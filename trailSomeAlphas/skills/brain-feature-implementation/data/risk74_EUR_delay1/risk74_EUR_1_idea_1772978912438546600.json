@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_delta({hfown_pctown}, 5), std=4), sector)",
+    "idea": "行业中性化流速信号：先对5日持仓变化率进行4倍标准差截尾处理以剔除极端脏数据，再在行业内进行z-score标准化。此举可剥离行业层面的资金轮动噪音（如整个板块遭受赎回），精准捕捉个股特有的对冲基金建仓速度，避免因行业beta导致的伪信号。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_delta(rsk74_hfown_pctown, 5), std=4), sector)"
+    ]
+}

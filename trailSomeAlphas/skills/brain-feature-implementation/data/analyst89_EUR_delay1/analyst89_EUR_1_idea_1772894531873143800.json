@@ -1,0 +1,7 @@
+{
+    "template": "days_from_last_change(vec_avg({fiscal_period_end}))",
+    "idea": "**Concept**: Reporting Gap Anomaly\n- **Sample Fields Used**: fiscal_period_end\n- **Definition**: Days elapsed since the last fiscal period end compared to the expected reporting frequency (detecting delayed filings)\n- **Why This Feature**: Unusually long gaps between reports often precede bad news or accounting restatements; early detection of reporting delays provides informational edge\n- **Logical Meaning**: Unusual latency in financial reporting; deviation from expected reporting schedule\n- **is filling nan necessary**: No, NaN values in this context represent missing reports which are themselves the anomaly signal; filling would obscure the information content\n- **Directionality**: High values indicate delayed reporting (negative governance signal); values near expected cycle length (90 for quarterly) indicate normal reporting\n- **Boundary Conditions**: Values >120 for quarterly reporters suggest significant delay; values >180 suggest potential delinquency or material accounting issues",
+    "expression_list": [
+        "days_from_last_change(vec_avg(anl89_fiscal_period_end))"
+    ]
+}

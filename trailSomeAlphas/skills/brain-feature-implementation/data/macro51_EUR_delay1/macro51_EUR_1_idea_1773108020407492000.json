@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(ts_regression(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), ts_step(), 252, rettype=0), 252)",
+    "idea": "**趋势剔除后的周期残差反转**：利用252日时间序列回归（ts_regression，rettype=0取残差）剔除溢价比率中的长期趋势成分（如结构性权重迁移），得到纯粹的周期波动残差，再计算该残差的历史分位数（ts_rank）。该信号识别的是剔除长期趋势后的周期性极端偏离，避免因基本面永久性变化导致的“价值陷阱”式伪均值回归信号，专注于捕捉周期性波动反转。",
+    "expression_list": [
+        "ts_rank(ts_regression(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), ts_step(), 252, rettype=0), 252)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(abs(group_zscore(winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4), industry)), 1.0), or(greater(group_rank(ts_backfill({raw_concentration}, 10), industry), 0.8), less(group_rank(ts_backfill({raw_concentration}, 10), industry), 0.2))), group_zscore(winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4), industry), 0)",
+    "idea": "高基数偏离确认策略：结合原始集中度水平（{raw_concentration}）与时序偏离进行双重确认。仅当企业在自身行业内的历史集中度处于前20%高位且进一步加速集中，或处于后20%低位且加速分散时产生信号。通过逻辑与条件过滤掉中等水平企业的无效波动，确保信号来自结构性变化而非均值回归的随机扰动。",
+    "expression_list": [
+        "trade_when(and(greater(abs(group_zscore(winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4), industry)), 1.0), or(greater(group_rank(ts_backfill(rsk74_raw_concentration, 10), industry), 0.8), less(group_rank(ts_backfill(rsk74_raw_concentration, 10), industry), 0.2))), group_zscore(winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4), industry), 0)",
+        "trade_when(and(greater(abs(group_zscore(winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4), industry)), 1.0), or(greater(group_rank(ts_backfill(rsk74_raw_concentration, 10), industry), 0.8), less(group_rank(ts_backfill(rsk74_raw_concentration, 10), industry), 0.2))), group_zscore(winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4), industry), 0)"
+    ]
+}

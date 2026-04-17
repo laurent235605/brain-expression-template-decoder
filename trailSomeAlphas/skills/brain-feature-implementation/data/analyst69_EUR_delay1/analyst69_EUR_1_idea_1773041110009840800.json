@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(or(greater(quantile(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), driver=\"gaussian\"), 1.0), less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0)), -1, 0), 20)",
+    "idea": "构建双重条件触发机制：使用quantile（高斯驱动）识别右尾极端稳定状态（>1个标准差），同时用ts_delta<0识别模板2的近期变更事件，通过逻辑OR合并两种负面信号来源（极端稳定可能暗示信息僵化，近期变更暗示不确定性）。对复合信号应用20日衰减，确保持续消化事件冲击。",
+    "expression_list": [
+        "ts_decay_linear(if_else(or(greater(quantile(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), driver=\"gaussian\"), 1.0), less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0)), -1, 0), 20)",
+        "ts_decay_linear(if_else(or(greater(quantile(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), driver=\"gaussian\"), 1.0), less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0)), -1, 0), 20)"
+    ]
+}

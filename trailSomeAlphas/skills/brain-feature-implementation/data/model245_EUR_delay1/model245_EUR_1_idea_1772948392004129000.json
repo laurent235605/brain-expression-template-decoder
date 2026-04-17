@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff(vec_avg({rank}), 60)",
+    "idea": "**Concept**: Rank vs Historical Mean\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Simple difference between current rank and its 60-day moving average (deviation from trend)\n- **Why This Feature**: Classic mean-reversion indicator; deviations from the historical average may indicate temporary dislocations that revert, or structural breaks that persist\n- **Logical Meaning**: Positive values indicate currently ranked worse than the 60-day average; negative values indicate better than average (assuming lower rank is better)\n- **is filling nan necessary**: Mean calculation ignores NaN automatically; current value NaN propagates naturally. Do not fill current NaN with mean as this artificially creates zero deviation.\n- **Directionality**: Negative values (if low rank is good) and negative deviation = better than usual; positive deviation = worse than usual\n- **Boundary Conditions**: Limited by rank range (approx -1600 to +1600); zero indicates at historical mean",
+    "expression_list": [
+        "ts_av_diff(vec_avg(mdl245_rank), 60)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), add(1, multiply(0.4, signed_power(winsorize(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), std=2), 1.5)))), 5)",
+    "idea": "行业中性化双信号非线性增强：对核心效率比率和修正幅度均进行组内标准化与截尾处理，使用signed_power放大极端修正的杠杆效应，并通过线性衰减降低换手，实现'质量+动量'的低频稳健增强。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.4, signed_power(winsorize(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), std=2), 1.5)))), 5)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.4, signed_power(winsorize(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), std=2), 1.5)))), 5)"
+    ]
+}

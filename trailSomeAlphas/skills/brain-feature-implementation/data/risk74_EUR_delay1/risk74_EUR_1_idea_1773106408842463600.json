@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),add(1,multiply(0.5,ts_zscore(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),60),add(ts_std_dev(ts_delta({hfown_pctown},1),252),0.0001)),std=4),252))))",
+    "idea": "多时间尺度信噪比协同增强：以20日持仓流强度为基准，引入60日/252日长期信噪比作为趋势确认项。通过线性加权构造复合信号（基准权重1+长期信号贡献0.5倍），当长期趋势与短期信号同向时自动放大权重，实现不同时间维度上的动量共振，同时保持行业中性。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),industry),add(1,multiply(0.5,ts_zscore(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),60),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),252),0.0001)),std=4),252))))"
+    ]
+}

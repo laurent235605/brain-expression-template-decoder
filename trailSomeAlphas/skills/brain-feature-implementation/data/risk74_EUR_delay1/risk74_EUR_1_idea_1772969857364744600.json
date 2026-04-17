@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(quantile({exp_usa}, driver=\"uniform\"), industry), signed_power(group_zscore(ts_delta({hfown_pctown}, 5), industry), 0.5))",
+    "idea": "**交叉增强：行业中性地理相对优势 × HF conviction**\n将模板1的地理暴露经行业中性化（group_zscore）处理，消除行业间不可比的基础差异；与模板2的HF流速经行业group_zscore及signed_power（0.5次方压缩极端值）后相乘。该结构确保信号仅在“同行业内的美国暴露领先者”且“同行业内的HF增持加速者”之间产生交互，构建行业剥离后的pure-alpha。",
+    "expression_list": [
+        "multiply(group_zscore(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), industry), signed_power(group_zscore(ts_delta(rsk74_hfown_pctown, 5), industry), 0.5))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr(if_else(greater(ts_zscore(ts_std_dev(returns, 21), 60), 1.0), multiply(0.7, right_tail(group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0)), group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry)), maxPercent=0.01)",
+    "idea": "波动率择时与风险预算：当21日波动率处于60日历史高位（zscore>1）时自动降低30%敞口，仅保留右尾（高配置）信号，结合目标换手率控制模块和个股权重上限1%约束，实现动态风险预算管理。",
+    "expression_list": [
+        "ts_target_tvr(if_else(greater(ts_zscore(ts_std_dev(returns, 21), 60), 1.0), multiply(0.7, right_tail(group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0)), group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry)), maxPercent=0.01)"
+    ]
+}

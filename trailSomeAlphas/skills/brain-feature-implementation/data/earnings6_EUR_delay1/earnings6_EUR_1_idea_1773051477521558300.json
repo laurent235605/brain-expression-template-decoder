@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_delta(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 21), industry)",
+    "idea": "在模板2的盈利惊喜基础上引入时序变化算子ts_delta(21天)，捕捉盈利惊喜的改善动量（ acceleration ），并结合模板1的行业中性化逻辑，识别行业内盈利预期正在加速改善的公司，关注惊喜的'变化'而非绝对水平。",
+    "expression_list": [
+        "group_zscore(ts_delta(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 21), industry)",
+        "group_zscore(ts_delta(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 21), industry)"
+    ]
+}

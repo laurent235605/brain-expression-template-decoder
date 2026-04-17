@@ -1,0 +1,8 @@
+{
+    "template": "signed_power( multiply( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( vec_stddev({estimated_eps}), 0.01 ) ), sqrt( vec_count({estimated_eps}) ) ), 1.5 )",
+    "idea": "分歧调整+样本置信+非线性放大。将惊喜除以分析师分歧(vec_stddev)得到信噪比，再乘以sqrt(估计数量)作为统计置信度加权(大样本估计更可靠)，最后用signed_power(1.5)非线性放大极端值而保持正负方向，形成'高置信度、高显著性'的极端惊喜暴露，强化对'一致预期被打破且分歧大'事件的捕捉。",
+    "expression_list": [
+        "signed_power( multiply( divide( subtract( vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps) ), add( vec_stddev(ern6_estimated_eps), 0.01 ) ), sqrt( vec_count(ern6_estimated_eps) ) ), 1.5 )",
+        "signed_power( multiply( divide( subtract( vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps) ), add( vec_stddev(ern6_estimated_eps), 0.01 ) ), sqrt( vec_count(ern6_estimated_eps) ) ), 1.5 )"
+    ]
+}

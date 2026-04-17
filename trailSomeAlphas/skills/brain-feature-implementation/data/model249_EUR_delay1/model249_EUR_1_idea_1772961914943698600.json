@@ -1,0 +1,7 @@
+{
+    "template": "multiply(winsorize((vec_avg({score}) - ts_mean(ts_backfill(vec_avg({score}), 5), 60)) / ts_std_dev(ts_backfill(vec_avg({score}), 5), 60), 4), add(1, multiply(0.3, ts_delta(winsorize((vec_avg({score}) - ts_mean(ts_backfill(vec_avg({score}), 5), 60)) / ts_std_dev(ts_backfill(vec_avg({score}), 5), 60), 4), 5))))",
+    "idea": "动量增强型复合信号：在基础Z-score（经winsorize与backfill清洗）上叠加近期5日变化趋势（ts_delta），通过multiply构造“水平×(1+0.3×动量)”的非线性放大结构。当分数异常与近期变化方向一致时（动量与Z同号），信号强度倍增；方向背离时信号衰减，实现趋势与历史异常水平的共振，增强对正在发酵事件的敏感度。",
+    "expression_list": [
+        "multiply(winsorize((vec_avg(mdl249_score) - ts_mean(ts_backfill(vec_avg(mdl249_score), 5), 60)) / ts_std_dev(ts_backfill(vec_avg(mdl249_score), 5), 60), 4), add(1, multiply(0.3, ts_delta(winsorize((vec_avg(mdl249_score) - ts_mean(ts_backfill(vec_avg(mdl249_score), 5), 60)) / ts_std_dev(ts_backfill(vec_avg(mdl249_score), 5), 60), 4), 5))))"
+    ]
+}

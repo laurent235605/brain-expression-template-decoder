@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(abs(quantile(group_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), driver=\"gaussian\")) > 2.0, signed_power(group_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 3), 0)",
+    "idea": "使用高斯分位数拉伸将极端相关性股票进一步推离均值（中间区间压缩至0附近），结合三次幂变换非线性放大尾部信号，仅保留拉伸后超过2倍标准差的极端状态，强化对所有权结构极端稳定或极端松散的区分度。",
+    "expression_list": [
+        "trade_when(abs(quantile(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), driver=\"gaussian\")) > 2.0, signed_power(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 3), 0)",
+        "trade_when(abs(quantile(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), driver=\"gaussian\")) > 2.0, signed_power(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 3), 0)",
+        "trade_when(abs(quantile(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), driver=\"gaussian\")) > 2.0, signed_power(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 3), 0)",
+        "trade_when(abs(quantile(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), driver=\"gaussian\")) > 2.0, signed_power(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 3), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(abs(vec_avg({aily_delta_recon_value})), 20)",
+    "idea": "**Concept**: Revision Calmness Index\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: 20-day average of absolute daily revisions\n- **Why This Feature**: Measures the baseline volatility of analyst expectations. Stable estimates suggest information efficiency; frequent revisions suggest ongoing discovery or uncertainty.\n- **is filling nan necessary**: NaN in daily delta likely means no revision (zero change). Using ts_backfill to carry forward zeros is appropriate since no change is meaningful information (stability).\n- **Directionality**: Low values indicate stable, confident forecasts; high values indicate active revision and uncertainty\n- **Boundary Conditions**: Zero indicates completely static estimates (potentially stale); values above historical 90th percentile indicate unusual analyst activity (potential signal)",
+    "expression_list": [
+        "ts_mean(abs(vec_avg(ern10_aily_delta_recon_value)), 20)"
+    ]
+}

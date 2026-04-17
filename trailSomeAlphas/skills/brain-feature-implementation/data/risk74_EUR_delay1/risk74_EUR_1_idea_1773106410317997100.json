@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(if_else(greater(ts_zscore(ts_std_dev(ts_delta({hfown_pctown},1),20),252),0),winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),reverse(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4))),10),industry)",
+    "idea": "波动率自适应的多空反转策略：根据持仓变化波动率的252日Z分数（ts_zscore）动态切换策略模式——当近期波动率高于历史均值时采用动量跟随（原信号），低于均值时采用均值反转（reverse）。经10日线性衰减（ts_decay_linear）平滑信号后，在行业内部进行归一化处理（group_normalize），实现波动率择时与行业美元中性。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(if_else(greater(ts_zscore(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),20),252),0),winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),reverse(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4))),10),industry)"
+    ]
+}

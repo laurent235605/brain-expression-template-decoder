@@ -1,0 +1,18 @@
+{
+    "template": "divide(ts_delta({value_08316q}, 63), multiply(ts_mean({value_08316q}, 252), add(0.1, divide({value_03051q}, {value_03999q}))))",
+    "idea": "在运营利润率动量（模板1）的基础上，引入短期流动性风险（模板2）作为分母调整项，构建风险调整后的动量信号。当公司面临较高短期债务压力时，降低其动量得分，避免在流动性紧张时期错配高杠杆公司的盈利改善信号。",
+    "expression_list": [
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), multiply(ts_mean(fnd28_newq_value_08316q, 252), add(0.1, divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q))))",
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), multiply(ts_mean(fnd28_newq_value_08316q, 252), add(0.1, divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q))))",
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), multiply(ts_mean(fnd28_newq_value_08316q, 252), add(0.1, divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q))))",
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), multiply(ts_mean(fnd28_newq_value_08316q, 252), add(0.1, divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q))))",
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), multiply(ts_mean(fnd28_newq_value_08316q, 252), add(0.1, divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q))))",
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), multiply(ts_mean(fnd28_newq_value_08316q, 252), add(0.1, divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q))))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), multiply(ts_mean(fnd28_ratesq_value_08316q, 252), add(0.1, divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q))))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), multiply(ts_mean(fnd28_ratesq_value_08316q, 252), add(0.1, divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q))))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), multiply(ts_mean(fnd28_ratesq_value_08316q, 252), add(0.1, divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q))))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), multiply(ts_mean(fnd28_ratesq_value_08316q, 252), add(0.1, divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q))))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), multiply(ts_mean(fnd28_ratesq_value_08316q, 252), add(0.1, divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q))))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), multiply(ts_mean(fnd28_ratesq_value_08316q, 252), add(0.1, divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q))))"
+    ]
+}

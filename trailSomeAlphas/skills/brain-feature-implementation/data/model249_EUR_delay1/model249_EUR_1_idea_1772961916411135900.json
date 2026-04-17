@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore((vec_avg({score}) - ts_mean(vec_avg({score}), 60)) / ts_std_dev(vec_avg({score}), 60), industry)",
+    "idea": "双层标准化剥离策略：先计算个股分数的60日时间序列Z-score（历史异常度），再在行业层面进行截面Z-score标准化（group_zscore）。此操作剥离了行业周期性beta，仅保留个股相对于同行业peers的特异异常波动，实现“组内可比”的相对价值发现。",
+    "expression_list": [
+        "group_zscore((vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 60)) / ts_std_dev(vec_avg(mdl249_score), 60), industry)"
+    ]
+}

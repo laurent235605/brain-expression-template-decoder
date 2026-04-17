@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_rank(subtract(ts_sum(ts_delta({hfown_pctown},1),5), ts_sum(ts_delta({hfown_pctown},1),20)), sector)), 0.85), group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),5), ts_sum(ts_delta({hfown_pctown},1),20)), sector), 0)",
+    "idea": "**持仓流加速度极值策略**: 计算5日短期累加流与20日长期累加流的差值，捕捉“近期加速增持/减持”的二阶导信号；在行业内部进行分位数排名，仅当绝对排名位于前15%或后15%（即|rank|>0.85）时才开仓，中段视为噪音赋值为0；对符合条件的标的赋予行业中性z-score权重。该逻辑避免了在持仓趋势平稳但绝对值高的标的上过度暴露，专注于动量发生拐点的时刻。",
+    "expression_list": [
+        "trade_when(greater(abs(group_rank(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),5), ts_sum(ts_delta(rsk74_hfown_pctown,1),20)), sector)), 0.85), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),5), ts_sum(ts_delta(rsk74_hfown_pctown,1),20)), sector), 0)"
+    ]
+}

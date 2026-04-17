@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize({hfown_pctown}, std=4), industry)), 2), group_zscore(winsorize({hfown_pctown}, std=4), industry), 0), 5)",
+    "idea": "极端阈值择时+衰减平滑：仅在|行业Zscore|>2的极端分位点开仓（中段80%视为噪音置零），并施加5日线性衰减控制换手率，专注于最极端的板块偏离押注，降低因小幅波动导致的频繁调仓。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(rsk74_hfown_pctown, std=4), industry)), 2), group_zscore(winsorize(rsk74_hfown_pctown, std=4), industry), 0), 5)"
+    ]
+}

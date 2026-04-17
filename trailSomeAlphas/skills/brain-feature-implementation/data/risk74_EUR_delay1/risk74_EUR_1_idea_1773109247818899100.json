@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4), industry), 2), group_zscore(winsorize(ts_backfill({concentration},63),std=4), industry)), 10), industry)",
+    "idea": "融合 Input 2 的累积流量计算与 Input 1 的交互结构：将15日累积空头变动（流量）经行业标准化及非线性放大后，与地理集中度水平值交互，通过线性衰减与行业中性归一化，识别空头压力积聚与地理风险静态水平的交叉影响。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry)), 10), industry)"
+    ]
+}

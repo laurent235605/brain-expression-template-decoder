@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change({eps_expected_report_dt}), 20), ts_decay_linear(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"cauchy\"), 15), 0)",
+    "idea": "事件窗口衰减信号：仅在预期报告日期近期发生变更（20天内）时触发信号，采用柯西分布映射增强尾部极端效应，并应用15日线性衰减捕捉事件后价格漂移，中间稳定期不持仓。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 20), ts_decay_linear(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"cauchy\"), 15), 0)",
+        "trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 20), ts_decay_linear(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"cauchy\"), 15), 0)"
+    ]
+}

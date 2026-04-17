@@ -1,0 +1,7 @@
+{
+    "template": "vec_stddev({data_item_value})",
+    "idea": "**Concept**: Cross-Metric Dispersion\n- **Sample Fields Used**: data_item_value\n- **Definition**: Standard deviation across vector elements (diversity of financial metrics within the observation), measuring internal consistency of financial performance\n- **Why This Feature**: High dispersion may indicate unbalanced financial health (e.g., high revenue but negative earnings); low dispersion suggests consistent performance across metrics; identifies quality of earnings vs accounting anomalies\n- **Logical Meaning**: Internal divergence between different financial metrics or periods; measures whether all financial indicators tell a consistent story\n- **is filling nan necessary**: Yes, use vec_filter to remove NaN elements before calculating dispersion to avoid bias from missing data\n- **Directionality**: High values indicate divergent signals from different financial metrics (mixed quality); low values indicate consistent performance across metrics (high quality); zero indicates all metrics equal (rare, potentially suspicious)\n- **Boundary Conditions**: 0 indicates perfect uniformity; extremely high values relative to mean suggest volatile or inconsistent business performance",
+    "expression_list": [
+        "vec_stddev(anl89_data_item_value)"
+    ]
+}

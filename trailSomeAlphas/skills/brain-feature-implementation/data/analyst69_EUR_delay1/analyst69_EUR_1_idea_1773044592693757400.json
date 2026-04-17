@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(winsorize(ts_regression(subtract(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), ts_delta(ts_backfill({eps_best_eeps_next_yr}, 5), 20)), ts_log(ts_mean({market_cap}, 21)), 126, rettype=0), std=4), industry)",
+    "idea": "预期期限结构陡峭化（Steepener）捕捉盈利拐点。构建短期（本年预期5日变化）与长期（次年预期20日变化）的修订斜率差，经市值中性化（回归残差）后行业标准化，识别市场对近期盈利上修但远期预期滞后的定价错配机会。",
+    "expression_list": []
+}

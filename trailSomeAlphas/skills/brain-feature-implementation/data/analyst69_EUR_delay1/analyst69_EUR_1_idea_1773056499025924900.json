@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), 20)",
+    "idea": "将模板A的盈利效率5日变化转换为20日时序分位（ts_rank），识别当前效率变化是否处于该股票自身历史区间的极端位置（如历史新高或新低）。这种时序视角与截面排名互补，适用于捕捉'效率创新高'类型的趋势延续或'极端偏离后反转'的均值回归信号。",
+    "expression_list": [
+        "ts_rank(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), 20)",
+        "ts_rank(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), 20)"
+    ]
+}

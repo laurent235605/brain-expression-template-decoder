@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(ts_decay_linear(ts_delta(vector_neut(winsorize(ts_backfill({fundreportedequityassets}, 21), std=4), winsorize(ts_backfill({reported_asset_value}, 21), std=4)), 63), 10), std=3))",
+    "idea": "捕捉基金股票配置相对于规模调整的边际变化趋势（一阶差分），通过63日变化窗口识别持续增配或减配行为，再经10日线性衰减加权平滑以降低高频噪音，适用于跟踪资金配置动量及调仓方向。",
+    "expression_list": [
+        "zscore(winsorize(ts_decay_linear(ts_delta(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), std=4), winsorize(ts_backfill(fund_reported_asset_value, 21), std=4)), 63), 10), std=3))"
+    ]
+}

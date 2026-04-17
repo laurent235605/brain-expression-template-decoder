@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 3)",
+    "idea": "期限利差非线性增强策略。将短期（5日）与长期（60日）地域敞口波动率之差进行行业标准化Z-score处理后，应用三次幂非线性变换。融合模板B的期限结构动能捕捉与模板A的极端偏离强调逻辑，既能识别业务地域动荡的加速（正值）或收敛（负值），又通过行业中性化消除行业固有波动差异，最终大幅放大那些正处于剧烈地域转型临界点且显著偏离行业基准的尾部信号，压缩中间噪音至接近零。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 3)"
+    ]
+}

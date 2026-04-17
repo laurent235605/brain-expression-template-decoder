@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 1.5), less(group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), -1.5)), group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0)",
+    "idea": "结合模板1的行业标准化流程与模板2的硬阈值截断逻辑，使用统计显著性阈值替代固定分位。当行业内标准化后的修订动量超过±1.5个标准差（统计显著极值）时才保留信号，其余置零。这种基于标准差阈值的硬截断（模拟right_tail/left_tail逻辑）比固定百分比排名更能适应不同行业波动率的差异，确保只交易具有显著基本面预期变化的股票，避免温和修订带来的噪声交易。",
+    "expression_list": [
+        "trade_when(or(greater(group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 1.5), less(group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), -1.5)), group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0)",
+        "trade_when(or(greater(group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 1.5), less(group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), -1.5)), group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0)"
+    ]
+}

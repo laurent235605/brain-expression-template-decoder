@@ -1,0 +1,16 @@
+[
+    "(vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin)) / abs(vec_avg(anl91_exposure_value))",
+    "(vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_exposure_value)) / (vec_avg(anl91_exposure_value) - vec_avg(anl91_cost_exposure_range_begin))",
+    "(vec_avg(anl91_exposure_value) - ts_mean(vec_avg(anl91_exposure_value), 60)) / ts_std_dev(vec_avg(anl91_exposure_value), 60)",
+    "(vec_avg(anl91_exposure_value) - vec_avg(anl91_cost_exposure_range_begin)) / (vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin))",
+    "if_else(vec_avg(anl91_exposure_value) > ts_max(vec_avg(anl91_cost_exposure_range_end), 20), 1, if_else(vec_avg(anl91_exposure_value) < ts_min(vec_avg(anl91_cost_exposure_range_begin), 20), -1, 0))",
+    "rank(vec_avg(anl91_exposure_value))",
+    "ts_delta(vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin), 10)",
+    "ts_delta(vec_avg(anl91_exposure_value), 5)",
+    "ts_std_dev(vec_avg(anl91_exposure_value), 20)",
+    "ts_sum(abs(ts_delta(vec_avg(anl91_exposure_value), 1)), 63)",
+    "ts_sum(if_else(vec_avg(anl91_exposure_value) > vec_avg(anl91_cost_exposure_range_end), 1, 0), 20)",
+    "vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin)",
+    "vec_avg(anl91_exposure_value)",
+    "vec_avg(anl91_exposure_value) / (vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin))"
+]

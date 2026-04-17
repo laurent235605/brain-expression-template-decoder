@@ -1,0 +1,8 @@
+{
+    "template": "divide(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), ts_std_dev({eps_best_eeps_cur_yr}, 20))",
+    "idea": "将5日EPS修订幅度除以过去20日EPS预测的标准差（ts_std_dev），构建'信噪比'指标。这调整了那些分析师预测本身就波动较大的股票（如周期性行业）的信号幅度，突出那些在低波动环境下出现显著共识调整的股票，增强信号的稳定性。",
+    "expression_list": [
+        "divide(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), ts_std_dev(anl69_aeps_best_eeps_cur_yr, 20))",
+        "divide(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), ts_std_dev(anl69_eps_best_eeps_cur_yr, 20))"
+    ]
+}

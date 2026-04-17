@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_decay_linear(group_zscore(ts_delta({hfown_pctown}, 21), sector), 10), subtract(1, multiply(0.3, signed_power(group_zscore({fund_num_owners_encr}, sector), 0.5))))",
+    "idea": "计算近21日持仓占比变化量并在行业内标准化，捕捉HF资金净流入/流出信号；辅以持有人数量信息反向加权（持有人越少代表信心越集中，信号放大；拥挤交易则衰减），用符号幂函数调整权重分布，形成资金流+集中度的复合动量。",
+    "expression_list": [
+        "multiply(ts_decay_linear(group_zscore(ts_delta(rsk74_hfown_pctown, 21), sector), 10), subtract(1, multiply(0.3, signed_power(group_zscore(hedge_fund_num_owners_encr, sector), 0.5))))"
+    ]
+}

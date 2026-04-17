@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize( trade_when( greater(group_rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), 0.8), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 0 ), industry )",
+    "idea": "组内条件归一化与换手率控制。综合多个模板思想：首先计算Surprise，然后使用trade_when配合group_rank筛选出行业内显著正向惊喜（如前20%分位），仅对这些标的建立多头，同时利用group_normalize确保行业内权重平衡，实现可交易性与信号强度的平衡。",
+    "expression_list": [
+        "group_normalize( trade_when( greater(group_rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 0.8), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0 ), industry )",
+        "group_normalize( trade_when( greater(group_rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 0.8), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0 ), industry )"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_std_dev({value_ts} + {earnyild}, 126), 0.02), ts_zscore(rank({momentum}) / (rank({value_ts}) + rank({earnyild}) + 0.01), 252), NaN)",
+    "idea": "仅当价值与盈利收益因子暴露的历史126日标准差大于阈值（0.02）时参与交易，避免在因子暴露长期稳定的\"无效\"股票上产生信号。将原始字段转换为横截面排名后再计算比值，消除量纲差异，最后通过252日时序zscore捕捉当前纯度相对于自身历史的极端偏离，适合事件驱动型的因子切换策略。",
+    "expression_list": [
+        "trade_when(greater(ts_std_dev(rsk74_value_ts + rsk74_earnyild, 126), 0.02), ts_zscore(rank(rsk74_momentum) / (rank(rsk74_value_ts) + rank(rsk74_earnyild) + 0.01), 252), NaN)",
+        "trade_when(greater(ts_std_dev(rsk74_value_ts + rsk74_earnyild, 126), 0.02), ts_zscore(rank(rsk74_momentum_ts) / (rank(rsk74_value_ts) + rank(rsk74_earnyild) + 0.01), 252), NaN)"
+    ]
+}

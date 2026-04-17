@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( divide(subtract(vec_avg({x_dividend}), ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry )",
+    "idea": "股息变化惊喜（动量）：将模板2的'惊喜'计算逻辑（实际值相对预期值的标准化偏离）迁移至股息领域，以历史均值作为'预期'，计算股息变化惊喜并进行行业标准化，捕捉分红政策的异常变化。",
+    "expression_list": [
+        "group_zscore( divide(subtract(vec_avg(ern6_x_dividend), ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(subtract(vec_avg(ern6_x_dividend_233), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(subtract(vec_avg(ern6_x_dividend_oc), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(subtract(vec_avg(ern6_x_dividend_oc_235), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry )"
+    ]
+}

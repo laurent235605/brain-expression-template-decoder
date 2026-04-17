@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(quantile(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(group_std_dev(returns, industry, 21), 0.001)), driver=\"cauchy\"), 2.0), industry)",
+    "idea": "以行业截面波动率作为统一风险基准（替代个股波动率），识别相对于同业整体风险环境的高配行为；使用柯西分布分位数转换极度拉伸尾部差异，再通过signed_power(2.0)平方放大极端值；这种非线性组合极度强调“在行业风险高企时仍极端高配/低配”的异常信念，中间区域信号几乎归零，适合捕捉尾部alpha而非线性暴露。",
+    "expression_list": [
+        "group_zscore(signed_power(quantile(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(group_std_dev(returns, industry, 21), 0.001)), driver=\"cauchy\"), 2.0), industry)"
+    ]
+}

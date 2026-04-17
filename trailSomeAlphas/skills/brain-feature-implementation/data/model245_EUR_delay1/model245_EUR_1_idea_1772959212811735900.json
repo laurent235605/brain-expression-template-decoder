@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(divide(ts_av_diff(vec_range({rank}), 60), ts_std_dev(vec_range({rank}), 60)), std=4), sector)), 2), signed_power(group_zscore(winsorize(divide(ts_av_diff(vec_range({rank}), 60), ts_std_dev(vec_range({rank}), 60)), std=4), sector), 1.5), 0), 3)",
+    "idea": "**概念**：组内中性化排名离散度异常捕捉（Group-Neutral Dispersion Anomaly）\n- **核心逻辑**：使用`vec_range`提取向量极差（模型间排名分歧度），代表预测不确定性；通过`winsorize(std=4)`清洗极端噪音后，用`group_zscore`进行行业中性化，消除行业特性带来的排名波动差异\n- **区间筛选**：利用`trade_when`仅当|z|>2（统计显著）时交易，避免噪音区间；`signed_power(1.5)`非线性放大极端尾部，强调高确信度异常\n- **换手控制**：`ts_decay_linear(3)`对信号进行线性衰减平滑，降低因排名日间抖动带来的高换手率\n- **经济含义**：当股票在行业内出现预测分歧度（模型间离散）的统计极端偏离时，往往预示信息冲击或基本面拐点，此时动量或反转信号更强",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(divide(ts_av_diff(vec_range(mdl245_rank), 60), ts_std_dev(vec_range(mdl245_rank), 60)), std=4), sector)), 2), signed_power(group_zscore(winsorize(divide(ts_av_diff(vec_range(mdl245_rank), 60), ts_std_dev(vec_range(mdl245_rank), 60)), std=4), sector), 1.5), 0), 3)"
+    ]
+}

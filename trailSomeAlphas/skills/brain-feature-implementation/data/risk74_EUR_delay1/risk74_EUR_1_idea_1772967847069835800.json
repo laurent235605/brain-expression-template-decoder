@@ -1,0 +1,14 @@
+{
+    "template": "group_zscore(multiply(winsorize({concentration},std=4), trade_when(and(not(is_nan({exp_nondomicile1})), less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05)), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), 0)), industry)",
+    "idea": "双数据源验证的地理风险：利用两个海外收入字段进行交叉验证（差异小于5%且非缺失），仅在高数据质量条件下使用两者均值作为海外敞口代理，乘以地理集中度后在行业内标准化。通过数据一致性过滤降低测量误差，精准识别单一国家依赖风险。",
+    "expression_list": [
+        "group_zscore(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), industry)",
+        "group_zscore(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), industry)"
+    ]
+}

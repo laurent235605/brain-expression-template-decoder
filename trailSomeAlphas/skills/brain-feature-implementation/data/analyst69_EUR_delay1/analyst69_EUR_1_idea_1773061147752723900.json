@@ -1,0 +1,14 @@
+{
+    "template": "ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0))",
+    "idea": "将输入2的原始相关性作为基准，乘以基于输入1事件检测的放大系数（发生变更时乘以0.5，否则1.0），实现'平静期维持原预期结构权重，事件期打折处理'的动态 hedging 逻辑。",
+    "expression_list": [
+        "ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0))",
+        "ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60) * (1 + 0.5 * if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0))"
+    ]
+}

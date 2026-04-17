@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(ts_zscore(add(multiply(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 21), 0.6), multiply(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 126), 0.4)), 63), 1.5), 5)",
+    "idea": "多期复合衰减信号：结合短期(21日)和长期(126日)财务累积指标，经z-score标准化后加权合成(0.6/0.4)，使用signed_power(1.5)非线性放大极端值以增强区分度，最后应用线性衰减(ts_decay_linear, 5日)降低换手率，平衡信号及时性与交易稳定性。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(ts_zscore(add(multiply(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 21), 0.6), multiply(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 126), 0.4)), 63), 1.5), 5)"
+    ]
+}

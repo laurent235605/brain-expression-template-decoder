@@ -1,0 +1,14 @@
+{
+    "template": "ts_delta(multiply(winsorize({concentration},std=4), trade_when(less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), 0)), 20)",
+    "idea": "质量加权的集中度速度：将地理集中度与经过双源验证的海外敞口相乘，计算20日变化量。高数据质量时点赋予完整暴露权重，通过验证差异阈值过滤测量误差，得到经可信度调整的动量信号。",
+    "expression_list": [
+        "ts_delta(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_concentration,std=4), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_concentration,std=4), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_concentration,std=4), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)",
+        "ts_delta(multiply(winsorize(rsk74_concentration,std=4), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)"
+    ]
+}

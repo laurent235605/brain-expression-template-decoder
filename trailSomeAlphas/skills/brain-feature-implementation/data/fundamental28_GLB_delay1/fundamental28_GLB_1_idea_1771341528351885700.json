@@ -1,0 +1,5 @@
+{
+    "template": "rank(ts_rank({return}-{asset},15))",
+    "idea": "先计算15日时序排名(ts_rank)，再在全截面做分位数排名(rank)，实现双重标准化，消除极端截面偏差",
+    "expression_list": []
+}

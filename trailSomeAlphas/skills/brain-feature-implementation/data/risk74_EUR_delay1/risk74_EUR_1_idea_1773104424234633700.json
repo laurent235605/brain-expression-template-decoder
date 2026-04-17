@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), ts_delta(winsorize(ts_backfill({exp_chn}, 63), std=4), 126)), industry), 2)",
+    "idea": "交叉融合两个模板的核思想：计算中美敞口变化速度的价差(动量之差而非水平之差)，捕捉两地战略转向的背离程度，经行业标准化后使用signed_power(2)放大极端背离信号，识别地缘配置转向最激进的公司。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), ts_delta(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), 126)), industry), 2)"
+    ]
+}

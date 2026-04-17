@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(signed_power(trade_when(greater(abs((vec_avg({aily_delta_recon_value}) - ts_mean(vec_avg({aily_delta_recon_value}), 20)) / ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), 2), (vec_avg({aily_delta_recon_value}) - ts_mean(vec_avg({aily_delta_recon_value}), 20)) / ts_std_dev(vec_avg({aily_delta_recon_value}), 20), 0), 2), sector)",
+    "idea": "极端尾部信号与行业平衡：仅当|Z-Score|>2（统计显著水平）时才通过trade_when保留信号，否则视为噪音置0，使用signed_power(..., 2)放大极端惊喜/惊吓的尾部差异同时保持方向，最后在行业内进行权重归一化（group_normalize），确保多空平衡且信号仅来自显著偏离历史区间的异常修订，避免微弱信号过度交易。",
+    "expression_list": [
+        "group_normalize(signed_power(trade_when(greater(abs((vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), 2), (vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20), 0), 2), sector)"
+    ]
+}

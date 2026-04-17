@@ -1,0 +1,7 @@
+{
+    "template": "multiply(subtract(ts_rank(ts_sum(ts_delta({hfown_pctown},1),5), 20), 0.5), divide(group_zscore(ts_sum(ts_delta({fund_pct_ownership_encr},1),60), sector), add(0.01, ts_std_dev(ts_sum(ts_delta({fund_pct_ownership_encr},1),60),20))))",
+    "idea": "非对称期限波动率缩放：对冲基金侧使用5日极短窗口流量经20日历史分位映射（-0.5~0.5），捕捉短期信息冲击；共同基金侧使用60日长窗口流量经行业zscore标准化后，除以其自身20日波动率（夏普化调整）；最终信号为两者乘积。该结构在高波动环境下降低基金流权重，突出对冲基金短期信息优势，低波动环境下放大基金战略配置信号。",
+    "expression_list": [
+        "multiply(subtract(ts_rank(ts_sum(ts_delta(rsk74_hfown_pctown,1),5), 20), 0.5), divide(group_zscore(ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),60), sector), add(0.01, ts_std_dev(ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),60),20))))"
+    ]
+}

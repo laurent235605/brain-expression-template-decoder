@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear( ( {concentration} - ts_mean({concentration}, 60) ) * ( {crowding} * {value_ts} ), 20 )",
+    "idea": "线性衰减加权交叉动量：对'集中度偏离×拥挤价值陷阱'的复合信号应用20日线性衰减加权（近期权重高），生成高换手率的激进信号。强调地理风险与因子风险的最新变化，适用于捕捉快速切换的战术性机会，但需注意换手率控制（可后续接hump_decay）。",
+    "expression_list": [
+        "ts_decay_linear( ( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( rsk74_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( rsk74_raw_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( liquidity_factor_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( liquidity_timeseries_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( rsk74_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( rsk74_raw_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( liquidity_factor_crowding * rsk74_value_ts ), 20 )",
+        "ts_decay_linear( ( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( liquidity_timeseries_crowding * rsk74_value_ts ), 20 )"
+    ]
+}

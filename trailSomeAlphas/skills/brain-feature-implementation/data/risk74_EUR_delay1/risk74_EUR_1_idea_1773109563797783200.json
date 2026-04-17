@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill({nondomicile},21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize({concentration},std=4), 20), industry), 2), 0), 3)",
+    "idea": "行业中性动量增强版：将海外收入占比在行业内部进行排名（前20%阈值），对地理集中度20日变化量进行行业内zscore标准化，并使用signed_power(2)非线性放大极端变化，最后叠加3日线性衰减降低换手。该模板剥离了行业固有海外敞口差异，专注于捕捉行业内部的相对单一市场依赖风险恶化。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_nondomicile,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_nondomicile,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 2), 0), 3)",
+        "ts_decay_linear(trade_when(greater(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,21),std=4), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 2), 0), 3)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(subtract(group_rank(winsorize(ts_backfill({concentration}, 10), std=4), sector), ts_mean(group_rank(winsorize(ts_backfill({concentration}, 10), std=4), sector), 60)), 5)",
+    "idea": "结合模板2的趋势偏离逻辑与模板1的组内排名方法，并引入时间序列平滑。先计算行业内分位数排名（group_rank）及其60日均值的偏离，再通过5日线性衰减（ts_decay_linear）平滑，在保留集中度趋势转向信号的同时，根据算子指导原则比同等窗口的简单均值(ts_mean)产生更低换手率，平衡反应速度与交易成本。",
+    "expression_list": [
+        "ts_decay_linear(subtract(group_rank(winsorize(ts_backfill(rsk74_concentration, 10), std=4), sector), ts_mean(group_rank(winsorize(ts_backfill(rsk74_concentration, 10), std=4), sector), 60)), 5)",
+        "ts_decay_linear(subtract(group_rank(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), sector), ts_mean(group_rank(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), sector), 60)), 5)"
+    ]
+}

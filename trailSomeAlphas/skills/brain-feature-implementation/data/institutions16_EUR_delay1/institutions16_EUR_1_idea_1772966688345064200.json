@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 20), 10)",
+    "idea": "资产流动量加速度：捕捉资产变化的二阶导数（变化率的变化），并使用10日线性衰减加权平滑，识别资产增长/减速的拐点，提前发现趋势衰竭或加速，过滤一次性报表噪音。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 20), 10)"
+    ]
+}

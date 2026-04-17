@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(ts_zscore(ts_sum(ts_delta(winsorize({shortint},4),1),15), 252), industry)",
+    "idea": "**历史异常分位信号（时序-截面结合）**：将当前15日空头流量与该股过去一年（252日）的历史分布进行zscore标准化（ts_zscore），识别相对于自身历史的异常值，再在行业横截面上进行分位排名（group_rank）。经济逻辑：不同股票的空头比例存在结构性差异（如热门股常年高空头），简单的绝对水平比较有偏差。此模板捕捉的是\"相对于该股票自身历史常态的突发偏离\"，更能反映情绪边际变化而非静态特征，适用于检测黑天鹅式的做空攻击或突然的大规模回补。",
+    "expression_list": [
+        "group_rank(ts_zscore(ts_sum(ts_delta(winsorize(rsk74_shortint,4),1),15), 252), industry)",
+        "group_rank(ts_zscore(ts_sum(ts_delta(winsorize(rsk74_shortint_ts,4),1),15), 252), industry)"
+    ]
+}

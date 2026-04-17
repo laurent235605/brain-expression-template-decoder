@@ -1,0 +1,8 @@
+{
+    "template": "multiply(bucket(rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), range=\"0,1,0.1\"), quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian))",
+    "idea": "**分桶效率动量叠加（分段+算术结构）**：先对效率比率进行rank分桶（第2.3步bucket算子，第0.2步排序度量），仅保留0-10%（极高效率）和90-100%（极低效率）两端的离散值，中间区间视为噪音置为0；再与分析师修正动量（高斯分位数）相乘。实现\"极端效率分层+方向性动量增强\"，符合第2步\"只有两端有信号\"的区间结构设计。",
+    "expression_list": [
+        "multiply(bucket(rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), range=\"0,1,0.1\"), quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian))",
+        "multiply(bucket(rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), range=\"0,1,0.1\"), quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian))"
+    ]
+}

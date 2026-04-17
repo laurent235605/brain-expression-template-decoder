@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr(vec_avg({rank}), ts_delay(vec_avg({rank}), 1), 20)",
+    "idea": "**Concept**: Rank Autocorrelation\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: 20-day Pearson correlation between current rank and 1-day lagged rank to measure day-to-day persistence\n- **Why This Feature**: Captures the short-term persistence properties of the model's rankings; high autocorrelation suggests the model updates incrementally rather than making wholesale revisions\n- **Logical Meaning**: Measures the \"stickiness\" of the model's rankings from day to day; values near 1 indicate the model rarely changes its mind abruptly\n- **is filling nan necessary**: Time series correlation requires aligned data; use ts_backfill(vec_avg({rank}), 5, k=1) to handle single-day gaps only if temporary, but avoid filling long NaN sequences as this creates artificial autocorrelation.\n- **Directionality**: Higher values (closer to 1) indicate highly persistent rankings; values near 0 or negative indicate mean-reverting or random walk behavior in ranks\n- **Boundary Conditions**: 1 = perfectly persistent (identical rankings day-to-day); 0 = no relationship; negative = tendency to reverse",
+    "expression_list": [
+        "ts_corr(vec_avg(mdl245_rank), ts_delay(vec_avg(mdl245_rank), 1), 20)"
+    ]
+}

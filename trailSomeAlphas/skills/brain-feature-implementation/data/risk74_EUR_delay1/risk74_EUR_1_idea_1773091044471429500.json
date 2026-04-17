@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore({factor_e}, industry) - group_zscore({factor_g}, industry)), 1.5), (group_zscore({factor_e}, industry) + group_zscore({factor_s}, industry) + group_zscore({factor_g}, industry)) * ({hfown_pctown} - group_mean({hfown_pctown}, industry)), 0)",
+    "idea": "交叉应用模板1的'偏科风险'识别与模板2的持仓偏离计算。仅当E与G的组内标准化差异超过1.5倍标准差（存在显著偏科）时才触发交易，此时将ESG综合分与HF持仓行业偏离度相乘。逻辑：专门捕捉ESG结构失衡但获得聪明钱认可（或抛弃）的极端案例，过滤掉ESG表现平庸的中性公司。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(rsk74_factor_e, industry) - group_zscore(rsk74_factor_g, industry)), 1.5), (group_zscore(rsk74_factor_e, industry) + group_zscore(rsk74_factor_s, industry) + group_zscore(rsk74_factor_g, industry)) * (rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry)), 0)",
+        "trade_when(greater(abs(group_zscore(rsk74_factor_esg, industry) - group_zscore(rsk74_factor_g, industry)), 1.5), (group_zscore(rsk74_factor_esg, industry) + group_zscore(rsk74_factor_s, industry) + group_zscore(rsk74_factor_g, industry)) * (rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry)), 0)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(abs(group_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector)) > 1.5, group_zscore(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), 0)",
+    "idea": "行业中性极端状态捕捉：首先对原始分位数据进行63日回溯填充确保数据连续性，计算60日滚动相关性后，在行业内部进行zscore标准化。仅当标准化后的相关性绝对值超过1.5倍标准差（即极端稳定或极端不稳定）时才保留信号，中间状态视为噪音并置零。该模板利用截断处理强调所有权结构的极端状态，同时通过行业中性化剔除行业间结构性差异。",
+    "expression_list": [
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0)",
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0)",
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0)",
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0)"
+    ]
+}

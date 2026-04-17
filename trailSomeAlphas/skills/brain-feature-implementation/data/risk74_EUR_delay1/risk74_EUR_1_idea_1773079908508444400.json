@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(add(add(ts_count_nans({factor_e},252), ts_count_nans({factor_s},252)), ts_count_nans({factor_g},252)), 80), ts_decay_linear(add(add(group_zscore(winsorize(ts_backfill({factor_e},21),std=4),industry), group_zscore(winsorize(ts_backfill({factor_s},21),std=4),industry)), group_zscore(winsorize(ts_backfill({factor_g},21),std=4),industry)), 63), 0)",
+    "idea": "**数据新鲜度加权（Fresh-Data Decay）**：先过滤过去一年缺失值过多的标的（总NaN>80视为数据质量差），对通过筛选的标的采用短窗口回填（21天）并施加63日线性衰减（ts_decay_linear）。该模板确保信号仅反映最新ESG变动，降低 stale data 与回填数据带来的噪音，同时通过衰减平滑短期跳变，控制换手率。",
+    "expression_list": [
+        "trade_when(less(add(add(ts_count_nans(rsk74_factor_e,252), ts_count_nans(rsk74_factor_s,252)), ts_count_nans(rsk74_factor_g,252)), 80), ts_decay_linear(add(add(group_zscore(winsorize(ts_backfill(rsk74_factor_e,21),std=4),industry), group_zscore(winsorize(ts_backfill(rsk74_factor_s,21),std=4),industry)), group_zscore(winsorize(ts_backfill(rsk74_factor_g,21),std=4),industry)), 63), 0)",
+        "trade_when(less(add(add(ts_count_nans(rsk74_factor_esg,252), ts_count_nans(rsk74_factor_s,252)), ts_count_nans(rsk74_factor_g,252)), 80), ts_decay_linear(add(add(group_zscore(winsorize(ts_backfill(rsk74_factor_esg,21),std=4),industry), group_zscore(winsorize(ts_backfill(rsk74_factor_s,21),std=4),industry)), group_zscore(winsorize(ts_backfill(rsk74_factor_g,21),std=4),industry)), 63), 0)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(divide(subtract({concentration}, ts_mean(ts_backfill({concentration}, 10), 60)), add(ts_std_dev(ts_delta({concentration}, 1), 60), 0.0001)), driver='gaussian')",
+    "idea": "应用分位点变换(quantile)于集中度信号，将'高斯驱动'的尾部拉伸特性与模板1的偏离趋势逻辑及模板2的波动率调整相结合。该变换将中间区间的温和集中度变化压缩至零附近，同时将极端的地缘集中或分散事件拉伸至更远尾部，增强对尾部风险事件的区分度。",
+    "expression_list": [
+        "quantile(divide(subtract(rsk74_concentration, ts_mean(ts_backfill(rsk74_concentration, 10), 60)), add(ts_std_dev(ts_delta(rsk74_concentration, 1), 60), 0.0001)), driver='gaussian')",
+        "quantile(divide(subtract(rsk74_raw_concentration, ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), add(ts_std_dev(ts_delta(rsk74_raw_concentration, 1), 60), 0.0001)), driver='gaussian')"
+    ]
+}

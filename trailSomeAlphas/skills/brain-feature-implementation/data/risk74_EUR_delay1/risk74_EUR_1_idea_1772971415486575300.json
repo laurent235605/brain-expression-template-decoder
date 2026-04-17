@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear({concentration} - ts_mean({concentration}, 60), 10) * ts_decay_linear({crowding}, 5) * {value_ts}",
+    "idea": "双时序衰减下的三因子动态平衡：对地理集中度偏离应用10日线性衰减（平滑长期趋势），对拥挤度应用5日快速衰减（捕捉近期变化），再与价值因子三重交互，平衡信号稳定性与对最新拥挤信息的敏感度。",
+    "expression_list": [
+        "ts_decay_linear(rsk74_concentration - ts_mean(rsk74_concentration, 60), 10) * ts_decay_linear(rsk74_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_concentration - ts_mean(rsk74_concentration, 60), 10) * ts_decay_linear(rsk74_raw_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_concentration - ts_mean(rsk74_concentration, 60), 10) * ts_decay_linear(liquidity_factor_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_concentration - ts_mean(rsk74_concentration, 60), 10) * ts_decay_linear(liquidity_timeseries_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 10) * ts_decay_linear(rsk74_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 10) * ts_decay_linear(rsk74_raw_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 10) * ts_decay_linear(liquidity_factor_crowding, 5) * rsk74_value_ts",
+        "ts_decay_linear(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 10) * ts_decay_linear(liquidity_timeseries_crowding, 5) * rsk74_value_ts"
+    ]
+}

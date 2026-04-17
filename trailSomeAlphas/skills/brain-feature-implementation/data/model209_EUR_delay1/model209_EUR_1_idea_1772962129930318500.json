@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_quantile(winsorize(subtract(1, vec_avg({lastcostingfailed})), std=3), industry, driver=\"gaussian\"), 5)",
+    "idea": "高斯分位平滑：先对数据进行去极值，在行业内部映射为高斯分位数（拉伸尾部、压缩中段），再通过线性衰减时序平滑（近5日加权），降低单日异常冲击，形成更稳健的运营质量缓慢变化信号，适用于低频配置场景。",
+    "expression_list": [
+        "ts_decay_linear(group_quantile(winsorize(subtract(1, vec_avg(mdl209_lastcostingfailed)), std=3), industry, driver=\"gaussian\"), 5)"
+    ]
+}

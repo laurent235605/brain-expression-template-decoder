@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(quantile(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), driver=\"gaussian\")), 1.0), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 0)",
+    "idea": "高斯分位数尾端聚焦：对行业中性后的区域价差应用高斯分位数转换，仅当价差处于分布极端(|quantile|>1σ)时才保留信号，中段噪音区间强制置零。利用quantile将中间区间压缩至0附近，实现“极端区域配置偏离才有Alpha”的非线性结构。",
+    "expression_list": [
+        "trade_when(greater(abs(quantile(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), driver=\"gaussian\")), 1.0), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 0)"
+    ]
+}

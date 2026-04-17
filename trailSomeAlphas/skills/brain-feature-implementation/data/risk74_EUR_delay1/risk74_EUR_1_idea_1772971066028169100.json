@@ -1,0 +1,16 @@
+{
+    "template": "signed_power(winsorize(group_zscore({concentration}, sector), 2), 2) * winsorize(ts_backfill({nondomicile},63),std=4)",
+    "idea": "非线性二次惩罚：对行业标准化后的集中度进行平方处理（signed_power，保留方向但放大极端值），再乘以原始非本土暴露水平。该设计对'极高集中度'给予二次方惩罚，强调'高危中的高危'，同时保持中等集中度股票的线性惩罚，实现对极端地理集中风险的非线性定价。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(rsk74_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_nondomicile,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_raw_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_raw_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_raw_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_nondomicile,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_raw_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)",
+        "signed_power(winsorize(group_zscore(rsk74_raw_concentration, sector), 2), 2) * winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4)"
+    ]
+}

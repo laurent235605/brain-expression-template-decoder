@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({version}), 5) * group_rank( ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), sector )",
+    "idea": "在行业层面(sector)对修正强度进行组内排名(group_rank)，利用该相对排名作为权重调整版本动量，实现行业中性化处理，捕捉'行业内相对活跃'的动量效应，有效剥离行业beta的干扰",
+    "expression_list": [
+        "ts_delta(vec_avg(anl85_version), 5) * group_rank( ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), sector )"
+    ]
+}

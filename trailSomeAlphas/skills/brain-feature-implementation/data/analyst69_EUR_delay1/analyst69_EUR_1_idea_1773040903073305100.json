@@ -1,0 +1,8 @@
+{
+    "template": "subtract(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay({eps_best_eeps_cur_yr}, 5)), divide(ts_delta({ebitda_best_eeps_cur_yr}, 5), ts_delay({ebitda_best_eeps_cur_yr}, 5)))",
+    "idea": "EPS与EBITDA修正背离：横向对比模板1中两种 estimates 的修正速度差异。当EPS修正速度显著快于EBITDA时，暗示分析师在调整财务杠杆或税率假设而非运营基本面；此背离信号可捕捉对净利润超预期/低于预期的结构性预期差。",
+    "expression_list": [
+        "subtract(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(anl69_eps_best_eeps_cur_yr, 5)), divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 5), ts_delay(anl69_ebitda_best_eeps_cur_yr, 5)))",
+        "subtract(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(anl69_aeps_best_eeps_cur_yr, 5)), divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 5), ts_delay(anl69_ebitda_best_eeps_cur_yr, 5)))"
+    ]
+}

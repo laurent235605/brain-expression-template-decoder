@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(quantile(group_zscore(winsorize(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), std=4), sector), driver=\"gaussian\"), 1.5), 3)",
+    "idea": "高斯分位平滑变换：以高斯分布映射替代硬阈值截断，将行业中度标准化后的复杂度分数压缩至零均值附近，仅保留极端尾部信号，配合3日衰减降低信号跳跃，实现从‘噪音’到‘信号’的连续过渡而非二元切换。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(quantile(group_zscore(winsorize(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4), sector), driver=\"gaussian\"), 1.5), 3)"
+    ]
+}

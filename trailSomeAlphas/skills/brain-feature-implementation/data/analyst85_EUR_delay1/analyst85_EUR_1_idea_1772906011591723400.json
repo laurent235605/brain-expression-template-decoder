@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_zscore(winsorize(vec_skewness(vec_filter({version}, value=\"nan\")), std=4), 252), 10)",
+    "idea": "时序Zscore衰减平滑策略：先对版本向量去除NaN并计算偏度，经Winsorize截尾（4倍标准差）去除极端噪音后，观察其在252日历史窗口中的Zscore位置（判断当前偏度处于历史分布的极端程度），最后通过10日线性衰减平滑以降低换手率，捕捉版本分布形态的长期结构性偏离，避免日间噪声干扰。",
+    "expression_list": [
+        "ts_decay_linear(ts_zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\"nan\")), std=4), 252), 10)"
+    ]
+}

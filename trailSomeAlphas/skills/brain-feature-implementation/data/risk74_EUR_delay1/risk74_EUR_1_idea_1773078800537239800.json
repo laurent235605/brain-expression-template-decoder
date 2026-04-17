@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(winsorize(group_zscore(multiply({crowding}, {value_ts}), sector), std=3), 3)",
+    "idea": "将对冲基金与共同基金流偏离度的时序平滑结构（ts_decay_linear + winsorize + group_zscore）迁移至拥挤价值因子，先对行业标准化与截尾处理，再进行3日线性衰减，形成 sector-neutral 的稳健拥挤价值信号，降低日频抖动并控制极值风险。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(group_zscore(multiply(liquidity_factor_crowding, rsk74_value_ts), sector), std=3), 3)",
+        "ts_decay_linear(winsorize(group_zscore(multiply(liquidity_timeseries_crowding, rsk74_value_ts), sector), std=3), 3)",
+        "ts_decay_linear(winsorize(group_zscore(multiply(rsk74_crowding, rsk74_value_ts), sector), std=3), 3)",
+        "ts_decay_linear(winsorize(group_zscore(multiply(rsk74_raw_crowding, rsk74_value_ts), sector), std=3), 3)"
+    ]
+}

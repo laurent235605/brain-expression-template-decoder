@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(if_else(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243})), industry), add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), if_else(is_nan(vec_avg({actual_eps})), 0, 1)))",
+    "idea": "构建事件计数与拆股幅度的交互项：将拆股比例（NaN视为无变化=1）的行业偏离度与事件计数相乘。当资本结构调整（拆股）伴随其他重大事件（董事会、财报）时，信号强度非线性放大，反映公司重大变革期的市场关注度。",
+    "expression_list": [
+        "multiply(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1)))",
+        "multiply(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1)))",
+        "multiply(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1)))",
+        "multiply(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1)))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(subtract(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), ts_mean(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), 20)), ts_std_dev(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), 20)), industry)",
+    "idea": "将模板2的时间序列标准化方法迁移至模板1的动量计算逻辑，构建“动量惊喜Z-Score”。计算当前5日动量相对于其20日历史均值的标准差偏离程度，识别动量变化的统计显著性而非仅仅方向，过滤掉统计噪音导致的假动量，并进行行业中性化处理。",
+    "expression_list": [
+        "group_zscore(divide(subtract(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), ts_mean(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), 20)), ts_std_dev(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), 20)), industry)"
+    ]
+}

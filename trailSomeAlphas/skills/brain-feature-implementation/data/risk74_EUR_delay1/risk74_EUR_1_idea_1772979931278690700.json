@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_rank(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry), 10)",
+    "idea": "行业内排序结合衰减平滑：先计算20日累积流在行业内分位数排名(group_rank)，消除量纲与行业差异，再应用10日线性衰减(ts_decay_linear)降低信号半衰期，在保留近期资金流相对强弱的同时显著控制组合换手率",
+    "expression_list": [
+        "ts_decay_linear(group_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry), 10)"
+    ]
+}

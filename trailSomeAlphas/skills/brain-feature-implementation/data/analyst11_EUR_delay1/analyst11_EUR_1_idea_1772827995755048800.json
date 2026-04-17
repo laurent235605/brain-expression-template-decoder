@@ -1,0 +1,30 @@
+{
+    "template": "{hybrid_weighted_score} - {max_correlation_weighted_score}",
+    "idea": "**Concept**: Hybrid Score Advantage Dynamics\n- **Sample Fields Used**: `hybrid_weighted_score`, `max_correlation_weighted_score`\n- **Definition**: Spread between hybrid (positive-only correlation) and max-correlation (absolute correlation) weighting methodologies\n- **Why This Feature**: Identifies companies where the \"best\" ESG practices (positive correlation) differ from the most \"market-moving\" practices (absolute correlation). Changes in this spread indicate shifting market efficiency in pricing ESG factors.\n- **is filling nan necessary**: NaN indicates missing correlation data; do not fill as the spread would be meaningless.\n- **Directionality**: Positive values suggest max-correlation scores exceed hybrid scores (negative correlations present); negative values suggest hybrid outperforms max-correlation\n- **Boundary Conditions**: Zero = perfect alignment between positive and absolute correlation weighting; High positive = significant negative ESG correlations exist",
+    "expression_list": [
+        "environmental_hybrid_weighted_score - environmental_max_correlation_weighted_score",
+        "employer_hybrid_weighted_score - environmental_max_correlation_weighted_score",
+        "citizenship_hybrid_weighted_score - environmental_max_correlation_weighted_score",
+        "governance_hybrid_weighted_score - environmental_max_correlation_weighted_score",
+        "social_hybrid_weighted_score - environmental_max_correlation_weighted_score",
+        "sustainability_hybrid_weighted_score - environmental_max_correlation_weighted_score",
+        "governance_hybrid_weighted_score - governance_max_correlation_weighted_score",
+        "citizenship_hybrid_weighted_score - governance_max_correlation_weighted_score",
+        "employer_hybrid_weighted_score - governance_max_correlation_weighted_score",
+        "environmental_hybrid_weighted_score - governance_max_correlation_weighted_score",
+        "social_hybrid_weighted_score - governance_max_correlation_weighted_score",
+        "sustainability_hybrid_weighted_score - governance_max_correlation_weighted_score",
+        "social_hybrid_weighted_score - social_max_correlation_weighted_score",
+        "sustainability_hybrid_weighted_score - social_max_correlation_weighted_score",
+        "citizenship_hybrid_weighted_score - social_max_correlation_weighted_score",
+        "employer_hybrid_weighted_score - social_max_correlation_weighted_score",
+        "environmental_hybrid_weighted_score - social_max_correlation_weighted_score",
+        "governance_hybrid_weighted_score - social_max_correlation_weighted_score",
+        "sustainability_hybrid_weighted_score - sustainability_max_correlation_weighted_score",
+        "social_hybrid_weighted_score - sustainability_max_correlation_weighted_score",
+        "citizenship_hybrid_weighted_score - sustainability_max_correlation_weighted_score",
+        "employer_hybrid_weighted_score - sustainability_max_correlation_weighted_score",
+        "environmental_hybrid_weighted_score - sustainability_max_correlation_weighted_score",
+        "governance_hybrid_weighted_score - sustainability_max_correlation_weighted_score"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(subtract(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 60), 5), industry), range='0,1,0.1')), industry), driver=gaussian)",
+    "idea": "构建双时间维度的加速度动量差分信号。分别计算基于20日平滑和60日平滑的预测修正加速度，通过group_rank进行行业内排序后，利用bucket将排序离散化为十分位，捕捉短期加速度相对于长期趋势的偏离（regime change）。此设计能识别分析师预期调整从平稳到加速或减速的结构性拐点，增强对动量转换的敏感度。",
+    "expression_list": [
+        "quantile(group_zscore(subtract(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 60), 5), industry), range='0,1,0.1')), industry), driver=gaussian)",
+        "quantile(group_zscore(subtract(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 60), 5), industry), range='0,1,0.1')), industry), driver=gaussian)"
+    ]
+}

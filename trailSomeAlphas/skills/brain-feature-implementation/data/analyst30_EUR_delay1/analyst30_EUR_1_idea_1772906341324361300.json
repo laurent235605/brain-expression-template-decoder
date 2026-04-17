@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( divide( vec_avg({adjustedgrossamt}), add( vec_stddev({adjustedgrossamt}), 0.001 ) ), industry )",
+    "idea": "稳定性调整股息溢价：使用股息信息比率（均值/标准差）识别高且稳定的股息支付者，而非仅关注绝对金额。高IR代表可持续的现金分派能力，配合行业中性化剔除行业间资本结构差异影响，避免因一次性特殊股息或周期性行业波动导致的信号失真。",
+    "expression_list": [
+        "group_zscore( divide( vec_avg(anl30_adjustedgrossamt), add( vec_stddev(anl30_adjustedgrossamt), 0.001 ) ), industry )",
+        "group_zscore( divide( vec_avg(anl30_unadjustedgrossamt), add( vec_stddev(anl30_unadjustedgrossamt), 0.001 ) ), industry )"
+    ]
+}

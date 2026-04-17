@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(group_rank(winsorize({crowding},std=4),industry),0.9),multiply(group_zscore(winsorize({value_ts},std=4),industry),-1),group_zscore(winsorize({value_ts},std=4),industry))",
+    "idea": "极端拥挤条件反转策略：仅当股票处于行业内拥挤度前10%分位（极端拥挤）时，将价值因子方向反转（乘以-1以规避或做空），其余情况保持价值因子原方向（做多），实现“去极端陷阱、持有纯净价值”的非对称 exposure，避免价值因子在极端拥挤区域的流动性风险。",
+    "expression_list": [
+        "trade_when(greater(group_rank(winsorize(liquidity_factor_crowding,std=4),industry),0.9),multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),-1),group_zscore(winsorize(rsk74_value_ts,std=4),industry))",
+        "trade_when(greater(group_rank(winsorize(liquidity_timeseries_crowding,std=4),industry),0.9),multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),-1),group_zscore(winsorize(rsk74_value_ts,std=4),industry))",
+        "trade_when(greater(group_rank(winsorize(rsk74_crowding,std=4),industry),0.9),multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),-1),group_zscore(winsorize(rsk74_value_ts,std=4),industry))",
+        "trade_when(greater(group_rank(winsorize(rsk74_raw_crowding,std=4),industry),0.9),multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),-1),group_zscore(winsorize(rsk74_value_ts,std=4),industry))"
+    ]
+}

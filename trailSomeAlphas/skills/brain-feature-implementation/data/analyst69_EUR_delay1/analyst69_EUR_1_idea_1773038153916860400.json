@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), add(ts_std_dev(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 252), 0.01))",
+    "idea": "构造“经波动率调整后的异常度”（类似信息比率）。将当前披露稳定性的Z-score除以其长期历史波动率（252日标准差）。若某股票历史上披露间隔本就波动巨大，则当前的偏离可能不重要；反之，若历史上极其规律，则小幅偏离即具显著信号意义。分母加0.01防止除零，有效识别“意料之外的规律/不规律”。",
+    "expression_list": [
+        "divide(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), add(ts_std_dev(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 252), 0.01))",
+        "divide(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), add(ts_std_dev(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 252), 0.01))"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize({concentration}, std=4), 60 ), sector ), 0 ), multiply( group_rank( {crowding}, sector ), signed_power( zscore( ts_backfill( {value_ts}, 63 ) ), 0.5 ) ), 0 ), 5 )",
+    "idea": "行业相对集中度动量与分位数加权价值陷阱：先将集中度在行业组内标准化并计算60日变化率，仅当行业相对集中度上升时触发信号；此时用行业内拥挤度排名非线性放大经幂变换（0.5次方压缩极端值）的价值因子，最后做5日线性衰减以降低换手并平滑信号。",
+    "expression_list": [
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( rsk74_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( rsk74_raw_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( liquidity_factor_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( liquidity_timeseries_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_raw_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( rsk74_raw_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_raw_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( rsk74_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_raw_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( liquidity_factor_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )",
+        "ts_decay_linear( trade_when( greater( group_zscore( ts_delta( winsorize(rsk74_raw_concentration, std=4), 60 ), sector ), 0 ), multiply( group_rank( liquidity_timeseries_crowding, sector ), signed_power( zscore( ts_backfill( rsk74_value_ts, 63 ) ), 0.5 ) ), 0 ), 5 )"
+    ]
+}

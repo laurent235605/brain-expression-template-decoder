@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_zscore(ts_delta(days_from_last_change({eps_expected_report_dt}), 5), 60), ts_zscore(ts_delta(days_from_last_change({eps_expected_report_dt}), 20), 60))",
+    "idea": "将预期修订的加速度逻辑迁移至报告日期稳定性指标，构建'计划不确定性变化加速度'信号。短期（5日）稳定性变化率与中期（20日）变化率的背离标识公司治理节奏的突变，捕捉从稳定到动荡或反之的拐点。",
+    "expression_list": [
+        "subtract(ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 20), 60))",
+        "subtract(ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 20), 60))"
+    ]
+}

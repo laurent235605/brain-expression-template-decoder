@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(winsorize(ts_delta(if_else(is_nan({exp_usa}), 0, {exp_usa}),63),std=4),252)",
+    "idea": "地理暴露动量拐点因子。衡量美国暴露在过去63日的变化率经252日时序Z-score标准化，识别公司供应链或市场战略向美国转移的加速度信号。高值表示公司正在加速'美国化'（管理层的主动地理布局调整），低值表示收缩美国业务，捕捉'正在变化'而非'静态水平'的alpha。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_delta(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa),63),std=4),252)"
+    ]
+}

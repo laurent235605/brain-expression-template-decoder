@@ -1,0 +1,10 @@
+{
+    "template": "multiply(quantile(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver='gaussian'), add(1, multiply(0.3, add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))))))",
+    "idea": "对盈利惊喜应用高斯分位数变换（拉伸尾部，压缩中部），再与事件数量线性组合。通过分布变换强化极端惊喜的识别能力，同时事件密度提供额外的横截面差异化，适用于挖掘尾部alpha。",
+    "expression_list": [
+        "multiply(quantile(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver='gaussian'), add(1, multiply(0.3, add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))))))",
+        "multiply(quantile(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver='gaussian'), add(1, multiply(0.3, add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))))))",
+        "multiply(quantile(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver='gaussian'), add(1, multiply(0.3, add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))))))",
+        "multiply(quantile(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver='gaussian'), add(1, multiply(0.3, add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))))))"
+    ]
+}

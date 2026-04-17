@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(zscore(ts_delta(vec_stddev({version}), 5))), 2), signed_power(zscore(ts_delta(vec_stddev({version}), 5)), 2), 0), industry)",
+    "idea": "极端分歧动量增强：结合Input 1的分歧度标准差与Input 2的极端阈值交易逻辑，仅在分歧变化超过2个标准差时触发非线性放大信号，并进行行业中性化处理，避免行业结构差异导致的偏差。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(zscore(ts_delta(vec_stddev(anl85_version), 5))), 2), signed_power(zscore(ts_delta(vec_stddev(anl85_version), 5)), 2), 0), industry)"
+    ]
+}

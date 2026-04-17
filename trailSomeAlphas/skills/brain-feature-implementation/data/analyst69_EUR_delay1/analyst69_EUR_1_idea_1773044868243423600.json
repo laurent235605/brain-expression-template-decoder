@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_rank(winsorize(subtract(ts_delta({eps_best_eeps_cur_yr}, 5), ts_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 60)), std=4), industry), 20)",
+    "idea": "修订加速度（二阶动量）行业中性化：计算短期（5日）修订动量相对中期趋势（60日均值）的偏离，识别预期修正正在加速或减速的拐点，经行业分组排名和20日衰减平滑，适用于捕捉业绩指引发布后的预期动量延续或反转。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(winsorize(subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 60)), std=4), industry), 20)",
+        "ts_decay_linear(group_rank(winsorize(subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 60)), std=4), industry), 20)"
+    ]
+}

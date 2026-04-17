@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(group_zscore(quantile(winsorize(log({volume}), std=4), driver=\"gaussian\"), industry), 20)",
+    "idea": "高斯分位成交量（尾部增强）：先对对数成交量进行缩尾，再通过 quantile 映射至高斯分布（将中间区间压缩、两端拉伸以突出极端 liquidity），经行业中性化后取20日移动平均。该变换增强了对极端流动性事件的区分度，同时平滑处理以降低高频噪声。",
+    "expression_list": [
+        "ts_mean(group_zscore(quantile(winsorize(log(mdl234_volume), std=4), driver=\"gaussian\"), industry), 20)"
+    ]
+}

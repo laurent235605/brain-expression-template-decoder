@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(if_else(greater(ts_std_dev(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 20), 0.5), ts_decay_linear(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 5), ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 20)), industry)",
+    "idea": "波动率自适应的平滑机制。动态判断近期20日预期修订的波动率状态：当波动率大于阈值0.5时，使用ts_decay_linear进行5日快速线性衰减以紧跟快速变化的市场预期；当波动率低时，切换至ts_mean进行20日均值平滑以降低换手率并捕捉持续趋势。通过条件逻辑实现信号处理速度的 regime switching，最后行业内标准化。",
+    "expression_list": [
+        "group_zscore(if_else(greater(ts_std_dev(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 20), 0.5), ts_decay_linear(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 5), ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 20)), industry)",
+        "group_zscore(if_else(greater(ts_std_dev(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 20), 0.5), ts_decay_linear(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 5), ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 20)), industry)"
+    ]
+}

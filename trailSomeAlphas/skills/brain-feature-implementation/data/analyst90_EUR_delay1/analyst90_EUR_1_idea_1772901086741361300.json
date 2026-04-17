@@ -1,0 +1,7 @@
+{
+    "template": "rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4))",
+    "idea": "分位数非线性偏离：将价格概率偏离信号转换为截面排名分位（0-1），压缩中间噪音区间，强化头尾极端偏离的股票识别。适用于认为只有极端错配才有收益的场景。",
+    "expression_list": [
+        "rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4))"
+    ]
+}

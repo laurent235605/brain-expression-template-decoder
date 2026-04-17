@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(ts_rank(ts_backfill({exp_usa}, 126), 252), 0.95), less(ts_rank(ts_backfill({exp_usa}, 126), 252), 0.05)), reverse(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry)), NaN)",
+    "idea": "极端敞口均值回归反向策略。观察126日平滑后的美国敞口在252日（一年）历史区间中的分位位置，仅当处于历史极端高位（前5%）或极端低位（后5%）时触发交易，采取反向操作（高历史敞口做空，低历史敞口做多），中段90%区域视为无效信号置NaN。利用group_zscore确保行业中性，捕捉过度暴露后的均值回归与情绪反转机会。",
+    "expression_list": [
+        "trade_when(or(greater(ts_rank(ts_backfill(rsk74_raw_exp_usa, 126), 252), 0.95), less(ts_rank(ts_backfill(rsk74_raw_exp_usa, 126), 252), 0.05)), reverse(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry)), NaN)"
+    ]
+}

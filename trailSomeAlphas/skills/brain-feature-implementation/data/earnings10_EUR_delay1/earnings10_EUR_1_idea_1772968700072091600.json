@@ -1,0 +1,7 @@
+{
+    "template": "multiply(quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "融合模板1的时序分位数持续性检验（3日平滑）与模板2的信息新鲜度衰减机制，将高斯分位数映射后的持续趋势信号按距离上次数据变更的天数进行线性降权（10天后归零），既保留对温和修正趋势的识别能力，又避免持有过时的陈旧信号，实现时间维度上的动态风险调整。",
+    "expression_list": [
+        "multiply(quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

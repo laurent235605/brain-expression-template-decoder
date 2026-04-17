@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(if_else(and(less(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), -1.5), less(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 60), 0)), -1, if_else(and(greater(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), 1.5), greater(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 60), 0)), 1, 0)), 10)",
+    "idea": "捕捉业务结构稳定性的变化动量，当波动率处于历史低位且持续下降（更稳定）时做多，处于高位且持续上升（更动荡）时做空，结合ts_decay_linear降低调仓频率。",
+    "expression_list": [
+        "ts_decay_linear(if_else(and(less(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), -1.5), less(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 60), 0)), -1, if_else(and(greater(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), 1.5), greater(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 60), 0)), 1, 0)), 10)"
+    ]
+}

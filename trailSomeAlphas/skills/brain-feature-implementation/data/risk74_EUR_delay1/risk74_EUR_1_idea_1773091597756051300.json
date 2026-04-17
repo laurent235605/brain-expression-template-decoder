@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 63), industry)",
+    "idea": "对中美敞口价差进行63日移动平均平滑处理后在行业内标准化，借鉴时序平滑算子降低高频噪音和换手率，捕捉稳健的中期区域配置趋势，平衡创新性与稳定性。",
+    "expression_list": [
+        "group_zscore(ts_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 63), industry)"
+    ]
+}

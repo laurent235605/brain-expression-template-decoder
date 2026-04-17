@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(multiply(ts_delta(vec_avg({elta_value}), 5), divide(1, add(vec_stddev({elta_value}), 0.01))), std=4), industry)",
+    "idea": "分析师共识度加权动量：利用估计向量的标准差（vec_stddev）衡量分析师分歧度，以分歧度的倒数作为置信权重乘以5日平均预期动量，当分析师意见越一致（分歧低）时赋予动量更高权重，构建基于共识强度的修正信号，经去极值后行业内标准化。",
+    "expression_list": [
+        "group_zscore(winsorize(multiply(ts_delta(vec_avg(ern10_elta_value), 5), divide(1, add(vec_stddev(ern10_elta_value), 0.01))), std=4), industry)"
+    ]
+}

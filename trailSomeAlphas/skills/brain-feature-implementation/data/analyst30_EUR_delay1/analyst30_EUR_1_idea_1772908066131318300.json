@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(vec_range(vec_filter({fiscalyearend}, value=\"nan\"))), 10), signed_power(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.5), 0)",
+    "idea": "结合模板2的极端值非线性放大与sector中性化框架，引入days_from_last_change捕捉事件驱动特征，仅当会计年度分散度在过去10天内发生过变化时才生成信号，专注于近期变更业务架构或子公司结构的公司。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\"))), 10), signed_power(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.5), 0)"
+    ]
+}

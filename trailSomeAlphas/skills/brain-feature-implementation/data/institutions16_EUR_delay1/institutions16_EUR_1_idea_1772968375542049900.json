@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(rank(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4)), 0.85), zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4)), trade_when(less(rank(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4)), 0.15), negate(zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4))), 0))",
+    "idea": "极端分位数双边策略（头尾聚焦）：仅关注资产变化分布的前15%（极端流入）和后15%（极端流出），中间70%视为噪音置零。对头部赋予正向标准化权重（追逐动量），对尾部赋予负向权重（捕捉反转或做空清算风险），通过嵌套trade_when实现条件触发式交易，专门捕捉并购预期或流动性危机等极端事件带来的非线性收益。",
+    "expression_list": [
+        "trade_when(greater(rank(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4)), 0.85), zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4)), trade_when(less(rank(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4)), 0.15), negate(zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4))), 0))"
+    ]
+}

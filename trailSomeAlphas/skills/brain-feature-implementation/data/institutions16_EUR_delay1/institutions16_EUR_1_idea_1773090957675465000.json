@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4), 252, rettype=0))), 1.5), zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4), 252, rettype=0)), multiply(zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4), 252, rettype=0)), 0.1))",
+    "idea": "采用'强信号重仓，弱信号轻仓'的分段逻辑。仅当规模调整后的残差绝对值超过1.5个标准差时，保留完整信号强度；对于中间区间(|zscore|<1.5)的微弱信号视为噪音，将其权重压缩至10%。通过trade_when实现条件性交易，降低中间模糊地带带来的换手率与噪音，专注于极端异常活跃或异常保守的基金。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 252, rettype=0))), 1.5), zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 252, rettype=0)), multiply(zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 252, rettype=0)), 0.1))"
+    ]
+}

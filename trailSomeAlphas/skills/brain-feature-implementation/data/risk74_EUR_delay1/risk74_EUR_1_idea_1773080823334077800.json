@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(less(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),63), -1.5), ts_rank(winsorize(ts_delta({concentration},1),std=4), 252), 0)",
+    "idea": "以空头累积处于历史低位(覆盖行为，Z-score<-1.5)作为触发条件，仅在此时期考察地理集中度日度变化的252天时序分位，捕捉空头回补与地理集中结构变化的特殊共振时点，利用空头信号作为时间过滤器。",
+    "expression_list": [
+        "trade_when(less(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),63), -1.5), ts_rank(winsorize(ts_delta(rsk74_concentration,1),std=4), 252), 0)",
+        "trade_when(less(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),63), -1.5), ts_rank(winsorize(ts_delta(rsk74_concentration,1),std=4), 252), 0)",
+        "trade_when(less(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),63), -1.5), ts_rank(winsorize(ts_delta(rsk74_raw_concentration,1),std=4), 252), 0)",
+        "trade_when(less(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),63), -1.5), ts_rank(winsorize(ts_delta(rsk74_raw_concentration,1),std=4), 252), 0)"
+    ]
+}

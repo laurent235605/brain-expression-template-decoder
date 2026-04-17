@@ -1,0 +1,12 @@
+{
+    "template": "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), std=4)), 0.85), -1, 0)), sector)",
+    "idea": "采用**分桶极值策略**(bucket approach逻辑)。认为只有极端的债务期限结构才产生可预测收益：将全市场分为前15%（极低短期债务，财务稳健，做多）和后15%（极高短期债务，再融资危机，做空），中间70%区间视为无效噪音并赋值为0（if_else嵌套）。最后通过group_normalize确保行业内多空净敞口平衡，控制行业集中度风险，构建纯多头尾与空头尾的组合。",
+    "expression_list": [
+        "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4)), 0.85), -1, 0)), sector)",
+        "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4)), 0.85), -1, 0)), sector)",
+        "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4)), 0.85), -1, 0)), sector)",
+        "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4)), 0.85), -1, 0)), sector)",
+        "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4)), 0.85), -1, 0)), sector)",
+        "group_normalize(if_else(less(rank(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4)), 0.15), 1, if_else(greater(rank(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4)), 0.85), -1, 0)), sector)"
+    ]
+}

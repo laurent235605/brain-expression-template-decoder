@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry)",
+    "idea": "分组中性化增强：对模板1的股息持续率应用分组Z-Score标准化（group_zscore）。通过行业内相对比较，消除不同行业间派息政策（如公用事业高派息vs科技低派息）的结构性差异，提取“行业内分红稳定性异常”这一纯净信号。",
+    "expression_list": [
+        "group_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry)",
+        "group_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry)",
+        "group_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry)",
+        "group_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry)"
+    ]
+}

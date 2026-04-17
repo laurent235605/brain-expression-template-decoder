@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(multiply(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), signed_power(group_rank(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 5), sector), 2)), 3)",
+    "idea": "波动率缩放与衰减平滑的复合残差。以特质性残差为基底，乘以其行业内近期调整动量（5日变化的分位数平方，signed_power=2）作为增强因子；对合成信号应用3日线性衰减（ts_decay_linear），强调\"异常偏离伴随主动调整\"的短期持续性，同时通过动量平方项抑制弱调整带来的噪音。",
+    "expression_list": [
+        "ts_decay_linear(multiply(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), signed_power(group_rank(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 5), sector), 2)), 3)",
+        "ts_decay_linear(multiply(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), signed_power(group_rank(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 5), sector), 2)), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(trade_when(greater(abs(ts_zscore(group_zscore(winsorize(ts_backfill({hfown_pctown},63),std=4),sector),252)),2),ts_zscore(group_zscore(winsorize(ts_backfill({hfown_pctown},63),std=4),sector),252),0),5),sector)",
+    "idea": "**概念**: 极端尾部隔离与换手率控制（Tail-Isolated Historical Extremity）\\n- **核心逻辑**: 在双重标准化基础上，通过`abs`与`greater`严格筛选超过2倍标准差的历史极端分位，利用`trade_when`将中段噪音归零；加入`ts_decay_linear`对极端信号进行5日线性衰减平滑，降低因单日数据抖动导致的换手率；最后通过`group_normalize`确保行业内多空净暴露为零，强化纯Alpha属性。适用于捕捉关税敏感行业中机构持仓历史极端偏离后的均值回归机会，同时控制组合波动。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(trade_when(greater(abs(ts_zscore(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown,63),std=4),sector),252)),2),ts_zscore(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown,63),std=4),sector),252),0),5),sector)"
+    ]
+}

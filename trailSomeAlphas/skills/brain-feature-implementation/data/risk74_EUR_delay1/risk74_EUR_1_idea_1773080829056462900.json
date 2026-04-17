@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(group_zscore(winsorize(ts_delta({shortint},1),std=4), industry), 5), industry)",
+    "idea": "对日度空头变化施加行业标准化与5天快速衰减(短于原模板的15天累积)，相比原设计更敏感地捕捉短期行业相对空头流动，结合行业归一化剔除行业beta，适合高频空头情绪监测。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(group_zscore(winsorize(ts_delta(rsk74_shortint,1),std=4), industry), 5), industry)",
+        "group_normalize(ts_decay_linear(group_zscore(winsorize(ts_delta(rsk74_shortint_ts,1),std=4), industry), 5), industry)"
+    ]
+}

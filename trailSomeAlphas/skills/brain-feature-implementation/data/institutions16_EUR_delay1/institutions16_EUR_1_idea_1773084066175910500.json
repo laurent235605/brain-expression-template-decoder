@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6,zscore(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21)))),multiply(0.4,zscore(ts_delta(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21)),5))))",
+    "idea": "结合配置水平与配置变化的双维度信息，60%权重赋予当前中性化配置强度的zscore（捕捉高仓位信念），40%权重赋予近5日配置变化的zscore（捕捉短期动量），经加权合成后筛选出既有高权益敞口又在近期积极加仓的'趋势强化'型标的，同时规避那些虽然仓位高但正在减仓的潜在陷阱基金。",
+    "expression_list": [
+        "add(multiply(0.6,zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21)))),multiply(0.4,zscore(ts_delta(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21)),5))))"
+    ]
+}

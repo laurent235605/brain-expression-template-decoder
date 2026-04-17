@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_regression(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), ts_step(), 252, rettype=2), add(ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252), 0.001))",
+    "idea": "股息趋势斜率标准化：利用时间序列回归（ts_regression, rettype=2提取斜率）计算过去252天股息的增长趋势（每日变化率），再除以历史平均股息水平进行标准化。该指标识别具有持续股息增长能力（正斜率）或持续削减（负斜率）的公司，而非仅关注单期水平高低。适用于长期持有策略中的股息质量筛选，斜率持续为正往往预示现金流改善。",
+    "expression_list": [
+        "divide(ts_regression(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), ts_step(), 252, rettype=2), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252), 0.001))",
+        "divide(ts_regression(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), ts_step(), 252, rettype=2), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252), 0.001))",
+        "divide(ts_regression(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), ts_step(), 252, rettype=2), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252), 0.001))",
+        "divide(ts_regression(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), ts_step(), 252, rettype=2), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252), 0.001))"
+    ]
+}

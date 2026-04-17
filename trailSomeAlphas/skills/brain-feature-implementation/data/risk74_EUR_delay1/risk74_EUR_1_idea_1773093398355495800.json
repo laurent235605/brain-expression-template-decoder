@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_decay_linear(winsorize(group_zscore(ts_sum(ts_delta(ts_backfill({hfown_pctown},63),1),20), sector), std=3), 20), ts_decay_linear(winsorize(group_zscore(ts_sum(ts_delta(ts_backfill({fund_pct_ownership_encr},63),1),20), sector), std=3), 20))",
+    "idea": "双轨衰减动量对齐：将模板2的\"回溯填充+衰减\"结构同时应用于对冲基金和共同基金两个维度（而非仅单边），分别构建20日衰减加权流，再进行差分。相比原模板1的简单累加，更重视近期资金流向的持续性，且双边对称处理减少数据缺失偏差。",
+    "expression_list": [
+        "subtract(ts_decay_linear(winsorize(group_zscore(ts_sum(ts_delta(ts_backfill(rsk74_hfown_pctown,63),1),20), sector), std=3), 20), ts_decay_linear(winsorize(group_zscore(ts_sum(ts_delta(ts_backfill(hedge_fund_pct_ownership_encr,63),1),20), sector), std=3), 20))"
+    ]
+}

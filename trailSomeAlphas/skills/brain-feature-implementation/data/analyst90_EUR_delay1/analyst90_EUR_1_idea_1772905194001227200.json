@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20)), industry)",
+    "idea": "将输入1的信噪比指标在行业组内进行标准化（group_zscore），消除不同行业分析师预测固有差异的横截面影响，得到行业相对意义上的信号质量，适用于行业中性配置。",
+    "expression_list": [
+        "group_zscore(vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20)), industry)"
+    ]
+}

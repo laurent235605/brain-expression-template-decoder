@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(and(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.5), greater(vec_count({aily_delta_recon_value}), 3)), subtract(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), group_mean(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), industry)), 0), hump(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)), hump=0.01))",
+    "idea": "引入数据质量过滤(vec_count>3)确保向量内有效数据点充足，剔除样本不足的噪音信号；通过行业均值剥离(group_mean)构建纯粹的行业中性alpha，消除行业系统性偏差；结合hump函数对时间衰减后的权重进行平滑，忽略日内微小权重波动以降低换手率，仅在信号显著偏离(>1.5σ)且数据质量合格时开仓，实现事件驱动的精细化仓位管理。",
+    "expression_list": [
+        "multiply(trade_when(and(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5), greater(vec_count(ern10_aily_delta_recon_value), 3)), subtract(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), group_mean(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), industry)), 0), hump(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)), hump=0.01))"
+    ]
+}

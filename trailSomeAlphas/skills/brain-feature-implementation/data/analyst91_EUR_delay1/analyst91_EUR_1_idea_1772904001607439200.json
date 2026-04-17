@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 60)",
+    "idea": "计算当前行业中性利差在过去60天中的分位排名，识别\"历史极端\"的重组时点。相比绝对数值，更关注相对自身历史的极端性，避免不同行业基准差异导致的误判。",
+    "expression_list": [
+        "ts_rank(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 60)"
+    ]
+}

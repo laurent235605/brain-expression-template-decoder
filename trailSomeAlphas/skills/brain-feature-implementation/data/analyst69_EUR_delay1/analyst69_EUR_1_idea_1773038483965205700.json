@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), industry), 3)",
+    "idea": "非线性组内增强：对Template1的组内稳定性排名进行3次幂signed_power非线性放大。在保持方向性（高稳定为正、低稳定为负）的同时，极端化尾部区分度，使行业内部极端稳定与极端不稳定的标的获得更大的权重差异，强化多空两端暴露。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), industry), 3)",
+        "signed_power(group_zscore(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), industry), 3)"
+    ]
+}

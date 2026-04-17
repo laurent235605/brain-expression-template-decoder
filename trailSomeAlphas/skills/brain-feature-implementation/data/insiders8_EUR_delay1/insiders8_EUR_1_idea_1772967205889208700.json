@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(ts_mean(subtract(group_rank({active_return_decile_rank_long}, industry), group_rank({active_weight_decile_rank_long}, industry)), 20), 0.7), subtract(group_rank({active_return_decile_rank_long}, industry), group_rank({active_weight_decile_rank_long}, industry)), multiply(subtract(group_rank({active_return_decile_rank_long}, industry), group_rank({active_weight_decile_rank_long}, industry)), 0.2)), 10)",
+    "idea": "持续性筛选模板：在行业内部使用排名而非原始分位，仅在偏离度持续20日维持高位（>0.7）时才全额配置信号，否则仅保留20%的轻度暴露，通过时间序列均值过滤短暂的价格噪音，确保信号具有足够的持续性，最后进行10日平滑降低调仓成本。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(ts_mean(subtract(group_rank(insd8_black_litterman_implied_active_return_decile_rank_long, industry), group_rank(insd8_active_weight_decile_rank_long, industry)), 20), 0.7), subtract(group_rank(insd8_black_litterman_implied_active_return_decile_rank_long, industry), group_rank(insd8_active_weight_decile_rank_long, industry)), multiply(subtract(group_rank(insd8_black_litterman_implied_active_return_decile_rank_long, industry), group_rank(insd8_active_weight_decile_rank_long, industry)), 0.2)), 10)"
+    ]
+}

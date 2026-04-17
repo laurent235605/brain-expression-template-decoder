@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(winsorize({factor_e} + {factor_s} + {factor_g}, std=4), industry) * (1 + 0.5 * zscore({hfown_pctown} - group_mean({hfown_pctown}, industry)))",
+    "idea": "先对模板1的ESG总分进行极值处理（winsorize）和行业内标准化（group_normalize），确保组内可比且稳健；再以1为基准，用模板2的组内持仓偏离（经zscore压缩到0.5倍）作为温和放大器。实现ESG基础信号与HF持仓信号的均衡融合，既保持ESG因子的核心地位，又利用持仓数据增强区分度。",
+    "expression_list": [
+        "group_normalize(winsorize(rsk74_factor_e + rsk74_factor_s + rsk74_factor_g, std=4), industry) * (1 + 0.5 * zscore(rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry)))",
+        "group_normalize(winsorize(rsk74_factor_esg + rsk74_factor_s + rsk74_factor_g, std=4), industry) * (1 + 0.5 * zscore(rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry)))"
+    ]
+}

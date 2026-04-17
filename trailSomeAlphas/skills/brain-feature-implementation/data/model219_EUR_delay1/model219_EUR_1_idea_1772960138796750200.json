@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill({fc_numest},63),std=4), add(winsorize(ts_backfill({fc_stdevfy1epsp},63),std=4), winsorize(ts_backfill({fc_stdevfy2epsp},63),std=4), filter=true)), industry), 5)",
+    "idea": "行业中性时序平滑模板：先对三个原始字段进行63日回溯填充与4倍标准差去极值清洗；计算原始稳定性得分（覆盖度/离散度之和）；通过group_zscore在行业内部进行中性化，消除不同行业间分析师覆盖密度差异带来的系统性偏差；最后应用5日线性衰减平滑(ts_decay_linear)降低换手率，捕捉稳定的中长期共识质量而非单日噪音。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_1_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_1_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_1_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_2_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_1_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_1_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_1_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_1_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_2_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_2_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_1_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_2_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_2_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_2_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_2_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_1_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_2_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_2_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_2_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_2_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_1_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(mdl219_1_fc_numest,63),std=4), add(winsorize(ts_backfill(mdl219_2_fc_stdevfy1epsp,63),std=4), winsorize(ts_backfill(mdl219_1_fc_stdevfy2epsp,63),std=4), filter=true)), industry), 5)"
+    ]
+}

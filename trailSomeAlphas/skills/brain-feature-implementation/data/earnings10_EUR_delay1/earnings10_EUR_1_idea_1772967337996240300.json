@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(trade_when(greater(abs((vec_max({aily_delta_recon_value}) - ts_mean(vec_max({aily_delta_recon_value}), 20)) / ts_std_dev(vec_max({aily_delta_recon_value}), 20)), 2), (vec_max({aily_delta_recon_value}) - ts_mean(vec_max({aily_delta_recon_value}), 20)) / ts_std_dev(vec_max({aily_delta_recon_value}), 20), NaN), sector), 3)",
+    "idea": "极端离群事件捕捉器：使用vec_max识别日内最大修正冲击以捕捉最具破坏性的信息更新，计算zscore后利用trade_when算子设定阈值仅当|z|>2时保留信号（非极端值置NaN），实现边界条件控制，进行行业中性化(group_zscore)消除系统性偏差，使用3日线性衰减确保事件后快速响应同时避免隔夜跳空风险。专门针对统计显著性超过2个标准差的极端信息冲击，适合高波动环境下的事件驱动策略。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(trade_when(greater(abs((vec_max(ern10_aily_delta_recon_value) - ts_mean(vec_max(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_max(ern10_aily_delta_recon_value), 20)), 2), (vec_max(ern10_aily_delta_recon_value) - ts_mean(vec_max(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_max(ern10_aily_delta_recon_value), 20), NaN), sector), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 21), industry)",
+    "idea": "将输入1的价差逻辑从'水平值'延伸至'变化率'，计算21日价差异动量并经行业标准化，捕捉中美敞口分化加速的动量效应，适用于地缘政治事件发酵期的趋势跟踪。",
+    "expression_list": [
+        "group_zscore(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 21), industry)"
+    ]
+}

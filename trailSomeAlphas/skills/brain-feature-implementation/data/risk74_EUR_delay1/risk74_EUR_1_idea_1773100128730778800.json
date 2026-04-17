@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize( if_else( greater( zscore( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ) ), 2 ), multiply( -1, zscore( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ) ) ), if_else( greater( zscore( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ) ), 0 ), zscore( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ) ), 0 ) ), industry )",
+    "idea": "针对边界条件中的'极端值可能预示拥挤交易'现象，构建非线性响应函数：当持仓变化处于中等正向区间(0-2σ)时视为趋势延续信号（做多），当处于极端正向区间(>2σ)时视为拥挤反转信号（反向做空）；通过分段函数(if_else)实现'中间噪音置零、极端反转、适度趋势跟踪'的复杂逻辑，并进行行业中性化。",
+    "expression_list": [
+        "group_normalize( if_else( greater( zscore( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ) ), 2 ), multiply( -1, zscore( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ) ) ), if_else( greater( zscore( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ) ), 0 ), zscore( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ) ), 0 ) ), industry )"
+    ]
+}

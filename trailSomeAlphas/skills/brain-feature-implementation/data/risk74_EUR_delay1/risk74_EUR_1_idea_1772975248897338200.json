@@ -1,0 +1,16 @@
+{
+    "template": "ts_regression(winsorize(ts_backfill({concentration},252),std=4), winsorize(ts_backfill(if_else(is_nan({nondomicile}),0,{nondomicile}),252),std=4), 252, rettype=0)",
+    "idea": "剔除国际化影响的纯集中度残差：将地理集中度对非国内收入敞口做252日时序回归，提取残差项（rettype=0）；该残差代表了无法被总体海外暴露水平解释的'异常集中度'，即剔除了'因为海外收入高所以地理集中度高'的线性解释后，真正由单一国家依赖带来的特有风险，适用于寻找结构性过度集中的标的。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_backfill(rsk74_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),252),std=4), 252, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,252),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),252),std=4), 252, rettype=0)"
+    ]
+}

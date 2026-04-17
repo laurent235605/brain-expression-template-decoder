@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(multiply(divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), nan_out(vec_avg({unadjustedgrossamt}), 0.0001)), signed_power(winsorize(vec_ir({unadjustedgrossamt}), 4), 0.5)), 4), industry)",
+    "idea": "**分红稳健性加权冲击 (Stability-Weighted Impact)**：利用`vec_ir`（信息比率，均值/标准差）衡量公司历史分红金额的稳定性；通过`signed_power`取其平方根作为权重，对原始调整比例进行缩放；该构造使得来自分红记录稳定（高IR）公司的调整事件获得更高权重，而波动大的公司的调整被视为低质量信号，经行业中性化后形成质量筛选因子。",
+    "expression_list": [
+        "group_zscore(winsorize(multiply(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), signed_power(winsorize(vec_ir(anl30_unadjustedgrossamt), 4), 0.5)), 4), industry)",
+        "group_zscore(winsorize(multiply(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), signed_power(winsorize(vec_ir(anl30_unadjustedgrossamt), 4), 0.5)), 4), industry)"
+    ]
+}

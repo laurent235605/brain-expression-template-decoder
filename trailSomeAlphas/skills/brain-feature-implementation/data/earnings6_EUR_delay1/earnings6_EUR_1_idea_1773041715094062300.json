@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 0), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 0)",
+    "idea": "仅在存在至少一个公司事件（董事会、财报或拆分）时交易盈利惊喜，利用trade_when实现条件过滤。体现了'无事件时盈利数据可能不可靠或已充分定价'的逻辑，避免在信息真空期基于 stale 的盈利预期进行交易。",
+    "expression_list": [
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0)",
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0)",
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0)",
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0)"
+    ]
+}

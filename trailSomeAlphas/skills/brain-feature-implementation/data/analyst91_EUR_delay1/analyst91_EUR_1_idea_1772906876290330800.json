@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6, ts_std_dev(vec_avg({exposure_value}), 20)), multiply(0.4, ts_std_dev(vec_stddev({exposure_value}), 20)))",
+    "idea": "复合稳定性指标：0.6权重跟踪平均暴露水平的波动( vec_avg )，0.4权重跟踪内部地理分散度( vec_stddev )的时序稳定性。该模板同时惩罚'整体布局漂移'和'内部结构动荡'，更全面地衡量公司地理业务矩阵的整体结构韧性。",
+    "expression_list": [
+        "add(multiply(0.6, ts_std_dev(vec_avg(anl91_exposure_value), 20)), multiply(0.4, ts_std_dev(vec_stddev(anl91_exposure_value), 20)))"
+    ]
+}

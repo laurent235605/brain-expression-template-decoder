@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_std_dev(ts_delta({concentration}, 1), 60), 0.02), subtract({concentration}, ts_mean(ts_backfill({concentration}, 10), 60)), multiply(0.3, subtract({concentration}, ts_mean(ts_backfill({concentration}, 10), 60))))",
+    "idea": "结合模板2的波动率标准化思路与模板1的回填清洗，构建仅在集中度波动率处于特定区间时才触发完整信号的动态仓位逻辑：当近期集中度波动率高于阈值时信号完整传递，低于阈值时仅保留30%暴露，避免在低波动噪音期过度交易或信号衰减。",
+    "expression_list": [
+        "trade_when(greater(ts_std_dev(ts_delta(rsk74_concentration, 1), 60), 0.02), subtract(rsk74_concentration, ts_mean(ts_backfill(rsk74_concentration, 10), 60)), multiply(0.3, subtract(rsk74_concentration, ts_mean(ts_backfill(rsk74_concentration, 10), 60))))",
+        "trade_when(greater(ts_std_dev(ts_delta(rsk74_raw_concentration, 1), 60), 0.02), subtract(rsk74_raw_concentration, ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), multiply(0.3, subtract(rsk74_raw_concentration, ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60))))"
+    ]
+}

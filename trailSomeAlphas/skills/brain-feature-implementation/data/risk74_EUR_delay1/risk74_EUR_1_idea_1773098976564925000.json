@@ -1,0 +1,5 @@
+{
+    "template": "multiply( bucket( ts_rank( ts_regression( {concentration}, group_mean( {concentration}, log(ts_mean({cap},21)), {sector} ), 60, rettype=0 ), 60 ), \"0,1,0.2\" ), group_zscore( multiply( {crowding}, {value_ts} ), {sector} ) )",
+    "idea": "行业beta剥离后的梯度暴露：先剔除行业集中度均值影响得到个股残差，将其60日历史分位划分为5档，信号强度随档位线性递增（0-4倍），叠加行业中性化的拥挤价值复合信号，实现风险积聚期的分层响应。",
+    "expression_list": []
+}

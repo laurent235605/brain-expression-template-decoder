@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_delta(vec_avg({likelihood_score}), 10), 0), rank(winsorize(ts_delta(vec_avg({likelihood_score}), 10) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 0)",
+    "idea": "引入时间序列差分（ts_delta）捕捉分析师信心改善动量，与价格偏离度相乘后截面排名（rank），仅在动量为正时交易，形成“改善趋势+截面错配”的时序增强。",
+    "expression_list": [
+        "trade_when(greater(ts_delta(vec_avg(success_likelihood_score), 10), 0), rank(winsorize(ts_delta(vec_avg(success_likelihood_score), 10) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 0)"
+    ]
+}

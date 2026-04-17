@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)), group_mean(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)), log(ts_mean(cap,21)), industry), 252, rettype=0), industry)",
+    "idea": "行业Beta剥离残差：通过时序回归（252日）剔除行业市值加权平均价差的共同成分，提取纯粹由个股特质驱动的中美敞口偏离，再进行行业Z分数标准化，得到剔除行业系统风险后的'纯净'区域配置阿尔法。",
+    "expression_list": [
+        "group_zscore(ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)), group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)), log(ts_mean(cap,21)), industry), 252, rettype=0), industry)"
+    ]
+}

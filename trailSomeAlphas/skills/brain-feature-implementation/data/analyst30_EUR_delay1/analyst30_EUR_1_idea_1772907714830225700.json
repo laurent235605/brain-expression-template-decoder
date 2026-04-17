@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(group_rank(vec_range(vec_filter({fiscalyearend}, \"nan\")), industry), 0.85), less(group_rank(vec_range(vec_filter({fiscalyearend}, \"nan\")), industry), 0.15)), group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, \"nan\")), 126), industry), 0)",
+    "idea": "极端值分段策略：仅当公司财政年度分散度处于行业内前15%（极高复杂性）或后15%（极度单一）时才建立头寸，中段区间视为噪音归零，强化尾部Alpha的纯度。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), industry), 0.85), less(group_rank(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), industry), 0.15)), group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), 126), industry), 0)"
+    ]
+}

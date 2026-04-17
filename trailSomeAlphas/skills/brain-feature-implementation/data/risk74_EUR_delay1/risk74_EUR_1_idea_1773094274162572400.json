@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252),1.5)",
+    "idea": "对行业中性残差的时序Z-score进行1.5次幂非线性变换（signed_power），放大极端正负残差的权重同时保留方向信息，构建对极端空头异动更敏感的陡峭信号。",
+    "expression_list": [
+        "signed_power(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252),1.5)",
+        "signed_power(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252),1.5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "scale(truncate(group_zscore(if_else(greater({active_return_decile_rank_long}, {active_weight_decile_rank_long}), signed_power(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 1.5), subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long})), industry), maxPercent=0.02), longscale=1, shortscale=1)",
+    "idea": "非对称分歧放大与权重约束。对正向分歧（return > weight）应用幂变换（signed_power，指数1.5）放大多头信号，负向分歧保持线性以控制空头风险，经行业标准化后，使用truncate限制单票最大权重2%，最后scale调整整体杠杆。适用于多头机会稀缺、需重点捕捉高分歧且控制单票暴露的场景。",
+    "expression_list": [
+        "scale(truncate(group_zscore(if_else(greater(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), signed_power(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 1.5), subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long)), industry), maxPercent=0.02), longscale=1, shortscale=1)"
+    ]
+}

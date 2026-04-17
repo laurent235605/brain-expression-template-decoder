@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_exp_window(signed_power(group_scale(subtract(ts_sum(subtract(vec_avg({cash_from_oper}), vec_avg({cap_expend_prpty_add})), 252), ts_sum(subtract(vec_avg({cash_from_oper}), vec_avg({cap_expend_prpty_add})), 504)), industry), 2), 126)",
+    "idea": "比较最近252日(一年)与504日(两年)累计自由现金流的差异以识别近期改善趋势，通过group_scale进行行业内[0,1]线性缩放后，使用signed_power(幂次=2)非线性放大尾部信号（极好与极差的标的），最后应用126日指数衰减加权平滑。该结构强调'近期趋势优于远期'的动量特征，同时通过指数衰减降低因子换手率，并突出那些现金创造能力处于行业极端分位点的公司。",
+    "expression_list": [
+        "ts_decay_exp_window(signed_power(group_scale(subtract(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 252), ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 504)), industry), 2), 126)",
+        "ts_decay_exp_window(signed_power(group_scale(subtract(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 252), ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 504)), industry), 2), 126)",
+        "ts_decay_exp_window(signed_power(group_scale(subtract(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 252), ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 504)), industry), 2), 126)",
+        "ts_decay_exp_window(signed_power(group_scale(subtract(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 252), ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 504)), industry), 2), 126)"
+    ]
+}

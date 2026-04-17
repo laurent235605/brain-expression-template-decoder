@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), 5), industry)",
+    "idea": "机构级清洗与行业中性化路径。首先对缺失值进行63日回溯填充（ts_backfill），避免因数据缺失导致的伪动量跳变；随后进行4倍标准差截尾（winsorize）处理极端异常值；计算5日变化率后，在行业（industry）内部进行Z-Score标准化（group_zscore），剔除行业Beta影响，仅保留股票相对于同行的分析师预期修正动量，形成纯粹的alpha来源。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), 5), industry)"
+    ]
+}

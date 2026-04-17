@@ -1,0 +1,7 @@
+{
+    "template": "if_else(less(days_from_last_change(ts_backfill({fundreportedequityassets}, 63)), 10), group_zscore(ts_rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252), industry), multiply(0.5, group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry)))",
+    "idea": "区分事件驱动与常态环境：当基金权益资产数据在10天内发生更新（days_from_last_change<10）时，使用252日时序分位数(ts_rank)衡量当前风险调整配置在其历史中的极端程度，并进行行业比较；对于陈旧数据则衰减至50%权重，优先交易信息时效性强的标的。",
+    "expression_list": [
+        "if_else(less(days_from_last_change(ts_backfill(inst16_ipreo_fundreportedequityassets, 63)), 10), group_zscore(ts_rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252), industry), multiply(0.5, group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry)))"
+    ]
+}

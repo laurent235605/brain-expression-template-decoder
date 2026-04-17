@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(winsorize(multiply(vec_median(ts_backfill({data_item_value}, 63)), vec_ir(ts_backfill({data_item_value}, 63))), std=4), 63)",
+    "idea": "稳定性加权稳健累积：利用向量中位数(vec_median)替代均值以降低极端财报异常值影响，同时以信息比率(vec_ir，均值/标准差)作为日度权重，强调财务表现稳定且持续的公司，再进行63日累积，适用于识别高质量、低波动的可持续增长。",
+    "expression_list": [
+        "ts_sum(winsorize(multiply(vec_median(ts_backfill(anl89_data_item_value, 63)), vec_ir(ts_backfill(anl89_data_item_value, 63))), std=4), 63)"
+    ]
+}

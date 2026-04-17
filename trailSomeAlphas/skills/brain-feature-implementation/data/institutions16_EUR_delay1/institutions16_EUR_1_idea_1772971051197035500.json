@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21)), ts_step(), 63, rettype=2)",
+    "idea": "**概念**：权益配置动量（Allocation Momentum）\n**逻辑**：使用21日回溯填充确保数据可得性，计算向量中性化后的权益敞口在过去63个交易日相对于时间步长（ts_step）的回归斜率（rettype=2）。\n**为什么**：静态的配置水平可能仅反映长期战略基准，而斜率捕捉基金近期是主动加仓权益（正斜率）还是持续减仓（负斜率），识别管理行为的边际变化方向而非存量暴露。\n**方向性**：正斜率表示权益配置相对于基金规模呈上升趋势（加仓动能），负斜率表示收缩或向现金/固收转移。\n**边界条件**：斜率接近零表示配置 stable，与规模同步变化；极端斜率可能预示重大策略转变或季度再平衡。",
+    "expression_list": [
+        "ts_regression(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21)), ts_step(), 63, rettype=2)"
+    ]
+}

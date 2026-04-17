@@ -1,0 +1,10 @@
+{
+    "template": "multiply(subtract(zscore({active_return_decile_rank_long}), zscore({active_weight_decile_rank_long})), signed_power(group_zscore(ts_regression({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60, rettype=0), sector), 0.5))",
+    "idea": "交叉增强缩放器：以收益-权重偏离（Input 1）为主信号，以持股集中度异常（Input 2）的平方根缩放因子（signed_power 0.5）调整强度。实现了\"定价偏离×机构行为\"的乘积效应，符合从属信号B安全增强主信号A的模板规范，避免方向反转。",
+    "expression_list": [
+        "multiply(subtract(zscore(insd8_black_litterman_implied_active_return_decile_rank_long), zscore(insd8_active_weight_decile_rank_long)), signed_power(group_zscore(ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0), sector), 0.5))",
+        "multiply(subtract(zscore(insd8_black_litterman_implied_active_return_decile_rank_long), zscore(insd8_active_weight_decile_rank_long)), signed_power(group_zscore(ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0), sector), 0.5))",
+        "multiply(subtract(zscore(insd8_black_litterman_implied_active_return_decile_rank_long), zscore(insd8_active_weight_decile_rank_long)), signed_power(group_zscore(ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0), sector), 0.5))",
+        "multiply(subtract(zscore(insd8_black_litterman_implied_active_return_decile_rank_long), zscore(insd8_active_weight_decile_rank_long)), signed_power(group_zscore(ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0), sector), 0.5))"
+    ]
+}

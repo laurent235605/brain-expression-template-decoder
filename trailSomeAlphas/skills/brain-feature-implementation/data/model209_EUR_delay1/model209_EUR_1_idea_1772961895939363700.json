@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(vec_sum({lastcostingfailed}), 0), vec_avg({investment}) / vec_sum({lastcostingfailed}), multiply(vec_sum({investment}), 2))",
+    "idea": "**概念**: 条件化策略切换（双模式风险暴露）\n- **逻辑**: 使用if_else实现分段逻辑：当存在失败记录时采用风险调整比率（Input 1逻辑），无失败时采用纯暴露策略并放大2倍（Input 2激进版）。体现\"只在信号明显时交易\"思想——无失败时视为纯粹投资机会，有失败时进入风险规避模式。\n- **边界**: 严格区分运营清洁期与问题期，避免零失败时的分母为1造成的保守偏差。",
+    "expression_list": [
+        "if_else(greater(vec_sum(mdl209_lastcostingfailed), 0), vec_avg(mdl209_investment) / vec_sum(mdl209_lastcostingfailed), multiply(vec_sum(mdl209_investment), 2))"
+    ]
+}

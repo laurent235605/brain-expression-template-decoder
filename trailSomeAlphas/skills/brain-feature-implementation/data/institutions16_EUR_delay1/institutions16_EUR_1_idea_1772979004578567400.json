@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4)), industry), driver='gaussian')",
+    "idea": "在规模中性化基础上实施行业二次中性化（group_zscore），彻底剥离行业配置beta与规模效应，得到纯粹的个股选择能力或风格偏离信号；随后通过高斯分位数变换（quantile with gaussian driver）将截面分布映射至标准正态形态，将中间60%的温和配置差异压缩至零附近，同时将极端配置强度向正负尾部拉伸，显著增强对极端权益敞口的识别能力，适用于构建多空对冲组合。",
+    "expression_list": [
+        "quantile(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4)), industry), driver='gaussian')"
+    ]
+}

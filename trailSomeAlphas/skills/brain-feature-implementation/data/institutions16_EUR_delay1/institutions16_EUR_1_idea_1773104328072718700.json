@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets}, 21), std=4), winsorize(ts_backfill({reported_asset_value}, 21), std=4)), 252)",
+    "idea": "计算当前规模调整后的股票配置偏离度相对于过去252日（一年）历史区间的时序Z分数，识别基金当前配置强度是否处于历史极端高位或低位，用于捕捉配置行为相对于自身历史的均值回复或趋势突破机会。",
+    "expression_list": [
+        "ts_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), std=4), winsorize(ts_backfill(fund_reported_asset_value, 21), std=4)), 252)"
+    ]
+}

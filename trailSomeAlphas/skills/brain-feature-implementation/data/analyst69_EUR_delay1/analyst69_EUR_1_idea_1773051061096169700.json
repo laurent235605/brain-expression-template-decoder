@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(multiply(group_zscore(divide(winsorize(ts_backfill({eps_best_eeps_cur_yr},63),std=4), winsorize(ts_backfill({ebitda_best_eeps_cur_yr},63),std=4)), sector), add(1, multiply(0.3, quantile(group_rank(winsorize(ts_delta({eps_best_eeps_cur_yr},5),std=4), sector), driver=gaussian)))), sector)",
+    "idea": "分位非线性响应增强。将分析师修正信号通过group_rank映射为0-1分位后，利用quantile(driver=gaussian)将中间区间压缩、尾部拉伸，强化极端修正的区分度；对核心效率信号进行行业组内标准化后，通过group_normalize确保各行业多空平衡，控制行业暴露风险。",
+    "expression_list": [
+        "group_normalize(multiply(group_zscore(divide(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), add(1, multiply(0.3, quantile(group_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr,5),std=4), sector), driver=gaussian)))), sector)",
+        "group_normalize(multiply(group_zscore(divide(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), add(1, multiply(0.3, quantile(group_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr,5),std=4), sector), driver=gaussian)))), sector)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_rank(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 60), industry), 10)",
+    "idea": "将原始字段先进行60日时序分位（ts_rank）以捕捉当前稳定性在历史区间中的相对位置，接着进行行业内标准化（group_zscore）剥离行业异质性，最后应用10日线性衰减（ts_decay_linear）替代简单移动平均，赋予近期数据更高权重，在保持对稳定性突变敏感度的同时通过平滑核函数降低组合换手率。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_rank(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 60), industry), 10)",
+        "ts_decay_linear(group_zscore(ts_rank(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 60), industry), 10)"
+    ]
+}

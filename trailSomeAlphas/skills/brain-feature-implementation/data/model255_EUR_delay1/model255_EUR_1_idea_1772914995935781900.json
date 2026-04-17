@@ -1,0 +1,7 @@
+{
+    "template": "{cacfroi50co2e} * ({cash_flow_score} / 5) * ({sustainability_score} / 5)",
+    "idea": "**Concept**: Sustainable Economic Profit Essence\n- **Sample Fields Used**: `cacfroi50co2e`, `cash_flow_score`, `sustainability_score`\n- **Definition**: Essential economic profit after accounting for environmental costs and cash flow verification, stripping away accounting accruals\n- **Why This Feature**: True economic profit must survive both carbon transition (cacfroi) and cash flow verification (not just accruals); this captures the essence of sustainable value creation\n- **is filling nan necessary**: Yes for cacfroi (ts_backfill 5 days for quarterly alignment), no for others\n- **Directionality**: High values indicate genuine sustainable competitive advantage; Negative values indicate value-destroying carbon-intensive operations\n- **Boundary Conditions**: Positive values with high confidence indicate long-term holds; Negative values indicate divestment candidates regardless of reported earnings",
+    "expression_list": [
+        "mdl255_cacfroi50co2e * (mdl255_cash_flow_score / 5) * (mdl255_payment_sustainability_score / 5)"
+    ]
+}

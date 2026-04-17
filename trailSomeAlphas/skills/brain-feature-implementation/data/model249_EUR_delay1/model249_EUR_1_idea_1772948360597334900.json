@@ -1,0 +1,7 @@
+{
+    "template": "rank(vec_avg({score}))",
+    "idea": "**Concept**: Cross-Sectional Score Percentile\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The rank of score within the universe normalized to [0,1], measuring relative attractiveness vs. all other stocks\n- **Why This Feature**: Acquisition likelihood is inherently relative (limited number of deals); top percentile may matter more than absolute score level\n- **is filling nan necessary**: No, rank operation handles NaNs by assigning them lowest rank; but for cleaner percentiles, `pasteurize(vec_avg({score}))` first to ensure finite values.\n- **Logical Meaning**: Relative standing in acquisition likelihood universe; captures \"best of breed\" target status\n- **Directionality**: 1.0 indicates highest likelihood in universe (top target); 0.0 indicates lowest\n- **Boundary Conditions**: Values > 0.9 indicate top decile targets; < 0.1 indicate bottom decile (avoid)",
+    "expression_list": [
+        "rank(vec_avg(mdl249_score))"
+    ]
+}

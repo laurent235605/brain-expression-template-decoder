@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(vec_skewness({exposure_value}), 20), sector), 3)",
+    "idea": "平滑化地理集中度极端偏离（时序平滑与尾部增强结合）。融合模板1的偏度度量、模板2的行业标准化与非线性增强，并引入ts_decay_linear降低信号抖动：先对地理集中度偏度应用20日线性衰减加权（保留近期信息但平滑单日噪音），再进行行业标准化，最后用signed_power放大极端值。该结构在保持\"只交易极端偏离\"逻辑的同时，显著降低组合换手率，适合持续监控地理风险但减少频繁调仓的场景。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(vec_skewness(anl91_exposure_value), 20), sector), 3)"
+    ]
+}

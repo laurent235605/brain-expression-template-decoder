@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(vec_skewness({exposure_value}), group_cartesian_product(sector, country))",
+    "idea": "笛卡尔积微观分组：将行业与国家做笛卡尔积，在极细颗粒的\"行业-国家\"交叉维度内计算地域集中度Z-score。同时剔除宏观层面的行业beta和国家beta双重影响，捕捉微观层面的\"在特定行业-国家组合中的异常地理布局\"alpha，最大化横截面异质性，适用于捕捉跨国企业在细分领域的精准战略布局偏离。",
+    "expression_list": [
+        "group_zscore(vec_skewness(anl91_exposure_value), group_cartesian_product(sector, country))"
+    ]
+}

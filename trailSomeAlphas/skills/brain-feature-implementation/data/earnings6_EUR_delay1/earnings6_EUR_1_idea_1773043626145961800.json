@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(or(less(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 0.1), greater(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 0.9)), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 0), 20)",
+    "idea": "极端值聚焦策略：仅保留Surprise分布的头部和尾部（前10%与后90%分位），中段（噪音区间）置零不参与交易；通过if_else与rank组合实现非线性响应，再应用时间衰减，确保只捕捉最具信息含量的重大超预期或低预期事件。",
+    "expression_list": [
+        "ts_decay_linear(if_else(or(less(rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 0.1), greater(rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 0.9)), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0), 20)",
+        "ts_decay_linear(if_else(or(less(rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 0.1), greater(rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 0.9)), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0), 20)"
+    ]
+}

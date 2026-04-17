@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(ts_regression(ts_decay_linear(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), 20), ts_decay_linear(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 252, rettype=0)), 2)",
+    "idea": "先对换手率和规模进行20日线性衰减(ts_decay_linear)平滑以降低日频噪音，再通过252日滚动回归剥离规模效应。对残差进行zscore标准化后，使用signed_power(..., 2)非线性放大尾部极端值（异常高/低活跃），同时压缩中间区间，增强对持续性异常交易行为的捕捉能力。",
+    "expression_list": [
+        "signed_power(zscore(ts_regression(ts_decay_linear(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), 20), ts_decay_linear(winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 20), 252, rettype=0)), 2)"
+    ]
+}

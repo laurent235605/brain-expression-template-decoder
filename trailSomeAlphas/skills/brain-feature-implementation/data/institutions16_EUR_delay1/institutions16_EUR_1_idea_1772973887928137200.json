@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), industry), 60, rettype=0)",
+    "idea": "**行业中性特质资产流动（Idiosyncratic Asset Flow）**：先对原始数据进行5日回溯填补与4倍标准差截断以清洗脏点，计算20日资产变化后，通过60日滚动回归剥离行业市值加权平均的资产流动趋势（CAPM残差逻辑），保留无法被行业Beta解释的异质性资金净流入，避免 sector rotation 带来的伪信号，专注于基金个体alpha。",
+    "expression_list": [
+        "ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), industry), 60, rettype=0)"
+    ]
+}

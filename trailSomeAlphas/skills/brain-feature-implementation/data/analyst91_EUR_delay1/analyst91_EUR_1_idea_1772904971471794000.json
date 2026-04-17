@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(vec_skewness({exposure_value}), sector)), 2), multiply(group_zscore(vec_skewness({exposure_value}), sector), signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 2)), 0)",
+    "idea": "仅当地理集中度偏度偏离行业均值超过2个标准差时（极端状态）才激活交易，此时将偏度信号乘以经signed_power（二次幂）增强的波动率因子。融合两模板核心逻辑：模板1识别地理集中，模板2度量波动极端性，通过trade_when实现\"只在信号显著时交易\"的风险控制，避免中等区间的噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(vec_skewness(anl91_exposure_value), sector)), 2), multiply(group_zscore(vec_skewness(anl91_exposure_value), sector), signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 2)), 0)"
+    ]
+}

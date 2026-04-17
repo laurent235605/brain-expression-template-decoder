@@ -1,0 +1,8 @@
+{
+    "template": "ts_corr({active_return_decile_rank_long} - {active_weight_decile_rank_long}, ts_delta({of_owners_decile_rank_long}, 20), 60)",
+    "idea": "计算持仓收益背离与有效持有人数变化的60日滚动相关性。这是模板1的相关性逻辑与模板2的背离概念在变化率维度上的交叉：揭示\"机构调仓行为\"（有效持有人变化）与\"持仓收益错配\"之间的领先滞后关系，识别知情交易者的提前布局或撤退信号。",
+    "expression_list": [
+        "ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, ts_delta(insd8_effective_number_of_owners_decile_rank_long, 20), 60)",
+        "ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, ts_delta(insd8_total_number_of_owners_decile_rank_long, 20), 60)"
+    ]
+}

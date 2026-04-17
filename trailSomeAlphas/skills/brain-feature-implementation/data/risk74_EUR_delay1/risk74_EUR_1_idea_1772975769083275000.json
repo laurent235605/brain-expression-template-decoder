@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(winsorize(ts_backfill({hfown_pctown}, 63), std=4), industry), driver=\"gaussian\")",
+    "idea": "数据清洗（63日回溯填充+4倍标准差截尾）后进行行业中性Zscore标准化，再使用高斯分位数拉伸尾部，将中段噪音压缩至零附近，极端偏离行业均值的持仓异常值获得更高权重，强化对HF极端超配/低配标的的识别。",
+    "expression_list": [
+        "quantile(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), industry), driver=\"gaussian\")"
+    ]
+}

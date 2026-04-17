@@ -1,0 +1,7 @@
+{
+    "template": "rank(ts_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), 252))",
+    "idea": "在基础清洗（回溯填充+缩尾）后，计算20日资产变化。通过252日时间序列zscore(ts_zscore)评估当前资产流动在历史同期中的异常程度（识别突发的资金流入/流出），再进行截面排名(rank)标准化。此模板捕捉“相对于自身历史的极端流动”信号，利用时间序列视角发现被忽视的动量变化，适用于寻找历史分位突破的标的。",
+    "expression_list": [
+        "rank(ts_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), 252))"
+    ]
+}

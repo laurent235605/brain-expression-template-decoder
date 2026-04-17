@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_zscore(vec_skewness({exposure_value}), 63), ts_zscore(vec_skewness({exposure_value}), 252))",
+    "idea": "短周期（63日）与长周期（252日）地域集中度Z-score的差值，捕捉过度集中后的均值回复或持续动量。正值表示近期集中加速（可能预示风险积聚顶点），负值表示战略分散化。",
+    "expression_list": [
+        "subtract(ts_zscore(vec_skewness(anl91_exposure_value), 63), ts_zscore(vec_skewness(anl91_exposure_value), 252))"
+    ]
+}

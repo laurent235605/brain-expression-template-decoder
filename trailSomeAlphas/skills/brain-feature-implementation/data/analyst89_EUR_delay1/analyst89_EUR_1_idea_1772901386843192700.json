@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_delta(subtract(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 63), group_mean(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 63), industry)), 21), industry)",
+    "idea": "行业调整累积增长率：先计算63日累积财务值并剔除行业平均水平(group_mean)，得到行业超额累积，再计算21日变化率(ts_delta)捕捉增长加速，最后进行行业归一化(group_normalize)确保行业内多空平衡，适用于行业中性框架下的增长套利。",
+    "expression_list": [
+        "group_normalize(ts_delta(subtract(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 63), group_mean(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 63), industry)), 21), industry)"
+    ]
+}

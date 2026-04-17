@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), 0), multiply({crowding}, {value_ts}), 0)",
+    "idea": "利用机构流偏离度作为开关条件：仅当对冲基金净流入显著大于共同基金时（聪明钱买入），才交易拥挤价值组合；否则空仓（0）。将 Source 2 的择时逻辑与 Source 1 的因子相乘逻辑结合为条件触发式结构，避免在机构抛售期间持有拥挤价值陷阱。",
+    "expression_list": [
+        "trade_when(greater(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0), multiply(liquidity_factor_crowding, rsk74_value_ts), 0)",
+        "trade_when(greater(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0), multiply(liquidity_timeseries_crowding, rsk74_value_ts), 0)",
+        "trade_when(greater(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0), multiply(rsk74_crowding, rsk74_value_ts), 0)",
+        "trade_when(greater(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0), multiply(rsk74_raw_crowding, rsk74_value_ts), 0)"
+    ]
+}

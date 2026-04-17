@@ -1,0 +1,14 @@
+{
+    "template": "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 20), 0, 1)",
+    "idea": "aggressive交叉重组：左侧为行业相对排名后的报告日期变更衰减信号（输入1+group_rank），右侧为缩放至[0,1]的预期相关性衰减趋势（输入2+scale），通过减法分离'事件驱动型不确定'与'基本面结构不确定'的净暴露。",
+    "expression_list": [
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), 0, 1)",
+        "group_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20), industry) - scale(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), 0, 1)"
+    ]
+}

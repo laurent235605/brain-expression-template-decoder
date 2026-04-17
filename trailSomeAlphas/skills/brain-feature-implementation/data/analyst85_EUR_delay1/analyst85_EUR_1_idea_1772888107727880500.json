@@ -1,0 +1,7 @@
+{
+    "template": "quantile(vec_avg({version}), driver=\"gaussian\", sigma=1.0)",
+    "idea": "**Concept**: Cross-Sectional Version Rank\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Gaussian quantile transformation of vector-averaged versions across the universe, creating relative positioning\n- **Why This Feature**: Identifies stocks with unusually high or low version numbers relative to peers, normalizing for market-wide shifts in versioning behavior\n- **is filling nan necessary**: NaN values should remain NaN through the quantile transformation to avoid false relative rankings for inactive ideas\n- **Directionality**: High values (positive tail) indicate most revised ideas relative to universe (consensus shorts/long candidates); low values indicate least revised (undiscovered ideas)\n- **Boundary Conditions**: ±3 sigma represents extreme percentiles; zero indicates median revision activity",
+    "expression_list": [
+        "quantile(vec_avg(anl85_version), driver=\"gaussian\", sigma=1.0)"
+    ]
+}

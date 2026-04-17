@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(add(multiply(0.6,ts_regression(winsorize(ts_sum(ts_delta({shortint},1),5),std=4),group_mean(ts_sum(ts_delta({shortint},1),5),log(ts_mean({cap},21)),industry),21,rettype=0)),multiply(0.4,ts_decay_linear(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),20),std=4),group_mean(ts_sum(ts_delta({shortint},1),20),log(ts_mean({cap},21)),industry),126,rettype=0),10))),industry)",
+    "idea": "构建双时间尺度（短期21日窗口与长期126日窗口）的特质性残差组合：短期（5日累积变动）权重60%捕捉即时做空压力，长期（20日累积）权重40%并经10日线性衰减（ts_decay_linear）捕捉结构性偏离，组内标准化后得到更稳健的多尺度异质性空头指标。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.6,ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),5),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),5),log(ts_mean(market_cap_usd,21)),industry),21,rettype=0)),multiply(0.4,ts_decay_linear(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),20),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),20),log(ts_mean(market_cap_usd,21)),industry),126,rettype=0),10))),industry)",
+        "group_zscore(add(multiply(0.6,ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),5),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),5),log(ts_mean(market_cap_usd,21)),industry),21,rettype=0)),multiply(0.4,ts_decay_linear(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),20),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),20),log(ts_mean(market_cap_usd,21)),industry),126,rettype=0),10))),industry)"
+    ]
+}

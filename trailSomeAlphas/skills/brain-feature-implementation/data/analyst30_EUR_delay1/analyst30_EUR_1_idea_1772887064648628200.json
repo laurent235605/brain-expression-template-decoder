@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), vec_avg({unadjustedgrossamt}))",
+    "idea": "**Concept**: Corporate Action Impact Depth\n- **Sample Fields Used**: `unadjustedgrossamt`, `adjustedgrossamt`\n- **Definition**: Relative size of corporate action adjustment as percentage of original unadjusted amount\n- **Why This Feature**: Normalizes adjustment magnitude to compare impact across companies of different sizes and dividend scales\n- **Logical Meaning**: Percentage of dividend value affected by capital structure changes; measures corporate action severity\n- **is filling nan necessary**: Ensure no division by zero; use `nan_out` on denominator to handle zero unadjusted amounts, and fill missing values appropriately\n- **Directionality**: 0 = no impact; positive values indicate percentage reduction (splits); negative values indicate enhancement (reverse splits)\n- **Boundary Conditions**: (-infinity, 1]; 1 = 100% reduction (total loss); 0 = no change",
+    "expression_list": [
+        "divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), vec_avg(anl30_unadjustedgrossamt))",
+        "divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), vec_avg(anl30_unadjustedgrossamt))"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear( trade_when( and( greater( ts_rank( ts_backfill({concentration}, 63), 60 ), 0.85 ), right_tail( {volume}, ts_mean({volume}, 20) ) ), multiply( group_zscore({crowding}, sector), group_zscore({value_ts}, sector) ), 0 ), 3 )",
+    "idea": "极端尾部捕捉结合流动性过滤：仅当集中度处于过去60日前15%分位（ts_rank>0.85）且成交量高于20日均值（right_tail）时触发信号，避免低流动性假象；使用行业中性化（group_zscore）处理拥挤与价值因子；最终通过3日线性衰减（ts_decay_linear）平滑权重变化，将换手率控制在合理区间，聚焦高风险积聚期的价值陷阱。",
+    "expression_list": []
+}

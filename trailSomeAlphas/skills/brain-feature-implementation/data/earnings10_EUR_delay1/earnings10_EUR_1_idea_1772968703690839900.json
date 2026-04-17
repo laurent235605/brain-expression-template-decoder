@@ -1,0 +1,7 @@
+{
+    "template": "multiply(quantile(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "将模板1的高斯分位数映射技术应用于模板2的Z分数信号，并保留模板2的新鲜度衰减机制。通过对Z分数进行高斯拉伸（替代模板2的硬阈值截断），使统计显著性信号呈连续分布而非二元开关，同时随时间递减权重，实现更平滑的事件驱动衰减曲线。",
+    "expression_list": [
+        "multiply(quantile(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

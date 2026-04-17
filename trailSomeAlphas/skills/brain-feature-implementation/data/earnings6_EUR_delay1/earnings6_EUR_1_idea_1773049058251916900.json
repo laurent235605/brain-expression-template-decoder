@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(vec_avg({actual_eps}), 0), divide(vec_avg({actual_eps}), add(ts_mean(ts_backfill(vec_avg({actual_eps}), 5), 252), 0.001)), 0)",
+    "idea": "条件化管道重组：引入逻辑运算符trade_when对模板2的EPS字段进行模板1的比率计算，但仅当EPS为正时激活信号。此交叉增强避免了亏损企业因负值产生的错误持续率信号，实现了“信号有效性先验筛选”与“历史均值归一化”的管道级联。",
+    "expression_list": [
+        "trade_when(greater(vec_avg(ern6_actual_eps), 0), divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001)), 0)",
+        "trade_when(greater(vec_avg(ern6_actual_eps_274), 0), divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001)), 0)"
+    ]
+}

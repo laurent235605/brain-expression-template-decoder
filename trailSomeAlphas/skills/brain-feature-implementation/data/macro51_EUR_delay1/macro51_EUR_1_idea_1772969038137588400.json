@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=3), industry), 1.5)",
+    "idea": "**非线性尾部增强（行业中性）**：对行业中性化后的Z-score应用1.5次幂的符号保持变换（signed_power）。该操作压缩中间区间（Z-score接近0）的噪音影响，同时放大极端偏离（远大于或远小于1的比率）的收益贡献。适用于相信只有显著的份额类别错配（如极度偏好STOXX版本或极度回避）才产生足够套利压力或流动性溢价的场景，强调信号的信噪比而非线性单调性。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=3), industry), 1.5)"
+    ]
+}

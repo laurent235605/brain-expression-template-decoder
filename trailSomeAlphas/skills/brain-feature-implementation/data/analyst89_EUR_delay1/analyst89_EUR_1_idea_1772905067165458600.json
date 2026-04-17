@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_skewness(winsorize(ts_backfill(vec_avg({data_item_value}), 63), 4), 252), sector), 5)",
+    "idea": "行业中性偏度趋势平滑信号：先对向量数据取均值得到标量序列，经63日缺失值回填与4倍标准差极值裁剪后，计算252日滚动偏度以捕捉长期分布不对称性，进行行业标准化剔除行业结构差异，最后使用5日线性衰减降低换手率。旨在捕捉个股相对于行业整体的收益分布尾部风险趋势。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_skewness(winsorize(ts_backfill(vec_avg(anl89_data_item_value), 63), 4), 252), sector), 5)"
+    ]
+}

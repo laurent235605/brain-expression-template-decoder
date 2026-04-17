@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(ts_rank(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),126),0.9), signed_power(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), 1.5), if_else(less(ts_rank(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),126),0.1), signed_power(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), 1.5), 0))",
+    "idea": "仅在个股历史分布的极端头部(90%以上)或尾部(10%以下)激活非对称交易信号，使用幂变换(signed_power)放大极端Z-score的尾部效应，中间区间视为噪音强制置零，构建对历史罕见空头异动高度敏感的条件触发式策略。",
+    "expression_list": [
+        "if_else(greater(ts_rank(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),126),0.9), signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 1.5), if_else(less(ts_rank(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),126),0.1), signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 1.5), 0))",
+        "if_else(greater(ts_rank(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),126),0.9), signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 1.5), if_else(less(ts_rank(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),126),0.1), signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 1.5), 0))"
+    ]
+}

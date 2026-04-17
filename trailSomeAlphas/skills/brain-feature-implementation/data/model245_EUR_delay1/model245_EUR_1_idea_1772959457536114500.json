@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(winsorize(divide(vec_avg({rank}), ts_std_dev(vec_avg({rank}), 20)), std=4))), 1.5), zscore(winsorize(divide(vec_avg({rank}), ts_std_dev(vec_avg({rank}), 20)), std=4)), 0)",
+    "idea": "极端置信度筛选：计算信噪比并进行标准化后，仅保留绝对值大于1.5倍标准差的极端值（高确信度信号），将中间噪音区间强制置零。构造出仅在模型观点强烈且稳定时才持仓的触发式策略，避免模糊信号带来的交易成本。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(winsorize(divide(vec_avg(mdl245_rank), ts_std_dev(vec_avg(mdl245_rank), 20)), std=4))), 1.5), zscore(winsorize(divide(vec_avg(mdl245_rank), ts_std_dev(vec_avg(mdl245_rank), 20)), std=4)), 0)"
+    ]
+}

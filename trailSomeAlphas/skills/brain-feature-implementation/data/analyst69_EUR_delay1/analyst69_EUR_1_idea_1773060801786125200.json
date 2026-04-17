@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 0.9), 1, if_else(less(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 0.1), -1, 0)), industry)",
+    "idea": "将Input 2的绝对阈值改为相对分位数阈值：使用group_rank进行行业内排序，仅对前10%(>0.9)和后10%(<0.1)赋权±1，中间80%视为噪音归零，最后行业归一化。实现自适应的极端稳定性/不确定性捕捉，避免固定天数阈值的历史偏差。",
+    "expression_list": [
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.9), 1, if_else(less(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.1), -1, 0)), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.9), 1, if_else(less(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.1), -1, 0)), industry)"
+    ]
+}

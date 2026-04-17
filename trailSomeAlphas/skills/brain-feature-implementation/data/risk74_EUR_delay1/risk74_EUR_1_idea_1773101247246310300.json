@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_sum(ts_delta(winsorize(ts_backfill({shortint},63),4),1),15), industry)), 2), group_zscore(ts_sum(ts_delta(winsorize(ts_backfill({shortint},63),4),1),15), industry), 0), 3)",
+    "idea": "**行业中性极端空头压力动量**：先对{shortint}进行63日回溯填充（ts_backfill）和4倍标准差去极值（winsorize）清洗，计算15日累积净变化（ts_sum）。通过group_zscore在行业内部标准化，消除不同行业间空头基差（如生物科技 vs 公用事业天然空头比例差异）。使用trade_when仅保留|zscore|>2的极端尾部（前5%/后5%），将中间区域视为噪音并赋0。最后用ts_decay_linear进行3日线性衰减平滑，显著降低换手率。经济逻辑：极端的空头积累（行业内相对）往往预示过度悲观或潜在逼空机会，而中间区域的空头变动多为噪音，此模板通过多层标准化和截断提取纯空头情绪极端值。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_sum(ts_delta(winsorize(ts_backfill(rsk74_shortint,63),4),1),15), industry)), 2), group_zscore(ts_sum(ts_delta(winsorize(ts_backfill(rsk74_shortint,63),4),1),15), industry), 0), 3)",
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_sum(ts_delta(winsorize(ts_backfill(rsk74_shortint_ts,63),4),1),15), industry)), 2), group_zscore(ts_sum(ts_delta(winsorize(ts_backfill(rsk74_shortint_ts,63),4),1),15), industry), 0), 3)"
+    ]
+}

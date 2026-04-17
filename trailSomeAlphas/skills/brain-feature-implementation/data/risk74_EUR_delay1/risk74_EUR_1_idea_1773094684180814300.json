@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252)",
+    "idea": "先通过63日行业市值加权回归剔除行业空头beta得到特质残差，再对该残差进行252日时序Z-score标准化，捕捉'相对于自身历史而言的行业中性极端空头异动'，融合截面行业剥离与时序历史比较双重逻辑，适应不同股票的历史波动差异。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252)"
+    ]
+}

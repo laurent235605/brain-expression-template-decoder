@@ -1,0 +1,8 @@
+{
+    "template": "subtract( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 5 ), ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 60 ) )",
+    "idea": "期限结构对比（短期vs长期）。分别对短期（5日）和长期（60日）窗口应用条件化衰减Surprise，通过相减构建Surprise的期限利差，捕捉盈利动量的加速或衰竭信号，类似分析师预期修正的term-structure逻辑，识别预期曲线的陡峭化或扁平化。",
+    "expression_list": [
+        "subtract( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 5 ), ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 60 ) )",
+        "subtract( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 5 ), ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 60 ) )"
+    ]
+}

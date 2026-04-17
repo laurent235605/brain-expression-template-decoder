@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(ts_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 60), 0.8), reverse(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60))), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)))",
+    "idea": "引入时序分位(ts_rank)判断与条件分支逻辑，构建智能化的动量/反转切换机制。当盈利效率比率处于自身历史高位(前20%)时，认为存在均值回归压力，对模板1的加速度信号进行反转(reverse)处理，捕捉'效率见顶+预期过热'的空头机会；反之则保持标准动量逻辑。此模板实现了趋势跟踪与均值回归的动态平衡。",
+    "expression_list": [
+        "if_else(greater(ts_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 60), 0.8), reverse(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60))), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)))",
+        "if_else(greater(ts_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 60), 0.8), reverse(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60))), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)))"
+    ]
+}

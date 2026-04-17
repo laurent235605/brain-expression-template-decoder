@@ -1,0 +1,8 @@
+{
+    "template": "multiply(trade_when(greater(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.8), 1.0, 0), group_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4),industry))",
+    "idea": "激进交叉融合双因子逻辑：仅当美股敞口处于全市场极端前10%时，启用输入2的空头加速度信号作为权重放大器；若不在极端区域则赋0。实现以暴露为门控、以空头趋势为增强的条件性叠加策略。",
+    "expression_list": [
+        "multiply(trade_when(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.8), 1.0, 0), group_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4),industry))",
+        "multiply(trade_when(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.8), 1.0, 0), group_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4),industry))"
+    ]
+}

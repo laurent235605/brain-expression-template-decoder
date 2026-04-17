@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6, group_zscore(subtract(winsorize(ts_backfill({overall_score},2),std=4), winsorize(ts_backfill({intangible_exposure_score},2),std=4)), sector)), multiply(0.4, ts_zscore(ts_delta(subtract(winsorize(ts_backfill({overall_score},2),std=4), winsorize(ts_backfill({intangible_exposure_score},2),std=4)), 63), 252)))",
+    "idea": "时序动量混合模板：融合截面偏离度（60%权重）与时序变化率（40%权重，观察63日变化相对252日历史的z-score）。该设计不仅捕捉静态的质量与无形资产错配，更动态跟踪质量恶化伴随高无形资产（风险累积）或质量改善确认无形资产价值（护城河强化）的过程，适用于识别拐点。",
+    "expression_list": [
+        "add(multiply(0.6, group_zscore(subtract(winsorize(ts_backfill(mdl255_overall_score,2),std=4), winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4)), sector)), multiply(0.4, ts_zscore(ts_delta(subtract(winsorize(ts_backfill(mdl255_overall_score,2),std=4), winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4)), 63), 252)))"
+    ]
+}

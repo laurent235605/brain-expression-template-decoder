@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0), signed_power(max(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0), 1.3), signed_power(min(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0), 1.1))",
+    "idea": "区分正向与负向修正的非对称市场反应，对正向惊喜使用更高幂次(1.3)放大多头暴露，对负向惊喜使用较低幂次(1.1)相对保守处理，通过if_else实现分档非线性变换，捕捉市场对利好与利空的非对称敏感度差异，同时保留原始方向性。",
+    "expression_list": [
+        "if_else(greater(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0), signed_power(max(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0), 1.3), signed_power(min(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0), 1.1))"
+    ]
+}

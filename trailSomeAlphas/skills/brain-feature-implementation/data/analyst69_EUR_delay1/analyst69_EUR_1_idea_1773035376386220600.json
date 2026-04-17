@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian)), 1.0), winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), 0)",
+    "idea": "**极端修正确认下的效率交易（条件触发结构）**：结合第5步\"只在信号明显时交易\"与第0步winsorize清洗。仅当分析师修正强度（模板B逻辑）处于极端分位（|zscore|>1）时，才交易经winsorize处理后的效率比率（模板A），否则仓位为0。实现\"情绪极端+估值极端\"的双条件筛选，避免在信息噪音区间过度暴露。",
+    "expression_list": [
+        "trade_when(greater(abs(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian)), 1.0), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)",
+        "trade_when(greater(abs(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian)), 1.0), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)"
+    ]
+}

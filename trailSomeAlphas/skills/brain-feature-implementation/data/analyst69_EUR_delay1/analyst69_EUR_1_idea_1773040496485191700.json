@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_mean(trade_when(less(ts_count_nans(days_from_last_change({eps_expected_report_dt}), 20), 5), winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 0), 20), 252)",
+    "idea": "引入数据质量过滤器：仅当最近20日内有效数据点（非缺失值）不少于15个时（即缺失少于5天），才使用缩尾后的原始稳定性指标，否则视为零信号；随后进行20日平滑与252日时序Z-score。此条件化构造避免了数据稀疏期（如停牌、未覆盖）产生的虚假极端值，确保因子仅在信息可靠时发挥作用，提升稳健性。",
+    "expression_list": [
+        "ts_zscore(ts_mean(trade_when(less(ts_count_nans(days_from_last_change(anl69_aeps_expected_report_dt), 20), 5), winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 0), 20), 252)",
+        "ts_zscore(ts_mean(trade_when(less(ts_count_nans(days_from_last_change(anl69_eps_expected_report_dt), 20), 5), winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 0), 20), 252)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(trade_when(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.85), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.15)), signed_power(zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), 4)), 1.3), 0), hump=0.02)",
+    "idea": "基于最小变动阈值的自适应衰减：在保留原15%头尾筛选逻辑的基础上，先对信号进行4倍标准差截断和Z-Score标准化，引入hump_decay控制（hump=0.02）以忽略微小权重变动、仅在信号变化显著时调仓，结合Signed Power增强，实现'高纯度极端信号+低换手率'的平衡，适合预期调整事件的持续跟踪。",
+    "expression_list": [
+        "hump_decay(trade_when(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.85), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.15)), signed_power(zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 4)), 1.3), 0), hump=0.02)",
+        "hump_decay(trade_when(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.85), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.15)), signed_power(zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 4)), 1.3), 0), hump=0.02)"
+    ]
+}

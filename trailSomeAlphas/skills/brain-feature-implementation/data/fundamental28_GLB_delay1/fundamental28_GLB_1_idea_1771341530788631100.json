@@ -1,0 +1,5 @@
+{
+    "template": "ts_regression({return}, {asset}, 15, rettype=0)",
+    "idea": "用15日滚动回归残差代替简单差价，剥离资产对收益的线性beta暴露，获取更纯粹的异质性alpha残差信号",
+    "expression_list": []
+}

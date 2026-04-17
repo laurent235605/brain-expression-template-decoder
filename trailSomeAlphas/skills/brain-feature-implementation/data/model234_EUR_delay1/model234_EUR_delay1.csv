@@ -1,0 +1,2 @@
+id,description,dataset,category,subcategory,region,delay,universe,type,dateCoverage,coverage,userCount,alphaCount,pyramidMultiplier,themes,dataset_id,dataset_name,category_id,category_name,subcategory_id,subcategory_name
+mdl234_volume,Shares traded in previous month,"{'id': 'model234', 'name': 'Spider Model Dataset'}","{'id': 'model', 'name': 'Model'}","{'id': 'model-risk-based-models', 'name': 'Risk Based Models'}",EUR,1,TOPCS1600,MATRIX,0.9102,1.0,0,0,1.4,[],model234,Spider Model Dataset,model,Model,model-risk-based-models,Risk Based Models

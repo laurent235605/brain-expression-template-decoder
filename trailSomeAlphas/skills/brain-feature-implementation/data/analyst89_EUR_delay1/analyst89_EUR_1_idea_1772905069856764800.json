@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(subtract(ts_skewness(winsorize(vec_avg({data_item_value}), 4), 252), group_mean(ts_skewness(winsorize(vec_avg({data_item_value}), 4), 252), log(ts_mean(cap, 21)), sector)), 5), sector)",
+    "idea": "相对行业偏度残差：计算个股偏度相对于市值加权（log(cap)）行业平均偏度的残差（通过group_mean实现），去除行业共性分布特征，保留个股特有的分布不对称性异质性，经5日衰减平滑后使用group_normalize确保行业内多空平衡，构建纯粹反映个股相对尾部风险暴露的残差alpha。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(subtract(ts_skewness(winsorize(vec_avg(anl89_data_item_value), 4), 252), group_mean(ts_skewness(winsorize(vec_avg(anl89_data_item_value), 4), 252), log(ts_mean(cap, 21)), sector)), 5), sector)"
+    ]
+}

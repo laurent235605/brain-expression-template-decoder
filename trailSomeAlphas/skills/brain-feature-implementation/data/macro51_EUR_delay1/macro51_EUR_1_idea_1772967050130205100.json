@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize( if_else( greater( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 0.8 ), ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), if_else( less( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 0.2 ), ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 0 ) ), industry )",
+    "idea": "分档行业中性化模板。将股票按近期(21日平均)权重在全市场的分位数划分为头部20%(重仓组)、尾部20%(轻数组)和中间60%(中性组)，仅对两头计算相对于半年(126日)历史时间序列中位数的偏离比率，中间组视为噪音置零，最后进行行业内多空平衡归一化(group_normalize)。该结构避免了中等权重股票稀释信号，专注于极端配置偏离的相对价值机会。",
+    "expression_list": [
+        "group_normalize( if_else( greater( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0.8 ), ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), if_else( less( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0.2 ), ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 0 ) ), industry )"
+    ]
+}

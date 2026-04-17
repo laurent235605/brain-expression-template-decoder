@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(greater(zscore(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63)), 2), 1, if_else(less(zscore(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63)), -2), -1, 0)), 20)",
+    "idea": "摒弃固定天数阈值，改用动态Zscore阈值(±2倍标准差)识别极端状态，结合63日回溯填充与20日线性衰减。将Input 2的离散逻辑转换为基于历史分布的自适应判定，适用于不同波动特征的股票群体。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(zscore(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63)), 2), 1, if_else(less(zscore(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63)), -2), -1, 0)), 20)",
+        "ts_decay_linear(if_else(greater(zscore(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63)), 2), 1, if_else(less(zscore(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63)), -2), -1, 0)), 20)"
+    ]
+}

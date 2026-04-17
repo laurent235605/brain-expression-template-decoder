@@ -1,0 +1,7 @@
+{
+    "template": "{active_weight_decile_rank_long} / ({absolute_weight_decile_rank_long} + 0.1)",
+    "idea": "**Concept**: Active Share Purity Ratio\n- **Sample Fields Used**: active_weight_decile_rank_long, absolute_weight_decile_rank_long\n- **Definition**: Ratio of active weight decile to absolute weight decile, measuring what proportion of large positions are benchmark deviations vs passive market cap weighting\n- **Why This Feature**: Distinguishes between \"closet indexers\" (low ratio) and \"true active managers\" (high ratio); structural breaks indicate style shifts in the holder base\n- **is filling nan necessary**: Both fields should exist simultaneously; if one missing, ratio is undefined. Do not fill.\n- **Directionality**: Values near 1 indicate high active share (conviction-driven); values near 0 indicate benchmark hugging; values >1 possible if absolute weight is small but active is high (underweight recovery)\n- **Boundary Conditions**: Undefined when absolute weight is near zero (avoid division by zero)",
+    "expression_list": [
+        "insd8_active_weight_decile_rank_long / (insd8_absolute_weight_decile_rank_long + 0.1)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20)",
+    "idea": "将报告日期的变更视为负面事件信号。使用时序差分算子检测`days_from_last_change`的骤降（由高位重置为0），标记事件日为-1，并通过20日线性衰减模拟市场对该不确定性事件的渐进消化过程。63日回溯填充确保历史连续性，避免缺失值干扰事件检测。",
+    "expression_list": [
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(quantile(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), driver=\"gaussian\"), ts_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252)), industry)",
+    "idea": "采用非线性变换强化信号区分度：先对风险调整后的配置进行高斯分位数拉伸（`quantile`）以放大尾部差异，再与其自身历史252日时间序列zscore相乘，得到既相对同业极端又相对自身历史极端的复合信号；最终行业内标准化，识别那些同时打破横向与纵向极端的异常配置机会。",
+    "expression_list": [
+        "group_zscore(multiply(quantile(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), driver=\"gaussian\"), ts_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252)), industry)"
+    ]
+}

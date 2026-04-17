@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(ts_std_dev({eps_best_eeps_cur_yr}, 20), 5)",
+    "idea": "**Concept**: Estimate Volatility Spike Detection\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: Change in rolling 20-day volatility of estimates (second moment shift) over 5-day window\n- **Why This Feature**: Sudden increases in estimate dispersion/volatility often precede earnings events or guidance confusion; detects uncertainty inflection\n- **Logical Meaning**: Anomalous instability in professional forecasts; indicates breaking news, pending announcements, or model parameter uncertainty\n- **is filling nan necessary**: Requires two levels of time series calculation; ensure robust handling by applying ts_backfill(25) to underlying data to cover both windows.\n- **Directionality**: High positive values indicate sudden uncertainty spike (often bearish due to risk premium); negative values indicate consensus crystallizing\n- **Boundary Conditions**: Spikes typically occur 1-2 weeks before earnings or after guidance surprises; sustained elevation suggests ongoing uncertainty",
+    "expression_list": [
+        "ts_delta(ts_std_dev(anl69_aeps_best_eeps_cur_yr, 20), 5)",
+        "ts_delta(ts_std_dev(anl69_eps_best_eeps_cur_yr, 20), 5)"
+    ]
+}

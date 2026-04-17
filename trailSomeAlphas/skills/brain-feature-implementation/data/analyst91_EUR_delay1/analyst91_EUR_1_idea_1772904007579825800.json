@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 10), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 5)",
+    "idea": "使用等权移动平均（ts_mean）替代线性衰减平滑处理行业中性利差，显著降低换手率（ts_mean的换手率远低于ts_decay_linear）。适用于希望降低交易成本同时保留期限结构信号的场景。",
+    "expression_list": [
+        "ts_mean(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 10), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 5)"
+    ]
+}

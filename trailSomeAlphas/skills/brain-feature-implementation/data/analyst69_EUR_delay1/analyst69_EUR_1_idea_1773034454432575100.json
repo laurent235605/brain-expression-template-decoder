@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay({eps_best_eeps_cur_yr}, 5))",
+    "idea": "**Concept**: Expectation Revision Velocity\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: Percentage change in estimates over 5 days (velocity of change)\n- **Why This Feature**: Captures the rate of change rather than absolute level; essential for momentum strategies in analyst data\n- **Logical Meaning**: Speed of information incorporation; high velocity indicates breaking news or sentiment shifts; low velocity indicates stable views\n- **is filling nan necessary**: Division by prior value requires ts_backfill(10) to ensure denominator is valid; zero handling requires care (return NaN for zero denominator).\n- **Directionality**: Positive values indicate accelerating upgrades; negative values indicate accelerating downgrades; magnitude indicates speed\n- **Boundary Conditions**: Values >0.10 (10% revision in week) indicate significant events; values near zero indicate drift",
+    "expression_list": [
+        "divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(anl69_aeps_best_eeps_cur_yr, 5))",
+        "divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(anl69_eps_best_eeps_cur_yr, 5))"
+    ]
+}

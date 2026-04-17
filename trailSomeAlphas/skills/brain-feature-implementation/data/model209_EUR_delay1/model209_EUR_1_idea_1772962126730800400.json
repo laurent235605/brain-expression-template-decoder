@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(subtract(1, vec_avg({lastcostingfailed})), add(vec_stddev({lastcostingfailed}), 0.001)), industry)",
+    "idea": "向量内信息比率：利用原始向量的均值与标准差构造夏普式比率（均值/波动），衡量单位风险下的运营可靠性，再进行行业中性标准化。适用于识别那些不仅故障少且成本波动低的优质标的，剔除均值假象但离散度高的噪音股。",
+    "expression_list": [
+        "group_zscore(divide(subtract(1, vec_avg(mdl209_lastcostingfailed)), add(vec_stddev(mdl209_lastcostingfailed), 0.001)), industry)"
+    ]
+}

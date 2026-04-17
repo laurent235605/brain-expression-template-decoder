@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 10), std=4), 5)",
+    "idea": "融合Input 2的累积概念与guidance中的'衰减加权'平滑算子（Smoothing Operators）。对10日流量进行线性衰减加权（近期数据权重更高），相比ts_mean能更快响应最新变化，适用于需要快速反应的场景（注意换手率高于ts_mean，需权衡稳定性）。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 10), std=4), 5)"
+    ]
+}

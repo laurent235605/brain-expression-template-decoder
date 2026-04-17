@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(rank(winsorize(ts_delta(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20), std=3)), 3)",
+    "idea": "分化动量模板：计算60日滚动相关性的20日变化率（加速度），经过去极值（3倍标准差）和截面排名处理，并用3日线性衰减平滑。该模板捕获“所有权结构正在快速解体或收敛”的动量信号，关注结构变化的速度而非静态水平，适用于捕捉M&A事件、指数成分调整或机构调仓导致的持有人结构突变。",
+    "expression_list": [
+        "ts_decay_linear(rank(winsorize(ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), std=3)), 3)",
+        "ts_decay_linear(rank(winsorize(ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), std=3)), 3)",
+        "ts_decay_linear(rank(winsorize(ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), std=3)), 3)",
+        "ts_decay_linear(rank(winsorize(ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), std=3)), 3)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252))",
+    "idea": "**Concept**: Operating Margin Momentum\n- **Sample Fields Used**: `value_08316q`\n- **Definition**: Recent change in operating margin normalized by the 1-year average margin level\n- **Why This Feature**: Identifies operational inflections (expansion/contraction) relative to the company's historical norm\n- **Logical Meaning**: Normalized velocity of profitability changes; indicates pricing power or cost control shifts\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Quarterly reporting gaps should not be filled to avoid assuming constant margins.\n- **Directionality**: Positive values indicate margin expansion (operational improvement)\n- **Boundary Conditions**: Values near zero indicate stable margins; spikes indicate one-time items or structural changes",
+    "expression_list": [
+        "divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252))",
+        "divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252))"
+    ]
+}

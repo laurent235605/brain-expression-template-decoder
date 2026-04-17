@@ -1,0 +1,14 @@
+{
+    "template": "multiply(zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4)), ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60))",
+    "idea": "双重稳定因子合成（Dual-Stability Composite）。将报告日期稳定性（经winsorize去极值+zscore标准化）与盈利预期跨期相关系数进行算术乘积。只有当公司既保持报告日程长期稳定（计划性强），又展现今明两年预期的强持续性（业务可预测）时，信号才为显著正值，代表高质量的信息披露环境与可预测的基本面。",
+    "expression_list": [
+        "multiply(zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4)), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4)), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4)), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4)), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4)), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4)), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4)), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60))",
+        "multiply(zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4)), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60))"
+    ]
+}

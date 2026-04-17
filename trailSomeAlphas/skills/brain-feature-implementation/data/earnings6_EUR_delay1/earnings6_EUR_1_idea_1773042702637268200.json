@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change(vec_avg({actual_eps})), 20), ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), multiply(0.3, ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252)))",
+    "idea": "利用days_from_last_change识别近期(20日内)有财报更新的公司，赋予其完整TTM盈利权重；对于数据陈旧的公司则大幅降权至30%，构建基于数据时效性的条件交易逻辑。该模板避免了对陈旧、过时盈利数据的过度依赖，确保Alpha信号主要来源于最新基本面信息。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(vec_avg(ern6_actual_eps)), 20), ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), multiply(0.3, ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)))",
+        "trade_when(less(days_from_last_change(vec_avg(ern6_actual_eps_274)), 20), ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), multiply(0.3, ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)))"
+    ]
+}

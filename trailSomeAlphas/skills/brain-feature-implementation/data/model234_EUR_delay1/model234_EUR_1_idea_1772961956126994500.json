@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(ts_delta(winsorize(log({volume}), std=4), 5), 2), industry)",
+    "idea": "成交量加速度（非线性动量）：捕捉对数成交量在5日内的变化率（ts_delta），通过 signed_power(..., 2) 非线性放大极端变化（保持方向但平方幅值），经行业中性化处理。该因子对资金流入流出的‘加速’趋势敏感，能识别成交量趋势的拐点与强化信号。",
+    "expression_list": [
+        "group_zscore(signed_power(ts_delta(winsorize(log(mdl234_volume), std=4), 5), 2), industry)"
+    ]
+}

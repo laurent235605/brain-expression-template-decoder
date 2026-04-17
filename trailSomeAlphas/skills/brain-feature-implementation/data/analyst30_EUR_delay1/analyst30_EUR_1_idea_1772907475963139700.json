@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 252)",
+    "idea": "历史时序分位数视角：计算当前财政年度变更次数在过去一年（252个交易日）中的历史分位水平。适用于检测近期是否发生并购、重组或会计政策重大调整事件，判断公司当前会计稳定性相对于自身历史处于何种极端位置（时序视角：当前是否处于历史上最不稳定的时期）",
+    "expression_list": [
+        "ts_rank(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 252)"
+    ]
+}

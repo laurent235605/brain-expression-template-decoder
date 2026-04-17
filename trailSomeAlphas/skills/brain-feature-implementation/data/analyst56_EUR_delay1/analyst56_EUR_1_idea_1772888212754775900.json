@@ -1,0 +1,15 @@
+{
+    "template": "(vec_avg({investment}) - ts_mean(vec_avg({investment}), 60)) / ts_std_dev(vec_avg({investment}), 60)",
+    "idea": "**Concept**: Author Investment Consistency\n- **Sample Fields Used**: `investment`, `daily_investment`, `authorcompany`\n- **Definition**: Z-score of current investment size relative to author's 60-day historical mean\n- **Why This Feature**: Detects when analysts make unusually large or small bets relative to their typical sizing, signaling exceptional conviction or risk aversion\n- **is filling nan necessary**: New authors or sparse traders have insufficient history. Fill NaN historical means with cross-sectional median via ts_backfill, as missing history should not exclude authors from analysis but should not bias toward zero.\n- **Directionality**: Positive values = larger than normal bets (conviction); negative = smaller (hesitation/drawdown)\n- **Boundary Conditions**: Authors with <5 observations should return NaN to ensure statistical significance",
+    "expression_list": [
+        "(vec_avg(anl56_daily_investment) - ts_mean(vec_avg(anl56_daily_investment), 60)) / ts_std_dev(vec_avg(anl56_daily_investment), 60)",
+        "(vec_avg(anl56_daily_investmentprice) - ts_mean(vec_avg(anl56_daily_investmentprice), 60)) / ts_std_dev(vec_avg(anl56_daily_investmentprice), 60)",
+        "(vec_avg(anl56_investment) - ts_mean(vec_avg(anl56_investment), 60)) / ts_std_dev(vec_avg(anl56_investment), 60)",
+        "(vec_avg(anl56_investmentprice) - ts_mean(vec_avg(anl56_investmentprice), 60)) / ts_std_dev(vec_avg(anl56_investmentprice), 60)",
+        "(vec_avg(anl56_reduced_investment) - ts_mean(vec_avg(anl56_reduced_investment), 60)) / ts_std_dev(vec_avg(anl56_reduced_investment), 60)",
+        "(vec_avg(anl56_reduced_investmentprice) - ts_mean(vec_avg(anl56_reduced_investmentprice), 60)) / ts_std_dev(vec_avg(anl56_reduced_investmentprice), 60)",
+        "(vec_avg(daily_investment_denomination) - ts_mean(vec_avg(daily_investment_denomination), 60)) / ts_std_dev(vec_avg(daily_investment_denomination), 60)",
+        "(vec_avg(investment_denomination) - ts_mean(vec_avg(investment_denomination), 60)) / ts_std_dev(vec_avg(investment_denomination), 60)",
+        "(vec_avg(main_investment_currency) - ts_mean(vec_avg(main_investment_currency), 60)) / ts_std_dev(vec_avg(main_investment_currency), 60)"
+    ]
+}

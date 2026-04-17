@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.85), greater(rank(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5)), 0.85)), ts_delta({eps_best_eeps_cur_yr}, 5), trade_when(and(less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.15), less(rank(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5)), 0.15)), ts_delta({eps_best_eeps_cur_yr}, 5), 0))",
+    "idea": "交叉应用模板1的双向极端逻辑与逻辑运算符(and)进行双重确认：要求EPS修订动量与盈利效率改善动量同时在横截面处于前15%分位才建立多头，两者同时处于后15%才建立空头，其余情况视为噪音置零。通过逻辑与(and)构造的确认机制过滤单一指标发出的虚假信号，显著提升多空组合的纯度与稳健性。",
+    "expression_list": [
+        "trade_when(and(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.85), greater(rank(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5)), 0.85)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), trade_when(and(less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.15), less(rank(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5)), 0.15)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0))",
+        "trade_when(and(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.85), greater(rank(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5)), 0.85)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), trade_when(and(less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.15), less(rank(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5)), 0.15)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0))"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "template": "ts_sum({roic}, 252)",
+    "idea": "**Concept**: Cumulative Economic Value Added\n- **Sample Fields Used**: roic\n- **Definition**: Rolling sum of return on invested capital over 2 years; captures total wealth creation period\n- **Why This Feature**: Point-in-time ROIC can be cyclical; cumulative sum indicates sustained value creation vs destruction over business cycles\n- **Logical Meaning**: Total percentage return on capital deployed over multi-year horizon\n- **is filling nan necessary**: ROIC can have erratic quarterly swings due to tax adjustments; use ts_backfill for missing quarters but ensure annual alignment for tax effect consistency\n- **Directionality**: Positive and increasing = value creation; Negative = destruction of shareholder value through poor capital allocation\n- **Boundary Conditions**: Values >0.5 (50% cumulative over 2 years) indicate exceptional capital efficiency; <-0.2 suggests terminal value destruction",
+    "expression_list": [
+        "ts_sum(fnd8_er_1af_matrix_ff_roic, 252)",
+        "ts_sum(fnd8_er_1qf_matrix_ff_roic, 252)",
+        "ts_sum(fnd8_eraf_matrix_ff_cf_roic, 252)",
+        "ts_sum(fnd8_eraf_matrix_ff_roic, 252)",
+        "ts_sum(fnd8_erqf_matrix_ff_cf_roic, 252)",
+        "ts_sum(fnd8_erqf_matrix_ff_roic, 252)"
+    ]
+}

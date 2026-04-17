@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(ts_zscore({eps_best_eeps_cur_yr}, 60), 2), less(ts_zscore({eps_best_eeps_cur_yr}, 60), -2)), ts_delta({eps_best_eeps_cur_yr}, 5), 0)",
+    "idea": "将模板1的分位排名极端值筛选升级为基于Z-Score的标准化极端值识别：使用60日滚动ts_zscore衡量EPS修订水平相对自身历史均值的偏离程度，仅当偏离超过±2个标准差时才触发交易信号，中段置零。此方法结合了横截面动量与历史时间序列的极端性判断，避免在常态波动区间产生无效暴露。",
+    "expression_list": [
+        "trade_when(or(greater(ts_zscore(anl69_aeps_best_eeps_cur_yr, 60), 2), less(ts_zscore(anl69_aeps_best_eeps_cur_yr, 60), -2)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0)",
+        "trade_when(or(greater(ts_zscore(anl69_eps_best_eeps_cur_yr, 60), 2), less(ts_zscore(anl69_eps_best_eeps_cur_yr, 60), -2)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_std_dev(vec_skewness({exposure_value}), 20), 10)",
+    "idea": "二阶风险测度（波动率的波动率）：计算地域集中度偏度本身的时序波动率，衡量公司地理战略的稳定性和连贯性，再应用10日线性衰减平滑以降低噪声。高值表示公司正处于激进的地理战略重构动荡期（风险释放与再配置），低值表示战略定力极强，适用于捕捉快速演变的风险结构。",
+    "expression_list": [
+        "ts_decay_linear(ts_std_dev(vec_skewness(anl91_exposure_value), 20), 10)"
+    ]
+}

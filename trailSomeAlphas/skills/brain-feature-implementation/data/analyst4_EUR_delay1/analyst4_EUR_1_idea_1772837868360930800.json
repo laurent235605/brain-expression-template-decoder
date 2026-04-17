@@ -1,0 +1,18 @@
+{
+    "template": "ts_mean({std}, 60)",
+    "idea": "**Concept**: Persistent Disagreement Score\n- **Sample Fields Used**: {std}, {standard_deviation}\n- **Definition**: Average level of analyst disagreement over extended periods, identifying chronically controversial stocks vs temporarily uncertain ones\n- **Why This Feature**: Persistent high disagreement indicates structural uncertainty (complex businesses, opaque reporting); temporary spikes indicate event-driven uncertainty; persistent low disagreement indicates stable, predictable businesses\n- **Logical Meaning**: Baseline uncertainty level for a stock - its inherent predictability\n- **is filling nan necessary**: Yes, backfill to ensure continuous calculation\n- **Directionality**: High persistent values indicate \"controversial\" stocks suitable for volatility strategies; low values indicate \"predictable\" stocks suitable for quality strategies\n- **Boundary Conditions**: Values > 2x cross-sectional median indicate extreme persistent disagreement; values < 0.5x indicate consensus champions",
+    "expression_list": [
+        "ts_mean(anl4_adz_ebit_std, 60)",
+        "ts_mean(anl4_adz_netprofit_std, 60)",
+        "ts_mean(anl4_af_div_std, 60)",
+        "ts_mean(anl4_sadaf_capex_std, 60)",
+        "ts_mean(anl4_sadaf_ebit_std, 60)",
+        "ts_mean(anl4_sadaf_ebitda_std, 60)",
+        "ts_mean(anl4_sadaf_gric_std, 60)",
+        "ts_mean(anl4_sadaf_netdebt_std, 60)",
+        "ts_mean(anl4_sadaf_netprofit_std, 60)",
+        "ts_mean(anl4_sadaf_netprofita_std, 60)",
+        "ts_mean(anl4_sadaf_totassets_std, 60)",
+        "ts_mean(anl4_sadaf_totgw_std, 60)"
+    ]
+}

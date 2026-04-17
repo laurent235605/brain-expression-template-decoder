@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 60)",
+    "idea": "将模板1的行业中性框架扩展至时间序列维度。先计算权益配置残差在行业内过去60日的时序Z分数（ts_zscore），识别相对于自身历史是否处于极端水平；再进行跨行业的截面标准化（group_zscore）。这种\"时序极端性+截面偏离度\"的双重标准化，筛选出既在历史低位/高位、又在行业内相对偏离最大的股票，增强信号的持续性。",
+    "expression_list": [
+        "group_zscore(ts_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 60)"
+    ]
+}

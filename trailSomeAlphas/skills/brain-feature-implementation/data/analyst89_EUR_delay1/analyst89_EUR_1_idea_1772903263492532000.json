@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(multiply(ts_skewness(vec_avg({data_item_value}), 126), signed_power(ts_mean(vec_stddev({data_item_value}), 126), -1)), {industry})",
+    "idea": "波动调整后的相对偏度：将原始偏度除以向量元素标准差的126日均值（通过signed_power取-1次方实现除法），剥离波动率水平对偏度解读的干扰，经行业z-score标准化后，得到剔除波动影响的\"纯\"分布不对称性指标，区分高波动下的真实偏态与噪音。",
+    "expression_list": []
+}

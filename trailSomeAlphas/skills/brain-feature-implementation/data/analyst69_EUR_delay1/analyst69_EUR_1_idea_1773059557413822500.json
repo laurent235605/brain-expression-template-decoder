@@ -1,0 +1,8 @@
+{
+    "template": "subtract(multiply(2, bucket(group_rank(days_from_last_change({eps_expected_report_dt}), industry), range=\"0,1,0.1\")), 9)",
+    "idea": "**行业内分档映射（Decile Bucketing）**：使用`group_rank`在行业内进行相对排序，再通过`bucket`将排序划分为10个分位档(0-9)。将分位数映射到-1至+1区间（最低档0映射为-9，最高档9映射为+9，再除以9标准化），实现仅做多行业内日程最稳定的前10%公司，做空最不稳定的后10%，完全剔除中间80%的模糊地带以降低噪音。",
+    "expression_list": [
+        "subtract(multiply(2, bucket(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), range=\"0,1,0.1\")), 9)",
+        "subtract(multiply(2, bucket(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), range=\"0,1,0.1\")), 9)"
+    ]
+}

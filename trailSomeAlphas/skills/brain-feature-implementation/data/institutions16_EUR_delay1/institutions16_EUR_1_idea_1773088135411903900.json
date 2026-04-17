@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(add(multiply(0.6, divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), multiply(0.4, divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 63), 0.001)))), 10), industry)",
+    "idea": "构建多时间尺度风险调整指标：分别用21日短期与63日长期波动率调整权益暴露残差，按6:4加权合成，并经10日线性衰减平滑以降低高频噪音；在行业内部zscore比较，旨在识别那些穿越不同波动周期、具有稳定风险收益特征而非短期运气型的基金配置。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(add(multiply(0.6, divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), multiply(0.4, divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 63), 0.001)))), 10), industry)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), 0.7), ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), 0)",
+    "idea": "引入模板B的稳定性指标作为模板A的条件交易开关。仅在报告日预期处于历史最稳定区间（前30%分位）时才允许交易EPS修订动量，否则仓位归零。避免在财报披露时间高度混乱的噪音期入场，实现环境适应性的信号过滤，平衡收益与风险。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.7), ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.7), ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.7), ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.7), ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), 0)"
+    ]
+}

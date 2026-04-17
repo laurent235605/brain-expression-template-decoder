@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(quantile(pasteurize({volume}), driver=\"uniform\"), 5)",
+    "idea": "时序-截面交叉：先对pasteurize清洗后的成交量进行uniform分位数转换消除原始分布差异，再计算5日变化率(ts_delta)，捕捉证券流动性在截面上的动态改善（正值）或恶化（负值）趋势，强调变化而非绝对水平",
+    "expression_list": [
+        "ts_delta(quantile(pasteurize(mdl234_volume), driver=\"uniform\"), 5)"
+    ]
+}

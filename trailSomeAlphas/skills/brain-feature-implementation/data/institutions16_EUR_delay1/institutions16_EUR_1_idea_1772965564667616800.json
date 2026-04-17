@@ -1,0 +1,7 @@
+{
+    "template": "regression_neut({fundportfolioturnover}, {reported_asset_value})",
+    "idea": "**Concept**: Size-Purified Activity\n- **Sample Fields Used**: `fundportfolioturnover`, `reported_asset_value`\n- **Definition**: Residual turnover after removing linear relationship with fund size (regression neutralization)\n- **Why This Feature**: Isolates the essential trading activity independent of scale; large funds naturally have different turnover constraints than small funds\n- **Logical Meaning**: Pure active management intensity net of size effects; positive values indicate more active than size predicts, negative indicates more passive\n- **is filling nan necessary**: Yes, apply `ts_backfill()` to both variables before regression to ensure sufficient overlapping data points for reliable beta estimation\n- **Directionality**: Positive values indicate unusually high activity for size (potential alpha seeking), negative values indicate unusual passivity (indexing or capacity constrained)\n- **Boundary Conditions**: Zero indicates turnover fully explained by size; extreme values suggest idiosyncratic trading style or liquidity events",
+    "expression_list": [
+        "regression_neut(inst16_ipreo_fundportfolioturnover, fund_reported_asset_value)"
+    ]
+}

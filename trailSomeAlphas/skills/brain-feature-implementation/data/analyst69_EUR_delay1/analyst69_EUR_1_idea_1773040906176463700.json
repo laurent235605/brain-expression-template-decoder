@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(group_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 0.5), divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay({eps_best_eeps_cur_yr}, 5)), 0)",
+    "idea": "高效率条件下的修正信号：结合模板2的转化率作为质量过滤器，仅在行业高转化率(前50%)股票中应用模板1的修正速度信号。通过trade_when将低效率公司的噪音归零，确保只在'优质公司'发生预期修正时进行交易，提升信号稳健性。",
+    "expression_list": [
+        "trade_when(greater(group_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.5), divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(anl69_eps_best_eeps_cur_yr, 5)), 0)",
+        "trade_when(greater(group_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.5), divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(anl69_aeps_best_eeps_cur_yr, 5)), 0)"
+    ]
+}

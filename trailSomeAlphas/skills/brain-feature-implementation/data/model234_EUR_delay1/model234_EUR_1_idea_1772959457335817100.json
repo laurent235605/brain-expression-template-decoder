@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_delta(quantile({volume}, driver=\"uniform\"), 5), 10), {sector})",
+    "idea": "行业内流动性加速度：计算成交量在行业内均匀分位的5日变化（加速度），经10日滞后线性衰减平滑后再次行业内标准化，捕捉流动性改善或恶化的持续趋势而非瞬时点。",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_corr(days_from_last_change({eps_expected_report_dt}), ts_delay(days_from_last_change({eps_expected_report_dt}), 20), 60)",
+    "idea": "将模板2的滚动相关性概念交叉应用于模板1的报告日期变更天数，计算其自身的时间序列自相关性。通过检测报告日期变更模式的持续性（高自相关意味着变更模式稳定，低自相关意味着近期突变），捕捉信息披露节奏的结构性变化。",
+    "expression_list": [
+        "ts_corr(days_from_last_change(anl69_aeps_expected_report_dt), ts_delay(days_from_last_change(anl69_aeps_expected_report_dt), 20), 60)",
+        "ts_corr(days_from_last_change(anl69_eps_expected_report_dt), ts_delay(days_from_last_change(anl69_eps_expected_report_dt), 20), 60)"
+    ]
+}

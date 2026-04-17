@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.5), quantile(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), driver='gaussian'), 0)",
+    "idea": "结合模板2的统计显著性阈值过滤（|Z|>1.5）与模板1的高斯分位数尾部拉伸技术，仅在Z分数绝对值超过阈值时开仓，并通过高斯映射将中间区间压缩至零附近、极端值向外拉伸，专门针对显著且极端的修正事件，增强对肥尾分布下极端收益的捕捉能力。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5), quantile(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), driver='gaussian'), 0)"
+    ]
+}

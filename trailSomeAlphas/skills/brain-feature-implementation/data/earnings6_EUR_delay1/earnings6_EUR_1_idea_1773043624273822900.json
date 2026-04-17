@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(signed_power(group_zscore(winsorize(divide(subtract(vec_percentage({actual_eps}, 0.5), vec_percentage({estimated_eps}, 0.5)), add(abs(vec_percentage({estimated_eps}, 0.5)), 0.01)), 4), industry), 3), 20)",
+    "idea": "将简单均值替换为分位数（median）以提高对极端分析师预测的鲁棒性，先进行Winsorize截尾处理去除离群值，再通过行业中性化（group_zscore）消除行业偏差，使用signed_power(3)非线性放大极端Surprise的Alpha贡献，最后用ts_mean替代ts_decay_linear以降低换手率并获取更稳定的行业相对收益。",
+    "expression_list": [
+        "ts_mean(signed_power(group_zscore(winsorize(divide(subtract(vec_percentage(ern6_actual_eps, 0.5), vec_percentage(ern6_estimated_eps, 0.5)), add(abs(vec_percentage(ern6_estimated_eps, 0.5)), 0.01)), 4), industry), 3), 20)",
+        "ts_mean(signed_power(group_zscore(winsorize(divide(subtract(vec_percentage(ern6_actual_eps_274, 0.5), vec_percentage(ern6_estimated_eps, 0.5)), add(abs(vec_percentage(ern6_estimated_eps, 0.5)), 0.01)), 4), industry), 3), 20)"
+    ]
+}

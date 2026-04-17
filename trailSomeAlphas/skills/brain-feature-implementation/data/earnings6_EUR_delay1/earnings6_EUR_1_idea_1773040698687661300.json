@@ -1,0 +1,10 @@
+{
+    "template": "quantile(group_zscore(divide(subtract(vec_avg({x_dividend}), ts_mean(vec_avg({x_dividend}), 252)), add(ts_mean(vec_avg({x_dividend}), 252), 0.001)), industry), driver=\"gaussian\")",
+    "idea": "将模板1的高斯分位数方法迁移至模板2的股息变化检测，计算股息相对于年度均值的偏离度并进行行业标准化，最后进行高斯拉伸，识别行业内的极端分红政策变化。",
+    "expression_list": [
+        "quantile(group_zscore(divide(subtract(vec_avg(ern6_x_dividend), ts_mean(vec_avg(ern6_x_dividend), 252)), add(ts_mean(vec_avg(ern6_x_dividend), 252), 0.001)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(subtract(vec_avg(ern6_x_dividend_233), ts_mean(vec_avg(ern6_x_dividend_233), 252)), add(ts_mean(vec_avg(ern6_x_dividend_233), 252), 0.001)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(subtract(vec_avg(ern6_x_dividend_oc), ts_mean(vec_avg(ern6_x_dividend_oc), 252)), add(ts_mean(vec_avg(ern6_x_dividend_oc), 252), 0.001)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(subtract(vec_avg(ern6_x_dividend_oc_235), ts_mean(vec_avg(ern6_x_dividend_oc_235), 252)), add(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252), 0.001)), industry), driver=\"gaussian\")"
+    ]
+}

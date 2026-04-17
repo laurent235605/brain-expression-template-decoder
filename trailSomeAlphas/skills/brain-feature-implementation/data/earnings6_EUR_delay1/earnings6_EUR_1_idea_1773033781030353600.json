@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 0, subtract(vec_avg({stock_split_ratio_243}), 1)), 2), industry)",
+    "idea": "**概念**: 行业内极端拆分事件捕捉\n**逻辑**: 将NaN（无拆分）视为0信号，对拆分比率偏离1的幅度进行平方放大（signed_power强调极端正向/反向拆分），随后在行业层面进行zscore标准化，以消除行业间资本结构政策的系统性差异，识别行业内的异常资本动作。适用于捕捉相对同行的管理层信心或 distress 信号。",
+    "expression_list": [
+        "group_zscore(signed_power(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, subtract(vec_avg(ern6_stock_split_ratio_243), 1)), 2), industry)"
+    ]
+}

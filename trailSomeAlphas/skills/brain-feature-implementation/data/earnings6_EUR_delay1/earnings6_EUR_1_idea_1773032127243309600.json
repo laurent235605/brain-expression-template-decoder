@@ -1,0 +1,14 @@
+{
+    "template": "multiply(vec_avg({x_dividend}), vec_avg({actual_eps}))",
+    "idea": "**Concept**: Dividend-Earnings Interaction Yield\n- **Sample Fields Used**: x_dividend, actual_eps\n- **Definition**: Product of dividend amount and actual EPS as a proxy for total shareholder return intensity\n- **Why This Feature**: Combines income and growth components; high values in both suggest strong total return potential; dividends without earnings support may be unsustainable\n- **Logical Meaning**: Captures the joint distribution of profitability and cash distribution; identifies companies rewarding shareholders from genuine earnings power\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Zero dividends should be preserved as zero (use fill 0); missing EPS should remain NaN to avoid false signals.\n- **Directionality**: High positive values indicate strong earnings with high payout (income + growth); negative or low values indicate either poor earnings or no dividend\n- **Boundary Conditions**: Negative values occur when EPS is negative despite dividend (potentially unsustainable); zero indicates no dividend regardless of earnings",
+    "expression_list": [
+        "multiply(vec_avg(ern6_x_dividend), vec_avg(ern6_actual_eps))",
+        "multiply(vec_avg(ern6_x_dividend), vec_avg(ern6_actual_eps_274))",
+        "multiply(vec_avg(ern6_x_dividend_233), vec_avg(ern6_actual_eps))",
+        "multiply(vec_avg(ern6_x_dividend_233), vec_avg(ern6_actual_eps_274))",
+        "multiply(vec_avg(ern6_x_dividend_oc), vec_avg(ern6_actual_eps))",
+        "multiply(vec_avg(ern6_x_dividend_oc), vec_avg(ern6_actual_eps_274))",
+        "multiply(vec_avg(ern6_x_dividend_oc_235), vec_avg(ern6_actual_eps))",
+        "multiply(vec_avg(ern6_x_dividend_oc_235), vec_avg(ern6_actual_eps_274))"
+    ]
+}

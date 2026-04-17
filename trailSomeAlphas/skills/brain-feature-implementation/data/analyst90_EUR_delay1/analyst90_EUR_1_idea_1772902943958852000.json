@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( signed_power( subtract( ts_rank( quantile( vec_avg( winsorize( {likelihood_score}, std=4 ) ), driver=\"gaussian\" ), 20 ), ts_rank( quantile( vec_avg( winsorize( {likelihood_score}, std=4 ) ), driver=\"gaussian\" ), 60 ) ), 1.5 ), industry )",
+    "idea": "多时间框架非线性加速度：对比20日短期与60日长期的历史分位数排名差异，使用1.5次幂放大极端偏离（加速或减速），经行业标准化后捕捉中期趋势拐点；高阶幂运算增强了对重大预期转折的敏感性，同时压缩了微小波动的干扰。",
+    "expression_list": [
+        "group_zscore( signed_power( subtract( ts_rank( quantile( vec_avg( winsorize( success_likelihood_score, std=4 ) ), driver=\"gaussian\" ), 20 ), ts_rank( quantile( vec_avg( winsorize( success_likelihood_score, std=4 ) ), driver=\"gaussian\" ), 60 ) ), 1.5 ), industry )"
+    ]
+}

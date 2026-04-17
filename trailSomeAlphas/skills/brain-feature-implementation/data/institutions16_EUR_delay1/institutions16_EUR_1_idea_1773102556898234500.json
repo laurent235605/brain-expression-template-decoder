@@ -1,0 +1,7 @@
+{
+    "template": "core = vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)); regime_vol = ts_std_dev(core, 252); is_high_vol = greater(zscore(regime_vol), 0.5); rank_core = group_rank(core, industry); base_signal = if_else(or(greater(rank_core, 0.9), less(rank_core, 0.1)), group_zscore(core, industry), 0); conditional = trade_when(is_high_vol, multiply(0.6, base_signal), base_signal); tvr_controlled = ts_target_tvr_3(conditional, target=0.35); final = scale(tvr_controlled, scale=1)",
+    "idea": "波动率自适应与换手率目标控制：利用252日滚动标准差识别高波动市场状态，在因子波动剧烈时自动降低仓位至60%以控制风险；通过ts_target_tvr_3显式约束年化换手率目标在0.35水平，实现信号强度与交易成本的显式平衡。",
+    "expression_list": [
+        "core = vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)); regime_vol = ts_std_dev(core, 252); is_high_vol = greater(zscore(regime_vol), 0.5); rank_core = group_rank(core, industry); base_signal = if_else(or(greater(rank_core, 0.9), less(rank_core, 0.1)), group_zscore(core, industry), 0); conditional = trade_when(is_high_vol, multiply(0.6, base_signal), base_signal); tvr_controlled = ts_target_tvr_3(conditional, target=0.35); final = scale(tvr_controlled, scale=1)"
+    ]
+}

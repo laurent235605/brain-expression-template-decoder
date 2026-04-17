@@ -1,0 +1,7 @@
+{
+    "template": "{fundportfolioturnover} * log({reported_asset_value})",
+    "idea": "**Concept**: Scale-Activity Interaction\n- **Sample Fields Used**: `fundportfolioturnover`, `reported_asset_value`\n- **Definition**: Product of portfolio turnover rate and natural log of total assets, capturing the interaction between size and trading intensity\n- **Why This Feature**: Large funds with high turnover face liquidity constraints and market impact costs differently than small funds; this interaction predicts implementation shortfall\n- **Logical Meaning**: Represents total trading volume capacity; high values suggest significant market impact potential, low values suggest nimble or passive strategies\n- **is filling nan necessary**: Yes, apply `ts_backfill()` to both fields separately before multiplication to ensure contemporaneous calculation; consider `pasteurize()` to handle any INF from log(0)\n- **Directionality**: High values indicate large active managers (market movers), low values indicate small passive funds (price takers)\n- **Boundary Conditions**: Zero indicates passive or empty fund; extremely high values suggest unsustainable trading relative to capacity",
+    "expression_list": [
+        "inst16_ipreo_fundportfolioturnover * log(fund_reported_asset_value)"
+    ]
+}

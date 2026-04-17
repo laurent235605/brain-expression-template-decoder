@@ -1,0 +1,8 @@
+{
+    "template": "subtract(group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian))",
+    "idea": "**效率-预期分化利差（对比/残差结构）**：借鉴\"Actual vs estimate spread\"模板逻辑，左侧为行业中性化的效率水平（长期结构质量），右侧为全市场标准化的短期修正动量（情绪）。二者相减捕捉\"基本面稳健但情绪过度反应\"或\"效率恶化但市场未充分定价\"的分化机会，实现截面与预期的交叉对比。",
+    "expression_list": [
+        "subtract(group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian))",
+        "subtract(group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian))"
+    ]
+}

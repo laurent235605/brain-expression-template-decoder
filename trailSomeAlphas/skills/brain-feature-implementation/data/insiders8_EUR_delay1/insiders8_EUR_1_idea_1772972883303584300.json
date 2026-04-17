@@ -1,0 +1,10 @@
+{
+    "template": "ts_delta(group_zscore(subtract({of_owners_decile_rank_long}, ts_regression({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60, rettype=0)), industry), 20)",
+    "idea": "股权集中度异常指标的20日行业中性变化率，识别机构持仓正在快速集中或分散的动量特征，捕捉所有权结构变迁的加速点。",
+    "expression_list": [
+        "ts_delta(group_zscore(subtract(insd8_effective_number_of_owners_decile_rank_long, ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)), industry), 20)",
+        "ts_delta(group_zscore(subtract(insd8_effective_number_of_owners_decile_rank_long, ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)), industry), 20)",
+        "ts_delta(group_zscore(subtract(insd8_total_number_of_owners_decile_rank_long, ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)), industry), 20)",
+        "ts_delta(group_zscore(subtract(insd8_total_number_of_owners_decile_rank_long, ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)), industry), 20)"
+    ]
+}

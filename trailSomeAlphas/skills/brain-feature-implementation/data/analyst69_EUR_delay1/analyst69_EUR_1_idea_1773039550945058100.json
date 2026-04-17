@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 5)",
+    "idea": "将模板A的短期动量逻辑交叉应用于模板B的事件时间维度。计算距离上次报告日期的5日变化（加速度概念），并辅以3倍标准差缩尾。该模板捕捉公司信息披露节奏的突变（如财报突然提前或延迟），将模板B的静态'稳定性'指标转化为动态'变化率'信号，适用于捕捉事件时间维度的动量效应。",
+    "expression_list": [
+        "ts_delta(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 5)",
+        "ts_delta(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 5)"
+    ]
+}

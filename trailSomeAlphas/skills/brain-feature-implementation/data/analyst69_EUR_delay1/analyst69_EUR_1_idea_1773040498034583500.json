@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(group_rank(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), industry), 126)",
+    "idea": "将个股稳定性先在行业内进行横截面分位排名（0-1），消除行业固有差异；随后计算该行业相对排名在过去126日中的时序分位（ts_rank）。此双重排名结构识别“行业内稳定性处于历史极端位置”的股票（无论绝对值如何），强调相对排序的持久性与极端性，而非原始数值的偏离程度。",
+    "expression_list": [
+        "ts_rank(group_rank(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), industry), 126)",
+        "ts_rank(group_rank(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), industry), 126)"
+    ]
+}

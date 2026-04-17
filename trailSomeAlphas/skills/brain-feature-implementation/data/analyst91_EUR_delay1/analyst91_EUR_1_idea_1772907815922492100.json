@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 60), ts_std_dev(vec_avg({exposure_value}), 5)), sector), 3)",
+    "idea": "反向期限利差收敛策略。计算长期（60日）减短期（5日）波动率的反向利差，经行业标准化后进行三次幂非线性变换。与常规期限利差相反，此结构专门捕捉\"长期高波动但近期突然稳定\"的地域敞口收敛模式，适用于识别已完成剧烈地域重组、进入稳定整合期的公司。结合模板B的期限对比逻辑与模板A的极端偏离强调，突出那些从行业视角看已完成极端转型、波动率从高位显著回落的修复型标的。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 60), ts_std_dev(vec_avg(anl91_exposure_value), 5)), sector), 3)"
+    ]
+}

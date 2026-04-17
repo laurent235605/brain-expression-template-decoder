@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({exposure_value}) - vec_avg({cost_exposure_range_begin})) / (vec_avg({cost_exposure_range_end}) - vec_avg({cost_exposure_range_begin}))",
+    "idea": "**Concept**: Normalized Range Position\n- **Sample Fields Used**: exposure_value, cost_exposure_range_begin, cost_exposure_range_end\n- **Definition**: Position of exposure value within the cost range, scaled 0 to 1 (0 = at lower bound, 1 = at upper bound)\n- **Why This Feature**: Indicates whether current exposure is near the conservative or aggressive cost estimates; values near 1 suggest exposure is testing upper cost limits\n- **Logical Meaning**: Relative positioning within expected operational parameters; measures how \"stretched\" current exposure is relative to cost expectations\n- **is filling nan necessary**: NaN in any component makes the position undefined. For cross-sectional comparison, use ts_backfill to ensure recent data availability, as this metric is most useful when current.\n- **Directionality**: Values near 0 indicate exposure near minimum cost estimates (favorable positioning); values near 1 indicate exposure near maximum cost estimates (margin pressure)\n- **Boundary Conditions**: Values outside 0-1 indicate exposure outside expected cost ranges (anomalous conditions)",
+    "expression_list": [
+        "(vec_avg(anl91_exposure_value) - vec_avg(anl91_cost_exposure_range_begin)) / (vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin))"
+    ]
+}

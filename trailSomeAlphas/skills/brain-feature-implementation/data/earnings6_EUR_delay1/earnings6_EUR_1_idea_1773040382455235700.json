@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 2), signed_power(group_zscore(if_else(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243})), industry), 2), 0)",
+    "idea": "使用 trade_when 构造条件触发器：仅当三类事件同时发生（极端企业活动峰值）时才开仓，此时对拆股比例的行业偏离度进行非线性放大（signed_power）。该策略过滤掉单一事件噪音，专注于罕见的企业活动密集期，利用市场信息过载带来的定价偏差。",
+    "expression_list": [
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 2), signed_power(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), 2), 0)",
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 2), signed_power(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), 2), 0)",
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 2), signed_power(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), 2), 0)",
+        "trade_when(greater(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 2), signed_power(group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), 2), 0)"
+    ]
+}

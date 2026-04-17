@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(ts_sum(ts_delta({hfown_pctown},1),20), industry), 0.8), signed_power(group_zscore(ts_sum(ts_delta({hfown_pctown},1),20), industry), 1.5), if_else(less(group_rank(ts_sum(ts_delta({hfown_pctown},1),20), industry), 0.2), signed_power(group_zscore(ts_sum(ts_delta({hfown_pctown},1),20), industry), 1.5), 0))",
+    "idea": "非线性分层的Barbell结构：将股票按行业内资金流入排名分为三层，仅对前20%(极度增持)和后20%(极度减持)进行非线性放大(signed_power, y=1.5)，中间60%视为无效区间赋值为0。该模板构建极端动量与极端反转的双向暴露，通过幂函数强化头部和尾部的权重差异，忽略缺乏明确信号的中间地带，适合捕捉机构资金行为的极化效应。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), industry), 0.8), signed_power(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), industry), 1.5), if_else(less(group_rank(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), industry), 0.2), signed_power(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), industry), 1.5), 0))"
+    ]
+}

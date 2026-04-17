@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr({volume}, ts_delay({volume}, 1), 6)",
+    "idea": "**Concept**: Volume Persistence Ratio\n- **Sample Fields Used**: volume\n- **Definition**: Time-series correlation between current volume and lagged volume (1 month prior) over a 6-month rolling window\n- **Why This Feature**: Captures the stickiness of liquidity regimes—whether high volume periods cluster or are transient\n- **Logical Meaning**: High correlation suggests structural liquidity (index inclusion, persistent institutional interest); low correlation suggests transient attention or event-driven spikes\n- **is filling nan necessary**: Yes, apply ts_backfill({volume}, 1) before correlation calculation to maintain window integrity without propagating NaNs through the entire series.\n- **Directionality**: Values near 1.0 indicate persistent liquidity states; near 0 indicate random liquidity; negative values suggest mean-reverting volume (high followed by low)\n- **Boundary Conditions**: Bounded between -1 and 1; values >0.7 suggest strong persistence; <-0.3 suggest active mean reversion",
+    "expression_list": [
+        "ts_corr(mdl234_volume, ts_delay(mdl234_volume, 1), 6)"
+    ]
+}

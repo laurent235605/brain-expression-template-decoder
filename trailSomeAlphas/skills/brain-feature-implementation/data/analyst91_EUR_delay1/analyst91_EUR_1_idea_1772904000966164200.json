@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6, signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 2)), multiply(0.4, group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector)))",
+    "idea": "将非线性增强的绝对波动率水平（60%权重）与期限利差（40%权重）结合。既考虑公司地域业务的整体动荡程度，又考虑近期变化趋势，构建更全面的地域风险暴露画像。",
+    "expression_list": [
+        "add(multiply(0.6, signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 2)), multiply(0.4, group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector)))"
+    ]
+}

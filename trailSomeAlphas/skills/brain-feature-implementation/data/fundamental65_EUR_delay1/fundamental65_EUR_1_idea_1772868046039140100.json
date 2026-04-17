@@ -1,0 +1,10 @@
+{
+    "template": "abs(subtract({sedol_ad}, ts_median({sedol_ad}, 252)))",
+    "idea": "**Concept**: Capital Structure Stability Index\n- **Sample Fields Used**: {sedol_ad}, {sedol_netdebt}, {sedol_mktlev}, {sedol_ed}\n- **Definition**: Deviation from historical median capital structure measuring financial policy stability versus aggressive leveraging/deleveraging cycles\n- **Why This Feature**: Stable capital structures indicate mature financial management and predictable cash flows; extreme deviations may signal M&A activity or distress\n- **Logical Meaning**: Absolute distance from median leverage indicates stability; moderate levels optimal for tax shields without distress risk\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Moderate values predict stability; extreme high values predict distress or over-leverage; extreme low values suggest under-optimization or cash accumulation for M&A\n- **Boundary Conditions**: Financial and REIT sectors have structurally different leverage; industry-relative version preferred",
+    "expression_list": [
+        "abs(subtract(fnd65_allcap_sedol_ad, ts_median(fnd65_allcap_sedol_ad, 252)))",
+        "abs(subtract(fnd65_allcap_sedol_adpmoc, ts_median(fnd65_allcap_sedol_adpmoc, 252)))",
+        "abs(subtract(fnd65_dev_sedol_ad, ts_median(fnd65_dev_sedol_ad, 252)))",
+        "abs(subtract(fnd65_dev_sedol_adpmoc, ts_median(fnd65_dev_sedol_adpmoc, 252)))"
+    ]
+}

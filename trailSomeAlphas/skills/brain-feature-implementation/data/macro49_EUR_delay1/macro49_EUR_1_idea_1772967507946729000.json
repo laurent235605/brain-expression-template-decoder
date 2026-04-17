@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_rank(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), group=sector), add(0.5, multiply(0.5, greater(group_rank(ts_backfill(vec_sum({shares}), lookback=5, k=1), group=sector), 0.8))))",
+    "idea": "**增强逻辑：流动性条件加权 + 截面分位**\n- **改进点1（流动性过滤）**：使用vec_sum计算区间总股数作为流动性代理，通过group_rank识别行业内流动性前20%的股票（right_tail逻辑）。\n- **改进点2（信号放大）**：利用算术运算构造非线性权重：高流动性股票乘数为1.0（0.5+0.5*1），低流动性为0.5（0.5+0.5*0），实现'仅在流动性充足时充分交易'的从属逻辑。\n- **改进点3（截面排序）**：对价格代理进行group_rank而非原始值比较，消除行业间量纲差异，形成0-1标准化信号，便于跨行业比较和组合构建。",
+    "expression_list": [
+        "multiply(group_rank(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), group=sector), add(0.5, multiply(0.5, greater(group_rank(ts_backfill(vec_sum(mcr49_shares), lookback=5, k=1), group=sector), 0.8))))"
+    ]
+}

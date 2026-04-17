@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(or(greater(ts_rank(group_rank(winsorize(ts_backfill({hfown_pctown},21),std=4),sector),252),0.9),less(ts_rank(group_rank(winsorize(ts_backfill({hfown_pctown},21),std=4),sector),252),0.1)),signed_power(ts_zscore(group_rank(winsorize(ts_backfill({hfown_pctown},21),std=4),sector),252),1.5),0),sector)",
+    "idea": "**概念**: 历史分位非线性增强（Percentile-Based Nonlinear Enhancement）\\n- **核心逻辑**: 将行业Z-Score替换为`group_rank`以消除异常值影响，再用`ts_rank`计算该行业分位在过去252日中的历史百分位；仅保留历史前10%与后10%的极端区间（`or`+`greater`/`less`），并通过`signed_power(y=1.5)`非线性放大极端尾部的力度，压缩中间分位的贡献。相比原始Z-Score方法，对持仓数据的分布偏度更具鲁棒性，适用于持仓比例分布极不均匀的行业。",
+    "expression_list": [
+        "group_normalize(trade_when(or(greater(ts_rank(group_rank(winsorize(ts_backfill(rsk74_hfown_pctown,21),std=4),sector),252),0.9),less(ts_rank(group_rank(winsorize(ts_backfill(rsk74_hfown_pctown,21),std=4),sector),252),0.1)),signed_power(ts_zscore(group_rank(winsorize(ts_backfill(rsk74_hfown_pctown,21),std=4),sector),252),1.5),0),sector)"
+    ]
+}

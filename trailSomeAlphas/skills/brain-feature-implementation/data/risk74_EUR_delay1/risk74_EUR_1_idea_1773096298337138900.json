@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(ts_rank(winsorize({nondomicile},std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize({concentration},std=4), industry), 2), group_zscore(winsorize({nondomicile},std=4), industry)), 0), 5)",
+    "idea": "极端条件非线性交互衰减：融合模板1的历史分位阈值触发机制与模板2的组内标准化及非线性幂次交互逻辑，将触发条件收紧至历史前10%分位，仅对极端海外收入占比股票计算行业中性后的地理集中度交互项，最后施加5日线性衰减平滑以控制噪声。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_nondomicile,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_std_exp_nondomicile1,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_std_exp_nondomicile2,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_nondomicile,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_std_exp_nondomicile1,std=4), industry)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.9), multiply(signed_power(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), 2), group_zscore(winsorize(rsk74_std_exp_nondomicile2,std=4), industry)), 0), 5)"
+    ]
+}

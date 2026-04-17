@@ -1,0 +1,7 @@
+{
+    "template": "quantile(if_else(less(days_from_last_change(vec_avg({aily_delta_recon_value})), 5), ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3)), driver='gaussian')",
+    "idea": "根据模板2的事件新鲜度动态切换信号类型：当数据变更发生在5天内（事件驱动期），使用模板2的Z分数捕捉即时冲击；超过5天进入持续期，切换至模板1的3日平滑分位数捕捉持续趋势。最后统一进行高斯分位数转换，兼顾短期事件与长期趋势的识别。",
+    "expression_list": [
+        "quantile(if_else(less(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 5), ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3)), driver='gaussian')"
+    ]
+}

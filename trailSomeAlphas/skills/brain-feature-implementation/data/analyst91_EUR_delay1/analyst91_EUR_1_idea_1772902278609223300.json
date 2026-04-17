@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_rank(ts_std_dev(ts_backfill(vec_avg({exposure_value}), 20), 20), 120), industry)",
+    "idea": "在计算20日波动率后，不直接使用原始值，而是计算该波动率在自身过去120日历史中的分位数（ts_rank），以识别公司当前是否处于“历史最高/最低波动区间”；随后在行业层面进行横向比较（group_zscore），筛选出那些业务结构稳定性不仅处于自身历史极致、且显著领先或落后于同业的标的，捕捉结构性优势或潜在重组风险。",
+    "expression_list": [
+        "group_zscore(ts_rank(ts_std_dev(ts_backfill(vec_avg(anl91_exposure_value), 20), 20), 120), industry)"
+    ]
+}

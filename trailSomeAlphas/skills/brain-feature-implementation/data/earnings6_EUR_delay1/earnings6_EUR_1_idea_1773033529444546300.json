@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_std_dev(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 63), abs(ts_mean(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 63)))",
+    "idea": "融合两种模板逻辑：先计算TTM累积EPS，再计算其63日滚动变异系数，识别'稳定的高累积盈利'与'波动的高累积盈利'的区别，过滤掉高波动盈利公司的价值陷阱。",
+    "expression_list": [
+        "divide(ts_std_dev(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 63), abs(ts_mean(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 63)))",
+        "divide(ts_std_dev(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 63), abs(ts_mean(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 63)))"
+    ]
+}

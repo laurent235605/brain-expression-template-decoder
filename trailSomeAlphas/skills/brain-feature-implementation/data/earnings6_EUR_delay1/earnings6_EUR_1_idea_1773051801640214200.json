@@ -1,0 +1,8 @@
+{
+    "template": "zscore(winsorize(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), std=4))",
+    "idea": "在条件过滤后，先进行截尾处理(winsorize, std=4)剔除极端异常值，再进行标准化(zscore)构建稳健的Z-score因子，既保留模板1的边界安全性，又通过统计清洗提升因子的横截面可比性。",
+    "expression_list": [
+        "zscore(winsorize(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), std=4))",
+        "zscore(winsorize(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), std=4))"
+    ]
+}

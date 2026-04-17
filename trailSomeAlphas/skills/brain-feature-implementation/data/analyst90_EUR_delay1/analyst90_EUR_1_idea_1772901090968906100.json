@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4))",
+    "idea": "跨时间标准化一致性因子：对原始 likelihood 波动率进行 winsorize 去极值和 zscore 标准化，得到横截面可比的一致性评分。低波动代表分析师信心稳定，高波动代表模型校准漂移，适用于识别分析师预期稳定的股票。",
+    "expression_list": [
+        "zscore(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4))"
+    ]
+}

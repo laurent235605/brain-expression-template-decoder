@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(group_rank({active_return_decile_rank_long}, group_cartesian_product(industry, market_cap_quintile)), group_rank({active_weight_decile_rank_long}, group_cartesian_product(industry, market_cap_quintile))), industry)",
+    "idea": "行业-市值交叉分组纯净分歧。在传统行业比较基础上，引入市值分位数进行笛卡尔积分组（group_cartesian_product），消除规模因子干扰。计算双重分组后的排名差异（group_rank），再进行行业内标准化（group_zscore），得到更纯净的\"同类比较\"信号，避免大小盘风格混淆导致的伪分歧，适用于精细化机构持仓结构分析。",
+    "expression_list": [
+        "group_zscore(subtract(group_rank(insd8_black_litterman_implied_active_return_decile_rank_long, group_cartesian_product(industry, market_cap_quintile)), group_rank(insd8_active_weight_decile_rank_long, group_cartesian_product(industry, market_cap_quintile))), industry)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply(bucket(rank(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1)))), \"0,1,0.2\"), group_zscore(if_else(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243})), industry))",
+    "idea": "将事件密集度分桶（bucket）处理：将排名分为5档（0-20%，20-40%等），并与拆股比例的行业偏离度相乘。该结构识别特定事件密度区间（如仅最高密度档）与资本结构调整的叠加效应，实现非线性的区间择时。",
+    "expression_list": [
+        "multiply(bucket(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), \"0,1,0.2\"), group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry))",
+        "multiply(bucket(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), \"0,1,0.2\"), group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry))",
+        "multiply(bucket(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), \"0,1,0.2\"), group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry))",
+        "multiply(bucket(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), \"0,1,0.2\"), group_zscore(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry))"
+    ]
+}

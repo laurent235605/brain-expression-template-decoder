@@ -1,0 +1,8 @@
+{
+    "template": "truncate(multiply(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), add(1, multiply(0.3, winsorize(ts_mean(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 10), std=2)))), maxPercent=0.02)",
+    "idea": "行业中性平滑修正增强：对核心效率比率进行行业中性化(group_zscore)与4倍标准差清洗，对修正信号先进行行业标准化再经10日移动平均(ts_mean)平滑，并以2倍标准差截断(winsorize)防止极端放大，最后通过truncate限制单票最大权重2%，实现温和且风险可控的从属放大。",
+    "expression_list": [
+        "truncate(multiply(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.3, winsorize(ts_mean(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 10), std=2)))), maxPercent=0.02)",
+        "truncate(multiply(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.3, winsorize(ts_mean(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 10), std=2)))), maxPercent=0.02)"
+    ]
+}

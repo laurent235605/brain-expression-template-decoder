@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(group_rank({value_ts} + {earnyild}, industry), 0.8), multiply(group_zscore({momentum}, industry), subtract(1, multiply(0.5, group_rank({valuearn}, industry)))), if_else(less(group_rank({value_ts} + {earnyild}, industry), 0.2), reverse(group_zscore({momentum}, industry)), NaN))",
+    "idea": "实施条件性因子策略：当股票处于行业前20%的高价值+高收益暴露时，做多动量但用盈利质量({valuearn})进行折扣调整（避免价值陷阱）；当处于行业后20%的低价值暴露时，反向做空动量（捕捉反转或成长型动量）；中间状态视为噪音不予交易。通过分层逻辑实现非线性的因子纯度提取。",
+    "expression_list": [
+        "if_else(greater(group_rank(rsk74_value_ts + rsk74_earnyild, industry), 0.8), multiply(group_zscore(rsk74_momentum, industry), subtract(1, multiply(0.5, group_rank(rsk74_valuearn, industry)))), if_else(less(group_rank(rsk74_value_ts + rsk74_earnyild, industry), 0.2), reverse(group_zscore(rsk74_momentum, industry)), NaN))",
+        "if_else(greater(group_rank(rsk74_value_ts + rsk74_earnyild, industry), 0.8), multiply(group_zscore(rsk74_momentum_ts, industry), subtract(1, multiply(0.5, group_rank(rsk74_valuearn, industry)))), if_else(less(group_rank(rsk74_value_ts + rsk74_earnyild, industry), 0.2), reverse(group_zscore(rsk74_momentum_ts, industry)), NaN))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile(subtract(ts_rank(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 252), 0.5), \"cauchy\")",
+    "idea": "历史分位数尾部拉伸：将当前期限利差映射至过去252日的历史分位数（ts_rank），减去0.5使其以零为中心，再通过quantile(..., \"cauchy\")映射到柯西分布以极度拉伸尾部。此举将信号转化为“当前地域动荡程度处于历史极值位置”的视角，避免在整体市场高波动或低波动制度下的水平误读，强化对极端地域重组事件的识别。",
+    "expression_list": [
+        "quantile(subtract(ts_rank(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 252), 0.5), \"cauchy\")"
+    ]
+}

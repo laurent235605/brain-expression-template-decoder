@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_regression(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), group_mean(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), sector), lookback=63, rettype=0), 5)",
+    "idea": "**增强逻辑：行业Beta剥离 + 残差动量**\n- **改进点1（共同因素剔除）**：将个股价格代理对行业均值进行63日时序回归(ts_regression, rettype=0取残差)，剥离行业层面的系统性价格变动（如板块轮动、宏观冲击），得到纯粹的公司特异性价格成分。\n- **改进点2（残差动量）**：对残差序列计算5日变化(ts_delta)，识别'独立于行业的内在价值漂移'信号。若残差持续上升，暗示存在未反映在行业标准计算中的正面信息流动。\n- **经济含义**：适用于检测成分股调整前的抢先交易或指数计算器的系统性滞后，残差动量方向指示真实供需压力。",
+    "expression_list": [
+        "ts_delta(ts_regression(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), group_mean(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), sector), lookback=63, rettype=0), 5)"
+    ]
+}

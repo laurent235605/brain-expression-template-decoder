@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_sum(if_else(is_nan(vec_stddev({aily_delta_recon_value})), 0, signed_power(vec_stddev({aily_delta_recon_value}), 2)), 20), industry)",
+    "idea": "将日内分析师修正值的标准差（衡量分析师群体内部意见分歧度）进行平方累加，捕捉'分析师激烈辩论'的时期，并进行行业中性化（group_zscore），以识别在同行中相对不确定性最高的标的。NaN视为无波动（0），避免低估。",
+    "expression_list": [
+        "group_zscore(ts_sum(if_else(is_nan(vec_stddev(ern10_aily_delta_recon_value)), 0, signed_power(vec_stddev(ern10_aily_delta_recon_value), 2)), 20), industry)"
+    ]
+}

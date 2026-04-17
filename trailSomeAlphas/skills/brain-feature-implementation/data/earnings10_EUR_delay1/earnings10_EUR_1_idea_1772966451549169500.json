@@ -1,0 +1,7 @@
+{
+    "template": "quantile(winsorize(ts_zscore(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), 252), std=4), driver=\"gaussian\")",
+    "idea": "历史极端性视角（Historical Surprise）。不仅关注当前的5日变化率，更通过252日（1年）时序Z-Score（ts_zscore）衡量该变化在历史区间内的罕见程度，捕捉统计意义上的“惊讶度”；再次截尾后使用高斯分位数拉伸（quantile with gaussian driver），将中间区间压缩、尾部极端信号强化，突出那些突破历史波动区间的重大修正事件。",
+    "expression_list": [
+        "quantile(winsorize(ts_zscore(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), 252), std=4), driver=\"gaussian\")"
+    ]
+}

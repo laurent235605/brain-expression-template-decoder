@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( quantile( ts_zscore( winsorize( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), std=4 ), 252 ), driver=\\\"gaussian\\\" ), 5 )",
+    "idea": "时序极值增强与平滑处理。首先对盈余惊喜进行截面去极值(winsorize)，计算其在过去252个交易日中的时序zscore(ts_zscore)以定位历史极端位置，再通过高斯分位数拉伸(quantile)放大历史极端事件，最后应用线性衰减(ts_decay_linear)降低换手率，捕捉“当前惊喜处于历史极端分位”的持续信号。",
+    "expression_list": [
+        "ts_decay_linear( quantile( ts_zscore( winsorize( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), std=4 ), 252 ), driver=\\\"gaussian\\\" ), 5 )",
+        "ts_decay_linear( quantile( ts_zscore( winsorize( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), std=4 ), 252 ), driver=\\\"gaussian\\\" ), 5 )"
+    ]
+}

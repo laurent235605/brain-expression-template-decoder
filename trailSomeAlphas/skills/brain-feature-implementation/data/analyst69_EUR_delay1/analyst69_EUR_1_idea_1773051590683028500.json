@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.15)), group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0)",
+    "idea": "融合模板1的行业中性化处理与模板2的极端尾部筛选逻辑。先通过ts_backfill确保数据连续性，计算5日差分捕捉短期修订动量；使用group_rank识别行业内前15%与后15%的极端修订股票，而非全市场排名，确保在行业内部进行相对比较；最终输出group_zscore标准化信号。这种结构既保留了尾部信号的高纯度（避免中段噪音），又剥离了行业Beta影响，适合捕捉行业特异性的预期修正机会。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.15)), group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0)",
+        "trade_when(or(greater(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.15)), group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0)"
+    ]
+}

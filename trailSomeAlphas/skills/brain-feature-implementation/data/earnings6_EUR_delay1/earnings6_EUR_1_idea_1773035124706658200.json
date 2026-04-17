@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), std=4), industry)",
+    "idea": "行业中性化EPS惊喜信号：融合EPS惊喜百分比模板中的相对偏离计算与分组中性化思路。通过winsorize(std=4)处理极端异常值（如预估EPS接近零时的极端比率），再利用group_zscore在行业内部进行标准化，消除不同行业间盈利波动差异带来的可比性问题，使跨行业的惊喜程度具有统一度量标准。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), std=4), industry)",
+        "group_zscore(winsorize(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), std=4), industry)"
+    ]
+}

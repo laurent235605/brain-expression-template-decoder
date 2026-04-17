@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(divide(subtract(ts_backfill(vec_avg({actual_eps}), 5), ts_backfill(vec_avg({estimated_eps}), 5)), add(abs(ts_backfill(vec_avg({estimated_eps}), 5)), 0.01)), industry), 10)",
+    "idea": "将模板2的回填与均值技术应用于模板1的EPS数据，对历史EPS和预期EPS先进行5日回溯填充再计算惊喜，最后加入线性衰减平滑，适用于处理数据更新延迟场景。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(divide(subtract(ts_backfill(vec_avg(ern6_actual_eps), 5), ts_backfill(vec_avg(ern6_estimated_eps), 5)), add(abs(ts_backfill(vec_avg(ern6_estimated_eps), 5)), 0.01)), industry), 10)",
+        "ts_decay_linear(group_zscore(divide(subtract(ts_backfill(vec_avg(ern6_actual_eps_274), 5), ts_backfill(vec_avg(ern6_estimated_eps), 5)), add(abs(ts_backfill(vec_avg(ern6_estimated_eps), 5)), 0.01)), industry), 10)"
+    ]
+}

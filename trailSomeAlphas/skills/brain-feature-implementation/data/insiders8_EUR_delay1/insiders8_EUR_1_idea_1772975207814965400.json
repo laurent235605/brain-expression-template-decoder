@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_corr({active_return_decile_rank_long} - {active_weight_decile_rank_long}, {of_owners_decile_rank_long} - {owners_decile_rank_long}, 60), std=4), 1.5), sector)",
+    "idea": "交叉构建两个维度差分的相关性：计算定价偏离（主动收益-权重）与所有权结构差异（机构-散户持仓）的60日滚动相关性，再通过signed_power(1.5)非线性放大。此模板捕捉机构行为与价格错配的协同效应，仅当两者持续同向变动（高正相关）或背离（高负相关）时才产生强信号，体现跨域信息增强。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long - insd8_effective_number_of_owners_decile_rank_long, 60), std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long - insd8_total_number_of_owners_decile_rank_long, 60), std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, insd8_total_number_of_owners_decile_rank_long - insd8_effective_number_of_owners_decile_rank_long, 60), std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, insd8_total_number_of_owners_decile_rank_long - insd8_total_number_of_owners_decile_rank_long, 60), std=4), 1.5), sector)"
+    ]
+}

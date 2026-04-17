@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(group_rank(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4),industry), 0.8), 1.0, trade_when(less(group_rank(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4),industry), 0.2), -1.0, 0))",
+    "idea": "使用行业分组排名（group_rank）替代zscore，对空头加速度进行行业内相对定位，仅保留行业内极端多头（前20%）和极端空头（后20%）信号，摒弃中间噪音，构建非多即空的离散择时策略。",
+    "expression_list": [
+        "trade_when(greater(group_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4),industry), 0.8), 1.0, trade_when(less(group_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4),industry), 0.2), -1.0, 0))",
+        "trade_when(greater(group_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4),industry), 0.8), 1.0, trade_when(less(group_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4),industry), 0.2), -1.0, 0))"
+    ]
+}

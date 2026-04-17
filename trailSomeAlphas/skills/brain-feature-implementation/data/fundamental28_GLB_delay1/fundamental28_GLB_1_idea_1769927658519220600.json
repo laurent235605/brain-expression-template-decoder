@@ -1,0 +1,10 @@
+{
+    "template": "ts_delta(group_zscore(divide(ts_backfill({value_03501a}, 63), {value_02300q}), industry), 63)",
+    "idea": "去杠杆化趋势动量：捕捉权益资产比率在行业内的相对改善趋势。先计算行业中性化的权益资产比，再取其63个交易日（约一个季度）的变化量（ts_delta）。正值表示公司正在相对同行业降低杠杆、提升权益占比（财务风险改善），负值表示相对加杠杆。该因子关注资本结构的动态优化而非静态水平，适用于识别财务质量持续修复的标的。",
+    "expression_list": [
+        "ts_delta(group_zscore(divide(ts_backfill(fnd28_bdea_value_03501a, 63), fnd28_bsassetq_value_02300q), industry), 63)",
+        "ts_delta(group_zscore(divide(ts_backfill(fnd28_bdea_value_03501a, 63), fnd28_nddq1_value_02300q), industry), 63)",
+        "ts_delta(group_zscore(divide(ts_backfill(fnd28_fsa1_value_03501a, 63), fnd28_bsassetq_value_02300q), industry), 63)",
+        "ts_delta(group_zscore(divide(ts_backfill(fnd28_fsa1_value_03501a, 63), fnd28_nddq1_value_02300q), industry), 63)"
+    ]
+}

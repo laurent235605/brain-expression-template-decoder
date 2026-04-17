@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 )",
+    "idea": "融合条件过滤与时间衰减。先使用trade_when确保估计值显著时才计算Surprise避免除零错误，再对有效Surprise序列应用ts_decay_linear进行线性衰减加权，既保证数据纯净度又突出近期盈利惊喜的动量效应，结合了模板1的稳健性与模板2的时序视角。",
+    "expression_list": [
+        "ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 )",
+        "ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 )"
+    ]
+}

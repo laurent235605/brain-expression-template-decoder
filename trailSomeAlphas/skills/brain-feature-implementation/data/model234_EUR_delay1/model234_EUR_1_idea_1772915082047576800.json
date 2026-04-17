@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression({volume}, ts_step(1), 6, rettype=1)",
+    "idea": "**Concept**: Volume Trend Structure\n- **Sample Fields Used**: volume\n- **Definition**: Slope coefficient from linear regression of volume against time over past 6 months\n- **Why This Feature**: Identifies structural trends in liquidity (improving or deteriorating market access) versus noise\n- **Logical Meaning**: Positive slope = structural increase in trading interest (growing institutional coverage, index inclusion); negative slope = structural decline (falling out of favor, delisting risk)\n- **is filling nan necessary**: Yes, essential to use ts_backfill({volume}, 2) for regression stability over the window\n- **Directionality**: Positive = uptrend in liquidity; Negative = downtrend in liquidity; Zero = no trend (stationary)\n- **Boundary Conditions**: Large positive values indicate strong liquidity improvement; large negative values indicate liquidity crisis; near zero indicates stable liquidity levels",
+    "expression_list": [
+        "ts_regression(mdl234_volume, ts_step(1), 6, rettype=1)"
+    ]
+}

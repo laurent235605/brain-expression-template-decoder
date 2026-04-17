@@ -1,0 +1,30 @@
+{
+    "template": "subtract(group_zscore(divide({value_03501a}, {value_02300q}), industry), group_zscore(divide({value_03051q}, {value_03999q}), industry))",
+    "idea": "通过行业中性化的多空组合，同时利用模板3（权益比作为质量代理）和模板2（短期流动性作为风险代理）。做多高权益比公司，做空高短期债务公司，形成质量-利差因子，并消除行业固有的资本结构差异，实现跨行业的可比性。",
+    "expression_list": [
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry))",
+        "subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry))"
+    ]
+}

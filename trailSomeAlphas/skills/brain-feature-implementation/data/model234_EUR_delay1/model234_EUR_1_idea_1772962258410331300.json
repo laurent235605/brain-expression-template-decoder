@@ -1,0 +1,7 @@
+{
+    "template": "truncate(rank(pasteurize({volume})), maxPercent=0.02)",
+    "idea": "排序权重约束：对pasteurize清洗后的成交量进行截面排名(rank)，然后使用truncate限制单证券最大权重不超过2%，在保持流动性排序信息的同时防止高流动性巨头过度主导组合，提升风险分散度",
+    "expression_list": [
+        "truncate(rank(pasteurize(mdl234_volume)), maxPercent=0.02)"
+    ]
+}

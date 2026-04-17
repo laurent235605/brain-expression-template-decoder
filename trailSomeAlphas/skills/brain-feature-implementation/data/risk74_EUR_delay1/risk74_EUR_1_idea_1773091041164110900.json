@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(group_rank({factor_e}, industry) + group_rank({factor_s}, industry) + group_rank({factor_g}, industry), 2.0), {hfown_pctown} - group_mean({hfown_pctown}, industry), 0)",
+    "idea": "基于模板1定义'高ESG公司'（三个组内排名之和>2.0，约前1/3），结合模板2的持仓偏离逻辑。仅在ESG综合评分行业领先的公司池中，计算HF持仓相对于行业均值的偏离。逻辑：识别聪明钱在优质ESG公司中的真实配置偏好，避免在低ESG公司中因其他因素导致的持仓噪音干扰。",
+    "expression_list": [
+        "if_else(greater(group_rank(rsk74_factor_e, industry) + group_rank(rsk74_factor_s, industry) + group_rank(rsk74_factor_g, industry), 2.0), rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry), 0)",
+        "if_else(greater(group_rank(rsk74_factor_esg, industry) + group_rank(rsk74_factor_s, industry) + group_rank(rsk74_factor_g, industry), 2.0), rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry), 0)"
+    ]
+}

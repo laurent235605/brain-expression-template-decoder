@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({likelihood_score}) * (ts_std_dev(vec_avg({likelihood_score}), 60) - ts_std_dev(vec_avg({likelihood_score}), 20)) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20))",
+    "idea": "激进地将输入1的置信水平与输入2的波动率期限结构直接相乘作为联合信号，再经短期波动率标准化；当高置信度遇上波动率收敛（正差分）时产生极端多头信号，遇上发散（负差分）时自然转为空头或中性暴露。",
+    "expression_list": [
+        "vec_avg(success_likelihood_score) * (ts_std_dev(vec_avg(success_likelihood_score), 60) - ts_std_dev(vec_avg(success_likelihood_score), 20)) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20))"
+    ]
+}

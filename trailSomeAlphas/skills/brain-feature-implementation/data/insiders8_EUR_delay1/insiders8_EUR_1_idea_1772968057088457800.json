@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(signed_power(divide(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), add(ts_std_dev(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20), 0.001)), 0.5), sector)",
+    "idea": "构建信息比率类指标：将原始相关性除以其20日时序波动率（稳定性调整），低波动的高相关性视为更可靠的信号。使用signed_power(y=0.5)对比率进行开方压缩，既保留方向又避免极端值过度主导，最后通过group_normalize在行业内平衡多空暴露，确保各板块权重中性。",
+    "expression_list": [
+        "group_normalize(signed_power(divide(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), add(ts_std_dev(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), 0.001)), 0.5), sector)",
+        "group_normalize(signed_power(divide(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), add(ts_std_dev(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), 0.001)), 0.5), sector)",
+        "group_normalize(signed_power(divide(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), add(ts_std_dev(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), 0.001)), 0.5), sector)",
+        "group_normalize(signed_power(divide(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), add(ts_std_dev(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), 0.001)), 0.5), sector)"
+    ]
+}

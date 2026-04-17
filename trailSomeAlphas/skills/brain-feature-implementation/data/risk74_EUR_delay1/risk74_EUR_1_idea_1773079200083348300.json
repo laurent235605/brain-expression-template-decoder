@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(add(multiply(0.7, subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4))), multiply(0.3, ts_delta(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)),63))), 1.5), industry)",
+    "idea": "非线性加速emphasis：结合当前价差水平（70%权重）与近期变化速度（30%权重，63日差分），通过1.5次幂 signed_power 放大极端偏离股票的信号强度，同时压缩中间噪音区间，经行业中性后形成具有凸性收益特征的区域配置因子。",
+    "expression_list": [
+        "group_zscore(signed_power(add(multiply(0.7, subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4))), multiply(0.3, ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)),63))), 1.5), industry)"
+    ]
+}

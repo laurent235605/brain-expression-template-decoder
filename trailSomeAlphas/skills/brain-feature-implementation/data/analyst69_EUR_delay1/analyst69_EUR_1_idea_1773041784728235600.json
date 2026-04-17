@@ -1,0 +1,8 @@
+{
+    "template": "add(group_zscore(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 5), industry), group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry))",
+    "idea": "等权叠加行业中性化的修订动量（5日变化平滑后）和利润转化率水平。该复合信号同时考虑'预期变化的方向'（动量）和'盈利质量的结构水平'（质量），实现估值与动量的均衡配置，分散单一信号的风险。",
+    "expression_list": [
+        "add(group_zscore(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 5), industry), group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry))",
+        "add(group_zscore(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry))"
+    ]
+}

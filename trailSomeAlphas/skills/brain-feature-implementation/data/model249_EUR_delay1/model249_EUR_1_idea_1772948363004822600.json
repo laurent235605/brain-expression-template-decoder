@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(if_else(greater_equal(vec_avg({quintile}), 4), 1, 0), 60)",
+    "idea": "**Concept**: Top Quintile Persistence Ratio\n- **Sample Fields Used**: `mdl249_quintile`\n- **Definition**: The proportion of the last 60 days spent in quintile 5 (top acquisition likelihood bucket)\n- **Why This Feature**: Structural acquisition targets maintain elevated status for extended periods; this measures duration of high-probability status\n- **is filling nan necessary**: Yes, treat gaps as non-Q5 days or backfill limited days. Use `if_else(is_nan(vec_avg({quintile})), 0, if_else(greater_equal(vec_avg({quintile}), 4), 1, 0))` to handle NaNs as non-top-quintile.\n- **Logical Meaning**: Concentration of time in extreme high-likelihood regime; measures \"structural target\" quality vs. transient speculation\n- **Directionality**: Values near 1.0 indicate persistent targets (structural); values near 0 indicate transient or low likelihood\n- **Boundary Conditions**: 1.0 indicates 60 consecutive days in Q5 (extreme persistence); 0 indicates no Q5 days in window",
+    "expression_list": [
+        "ts_mean(if_else(greater_equal(vec_avg(mdl249_quintile), 4), 1, 0), 60)"
+    ]
+}

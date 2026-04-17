@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.7, ts_zscore(vec_skewness({exposure_value}), 126)), multiply(0.3, ts_zscore(vec_kurtosis({exposure_value}), 126)))",
+    "idea": "结合偏度（不对称性）与峰度（尾部厚度）的复合信号，0.7/0.3加权。不仅关注地域集中的方向性，还考虑极端单区域敞口爆发的厚尾风险，构建更全面的地理风险度量。",
+    "expression_list": [
+        "add(multiply(0.7, ts_zscore(vec_skewness(anl91_exposure_value), 126)), multiply(0.3, ts_zscore(vec_kurtosis(anl91_exposure_value), 126)))"
+    ]
+}

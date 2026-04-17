@@ -1,0 +1,22 @@
+{
+    "template": "ts_delta({score_fy1}, 10)",
+    "idea": "**Concept**: Innovation Score Momentum\n- **Sample Fields Used**: score_fy1\n- **Definition**: Change in innovation score over 10-day period, measuring shift in high-quality analyst sentiment\n- **Why This Feature**: Innovation scores lead consensus; their momentum predicts future estimate revisions\n- **Logical Meaning**: Increasing scores suggest accumulating bullish conviction among top analysts\n- **is filling nan necessary**: Yes, carry forward last valid score using ts_backfill\n- **Directionality**: Positive momentum predicts positive earnings surprises; negative predicts misses\n- **Boundary Conditions**: Bounded by analyst coverage count; normalize by total analyst count if available",
+    "expression_list": [
+        "ts_delta(anl10_cpxinnovation_score_fy1, 10)",
+        "ts_delta(anl10_cshinnovation_score_fy1, 10)",
+        "ts_delta(anl10_dpsinnovation_score_fy1, 10)",
+        "ts_delta(anl10_ebiinnovation_score_fy1, 10)",
+        "ts_delta(anl10_ebtinnovation_score_fy1, 10)",
+        "ts_delta(anl10_gpsinnovation_score_fy1, 10)",
+        "ts_delta(anl10_grminnovation_score_fy1, 10)",
+        "ts_delta(anl10_navinnovation_score_fy1, 10)",
+        "ts_delta(anl10_ndtinnovation_score_fy1, 10)",
+        "ts_delta(anl10_nerinnovation_score_fy1, 10)",
+        "ts_delta(anl10_netinnovation_score_fy1, 10)",
+        "ts_delta(anl10_oprinnovation_score_fy1, 10)",
+        "ts_delta(anl10_preinnovation_score_fy1, 10)",
+        "ts_delta(anl10_prrinnovation_score_fy1, 10)",
+        "ts_delta(anl10_salinnovation_score_fy1, 10)",
+        "ts_delta(anl10_tbvinnovation_score_fy1, 10)"
+    ]
+}

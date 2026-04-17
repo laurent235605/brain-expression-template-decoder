@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(ts_backfill({concentration},63),std=4), sector) * winsorize(ts_backfill({nondomicile},63),std=4), 63)",
+    "idea": "时序平滑的地理集中风险：先将集中度与非本土暴露进行时序回填和极值裁剪，在行业层面标准化后相乘，再进行63天线性衰减平滑。该模板强调持续性的'单一外国市场风险'，避免短期数据噪音干扰，适合捕捉结构性的地理集中危险而非临时波动。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 63)",
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 63)"
+    ]
+}

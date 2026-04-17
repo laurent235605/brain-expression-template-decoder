@@ -1,0 +1,7 @@
+{
+    "template": "group_compare(ts_delta(winsorize(vec_avg({version}), std=4), 5), ts_mean(winsorize(vec_avg({version}), std=4), 20), industry)",
+    "idea": "融合模板1的短期动量与模板2的时间累积思想，先对原始数据进行4倍标准差去极值处理，计算5日动量相对于20日均值的偏离度，并在行业内进行相对比较。捕捉短期revision突破长期区间的异常信号，同时通过组内比较消除行业间水平差异。",
+    "expression_list": [
+        "group_compare(ts_delta(winsorize(vec_avg(anl85_version), std=4), 5), ts_mean(winsorize(vec_avg(anl85_version), std=4), 20), industry)"
+    ]
+}

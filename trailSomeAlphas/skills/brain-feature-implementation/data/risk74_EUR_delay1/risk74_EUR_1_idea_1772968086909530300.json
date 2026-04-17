@@ -1,0 +1,14 @@
+{
+    "template": "quantile( {concentration}, \"gaussian\" ) * quantile( {crowding}, \"gaussian\" )",
+    "idea": "高斯分布尾部交叉：将两个因子通过quantile映射到高斯分布（中间压缩、两端拉长）后相乘，极度放大极端值区域的权重，几乎完全消除中间区间的噪音。适用于'只关注极端地理风险且极端拥挤'的激进策略，强化对离群值的暴露。",
+    "expression_list": [
+        "quantile( rsk74_concentration, \"gaussian\" ) * quantile( rsk74_crowding, \"gaussian\" )",
+        "quantile( rsk74_concentration, \"gaussian\" ) * quantile( rsk74_raw_crowding, \"gaussian\" )",
+        "quantile( rsk74_concentration, \"gaussian\" ) * quantile( liquidity_factor_crowding, \"gaussian\" )",
+        "quantile( rsk74_concentration, \"gaussian\" ) * quantile( liquidity_timeseries_crowding, \"gaussian\" )",
+        "quantile( rsk74_raw_concentration, \"gaussian\" ) * quantile( rsk74_raw_crowding, \"gaussian\" )",
+        "quantile( rsk74_raw_concentration, \"gaussian\" ) * quantile( rsk74_crowding, \"gaussian\" )",
+        "quantile( rsk74_raw_concentration, \"gaussian\" ) * quantile( liquidity_factor_crowding, \"gaussian\" )",
+        "quantile( rsk74_raw_concentration, \"gaussian\" ) * quantile( liquidity_timeseries_crowding, \"gaussian\" )"
+    ]
+}

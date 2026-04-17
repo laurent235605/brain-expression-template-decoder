@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(vec_avg({rank}), 20)",
+    "idea": "**Concept**: Smoothed Rank\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Linear decay weighted average of rank over 20 days (higher weights on recent observations)\n- **Why This Feature**: Reduces noise in daily rankings while preserving recent trend information; captures the model's recent average view rather than potentially noisy daily snapshots\n- **Logical Meaning**: Represents the cumulative recent assessment of the model, smoothing out temporary fluctuations while weighting recent changes more heavily than older ones\n- **is filling nan necessary**: Linear decay operator handles NaN by skipping them in the weighted average, but long gaps create look-ahead bias if not handled. For rank data with potential universe entry/exit, use ts_backfill only for very short gaps (1-2 days).\n- **Directionality**: Lower values (if lower rank is better) indicate consistently good recent ranking; values follow the same scale as raw rank\n- **Boundary Conditions**: Bounded by universe size (1 to 1600); smoother than raw series",
+    "expression_list": [
+        "ts_decay_linear(vec_avg(mdl245_rank), 20)"
+    ]
+}

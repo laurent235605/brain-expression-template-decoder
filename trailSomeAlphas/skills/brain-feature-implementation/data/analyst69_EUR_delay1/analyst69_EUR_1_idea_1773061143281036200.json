@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 5), -5), ts_zscore(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), industry), 0), 20)",
+    "idea": "当报告日期发生剧烈调整（5日变化<-5天，输入1逻辑）时，加载行业zscore标准化后的预期一致性水平（输入2+group_zscore）作为信号强度，否则为0，再通过20日衰减，构建事件深度与基本面质量交互的择时信号。",
+    "expression_list": [
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), industry), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 5), -5), ts_zscore(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), industry), 0), 20)"
+    ]
+}

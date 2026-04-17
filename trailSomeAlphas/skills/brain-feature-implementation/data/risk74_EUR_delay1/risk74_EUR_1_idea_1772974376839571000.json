@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_sum(ts_delta(winsorize({hfown_pctown}, 4), 1), 20), sector)), 2), ts_decay_linear(ts_sum(ts_delta({hfown_pctown}, 1), 20), 10), 0)",
+    "idea": "**条件极值非线性响应（高门槛+低换手）**：仅在20日累积资金流处于行业分布的极端尾部（|zscore|>2）时才参与交易，中间区域直接置零，避免微弱信号带来的无效换手；对于通过阈值检验的极端信号，使用10日线性衰减加权平滑权重变化，降低单日数据抖动导致的调仓成本。此模板实现“要么重注、要么空仓”的离散化信号，适合高换手率约束下的资金流策略。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_sum(ts_delta(winsorize(rsk74_hfown_pctown, 4), 1), 20), sector)), 2), ts_decay_linear(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 10), 0)"
+    ]
+}

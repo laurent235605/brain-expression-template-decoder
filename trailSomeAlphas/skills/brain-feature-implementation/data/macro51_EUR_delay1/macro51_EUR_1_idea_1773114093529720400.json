@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( group_normalize( if_else( greater( group_rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), industry ), 0.8 ), ( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ) ) / sqrt( ts_std_dev( {stoxx_europe_600_ucits_weight}, 21 ) ), if_else( less( group_rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), industry ), 0.2 ), ( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ) ) / sqrt( ts_std_dev( {stoxx_europe_600_ucits_weight}, 21 ) ), 0 ) ), industry ), 3 )",
+    "idea": "波动率调整与平滑衰减模板。在原始偏离比率基础上除以21日波动率的平方根进行风险调整（高波动股票信号衰减），仅保留行业内排名前20%和后20%的股票，最后使用3日线性衰减(ts_decay_linear)降低换手率。该结构更关注稳定的极端配置偏离，惩罚高噪声的仓位抖动。",
+    "expression_list": [
+        "ts_decay_linear( group_normalize( if_else( greater( group_rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), industry ), 0.8 ), ( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ) ) / sqrt( ts_std_dev( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), if_else( less( group_rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), industry ), 0.2 ), ( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ) ) / sqrt( ts_std_dev( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0 ) ), industry ), 3 )"
+    ]
+}

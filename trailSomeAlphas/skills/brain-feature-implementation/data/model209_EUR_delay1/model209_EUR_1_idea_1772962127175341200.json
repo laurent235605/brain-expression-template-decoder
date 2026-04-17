@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(subtract(1, vec_avg({lastcostingfailed})), industry), signed_power(ts_delta(subtract(1, ts_mean(vec_avg({lastcostingfailed}), 5)), 20), 0.5))",
+    "idea": "动量增强型质量因子：当前行业相对可靠性水平乘以近20日可靠性改善趋势的非线性放大（signed_power压缩极端趋势防止过拟合），捕捉那些原本运营稳健且近期仍在持续优化成本控制的标的，形成水平与趋势的双重验证。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(1, vec_avg(mdl209_lastcostingfailed)), industry), signed_power(ts_delta(subtract(1, ts_mean(vec_avg(mdl209_lastcostingfailed), 5)), 20), 0.5))"
+    ]
+}

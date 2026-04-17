@@ -1,0 +1,7 @@
+{
+    "template": "multiply(quantile(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), driver=\"gaussian\"), subtract(1, multiply(0.5, signed_power(zscore(winsorize(ts_delta(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4), 20), std=4)), 0.5))))",
+    "idea": "高斯分位与波动率缩放：将背离信号通过高斯分位转换（quantile）拉伸头尾，并用波动率变化率的压缩幂次（signed_power）进行非线性缩放。强化极端背离且信息快速收敛（波动率骤降）情境下的信号。",
+    "expression_list": [
+        "multiply(quantile(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), driver=\"gaussian\"), subtract(1, multiply(0.5, signed_power(zscore(winsorize(ts_delta(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4), 20), std=4)), 0.5))))"
+    ]
+}

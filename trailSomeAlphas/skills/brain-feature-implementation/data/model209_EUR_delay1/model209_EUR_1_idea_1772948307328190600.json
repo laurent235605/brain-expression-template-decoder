@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({investment}) * vec_avg({lastcostingfailed})",
+    "idea": "**Concept**: At-Risk Investment Exposure\n- **Sample Fields Used**: investment, lastcostingfailed\n- **Definition**: Product of average investment and average failure rate, quantifying capital subject to operational risk\n- **Why This Feature**: Combines financial exposure with operational reliability to identify vulnerable allocations where large positions coincide with costing issues\n- **Logical Meaning**: Expected value of investment affected by pricing failures\n- **is filling nan necessary**: Ensure paired availability; if one field is NaN, exclude from both calculations to maintain alignment\n- **Directionality**: Higher values indicate significant capital at operational risk; zero indicates all costing successful or no investment\n- **Boundary Conditions**: Unbounded positive range; zero when either factor is zero",
+    "expression_list": [
+        "vec_avg(mdl209_investment) * vec_avg(mdl209_lastcostingfailed)"
+    ]
+}

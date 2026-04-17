@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 2), signed_power(subtract(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 1), 2), 0)",
+    "idea": "极端变更事件捕捉（头尾区间隔离）：仅在财政年度变更次数超过阈值（>2次，表明发生重大会计政策重组或频繁并购）时产生信号，并使用幂运算（平方）放大极端不稳定公司的权重，其余时间视为无信号（0）。属于典型的'中段噪音剔除'策略，只关注会计结构剧烈动荡的尾部极端事件，适用于事件驱动型策略",
+    "expression_list": [
+        "trade_when(greater(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 2), signed_power(subtract(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 1), 2), 0)"
+    ]
+}

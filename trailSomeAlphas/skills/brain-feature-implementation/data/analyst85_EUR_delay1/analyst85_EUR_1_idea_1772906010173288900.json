@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(winsorize(vec_skewness(vec_filter({version}, value=\"nan\")), std=4)), 5), ts_zscore(winsorize(vec_skewness(vec_filter({version}, value=\"nan\")), std=4), 60), 0)",
+    "idea": "近期变化事件驱动策略：利用days_from_last_change监测偏度指标的突变事件，仅当近5日内版本分布偏度发生显著变化时（视为结构性转变事件），加载该股票过去60日的偏度Zscore仓位，其余时间空仓或保持中性；此策略专注于捕捉版本更新行为发生趋势转折的窗口期，避免在分布形态稳定时期承担无效风险。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(winsorize(vec_skewness(vec_filter(anl85_version, value=\"nan\")), std=4)), 5), ts_zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\"nan\")), std=4), 60), 0)"
+    ]
+}

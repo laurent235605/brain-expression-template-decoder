@@ -1,0 +1,7 @@
+{
+    "template": "ts_percentage(vec_avg({aily_delta_recon_value}), 60)",
+    "idea": "**Concept**: Historical Revision Percentile\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: Percentile position of current revision within the 60-day historical distribution for each instrument\n- **Why This Feature**: Contextualizes today's revision against the instrument's own historical revision pattern. A revision that is normal for one stock may be extreme for another.\n- **is filling nan necessary**: Historical NaNs should be ignored in percentile calculation; current NaN returns NaN.\n- **Directionality**: High values (near 1.0) indicate historically large positive revision; low values (near 0.0) indicate historically large negative revision\n- **Boundary Conditions**: Values > 0.9 or < 0.1 indicate extreme historical revisions; values near 0.5 indicate typical daily noise",
+    "expression_list": [
+        "ts_percentage(vec_avg(ern10_aily_delta_recon_value), 60)"
+    ]
+}

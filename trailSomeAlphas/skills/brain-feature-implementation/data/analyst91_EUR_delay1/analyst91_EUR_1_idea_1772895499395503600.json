@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({exposure_value})",
+    "idea": "**Concept**: Pure Geographic Exposure Signal\n- **Sample Fields Used**: exposure_value\n- **Definition**: The fundamental geographic exposure value stripped of cost uncertainty noise, representing the core revenue diversification signal\n- **Why This Feature**: Isolates the primary information content of the dataset—geographic revenue concentration—without the secondary complexity of cost estimation\n- **Logical Meaning**: Raw exposure to specific markets; the essential building block for diversification analysis and regional risk assessment\n- **is filling nan necessary**: NaN values represent missing exposure data, distinct from zero exposure. Do not fill with zeros. Use ts_backfill(10) only if the gap is clearly temporary; otherwise preserve NaN to avoid false diversification signals.\n- **Directionality**: Higher values indicate greater concentration in the measured region; lower values indicate limited presence\n- **Boundary Conditions**: Bounded [0, 1] for percentage exposure; values >1 indicate leverage or data scaling issues",
+    "expression_list": [
+        "vec_avg(anl91_exposure_value)"
+    ]
+}

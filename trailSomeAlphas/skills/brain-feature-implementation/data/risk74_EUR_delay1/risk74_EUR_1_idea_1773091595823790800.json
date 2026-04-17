@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), add(group_mean(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0)",
+    "idea": "融合输入2的双因子解释变量结构，将中美价差同时对“行业内市值加权平均价差”和“总体非本土敞口”进行回归，剥离行业趋势和全球化水平双重影响，获得经双重提纯的区域配置Alpha。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), add(group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0)",
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), add(group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0)"
+    ]
+}

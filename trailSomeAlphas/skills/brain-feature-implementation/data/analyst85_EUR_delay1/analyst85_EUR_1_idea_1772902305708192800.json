@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(ts_decay_exp_window(winsorize(ts_backfill(vec_avg({version}), 126), std=4), 20, factor=0.1), 3), sector)",
+    "idea": "行业中性平滑版本动量。先进行126日回填确保数据连续性，去极值后做20日指数衰减，再通过3日线性衰减（ts_decay_linear）进一步平滑以降低换手率，最后进行行业组内归一化（group_normalize）控制行业暴露。适用于构建低换手、行业中性且可持续交易的版本趋势跟踪策略。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(ts_decay_exp_window(winsorize(ts_backfill(vec_avg(anl85_version), 126), std=4), 20, factor=0.1), 3), sector)"
+    ]
+}

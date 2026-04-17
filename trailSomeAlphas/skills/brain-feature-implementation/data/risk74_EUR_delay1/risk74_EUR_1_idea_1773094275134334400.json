@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(group_normalize(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry),252)",
+    "idea": "先进行行业内归一化（group_normalize使每个行业内部多空平衡），再计算该标准化值在过去252天中的时序分位（ts_rank），确保信号纯粹反映行业内相对极端性而非行业间水平差异。",
+    "expression_list": [
+        "ts_rank(group_normalize(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry),252)",
+        "ts_rank(group_normalize(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry),252)"
+    ]
+}

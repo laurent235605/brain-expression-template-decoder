@@ -1,0 +1,18 @@
+[
+    "(vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)",
+    "days_from_last_change(ern10_elta_run_timestamp)",
+    "if_else(ern10_elta_period_year == ern10_aily_delta_recon_period_year, 1.0, 0.0)",
+    "rank(vec_avg(ern10_aily_delta_recon_value))",
+    "ts_av_diff(vec_avg(ern10_aily_delta_recon_value), 20)",
+    "ts_delta(vec_avg(ern10_elta_value), 5)",
+    "ts_mean(abs(vec_avg(ern10_aily_delta_recon_value)), 20)",
+    "ts_percentage(vec_avg(ern10_aily_delta_recon_value), 60)",
+    "ts_sum(signed_power(vec_avg(ern10_aily_delta_recon_value), 2), 20)",
+    "ts_sum(vec_avg(ern10_aily_delta_recon_value), 10)",
+    "ts_sum(vec_avg(ern10_aily_delta_recon_value), 20)",
+    "vec_avg(ern10_aily_delta_recon_value)",
+    "vec_avg(ern10_aily_delta_recon_value) / (abs(vec_avg(ern10_elta_value)) + 0.01)",
+    "vec_avg(ern10_elta_value)",
+    "vec_avg(ern10_elta_value) * sign(vec_avg(ern10_aily_delta_recon_value))",
+    "vec_stddev(ern10_elta_value)"
+]

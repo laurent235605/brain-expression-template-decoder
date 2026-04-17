@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_normalize(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), add(1, trade_when(greater(bucket(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), range='0,1,0.2'), 0.8), 0.5, trade_when(less(bucket(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), range='0,1,0.2'), 0.2), -0.4, 0))))",
+    "idea": "分桶阈值非对称增强：将分析师修正按行业分位数划分为五档，仅对前20%强烈上修给予+50%正向放大，对后20%强烈下修给予-40%负向惩罚，中段视为噪音不予调整，实现非对称的动量增强结构。",
+    "expression_list": [
+        "multiply(group_normalize(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, trade_when(greater(bucket(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), range='0,1,0.2'), 0.8), 0.5, trade_when(less(bucket(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), range='0,1,0.2'), 0.2), -0.4, 0))))",
+        "multiply(group_normalize(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, trade_when(greater(bucket(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), range='0,1,0.2'), 0.8), 0.5, trade_when(less(bucket(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), range='0,1,0.2'), 0.2), -0.4, 0))))"
+    ]
+}

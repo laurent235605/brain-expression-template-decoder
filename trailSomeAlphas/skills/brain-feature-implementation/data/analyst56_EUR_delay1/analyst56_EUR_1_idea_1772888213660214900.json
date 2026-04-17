@@ -1,0 +1,9 @@
+{
+    "template": "quantile(vec_avg({probability}), driver=\"gaussian\", sigma=1.0)",
+    "idea": "**Concept**: Cross-Sectional Conviction Percentile\n- **Sample Fields Used**: `probability`, `conviction_probability_score`\n- **Definition**: Daily percentile rank of conviction across all active ideas, normalized to Gaussian distribution\n- **Why This Feature**: Raw probability scores vary by broker calibration; relative ranking identifies the \"best ideas\" within the current opportunity set\n- **is filling nan necessary**: NaN values represent missing data and should be excluded from ranking (handled automatically by quantile operator).\n- **Directionality**: High values = top-decile conviction (relative strength); Low values = weak relative conviction\n- **Boundary Conditions**: Single instrument days return 0.5 (neutral); handle ties via average rank",
+    "expression_list": [
+        "quantile(vec_avg(anl56_daily_probability), driver=\"gaussian\", sigma=1.0)",
+        "quantile(vec_avg(anl56_probability), driver=\"gaussian\", sigma=1.0)",
+        "quantile(vec_avg(conviction_probability_score), driver=\"gaussian\", sigma=1.0)"
+    ]
+}

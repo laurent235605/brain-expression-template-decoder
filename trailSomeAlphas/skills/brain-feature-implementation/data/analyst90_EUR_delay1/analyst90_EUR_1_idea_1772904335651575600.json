@@ -1,0 +1,7 @@
+{
+    "template": "ls_clean = winsorize(vec_avg(ts_backfill({likelihood_score}, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill({exit_price}, 63)), vec_avg(ts_backfill({openprice}, 63))), std=4)\nls_mean = ts_mean(ls_clean, 30)\nret_mean = ts_mean(ret_clean, 30)\ndivergence = subtract(ls_clean, multiply(ls_mean, divide(ret_clean, ret_mean)))\ndiv_tail = quantile(winsorize(divergence, std=4), driver=\"gaussian\")\ncore = ts_decay_linear(div_tail, 5)",
+    "idea": "尾部风险强调与平滑模板：使用分位数变换（quantile）将分歧度映射至高斯分布，将中间区间的噪音压缩至零附近，同时拉伸极端尾部（极大或极小分歧），以强调校准错误严重的标的。随后应用线性衰减（ts_decay_linear）降低换手率，捕捉持续性的定价偏差而非单日噪音。",
+    "expression_list": [
+        "ls_clean = winsorize(vec_avg(ts_backfill(success_likelihood_score, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill(expected_exit_price, 63)), vec_avg(ts_backfill(anl90_openprice, 63))), std=4)\nls_mean = ts_mean(ls_clean, 30)\nret_mean = ts_mean(ret_clean, 30)\ndivergence = subtract(ls_clean, multiply(ls_mean, divide(ret_clean, ret_mean)))\ndiv_tail = quantile(winsorize(divergence, std=4), driver=\"gaussian\")\ncore = ts_decay_linear(div_tail, 5)"
+    ]
+}

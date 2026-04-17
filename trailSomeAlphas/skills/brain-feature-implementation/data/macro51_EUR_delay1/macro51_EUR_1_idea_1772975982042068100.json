@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( ts_regression( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), group_mean( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), sector ), 252, rettype=0 ), sector )",
+    "idea": "特质性流动性溢价残差（Idiosyncratic Residual）。通过252日时序回归剥离行业系统性流动性贝塔（以行业等权均值为市场代理变量），取残差项并进行行业Z-score标准化。该信号剔除了行业层面流动性冲击（如板块轮动导致的全行业溢价同步上升）的干扰，更纯粹地捕捉由个股特有风险驱动的流动性错配，实现真正的行业中性化逆向布局。",
+    "expression_list": [
+        "group_zscore( ts_regression( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), group_mean( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), sector ), 252, rettype=0 ), sector )"
+    ]
+}

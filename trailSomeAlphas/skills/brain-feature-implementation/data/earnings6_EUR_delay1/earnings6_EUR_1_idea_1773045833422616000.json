@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( less( days_from_last_change( vec_avg({actual_eps}) ), 5 ), hump_decay( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), hump=0.02 ), 0 )",
+    "idea": "事件驱动衰减模型。利用days_from_last_change检测实际EPS的更新时点（财报发布），仅在新事件发生后的5个交易日内通过hump_decay维持信号强度，其余时间通过trade_when置零，避免陈旧数据干扰，专注捕捉“新鲜惊喜”的短期价格反应。",
+    "expression_list": [
+        "trade_when( less( days_from_last_change( vec_avg(ern6_actual_eps) ), 5 ), hump_decay( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), hump=0.02 ), 0 )",
+        "trade_when( less( days_from_last_change( vec_avg(ern6_actual_eps_274) ), 5 ), hump_decay( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), hump=0.02 ), 0 )"
+    ]
+}

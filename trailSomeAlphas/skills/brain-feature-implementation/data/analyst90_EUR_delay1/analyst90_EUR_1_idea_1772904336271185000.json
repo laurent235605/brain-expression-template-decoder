@@ -1,0 +1,7 @@
+{
+    "template": "ls_clean = winsorize(vec_avg(ts_backfill({likelihood_score}, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill({exit_price}, 63)), vec_avg(ts_backfill({openprice}, 63))), std=4)\ndiv_short = subtract(ls_clean, multiply(ts_mean(ls_clean, 10), divide(ret_clean, ts_mean(ret_clean, 10))))\ndiv_long = subtract(ls_clean, multiply(ts_mean(ls_clean, 30), divide(ret_clean, ts_mean(ret_clean, 30))))\ndiv_momentum = subtract(div_short, div_long)\ncore = zscore(winsorize(div_momentum, std=4))",
+    "idea": "多时间尺度动量分歧模板：分别计算10日（短期）与30日（长期）的概率-价格分歧度，通过两者之差（div_short - div_long）捕捉分歧度的变化加速度（动量）。当短期分歧显著大于长期分歧时，表明分析师信心与价格隐含收益的背离正在快速扩大，可能预示更大的定价修正压力。",
+    "expression_list": [
+        "ls_clean = winsorize(vec_avg(ts_backfill(success_likelihood_score, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill(expected_exit_price, 63)), vec_avg(ts_backfill(anl90_openprice, 63))), std=4)\ndiv_short = subtract(ls_clean, multiply(ts_mean(ls_clean, 10), divide(ret_clean, ts_mean(ret_clean, 10))))\ndiv_long = subtract(ls_clean, multiply(ts_mean(ls_clean, 30), divide(ret_clean, ts_mean(ret_clean, 30))))\ndiv_momentum = subtract(div_short, div_long)\ncore = zscore(winsorize(div_momentum, std=4))"
+    ]
+}

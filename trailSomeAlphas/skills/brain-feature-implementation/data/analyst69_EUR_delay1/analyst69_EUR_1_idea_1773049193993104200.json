@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(trade_when(less(ts_count_nans({eps_best_eeps_cur_yr}, 20), 5), multiply(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), add(1, multiply(0.3, winsorize(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), std=2)))), 0), industry)",
+    "idea": "数据质量门控保守增强：通过ts_count_nans过滤近20日内缺失超过5天的低质量标的，仅对数据完整股票应用行业中性后的修正放大，并以group_normalize强制每个行业多空平衡(零净暴露)，适合严格风险控制场景下的基本面增强。",
+    "expression_list": [
+        "group_normalize(trade_when(less(ts_count_nans(anl69_eps_best_eeps_cur_yr, 20), 5), multiply(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.3, winsorize(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), std=2)))), 0), industry)",
+        "group_normalize(trade_when(less(ts_count_nans(anl69_aeps_best_eeps_cur_yr, 20), 5), multiply(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.3, winsorize(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), std=2)))), 0), industry)"
+    ]
+}

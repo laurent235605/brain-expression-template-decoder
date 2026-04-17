@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(right_tail(rank(ts_sum({cfroidrs}, 10)), minimum=0.8), subtract({cfroichg}, ts_delay({cfroichg}, 5)), 0)",
+    "idea": "高累积分桶加速度择时：利用right_tail(rank(...), 0.8)筛选出Input 2累积漂移处于全市场前20%的股票(右尾极端组)，仅在该高置信度分桶内交易Input 1的加速度信号，其余区间持仓为0(NaN)。这是一种激进的‘双极端确认’结构，要求中期趋势(累积)与短期加速度同时处于极端强势才参与，显著降低交易频率但提高单次押注强度。",
+    "expression_list": [
+        "trade_when(right_tail(rank(ts_sum(mdl172_cfroidrs, 10)), minimum=0.8), subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5)), 0)"
+    ]
+}

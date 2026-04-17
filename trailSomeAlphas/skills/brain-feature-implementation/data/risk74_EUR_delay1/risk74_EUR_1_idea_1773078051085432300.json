@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(ts_regression(ts_sum(ts_delta({exp_usa},1),15),ts_step(),5,rettype=2),std=4),industry), 5)",
+    "idea": "将输入2的加速度计算逻辑（15日累积变化+5日回归斜率）迁移至美股敞口字段，检测敞口变化的二阶导（加速度），经行业中性化后使用输入1的5日线性衰减平滑，捕捉敞口趋势的极端拐点。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_raw_exp_usa,1),15),ts_step(),5,rettype=2),std=4),industry), 5)"
+    ]
+}

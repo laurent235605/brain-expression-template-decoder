@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), 252)",
+    "idea": "历史极端分位时序过滤：计算当前20日累积流相对个股自身历史252日分布的时序zscore，识别突破历史常态（如2倍标准差）的异常资金异动，避免静态阈值在不同个股间的不可比性",
+    "expression_list": [
+        "ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 252)"
+    ]
+}

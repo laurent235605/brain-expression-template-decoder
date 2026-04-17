@@ -1,0 +1,5 @@
+{
+    "template": "ts_regression(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20), ts_decay_linear(group_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), log(ts_mean({cap}, 21)), industry), 20), 252, rettype=0)",
+    "idea": "构建报告日期变更因子的市场/行业纯化版本，以行业市值加权平均事件暴露作为系统性风险因子（解释变量），通过252日滚动回归提取特异性残差（rettype=0）。该方法剔除行业整体财报季迁移或系统性报告延迟的Beta影响，仅保留个体公司层面的特殊不确定性信息作为最终Alpha来源，实现真正的事件特异性定价。",
+    "expression_list": []
+}

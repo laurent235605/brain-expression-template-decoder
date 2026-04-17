@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry)",
+    "idea": "借鉴模板1的126日平滑与行业标准化结构，将vec_range替换为vec_stddev以衡量会计年度日期的波动性而非极差，更能反映公司 fiscal year end 持续不稳定的特征，适用于识别报告周期不规律的风险标的。",
+    "expression_list": [
+        "group_zscore(ts_mean(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry)"
+    ]
+}

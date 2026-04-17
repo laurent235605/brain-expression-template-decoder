@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(bucket(rank(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4)), \"0,1,0.1\"), 0.8), 1.0, trade_when(less(bucket(rank(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4)), \"0,1,0.1\"), 0.2), -1.0, 0)), 5)",
+    "idea": "将输入1的极端分桶与换手率控制逻辑迁移至输入2的空头加速度信号，识别空头压力极端加速（前10%）或极端减速（后10%）的拐点，经5日线性衰减平滑后构建纯多纯空信号，专注于个股特质性的极端趋势变化。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(bucket(rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4)), \"0,1,0.1\"), 0.8), 1.0, trade_when(less(bucket(rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4)), \"0,1,0.1\"), 0.2), -1.0, 0)), 5)",
+        "ts_decay_linear(trade_when(greater(bucket(rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4)), \"0,1,0.1\"), 0.8), 1.0, trade_when(less(bucket(rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4)), \"0,1,0.1\"), 0.2), -1.0, 0)), 5)"
+    ]
+}

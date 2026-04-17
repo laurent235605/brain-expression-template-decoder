@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(multiply(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), signed_power(group_zscore(winsorize(ts_backfill({concentration},63),std=4), industry), 2)), industry)",
+    "idea": "交互输入1的空头历史极端异动与输入2的地理集中度行业相对值，并对集中度施加非线性放大，捕捉空头历史罕见累积与地理集中风险的双重叠加，经行业中性化归一化控制行业暴露。",
+    "expression_list": [
+        "group_normalize(multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2)), industry)",
+        "group_normalize(multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2)), industry)",
+        "group_normalize(multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2)), industry)",
+        "group_normalize(multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2)), industry)"
+    ]
+}

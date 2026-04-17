@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(vec_avg({version})), 10), multiply(ts_decay_exp_window(vec_avg(ts_backfill({version}, 63)), 20, factor=0.1), signed_power(group_rank(vec_avg({version}), industry), 2)), 0)",
+    "idea": "事件驱动的版本更新放大器。仅在版本数据近期发生变动（days_from_last_change < 10）时触发交易条件，将指数衰减后的版本均值与行业内排名的平方(signed_power)相乘以非线性放大极端活跃股票的信号权重，无近期更新时强制归零，有效控制换手率并聚焦事件冲击。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(vec_avg(anl85_version)), 10), multiply(ts_decay_exp_window(vec_avg(ts_backfill(anl85_version, 63)), 20, factor=0.1), signed_power(group_rank(vec_avg(anl85_version), industry), 2)), 0)"
+    ]
+}

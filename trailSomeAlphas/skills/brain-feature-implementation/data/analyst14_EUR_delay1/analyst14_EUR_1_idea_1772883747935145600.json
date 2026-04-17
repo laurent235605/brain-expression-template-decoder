@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({mean_revenue_fp1}, 5)",
+    "idea": "**Concept**: Estimate Revision Momentum\n- **Sample Fields Used**: mean_revenue_fp1\n- **Definition**: The rate of change in consensus estimates over recent trading days, capturing analyst optimism/pessimism trends\n- **Why This Feature**: Analysts revise estimates based on new information; aggregating these revisions captures emerging fundamental trends before they appear in actuals. Positive momentum often precedes price appreciation.\n- **Logical Meaning**: Measures the direction and velocity of changing expectations. Accelerating upward revisions suggest improving business conditions; deceleration suggests peak growth.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Positive values indicate upgrading estimates (bullish momentum); negative values indicate downgrades (bearish momentum)\n- **Boundary Conditions**: Extreme values during earnings announcement windows when analysts batch-update models",
+    "expression_list": [
+        "ts_delta(anl14_mean_revenue_fp1, 5)"
+    ]
+}

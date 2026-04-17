@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_delta(ts_regression(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4), 126, rettype=0), 20))",
+    "idea": "关注相对活跃度的时间序列变化而非绝对水平。先通过126日回归得到规模调整后的残差（代表相对活跃度），计算其20日变化量(ts_delta)以捕捉基金交易强度的动量或反转信号。标准化后得到'活跃度改善'因子，适用于发现正在改变策略（从保守转向激进或反之）的基金。",
+    "expression_list": [
+        "zscore(ts_delta(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 126, rettype=0), 20))"
+    ]
+}

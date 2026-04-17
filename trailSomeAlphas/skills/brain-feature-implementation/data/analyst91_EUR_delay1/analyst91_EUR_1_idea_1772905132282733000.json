@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), group_mean(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), log(ts_mean(cap, 21)), sector), 252, rettype=0)",
+    "idea": "以市值加权行业平均地理波动率期限利差为解释变量，对个股期限利差进行252日时序回归，提取残差项作为alpha信号。该方法剥离了由行业周期或宏观地域冲击驱动的系统性波动，仅保留公司特定战略（如跨国并购、业务剥离）驱动的异质性地域转型信号，实现更纯粹的特殊风险暴露。",
+    "expression_list": [
+        "ts_regression(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), group_mean(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), log(ts_mean(cap, 21)), sector), 252, rettype=0)"
+    ]
+}

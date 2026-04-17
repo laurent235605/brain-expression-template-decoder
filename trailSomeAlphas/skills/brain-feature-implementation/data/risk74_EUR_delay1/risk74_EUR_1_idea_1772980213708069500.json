@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(group_zscore(ts_sum(ts_delta({shortint}, 1), 15), sector), 252)",
+    "idea": "先将15日空头持仓累积变化在行业层面中性化（消除不同行业固有做空比例差异），再计算该行业相对指标在过去252个交易日中的时序Z-score，识别全市场维度下相对于自身历史极端的空头押注累积或异常回补信号。",
+    "expression_list": [
+        "ts_zscore(group_zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15), sector), 252)",
+        "ts_zscore(group_zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), sector), 252)"
+    ]
+}

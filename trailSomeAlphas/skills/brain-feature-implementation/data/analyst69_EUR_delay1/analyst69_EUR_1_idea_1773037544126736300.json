@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(add(multiply(0.6, divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5))), multiply(0.4, divide(ts_delta(ts_backfill({ebitda_best_eeps_cur_yr}, 20), 5), ts_delay(ts_backfill({ebitda_best_eeps_cur_yr}, 20), 5)))), 5)",
+    "idea": "构建加权复合因子（60% EPS速度+40% EBITDA速度），针对两者不同的数据稀疏性采用差异化回溯填充窗口（10日vs20日，对应模板提示的稀疏处理建议）。应用5日线性衰减（ts_decay_linear）降低换手，相比原始delta信号能显著平滑权重变化，在保持信息含量的同时提升交易实现性。",
+    "expression_list": [
+        "ts_decay_linear(add(multiply(0.6, divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5))), multiply(0.4, divide(ts_delta(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5)))), 5)",
+        "ts_decay_linear(add(multiply(0.6, divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5))), multiply(0.4, divide(ts_delta(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5)))), 5)"
+    ]
+}

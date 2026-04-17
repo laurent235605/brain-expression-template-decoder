@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(group_rank(ts_decay_linear(winsorize(ts_backfill({exp_usa}, 21), std=4), 10), industry), multiply(1.5, group_rank(ts_decay_linear(winsorize(ts_backfill({exp_chn}, 21), std=4), 10), industry))), industry)",
+    "idea": "非对称双轴型（Asymmetric Dual-Rank）：对美国敞口与中国敞口分别进行行业内的时序平滑（ts_decay_linear, 10天）后独立排序，并赋予中国敞口1.5倍非对称权重以强化“低中国敞口”的惩罚力度。该结构突破了简单减法的线性假设，允许在极端地缘政治环境下对中国敞口进行非线性风险定价，同时维持行业中性。",
+    "expression_list": [
+        "group_zscore(subtract(group_rank(ts_decay_linear(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 10), industry), multiply(1.5, group_rank(ts_decay_linear(winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4), 10), industry))), industry)"
+    ]
+}

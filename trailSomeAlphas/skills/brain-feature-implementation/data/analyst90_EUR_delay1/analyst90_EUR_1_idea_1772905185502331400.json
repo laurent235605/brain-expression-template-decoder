@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20)), 60)",
+    "idea": "将输入1的信噪比构造逻辑与输入2的60日长期窗口结合，对风险调整后的分析师信心度进行时序排名，识别当前信号质量处于历史极端分位的标的，增强对持续性高质量信号的捕捉。",
+    "expression_list": [
+        "ts_rank(vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20)), 60)"
+    ]
+}

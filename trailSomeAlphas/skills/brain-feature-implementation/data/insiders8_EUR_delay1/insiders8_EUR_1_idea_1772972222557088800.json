@@ -1,0 +1,7 @@
+{
+    "template": "raw = winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4); gauss = quantile(raw, driver=\"gaussian\"); upper = right_tail(gauss, 1.0); lower = left_tail(gauss, -1.0); combined = add(upper, lower); sec_neutral = group_zscore(combined, sector); final = trade_when(not(is_nan(sec_neutral)), signed_power(sec_neutral, 1.2), 0)",
+    "idea": "分布变换与极端尾隔离：先将原始差异映射至高斯分布（拉伸尾部、压缩中部），随后利用right_tail/left_tail硬截断仅保留±1标准差之外的极端尾（中间视为无信息NaN），实现“硬边界”降噪。对隔离后的极端值再进行1.2次幂微调放大，最后通过trade_when确保中间区间零暴露，构建纯尾端多空组合。",
+    "expression_list": [
+        "raw = winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4); gauss = quantile(raw, driver=\"gaussian\"); upper = right_tail(gauss, 1.0); lower = left_tail(gauss, -1.0); combined = add(upper, lower); sec_neutral = group_zscore(combined, sector); final = trade_when(not(is_nan(sec_neutral)), signed_power(sec_neutral, 1.2), 0)"
+    ]
+}

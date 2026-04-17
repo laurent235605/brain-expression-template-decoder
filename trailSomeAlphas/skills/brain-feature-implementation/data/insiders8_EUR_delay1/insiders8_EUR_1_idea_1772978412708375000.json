@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(add(multiply(0.7, ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)), multiply(0.3, ts_delta(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20))), sector)",
+    "idea": "构建相关性动量复合因子：将当前 60 日相关性水平（70% 权重）与过去 20 日的相关性变化率（30% 权重）相加，既惩罚正在恶化的稳定性（delta 为负），又奖励正在改善的协同持仓；该设计融合了“水平”与“趋势”双重信息，能够提前捕捉所有权结构由分散走向集中（或由集中走向分散）的拐点，最后在行业内标准化以确保可比性。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.7, ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)), multiply(0.3, ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20))), sector)",
+        "group_zscore(add(multiply(0.7, ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)), multiply(0.3, ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20))), sector)",
+        "group_zscore(add(multiply(0.7, ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)), multiply(0.3, ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20))), sector)",
+        "group_zscore(add(multiply(0.7, ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)), multiply(0.3, ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20))), sector)"
+    ]
+}

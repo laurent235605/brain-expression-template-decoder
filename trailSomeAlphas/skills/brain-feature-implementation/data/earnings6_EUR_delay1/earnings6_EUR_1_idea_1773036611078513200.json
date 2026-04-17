@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(less(ts_zscore(vec_avg({x_dividend}), 252), 3), divide(vec_avg({x_dividend}), add(ts_median(ts_backfill(vec_avg({x_dividend}), 63), 252), 0.001)), ts_mean(vec_avg({x_dividend}), 252))",
+    "idea": "使用trade_when构建条件逻辑：当股息水平在历史252日zscore小于3（排除极端特殊股息）时，计算当期股息与历史median的稳健比率；对于极端异常值（特殊分红），则使用历史均值作为替代值。该方法通过显式过滤右尾极值，避免一次性大额分红对持续性因子的虚假贡献。",
+    "expression_list": [
+        "trade_when(less(ts_zscore(vec_avg(ern6_x_dividend), 252), 3), divide(vec_avg(ern6_x_dividend), add(ts_median(ts_backfill(vec_avg(ern6_x_dividend), 63), 252), 0.001)), ts_mean(vec_avg(ern6_x_dividend), 252))",
+        "trade_when(less(ts_zscore(vec_avg(ern6_x_dividend_233), 252), 3), divide(vec_avg(ern6_x_dividend_233), add(ts_median(ts_backfill(vec_avg(ern6_x_dividend_233), 63), 252), 0.001)), ts_mean(vec_avg(ern6_x_dividend_233), 252))",
+        "trade_when(less(ts_zscore(vec_avg(ern6_x_dividend_oc), 252), 3), divide(vec_avg(ern6_x_dividend_oc), add(ts_median(ts_backfill(vec_avg(ern6_x_dividend_oc), 63), 252), 0.001)), ts_mean(vec_avg(ern6_x_dividend_oc), 252))",
+        "trade_when(less(ts_zscore(vec_avg(ern6_x_dividend_oc_235), 252), 3), divide(vec_avg(ern6_x_dividend_oc_235), add(ts_median(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 63), 252), 0.001)), ts_mean(vec_avg(ern6_x_dividend_oc_235), 252))"
+    ]
+}

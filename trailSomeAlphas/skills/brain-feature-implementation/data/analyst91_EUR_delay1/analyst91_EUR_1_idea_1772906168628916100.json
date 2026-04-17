@@ -1,0 +1,7 @@
+{
+    "template": "truncate(signed_power(ts_regression(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), group_mean(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 252, rettype=0), 3), maxPercent=0.02)",
+    "idea": "剥离行业系统性波动影响，将个股业务暴露波动率对行业平均波动率做252日时序回归(ts_regression)，取残差作为特质性业务不稳定度，经winsorize与signed_power立方变换后，用truncate限制个股权重上限。",
+    "expression_list": [
+        "truncate(signed_power(ts_regression(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), group_mean(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 252, rettype=0), 3), maxPercent=0.02)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(if_else(greater(ts_decay_linear(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 10), 0.7), 1, if_else(less(ts_decay_linear(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 10), 0.3), -1, 0)), industry)",
+    "idea": "结合模板2的盈利预期相关性计算与模板1的三态离散逻辑，并引入时间序列衰减平滑(ts_decay_linear)。通过对60日相关性进行10日线性衰减加权，降低短期噪音后，再对平滑值应用极端阈值判断（>0.7为稳定，<0.3为断裂），提高信号稳健性。",
+    "expression_list": [
+        "group_normalize(if_else(greater(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 10), 0.7), 1, if_else(less(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 10), 0.3), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 10), 0.7), 1, if_else(less(ts_decay_linear(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 10), 0.3), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 10), 0.7), 1, if_else(less(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 10), 0.3), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 10), 0.7), 1, if_else(less(ts_decay_linear(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 10), 0.3), -1, 0)), industry)"
+    ]
+}

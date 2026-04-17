@@ -1,0 +1,14 @@
+{
+    "template": "divide(multiply({sedol_cg3ysales}, {sedol_cg3yroic}), {sedol_pe_wt})",
+    "idea": "**Concept**: GARP Efficiency Ratio\n- **Sample Fields Used**: {sedol_cg3ysales}, {sedol_pe_wt}, {sedol_cg3yroic}, {sedol_mpg}\n- **Definition**: 3-year geometric growth rate (sales and ROIC) normalized by time-weighted forward P/E to measure growth generation efficiency per unit of valuation paid\n- **Why This Feature**: Pure growth or pure value misses the intersection; this combines both in a single efficiency metric similar to PEG but with fundamental growth drivers\n- **Logical Meaning**: Higher ratios indicate \"cheaper\" growth (more growth per P/E unit); lower ratios indicate expensive growth or value traps with declining fundamentals\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values predict outperformance in growth-rotation regimes; very low values predict multiple compression\n- **Boundary Conditions**: Negative earnings or growth rates create sign flips; requires winsorization at extremes",
+    "expression_list": [
+        "divide(multiply(fnd65_allcap_sedol_cg3ysales, fnd65_allcap_sedol_cg3yroic), fnd65_allcap_sedol_pe_wt)",
+        "divide(multiply(fnd65_allcap_sedol_cg3ysales, fnd65_allcap_sedol_cg3yroic), fnd65_dev_sedol_pe_wt)",
+        "divide(multiply(fnd65_allcap_sedol_cg3ysales, fnd65_dev_sedol_cg3yroic), fnd65_allcap_sedol_pe_wt)",
+        "divide(multiply(fnd65_allcap_sedol_cg3ysales, fnd65_dev_sedol_cg3yroic), fnd65_dev_sedol_pe_wt)",
+        "divide(multiply(fnd65_dev_sedol_cg3ysales, fnd65_dev_sedol_cg3yroic), fnd65_dev_sedol_pe_wt)",
+        "divide(multiply(fnd65_dev_sedol_cg3ysales, fnd65_dev_sedol_cg3yroic), fnd65_allcap_sedol_pe_wt)",
+        "divide(multiply(fnd65_dev_sedol_cg3ysales, fnd65_allcap_sedol_cg3yroic), fnd65_dev_sedol_pe_wt)",
+        "divide(multiply(fnd65_dev_sedol_cg3ysales, fnd65_allcap_sedol_cg3yroic), fnd65_allcap_sedol_pe_wt)"
+    ]
+}

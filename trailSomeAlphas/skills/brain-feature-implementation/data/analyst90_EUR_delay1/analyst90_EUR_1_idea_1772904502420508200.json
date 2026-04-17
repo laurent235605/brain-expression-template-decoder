@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_std_dev(vec_ir({likelihood_score}), 60), 5)",
+    "idea": "信息比率稳定性动量：计算likelihood向量信息比率（均值/标准差）的60日滚动波动率，并应用5日线性衰减加权。低波动代表分析师预测信号的质量持续稳定且可靠，高波动则暗示预测能力的不确定性与模型校准风险，通过平滑降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(ts_std_dev(vec_ir(success_likelihood_score), 60), 5)"
+    ]
+}

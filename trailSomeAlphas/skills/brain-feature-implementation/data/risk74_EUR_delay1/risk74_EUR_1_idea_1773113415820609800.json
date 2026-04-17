@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), 60)), 2), ts_zscore(group_zscore({hfown_pctown}, sector), 252), 0)",
+    "idea": "结合模板2的资金流强度与模板1的持仓极端度，引入条件交易（trade_when）：仅当近期（60日）累计资金流出现统计显著异动（绝对值>2标准差）时，才暴露持仓的历史极端偏离信号，避免在资金流动平淡时期持有基于历史极值的均值回归仓位。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 60)), 2), ts_zscore(group_zscore(rsk74_hfown_pctown, sector), 252), 0)"
+    ]
+}

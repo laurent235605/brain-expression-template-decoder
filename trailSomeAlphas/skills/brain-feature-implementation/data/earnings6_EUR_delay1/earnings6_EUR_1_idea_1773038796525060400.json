@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), ts_zscore(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 252), 0)",
+    "idea": "时序Z-Score异常检测：在盈余数据有效的前提下，计算股息持续性指标在过去252天的时序Z-Score，识别自身历史分布中的极端分红行为，而非仅截面比较。",
+    "expression_list": [
+        "trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), ts_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 252), 0)",
+        "trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), ts_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 252), 0)",
+        "trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), ts_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 252), 0)",
+        "trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), ts_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 252), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), sector), driver=\"gaussian\")",
+    "idea": "组内中性化尾端强化偏度加速：在行业层面计算偏度一阶差分的Z-score以剔除行业系统风险，再通过高斯分位数映射将中间区间压缩至零附近、极端值拉伸，仅保留显著的偏度结构转变信号，避免行业间偏度水平差异的干扰。",
+    "expression_list": [
+        "quantile(group_zscore(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63), sector), driver=\"gaussian\")"
+    ]
+}

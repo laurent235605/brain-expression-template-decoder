@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(abs(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 5)), 252), driver=\"cauchy\")",
+    "idea": "分布与窗口双重变异：融合Template1的分布映射框架与Template2的差分逻辑，将1日差分扩展为5日累积变更幅度检测，并使用柯西分布（比高斯分布具有更厚尾部）替代高斯映射。对报告日期的任何方向变更（abs绝对值）进行极度强调，捕捉极端变更事件。",
+    "expression_list": [
+        "quantile(ts_rank(abs(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 5)), 252), driver=\"cauchy\")",
+        "quantile(ts_rank(abs(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 5)), 252), driver=\"cauchy\")"
+    ]
+}

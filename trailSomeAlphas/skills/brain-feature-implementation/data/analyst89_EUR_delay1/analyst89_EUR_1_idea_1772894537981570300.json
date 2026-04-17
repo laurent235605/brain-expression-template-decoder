@@ -1,0 +1,7 @@
+{
+    "template": "ts_entropy(vec_avg({fiscal_period_end}), 63)",
+    "idea": "**Concept**: Fiscal Period Concentration\n- **Sample Fields Used**: fiscal_period_end\n- **Definition**: Information entropy of fiscal period end distribution over a lookback window, measuring how concentrated or dispersed reporting dates are\n- **Why This Feature**: Companies with off-calendar fiscal years (e.g., retail ending January) exhibit different seasonality; high concentration in specific months may indicate industry clustering or tax-driven fiscal year selection\n- **Logical Meaning**: Distribution pattern of fiscal year-ends; indicates whether reporting is clustered in specific calendar periods or uniformly distributed\n- **is filling nan necessary**: Yes, entropy calculation requires complete observation set; filter invalid dates\n- **Directionality**: Low entropy indicates concentrated fiscal year-ends (industry clustering); high entropy indicates dispersed reporting (diverse fiscal calendars)\n- **Boundary Conditions**: 0 indicates all observations share the same fiscal month-end; maximum entropy indicates uniform distribution across all 12 months",
+    "expression_list": [
+        "ts_entropy(vec_avg(anl89_fiscal_period_end), 63)"
+    ]
+}

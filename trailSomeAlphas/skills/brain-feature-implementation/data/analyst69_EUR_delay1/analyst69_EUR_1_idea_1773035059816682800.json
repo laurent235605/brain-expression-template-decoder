@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(days_from_last_change({eps_expected_report_dt}), 90), 1, if_else(less(days_from_last_change({eps_expected_report_dt}), 5), -1, 0)), industry)",
+    "idea": "采用双阈值逻辑区分三种状态：极度稳定（>90天）赋权+1，近期变更（<5天）赋权-1，中间状态视为噪音赋权0。通过行业归一化（group_normalize）确保每个行业内部多空平衡，避免行业配置偏差。该模板适用于仅对极端确定性和极端不确定性进行下注的场景。",
+    "expression_list": [
+        "group_normalize(if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), -1, 0)), industry)",
+        "group_normalize(if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_eps_expected_report_dt), 5), -1, 0)), industry)"
+    ]
+}

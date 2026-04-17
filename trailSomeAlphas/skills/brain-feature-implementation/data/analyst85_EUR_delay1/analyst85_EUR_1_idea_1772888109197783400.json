@@ -1,0 +1,7 @@
+{
+    "template": "ts_backfill(vec_avg({version}), 5, k=1)",
+    "idea": "**Concept**: Version Constancy Score\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Backfilled version values to maintain last known recommendation state, measuring how long ideas persist without revision\n- **Why This Feature**: Captures the duration since last update, distinguishing between actively maintained ideas and forgotten legacy recommendations\n- **is filling nan necessary**: Yes, use `ts_backfill` with limited lookback (5 days) to handle temporary data transmission gaps, but preserve NaNs for withdrawn ideas by checking `is_nan` flags\n- **Directionality**: Higher backfilled values (older versions persisting) indicate stale recommendations; fresh values indicate current active research\n- **Boundary Conditions**: Maximum lookback values indicate potentially stale or abandoned ideas; zero indicates very recent updates",
+    "expression_list": [
+        "ts_backfill(vec_avg(anl85_version), 5, k=1)"
+    ]
+}

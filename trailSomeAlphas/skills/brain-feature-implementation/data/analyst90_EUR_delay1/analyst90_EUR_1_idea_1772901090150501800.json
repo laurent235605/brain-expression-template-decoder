@@ -1,0 +1,7 @@
+{
+    "template": "if_else(less(rank(ts_std_dev(vec_avg({likelihood_score}), 60)), 0.3), zscore(vec_avg({likelihood_score})), multiply(zscore(vec_avg({likelihood_score})), 0.3))",
+    "idea": "双区间一致性加权：根据 likelihood 稳定性进行分层处理。仅对一致性排名前30%（低波动）的股票给予完整 likelihood 权重，其余股票权重压缩至30%。实现\"只有稳定预测才重配\"的风险控制逻辑。",
+    "expression_list": [
+        "if_else(less(rank(ts_std_dev(vec_avg(success_likelihood_score), 60)), 0.3), zscore(vec_avg(success_likelihood_score)), multiply(zscore(vec_avg(success_likelihood_score)), 0.3))"
+    ]
+}

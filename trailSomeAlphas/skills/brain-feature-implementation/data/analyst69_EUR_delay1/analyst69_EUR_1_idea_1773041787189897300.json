@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), std=4), industry)",
+    "idea": "计算EPS/EBITDA比率的5日变化（捕捉分析师对税率、利息成本预期的边际调整），并进行行业中性化。该信号反映公司盈利结构相对于同业的边际变化，识别财务杠杆或运营效率的拐点。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), std=4), industry)",
+        "group_zscore(winsorize(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), std=4), industry)"
+    ]
+}

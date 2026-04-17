@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_mean(winsorize(ts_backfill({exp_usa}, 21), std=4), 20), ts_mean(winsorize(ts_backfill({exp_chn}, 21), std=4), 20)), industry)",
+    "idea": "基于模板1的地理价差结构引入时序平滑处理：使用等权移动平均(ts_mean, 20日)替代瞬时敞口值，显著降低策略换手率(相比线性衰减更优)，同时保持行业中性(group_zscore)，适合作为稳健的基础配置信号。",
+    "expression_list": [
+        "group_zscore(subtract(ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 20), ts_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4), 20)), industry)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(group_zscore(subtract(ts_sum(ts_delta(multiply({crowding}, {hfown_pctown}),1),20), ts_sum(ts_delta(multiply({value_ts}, {fund_pct_ownership_encr}),1),20)), sector), std=3)",
+    "idea": "激进重组四个原始字段：将拥挤度与对冲基金持仓变化相乘、价值与共同基金持仓变化相乘，分别计算20日累积变化后求差值，在行业层面标准化并截尾，捕捉不同机构类型对两类因子的非对称影响（如对冲基金偏好高拥挤度，共同基金偏好低价值）。",
+    "expression_list": [
+        "winsorize(group_zscore(subtract(ts_sum(ts_delta(multiply(liquidity_factor_crowding, rsk74_hfown_pctown),1),20), ts_sum(ts_delta(multiply(rsk74_value_ts, hedge_fund_pct_ownership_encr),1),20)), sector), std=3)",
+        "winsorize(group_zscore(subtract(ts_sum(ts_delta(multiply(liquidity_timeseries_crowding, rsk74_hfown_pctown),1),20), ts_sum(ts_delta(multiply(rsk74_value_ts, hedge_fund_pct_ownership_encr),1),20)), sector), std=3)",
+        "winsorize(group_zscore(subtract(ts_sum(ts_delta(multiply(rsk74_crowding, rsk74_hfown_pctown),1),20), ts_sum(ts_delta(multiply(rsk74_value_ts, hedge_fund_pct_ownership_encr),1),20)), sector), std=3)",
+        "winsorize(group_zscore(subtract(ts_sum(ts_delta(multiply(rsk74_raw_crowding, rsk74_hfown_pctown),1),20), ts_sum(ts_delta(multiply(rsk74_value_ts, hedge_fund_pct_ownership_encr),1),20)), sector), std=3)"
+    ]
+}

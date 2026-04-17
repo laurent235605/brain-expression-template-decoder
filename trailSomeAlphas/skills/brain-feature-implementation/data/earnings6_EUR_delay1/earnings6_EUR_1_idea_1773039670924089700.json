@@ -1,0 +1,8 @@
+{
+    "template": "subtract(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), ts_mean(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 252))",
+    "idea": "应用CAPM残差模板逻辑到时序维度：计算当前EPS惊喜相对其252日历史均值的偏离（残差），剔除市场-wide的盈利预期系统性偏差，专注于特异性质的盈利超预期成分，捕捉真正的alpha来源。",
+    "expression_list": [
+        "subtract(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), ts_mean(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 252))",
+        "subtract(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), ts_mean(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 252))"
+    ]
+}

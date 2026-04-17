@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(add(multiply(0.6, zscore(vec_skewness({version}))), multiply(0.4, zscore(vec_kurtosis({version})))), industry)",
+    "idea": "偏度-峰度复合分布形态因子：结合版本分布的偏度（不对称性）和峰度（尾部厚度，vec_kurtosis），构建加权复合因子（60%偏度+40%峰度），先分别标准化(zscore)再相加，并在行业内归一化(group_normalize)。该模板全面刻画分析师预测版本的分布特征：高偏度高峰度表示少数分析师持有极端新/旧观点且分布极不对称，往往预示共识即将破裂或强化。",
+    "expression_list": [
+        "group_normalize(add(multiply(0.6, zscore(vec_skewness(anl85_version))), multiply(0.4, zscore(vec_kurtosis(anl85_version)))), industry)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),5),group_mean(ts_sum(ts_delta({shortint},1),5),log(ts_mean({shortint},21)),industry),21,rettype=0),std=4),63),ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252))",
+    "idea": "对比短期（5日窗口，21日回归）与中期（15日窗口，63日回归）行业中性空头残差的时序Z-score差异，识别空头压力'近期加速恶化/缓解'相对于中期趋势的背离信号。",
+    "expression_list": [
+        "subtract(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),5),group_mean(ts_sum(ts_delta(rsk74_shortint,1),5),log(ts_mean(rsk74_shortint,21)),industry),21,rettype=0),std=4),63),ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252))",
+        "subtract(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),5),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),5),log(ts_mean(rsk74_shortint_ts,21)),industry),21,rettype=0),std=4),63),ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252))"
+    ]
+}

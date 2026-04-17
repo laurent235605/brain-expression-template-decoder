@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(abs(ts_delta(ts_regression(vec_avg({version}), group_mean(vec_avg({version}), log(ts_mean(cap,21)), industry), 63, rettype=0), 1)), 20)",
+    "idea": "采用类CAPM残差剥离逻辑：先将个股版本序列对行业市值加权平均版本序列做63日滚动回归，提取特质性版本残差（剔除行业轮动带来的系统性修订噪音），再计算该残差20日累积绝对变化。该模板专注捕捉公司特异性信息冲击强度，避免行业事件驱动的伪信号。",
+    "expression_list": [
+        "ts_sum(abs(ts_delta(ts_regression(vec_avg(anl85_version), group_mean(vec_avg(anl85_version), log(ts_mean(cap,21)), industry), 63, rettype=0), 1)), 20)"
+    ]
+}

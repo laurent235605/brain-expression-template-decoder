@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector)), 2), signed_power(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 2), 0)",
+    "idea": "仅当行业中性化的波动率利差绝对值超过2个标准差（极端重组或极端稳定）时才参与交易，并应用平方非线性增强；中间区间视为噪音直接置零。实现\"中间地带无信号，极端两极重仓\"的均衡配置。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector)), 2), signed_power(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 2), 0)"
+    ]
+}

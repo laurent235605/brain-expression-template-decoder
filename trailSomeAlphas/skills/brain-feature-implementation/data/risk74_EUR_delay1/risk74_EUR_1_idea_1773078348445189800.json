@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_zscore(multiply(winsorize({hfown_pctown}, std=4), s_log_1p(winsorize({fund_num_owners_encr}, std=4))), {sector}), 10)",
+    "idea": "基金共识度加权平滑因子：将持仓比例与持有基金数量（经对数变换s_log_1p和去极值）相乘构建\"共识强度\"指标（高持仓+高基金数=强共识），进行板块中性化（group_zscore）后，使用线性衰减移动平均（ts_decay_linear, d=10）降低换手率并维持信号持续性。用于识别板块内机构真正抱团或分散试水的行为，避免单日数据噪音。",
+    "expression_list": []
+}

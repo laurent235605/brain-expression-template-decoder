@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 1.5), less(ts_count_nans({eps_expected_report_dt}, 20), 5)), multiply(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), group_scale(abs(last_diff_value({eps_expected_report_dt}, 60)), industry)), 0)",
+    "idea": "设置双重条件触发机制：仅当20日平滑稳定性显著偏离252日常态（Z>1.5）且近20日数据缺失少于5天（数据质量过滤）时开仓；此时引入过去60日报告日期上次变动的绝对幅度（last_diff_value）经行业标准化（group_scale）后作为权重乘数，对历史上曾发生大幅日程调整的个股赋予更高置信度，实现信号强度与事件幅度的非线性耦合。",
+    "expression_list": [
+        "trade_when(and(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 1.5), less(ts_count_nans(anl69_aeps_expected_report_dt, 20), 5)), multiply(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), group_scale(abs(last_diff_value(anl69_aeps_expected_report_dt, 60)), industry)), 0)",
+        "trade_when(and(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 1.5), less(ts_count_nans(anl69_eps_expected_report_dt, 20), 5)), multiply(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), group_scale(abs(last_diff_value(anl69_eps_expected_report_dt, 60)), industry)), 0)"
+    ]
+}

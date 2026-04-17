@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut({prc_book}, add({grow_fy5}, {epsgrow5}))",
+    "idea": "**Concept**: Pure Value Essence\n- **Sample Fields Used**: prc_book, grow_fy5, epsgrow5, vc_ratio\n- **Definition**: Valuation metric purified of growth expectations, isolating the \"asset value\" component independent of future growth optionality\n- **Why This Feature**: Separates Graham-style net asset value from growth-option value, identifying true deep value vs. growth-at-reasonable-price\n- **Logical Meaning**: Low values indicate asset-backed value with low growth expectations (cigar butts); high values indicate growth-dominated valuation\n- **is filling nan necessary**: No, vc_ratio (value-to-cost?) may already incorporate this; preserve NaN for failed calculations.\n- **Directionality**: Low = deep value; High = growth/quality premium\n- **Boundary Conditions**: Near-zero indicates liquidation value; >5 indicates franchise value dominance",
+    "expression_list": [
+        "vector_neut(mdl172_prc_book, add(mdl172_grow_fy5, mdl172_epsgrow5))"
+    ]
+}

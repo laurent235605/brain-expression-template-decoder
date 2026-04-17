@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(rank(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4)), 0.9), less(rank(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4)), 0.1)), group_normalize(quantile(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4), driver=\"gaussian\"), industry), 0)",
+    "idea": "极端尾部高斯隔离配对策略。仅选取美国敞口在全市场前10%（纯海外暴露）与后10%（纯国内防御）的标的，通过高斯分位数拉伸极端值并在行业内归一化，构造零行业偏差的地理纯多头与纯空头配对信号，中段噪音置零。",
+    "expression_list": [
+        "trade_when(or(greater(rank(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4)), 0.9), less(rank(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4)), 0.1)), group_normalize(quantile(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), driver=\"gaussian\"), industry), 0)"
+    ]
+}

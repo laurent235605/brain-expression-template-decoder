@@ -1,0 +1,8 @@
+{
+    "template": "add( group_zscore( vec_avg({adjustedgrossamt}), industry ), multiply( 0.5, ts_zscore( ts_delta( vec_avg({adjustedgrossamt}), 126 ), 252 ) ) )",
+    "idea": "多维度股息复合信号：结合截面水平（当前股息金额的行业相对位置）与时序趋势（半年期股息增长率）的加权组合。水平项确保基础收益质量，趋势项捕捉股息提升动能，0.5权重防止短期波动过度主导。该结构平衡了价值型与动量型投资者的需求，构建更鲁棒的股息质量评分。",
+    "expression_list": [
+        "add( group_zscore( vec_avg(anl30_adjustedgrossamt), industry ), multiply( 0.5, ts_zscore( ts_delta( vec_avg(anl30_adjustedgrossamt), 126 ), 252 ) ) )",
+        "add( group_zscore( vec_avg(anl30_unadjustedgrossamt), industry ), multiply( 0.5, ts_zscore( ts_delta( vec_avg(anl30_unadjustedgrossamt), 126 ), 252 ) ) )"
+    ]
+}

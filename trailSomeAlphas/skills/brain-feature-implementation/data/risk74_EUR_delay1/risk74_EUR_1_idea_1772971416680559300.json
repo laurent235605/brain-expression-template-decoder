@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(abs({concentration} - ts_mean({concentration}, 60)) * {factor_crowding}, sector)",
+    "idea": "行业内均衡配置的地理风险-因子拥挤乘积：计算地理集中度变化的绝对幅度与因子层面拥挤度的乘积，并在行业内归一化权重（group_normalize），确保每个行业的地理-拥挤风险暴露净值为零，纯做多空行业内相对差异。",
+    "expression_list": [
+        "group_normalize(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)) * liquidity_factor_crowding, sector)",
+        "group_normalize(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)) * liquidity_factor_crowding, sector)"
+    ]
+}

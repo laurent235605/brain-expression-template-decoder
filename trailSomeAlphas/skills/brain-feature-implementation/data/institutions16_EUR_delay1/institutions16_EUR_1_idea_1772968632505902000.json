@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), 10)",
+    "idea": "先计算20日移动平均的权益配置残差（ts_mean）以平滑短期报告噪音或调仓波动，经行业内标准化后，再应用10日线性衰减加权（ts_decay_linear）。该模板旨在捕捉\"持续且稳定\"的权益配置趋势，而非单日跳跃，同时通过衰减控制降低组合换手率，适合作为低频配置信号。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), 10)"
+    ]
+}

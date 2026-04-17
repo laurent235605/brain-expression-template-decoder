@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(group_rank(ts_sum(ts_delta({shortint},1),15),industry),0.8),ts_decay_linear(ts_sum(ts_delta({shortint},1),15),3),if_else(less(group_rank(ts_sum(ts_delta({shortint},1),15),industry),0.2),ts_decay_linear(ts_sum(ts_delta({shortint},1),15),3),ts_mean(ts_sum(ts_delta({shortint},1),15),10)))",
+    "idea": "对行业排名前20%（极端高空头）和后20%（极端低空头）的股票应用3日快速衰减（强调即时性），对中间60%应用10日简单平均（平滑噪音），融合分组逻辑与时序平滑参数差异化，在保持行业中性关注的同时优化不同区间的信号响应速度。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_sum(ts_delta(rsk74_shortint,1),15),industry),0.8),ts_decay_linear(ts_sum(ts_delta(rsk74_shortint,1),15),3),if_else(less(group_rank(ts_sum(ts_delta(rsk74_shortint,1),15),industry),0.2),ts_decay_linear(ts_sum(ts_delta(rsk74_shortint,1),15),3),ts_mean(ts_sum(ts_delta(rsk74_shortint,1),15),10)))",
+        "if_else(greater(group_rank(ts_sum(ts_delta(rsk74_shortint_ts,1),15),industry),0.8),ts_decay_linear(ts_sum(ts_delta(rsk74_shortint_ts,1),15),3),if_else(less(group_rank(ts_sum(ts_delta(rsk74_shortint_ts,1),15),industry),0.2),ts_decay_linear(ts_sum(ts_delta(rsk74_shortint_ts,1),15),3),ts_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),10)))"
+    ]
+}

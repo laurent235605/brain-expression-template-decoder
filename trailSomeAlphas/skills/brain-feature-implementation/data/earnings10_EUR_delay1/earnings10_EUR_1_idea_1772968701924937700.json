@@ -1,0 +1,7 @@
+{
+    "template": "multiply(quantile(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "将模板1的高斯分位数映射直接应用于原始时序分位数（不经平滑），并与模板2的新鲜度衰减因子相乘，使当前处于历史极端分位的信号随信息年龄增长而线性递减，构建非对称的时间衰减结构，更敏感地反应最新出现的极端修正。",
+    "expression_list": [
+        "multiply(quantile(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

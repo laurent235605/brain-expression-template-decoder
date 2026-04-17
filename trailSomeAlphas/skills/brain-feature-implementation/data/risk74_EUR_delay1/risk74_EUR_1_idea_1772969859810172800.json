@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_decay_exp_window(days_from_last_change({exp_usa}), 10), ts_delta({hfown_pctown}, 5))",
+    "idea": "**交叉增强：地理暴露事件驱动 × HF即时反应**\n利用days_from_last_change捕捉模板1中地理暴露数据的最近更新（如季度报告中美国收入占比突变），经指数衰减窗口（半衰期10日）构造事件时间衰减函数；与模板2的原始HF流速相乘。该模板假设地理结构的实质性调整（如新增美国大客户）会立即反映在HF的持仓变化中，通过时间衰减确保只在事件后短期内交易，避免过时信号。",
+    "expression_list": [
+        "multiply(ts_decay_exp_window(days_from_last_change(rsk74_raw_exp_usa), 10), ts_delta(rsk74_hfown_pctown, 5))"
+    ]
+}

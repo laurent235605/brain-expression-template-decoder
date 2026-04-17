@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_decay_linear(add(multiply(0.6, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), multiply(0.3, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 10), industry)), multiply(0.1, group_zscore(ts_delta(ts_delta({eps_best_eeps_cur_yr}, 5), 5), industry))), 3), driver=gaussian)",
+    "idea": "多时间尺度修正动量复合策略，融合5日变化（60%权重）、10日变化（30%权重）及5日变化的变化即加速度（10%权重），经行业标准化后通过3日线性衰减平滑，既捕捉持续盈利预期调整又降低短期噪声，最终进行高斯分位转换。",
+    "expression_list": [
+        "quantile(ts_decay_linear(add(multiply(0.6, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), multiply(0.3, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 10), industry)), multiply(0.1, group_zscore(ts_delta(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 5), industry))), 3), driver=gaussian)",
+        "quantile(ts_decay_linear(add(multiply(0.6, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), multiply(0.3, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 10), industry)), multiply(0.1, group_zscore(ts_delta(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 5), industry))), 3), driver=gaussian)"
+    ]
+}

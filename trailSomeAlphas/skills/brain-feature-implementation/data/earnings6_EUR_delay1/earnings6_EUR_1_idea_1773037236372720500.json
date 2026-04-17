@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(multiply(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20), greater(subtract(20, days_from_last_change(vec_avg({actual_eps}))), 0)), industry)",
+    "idea": "事件时间 freshness 衰减加权。结合盈利惊喜幅度与事件新鲜度，使用days_from_last_change检测最近一次实际EPS发布日期，构建20日内线性递减的时间权重（超过20天权重归零），确保策略聚焦于刚发布业绩且超预期的PEAD（Post-Earnings-Announcement Drift）窗口期，最后行业归一化。",
+    "expression_list": [
+        "group_normalize(multiply(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), greater(subtract(20, days_from_last_change(vec_avg(ern6_actual_eps))), 0)), industry)",
+        "group_normalize(multiply(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), greater(subtract(20, days_from_last_change(vec_avg(ern6_actual_eps_274))), 0)), industry)"
+    ]
+}

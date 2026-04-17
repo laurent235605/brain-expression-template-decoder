@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev({fundreportedequityassets} / {reported_asset_value}, 20)",
+    "idea": "**Concept**: Equity Allocation Stability Coefficient\n- **Sample Fields Used**: `fundreportedequityassets`, `reported_asset_value`\n- **Definition**: Time-series standard deviation of the ratio of equity assets to total fund assets over a 20-day window\n- **Why This Feature**: Stable allocation ratios indicate investment conviction and adherence to strategic asset allocation, while high volatility suggests market timing attempts or forced liquidations\n- **Logical Meaning**: Measures consistency of risk exposure; stable values indicate buy-and-hold philosophy, unstable values suggest active tactical allocation or liquidity stress\n- **is filling nan necessary**: Yes, use `ts_backfill()` for missing daily values if disclosure is quarterly, but limit backfill to 90 days to avoid stale data bias. NaNs in asset values often represent non-disclosure periods rather than zero values, requiring backfill rather than zero-fill.\n- **Directionality**: Low values indicate stability (consistent strategic allocation), high values indicate instability (tactical shifts or distress)\n- **Boundary Conditions**: Zero indicates perfect stability (rare); extremely high values suggest new fund launch or liquidation events",
+    "expression_list": [
+        "ts_std_dev(inst16_ipreo_fundreportedequityassets / fund_reported_asset_value, 20)"
+    ]
+}

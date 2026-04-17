@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), s_log_1p(winsorize(ts_backfill({reported_asset_value},63),std=4)), 252, rettype=0)), y=2)",
+    "idea": "**稳健参数化中性化与尾部强化**：首先对两个字段进行63日回溯填充（ts_backfill）以处理缺失值，并使用4倍标准差缩尾（winsorize）消除极端异常值。考虑到基金规模（reported_asset_value）与换手率之间通常呈非线性对数关系，对规模取s_log_1p变换后，进行252日滚动回归提取残差（rettype=0），剥离规模因素。最后对残差进行截面zscore标准化，并使用signed_power(y=2)非线性放大极端值，显著区分异常活跃与异常被动的基金，同时保持方向性。",
+    "expression_list": [
+        "signed_power(zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), s_log_1p(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 252, rettype=0)), y=2)"
+    ]
+}

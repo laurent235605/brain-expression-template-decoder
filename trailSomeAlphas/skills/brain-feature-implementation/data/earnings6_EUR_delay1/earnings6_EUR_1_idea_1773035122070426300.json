@@ -1,0 +1,14 @@
+{
+    "template": "multiply(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), signed_power(ts_delta(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 21), 0.5))",
+    "idea": "双信号协同增强：将行业中性化EPS惊喜与股息趋势的21日变化相乘，使用signed_power(..., 0.5)对股息变化进行非线性压缩（保留方向但降低极端值影响）。该构造实现\"盈利超预期且股息改善\"的叠加效应，两者同向时信号增强，背离时相互制衡，形成更稳健的基本面质量筛选。",
+    "expression_list": [
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 21), 0.5))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), signed_power(ts_delta(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 21), 0.5))"
+    ]
+}

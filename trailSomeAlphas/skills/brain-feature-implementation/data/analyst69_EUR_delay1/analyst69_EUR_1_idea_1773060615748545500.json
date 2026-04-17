@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), industry), 2)",
+    "idea": "将模板2的跨期相关性在行业内部进行zscore标准化（引入模板1的行业相对概念），并使用signed_power非线性放大极端偏离值（无论正负），压缩中间区间。该结构强调'与同业显著不同的盈利预期结构'，突出行业内的一致性异常者。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), industry), 2)",
+        "signed_power(group_zscore(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), industry), 2)",
+        "signed_power(group_zscore(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), industry), 2)",
+        "signed_power(group_zscore(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), industry), 2)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_stddev({exposure_value}), 63), std=4), 20), industry), 2), group_zscore(ts_delta(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry))",
+    "idea": "融合业务结构分布的离散程度(vec_stddev计算的波动率)与平均水平的变化趋势(vec_avg的20日变化量)，先分别进行行业标准化与尾部放大，再通过截面乘积构造'高波动+高变化'的强化信号；旨在识别业务结构正在发生剧烈且不稳定变迁的标的，兼具质量因子的稳定性筛选与动量因子的变化捕捉双重特征。",
+    "expression_list": [
+        "multiply(signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_stddev(anl91_exposure_value), 63), std=4), 20), industry), 2), group_zscore(ts_delta(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry))"
+    ]
+}

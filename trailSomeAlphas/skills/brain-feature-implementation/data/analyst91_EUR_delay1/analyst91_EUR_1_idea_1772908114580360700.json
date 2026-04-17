@@ -1,0 +1,7 @@
+{
+    "template": "scale(hump(ts_rank(group_rank(ts_std_dev(vec_avg(winsorize(ts_backfill({exposure_value}, 63), std=4)), 20), industry), 252), hump=0.02), longscale=1.0, shortscale=1.0)",
+    "idea": "实施双重排序策略：先计算暴露波动率在 industry 内的截面分位（group_rank），再计算该分位在过去一年（252日）的时序分位（ts_rank），以识别当前波动率同时处于同业极端水平和自身历史极端水平的股票；通过 hump 算子（0.02阈值）过滤日间微小波动以降低换手率；最终使用 scale 控制整体多空敞口，实现可执行的风险平价组合。",
+    "expression_list": [
+        "scale(hump(ts_rank(group_rank(ts_std_dev(vec_avg(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 20), industry), 252), hump=0.02), longscale=1.0, shortscale=1.0)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(group_zscore(ts_delta(ts_decay_linear({eps_best_eeps_cur_yr}, 20), 5), industry), industry)",
+    "idea": "融合模板2的时序平滑算子与模板1的行业中性化框架。先对原始EPS进行20日线性衰减平均（赋予近期数据更高权重），再计算5日变化率以降噪，最后进行行业组内ZScore标准化与归一化。此结构既保留了模板2对近期趋势的敏感性，又通过模板1的group逻辑确保信号在行业内部可比，适用于捕捉跨行业的相对盈利动量。",
+    "expression_list": [
+        "group_normalize(group_zscore(ts_delta(ts_decay_linear(anl69_aeps_best_eeps_cur_yr, 20), 5), industry), industry)",
+        "group_normalize(group_zscore(ts_delta(ts_decay_linear(anl69_eps_best_eeps_cur_yr, 20), 5), industry), industry)"
+    ]
+}

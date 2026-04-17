@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(winsorize(ts_backfill({factor_e},63) + ts_backfill({factor_s},63) + ts_backfill({factor_g},63), 4), sector), 1.5)",
+    "idea": "融合ESG三要素非线性组合与行业相对偏离思路：先对ESG各分量做时序回填处理缺失值，相加后通过winsorize去除极端脏点，再进行行业中性化(zscore)；最后使用signed_power放大尾部，突出行业内的ESG领导者与落后者，同时保持方向一致性。这种结构既保留了ESG数据清洗的必要性，又引入了对冲基金持仓信号中的行业相对偏离逻辑。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(ts_backfill(rsk74_factor_e,63) + ts_backfill(rsk74_factor_s,63) + ts_backfill(rsk74_factor_g,63), 4), sector), 1.5)",
+        "signed_power(group_zscore(winsorize(ts_backfill(rsk74_factor_esg,63) + ts_backfill(rsk74_factor_s,63) + ts_backfill(rsk74_factor_g,63), 4), sector), 1.5)"
+    ]
+}

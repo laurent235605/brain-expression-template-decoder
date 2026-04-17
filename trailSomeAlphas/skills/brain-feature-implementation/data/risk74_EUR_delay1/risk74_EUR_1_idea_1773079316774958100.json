@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_decay_linear(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), ts_mean(winsorize(ts_delta({hfown_pctown}, 1), std=4), 60))",
+    "idea": "将模板1的'趋势偏离'逻辑应用于模板2的机构持仓数据，用线性衰减移动平均(ts_decay_linear)替代简单累计以更快捕捉持仓趋势变化，并与60日长期趋势比较识别战略调仓。结合模板2的winsorize处理防止单日极端交易数据干扰，形成对持仓动量的稳健估计。",
+    "expression_list": [
+        "subtract(ts_decay_linear(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), ts_mean(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 60))"
+    ]
+}

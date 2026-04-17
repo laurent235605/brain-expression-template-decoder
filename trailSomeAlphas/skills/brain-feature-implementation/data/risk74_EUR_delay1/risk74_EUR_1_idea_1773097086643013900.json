@@ -1,0 +1,14 @@
+{
+    "template": "multiply(group_zscore(ts_delta(winsorize({concentration},std=4), 20), industry), right_tail(trade_when(less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), 0), minimum=0.5))",
+    "idea": "右尾极端验证加权：使用right_tail算子截取验证得分较高的样本（>0.5），将其作为权重与模板2的集中度变化量行业Z分数相乘，仅保留数据质量极高的海外敞口动量信号，剔除边际模糊样本。",
+    "expression_list": [
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0), minimum=0.5))",
+        "multiply(group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), right_tail(trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0), minimum=0.5))"
+    ]
+}

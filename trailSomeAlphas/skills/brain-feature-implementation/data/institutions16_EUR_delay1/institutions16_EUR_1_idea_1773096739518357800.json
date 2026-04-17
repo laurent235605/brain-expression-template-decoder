@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_regression(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), ts_step(), 20, rettype=2), industry), 3)",
+    "idea": "将风险调整后的暴露指标视为时间序列，通过20日线性回归斜率捕捉基金持续增配或减配权益资产的趋势动量，而非仅使用静态截面值；最终经3日线性衰减平滑信号，降低突发波动带来的换手，专注配置行为的持续性alpha。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_regression(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), ts_step(), 20, rettype=2), industry), 3)"
+    ]
+}

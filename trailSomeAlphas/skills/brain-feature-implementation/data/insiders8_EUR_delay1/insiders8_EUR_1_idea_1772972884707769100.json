@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(winsorize(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), std=3), industry)",
+    "idea": "对收益-权重偏离进行3倍标准差极值截尾后做行业内分位数排序，剔除数据错误与极端噪音，获取稳健的行业内相对配置错配排序。",
+    "expression_list": [
+        "group_rank(winsorize(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), std=3), industry)"
+    ]
+}

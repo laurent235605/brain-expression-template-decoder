@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), 60) * quantile(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), driver='gaussian')",
+    "idea": "**概念**: 高斯映射结构权重调制\n将所有权结构相关性通过高斯分位数映射拉伸尾部分布（中间压缩，两极放大），作为乘数因子作用于Z-score标准化的内幕持仓稳定性。这种非线性增强使得在极端结构状态下（无论极稳定或极不稳定），内幕信念信号被放大，而模糊中段被抑制。",
+    "expression_list": [
+        "ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60) * quantile(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), driver='gaussian')",
+        "ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60) * quantile(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), driver='gaussian')",
+        "ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60) * quantile(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), driver='gaussian')",
+        "ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60) * quantile(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), driver='gaussian')"
+    ]
+}

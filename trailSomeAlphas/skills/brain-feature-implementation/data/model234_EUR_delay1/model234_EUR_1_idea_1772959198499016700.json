@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(ts_rank(log({volume}), 63), 0.8), signed_power(group_zscore(log({volume}), {industry}), 1.5), multiply(0.3, group_zscore(log({volume}), {industry})))",
+    "idea": "条件性非线性成交量增强与分段仓位控制。仅当成交量处于63日历史前20%分位（高活跃度区间）时，应用1.5次幂对行业标准化后的成交量信号进行尾部放大以强化极端值权重；在成交量处于历史低位（后80%）时则仅保留0.3倍基础权重，实现“强信号重配、弱信号轻配”的非线性仓位分配机制，过滤低成交量区间的噪音干扰。",
+    "expression_list": []
+}

@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(ts_regression(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), ts_step(), 252, rettype=2), 0), group_zscore(ts_regression(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), ts_step(), 252, rettype=2), {industry}), multiply(-1, group_zscore(ts_regression(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), ts_step(), 252, rettype=2), {industry})))",
+    "idea": "集中度动量趋势行业中性（双向非对称）。通过252日回归斜率（rettype=2）识别地域集中度的长期趋势方向：当斜率为正（趋于集中）时，取行业内标准化值作为多头信号；当斜率为负（趋于分散）时，取其负值作为空头信号（multiply(-1, ...)）。将静态的集中度水平转化为动态的\"正在集中\"或\"正在分散\"的过程信号，避免行业固有集中度水平的干扰。",
+    "expression_list": []
+}

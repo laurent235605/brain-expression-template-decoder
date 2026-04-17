@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(ts_decay_linear(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 5), ts_decay_linear(subtract(ts_std_dev(vec_range({exposure_value}), 5), ts_std_dev(vec_range({exposure_value}), 60)), 5)), industry)",
+    "idea": "双维度交互效应（敞口水平×地理跨度）：同时计算vec_avg（平均敞口水平）和vec_range（最大-最小敞口，代表地理覆盖跨度）的期限利差，二者相乘得到交互项。仅当平均敞口波动加剧且地理跨度同时扩大（或同时收缩）时信号显著，捕捉“全面地域战略调整”而非局部微调。最后进行行业中性化，确保信号反映的是公司特定的地域转型强度。",
+    "expression_list": [
+        "group_zscore(multiply(ts_decay_linear(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 5), ts_decay_linear(subtract(ts_std_dev(vec_range(anl91_exposure_value), 5), ts_std_dev(vec_range(anl91_exposure_value), 60)), 5)), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(if_else(greater(abs(ts_zscore(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),60)),2),ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),ts_decay_linear(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),10)),industry)",
+    "idea": "构建自适应时序处理框架：基于60日历史Z-Score识别波动区间，若当前5日动量处于历史极端(abs(z)>2)则采用无衰减原始值以快速反应趋势拐点，若处于正常区间则采用10日线性衰减平滑噪音，最后进行行业中性化，实现“高波动快反应、低波动稳信号”的智能衰减策略。",
+    "expression_list": [
+        "group_zscore(if_else(greater(abs(ts_zscore(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),60)),2),ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),ts_decay_linear(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),10)),industry)"
+    ]
+}

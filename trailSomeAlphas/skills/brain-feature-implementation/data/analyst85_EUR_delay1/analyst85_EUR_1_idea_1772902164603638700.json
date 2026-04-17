@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(ts_sum(abs(ts_delta(vec_avg(ts_backfill({version}, 63)), 1)), 20), std=4))",
+    "idea": "对原始版本向量先进行63日回溯填补（防止缺失导致活动低估），再计算日均版本号，取绝对日变化并累积20日，随后截断4倍标准差极端值（防止单次异常跳转主导），最终标准化为Z分数。该模板提供跨股票可比的稳健修订强度信号，适用于识别市场层面的分析师关注极端偏离。",
+    "expression_list": [
+        "zscore(winsorize(ts_sum(abs(ts_delta(vec_avg(ts_backfill(anl85_version, 63)), 1)), 20), std=4))"
+    ]
+}

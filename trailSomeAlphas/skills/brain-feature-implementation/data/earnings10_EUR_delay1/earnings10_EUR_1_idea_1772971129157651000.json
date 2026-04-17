@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(trade_when(and(greater(abs(ts_delta(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 5)), 0.5), less(days_from_last_change(vec_avg({aily_delta_recon_value})), 5)), multiply(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), hump_decay(subtract(1, divide(days_from_last_change(vec_avg({aily_delta_recon_value})), 5)), hump=0.02)), 0), industry)",
+    "idea": "构建双条件触发机制：结合5日变化量(ts_delta)识别显著变动，并严格限制仅在数据变更后5天内开仓；使用hump_decay函数对衰减过程进行平滑处理，抑制每日微小波动导致的权重 jitter，同时快速归零过期信号；最终通过行业内排名(group_rank)获取相对强弱排序，避免跨行业不可比问题，聚焦行业内相对机会。",
+    "expression_list": [
+        "group_rank(trade_when(and(greater(abs(ts_delta(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 5)), 0.5), less(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 5)), multiply(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), hump_decay(subtract(1, divide(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 5)), hump=0.02)), 0), industry)"
+    ]
+}

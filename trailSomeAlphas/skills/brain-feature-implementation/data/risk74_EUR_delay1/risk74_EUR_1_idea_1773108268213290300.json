@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),2),greater(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry),2)),winsorize(ts_sum(ts_delta({shortint},1),15),std=4),multiply(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),0.3))",
+    "idea": "双重极端条件触发机制：仅当空头变化同时处于自身历史极端（Z>2）和行业极端（组内Z>2）时满仓信号，否则仓位衰减至30%，构建'历史罕见+行业 outliers'双重确认的高置信度激进策略，避免单一维度噪音。",
+    "expression_list": [
+        "trade_when(and(greater(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),2),greater(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry),2)),winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),multiply(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),0.3))",
+        "trade_when(and(greater(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),2),greater(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry),2)),winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),multiply(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),0.3))"
+    ]
+}

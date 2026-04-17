@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(subtract(ts_delta(group_zscore(winsorize(vec_avg({likelihood_score}), std=4), industry), 5), ts_delta(group_zscore(winsorize(vec_avg({likelihood_score}), std=4), industry), 30)), 3)",
+    "idea": "多 horizon 加速检测器：对比短期(5日)与长期(30日)的组内zscore变化差异，识别置信度改善的加速度（短期变化减去长期变化），配合ts_decay_linear(3)对结果进行线性衰减平滑，有效降低换手率的同时捕捉动量加速或减速的拐点信号。",
+    "expression_list": [
+        "ts_decay_linear(subtract(ts_delta(group_zscore(winsorize(vec_avg(success_likelihood_score), std=4), industry), 5), ts_delta(group_zscore(winsorize(vec_avg(success_likelihood_score), std=4), industry), 30)), 3)"
+    ]
+}

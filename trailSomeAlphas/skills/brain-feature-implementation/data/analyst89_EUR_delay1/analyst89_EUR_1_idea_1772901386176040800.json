@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 126), 252)), 2), ts_zscore(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 126), 252), 0)",
+    "idea": "历史分位极端累积：计算126日累积财务指标，并观察其在过去一年(252日)中的历史分位，仅当处于顶部或底部极端分位(|zscore|>2)时保留信号，其余区间视为噪音置零，捕捉极端累积后的动量延续或均值回复机会。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 126), 252)), 2), ts_zscore(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 126), 252), 0)"
+    ]
+}

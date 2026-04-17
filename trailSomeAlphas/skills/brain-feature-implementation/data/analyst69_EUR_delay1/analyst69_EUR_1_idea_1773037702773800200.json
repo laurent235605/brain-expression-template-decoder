@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_delta({eps_best_eeps_cur_yr}, 5), add(1, multiply(0.3, group_zscore(s_log_1p(days_from_last_change({eps_expected_report_dt})), industry))))",
+    "idea": "**稳定性加权修正模型**：融合来源2的短期修正动量(ts_delta)与来源1的财报日期稳定性(days_from_last_change)。利用group_zscore实现行业中性化，s_log_1p压缩极端天数差异，构建\"稳定日期背书下的修正信号\"——财报日程越稳定，分析师修正的可信度权重越高，避免在日程混乱期过度解读预期调整。",
+    "expression_list": [
+        "multiply(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), add(1, multiply(0.3, group_zscore(s_log_1p(days_from_last_change(anl69_aeps_expected_report_dt)), industry))))",
+        "multiply(ts_delta(anl69_eps_best_eeps_cur_yr, 5), add(1, multiply(0.3, group_zscore(s_log_1p(days_from_last_change(anl69_aeps_expected_report_dt)), industry))))",
+        "multiply(ts_delta(anl69_eps_best_eeps_cur_yr, 5), add(1, multiply(0.3, group_zscore(s_log_1p(days_from_last_change(anl69_eps_expected_report_dt)), industry))))",
+        "multiply(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), add(1, multiply(0.3, group_zscore(s_log_1p(days_from_last_change(anl69_eps_expected_report_dt)), industry))))"
+    ]
+}

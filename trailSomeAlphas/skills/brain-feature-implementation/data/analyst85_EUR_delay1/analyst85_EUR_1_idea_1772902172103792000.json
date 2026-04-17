@@ -1,0 +1,7 @@
+{
+    "template": "multiply(zscore(ts_delta(vec_avg({version}), 5)), add(1, multiply(0.5, zscore(ts_delta(vec_count({version}), 5)))))",
+    "idea": "覆盖广度增强动量：主信号为版本均值变化的标准化值，从属信号为分析师数量（vec_count）的变化。通过算术运算将覆盖数量增加作为放大器（1 + 0.5×覆盖变化），实现关注度提升时信号增强的逻辑。",
+    "expression_list": [
+        "multiply(zscore(ts_delta(vec_avg(anl85_version), 5)), add(1, multiply(0.5, zscore(ts_delta(vec_count(anl85_version), 5)))))"
+    ]
+}

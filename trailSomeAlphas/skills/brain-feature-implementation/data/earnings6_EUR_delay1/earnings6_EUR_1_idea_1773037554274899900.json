@@ -1,0 +1,7 @@
+{
+    "template": "quantile( vec_avg({stock_split_ratio_243}), driver=\"gaussian\" )",
+    "idea": "将分布拉伸算子（quantile）应用于模板1，利用高斯驱动将极端分拆事件（正向或反向）映射到分布两端，而压缩中间无事件区域（值为1或NaN）至零附近，增强尾部事件的区分度，适用于仅关注极端资本结构变化的策略。",
+    "expression_list": [
+        "quantile( vec_avg(ern6_stock_split_ratio_243), driver=\"gaussian\" )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4))",
+    "idea": "稳健概率价格偏离度：对原始 divergence 信号进行 winsorize 去极值（4倍标准差截断）和 zscore 标准化，消除极端价格目标或概率评估异常值的影响，增强信号在横截面上的可比性和稳健性。",
+    "expression_list": [
+        "zscore(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4))"
+    ]
+}

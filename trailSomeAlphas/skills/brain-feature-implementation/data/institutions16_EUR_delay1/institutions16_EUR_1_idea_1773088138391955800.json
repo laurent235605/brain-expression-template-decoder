@@ -1,0 +1,7 @@
+{
+    "template": "group_zscale(ts_regression(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), group_mean(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 126, rettype=0), industry)",
+    "idea": "提取行业纯净残差alpha：通过126日时间序列回归，将风险调整后配置对行业同期均值做正交化处理（取残差），剔除行业beta波动影响；再经行业内zscore标准化，专注于挖掘由基金经理个体决策带来的异质性风险调整配置能力，避免行业轮动干扰。",
+    "expression_list": [
+        "group_zscale(ts_regression(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), group_mean(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 126, rettype=0), industry)"
+    ]
+}

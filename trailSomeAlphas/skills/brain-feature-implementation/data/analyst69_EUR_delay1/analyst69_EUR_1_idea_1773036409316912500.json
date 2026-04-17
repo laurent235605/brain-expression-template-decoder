@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 10)",
+    "idea": "对累积修订压力进行时间序列平滑处理。基于63日累积求和捕捉季度级别的持续预期调整趋势，但引入10日线性衰减算子降低信号换手率。相比原始累积版本，此结构赋予近期数据更高权重，缓慢遗忘历史信息，在保留长期趋势稳定性的同时提升对最新变化的响应速度，实现均衡的换手-信号权衡。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 10)",
+        "ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 10)"
+    ]
+}

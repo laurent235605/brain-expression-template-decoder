@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(if_else(greater(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 90), 1, if_else(less(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 5), -1, 0)), 20), industry)",
+    "idea": "将Input 2的双阈值状态识别与Input 1的线性衰减逻辑融合：先通过63日回溯填充确保数据连续性，标记极度稳定(>90天)和近期变更(<5天)状态，经20日线性衰减平滑状态转换噪音，最后进行group_normalize行业归一化确保多空平衡。实现渐进式事件消化与行业中性的结合。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(if_else(greater(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 90), 1, if_else(less(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 5), -1, 0)), 20), industry)",
+        "group_normalize(ts_decay_linear(if_else(greater(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 90), 1, if_else(less(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 5), -1, 0)), 20), industry)"
+    ]
+}

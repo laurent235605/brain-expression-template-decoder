@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), 5), ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 0)",
+    "idea": "结合事件驱动模板：仅当盈利转换效率比率在5日内发生过变动（days_from_last_change<5，视为模型重构事件）时，启用累积修正压力信号；否则仓位置零。此设计捕捉分析师调整财务模型后的短期价格发现窗口，避免在预期稳定期承担无效波动。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 5), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 0)",
+        "trade_when(less(days_from_last_change(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 5), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 0)"
+    ]
+}

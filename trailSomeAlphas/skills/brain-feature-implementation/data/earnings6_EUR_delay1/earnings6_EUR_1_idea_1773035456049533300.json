@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 20 + 10 * abs(vec_avg({stock_split_ratio_243}) - 1))",
+    "idea": "动态半衰期平滑：将模板1的累积EPS通过时序衰减进行平滑，但衰减窗口长度由模板2的拆股偏离度动态决定。核心创新在于：当拆股比率偏离1越多（无论正向或反向），表明资本结构越不稳定，此时缩短记忆窗口（20+10*|deviation|，实际应为减小窗口？注意：ts_decay_linear窗口越大越平滑， turnover越低；这里应理解为窗口大小与|deviation|负相关？不，代码中是20+10*abs，窗口随偏离增大而增大，意味着更长的平滑期以适应结构变化）。实际上，这表示在拆股事件后，使用更长期的平滑来消化一次性调整，避免过度反应。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 20 + 10 * abs(vec_avg(ern6_stock_split_ratio_243) - 1))",
+        "ts_decay_linear(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 20 + 10 * abs(vec_avg(ern6_stock_split_ratio_243) - 1))"
+    ]
+}

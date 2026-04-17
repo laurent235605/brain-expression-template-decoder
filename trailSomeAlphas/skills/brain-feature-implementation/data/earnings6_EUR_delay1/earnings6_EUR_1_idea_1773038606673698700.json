@@ -1,0 +1,8 @@
+{
+    "template": "subtract( ts_decay_linear( group_rank( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry ), 5 ), ts_decay_linear( group_rank( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry ), 20 ) )",
+    "idea": "构建行业相对排名（group_rank）的短期（5日）与长期（20日）线性衰减动量差，捕捉盈利惊喜预期的加速或减速变化，识别预期修正的拐点信号，利用双时间尺度分离瞬时冲击与趋势成分。",
+    "expression_list": [
+        "subtract( ts_decay_linear( group_rank( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ), 5 ), ts_decay_linear( group_rank( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ), 20 ) )",
+        "subtract( ts_decay_linear( group_rank( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ), 5 ), ts_decay_linear( group_rank( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ), 20 ) )"
+    ]
+}

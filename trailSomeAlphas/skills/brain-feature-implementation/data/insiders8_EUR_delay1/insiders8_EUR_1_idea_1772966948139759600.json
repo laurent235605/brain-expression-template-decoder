@@ -1,0 +1,10 @@
+{
+    "template": "trade_when( greater( abs( ts_delta( ts_corr( winsorize( {of_owners_decile_rank_long}, 4 ), winsorize( {owners_decile_rank_long}, 4 ), 60 ), 20 ) ), 0.3 ), ts_zscore( ts_corr( winsorize( {of_owners_decile_rank_long}, 4 ), winsorize( {owners_decile_rank_long}, 4 ), 60 ), 252 ), 0 )",
+    "idea": "持有人结构制度变迁检测（事件驱动型）。仅当20日相关性变化率绝对值超过0.3阈值时（表明有效持有人与总持有人分位秩关系发生显著断裂或修复，可能对应M&A、指数调入调出或机构大额换仓），才输出该股票当前相关性的252日历史zscore作为信号；中间平稳期视为噪音输出0。该模板捕捉ownership结构突变带来的定价扭曲，而非持续暴露于结构稳定状态。",
+    "expression_list": [
+        "trade_when( greater( abs( ts_delta( ts_corr( winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), 60 ), 20 ) ), 0.3 ), ts_zscore( ts_corr( winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), 60 ), 252 ), 0 )",
+        "trade_when( greater( abs( ts_delta( ts_corr( winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), 60 ), 20 ) ), 0.3 ), ts_zscore( ts_corr( winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), 60 ), 252 ), 0 )",
+        "trade_when( greater( abs( ts_delta( ts_corr( winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), 60 ), 20 ) ), 0.3 ), ts_zscore( ts_corr( winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), 60 ), 252 ), 0 )",
+        "trade_when( greater( abs( ts_delta( ts_corr( winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), 60 ), 20 ) ), 0.3 ), ts_zscore( ts_corr( winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), 60 ), 252 ), 0 )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(if_else(greater(group_rank(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), 0.85), multiply(signed_power(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), 1.3), s_log_1p(ts_zscore(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 252))), if_else(less(group_rank(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), 0.15), multiply(signed_power(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), 1.3), s_log_1p(ts_zscore(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 252))), 0)), industry)",
+    "idea": "非对称尾部分段策略：仅对行业分位处于前15%或后15%的标的激活信号，中间段视为噪音置零，对有效尾部使用signed_power适度放大极端偏离，并保持历史分位的对数压缩形态，最终组内归一化确保各行业多空平衡，控制系统性行业暴露。",
+    "expression_list": [
+        "group_normalize(if_else(greater(group_rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), 0.85), multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), 1.3), s_log_1p(ts_zscore(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 252))), if_else(less(group_rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), 0.15), multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), 1.3), s_log_1p(ts_zscore(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 252))), 0)), industry)"
+    ]
+}

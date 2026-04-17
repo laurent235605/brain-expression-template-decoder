@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), sector), 20), 5)",
+    "idea": "计算特质性资产流残差的20日变化率（加速度，ts_delta），捕捉异质性资金关注度边际强化的动态趋势，配合5日半衰期衰减平滑，识别资金行为正处于加速提升阶段的早期 Alpha 机会，较水平值具有更强的预测力。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), sector), 20), 5)"
+    ]
+}

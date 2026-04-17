@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4), 0), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 0)",
+    "idea": "借鉴输入2的非本土敞口控制思想，利用trade_when仅在非本土敞口显著为正（全球化程度高）的公司中应用中美价差策略，剔除纯本土公司噪音，提高信号针对性和稳健性。",
+    "expression_list": [
+        "trade_when(greater(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4), 0), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 0)",
+        "trade_when(greater(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4), 0), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 0)"
+    ]
+}

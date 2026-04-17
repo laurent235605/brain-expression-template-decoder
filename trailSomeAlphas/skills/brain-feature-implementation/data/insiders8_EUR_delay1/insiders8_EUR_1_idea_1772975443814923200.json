@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(greater(ts_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 126), 0.8), signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), multiply(0.3, winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4))), sector)",
+    "idea": "采用条件交易逻辑（trade_when），仅在时间序列排名进入前20%（历史极值区间）时启用模板2的1.5次幂放大，否则仅保留30%的线性信号。这种双重确认机制确保只有在历史极端且当前显著偏离时才重仓，降低中等区间的假信号与换手率。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 126), 0.8), signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), multiply(0.3, winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4))), sector)"
+    ]
+}

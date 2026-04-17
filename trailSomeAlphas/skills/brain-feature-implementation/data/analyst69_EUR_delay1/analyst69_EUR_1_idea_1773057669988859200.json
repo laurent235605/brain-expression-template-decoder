@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(divide(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), add(0.001, group_std_dev(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), industry))), industry), driver=cauchy)",
+    "idea": "采用行业内的信噪比标准化与厚尾分布映射。在原始加速度基础上，除以行业内同期的横截面标准差（group_std_dev），得到经波动率调整的信息比率式信号；使用柯西分布（driver=cauchy）替代高斯分布进行分位转换，赋予极端值更高权重，更有效识别相对于行业 peers 具有统计显著性的预测调整加速行为，降低平庸信号的干扰。",
+    "expression_list": [
+        "quantile(group_zscore(divide(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), add(0.001, group_std_dev(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry))), industry), driver=cauchy)",
+        "quantile(group_zscore(divide(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), add(0.001, group_std_dev(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry))), industry), driver=cauchy)"
+    ]
+}

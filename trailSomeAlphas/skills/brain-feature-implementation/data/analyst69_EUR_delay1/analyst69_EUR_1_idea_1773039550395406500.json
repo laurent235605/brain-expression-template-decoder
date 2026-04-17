@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(ts_mean(winsorize({eps_best_eeps_cur_yr}, std=3), 20), 5)",
+    "idea": "反转模板A与模板B的运算顺序：先对原始盈利预测进行20日平滑与3倍标准差缩尾（模板B的稳定化处理），再计算5日变化（模板A的动量逻辑）。这种'先滤波后差分'的结构能有效识别经过噪音过滤后的预测趋势转向，避免单日数据错误或极端值导致的假突破信号，提升动量信号的稳健性。",
+    "expression_list": [
+        "ts_delta(ts_mean(winsorize(anl69_aeps_best_eeps_cur_yr, std=3), 20), 5)",
+        "ts_delta(ts_mean(winsorize(anl69_eps_best_eeps_cur_yr, std=3), 20), 5)"
+    ]
+}

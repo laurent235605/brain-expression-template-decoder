@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_delta({hfown_pctown}, 5), ts_mean(ts_delta({hfown_pctown}, 5), 20)), sector)",
+    "idea": "行业相对残差动量：计算5日短期流速相对于其20日均线的偏离（即unexpected flow shock），再进行行业中性化。该信号识别的是“突发”的仓位调整（相对于自身近期趋势的突变），而非持续性缓慢加仓，用于捕捉事件驱动型的对冲基金行为。",
+    "expression_list": [
+        "group_zscore(subtract(ts_delta(rsk74_hfown_pctown, 5), ts_mean(ts_delta(rsk74_hfown_pctown, 5), 20)), sector)"
+    ]
+}

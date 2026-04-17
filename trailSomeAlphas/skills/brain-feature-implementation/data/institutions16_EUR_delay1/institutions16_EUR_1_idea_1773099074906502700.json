@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(hump(ts_decay_linear(signed_power(winsorize(ts_delta(ts_backfill({reported_asset_value}, 63), 20) - ts_mean(ts_delta(ts_backfill({reported_asset_value}, 63), 20), 60), 4), 2), 10), 0.01), industry)",
+    "idea": "组内非对称加速因子：对原始资产变化加速度进行行业中性化处理，通过signed_power放大极端值，利用hump控制日间微小波动以降低换手率，适用于捕捉行业内资金流入的异常加速信号，同时抑制噪音。",
+    "expression_list": [
+        "group_zscore(hump(ts_decay_linear(signed_power(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20) - ts_mean(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20), 60), 4), 2), 10), 0.01), industry)"
+    ]
+}

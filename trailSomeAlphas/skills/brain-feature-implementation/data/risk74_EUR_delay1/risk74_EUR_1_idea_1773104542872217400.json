@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(s_log_1p(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), signed_power(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4), 0.5)), 252, rettype=0)), subindustry)",
+    "idea": "对非本土敞口进行幂变换压缩（signed_power, y=0.5）以减小极端值影响，对回归残差应用对称对数压缩（s_log_1p）突出极端偏离，并在子行业层面（subindustry）进行标准化，形成更精细的特质性Alpha。",
+    "expression_list": [
+        "group_zscore(s_log_1p(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), signed_power(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4), 0.5)), 252, rettype=0)), subindustry)",
+        "group_zscore(s_log_1p(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), signed_power(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4), 0.5)), 252, rettype=0)), subindustry)"
+    ]
+}

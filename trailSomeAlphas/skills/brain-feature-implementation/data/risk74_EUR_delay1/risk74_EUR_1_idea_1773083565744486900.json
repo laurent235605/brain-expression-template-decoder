@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(ts_regression(ts_delta(ts_backfill({hfown_pctown}, 63), 1), group_mean(ts_delta(ts_backfill({hfown_pctown}, 63), 1), sector), 60, rettype=0), std=3), 20)",
+    "idea": "**事件窗口残差剥离**: 将个股持仓变动对行业同期平均变动做60日滚动回归，提取残差项（剔除板块贝塔后的特质性流压）；3倍标准差截尾处理异常交易；20日线性衰减捕捉事件后持续60个交易日的资金流入惯性，适用于识别独立于板块趋势的阿尔法机会。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(ts_regression(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), group_mean(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), sector), 60, rettype=0), std=3), 20)"
+    ]
+}

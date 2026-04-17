@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(vec_avg({aily_delta_recon_value}), 20)",
+    "idea": "**衰减加权修订路径**：将模板2的ts_sum替换为ts_decay_linear，给予近期修订值线性递减的更高权重。相比等权累加，此结构对最新分析师调整更敏感，适用于需要快速反应的场景（注意：根据平滑算子指导，此结构换手率显著高于ts_mean）。",
+    "expression_list": [
+        "ts_decay_linear(vec_avg(ern10_aily_delta_recon_value), 20)"
+    ]
+}

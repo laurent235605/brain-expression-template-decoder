@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut(subtract({cfroi_1}, {cfroimk5}), {mark_cap})",
+    "idea": "**Concept**: CFROI Market Relative Advantage\n- **Sample Fields Used**: cfroi_1, cfroimk5, mark_cap\n- **Definition**: Company-specific CFROI relative to market-wide CFROI expectations, adjusted for size (market cap) biases\n- **Why This Feature**: Distinguishes between broad market cyclicality (beta) and company-specific execution (alpha) in cash flow generation\n- **Logical Meaning**: Positive values indicate above-market cash efficiency; negative indicates below-market performance\n- **is filling nan necessary**: No, cfroimk5 represents market aggregate; if missing, relative comparison is invalid.\n- **Directionality**: Positive = superior capital allocation; Negative = capital destroyer relative to market\n- **Boundary Conditions**: Values >5% indicate significant competitive advantage; <-5% indicates structural disadvantage",
+    "expression_list": [
+        "vector_neut(subtract(mdl172_cfroi_1, mdl172_cfroimk5), mdl172_mark_cap)"
+    ]
+}

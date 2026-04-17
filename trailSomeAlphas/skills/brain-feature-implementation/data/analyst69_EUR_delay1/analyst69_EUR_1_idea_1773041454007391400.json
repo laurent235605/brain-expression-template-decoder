@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), industry), add(1, multiply(abs(subtract(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 0.5)), 1.0)))",
+    "idea": "基于行业内标准化的EPS修正信号，根据其在行业内排名与中间值的距离进行动态加权（排名越极端权重越高，基础权重为1，极端可增加至1.5倍），实现自动对称放大头部和尾部信号、压缩中段噪音的非线性增强效果。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), add(1, multiply(abs(subtract(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 0.5)), 1.0)))",
+        "multiply(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), add(1, multiply(abs(subtract(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 0.5)), 1.0)))"
+    ]
+}

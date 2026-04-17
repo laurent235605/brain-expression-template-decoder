@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_rank(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 252), industry)",
+    "idea": "先对原始字段进行63日回溯填充与4倍标准差缩尾清洗，计算权益资产对总资产的向量中性残差以剥离规模效应，随后计算该残差在过去252个交易日中的时序分位（ts_rank），识别当前配置处于历史极端区间的基金，最后在行业内进行标准化（group_zscore）。该模板捕捉\"历史性超配/低配\"信号，同时控制行业暴露。",
+    "expression_list": [
+        "group_zscore(ts_rank(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 252), industry)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_mean(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), 20), 252)",
+    "idea": "将模板1的横截面高斯分位数与模板2的时序Z-score框架结合，通过20日平滑和252日历史比较，识别当前盈利修正强度是否显著偏离个股长期常态，捕捉极端情绪的历史相对位置而非绝对水平。",
+    "expression_list": [
+        "ts_zscore(ts_mean(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), 20), 252)",
+        "ts_zscore(ts_mean(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), 20), 252)"
+    ]
+}

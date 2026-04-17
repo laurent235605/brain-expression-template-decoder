@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.5), ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), 0), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "结合模板1的持续性确认(ts_mean(ts_rank))与模板2的阈值交易和新鲜度衰减，构建三重过滤：仅当Z分数超过1.5阈值、且过去3天持续处于历史极端分位、同时数据更新鲜于10天时，才持有信号，最大化信号质量并剔除噪音与过时信息。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5), ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), 0), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

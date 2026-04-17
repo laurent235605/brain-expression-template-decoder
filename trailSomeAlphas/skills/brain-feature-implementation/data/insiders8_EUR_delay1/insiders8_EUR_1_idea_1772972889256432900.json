@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(bucket(rank(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long})), range=\"0,1,0.1\"), 0.9), subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 0)",
+    "idea": "仅当收益-权重偏离处于全市场前10%极端分位桶时才保留原始信号，中段及后段强制归零，实现极端错配精选的激进择时策略。",
+    "expression_list": [
+        "trade_when(greater(bucket(rank(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long)), range=\"0,1,0.1\"), 0.9), subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 0)"
+    ]
+}

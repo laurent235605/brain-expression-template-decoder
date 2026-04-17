@@ -1,0 +1,16 @@
+{
+    "template": "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize({nondomicile},std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize({concentration},std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+    "idea": "行业-规模双重分组极端动量：在行业与市值规模的笛卡尔积分组内比较海外敞口，仅对组内前20%且地理集中度20日变化为正值（右尾截断排除改善者）的股票构建信号，使用半衰期10日的指数衰减窗口平滑信号路径，并标准化组合总杠杆以控制整体风险预算。",
+    "expression_list": [
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_nondomicile,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_nondomicile,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)",
+        "scale(ts_decay_exp_window(trade_when(greater(group_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), group_cartesian_product(industry, size)), 0.8), right_tail(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), minimum=0), 0), 10, 0.8), scale=1)"
+    ]
+}

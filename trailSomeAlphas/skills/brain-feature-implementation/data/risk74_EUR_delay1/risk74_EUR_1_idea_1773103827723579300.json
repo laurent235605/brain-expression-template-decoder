@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(divide(winsorize({momentum},std=4), add(add(winsorize({value_ts},std=4), winsorize({earnyild},std=4)), 0.0001)), d=10)",
+    "idea": "**时序平滑因子结构持续性**：使用时序衰减线性加权（ts_decay_linear，半衰期10天）对原始比率进行平滑，相比简单均值(ts_mean)更快反应近期变化但控制换手率；分子分母分别进行4倍标准差去极值（winsorize）处理；该模板捕捉因子暴露的持续性趋势而非单日噪音，适用于识别正在形成的纯因子风格（如动量加速而价值维持低位），并通过decay降低调仓频率。",
+    "expression_list": [
+        "ts_decay_linear(divide(winsorize(rsk74_momentum,std=4), add(add(winsorize(rsk74_value_ts,std=4), winsorize(rsk74_earnyild,std=4)), 0.0001)), d=10)",
+        "ts_decay_linear(divide(winsorize(rsk74_momentum_ts,std=4), add(add(winsorize(rsk74_value_ts,std=4), winsorize(rsk74_earnyild,std=4)), 0.0001)), d=10)"
+    ]
+}

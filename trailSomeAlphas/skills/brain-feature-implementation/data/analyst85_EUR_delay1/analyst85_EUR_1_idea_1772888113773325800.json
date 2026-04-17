@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20)",
+    "idea": "**Concept**: Accumulated Revision Intensity\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Sum of absolute version changes over 20 days, measuring total analytical activity and revision intensity\n- **Why This Feature**: Cumulative measure of \"analyst attention\" - high values indicate stocks undergoing intense scrutiny and frequent updates, potentially preceding volatility\n- **is filling nan necessary**: Treat NaNs as zeros in the summation using conditional logic, or use `ts_sum` which ignores NaNs, to prevent activity undercounting during data gaps\n- **Directionality**: High values indicate high analytical churn (potentially overcrowded or uncertain ideas); low values indicate neglected or stable recommendations\n- **Boundary Conditions**: Zero indicates no revisions in window; maximum values indicate daily version updates",
+    "expression_list": [
+        "ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20)"
+    ]
+}

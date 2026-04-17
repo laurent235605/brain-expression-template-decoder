@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(subtract(multiply(2, group_rank(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry)), 1), 1.5)",
+    "idea": "将模板2的幂变换应用于模板1的行业排名逻辑（group_rank替代group_zscore）。先将行业内排名线性映射至[-1,1]区间（0-100%映射为-1到1），再应用1.5次幂变换放大两端。相比基于Z分数的方法，排名对异常值更稳健，且幂变换在此确保极端排名（如前5%与后5%）获得显著更高的权重，实现\"稳健排序+凸性加权\"的均衡。",
+    "expression_list": [
+        "signed_power(subtract(multiply(2, group_rank(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry)), 1), 1.5)"
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "template": "abs({corr_weighted_score} - {positive_corr_score})",
+    "idea": "**Concept**: ESG Financial Materiality Stability\n- **Sample Fields Used**: corr_weighted_score, positive_corr_score\n- **Definition**: Difference between general correlation-weighted score and positive-correlation-only score\n- **Why This Feature**: Measures stability of financial materiality signal - whether financially relevant ESG factors are consistently positive\n- **Logical Meaning**: Small difference suggests ESG factors that correlate with returns do so consistently positively\n- **Directionality**: Lower = more stable financial materiality signal\n- **Boundary Conditions**: 0 = all correlated factors are positively correlated, large values = mixed correlation directions",
+    "expression_list": [
+        "abs(community_corr_weighted_score - community_positive_corr_score)",
+        "abs(community_corr_weighted_score - environmental_positive_corr_score)",
+        "abs(community_corr_weighted_score - governance_positive_corr_score)",
+        "abs(community_corr_weighted_score - social_positive_corr_score)",
+        "abs(community_corr_weighted_score - workforce_positive_corr_score)",
+        "abs(environmental_corr_weighted_score - environmental_positive_corr_score)",
+        "abs(environmental_corr_weighted_score - community_positive_corr_score)",
+        "abs(environmental_corr_weighted_score - governance_positive_corr_score)",
+        "abs(environmental_corr_weighted_score - social_positive_corr_score)",
+        "abs(environmental_corr_weighted_score - workforce_positive_corr_score)",
+        "abs(governance_corr_weighted_score - governance_positive_corr_score)",
+        "abs(governance_corr_weighted_score - community_positive_corr_score)",
+        "abs(governance_corr_weighted_score - environmental_positive_corr_score)",
+        "abs(governance_corr_weighted_score - social_positive_corr_score)",
+        "abs(governance_corr_weighted_score - workforce_positive_corr_score)",
+        "abs(social_corr_weighted_score - social_positive_corr_score)",
+        "abs(social_corr_weighted_score - community_positive_corr_score)",
+        "abs(social_corr_weighted_score - environmental_positive_corr_score)",
+        "abs(social_corr_weighted_score - governance_positive_corr_score)",
+        "abs(social_corr_weighted_score - workforce_positive_corr_score)",
+        "abs(workforce_corr_weighted_score - workforce_positive_corr_score)",
+        "abs(workforce_corr_weighted_score - community_positive_corr_score)",
+        "abs(workforce_corr_weighted_score - environmental_positive_corr_score)",
+        "abs(workforce_corr_weighted_score - governance_positive_corr_score)",
+        "abs(workforce_corr_weighted_score - social_positive_corr_score)"
+    ]
+}

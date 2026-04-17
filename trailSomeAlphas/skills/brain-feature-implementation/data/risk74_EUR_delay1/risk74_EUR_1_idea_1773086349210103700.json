@@ -1,0 +1,14 @@
+{
+    "template": "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( {concentration}, 20 ) - ts_mean( {concentration}, 60 ), 252 ), minimum=1 ), multiply( group_zscore( {crowding}, industry ), signed_power( group_zscore( {value_ts}, industry ), 0.5 ) ), 0 ), 0.1 )",
+    "idea": "长周期趋势偏离与组内半衰价值陷阱：计算短期（20日）与中期（60日）均集中度的差值在一年历史中的zscore，仅当右尾显著（>1标准差，即快速集中化）时交易；采用行业内zscore标准化的拥挤度与经平方根压缩（0.5次方）的行业内价值因子相乘，既保留方向又压缩极端值影响，最后通过目标换手率算子（TVR）强制控制双边换手率在10%左右。",
+    "expression_list": [
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_concentration, 20 ) - ts_mean( rsk74_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( rsk74_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_concentration, 20 ) - ts_mean( rsk74_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( rsk74_raw_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_concentration, 20 ) - ts_mean( rsk74_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( liquidity_factor_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_concentration, 20 ) - ts_mean( rsk74_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( liquidity_timeseries_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_raw_concentration, 20 ) - ts_mean( rsk74_raw_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( rsk74_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_raw_concentration, 20 ) - ts_mean( rsk74_raw_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( rsk74_raw_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_raw_concentration, 20 ) - ts_mean( rsk74_raw_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( liquidity_factor_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )",
+        "ts_target_tvr_2( trade_when( right_tail( ts_zscore( ts_mean( rsk74_raw_concentration, 20 ) - ts_mean( rsk74_raw_concentration, 60 ), 252 ), minimum=1 ), multiply( group_zscore( liquidity_timeseries_crowding, industry ), signed_power( group_zscore( rsk74_value_ts, industry ), 0.5 ) ), 0 ), 0.1 )"
+    ]
+}

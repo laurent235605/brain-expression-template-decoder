@@ -1,0 +1,14 @@
+{
+    "template": "divide({fc_numest}, add({fc_stdevfy1epsp}, {fc_stdevfy2epsp}, filter=true))",
+    "idea": "**Concept**: Earnings Estimate Stability Score\n- **Sample Fields Used**: `fc_stdevfy1epsp`, `fc_stdevfy2epsp`, `fc_numest`\n- **Definition**: Inverse of coefficient of variation for analyst estimates, weighted by number of analysts\n- **Why This Feature**: High estimate stability indicates business model predictability and information transparency\n- **Logical Meaning**: Measures the confidence/consensus among analysts; stable estimates suggest lower future volatility and more predictable cash flows\n- **is filling nan necessary**: Yes, use `ts_backfill()` for missing estimate data as lack of coverage implies instability/uncertainty should be neutralized\n- **Directionality**: Higher values indicate more stable earnings expectations (bullish for low-volatility strategies)\n- **Boundary Conditions**: Near-zero dispersion with high coverage = maximum stability; high dispersion = uncertainty discount",
+    "expression_list": [
+        "divide(mdl219_1_fc_numest, add(mdl219_1_fc_stdevfy1epsp, mdl219_1_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_2_fc_numest, add(mdl219_1_fc_stdevfy1epsp, mdl219_1_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_1_fc_numest, add(mdl219_1_fc_stdevfy1epsp, mdl219_2_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_2_fc_numest, add(mdl219_1_fc_stdevfy1epsp, mdl219_2_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_2_fc_numest, add(mdl219_2_fc_stdevfy1epsp, mdl219_2_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_1_fc_numest, add(mdl219_2_fc_stdevfy1epsp, mdl219_2_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_2_fc_numest, add(mdl219_2_fc_stdevfy1epsp, mdl219_1_fc_stdevfy2epsp, filter=true))",
+        "divide(mdl219_1_fc_numest, add(mdl219_2_fc_stdevfy1epsp, mdl219_1_fc_stdevfy2epsp, filter=true))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "{stoxx_europe_600_ucits_weight} * {europe_600_ucits_weight}",
+    "idea": "**Concept**: Weight-Market Interaction Proxy\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight, europe_600_ucits_weight\n- **Definition**: The interaction between the specific STOXX 600 weight and the broader Europe 600 UCITS weight component, isolating fund-specific allocation decisions from benchmark drift\n- **Why This Feature**: By comparing the specific ETF weight trajectory against the broader category weight, we can identify when the fund is actively deviating from passive tracking\n- **is filling nan necessary**: Yes, use group_mean() cross-sectionally to fill missing weights for delisted or suspended stocks, ensuring the interaction term remains calculable across the universe\n- **Directionality**: Positive values when both weights increase suggest sector momentum; negative divergence suggests contrarian positioning or hedging\n- **Boundary Conditions**: Constrained by the mathematical relationship between constituent and aggregate weights",
+    "expression_list": [
+        "mcr51_ishares_stoxx_europe_600_ucits_weight * mcr51_ishares_stoxx_europe_600_ucits_weight"
+    ]
+}

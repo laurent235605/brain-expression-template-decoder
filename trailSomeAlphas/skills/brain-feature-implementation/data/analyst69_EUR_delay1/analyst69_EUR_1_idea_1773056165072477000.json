@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(days_from_last_change({eps_expected_report_dt}), 20), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 0)",
+    "idea": "以报告日期稳定性作为硬筛选条件，仅在日程稳定（20天无变更）时暴露预期修订加速度因子。剔除日程频繁调整带来的噪音与潜在负面事件干扰，确保动量信号建立在公司运营可预测的基础上。",
+    "expression_list": [
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 20), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 20), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 20), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 20), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)"
+    ]
+}

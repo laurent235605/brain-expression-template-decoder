@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(group_rank(ts_mean({volume},21), industry), 0.2), divide(group_zscore(ts_sum(subtract(ts_backfill(vec_avg({cash_from_oper}),63), ts_backfill(vec_avg({cap_expend_prpty_add}),63)), 504), industry), ts_backfill({market_cap},63)), 0)",
+    "idea": "首先通过行业内成交量排名过滤掉流动性最差的后20%股票以控制交易成本与冲击成本；然后将经行业中性化处理的累计自由现金流除以市值，得到行业相对自由现金流收益率(FCF Yield)。该模板识别的是那些在同业中既具备强劲现金创造能力、当前估值又相对低估（市值分母）且具备足够流动性的标的，结合了质量与价值的双重逻辑。",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(abs(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60)), 1.5), greater(abs(ts_zscore(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 60)), 1.0)), ts_decay_linear(winsorize(divide(ts_mean({eps_best_eeps_cur_yr}, 20), ts_mean({ebitda_best_eeps_cur_yr}, 20)), std=4), 5), 0)",
+    "idea": "时序双确认与衰减平滑：引入60日时序zscore验证5日修正的极端性是否处于历史高位，同时要求20日平滑修正也处于极端区间以过滤噪音；对效率比率采用20日移动平均和5日线性衰减，显著降低换手率同时保留趋势信号。",
+    "expression_list": [
+        "trade_when(and(greater(abs(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60)), 1.5), greater(abs(ts_zscore(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 60)), 1.0)), ts_decay_linear(winsorize(divide(ts_mean(anl69_eps_best_eeps_cur_yr, 20), ts_mean(anl69_ebitda_best_eeps_cur_yr, 20)), std=4), 5), 0)",
+        "trade_when(and(greater(abs(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60)), 1.5), greater(abs(ts_zscore(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 60)), 1.0)), ts_decay_linear(winsorize(divide(ts_mean(anl69_aeps_best_eeps_cur_yr, 20), ts_mean(anl69_ebitda_best_eeps_cur_yr, 20)), std=4), 5), 0)"
+    ]
+}

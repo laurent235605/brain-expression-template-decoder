@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(multiply(ts_zscore(winsorize(ts_delta(vec_avg({likelihood_score}), 5), std=4), 60), subtract(ts_rank(divide(vec_avg({exit_price}), vec_avg({openprice})), 20), 0.5)), y=2), 3)",
+    "idea": "捕捉概率评分的短期加速度（5日变化率）而非绝对偏离，结合价格动量在过去20日中的历史分位，通过非线性幂变换（y=2）放大极端共振信号，并以3日线性衰减平滑换手，降低高频噪音干扰。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(multiply(ts_zscore(winsorize(ts_delta(vec_avg(success_likelihood_score), 5), std=4), 60), subtract(ts_rank(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), 20), 0.5)), y=2), 3)"
+    ]
+}

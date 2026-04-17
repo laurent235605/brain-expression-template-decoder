@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(divide(ts_av_diff(winsorize(ts_backfill(vec_ir({vda}), lookback=5, k=1), std=4), 120), add(0.0001, ts_std_dev(winsorize(ts_backfill(vec_ir({vda}), lookback=5, k=1), std=4), 120))), 5), industry)",
+    "idea": "**稳健行业中性流动性冲击**: 使用vec_ir(信息比率)替代简单均值，更好地捕捉成交量强度相对于其离散度的异常；先进行winsorize去极值处理防止异常值主导均值/标准差计算；通过ts_decay_linear线性衰减平滑近期数据降低周转率；最后进行行业中性化(group_zscore)，识别行业内相对的流动性压力事件，避免行业间的不可比性。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(divide(ts_av_diff(winsorize(ts_backfill(vec_ir(mcr49_vda), lookback=5, k=1), std=4), 120), add(0.0001, ts_std_dev(winsorize(ts_backfill(vec_ir(mcr49_vda), lookback=5, k=1), std=4), 120))), 5), industry)"
+    ]
+}

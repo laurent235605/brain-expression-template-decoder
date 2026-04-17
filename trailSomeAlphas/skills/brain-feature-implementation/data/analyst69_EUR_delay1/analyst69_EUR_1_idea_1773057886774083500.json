@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), industry)), 1.0), multiply(ts_regression(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), group_mean(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), log(ts_mean({market_cap}, 21)), {sector}), 252, rettype=0), exp(multiply(-0.05, days_from_last_change(ts_delta({eps_best_eeps_cur_yr}, 5))))), 0)",
+    "idea": "残差剥离与事件衰减：对效率比率进行行业市值加权回归剥离系统性成分（CAPM residual），获取特质性效率；仅在修正极端时开仓，并使用指数衰减函数基于距上次修正变化的天数动态降低权重，精准捕捉分析师修正事件后的短期alpha窗口。",
+    "expression_list": []
+}

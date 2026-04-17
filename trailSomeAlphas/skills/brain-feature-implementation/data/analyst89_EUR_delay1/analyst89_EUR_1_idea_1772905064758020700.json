@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), 4), 252), 20), sector), 3)",
+    "idea": "偏度变化率动量：在标准偏度计算基础上，加入20日偏度变化率（ts_delta），识别分布不对称性正在加剧（正delta）或改善（负delta）的拐点信号，经行业中性化和3日衰减平滑处理后，专注于偏度动量而非绝对水平，捕捉投资者情绪或基本面分布形态的加速演变过程。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), 4), 252), 20), sector), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater(quantile(group_rank(ts_delta(vec_skewness({version}), 5), industry), \"gaussian\"), 0.8), signed_power(group_zscore(vec_skewness({version}), industry), 1.2), if_else(less(quantile(group_rank(ts_delta(vec_skewness({version}), 5), industry), \"gaussian\"), 0.2), reverse(signed_power(group_zscore(vec_skewness({version}), industry), 1.2)), 0)), industry), 3)",
+    "idea": "偏度变化率(加速度)策略：关注偏度自身的变化趋势(ts_delta)而非绝对水平，捕捉分布形态正在快速极化的股票；先计算5日偏度变化在行业内的排名，再通过高斯分位数变换(quantile)进一步压缩中间区间噪音，仅保留变化最剧烈的20%多头和20%空头，使用signed_power增强信号强度。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(greater(quantile(group_rank(ts_delta(vec_skewness(anl85_version), 5), industry), \"gaussian\"), 0.8), signed_power(group_zscore(vec_skewness(anl85_version), industry), 1.2), if_else(less(quantile(group_rank(ts_delta(vec_skewness(anl85_version), 5), industry), \"gaussian\"), 0.2), reverse(signed_power(group_zscore(vec_skewness(anl85_version), industry), 1.2)), 0)), industry), 3)"
+    ]
+}

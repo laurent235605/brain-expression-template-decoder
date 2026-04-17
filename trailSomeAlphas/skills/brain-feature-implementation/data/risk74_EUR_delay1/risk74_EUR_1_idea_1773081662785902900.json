@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_delta(ts_sum(ts_delta({hfown_pctown}, 1), 20), 5), ts_delta(ts_sum(ts_delta({shortint}, 1), 15), 5))",
+    "idea": "资金流加速度二阶导捕捉。计算两类资金累积流的5日变化率（即二阶差分，反映近期累积速度的增减），识别资金进出速度的边际加速或减速，捕捉动量拐点而非存量水平，适用于发现机构建仓加速或空头踩踏加剧的临界点。",
+    "expression_list": [
+        "subtract(ts_delta(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 5), ts_delta(ts_sum(ts_delta(rsk74_shortint, 1), 15), 5))",
+        "subtract(ts_delta(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 5), ts_delta(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 5))"
+    ]
+}

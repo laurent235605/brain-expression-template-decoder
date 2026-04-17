@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_sum(winsorize(ts_backfill(vec_avg({data_item_value}), 63), std=4), 63), industry)",
+    "idea": "先对向量均值进行63日回溯填充以处理缺失值，再进行4倍标准差极值裁剪，随后计算63日累积和，最后进行行业中性化（zscore）。此模板消除了行业间财务积累规模的基数差异，专注于识别行业内部的相对积累强度，同时控制了极端异常值和缺失数据带来的偏差。",
+    "expression_list": [
+        "group_zscore(ts_sum(winsorize(ts_backfill(vec_avg(anl89_data_item_value), 63), std=4), 63), industry)"
+    ]
+}

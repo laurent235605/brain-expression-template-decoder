@@ -1,0 +1,8 @@
+{
+    "template": "vec_sum({adjustedgrossamt})",
+    "idea": "**Concept**: Cumulative Economic Dividend Accrual\n- **Sample Fields Used**: `adjustedgrossamt`\n- **Definition**: Sum of all adjusted dividend amounts over the vector dimension representing total economic cash flow\n- **Why This Feature**: Aggregates total expected cash flow from dividends over the observation period; useful for yield calculations and income forecasting\n- **Logical Meaning**: Total shareholder value distribution after corporate action adjustments\n- **is filling nan necessary**: NaN values represent missing periods; treat as 0 for cumulative sum using `add` with filter=true, or backfill if assuming dividend continuity. For strict accrual accounting, fill NaNs with 0 to avoid understating total flow\n- **Directionality**: Higher values indicate greater cumulative cash flow; zero indicates no dividend activity\n- **Boundary Conditions**: >= 0; theoretically unbounded; 0 indicates non-payer or all missing data",
+    "expression_list": [
+        "vec_sum(anl30_adjustedgrossamt)",
+        "vec_sum(anl30_unadjustedgrossamt)"
+    ]
+}

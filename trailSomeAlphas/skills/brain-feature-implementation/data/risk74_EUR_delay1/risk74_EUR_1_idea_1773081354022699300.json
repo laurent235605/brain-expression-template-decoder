@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta({exp_usa}, 1), 60)",
+    "idea": "将模板B的时间序列变化检测逻辑（ts_delta+历史zscore）应用于模板A的地理暴露概念。不再只看横截面的暴露水平，而是检测公司在60天窗口内对美暴露的变化趋势（增加或减少的zscore），识别正在战略转向或逃离特定市场的公司，捕捉动态beta变化而非静态暴露。",
+    "expression_list": [
+        "ts_zscore(ts_delta(rsk74_raw_exp_usa, 1), 60)"
+    ]
+}

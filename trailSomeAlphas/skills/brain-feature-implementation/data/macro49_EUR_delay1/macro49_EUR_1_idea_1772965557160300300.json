@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1))",
+    "idea": "**Concept**: Implied Reference Price Proxy\n- **Sample Fields Used**: notional, shares\n- **Definition**: Ratio of notional to shares as a proxy for the reference price used by index calculators\n- **Why This Feature**: Provides independent price estimate for validation; deviations from market price indicate timing differences or special situations; useful for detecting stale announcements\n- **is filling nan necessary**: Yes, backfill required to ensure both numerator and denominator represent same announcement event.\n- **Directionality**: Level indicates price; trend indicates drift; divergence from market price indicates stale data or corporate actions\n- **Boundary Conditions**: Near-zero values impossible (division by zero protection needed); extreme values suggest penny stocks or data errors",
+    "expression_list": [
+        "divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1))"
+    ]
+}

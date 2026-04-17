@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(ts_backfill(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 126), 252), driver=\"gaussian\")",
+    "idea": "级联融合：先执行模板2的63日累积修正压力计算（含5日回溯填充预处理），再将该压力指标作为输入，完整通过模板1的126日回溯-252日时序分位-高斯映射流水线，评估当前修正动能是否处于历史极端水平。",
+    "expression_list": [
+        "quantile(ts_rank(ts_backfill(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 126), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(ts_backfill(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 126), 252), driver=\"gaussian\")"
+    ]
+}

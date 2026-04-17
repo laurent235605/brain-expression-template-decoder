@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(vec_percentage({data_item_value}, 0.5), 63)",
+    "idea": "使用向量中位数（50%分位点）替代简单平均来代表每日的财务水平，再进行63日累积。中位数对极端分项值（如一次性非经常性损益）具有鲁棒性，能够更稳健地累积公司的典型财务表现，适用于财务数据质量参差或包含异常分项的场景。",
+    "expression_list": [
+        "ts_sum(vec_percentage(anl89_data_item_value, 0.5), 63)"
+    ]
+}

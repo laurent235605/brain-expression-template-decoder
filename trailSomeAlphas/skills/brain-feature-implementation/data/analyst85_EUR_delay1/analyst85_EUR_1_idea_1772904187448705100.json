@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(trade_when(greater(abs(ts_zscore(group_zscore(vec_skewness({version}), industry), 60)), 2), if_else(greater(ts_zscore(group_zscore(vec_skewness({version}), industry), 60), 0), 1, -1), 0), industry), 3)",
+    "idea": "历史分位行业中性极值策略：构建双重标准化指标——先在行业内计算偏度zscore(group_zscore)，再计算该zscore在过去60天内的时序zscore(ts_zscore)，识别当前行业相对偏度处于自身历史极端水平(>|2|标准差)的标的；利用绝对值判断与符号函数分离多空方向，仅在极端偏离历史常态时触发交易(trade_when)，结合3日线性衰减捕捉均值回归的短期alpha，避免对常态波动过度反应。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(trade_when(greater(abs(ts_zscore(group_zscore(vec_skewness(anl85_version), industry), 60)), 2), if_else(greater(ts_zscore(group_zscore(vec_skewness(anl85_version), industry), 60), 0), 1, -1), 0), industry), 3)"
+    ]
+}

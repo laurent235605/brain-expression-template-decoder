@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(vec_avg({rank})), 5), subtract(vec_avg({rank}), ts_decay_exp_window(vec_avg({rank}), 20, 0.5)), 0)",
+    "idea": "**增强概念**: 事件驱动的排名突破信号\n- **核心改进**: 引入days_from_last_change检测排名最近一次显著变动的时点，仅当变动发生在5个交易日内时启用偏差信号，否则视为0（无信号）；避免对静态趋势中的随机噪声反应。\n- **逻辑含义**: 排名趋势 deviation 只有在\"近期发生更新事件\"时才具有预测力；过滤掉陈旧的趋势偏离，专注于模型最新观点发布后的价格发现过程；适用于事件驱动型alpha或模型更新频率较低的场景。\n- **边界处理**: 长期无变化的股票自动剔除，确保信号新鲜度。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(vec_avg(mdl245_rank)), 5), subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, 0.5)), 0)"
+    ]
+}

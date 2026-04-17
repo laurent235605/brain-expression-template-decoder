@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),20),std=4),252),driver=\"cauchy\")",
+    "idea": "使用柯西分布(Cauchy)对Z-score进行分位数转换，极度放大历史分布尾部(极端空头异动)的区分度，同时将中间区间([-1,1]标准差内)压缩至接近零值。相比正态Z-score，更强调'历史罕见'的异常事件，降低中等波动噪音。",
+    "expression_list": [
+        "quantile(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),20),std=4),252),driver=\"cauchy\")",
+        "quantile(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),20),std=4),252),driver=\"cauchy\")"
+    ]
+}

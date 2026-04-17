@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(ts_regression(winsorize(ts_backfill({shortint},63),std=4), group_mean(winsorize(ts_backfill({shortint},63),std=4), log(ts_mean({concentration},21)), industry), 63, rettype=0), 10)",
+    "idea": "跨字段权重基准应用：以地理集中度市值加权作为代理基准，提取空头头寸的特质残差（63日回归），再经10日线性衰减，构建以地理风险为锚的特质做空压力指标。",
+    "expression_list": [
+        "ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_shortint,63),std=4), group_mean(winsorize(ts_backfill(rsk74_shortint,63),std=4), log(ts_mean(rsk74_concentration,21)), industry), 63, rettype=0), 10)",
+        "ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_shortint_ts,63),std=4), group_mean(winsorize(ts_backfill(rsk74_shortint_ts,63),std=4), log(ts_mean(rsk74_concentration,21)), industry), 63, rettype=0), 10)",
+        "ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_shortint,63),std=4), group_mean(winsorize(ts_backfill(rsk74_shortint,63),std=4), log(ts_mean(rsk74_raw_concentration,21)), industry), 63, rettype=0), 10)",
+        "ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_shortint_ts,63),std=4), group_mean(winsorize(ts_backfill(rsk74_shortint_ts,63),std=4), log(ts_mean(rsk74_raw_concentration,21)), industry), 63, rettype=0), 10)"
+    ]
+}

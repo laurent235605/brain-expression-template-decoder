@@ -1,0 +1,7 @@
+{
+    "template": "bucket(rank(group_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, sector)), range=\"0,1,0.1\")",
+    "idea": "将行业中性后的分歧信号按截面排名分桶（10分位），将连续值离散化为桶标签，便于后续进行非线性组合（如仅做多第1桶、做空第10桶），或与其他因子进行笛卡尔积分组精细化选股。",
+    "expression_list": [
+        "bucket(rank(group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector)), range=\"0,1,0.1\")"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(winsorize(subtract(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), group_mean(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), industry)), std=4), industry), y=2), 20)",
+    "idea": "剥离行业共同因素提取特质性idiosyncratic信号：先计算行业组内均值，用个股变化量减去行业均值得到残差（剔除行业层面的季节性报告期调整），对残差做截尾和组内zscore标准化，保留平方放大后的极端偏离，通过20日线性衰减获取剔除行业beta后的纯净事件alpha。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(winsorize(subtract(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), group_mean(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), industry)), std=4), industry), y=2), 20)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(subtract(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), group_mean(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), industry)), std=4), industry), y=2), 20)"
+    ]
+}

@@ -1,0 +1,18 @@
+[
+    "bucket(ts_percentage(mdl234_volume, 12, 0.5), buckets=\"0,0.25,0.5,0.75,1\")",
+    "bucket(ts_percentage(mdl234_volume, 12, 0.5), range=\"0,1,0.2\")",
+    "divide(subtract(mdl234_volume, ts_mean(mdl234_volume, 12)), ts_std_dev(mdl234_volume, 12))",
+    "divide(subtract(mdl234_volume, ts_min(mdl234_volume, 12)), subtract(ts_max(mdl234_volume, 12), ts_min(mdl234_volume, 12)))",
+    "divide(ts_std_dev(mdl234_volume, 12), ts_mean(mdl234_volume, 12))",
+    "greater(mdl234_volume, multiply(ts_median(mdl234_volume, 6), 1.5))",
+    "log(mdl234_volume)",
+    "multiply(mdl234_volume, ts_std_dev(mdl234_volume, 6))",
+    "pasteurize(mdl234_volume)",
+    "quantile(mdl234_volume, driver=\"uniform\")",
+    "subtract(ts_returns(mdl234_volume, 1), ts_delay(ts_returns(mdl234_volume, 1), 1))",
+    "ts_corr(mdl234_volume, ts_delay(mdl234_volume, 1), 6)",
+    "ts_decay_exp_window(mdl234_volume, 6, factor=0.5)",
+    "ts_regression(mdl234_volume, ts_step(1), 6, rettype=1)",
+    "ts_returns(mdl234_volume, 1, mode=1)",
+    "ts_sum(mdl234_volume, 3)"
+]

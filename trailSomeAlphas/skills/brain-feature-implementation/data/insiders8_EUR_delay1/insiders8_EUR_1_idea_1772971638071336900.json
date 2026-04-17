@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_regression({active_return_decile_rank_long} - {active_weight_decile_rank_long}, group_mean({active_return_decile_rank_long} - {active_weight_decile_rank_long}, sector), 21, rettype=0), std=4), 1.5), sector)",
+    "idea": "先通过21日时序回归剥离行业共同因子（sector-average spread），提取个股特异性定价偏离残差（Idiosyncratic Deviation），再对其进行1.5次幂非线性处理和行业标准化，获取剔除板块Beta后的纯净异质性定价错误信号。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_regression(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, group_mean(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector), 21, rettype=0), std=4), 1.5), sector)"
+    ]
+}

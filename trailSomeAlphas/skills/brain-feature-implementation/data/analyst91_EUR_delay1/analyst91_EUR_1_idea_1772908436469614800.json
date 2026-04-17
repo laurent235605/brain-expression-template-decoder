@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(quantile(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_kurtosis({exposure_value}), 63), std=4), 20), industry), driver=\"cauchy\"), hump=0.02, decay=0.95)",
+    "idea": "使用向量峰度(vec_kurtosis)捕捉业务结构分布的厚尾特征与极端偏离风险，经行业标准化后采用Cauchy分布进行分位转换(quantile)以极度放大极端值、压缩中间区间，最后通过hump_decay忽略小于2%的日间微小变动并指数衰减历史数据；构建低换手率、专注于'业务结构分布形态发生极端尾部突变'的高置信度风险预警因子。",
+    "expression_list": [
+        "hump_decay(quantile(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_kurtosis(anl91_exposure_value), 63), std=4), 20), industry), driver=\"cauchy\"), hump=0.02, decay=0.95)"
+    ]
+}

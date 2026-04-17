@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(less(ts_rank(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 126), 0.2), greater(ts_rank(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 126), 0.8)), group_zscore(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), sector), 0)",
+    "idea": "条件触发式稳定信号（极值治理水平共振）：仅在性别比例处于自身历史极值区间（前20%高位或后20%低位，暗示治理结构可能处于变革临界点）时，才启用稳定性变化信号；其余时期仓位归零。该模板结合了“水平极端+趋势改善”的双重验证逻辑，避免在治理水平平庸区间的无效波动中交易。",
+    "expression_list": [
+        "trade_when(or(less(ts_rank(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 126), 0.2), greater(ts_rank(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 126), 0.8)), group_zscore(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), sector), 0)"
+    ]
+}

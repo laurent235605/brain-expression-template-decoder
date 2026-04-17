@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(or(greater(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), 0.9), less(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), 0.1)), ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 0)",
+    "idea": "稳定性极端状态门控：借鉴模板1的历史分位逻辑与模板2的修正动量，仅在报告日期稳定性处于历史极端区间(前10%或后10%)时，才交易累积修正和信号。该结构假设报告日期的极端稳定或极端不稳定状态反映了公司信息环境的结构性特征，此时分析师修正信号更具预测力，中间状态视为噪音并屏蔽。",
+    "expression_list": [
+        "trade_when(or(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.9), less(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.1)), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 0)",
+        "trade_when(or(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.9), less(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.1)), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 0)",
+        "trade_when(or(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.9), less(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.1)), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 0)",
+        "trade_when(or(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.9), less(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.1)), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 0)"
+    ]
+}

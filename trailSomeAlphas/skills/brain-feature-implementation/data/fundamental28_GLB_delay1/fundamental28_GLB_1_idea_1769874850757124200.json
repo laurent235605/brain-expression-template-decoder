@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum({cfsourceusea_value_04840a}, 63)",
+    "idea": "**Concept**: Cumulative FX Drag\n- **Sample Fields Used**: `cfsourceusea_value_04840a`\n- **Definition**: Rolling 63-day (quarterly) sum of FX effects on cash\n- **Why This Feature**: Distinguishes persistent currency headwinds from one-time translation adjustments\n- **Logical Meaning**: Sustained currency impact over a reporting period; indicates structural FX exposure\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Cumulative zero over time suggests natural hedging; filling NaNs as zero may obscure this.\n- **Directionality**: Negative values indicate cumulative FX headwinds (reducing cash); positive indicates tailwinds\n- **Boundary Conditions**: Large negative sums indicate sustained currency depreciation impact on foreign operations",
+    "expression_list": [
+        "ts_sum(fnd28_cfsourceusea_value_04840a, 63)"
+    ]
+}

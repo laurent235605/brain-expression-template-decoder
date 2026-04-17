@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({elta_value})",
+    "idea": "**Concept**: Core Expectation Level\n- **Sample Fields Used**: `{elta_value}`\n- **Definition**: The raw average estimate level across all KEI drivers\n- **Why This Feature**: Represents the absolute level of analyst optimism/pessimism about key drivers. High levels suggest high expectations (potential disappointment risk); low levels suggest conservative estimates (potential beat opportunity).\n- **is filling nan necessary**: NaN indicates missing coverage; preserve to avoid false zero-level signals.\n- **Directionality**: High values indicate optimistic analyst expectations; low values indicate conservative expectations; trend matters more than absolute\n- **Boundary Conditions**: Extreme high values relative to historical range indicate peak optimism; extreme low indicate trough pessimism",
+    "expression_list": [
+        "vec_avg(ern10_elta_value)"
+    ]
+}

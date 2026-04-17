@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( ts_zscore( ts_delta( ({hfown_pctown} / {hfown_numown}), 20 ), 60 ), 5 )",
+    "idea": "集中度变化动量平滑：计算20日集中度变化率（反映机构正在加仓聚集或减仓分散的短期趋势），并用60日滚动窗口的历史波动率进行标准化得到时序Z分数，最后通过5日线性衰减加权平滑。该模板强调“变化本身”而非绝对水平，用于识别持股结构正在发生剧烈变动的标的，同时衰减函数降低信号高频抖动带来的换手率，适合捕捉机构调仓初期的动量效应。",
+    "expression_list": [
+        "ts_decay_linear( ts_zscore( ts_delta( (rsk74_hfown_pctown / rsk74_hfown_numown), 20 ), 60 ), 5 )"
+    ]
+}

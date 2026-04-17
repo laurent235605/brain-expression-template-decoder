@@ -1,0 +1,18 @@
+[
+    "(vec_avg(anl89_data_item_value) - ts_min(vec_avg(anl89_data_item_value), 504)) / (ts_max(vec_avg(anl89_data_item_value), 504) - ts_min(vec_avg(anl89_data_item_value), 504))",
+    "252 - ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)",
+    "days_from_last_change(vec_avg(anl89_fiscal_period_end))",
+    "ts_av_diff(vec_avg(anl89_data_item_value), 504) / ts_std_dev(vec_avg(anl89_data_item_value), 504)",
+    "ts_corr(vec_avg(anl89_data_item_value), ts_delay(vec_avg(anl89_data_item_value), 63), 252)",
+    "ts_corr(vec_avg(anl89_data_item_value), vec_avg(anl89_fiscal_period_end), 252)",
+    "ts_decay_exp_window(vec_avg(anl89_data_item_value), 63, factor=0.5) / ts_mean(vec_avg(anl89_data_item_value), 252)",
+    "ts_delta(vec_avg(anl89_data_item_value), 252) / abs(ts_delay(vec_avg(anl89_data_item_value), 252))",
+    "ts_delta(vec_avg(anl89_fiscal_period_end), 252)",
+    "ts_entropy(vec_avg(anl89_fiscal_period_end), 63)",
+    "ts_mean(days_from_last_change(vec_avg(anl89_fiscal_period_end)), 252)",
+    "ts_skewness(vec_avg(anl89_data_item_value), 252)",
+    "ts_std_dev(days_from_last_change(vec_avg(anl89_fiscal_period_end)), 126)",
+    "ts_std_dev(vec_avg(anl89_data_item_value), 63) / abs(ts_mean(vec_avg(anl89_data_item_value), 63))",
+    "ts_sum(vec_avg(anl89_data_item_value), 63)",
+    "vec_stddev(anl89_data_item_value)"
+]

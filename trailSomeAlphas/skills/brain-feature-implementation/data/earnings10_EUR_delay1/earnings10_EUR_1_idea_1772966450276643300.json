@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5)), industry)",
+    "idea": "分歧度加权置信度调整（Disparity-Weighted Momentum）。利用向量标准差vec_stddev衡量同一时点上分析师预测的分歧度，以(1+分歧度)^(-0.5)作为置信权重对原始动量进行缩放——当分析师群体高度一致（低标准差）时赋予更高置信权重，分歧巨大时（可能预示信息混乱）自动压低权重；最后进行行业中性化，形成经“质量”筛选的聪明钱动量信号。",
+    "expression_list": [
+        "group_zscore(multiply(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5)), industry)"
+    ]
+}

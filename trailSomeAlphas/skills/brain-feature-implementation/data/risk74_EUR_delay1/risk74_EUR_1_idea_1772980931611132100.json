@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4), industry)), 1.5), group_zscore(winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4), industry), 0), 5)",
+    "idea": "行业中性极端偏离捕捉：先对原始集中度进行10日回填补齐季度滞后，计算相对于60日均值的时序偏离，并进行4倍标准差截尾处理。仅在行业组内zscore绝对值超过1.5的极端偏离时保留信号（捕捉关税冲击下的紧急供应链调整），中间温和变化置零以降低噪音，最后应用5日线性衰减平滑以降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4), industry)), 1.5), group_zscore(winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4), industry), 0), 5)",
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4), industry)), 1.5), group_zscore(winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4), industry), 0), 5)"
+    ]
+}

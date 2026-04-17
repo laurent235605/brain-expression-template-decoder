@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev({weight_net}, 20) / abs(ts_mean({weight_net}, 20) + 0.0001)",
+    "idea": "**Concept**: Net Weight Stability Ratio\n- **Sample Fields Used**: weight_net\n- **Definition**: Rolling coefficient of variation of net weights over 20 days, measuring persistence of directional bias\n- **Why This Feature**: Identifies stocks with consistent insider sentiment vs those with fluctuating views; stable net weights suggest conviction, unstable suggest tactical trading or forced liquidations\n- **is filling nan necessary**: If NaN indicates no holdings (zero weight), filling with 0 may be appropriate, but if NaN indicates missing data, use ts_backfill with care. Given this is holdings data, NaN likely means zero position, so filling with 0 preserves information.\n- **Directionality**: Low values (stable) indicate strong persistent conviction; high values indicate uncertainty or liquidity-driven trading\n- **Boundary Conditions**: Near-zero stability suggests initialization or corporate actions; extremely high stability may indicate stale data or illiquid positions",
+    "expression_list": [
+        "ts_std_dev(insd8_weight_net, 20) / abs(ts_mean(insd8_weight_net, 20) + 0.0001)"
+    ]
+}

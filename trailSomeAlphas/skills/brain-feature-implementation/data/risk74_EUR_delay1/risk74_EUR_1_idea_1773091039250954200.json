@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore({factor_e}, industry) + group_zscore({factor_s}, industry) + group_zscore({factor_g}, industry) - abs(group_zscore({factor_e}, industry) - group_zscore({factor_g}, industry))",
+    "idea": "融合模板1的ESG平衡概念与模板2的组内相对比较逻辑。先将E/S/G三个因子在行业内部标准化（group_zscore），计算总分并惩罚E与G之间的绝对差异（识别偏科），以筛选行业内真正均衡的ESG领导者，避免单一维度极端但其他维度薄弱的公司。适用于识别抗风险能力更强的优质标的。",
+    "expression_list": [
+        "group_zscore(rsk74_factor_e, industry) + group_zscore(rsk74_factor_s, industry) + group_zscore(rsk74_factor_g, industry) - abs(group_zscore(rsk74_factor_e, industry) - group_zscore(rsk74_factor_g, industry))",
+        "group_zscore(rsk74_factor_esg, industry) + group_zscore(rsk74_factor_s, industry) + group_zscore(rsk74_factor_g, industry) - abs(group_zscore(rsk74_factor_esg, industry) - group_zscore(rsk74_factor_g, industry))"
+    ]
+}

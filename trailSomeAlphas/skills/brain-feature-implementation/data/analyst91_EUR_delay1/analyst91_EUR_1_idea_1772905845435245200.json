@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(hump(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), hump=0.02), 2)",
+    "idea": "在模板2的行业Z-Score后加入hump算子（阈值0.02），仅当信号变化超过2%时才调整仓位，过滤日常微小波动导致的噪音交易；显著降低换手率的同时保留对重大业务结构偏离的敏感度，适合业务缓慢演变的均衡型策略。",
+    "expression_list": [
+        "signed_power(hump(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), hump=0.02), 2)"
+    ]
+}

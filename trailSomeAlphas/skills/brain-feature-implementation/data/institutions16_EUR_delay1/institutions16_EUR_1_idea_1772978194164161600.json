@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 126, rettype=0), industry)",
+    "idea": "组内中性化版本。考虑到不同行业或基金类型的规模-换手率基准存在结构性差异（如小盘基金天然换手率高），先进行数据清洗与126日回归得到残差，再在行业（industry）层面进行组内zscore标准化。这使得\"异常活跃度\"是相对于同类型基金的比较，而非跨类型的简单比较，提升了信号的横截面可比性。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 126, rettype=0), industry)"
+    ]
+}

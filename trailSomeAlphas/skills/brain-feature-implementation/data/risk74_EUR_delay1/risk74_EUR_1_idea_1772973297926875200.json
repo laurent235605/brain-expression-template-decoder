@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa},63),std=4), winsorize(ts_backfill({exp_chn},63),std=4)), winsorize(ts_backfill({exp_nondomicile1},63),std=4), 252, rettype=0)",
+    "idea": "使用非本土敞口作为系统性风险因子对中美价差进行回归调整，剥离全球化水平对区域配置的影响，得到经全球化风险中性化后的纯中美相对偏好残差信号。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4)), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 252, rettype=0)",
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4)), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 252, rettype=0)"
+    ]
+}

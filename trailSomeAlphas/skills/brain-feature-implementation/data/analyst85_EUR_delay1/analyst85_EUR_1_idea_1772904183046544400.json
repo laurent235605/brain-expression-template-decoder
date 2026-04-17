@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(group_normalize(if_else(right_tail(ts_rank(group_rank(vec_skewness({version}), industry), 10), 0.8), 1, if_else(left_tail(ts_rank(group_rank(vec_skewness({version}), industry), 10), 0.2), -1, 0)), industry), 0.02)",
+    "idea": "持续极端偏度动量策略：将原始截面排名扩展为10日持续排名(ts_rank)，要求标的不仅在当前偏度极端，且需在过去10天内持续处于行业前/后20%分位，有效过滤短期噪音；利用右尾/左尾算子(right_tail/left_tail)清晰划分交易区间，仅保留极端多头与空头；采用hump_decay替代线性衰减，通过设置0.02的日变动阈值忽略微小波动，仅在信号发生实质性变化时调仓，适用于捕捉偏度形态的持续动量而非单日脉冲。",
+    "expression_list": [
+        "hump_decay(group_normalize(if_else(right_tail(ts_rank(group_rank(vec_skewness(anl85_version), industry), 10), 0.8), 1, if_else(left_tail(ts_rank(group_rank(vec_skewness(anl85_version), industry), 10), 0.2), -1, 0)), industry), 0.02)"
+    ]
+}

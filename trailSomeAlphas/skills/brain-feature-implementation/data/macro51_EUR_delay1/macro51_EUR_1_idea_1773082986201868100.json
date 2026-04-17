@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector)), 1.5), group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector), 0)",
+    "idea": "极端阈值条件触发策略。仅当行业中性化后的权重比率偏离度绝对值超过1.5倍标准差时才保留原信号开仓，中间区间视为无效噪音并置零，构建非连续性的、专注于极端配置偏离的事件驱动型Alpha。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector)), 1.5), group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector), 0)"
+    ]
+}

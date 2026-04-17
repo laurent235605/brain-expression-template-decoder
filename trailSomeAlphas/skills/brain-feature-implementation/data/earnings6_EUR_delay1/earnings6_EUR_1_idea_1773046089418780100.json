@@ -1,0 +1,8 @@
+{
+    "template": "group_rank( ts_decay_linear( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20 ), industry )",
+    "idea": "融合模板2的近期加权逻辑与分组比较框架，在行业内部对衰减后的Surprise进行排名（0-1分位）。通过group_rank消除行业间预期差水平差异，专注捕捉行业内的盈利预期修正领先者，适用于行业分化较大的市场环境。",
+    "expression_list": [
+        "group_rank( ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), industry )",
+        "group_rank( ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), industry )"
+    ]
+}

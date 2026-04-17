@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(winsorize(ts_sum(vec_avg({data_item_value}), 63), std=4), 252)",
+    "idea": "在极值处理后，观察当前财务累积值在过去252日（一年）中的历史分位排名。此模板将绝对数值转化为相对历史位置的百分位信号，用于识别当前积累是否处于历史极端高位（可能高估）或低位（可能低估），适用于均值回归或趋势突破策略。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_sum(vec_avg(anl89_data_item_value), 63), std=4), 252)"
+    ]
+}

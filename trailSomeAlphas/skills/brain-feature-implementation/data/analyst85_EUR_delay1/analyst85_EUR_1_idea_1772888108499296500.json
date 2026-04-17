@@ -1,0 +1,7 @@
+{
+    "template": "sigmoid(vec_avg({version}))",
+    "idea": "**Concept**: Essential Version Signal\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Sigmoid transformation of mean-centered versions, compressing extreme values while preserving rank information\n- **Why This Feature**: Distills the essential signal from version data - extreme high/low versions are compressed to prevent outlier dominance while maintaining the ordinal relationship\n- **is filling nan necessary**: Preserve NaNs through transformation to avoid artificial signal generation from missing data\n- **Directionality**: Values near 0.5 indicate average version activity; approaching 1 indicates extremely high versions; approaching 0 indicates minimal versioning\n- **Boundary Conditions**: Asymptotically approaches 0 or 1 for extreme inputs; exactly 0.5 when input equals zero (after centering)",
+    "expression_list": [
+        "sigmoid(vec_avg(anl85_version))"
+    ]
+}

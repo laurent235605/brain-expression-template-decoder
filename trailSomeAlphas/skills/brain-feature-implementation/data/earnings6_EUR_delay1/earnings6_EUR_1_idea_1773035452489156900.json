@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(ts_delta(vec_avg({stock_split_ratio_243}), 21)), 0.05), NaN, ts_delta(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 63))",
+    "idea": "激进重组：将拆股事件视为盈利动量的\"噪声开关\"。逻辑上，拆股前后通常伴随高波动与价格调整，此时TTM EPS的短期变化可能失真。利用模板2的拆股比率变化率作为条件过滤器：当近期（21天）发生显著拆股事件（变化>0.05）时，强制置NaN避免交易；仅在拆股稳定期启用模板1的EPS累积动量（63天变化），实现事件驱动的择时增强。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_delta(vec_avg(ern6_stock_split_ratio_243), 21)), 0.05), NaN, ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 63))",
+        "trade_when(greater(abs(ts_delta(vec_avg(ern6_stock_split_ratio_243), 21)), 0.05), NaN, ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 63))"
+    ]
+}

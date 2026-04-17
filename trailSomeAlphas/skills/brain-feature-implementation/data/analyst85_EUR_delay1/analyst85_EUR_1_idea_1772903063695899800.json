@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(vec_ir(ts_backfill({version}, 63)), multiply(20, add(1, abs(ts_zscore(vec_count({version}), 60)))), factor=0.1)",
+    "idea": "自适应窗口的版本信息比率。利用vec_ir（均值/标准差）衡量版本信号的信噪比，根据版本数量的历史zscore绝对值动态调整衰减窗口长度（高波动期延长窗口，低波动期缩短），通过自适应机制在不同市场信息环境下保持信号稳定性。",
+    "expression_list": [
+        "ts_decay_exp_window(vec_ir(ts_backfill(anl85_version, 63)), multiply(20, add(1, abs(ts_zscore(vec_count(anl85_version), 60)))), factor=0.1)"
+    ]
+}

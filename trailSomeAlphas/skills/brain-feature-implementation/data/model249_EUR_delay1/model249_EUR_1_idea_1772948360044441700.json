@@ -1,0 +1,7 @@
+{
+    "template": "and(greater_equal(vec_avg({quintile}), 4), less(ts_delay(vec_avg({quintile}), 5), 4))",
+    "idea": "**Concept**: Quintile Boundary Spike\n- **Sample Fields Used**: `mdl249_quintile`, `mdl249_score`\n- **Definition**: Binary indicator when a stock crosses from Q4 to Q5 (top quintile entry) within the last 5 days\n- **Why This Feature**: Entry into the top quintile represents crossing a critical threshold where acquisition likelihood enters the \"highest probability\" regime, often triggering increased scrutiny\n- **is filling nan necessary**: Yes, use `ts_backfill(vec_avg({quintile}), 3)` to ensure accurate detection of boundary crossings.\n- **Logical Meaning**: Identifies stocks that have recently entered the extreme upper tail of acquisition likelihood distribution\n- **Directionality**: 1 indicates recent entry to top quintile (high attention signal); 0 indicates no recent entry\n- **Boundary Conditions**: Persistent 1s indicate sustained top-quintile status; rapid 0-1-0 oscillation indicates noise at boundary",
+    "expression_list": [
+        "and(greater_equal(vec_avg(mdl249_quintile), 4), less(ts_delay(vec_avg(mdl249_quintile), 5), 4))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "core = vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)); rank_smooth = ts_mean(group_rank(core, industry), 20); is_top = greater(rank_smooth, 0.9); is_bottom = less(rank_smooth, 0.1); signal = if_else(is_top, group_zscore(core, industry), if_else(is_bottom, group_zscore(core, industry), 0)); smoothed = ts_decay_linear(signal, 5); final = scale(smoothed, scale=1)",
+    "idea": "引入时序持续性验证与衰减平滑：通过20日移动平均检验极端行业排名的持续性，过滤短期噪声；使用线性衰减替代即时信号，显著降低换手率，仅在配置偏离具备时间延续性时建仓。",
+    "expression_list": [
+        "core = vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)); rank_smooth = ts_mean(group_rank(core, industry), 20); is_top = greater(rank_smooth, 0.9); is_bottom = less(rank_smooth, 0.1); signal = if_else(is_top, group_zscore(core, industry), if_else(is_bottom, group_zscore(core, industry), 0)); smoothed = ts_decay_linear(signal, 5); final = scale(smoothed, scale=1)"
+    ]
+}

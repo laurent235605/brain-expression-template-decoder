@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(vec_skewness({exposure_value}), sector)), 2), signed_power(group_zscore(vec_skewness({exposure_value}), sector), 3), 0)",
+    "idea": "极端阈值触发机制：仅在地域集中度偏离行业均值2个标准差以上的尾部区间启动交易，应用三次幂非线性放大极端信号，中段噪音强制归零至NaN。激进地捕捉\"All-in特定市场\"或\"全面地理撤退\"的极端重组事件，构建高杠杆行业中性多空组合，完全摒弃温和调整区间。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(vec_skewness(anl91_exposure_value), sector)), 2), signed_power(group_zscore(vec_skewness(anl91_exposure_value), sector), 3), 0)"
+    ]
+}

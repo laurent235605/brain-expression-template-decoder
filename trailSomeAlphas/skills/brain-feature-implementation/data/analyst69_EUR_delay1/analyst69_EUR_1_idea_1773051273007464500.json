@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(quantile(ts_rank(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), driver=\"cauchy\"), 252)",
+    "idea": "先将原始天数转换为20日时序分位数以消除量纲，再通过Cauchy分布映射将中间区间压缩、尾部极端拉伸，最后计算该变换值在过去252日的偏离度，专门识别“历史罕见的极端稳定/不稳定状态”。",
+    "expression_list": [
+        "ts_zscore(quantile(ts_rank(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), driver=\"cauchy\"), 252)",
+        "ts_zscore(quantile(ts_rank(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), driver=\"cauchy\"), 252)"
+    ]
+}

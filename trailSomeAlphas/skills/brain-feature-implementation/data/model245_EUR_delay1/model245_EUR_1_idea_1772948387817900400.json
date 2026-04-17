@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_av_diff(vec_avg({rank}), 60), ts_std_dev(vec_avg({rank}), 60))",
+    "idea": "**Concept**: Rank Z-Score\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Number of standard deviations the current rank is from its 60-day historical mean (statistical distance measure)\n- **Why This Feature**: Identifies statistically unusual rankings that may represent high-conviction opportunities or potential mean-reversion candidates when the model's view deviates significantly from its historical norm for a stock\n- **Logical Meaning**: Measures how atypical the current ranking is compared to the stock's recent ranking history; extreme values suggest the model has significantly changed its view or the stock has experienced fundamental shifts\n- **is filling nan necessary**: The mean and std_dev calculations ignore NaN by default; however, if the history is sparse (>50% NaN), the z-score becomes unreliable. Do not fill NaNs with zeros or means as this artificially compresses the standard deviation.\n- **Directionality**: High absolute values indicate anomalies; sign indicates direction relative to historical average (positive = ranked worse than usual, assuming standard rank convention)\n- **Boundary Conditions**: Theoretically unbounded; practically |z| > 2 or 3 considered statistically significant; |z| > 4 extremely rare (fat tails possible in rank data)",
+    "expression_list": [
+        "divide(ts_av_diff(vec_avg(mdl245_rank), 60), ts_std_dev(vec_avg(mdl245_rank), 60))"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(less(divide(ts_std_dev(vec_avg({actual_eps}), 252), abs(ts_mean(vec_avg({actual_eps}), 252))), 0.5), ts_sum(ts_backfill(vec_avg({x_dividend}), 5), 252), NaN)",
+    "idea": "使用EPS稳定性作为条件过滤器（trade_when），仅当盈利变异系数低于阈值（盈利稳定）时才交易股息累积因子，过滤掉因盈利不稳定导致的虚假股息信号，增强股息因子的质量与可靠性。",
+    "expression_list": [
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps), 252), abs(ts_mean(vec_avg(ern6_actual_eps), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps), 252), abs(ts_mean(vec_avg(ern6_actual_eps), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps), 252), abs(ts_mean(vec_avg(ern6_actual_eps), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps), 252), abs(ts_mean(vec_avg(ern6_actual_eps), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps_274), 252), abs(ts_mean(vec_avg(ern6_actual_eps_274), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps_274), 252), abs(ts_mean(vec_avg(ern6_actual_eps_274), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps_274), 252), abs(ts_mean(vec_avg(ern6_actual_eps_274), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), NaN)",
+        "trade_when(less(divide(ts_std_dev(vec_avg(ern6_actual_eps_274), 252), abs(ts_mean(vec_avg(ern6_actual_eps_274), 252))), 0.5), ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), NaN)"
+    ]
+}

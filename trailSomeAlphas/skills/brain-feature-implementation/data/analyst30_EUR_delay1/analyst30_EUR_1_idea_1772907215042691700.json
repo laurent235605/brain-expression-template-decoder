@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(quantile(group_rank(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector), driver=\"gaussian\"), signed_power(group_zscore(vec_skewness(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.5)), 3)",
+    "idea": "分布形态增强策略：利用高斯分位数(quantile)将行业排名拉伸至正态尾部，强化极端值区分度；引入偏度(vec_skewness)识别非对称的会计年度分布（如多数集中于年末但存在异常值长尾），通过signed_power(1.5)放大右偏极端；最后以3日衰减平滑信号，替代硬阈值实现渐进式仓位调整。",
+    "expression_list": [
+        "ts_decay_linear(multiply(quantile(group_rank(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), driver=\"gaussian\"), signed_power(group_zscore(vec_skewness(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.5)), 3)"
+    ]
+}

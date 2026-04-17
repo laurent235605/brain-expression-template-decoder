@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_normalize(trade_when(greater(group_rank(signed_power(vec_skewness({version}), 3), industry), 0.9), trade_when(greater(group_rank(vec_avg({volume}), industry), 0.3), 1, 0.3), trade_when(less(group_rank(signed_power(vec_skewness({version}), 3), industry), 0.2), trade_when(greater(group_rank(vec_avg({volume}), industry), 0.3), -1, -0.3), 0)), industry), 7)",
+    "idea": "非对称流动性过滤策略：对偏度进行三次方非线性变换(signed_power)强化极端值，实施非对称阈值（多头前10% vs 空头后20%），并引入成交量行业排名过滤（仅对流动性前70%股票满仓交易，后30%轻仓30%），配合7日长衰减降低冲击成本。",
+    "expression_list": []
+}

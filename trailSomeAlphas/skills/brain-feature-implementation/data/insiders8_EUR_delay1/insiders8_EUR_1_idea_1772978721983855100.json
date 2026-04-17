@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(signed_power(winsorize(trade_when(or(greater(group_rank(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), bucket(group_rank({market_cap}, sector), \"0,1,0.33\")), 0.85), less(group_rank(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), bucket(group_rank({market_cap}, sector), \"0,1,0.33\")), 0.15)), group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), 0), std=4), 2.0), sector)",
+    "idea": "实施分层中性化（先行业zscore，再在同行业内按市值三分位组zscore），消除规模偏差；利用分位数桶化（bucket）严格隔离中间70%噪音区间，仅对极端尾部（前15%/后15%）保留原始价差并施加2.0次幂非线性放大，构建纯粹的双向定价偏离信号。",
+    "expression_list": []
+}

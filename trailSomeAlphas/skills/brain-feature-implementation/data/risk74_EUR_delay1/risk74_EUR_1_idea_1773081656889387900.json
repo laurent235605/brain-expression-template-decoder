@@ -1,0 +1,8 @@
+{
+    "template": "winsorize(subtract(ts_mean(ts_delta({hfown_pctown}, 1), 20), ts_mean(ts_delta({shortint}, 1), 15)), 4)",
+    "idea": "低换手率平滑趋势融合。依据指引使用ts_mean替代ts_sum以降低换手率（ts_decay_linear会显著提高换手率），对两类资金的日度变化做20日与15日窗口平均后相减，捕捉持续趋势而非脉冲噪音，并进行4倍标准差截尾处理抑制极端脏点。",
+    "expression_list": [
+        "winsorize(subtract(ts_mean(ts_delta(rsk74_hfown_pctown, 1), 20), ts_mean(ts_delta(rsk74_shortint, 1), 15)), 4)",
+        "winsorize(subtract(ts_mean(ts_delta(rsk74_hfown_pctown, 1), 20), ts_mean(ts_delta(rsk74_shortint_ts, 1), 15)), 4)"
+    ]
+}

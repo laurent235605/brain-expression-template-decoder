@@ -1,0 +1,16 @@
+{
+    "template": "{concentration} * {nondomicile}",
+    "idea": "**Concept**: Residual Geographic Concentration\n- **Sample Fields Used**: `concentration`, `exp_nondomicile1`, `exp_nondomicile2`, `nondomicile`\n- **Definition**: Geographic concentration isolated from total non-domestic exposure to identify \"all eggs in one foreign basket\" vs. diversified internationalization\n- **Why This Feature**: Two companies with 50% foreign exposure differ if one spreads across 10 countries vs. one targeting only China; this captures that distinction\n- **Logical Meaning**: High values indicate concentrated foreign exposure (single country risk); low values indicate diversified foreign exposure (portfolio of countries)\n- **is filling nan necessary**: Yes, fill missing nondomicile components with 0\n- **Directionality**: High = concentrated foreign risk (dangerous); Low = diversified foreign revenue (safe); Zero = domestic only\n- **Boundary Conditions**: Maximum indicates single-foreign-country dependence; minimum indicates either domestic or perfectly diversified",
+    "expression_list": [
+        "rsk74_concentration * rsk74_nondomicile",
+        "rsk74_concentration * rsk74_raw_exp_nondomicile1",
+        "rsk74_concentration * rsk74_raw_exp_nondomicile2",
+        "rsk74_concentration * rsk74_std_exp_nondomicile1",
+        "rsk74_concentration * rsk74_std_exp_nondomicile2",
+        "rsk74_raw_concentration * rsk74_raw_exp_nondomicile1",
+        "rsk74_raw_concentration * rsk74_raw_exp_nondomicile2",
+        "rsk74_raw_concentration * rsk74_nondomicile",
+        "rsk74_raw_concentration * rsk74_std_exp_nondomicile1",
+        "rsk74_raw_concentration * rsk74_std_exp_nondomicile2"
+    ]
+}

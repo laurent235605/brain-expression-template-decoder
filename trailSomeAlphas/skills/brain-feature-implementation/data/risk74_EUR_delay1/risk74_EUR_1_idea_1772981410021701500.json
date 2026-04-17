@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(ts_backfill({hfown_pctown}, 63), std=4), sector), 5)",
+    "idea": "经过滞后填补与去极值处理的持仓占比，在行业层面进行Z-score标准化以剔除行业配置Beta，再经线性衰减平滑降低数据噪声。捕捉行业内HF超配/低配的持续异常，而非单日波动。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), sector), 5)"
+    ]
+}

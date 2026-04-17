@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(or(greater(group_rank(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 0.8), less(group_rank(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 0.2)), signed_power(group_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 2), NaN), 10)",
+    "idea": "通过分位数阈值严格过滤（仅保留行业内前20%最稳定与后20%最不稳定股票），彻底消除中段噪音，仅交易极端信号；配合10日线性衰减平滑权重变化，显著降低换手率，捕捉'极端可预测性'溢价的持续性而非单日脉冲，适合低频换仓策略。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(or(greater(group_rank(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 0.8), less(group_rank(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 0.2)), signed_power(group_zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 2), NaN), 10)",
+        "ts_decay_linear(trade_when(or(greater(group_rank(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 0.8), less(group_rank(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 0.2)), signed_power(group_zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 2), NaN), 10)"
+    ]
+}

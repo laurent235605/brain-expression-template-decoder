@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry ) ), 1.5 ), quantile( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver=\"gaussian\" ), 0 )",
+    "idea": "严格尾部分位数择时：仅当行业标准化后的Surprise绝对值超过1.5倍标准差（极端尾部）时才参与交易，其余位置置0，配合高斯变换强化对极端黑天鹅事件的纯暴露，降低中段噪音干扰。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ) ), 1.5 ), quantile( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" ), 0 )",
+        "trade_when( greater( abs( group_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ) ), 1.5 ), quantile( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" ), 0 )"
+    ]
+}

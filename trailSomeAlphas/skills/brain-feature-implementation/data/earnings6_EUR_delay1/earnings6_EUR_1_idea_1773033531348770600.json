@@ -1,0 +1,14 @@
+{
+    "template": "subtract(zscore(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252)), zscore(divide(ts_std_dev(vec_avg({x_dividend}), 252), abs(ts_mean(vec_avg({x_dividend}), 252)))))",
+    "idea": "将TTM EPS累积（正向指标，越高越好）与股息稳定性（反向指标，越低越好）进行Z-Score标准化后融合。高分表示高盈利累积且低股息波动，综合衡量公司财务质量的稳健性与可持续性。",
+    "expression_list": [
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend), 252), abs(ts_mean(vec_avg(ern6_x_dividend), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend_233), 252), abs(ts_mean(vec_avg(ern6_x_dividend_233), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend_oc), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend), 252), abs(ts_mean(vec_avg(ern6_x_dividend), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend_233), 252), abs(ts_mean(vec_avg(ern6_x_dividend_233), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend_oc), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc), 252)))))",
+        "subtract(zscore(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)), zscore(divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252)))))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), {owners_decile_rank_long}) * signed_power(ts_zscore(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), 60), 2)",
+    "idea": "**概念**: 分位数组内结构动量\n首先在所有权分位数组内对结构惯性进行标准化，消除不同持股集中度水平的基础差异；然后与非线性的权重稳定性（平方压缩中间值，放大极端）相乘。识别那些在同类所有权结构中脱颖而出、且内幕持仓异常稳定的标的。",
+    "expression_list": [
+        "group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), insd8_effective_number_of_owners_decile_rank_long) * signed_power(ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60), 2)",
+        "group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), insd8_total_number_of_owners_decile_rank_long) * signed_power(ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60), 2)",
+        "group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), insd8_total_number_of_owners_decile_rank_long) * signed_power(ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60), 2)",
+        "group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), insd8_effective_number_of_owners_decile_rank_long) * signed_power(ts_zscore(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 60), 2)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_std_dev(vec_avg(ts_backfill({exposure_value}, 10)), 20), std=3), industry)",
+    "idea": "行业相对地理敞口稳定性（极端值控制）。先对缺失值进行10日回填（考虑地域敞口变化的渐进性），计算向量均值的20日波动率，使用3倍标准差裁剪消除极端异常值，最后进行行业中性Z-score标准化。该模板识别相对于同行业公司而言，地域业务布局异常稳定或动荡的标的，剔除行业固有波动差异，高值代表相对于同行具有极高的地域业务不稳定性。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_std_dev(vec_avg(ts_backfill(anl91_exposure_value, 10)), 20), std=3), industry)"
+    ]
+}

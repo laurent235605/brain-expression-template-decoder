@@ -1,0 +1,7 @@
+{
+    "template": "bucket(rank({stoxx_europe_600_ucits_weight}), range=\"0,1,0.2\")",
+    "idea": "**Concept**: Weight Rank Stability\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The time-series persistence of an instrument's percentile rank within the cross-sectional weight distribution, measuring whether leaders remain leaders\n- **Why This Feature**: In passive ETFs, top weights should remain relatively stable (large caps stay large); rank instability suggests either high turnover in the underlying index or active tactical shifts\n- **is filling nan necessary**: Yes, use group_mean() to impute missing weights temporarily for ranking purposes, ensuring rank continuity for suspended stocks that resume trading\n- **Directionality**: Stable high values indicate persistent large-cap dominance; declining values indicate migration from large-cap to mid-cap status within the portfolio\n- **Boundary Conditions**: Bounded [0, 1] as a percentile; transitions between quintiles mark significant regime changes",
+    "expression_list": [
+        "bucket(rank(mcr51_ishares_stoxx_europe_600_ucits_weight), range=\"0,1,0.2\")"
+    ]
+}

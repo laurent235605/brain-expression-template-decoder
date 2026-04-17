@@ -1,0 +1,10 @@
+{
+    "template": "multiply({sedol_curindbp_}, subtract(1, ts_quantile({sedol_aspanratio}, 252)))",
+    "idea": "**Concept**: Quality-Adjusted Industry Value Spread\n- **Sample Fields Used**: {sedol_curindbp_}, {sedol_aspanratio}, {sedol_curindep_}\n- **Definition**: Industry-relative book-to-price adjusted by accrual quality percentile to identify \"true\" value stocks after accounting for earnings manipulation risk\n- **Why This Feature**: Value strategies fail when buying artificially cheap stocks with poor earnings quality; this interaction filters out value traps by requiring low accruals\n- **Logical Meaning**: High adjusted value indicates cheap stocks with clean accounting (quality value); low values indicate expensive or manipulative accounting stocks\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values predict value premium with reduced drawdowns; negative values predict growth traps or accounting red flags\n- **Boundary Conditions**: Requires careful handling when accruals are undefined (financial companies)",
+    "expression_list": [
+        "multiply(fnd65_allcap_sedol_curindbp_, subtract(1, ts_quantile(fnd65_allcap_sedol_aspanratio, 252)))",
+        "multiply(fnd65_dev_sedol_curindbp_, subtract(1, ts_quantile(fnd65_allcap_sedol_aspanratio, 252)))",
+        "multiply(fnd65_dev_sedol_curindbp_, subtract(1, ts_quantile(fnd65_dev_sedol_aspanratio, 252)))",
+        "multiply(fnd65_allcap_sedol_curindbp_, subtract(1, ts_quantile(fnd65_dev_sedol_aspanratio, 252)))"
+    ]
+}

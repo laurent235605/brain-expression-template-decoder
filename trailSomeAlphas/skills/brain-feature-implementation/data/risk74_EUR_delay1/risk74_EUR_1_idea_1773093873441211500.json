@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_zscore(divide(ts_sum(winsorize(subtract(ts_delta({hfown_pctown}, 1), group_mean(ts_delta({hfown_pctown}, 1), log(ts_mean(cap,21)), industry)), std=4), 20), add(ts_std_dev(subtract(ts_delta({hfown_pctown}, 1), group_mean(ts_delta({hfown_pctown}, 1), log(ts_mean(cap,21)), industry)), 60), 0.0001)), industry), maxPercent=0.015)",
+    "idea": "CAPM残差流压版：借鉴CAPM残差思想，先用group_mean剔除行业共同持仓变动(以流通市值log加权)，得到异质性(idiosyncratic)持仓变化；在此基础上计算波动率调整后的信噪比，确保信号仅反映个股特有的大额资金异动，而非行业贝塔轮动。",
+    "expression_list": [
+        "truncate(group_zscore(divide(ts_sum(winsorize(subtract(ts_delta(rsk74_hfown_pctown, 1), group_mean(ts_delta(rsk74_hfown_pctown, 1), log(ts_mean(cap,21)), industry)), std=4), 20), add(ts_std_dev(subtract(ts_delta(rsk74_hfown_pctown, 1), group_mean(ts_delta(rsk74_hfown_pctown, 1), log(ts_mean(cap,21)), industry)), 60), 0.0001)), industry), maxPercent=0.015)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_regression(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), 5), group_mean(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), 5), industry), 20, rettype=0), 5), industry)",
+    "idea": "通过20日时序回归剥离行业系统性Beta(以行业平均修正动量为解释变量)，提取特质性残差(idiosyncratic residual)作为纯净alpha，再经5日线性衰减平滑降低换手率，最后进行行业Z-Score标准化，得到剔除行业共同趋势后的个股特异性预期修正信号。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_regression(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), 5), group_mean(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), 5), industry), 20, rettype=0), 5), industry)"
+    ]
+}

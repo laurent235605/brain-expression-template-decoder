@@ -1,0 +1,7 @@
+{
+    "template": "divide(winsorize(subtract(ts_mean(ts_backfill(vec_avg({vda}), lookback=5, k=1), 20), ts_mean(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120)), std=4), ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120))",
+    "idea": "构建流动性期限结构（Liquidity Term Structure），计算短期（20日）与长期（120日）平均成交量的标准化偏离度（除以历史波动率）。该信号捕捉流动性状态的边际变化速度，正值表示近期流动性异常充裕，负值表示流动性快速枯竭。",
+    "expression_list": [
+        "divide(winsorize(subtract(ts_mean(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 20), ts_mean(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120)), std=4), ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120))"
+    ]
+}

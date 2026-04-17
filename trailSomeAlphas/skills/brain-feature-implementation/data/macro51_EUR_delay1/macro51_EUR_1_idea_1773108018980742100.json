@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(or(greater(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252), 0.9), less(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252), 0.1)), ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252), 0), 5)",
+    "idea": "**极端分位数过滤与衰减平滑**：仅在历史分位数处于极端高位（>90%，超买）或低位（<10%，超卖）时保留信号，中间温和区间视为噪音并置零（trade_when），随后应用5日线性衰减（ts_decay_linear）降低换手率。该结构避免了在溢价温和波动区间的无效交易，专注于高置信度的极端均值回归机会，并控制调仓成本。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(or(greater(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252), 0.9), less(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252), 0.1)), ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252), 0), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), group_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), log(ts_mean({600_ucits_weight},21)), sector), 252, rettype=0)",
+    "idea": "剥离行业共性后的特质性权重偏离。通过将个股相对权重比率对行业市值加权平均比率做252日时序回归，提取残差作为纯个股层面的上市工具偏好信号，消除行业配置轮动对个体信号的干扰，适用于捕捉跨行业的结构性错配。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), group_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), log(ts_mean(mcr51_ishares_stoxx_europe_600_ucits_weight,21)), sector), 252, rettype=0)"
+    ]
+}

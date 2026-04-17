@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_zscore(subtract(1, ts_mean(vec_avg({lastcostingfailed}), 20)), industry), group_zscore(ts_std_dev(vec_avg({lastcostingfailed}), 20), industry))",
+    "idea": "时序稳定性调整：不仅关注近20日平均可靠性水平，还减去其滚动波动率的标准化得分，惩罚那些虽然均值高但波动剧烈的标的（运营不稳定），奖励持续稳定低故障的公司，实现风险调整后的行业相对排名。",
+    "expression_list": [
+        "subtract(group_zscore(subtract(1, ts_mean(vec_avg(mdl209_lastcostingfailed), 20)), industry), group_zscore(ts_std_dev(vec_avg(mdl209_lastcostingfailed), 20), industry))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(ts_backfill(vec_skewness({vda}), lookback=5, k=1), 120), industry), 3)",
+    "idea": "利用向量偏度（vec_skewness）捕捉日内（或向量内）流动性分布的不对称性。正的极端偏度通常预示存在大额单边订单流导致的流动性压力。通过行业内标准化（group_zscore）和幂变换（signed_power），突出显示微观结构出现严重失衡的异常时刻。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(ts_backfill(vec_skewness(mcr49_vda), lookback=5, k=1), 120), industry), 3)"
+    ]
+}

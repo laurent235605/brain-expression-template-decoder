@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_delta(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 63), 20), industry)",
+    "idea": "**时序惊喜动量加速因子**：不直接使用当期惊喜水平，而是关注业绩惊喜的时序变化趋势（加速度）。计算当期与63天前的惊喜百分比变化（ts_delta），捕捉业绩趋势是加速超预期还是减速；通过线性衰减加权（ts_decay_linear, 20天）对近期变化赋予更高权重，平滑短期噪音；最后进行行业标准化。该模板适用于识别业绩动量正在增强的标的，避免静态惊喜的均值回归风险。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_delta(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 63), 20), industry)",
+        "group_zscore(ts_decay_linear(ts_delta(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 63), 20), industry)"
+    ]
+}

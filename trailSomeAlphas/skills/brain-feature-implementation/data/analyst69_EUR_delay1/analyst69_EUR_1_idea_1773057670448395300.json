@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(group_normalize(trade_when(or(greater(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), 0.8), less(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), 0.2)), ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), 0), industry), hump=0.01)",
+    "idea": "实施极端分位截断与换手率自适应控制。通过bucket和group_rank将信号限制在行业内前20%（极强加速）与后20%（极强减速）两个极端桶，中间80%区间视为噪音并归零；利用hump_decay对权重进行滞后平滑（hump=0.01），在不牺牲信号及时性的前提下降低换手率；最后通过group_normalize确保每日每个行业内的多空净暴露严格中性，实现纯粹的行业内相对选股。",
+    "expression_list": [
+        "hump_decay(group_normalize(trade_when(or(greater(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), 0.8), less(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), 0.2)), ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), 0), industry), hump=0.01)",
+        "hump_decay(group_normalize(trade_when(or(greater(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), 0.8), less(bucket(group_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), range='0,1,0.1'), 0.2)), ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), 0), industry), hump=0.01)"
+    ]
+}

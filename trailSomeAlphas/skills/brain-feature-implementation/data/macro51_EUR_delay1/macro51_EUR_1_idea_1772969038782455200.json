@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), industry)), 1.5), group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), industry), 0), 5)",
+    "idea": "**条件交易与平滑衰减复合信号**：仅当行业中性化后的比率偏离度绝对值超过1.5倍标准差（显著溢价或折价）时才开仓交易（trade_when），否则持仓为0；对产生的信号应用5日线性衰减加权（ts_decay_linear）降低换手率。该模板结合了“显著性过滤”（避免轻微比率波动带来的噪音交易）和“时序平滑”（降低高频抖动），适用于容量较大、对换手敏感的策略，专注于捕捉持续性的份额类别偏好迁移而非日内噪音。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), industry)), 1.5), group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), industry), 0), 5)"
+    ]
+}

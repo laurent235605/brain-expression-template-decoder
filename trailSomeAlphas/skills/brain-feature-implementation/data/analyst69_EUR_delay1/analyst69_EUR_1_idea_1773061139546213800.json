@@ -1,0 +1,8 @@
+{
+    "template": "ts_corr(days_from_last_change({eps_expected_report_dt}), ts_delay(days_from_last_change({eps_expected_report_dt}), 20), 60)",
+    "idea": "计算报告日期变更间隔（输入1）与其20日滞后值的60日滚动相关性（输入2逻辑），将事件检测从'单日突变'升级为'模式持续性'分析，低相关性暗示公司信息披露节奏紊乱。",
+    "expression_list": [
+        "ts_corr(days_from_last_change(anl69_aeps_expected_report_dt), ts_delay(days_from_last_change(anl69_aeps_expected_report_dt), 20), 60)",
+        "ts_corr(days_from_last_change(anl69_eps_expected_report_dt), ts_delay(days_from_last_change(anl69_eps_expected_report_dt), 20), 60)"
+    ]
+}

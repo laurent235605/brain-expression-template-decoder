@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(ts_backfill(ts_delta({eps_best_eeps_cur_yr}, 5), 63), 252), driver=\"gaussian\")",
+    "idea": "将Input 1的短期盈利修正动量（5日变化）嵌入Input 2的历史分布分析框架：先对5日变化序列进行63日回溯填充确保数据连续性，再计算其在过去252个交易日中的时序分位（ts_rank），最后通过高斯分布映射（quantile）将历史极端的分析师情绪转变拉伸至尾部，放大罕见修正事件的信号强度，构建‘历史极端修订动量’指标。",
+    "expression_list": [
+        "quantile(ts_rank(ts_backfill(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(ts_backfill(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63), 252), driver=\"gaussian\")"
+    ]
+}

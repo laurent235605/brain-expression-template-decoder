@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(multiply(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5)), industry), 10)",
+    "idea": "平滑共识动量：在模板1的分歧度加权动量基础上，引入线性衰减算子ts_decay_linear进行10日平滑处理。在保持“分析师一致预期变化”信号内核的同时，通过线性递减权重（10,9,...,1）降低日间噪音导致的换手率，平衡信号及时性与策略稳定性。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(multiply(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5)), industry), 10)"
+    ]
+}

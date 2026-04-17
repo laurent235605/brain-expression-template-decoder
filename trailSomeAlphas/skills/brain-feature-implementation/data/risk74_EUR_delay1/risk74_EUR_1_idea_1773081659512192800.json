@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(ts_sum(ts_delta({hfown_pctown}, 1), 20), ts_sum(ts_delta({shortint}, 1), 15), 63, rettype=0)",
+    "idea": "剥离空头趋势影响后的对冲基金净流向残差。通过将20日对冲基金持仓累积变化对15日空头持仓累积变化做时序回归，取残差以剔除空头动量对机构流的解释成分，捕捉纯粹由机构主动行为驱动的alpha，避免将空头主导的市场beta误判为机构选股能力。",
+    "expression_list": [
+        "ts_regression(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), ts_sum(ts_delta(rsk74_shortint, 1), 15), 63, rettype=0)",
+        "ts_regression(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 63, rettype=0)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "add( ts_mean( divide( subtract( vec_avg( {actual_eps} ), vec_avg( {estimated_eps} ) ), add( abs( vec_avg( {estimated_eps} ) ), 0.01 ) ), 20 ), multiply( 0.5, ts_decay_linear( subtract( if_else( is_nan( vec_avg( {stock_split_ratio_243} ) ), 1, vec_avg( {stock_split_ratio_243} ) ), 1 ), 20 ) ) )",
+    "idea": "均衡平滑复合：将模板1的盈利惊喜经ts_mean(20)平滑以降低噪音，与模板2的分拆事件经ts_decay_linear(20)平滑后的脉冲信号以2:1权重相加。既保留盈利趋势的主导地位，又通过分拆事件提供资本结构层面的辅助验证，适合作为稳健的基础Alpha层。",
+    "expression_list": [
+        "add( ts_mean( divide( subtract( vec_avg( ern6_actual_eps ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ), 20 ), multiply( 0.5, ts_decay_linear( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ), 20 ) ) )",
+        "add( ts_mean( divide( subtract( vec_avg( ern6_actual_eps_274 ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ), 20 ), multiply( 0.5, ts_decay_linear( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ), 20 ) ) )"
+    ]
+}

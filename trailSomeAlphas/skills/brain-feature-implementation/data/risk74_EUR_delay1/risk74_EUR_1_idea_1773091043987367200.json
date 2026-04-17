@@ -1,0 +1,8 @@
+{
+    "template": "({hfown_pctown} - group_mean({hfown_pctown}, industry)) * signed_power(group_zscore({factor_e} + {factor_s} + {factor_g}, industry), 0.5)",
+    "idea": "结合模板2的行业相对持仓偏离与模板1的ESG整合评分。使用signed_power对组内标准化后的ESG总分进行非线性压缩（0.5次方），既保留方向又降低极端值影响，再与HF持仓偏离相乘。逻辑：在高ESG评分的公司中，HF的超配更具说服力；同时防止ESG极端异常值过度主导最终信号，实现温和增强。",
+    "expression_list": [
+        "(rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry)) * signed_power(group_zscore(rsk74_factor_e + rsk74_factor_s + rsk74_factor_g, industry), 0.5)",
+        "(rsk74_hfown_pctown - group_mean(rsk74_hfown_pctown, industry)) * signed_power(group_zscore(rsk74_factor_esg + rsk74_factor_s + rsk74_factor_g, industry), 0.5)"
+    ]
+}

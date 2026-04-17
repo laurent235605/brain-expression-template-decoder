@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0.85), greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.5)), quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), driver='gaussian'), 0)",
+    "idea": "交叉验证模板1的时序分位数持续性（要求20日分位数>85%）与模板2的统计显著性（|Z|>1.5），采用双重确认机制：仅当信号在历史高位/低位持续存在且统计显著时才赋予高斯分位数权重，有效过滤单一指标可能产生的假阳性噪音，提升信号质量。",
+    "expression_list": [
+        "trade_when(and(greater(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0.85), greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5)), quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), driver='gaussian'), 0)"
+    ]
+}

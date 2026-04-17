@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(if_else(greater(days_from_last_change({eps_expected_report_dt}), 90), multiply(1, add(1, abs(group_zscore({analyst_dispersion}, industry)))), if_else(less(days_from_last_change({eps_expected_report_dt}), 5), multiply(reverse(1), add(1, abs(group_zscore({analyst_dispersion}, industry)))), 0)), industry)",
+    "idea": "将原始staleness信号与分析师预测分歧度({analyst_dispersion})进行算术增强：高分歧时通过绝对z-score加1的方式放大staleness效应(极度稳定+高分歧=强确定性溢价，近期变更+高分歧=强不确定性折价)，低分歧时维持基础配置，实现基本面确定性与市场认知分歧的双维度信息叠加。",
+    "expression_list": []
+}

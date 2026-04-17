@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(ts_mean({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 20), sector), 0.9), 1, if_else(less(group_rank(ts_mean({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 20), sector), 0.1), -1, 0))",
+    "idea": "融合模板2的定价偏离差分与模板1的离散化阈值逻辑：先对收益-权重分位数差异进行20日移动平均平滑（ts_mean降噪），再仅在行业排名的前10%（极端高估）赋予-1、后10%（极端低估）赋予+1，中间80%置零。通过时序平滑过滤短期噪音，再结合非黑即白的仓位构建，提升信号的稳定性。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_mean(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20), sector), 0.9), 1, if_else(less(group_rank(ts_mean(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20), sector), 0.1), -1, 0))"
+    ]
+}

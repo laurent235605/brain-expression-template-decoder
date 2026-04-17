@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(trade_when(or(greater(quantile(days_from_last_change({eps_expected_report_dt}), \"gaussian\"), 1.5), less(quantile(days_from_last_change({eps_expected_report_dt}), \"gaussian\"), reverse(1.5))), signed_power(quantile(days_from_last_change({eps_expected_report_dt}), \"gaussian\"), 3), 0), industry)",
+    "idea": "使用quantile将staleness分布映射至高斯形态，仅当标准化值处于±1.5标准差尾部极端区域时才建仓，中段噪音强制归零；通过signed_power(3)三次方非线性放大极端尾部差异，使组合极度集中于最确定的稳定状态与最不确定的近期变更状态，强化Barbell策略效果。",
+    "expression_list": [
+        "group_normalize(trade_when(or(greater(quantile(days_from_last_change(anl69_aeps_expected_report_dt), \"gaussian\"), 1.5), less(quantile(days_from_last_change(anl69_aeps_expected_report_dt), \"gaussian\"), reverse(1.5))), signed_power(quantile(days_from_last_change(anl69_aeps_expected_report_dt), \"gaussian\"), 3), 0), industry)",
+        "group_normalize(trade_when(or(greater(quantile(days_from_last_change(anl69_eps_expected_report_dt), \"gaussian\"), 1.5), less(quantile(days_from_last_change(anl69_eps_expected_report_dt), \"gaussian\"), reverse(1.5))), signed_power(quantile(days_from_last_change(anl69_eps_expected_report_dt), \"gaussian\"), 3), 0), industry)"
+    ]
+}

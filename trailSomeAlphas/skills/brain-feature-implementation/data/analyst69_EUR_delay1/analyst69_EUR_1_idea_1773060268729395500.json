@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(if_else(and(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), greater(ts_rank({turnover}, 20), 0.8)), -1, 0), 20)",
+    "idea": "引入成交量确认机制以过滤噪声事件，仅当报告日期发生变更且当日成交量处于过去20日高位（前20%分位数）时，才认定该事件具有市场关注度并触发-1信号。通过20日线性衰减模拟信息释放过程，构建基于高流动性确认的负面事件驱动策略，避免在低关注度环境下由数据错误或非实质性调整引发的误判。",
+    "expression_list": []
+}

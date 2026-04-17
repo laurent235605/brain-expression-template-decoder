@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( subtract( group_rank( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), industry ), group_rank( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 20 ), industry ) ), industry )",
+    "idea": "通过比较5日与20日持仓变化速度的组内排名差异，捕捉短期加速相对于长期趋势的陡峭程度（期限结构），识别资金流入的边际加强信号；进行行业中性化处理，剔除行业轮动带来的伪信号，专注于个股层面的相对加速度。",
+    "expression_list": [
+        "group_zscore( subtract( group_rank( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), industry ), group_rank( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 20 ), industry ) ), industry )"
+    ]
+}

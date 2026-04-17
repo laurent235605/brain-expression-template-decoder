@@ -1,0 +1,7 @@
+{
+    "template": "1 - vec_avg({lastcostingfailed})",
+    "idea": "**Concept**: Operational Reliability Rate\n- **Sample Fields Used**: lastcostingfailed\n- **Definition**: Proportion of successful costing operations calculated as 1 minus the average failure flag\n- **Why This Feature**: Measures stability of operational infrastructure; consistent success indicates robust systems while volatility suggests unreliable pricing engines\n- **Logical Meaning**: System-wide reliability metric for costing processes\n- **is filling nan necessary**: NaN may indicate missing attempts; treat as neither success nor failure by filtering before averaging, or conservatively treat as 0 (failure) if data absence implies risk\n- **Directionality**: 1 indicates perfect reliability; 0 indicates complete system failure; values in between indicate partial degradation\n- **Boundary Conditions**: 0 to 1 bounded range",
+    "expression_list": [
+        "1 - vec_avg(mdl209_lastcostingfailed)"
+    ]
+}

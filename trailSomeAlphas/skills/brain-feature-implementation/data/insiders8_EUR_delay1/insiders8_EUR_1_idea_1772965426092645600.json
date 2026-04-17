@@ -1,0 +1,7 @@
+{
+    "template": "sign({weight_net}) * ts_delta({active_return_decile_rank_long}, 5)",
+    "idea": "**Concept**: Implied Return Revision Velocity\n- **Sample Fields Used**: active_return_decile_rank_long\n- **Definition**: Change in Black-Litterman implied return decile rank adjusted for the sign of current net weight\n- **Why This Feature**: Captures updates to expected returns independent of position changes; rapid revisions suggest new information arrival\n- **is filling nan necessary**: NaN in BL-implied returns may indicate insufficient historical data for covariance estimation. Consider using group_mean by sector to fill if fundamental coverage exists.\n- **Directionality**: Positive delta with positive net weight confirms bullish momentum; negative delta with positive weight suggests fading conviction\n- **Boundary Conditions**: Jumps from decile 1 to 10 suggest model instability or extreme return shocks",
+    "expression_list": [
+        "sign(insd8_weight_net) * ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long, 5)"
+    ]
+}

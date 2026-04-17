@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(vector_neut(ts_backfill({fundreportedequityassets},63), ts_backfill({reported_asset_value},63))), 3)",
+    "idea": "对经过回溯填充和向量中性化后的规模中性残差进行截面标准化，再应用三次方的符号幂变换（signed_power）。该非线性变换极度放大尾部信号（高确信度多头与极度防御空头），同时压缩中等配置区间的贡献，构建一个专注于极端配置风险的非对称因子。",
+    "expression_list": [
+        "signed_power(zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,63), ts_backfill(fund_reported_asset_value,63))), 3)"
+    ]
+}

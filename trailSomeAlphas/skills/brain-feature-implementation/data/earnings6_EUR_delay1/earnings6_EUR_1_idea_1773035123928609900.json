@@ -1,0 +1,8 @@
+{
+    "template": "bucket(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), range=\"0,1,0.2\")",
+    "idea": "分位桶化的离散惊喜：将连续的EPS惊喜比率通过rank映射到0-1分位，再使用bucket划分为5等分桶。此处理将连续信号转化为离散排序，消除原始比率中可能存在的非线性扭曲（如对数正态分布导致的右偏），便于后续进行分段加权或仅在特定分位（如最高/最低桶）进行交易，增强信号的可解释性与稳定性。",
+    "expression_list": [
+        "bucket(rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), range=\"0,1,0.2\")",
+        "bucket(rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), range=\"0,1,0.2\")"
+    ]
+}

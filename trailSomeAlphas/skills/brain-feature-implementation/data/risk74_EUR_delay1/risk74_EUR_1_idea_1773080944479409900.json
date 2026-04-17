@@ -1,0 +1,14 @@
+{
+    "template": "multiply(group_zscore(winsorize({concentration},std=4), industry), trade_when(less(ts_rank(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 60), 0.2), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), 0))",
+    "idea": "时序稳定性加权复合风险：利用输入2的时间序列排名框架作用于输入1的双源差异绝对值，识别两数据源差异处于历史低位（前20%）的高置信时期，此时将行业标准化后的{concentration}与双源均值海外敞口相乘。差异越小权重越高，构建时序自适应的地理风险因子。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0))",
+        "multiply(group_zscore(winsorize(rsk74_concentration,std=4), industry), trade_when(less(ts_rank(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 60), 0.2), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(vec_skewness({version}), 60)), 2), ts_zscore(vec_skewness({version}), 60), 0)",
+    "idea": "历史均值偏离的偏度Z分数：计算当前偏度相对于其60日历史均值的标准差偏离(ts_zscore)，并使用trade_when仅当绝对偏离超过2个标准差时交易（极端值保留，其余置零）。高正值表示当前偏度远高于历史常态，可能预示分析师行为模式的结构性转变；高负值则表示分布异常集中。适用于识别版本分布形态的异常 regime 转换。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(vec_skewness(anl85_version), 60)), 2), ts_zscore(vec_skewness(anl85_version), 60), 0)"
+    ]
+}

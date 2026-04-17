@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252)",
+    "idea": "串行融合双重视角：先以63日回归剔除行业空头beta提取特质残差（模板2逻辑），再对该残差计算252日时序Z-score（模板1逻辑），识别'经行业调整后的历史极端'空头异动，既消除行业系统性干扰又适应个股长期结构性差异。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252)"
+    ]
+}

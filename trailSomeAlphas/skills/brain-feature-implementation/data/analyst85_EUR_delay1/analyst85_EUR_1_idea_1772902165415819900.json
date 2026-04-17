@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), std=3), industry)",
+    "idea": "在清洗后的20日累积修订强度基础上，进行行业内标准化（Group Z-Score）。剔除不同行业间分析师覆盖密度与更新频率的系统性差异，专注捕捉行业内相对异常的调研活跃波动，适用于控制行业暴露下的相对选股。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), std=3), industry)"
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "template": "divide(add(add({sedol_curindbp_}, {sedol_curindep_}), add({sedol_curindsp_}, {sedol_curindcfp_})), 4)",
+    "idea": "**Concept**: Multi-Factor Industry Z-Score Composite\n- **Sample Fields Used**: {sedol_curindbp_}, {sedol_curindep_}, {sedol_curindsp_}, {sedol_curindcfp_}\n- **Definition**: Average of industry-relative valuation Z-scores across book, earnings, sales, and cash flow to identify stocks cheap on multiple dimensions simultaneously\n- **Why This Feature**: Single-metric value can be distorted by sector-specific accounting (e.g., depreciation policies affecting EPS but not sales); composite reduces noise\n- **Logical Meaning**: More negative values indicate deeper relative value; positive values indicate premium pricing across all metrics\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Lower (more negative) values predict mean-reversion outperformance within industries\n- **Boundary Conditions**: Missing data in any metric biases composite; equal weighting vs. optimized weighting trade-offs",
+    "expression_list": [
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_allcap_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_dev_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_dev_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_dev_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)",
+        "divide(add(add(fnd65_allcap_sedol_curindbp_, fnd65_allcap_sedol_curindep_), add(fnd65_allcap_sedol_curindsp_, fnd65_dev_sedol_curindcfp_)), 4)"
+    ]
+}

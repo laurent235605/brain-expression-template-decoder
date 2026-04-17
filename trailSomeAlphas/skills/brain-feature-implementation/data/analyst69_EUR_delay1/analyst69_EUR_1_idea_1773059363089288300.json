@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(signed_power(group_zscore(winsorize(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), std=4), industry), y=2), 20), industry)",
+    "idea": "将二元事件扩展为幅度敏感信号：先对日内变化量做4倍标准差截尾，通过行业组内zscore识别相对于同行的异常变更（而非绝对数值），利用signed_power(y=2)放大极端偏离的尾部效应，最后经20日线性衰减并做行业中性化处理，得到纯净的个股特质性不确定性溢价。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(signed_power(group_zscore(winsorize(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), std=4), industry), y=2), 20), industry)",
+        "group_normalize(ts_decay_linear(signed_power(group_zscore(winsorize(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), std=4), industry), y=2), 20), industry)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(abs(quantile(ts_rank(days_from_last_change({eps_expected_report_dt}), 252), driver=\"gaussian\")), 1.5), ts_backfill({eps_best_eeps_cur_yr}, 63), 0)",
+    "idea": "时间极端条件触发结构：融合模板A的'事件时间距离'度量（days_from_last_change+ts_rank+quantile高斯拉伸）与模板B的'极端条件触发'逻辑（trade_when+abs+阈值）。仅当距离上次预期报告日变更的时间处于历史极端分位（|高斯分位|>1.5）时，才持仓EPS预期值，否则强制空仓。捕捉'历史罕见的长静默期'或'预期频繁变更'的极端状态，避免在信息平稳期过度暴露。",
+    "expression_list": [
+        "trade_when(greater(abs(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), driver=\"gaussian\")), 1.5), ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 0)",
+        "trade_when(greater(abs(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), driver=\"gaussian\")), 1.5), ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 0)",
+        "trade_when(greater(abs(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), driver=\"gaussian\")), 1.5), ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 0)",
+        "trade_when(greater(abs(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), driver=\"gaussian\")), 1.5), ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 0)"
+    ]
+}

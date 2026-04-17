@@ -1,0 +1,9 @@
+{
+    "template": "trade_when(greater(quantile(vec_avg({probability}), driver=\"uniform\"), 0.8), ts_delta(vec_avg({daily_probability}), 5), 0)",
+    "idea": "高信念过滤下的动量交易：仅当横截面信念处于前20%分位（强者）时才交易其5日动量信号，实现\"优中选优\"的增强策略",
+    "expression_list": [
+        "trade_when(greater(quantile(vec_avg(anl56_daily_probability), driver=\"uniform\"), 0.8), ts_delta(vec_avg(anl56_daily_probability), 5), 0)",
+        "trade_when(greater(quantile(vec_avg(anl56_probability), driver=\"uniform\"), 0.8), ts_delta(vec_avg(anl56_daily_probability), 5), 0)",
+        "trade_when(greater(quantile(vec_avg(conviction_probability_score), driver=\"uniform\"), 0.8), ts_delta(vec_avg(anl56_daily_probability), 5), 0)"
+    ]
+}

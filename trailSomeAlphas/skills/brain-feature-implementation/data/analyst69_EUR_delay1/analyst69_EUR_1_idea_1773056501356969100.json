@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 4), 63), 10)",
+    "idea": "在模板B的累积结构中加入4倍标准差极端值裁剪（winsorize），剔除单日异常巨大的预期调整（可能是数据错误或一次性事件冲击），同时保留63日累积与10日线性衰减。识别持续稳健的修订趋势而非脉冲式噪音，提高信号的稳定性与可执行性。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 4), 63), 10)",
+        "ts_decay_linear(ts_sum(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 4), 63), 10)"
+    ]
+}

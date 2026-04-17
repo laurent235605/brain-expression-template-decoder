@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(group_rank(add(multiply(0.6, vec_range(vec_filter({fiscalyearend}, value=\"nan\"))), multiply(0.4, vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")))), sector), 0.85), signed_power(group_zscore(winsorize(add(multiply(0.6, vec_range(vec_filter({fiscalyearend}, value=\"nan\"))), multiply(0.4, vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")))), std=4), sector), 2), 0)",
+    "idea": "复合复杂度指数：融合极差（60%权重）与标准差（40%权重）构建多维分散度指标，更稳健地衡量子公司报告周期异质性，仅对行业前15%极值进行平方非线性放大（power=2），强化尾部区分度。",
+    "expression_list": [
+        "trade_when(greater(group_rank(add(multiply(0.6, vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\"))), multiply(0.4, vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")))), sector), 0.85), signed_power(group_zscore(winsorize(add(multiply(0.6, vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\"))), multiply(0.4, vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")))), std=4), sector), 2), 0)"
+    ]
+}

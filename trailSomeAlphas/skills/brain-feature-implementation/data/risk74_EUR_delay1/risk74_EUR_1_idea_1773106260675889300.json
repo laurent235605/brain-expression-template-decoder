@@ -1,0 +1,7 @@
+{
+    "template": "subtract(signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown},63),1), std=3), 20), sector), 0.5), signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({fund_pct_ownership_encr},63),1), std=3), 20), sector), 0.5))",
+    "idea": "将模板2的完整处理流程（回溯填充、3倍标准差截尾、20日线性衰减加权、行业标准化、0.5次幂压缩）分别独立应用于对冲基金和共同基金持仓变化序列，再计算两者差异，更精准地捕捉各自持续趋势经非线性变换后的相对背离，避免直接对差值进行标准化带来的信息损失。",
+    "expression_list": [
+        "subtract(signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown,63),1), std=3), 20), sector), 0.5), signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(hedge_fund_pct_ownership_encr,63),1), std=3), 20), sector), 0.5))"
+    ]
+}

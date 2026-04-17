@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(add(winsorize(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), std=4), winsorize(divide(ts_delta({ebitda_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({ebitda_best_eeps_cur_yr}, 20), 5)), std=4)), industry)",
+    "idea": "融合EPS与EBITDA的5日修正速度（来自模板1的百分比变化逻辑），通过截面zscore标准化后等权相加，并在行业层面中性化（借鉴CAPM模板思路）。针对两类数据不同的稀疏性特征，分别采用10日与20日回溯填充，既保留速度信息又避免行业偏差，实现跨财务指标的共识预期动量。",
+    "expression_list": [
+        "group_zscore(add(winsorize(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), std=4), winsorize(divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5)), std=4)), industry)",
+        "group_zscore(add(winsorize(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), std=4), winsorize(divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5)), std=4)), industry)"
+    ]
+}

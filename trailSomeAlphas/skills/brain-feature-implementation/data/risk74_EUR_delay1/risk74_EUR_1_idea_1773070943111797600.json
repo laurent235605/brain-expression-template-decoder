@@ -1,0 +1,26 @@
+{
+    "template": "multiply(ts_sum(ts_delta({shortint}, 1), 15), multiply({concentration}, {nondomicile}))",
+    "idea": "保留模板2的原始乘积结构（集中度×非本土暴露），但将其作为模板1空头兴趣累积信号的放大器，构建'高地理风险下的做空压力'复合信号，实现跨模板的风险叠加增强。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_nondomicile))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_nondomicile))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_nondomicile))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_nondomicile))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2))",
+        "multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2))"
+    ]
+}

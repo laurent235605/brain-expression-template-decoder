@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry)), 2), signed_power(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry), 2), NaN)",
+    "idea": "极端尾部分位非线性放大：仅当20日累积流处于行业极端分位（|zscore|>2）时保留信号，中间温和变动视为噪音置NaN；对保留的极端值使用signed_power(...,2)放大尾部差异，强化极强 accumulative buying/selling pressure 的区分度",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry)), 2), signed_power(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry), 2), NaN)"
+    ]
+}

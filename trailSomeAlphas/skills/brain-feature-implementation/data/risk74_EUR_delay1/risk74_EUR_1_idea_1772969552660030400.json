@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_rank(winsorize(({hfown_pctown} / {hfown_numown}), std=4), industry), 2)",
+    "idea": "非线性行业分位数映射拉伸：将去极值后的分散度指标在行业内部进行排序分位（group_rank），然后通过signed_power（幂次=2）对分位数进行非线性变换——对接近0（极度分散）和接近1（极度集中）的尾部区域进行平方拉伸放大权重，同时压缩中间区间的区分度，增强对极端持仓结构风险的识别敏感度。",
+    "expression_list": [
+        "signed_power(group_rank(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), industry), 2)"
+    ]
+}

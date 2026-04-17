@@ -1,0 +1,7 @@
+{
+    "template": "hump(multiply(group_zscore(winsorize({stoxx_europe_600_ucits_weight}, std=4), sector), inverse(sqrt(ts_std_dev(group_zscore(winsorize({stoxx_europe_600_ucits_weight}, std=4), sector), 21)))), hump=0.02)",
+    "idea": "计算权重相对行业均值的偏离度（Z-score），并通过其近期波动率（ts_std_dev）的倒数进行风险调整，结合hump函数忽略微小波动（<2%变化），仅在偏离显著且波动适中时放大信号，捕捉经风险调整后的超配/低配反转信号。",
+    "expression_list": [
+        "hump(multiply(group_zscore(winsorize(mcr51_ishares_stoxx_europe_600_ucits_weight, std=4), sector), inverse(sqrt(ts_std_dev(group_zscore(winsorize(mcr51_ishares_stoxx_europe_600_ucits_weight, std=4), sector), 21)))), hump=0.02)"
+    ]
+}

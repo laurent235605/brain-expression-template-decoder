@@ -1,0 +1,30 @@
+{
+    "template": "abs({industry_position} - {industry_position_2})",
+    "idea": "**Concept**: Cross-Pillar Rank Divergence\n- **Sample Fields Used**: `industry_position`, `industry_position_2`\n- **Definition**: Absolute difference between industry rankings across different ESG pillars\n- **Why This Feature**: Identifies companies with anomalously inconsistent ESG profiles (e.g., top-decile governance with bottom-decile environmental scores). Such divergence may indicate governance structures that fail to enforce environmental compliance or acquired subsidiaries with divergent cultures.\n- **is filling nan necessary**: If either position is NaN, divergence is undefined; subtraction handles this naturally.\n- **Directionality**: Low values (< 10 rank difference) indicate consistent ESG quality; High values (> 30) indicate anomalous internal ESG conflicts\n- **Boundary Conditions**: 0 = perfectly aligned pillar rankings; Max = maximum possible rank difference in industry",
+    "expression_list": [
+        "abs(environmental_industry_position_2 - environmental_industry_position_2)",
+        "abs(environmental_hybrid_industry_position - environmental_industry_position_2)",
+        "abs(environmental_maxcorr_industry_position - environmental_industry_position_2)",
+        "abs(employee_diversity_industry_position - environmental_industry_position_2)",
+        "abs(employee_satisfaction_industry_position - environmental_industry_position_2)",
+        "abs(employer_hybrid_industry_position - environmental_industry_position_2)",
+        "abs(employer_industry_position - environmental_industry_position_2)",
+        "abs(employer_maxcorr_industry_position - environmental_industry_position_2)",
+        "abs(governance_industry_position_2 - governance_industry_position_2)",
+        "abs(governance_hybrid_industry_position - governance_industry_position_2)",
+        "abs(governance_maxcorr_industry_position - governance_industry_position_2)",
+        "abs(antipollution_policy_industry_position - governance_industry_position_2)",
+        "abs(board_independence_industry_position - governance_industry_position_2)",
+        "abs(citizenship_hybrid_industry_position - governance_industry_position_2)",
+        "abs(citizenship_industry_position - governance_industry_position_2)",
+        "abs(citizenship_maxcorr_industry_position - governance_industry_position_2)",
+        "abs(social_industry_position_2 - social_industry_position_2)",
+        "abs(social_hybrid_industry_position - social_industry_position_2)",
+        "abs(social_maxcorr_industry_position - social_industry_position_2)",
+        "abs(social_poscorr_industry_position - social_industry_position_2)",
+        "abs(social_score_industry_position - social_industry_position_2)",
+        "abs(social_totalcorr_industry_position - social_industry_position_2)",
+        "abs(sustainability_hybrid_industry_position - social_industry_position_2)",
+        "abs(sustainability_industry_position - social_industry_position_2)"
+    ]
+}

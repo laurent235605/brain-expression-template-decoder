@@ -1,0 +1,10 @@
+{
+    "template": "hump(ts_delta(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), 5), 0.005) * ts_mean(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), 5)",
+    "idea": "**概念**: 微结构变化触发的平滑信念\n使用hump算子过滤掉所有权结构相关性的微小抖动（<0.005），仅保留显著的结构变化信号；乘以近期平均的内幕持仓稳定性。该模板旨在识别那些发生实质性所有权结构重组、且内幕持仓保持稳定的股票，忽略噪音型结构波动。",
+    "expression_list": [
+        "hump(ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 5), 0.005) * ts_mean(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5)",
+        "hump(ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 5), 0.005) * ts_mean(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5)",
+        "hump(ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 5), 0.005) * ts_mean(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5)",
+        "hump(ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 5), 0.005) * ts_mean(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), industry)",
+    "idea": "将模板2的平滑处理与分组运算结合，计算行业内相对报告日期稳定性（group_zscore），避免不同行业披露节奏差异导致的误判，提供行业中性的事件时间轴参考。",
+    "expression_list": [
+        "group_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), industry)",
+        "group_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), industry)"
+    ]
+}

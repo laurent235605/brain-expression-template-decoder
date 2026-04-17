@@ -1,0 +1,14 @@
+{
+    "template": "trade_when( greater( ts_zscore( winsorize( ts_backfill( {concentration}, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( {crowding}, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( {value_ts}, industry ), 20 ) ), 0 )",
+    "idea": "增强版统计显著趋势验证：将简单均线突破升级为252日Z-Score检验（>1标准差），确保集中度上升具有统计显著性；对拥挤度施加行业组内平方非线性变换（signed_power=2），极端放大高拥挤股票权重；价值信号经20日线性衰减平滑（ts_decay_linear），降低短期噪音导致的换手；所有输入经63日回溯填充与4倍标准差截断（winsorize）处理，提升数据质量。仅在集中度进入历史极端高位区间时激活做空信号。",
+    "expression_list": [
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( rsk74_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( rsk74_raw_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( liquidity_factor_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( liquidity_timeseries_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_raw_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( rsk74_raw_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_raw_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( rsk74_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_raw_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( liquidity_factor_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )",
+        "trade_when( greater( ts_zscore( winsorize( ts_backfill( rsk74_raw_concentration, 63 ), 4 ), 252 ), 1 ), multiply( signed_power( group_zscore( winsorize( liquidity_timeseries_crowding, 4 ), industry ), 2 ), ts_decay_linear( group_zscore( rsk74_value_ts, industry ), 20 ) ), 0 )"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_exp_window(trade_when(greater(quantile(ts_zscore(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), 1, 0), 5), 252), driver=\"gaussian\"), 2), quantile(ts_zscore(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), 1, 0), 5), 252), driver=\"gaussian\"), 0), 15)",
+    "idea": "捕捉变更聚集(clustering)效应：通过5日滚动求和统计近期报告日调整频次，经252日历史zscore标准化后映射为高斯分布分位数，仅当超过2倍标准差（前5%极端不确定公司）时保留信号，其余置零；采用15日指数衰减(ts_decay_exp_window)使得高频变更事件的惩罚呈指数级快速衰减，突出突发不确定性的短期冲击。",
+    "expression_list": [
+        "ts_decay_exp_window(trade_when(greater(quantile(ts_zscore(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), 1, 0), 5), 252), driver=\"gaussian\"), 2), quantile(ts_zscore(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), 1, 0), 5), 252), driver=\"gaussian\"), 0), 15)",
+        "ts_decay_exp_window(trade_when(greater(quantile(ts_zscore(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), 1, 0), 5), 252), driver=\"gaussian\"), 2), quantile(ts_zscore(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), 1, 0), 5), 252), driver=\"gaussian\"), 0), 15)"
+    ]
+}

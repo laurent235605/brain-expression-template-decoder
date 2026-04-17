@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(group_rank(vec_avg({version}), industry), 5), 3)",
+    "idea": "行业内排名加速度：不直接使用版本数值，而是计算个股在行业内的分位数排名（group_rank）的5日变化，并进行3日线性衰减平滑。该相对视角能识别在行业内信息优势快速上升或下降的股票，避免跨行业不可比性。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(group_rank(vec_avg(anl85_version), industry), 5), 3)"
+    ]
+}

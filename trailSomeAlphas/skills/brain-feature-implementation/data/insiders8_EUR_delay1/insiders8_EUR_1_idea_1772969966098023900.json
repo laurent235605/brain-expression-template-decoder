@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore( winsorize( divide( ts_std_dev( {weight_net}, 20 ), add( abs( ts_mean( {weight_net}, 20 ) ), 0.0001 ) ), std=4 ), 252 )",
+    "idea": "持仓稳定性时序动量（历史分位）。计算20日变异系数并经截面去极值后，再取该CV在过去252个交易日中的时序zscore。正值表示当前持仓波动处于历史高位（机构调仓频繁、信心动摇），负值表示进入历史罕见的稳定期（强烈信念或筹码锁定）。用于捕捉持仓行为的边际变化而非绝对水平。",
+    "expression_list": [
+        "ts_zscore( winsorize( divide( ts_std_dev( insd8_weight_net, 20 ), add( abs( ts_mean( insd8_weight_net, 20 ) ), 0.0001 ) ), std=4 ), 252 )"
+    ]
+}

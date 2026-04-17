@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(divide(vec_avg({rank}), ts_std_dev(vec_avg({rank}), 20)), std=4), industry)",
+    "idea": "行业中性信噪比：先计算个股排名相对于自身历史波动的信噪比，进行去极值处理，再在行业内部进行zscore标准化。此举剔除了不同行业间波动率水平和排名中枢的结构性差异，捕捉行业内相对的信号稳定性与确信度。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(vec_avg(mdl245_rank), ts_std_dev(vec_avg(mdl245_rank), 20)), std=4), industry)"
+    ]
+}

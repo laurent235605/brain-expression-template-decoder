@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(ts_delta(vec_avg({elta_value}), 5), industry), subtract(1, rank(vec_stddev({elta_value}))))",
+    "idea": "共识质量加权动量模板。将行业中性修正动量乘以(1-离散度排名)作为自适应权重，其中离散度通过vec_stddev计算估计分布的标准差衡量分析师分歧程度。当分析师分歧大（高离散度，排名接近1）时自动降低信号权重至接近零，共识集中时（低离散度）保留完整信号强度。逻辑在于：一致预期下的修正比分歧预期下的修正更具价格影响力，实现了基于市场共识质量的动态信号增强。",
+    "expression_list": [
+        "multiply(group_zscore(ts_delta(vec_avg(ern10_elta_value), 5), industry), subtract(1, rank(vec_stddev(ern10_elta_value))))"
+    ]
+}

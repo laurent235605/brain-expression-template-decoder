@@ -1,0 +1,8 @@
+{
+    "template": "hump(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 0.01)",
+    "idea": "在模板2的回归残差基础上应用hump算子（阈值0.01），忽略微小的日间残差波动，仅当特质性敞口发生实质性变化（突破噪音区间）时才调整仓位，显著降低换手率同时保留核心信号，实现稳定性与特异性的平衡。",
+    "expression_list": [
+        "hump(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), 0.01)",
+        "hump(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), 0.01)"
+    ]
+}

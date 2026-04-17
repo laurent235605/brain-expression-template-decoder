@@ -1,0 +1,12 @@
+{
+    "template": "{correlation} - {correlation}",
+    "idea": "**Concept**: ESG Methodology Divergence (Market Perception Shift)\n- **Sample Fields Used**: `total_correlation`, `positive_correlation`\n- **Definition**: Difference between total-correlation-weighted and positive-correlation-weighted ESG scores\n- **Why This Feature**: Captures the gap between ESG factors that correlate with returns (positive or negative) vs. those that only positively correlate. A widening gap suggests market repricing of ESG risk factors or changing investor preferences regarding sustainability metrics.\n- **is filling nan necessary**: Correlation scores may be NaN for companies with insufficient return history; preserve NaN as the divergence is undefined.\n- **Directionality**: Positive values indicate strong negative-correlation ESG factors (potential \"ESG risk\" factors); negative values indicate positive-correlation factors dominate\n- **Boundary Conditions**: Extreme positive = ESG profile dominated by factors historically associated with underperformance; Extreme negative = pure positive-correlation ESG alignment",
+    "expression_list": [
+        "environmental_max_correlation_weighted_score - environmental_max_correlation_weighted_score",
+        "governance_max_correlation_weighted_score - governance_max_correlation_weighted_score",
+        "social_max_correlation_weighted_score - social_max_correlation_weighted_score",
+        "social_score_positive_correlation - social_score_positive_correlation",
+        "social_score_total_correlation - social_score_total_correlation",
+        "sustainability_max_correlation_weighted_score - sustainability_max_correlation_weighted_score"
+    ]
+}

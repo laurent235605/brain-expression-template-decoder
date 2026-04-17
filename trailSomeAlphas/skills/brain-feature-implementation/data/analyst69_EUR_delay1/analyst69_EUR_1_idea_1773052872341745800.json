@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), add(1, abs(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"))))",
+    "idea": "将报告日稳定性的历史极端程度（经高斯映射后的绝对值）作为动态杠杆系数（1.0-2.0x）。当财报披露时间处于历史罕见状态（无论极稳定或极不稳定，高斯分位绝对值大）时，自动放大EPS修订动量的暴露；常态下则保持基准权重。捕捉非线性增强的“不确定性溢价”或“确定性溢价”，实现状态依赖型杠杆。",
+    "expression_list": [
+        "multiply(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), add(1, abs(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"))))",
+        "multiply(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), add(1, abs(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"))))",
+        "multiply(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), add(1, abs(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"))))",
+        "multiply(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), add(1, abs(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"))))"
+    ]
+}

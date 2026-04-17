@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(multiply(subtract(ts_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), 60), ts_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 20), 60)), signed_power(ts_zscore(ts_std_dev(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), 60), 252), -0.5)), industry)",
+    "idea": "波动率自适应缩放：计算短期修订动量的60日滚动标准差作为已实现波动率，通过signed_power取-0.5次方将其转换为波动率调整系数（低波动环境放大信号，高波动环境压缩信号）。将原始加速度信号与逆波动率系数相乘后再进行行业中性化，提升风险调整后的信号稳定性，避免在信息噪音较大的高波动时期过度下注。",
+    "expression_list": [
+        "group_zscore(multiply(subtract(ts_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), 60), ts_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 20), 60)), signed_power(ts_zscore(ts_std_dev(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), 60), 252), -0.5)), industry)",
+        "group_zscore(multiply(subtract(ts_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), 60), ts_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 20), 60)), signed_power(ts_zscore(ts_std_dev(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), 60), 252), -0.5)), industry)"
+    ]
+}

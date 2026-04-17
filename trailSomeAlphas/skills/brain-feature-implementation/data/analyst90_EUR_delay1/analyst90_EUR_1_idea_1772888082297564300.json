@@ -1,0 +1,7 @@
+{
+    "template": "quantile(vec_avg({likelihood_score}), driver=\"uniform\") - ts_delay(quantile(vec_avg({likelihood_score}), driver=\"uniform\"), 30)",
+    "idea": "**Concept**: Success Likelihood Rank Spread\n- **Sample Fields Used**: `likelihood_score`\n- **Definition**: Difference between current percentile rank of success likelihood and its 30-day average rank\n- **Why This Feature**: Captures stocks where analyst confidence is improving or deteriorating relative to historical positioning and peers\n- **is filling nan necessary**: Calculate rank first, handling NaN as minimum rank, then difference; or exclude NaN from rank calculation.\n- **Logical Meaning**: Positive values indicate improving confidence relative to past; negative indicate declining confidence\n- **Directionality**: Positive values bullish (upgrading prospects); negative bearish (downgrading)\n- **Boundary Conditions**: +1 indicates moved from bottom to top rank; -1 indicates fell from top to bottom",
+    "expression_list": [
+        "quantile(vec_avg(success_likelihood_score), driver=\"uniform\") - ts_delay(quantile(vec_avg(success_likelihood_score), driver=\"uniform\"), 30)"
+    ]
+}

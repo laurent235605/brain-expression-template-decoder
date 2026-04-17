@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(subtract(log({volume}), ts_mean(log({volume}), 252)), industry)",
+    "idea": "长期成交量趋势偏离（年度对比）：计算当前对数成交量与过去一年（252日）均值的差值，衡量长期趋势的偏离度，并在行业内进行分位排序。正值表明成交量处于年度高位，可能伴随结构性的资金关注提升；负值则提示流动性萎缩风险。",
+    "expression_list": [
+        "group_rank(subtract(log(mdl234_volume), ts_mean(log(mdl234_volume), 252)), industry)"
+    ]
+}

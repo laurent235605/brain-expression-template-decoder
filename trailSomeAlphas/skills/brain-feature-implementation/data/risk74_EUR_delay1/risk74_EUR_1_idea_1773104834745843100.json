@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 63), std=3), winsorize(ts_backfill({exp_chn}, 63), std=3)), industry)), 1.5), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 63), std=3), winsorize(ts_backfill({exp_chn}, 63), std=3)), industry), 0)",
+    "idea": "极端阈值型（Tail Focus）：仅在个股的中美敞口价差显著偏离行业均值（|zscore|>1.5）时产生非零信号，中段噪音区间强制归零。利用更长回望窗口（63天）与更紧的winsorize（std=3）降低偶发波动干扰，专注捕捉地缘政治冲击导致的极端错配机会，实现“非极端不交易”的择时逻辑。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=3), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=3)), industry)), 1.5), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=3), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=3)), industry), 0)"
+    ]
+}

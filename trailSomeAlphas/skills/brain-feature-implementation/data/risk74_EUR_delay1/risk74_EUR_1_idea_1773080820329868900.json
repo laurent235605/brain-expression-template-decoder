@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_backfill({concentration},63),std=4),252)",
+    "idea": "将地理集中度数据应用输入1的252天时序Z-score框架，识别相对于该股票自身历史而言的极端地理集中风险累积，剥离行业间基准差异，专注个股时间序列上的历史罕见偏离。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),252)",
+        "ts_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),252)"
+    ]
+}

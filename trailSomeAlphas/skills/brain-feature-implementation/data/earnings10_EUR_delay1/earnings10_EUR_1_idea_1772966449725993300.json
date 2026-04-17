@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(vec_avg({elta_value})), 10), ts_decay_linear(group_zscore(subtract(vec_avg({elta_value}), last_diff_value(vec_avg({elta_value}), 60)), industry), 10), 0)",
+    "idea": "事件驱动型修正冲击捕捉（Event-Driven Revision Jump）。利用last_diff_value识别分析师预期实际发生“跳变”的时点（与过去60日不同的最新值），计算跳变幅度；仅在变化发生后10日内（days_from_last_change < 10）进行交易窗口开放，并配合10日线性衰减，精准捕捉信息扩散初期的价格反应，避免持有 stale 信号，适合高频事件套利逻辑。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(vec_avg(ern10_elta_value)), 10), ts_decay_linear(group_zscore(subtract(vec_avg(ern10_elta_value), last_diff_value(vec_avg(ern10_elta_value), 60)), industry), 10), 0)"
+    ]
+}

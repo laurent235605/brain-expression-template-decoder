@@ -1,0 +1,8 @@
+{
+    "template": "ts_std_dev({risk_score}, 60) / abs(ts_mean({risk_score}, 60))",
+    "idea": "**Concept**: Tariff Risk Regime Stability\n- **Sample Fields Used**: `risk_score`, `risk_score_specialized`\n- **Definition**: Coefficient of variation of tariff risk scores over 60 days to identify companies with persistent vs. transient policy risk exposure\n- **Why This Feature**: Distinguishes between companies with structural tariff vulnerability (stable high scores) vs. those experiencing temporary policy noise\n- **Logical Meaning**: Low values indicate entrenched tariff exposure (e.g., commodity exporters with fixed supply chains); high values indicate shifting risk profiles or policy uncertainty resolution\n- **is filling nan necessary**: Yes, use `ts_backfill({risk_score}, 5)` before calculating std dev to handle reporting gaps without assuming zero risk\n- **Directionality**: Low values = stable risk regime (predictable exposure); High values = unstable/changing risk profile\n- **Boundary Conditions**: Near-zero values indicate completely static tariff classification; extremely high values may indicate data errors or corporate restructuring events",
+    "expression_list": [
+        "ts_std_dev(tariff_risk_score, 60) / abs(ts_mean(tariff_risk_score, 60))",
+        "ts_std_dev(tariff_risk_score_specialized, 60) / abs(ts_mean(tariff_risk_score_specialized, 60))"
+    ]
+}

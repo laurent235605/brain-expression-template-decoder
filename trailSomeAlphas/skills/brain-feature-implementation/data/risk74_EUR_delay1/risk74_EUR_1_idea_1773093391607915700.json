@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), driver=\"gaussian\")",
+    "idea": "高斯分位数尾部增强：在模板1的行业中性流偏离度基础上，叠加高斯分位数变换(quantile-gaussian)，将中间区间压缩至0附近，将极端正负偏离映射到标准正态分布的远端，强化尾部选股能力，使策略更专注于极度异常的资金流背离。",
+    "expression_list": [
+        "quantile(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), driver=\"gaussian\")"
+    ]
+}

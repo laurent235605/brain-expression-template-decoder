@@ -1,0 +1,18 @@
+{
+    "template": "rank(multiply(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), subtract(1, divide({value_03051q}, {value_03999q}))))",
+    "idea": "构建双因子复合排名：将模板1的利润率动量乘以（1-模板2的流动性风险）进行风险调整，然后通过rank转换为均匀分位信号。该结构融合了盈利改善与财务安全逻辑，形成简洁的横截面选股信号，避免极端数值干扰。",
+    "expression_list": [
+        "rank(multiply(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), subtract(1, divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), subtract(1, divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), subtract(1, divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), subtract(1, divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), subtract(1, divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), subtract(1, divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), subtract(1, divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), subtract(1, divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), subtract(1, divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), subtract(1, divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), subtract(1, divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q))))",
+        "rank(multiply(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), subtract(1, divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q))))"
+    ]
+}

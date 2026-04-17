@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 0.85), ts_decay_linear(signed_power(subtract(days_from_last_change({eps_expected_report_dt}), 60), 0.5), 20), if_else(less(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 0.15), reverse(ts_decay_linear(subtract(10, days_from_last_change({eps_expected_report_dt})), 5)), 0)), industry)",
+    "idea": "将固定阈值改为行业内动态分位数阈值(85%/15%)以适应不同行业的报告周期差异；对长稳定期使用ts_decay_linear与signed_power(0.5)进行右偏压缩平滑，对近期变更使用线性衰减的负向暴露，使信号在持续性极端状态下逐渐增强而非瞬时跳变，降低换手率。",
+    "expression_list": [
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.85), ts_decay_linear(signed_power(subtract(days_from_last_change(anl69_aeps_expected_report_dt), 60), 0.5), 20), if_else(less(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.15), reverse(ts_decay_linear(subtract(10, days_from_last_change(anl69_aeps_expected_report_dt)), 5)), 0)), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.85), ts_decay_linear(signed_power(subtract(days_from_last_change(anl69_eps_expected_report_dt), 60), 0.5), 20), if_else(less(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.15), reverse(ts_decay_linear(subtract(10, days_from_last_change(anl69_eps_expected_report_dt)), 5)), 0)), industry)"
+    ]
+}

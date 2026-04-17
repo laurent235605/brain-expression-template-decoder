@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(multiply(signed_power(group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 3), add(1, multiply(0.3, rank(ts_backfill({volume}, 21))))), industry)",
+    "idea": "对原始信号进行行业中性化后，使用signed_power(3)非线性放大极端值（极高/极低配置强度），并叠加基于流动性的温和调整（成交量排名映射至0.7-1.3倍权重），最后通过group_normalize实现行业内多空资金平衡，避免行业偏离。",
+    "expression_list": []
+}

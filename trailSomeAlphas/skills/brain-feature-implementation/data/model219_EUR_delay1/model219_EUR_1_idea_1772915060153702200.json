@@ -1,0 +1,10 @@
+{
+    "template": "quantile(add({curindbp}, {curindsp}), driver=\"uniform\")",
+    "idea": "**Concept**: Cross-Sectional Value Dispersion Rank\n- **Sample Fields Used**: `curindbp`, `curindsp`, `curindfcf`\n- **Definition**: Percentile rank of value composite within industry, adjusted for sector dispersion\n- **Why This Feature**: Value works better when comparing within sectors due to accounting differences\n- **Logical Meaning**: Identifies cheapest stocks within their peer groups regardless of sector valuation levels\n- **is filling nan necessary**: Yes, use `ts_backfill()` for missing relative metrics\n- **Directionality**: Higher ranks (top decile) indicate extreme relative value\n- **Boundary Conditions**: Extreme ranks in low-dispersion industries less meaningful than in high-dispersion",
+    "expression_list": [
+        "quantile(add(mdl219_1_curindbp_, mdl219_1_curindsp_), driver=\"uniform\")",
+        "quantile(add(mdl219_1_curindbp_, mdl219_2_curindsp_), driver=\"uniform\")",
+        "quantile(add(mdl219_2_curindbp_, mdl219_2_curindsp_), driver=\"uniform\")",
+        "quantile(add(mdl219_2_curindbp_, mdl219_1_curindsp_), driver=\"uniform\")"
+    ]
+}

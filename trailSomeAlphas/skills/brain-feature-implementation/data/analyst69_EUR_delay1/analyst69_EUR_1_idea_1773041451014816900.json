@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(subtract(quantile(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), driver=gaussian), ts_mean(quantile(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), driver=gaussian), 20)), industry)",
+    "idea": "对5日EPS修正进行高斯分位数转换后，计算其相对20日均值的偏离度，再进行行业内标准化，捕捉那些相对于近期常态出现极端跳变的修正信号，适用于捕捉过度反应后的均值回归机会。",
+    "expression_list": [
+        "group_zscore(subtract(quantile(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), driver=gaussian), ts_mean(quantile(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), driver=gaussian), 20)), industry)",
+        "group_zscore(subtract(quantile(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), driver=gaussian), ts_mean(quantile(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), driver=gaussian), 20)), industry)"
+    ]
+}

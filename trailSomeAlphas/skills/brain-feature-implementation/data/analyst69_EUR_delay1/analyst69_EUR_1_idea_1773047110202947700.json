@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(bucket(rank(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60))), \"0,1,0.2\"), 0.8), signed_power(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 2), 0)",
+    "idea": "将模板1的连续信号通过分桶（bucket）离散化为五档，并仅对最高档（前20%）施加非线性放大。使用rank将修订加速度映射到[0,1]区间后分桶，仅当信号处于极端加速区间（>0.8分位）时，通过signed_power放大尾部权重，其余区间归零。这种“头部聚焦”策略借鉴了模板2的极端值下注逻辑，但应用于连续动量因子，实现“只在 strongest momentum 时重仓”。",
+    "expression_list": [
+        "trade_when(greater(bucket(rank(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60))), \"0,1,0.2\"), 0.8), signed_power(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 2), 0)",
+        "trade_when(greater(bucket(rank(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60))), \"0,1,0.2\"), 0.8), signed_power(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 2), 0)"
+    ]
+}

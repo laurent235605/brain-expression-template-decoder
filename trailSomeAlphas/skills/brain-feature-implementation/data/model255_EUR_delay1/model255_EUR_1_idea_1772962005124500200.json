@@ -1,0 +1,7 @@
+{
+    "template": "s1 = winsorize(ts_backfill({special_items_score}, 126), std=3)\ns2 = winsorize(ts_backfill({accrued_expenses_score}, 126), std=3)\ns3 = winsorize(ts_backfill({revenue_recognition_score}, 126), std=3)\ns4 = winsorize(ts_backfill({deferred_rev_score}, 126), std=3)\nvalid_cnt = add(add(add(not(is_nan(s1)), not(is_nan(s2))), not(is_nan(s3))), not(is_nan(s4)))\ncomposite = divide(add(add(add(s1, s2), s3), s4), valid_cnt)\ncomposite_robust = trade_when(greater_equal(valid_cnt, 3), composite, NaN)\nsmoothed = ts_decay_linear(composite_robust, 20)\nsignal = reverse(group_zscore(smoothed, industry))",
+    "idea": "稳健加权与缺失值处理：通过长周期(126日)时序回填和截面winsorize清洗极值，要求至少3个有效字段才参与计算以避免信息不足，随后应用线性衰减平滑短期噪音，最终进行行业中性化并反转方向（低原始分=高操纵风险），得到稳健的操纵风险暴露信号。",
+    "expression_list": [
+        "s1 = winsorize(ts_backfill(mdl255_special_items_score, 126), std=3)\ns2 = winsorize(ts_backfill(mdl255_accrued_expenses_score, 126), std=3)\ns3 = winsorize(ts_backfill(mdl255_revenue_recognition_score, 126), std=3)\ns4 = winsorize(ts_backfill(mdl255_deferred_rev_score, 126), std=3)\nvalid_cnt = add(add(add(not(is_nan(s1)), not(is_nan(s2))), not(is_nan(s3))), not(is_nan(s4)))\ncomposite = divide(add(add(add(s1, s2), s3), s4), valid_cnt)\ncomposite_robust = trade_when(greater_equal(valid_cnt, 3), composite, NaN)\nsmoothed = ts_decay_linear(composite_robust, 20)\nsignal = reverse(group_zscore(smoothed, industry))"
+    ]
+}

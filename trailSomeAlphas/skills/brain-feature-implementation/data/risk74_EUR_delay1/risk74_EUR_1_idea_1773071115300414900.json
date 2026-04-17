@@ -1,0 +1,16 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_backfill({concentration},63),std=4), winsorize(ts_backfill({nondomicile},63),std=4), 252, rettype=0), sector)",
+    "idea": "通过252日时序回归剥离总海外暴露解释的集中度，提取特质性单一国家依赖风险（残差），并进行行业内标准化，识别无法被整体国际化程度解释的地理集中风险，高残差代表危险的单一市场依赖。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 252, rettype=0), sector)"
+    ]
+}

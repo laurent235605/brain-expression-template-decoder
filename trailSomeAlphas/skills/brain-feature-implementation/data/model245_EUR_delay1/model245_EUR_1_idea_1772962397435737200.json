@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_sum(ts_delta(vec_avg({rank}), 1), 20), ts_corr(ts_delta(vec_avg({rank}), 1), ts_step(), 20))",
+    "idea": "**概念**: 趋势一致性加权的排名迁移\n- **融合逻辑**: 模板1的累积排名变化（距离）乘以该变化的方向一致性（时间相关系数）。只有当排名持续单向移动（高相关性）时，累积距离才获得高权重；震荡式的来回迁移被抑制。\n- **时序逻辑**: 使用ts_corr计算每日delta与时间步长的相关性，识别\"稳定趋势\"vs\"无序震荡\"。这是对模板2\"稳定性筛选\"逻辑的另一种实现（从波动率维度转向方向一致性维度）。\n- **双重验证**: 既要求\"走得远\"（模板1的ts_sum），又要求\"走得直\"（ts_corr接近1或-1），提高信号质量。\n- **零值处理**: 相关性接近0时信号自然衰减，无需额外截断。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(vec_avg(mdl245_rank), 1), 20), ts_corr(ts_delta(vec_avg(mdl245_rank), 1), ts_step(), 20))"
+    ]
+}

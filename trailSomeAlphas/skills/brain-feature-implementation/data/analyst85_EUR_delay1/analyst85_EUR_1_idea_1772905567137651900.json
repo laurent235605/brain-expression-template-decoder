@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(ts_zscore(ts_delta(vec_avg({version}), 5), 60), std=3), 1.2)",
+    "idea": "**非线性极端强调**：在标准化基础上（60日Z分数），先以3倍标准差截断，再使用1.2次有符号幂函数对结果进行非线性变换。该处理在保持正负方向性不变的前提下，轻微放大尾部极端值（>1幂次增强区分度），使极端批量更新事件获得更高权重，同时压缩中间温和变化的区分度，适合追求\"极端信息冲击\"暴露的策略。",
+    "expression_list": [
+        "signed_power(winsorize(ts_zscore(ts_delta(vec_avg(anl85_version), 5), 60), std=3), 1.2)"
+    ]
+}

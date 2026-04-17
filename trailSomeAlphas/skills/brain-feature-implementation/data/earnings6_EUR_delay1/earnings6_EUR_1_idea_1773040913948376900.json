@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( quantile( group_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), group_cartesian_product(industry, size) ), driver=\"gaussian\" ), 10 )",
+    "idea": "行业-规模交叉微观结构：在行业与规模的笛卡尔积分组内进行标准化（group_cartesian_product），实现更精细的同业比较，经高斯变换后使用线性衰减平滑，挖掘细分领域内的极端业绩偏离。",
+    "expression_list": [
+        "ts_decay_linear( quantile( group_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), group_cartesian_product(industry, size) ), driver=\"gaussian\" ), 10 )",
+        "ts_decay_linear( quantile( group_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), group_cartesian_product(industry, size) ), driver=\"gaussian\" ), 10 )"
+    ]
+}

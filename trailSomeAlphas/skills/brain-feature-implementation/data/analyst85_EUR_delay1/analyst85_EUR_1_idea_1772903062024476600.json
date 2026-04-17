@@ -1,0 +1,7 @@
+{
+    "template": "rank(subtract(ts_decay_exp_window(vec_avg(ts_backfill({version}, 63)), 10, factor=0.3), ts_decay_exp_window(vec_avg(ts_backfill({version}, 63)), 40, factor=0.05)))",
+    "idea": "长短期版本趋势价差动量。对比快速衰减窗口（10日，高factor=0.3强调近期）与慢速衰减窗口（40日，低factor=0.05保留长期记忆）的版本均值差异，通过截面排名(rank)识别版本更新正在加速（短期>长期）或减速（短期<长期）的股票，构建类似期限结构的利差信号。",
+    "expression_list": [
+        "rank(subtract(ts_decay_exp_window(vec_avg(ts_backfill(anl85_version, 63)), 10, factor=0.3), ts_decay_exp_window(vec_avg(ts_backfill(anl85_version, 63)), 40, factor=0.05)))"
+    ]
+}

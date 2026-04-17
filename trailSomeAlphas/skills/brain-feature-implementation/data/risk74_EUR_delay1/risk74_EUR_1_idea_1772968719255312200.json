@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_mean({hfown_pctown}, 5), ts_mean({hfown_pctown}, 63)), ts_decay_linear(group_zscore({hfown_pctown}, sector), 3), ts_mean(group_zscore({hfown_pctown}, sector), 21))",
+    "idea": "**概念**: 自适应时间频率切换（Adaptive Time Regime）\\n- **核心逻辑**: 根据HF调仓活跃度动态选择信号频率：比较短期（5日）与中期（63日）持仓均值，当近期持仓显著上升（主动调仓期）时采用3日线性衰减快速响应，当持仓平稳时采用21日均值降低换手。\\n- **信号解释**: 在HF活跃调仓期提高灵敏度捕捉行业配置变化，在持仓稳定期降低噪音与交易成本，实现基于行业相对持仓的动态流动性管理与关税风险规避。",
+    "expression_list": [
+        "if_else(greater(ts_mean(rsk74_hfown_pctown, 5), ts_mean(rsk74_hfown_pctown, 63)), ts_decay_linear(group_zscore(rsk74_hfown_pctown, sector), 3), ts_mean(group_zscore(rsk74_hfown_pctown, sector), 21))"
+    ]
+}

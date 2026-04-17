@@ -1,0 +1,16 @@
+{
+    "template": "multiply(ts_regression(winsorize({concentration},std=4), group_mean(winsorize({nondomicile},std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize({nondomicile},std=4))",
+    "idea": "剥离行业国际化水平的残差集中：通过252日回归剔除海外收入占比对地理集中度的系统性解释（使用市值加权的行业均值作为解释变量），提取残差（未被行业国际化程度解释的异常集中部分），再与海外敞口交互。识别相同国际化水平下异常集中的特有风险。",
+    "expression_list": [
+        "multiply(ts_regression(winsorize(rsk74_concentration,std=4), group_mean(winsorize(rsk74_nondomicile,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_nondomicile,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_concentration,std=4), group_mean(winsorize(rsk74_raw_exp_nondomicile1,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_raw_exp_nondomicile1,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_concentration,std=4), group_mean(winsorize(rsk74_raw_exp_nondomicile2,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_raw_exp_nondomicile2,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_concentration,std=4), group_mean(winsorize(rsk74_std_exp_nondomicile1,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_std_exp_nondomicile1,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_concentration,std=4), group_mean(winsorize(rsk74_std_exp_nondomicile2,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_std_exp_nondomicile2,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_raw_concentration,std=4), group_mean(winsorize(rsk74_raw_exp_nondomicile1,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_raw_exp_nondomicile1,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_raw_concentration,std=4), group_mean(winsorize(rsk74_raw_exp_nondomicile2,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_raw_exp_nondomicile2,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_raw_concentration,std=4), group_mean(winsorize(rsk74_nondomicile,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_nondomicile,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_raw_concentration,std=4), group_mean(winsorize(rsk74_std_exp_nondomicile1,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_std_exp_nondomicile1,std=4))",
+        "multiply(ts_regression(winsorize(rsk74_raw_concentration,std=4), group_mean(winsorize(rsk74_std_exp_nondomicile2,std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), winsorize(rsk74_std_exp_nondomicile2,std=4))"
+    ]
+}

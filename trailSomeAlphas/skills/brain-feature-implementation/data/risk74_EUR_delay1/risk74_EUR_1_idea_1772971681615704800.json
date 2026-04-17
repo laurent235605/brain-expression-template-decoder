@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(group_zscore(ts_backfill({factor_esg},63), sector), 0), {hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\"), 0)",
+    "idea": "交叉验证型模板：仅在ESG评分高于行业均值（group_zscore>0）时，才启用对冲基金持仓相对于行业的分位数偏离作为信号。此设计借鉴了输入2中的sector-relative deviation思想，但以ESG质量作为过滤器，避免低质量ESG公司的持仓噪音干扰，实现了从属信号B（HF持仓）对主信号A（ESG水平）的条件增强。",
+    "expression_list": [
+        "trade_when(greater(group_zscore(ts_backfill(rsk74_factor_esg,63), sector), 0), rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"), 0)"
+    ]
+}

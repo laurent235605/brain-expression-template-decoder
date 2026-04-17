@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_rank(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), 60), sector)",
+    "idea": "在模板1的截面背离基础上叠加时序维度：计算当前20日累计净流入差值在过去60个交易日中的历史分位数（ts_rank），识别该背离相对于自身历史是否处于极端位置，再进行行业标准化，筛选出既相对行业 peers 偏离、又处于自身历史极值区域的标的。",
+    "expression_list": [
+        "group_zscore(ts_rank(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), 60), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "add(trade_when(greater(group_rank(ts_delta(ts_backfill({hfown_pctown}, 63), 1), sector), 0.85), multiply(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 15), 1.5), 0), trade_when(less(group_rank(ts_delta(ts_backfill({hfown_pctown}, 63), 1), sector), 0.15), multiply(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 8), -1.2), 0))",
+    "idea": "**非对称多空分档增强**: 非对称处理多空信号：仅当个股持仓变化处于行业前15%时做多，后15%时做空，中段视为噪音归零；多头端采用15日长衰减捕捉长期建仓趋势，空头端采用8日短衰减快速反应减仓风险；分别赋予1.5倍与-1.2倍非对称杠杆，反映增持信息持续性强于减持的微观结构特征。",
+    "expression_list": [
+        "add(trade_when(greater(group_rank(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), sector), 0.85), multiply(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 15), 1.5), 0), trade_when(less(group_rank(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), sector), 0.15), multiply(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 8), -1.2), 0))"
+    ]
+}

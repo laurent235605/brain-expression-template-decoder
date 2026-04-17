@@ -1,0 +1,10 @@
+{
+    "template": "reverse(group_zscore(ts_std_dev(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 60), sector))",
+    "idea": "波动率调整模板：计算60日滚动相关性的60日滚动标准差（即相关性的波动率），经行业标准化后取反。低波动意味着所有权结构持续稳定（机构长期锁仓），高波动意味着结构剧烈变化（筹码松动或大规模换手）。通过“相关性的相关性”二次提炼，识别出真正持续的所有权惯性，过滤掉由短期噪音导致的虚假相关性波动。",
+    "expression_list": [
+        "reverse(group_zscore(ts_std_dev(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 60), sector))",
+        "reverse(group_zscore(ts_std_dev(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 60), sector))",
+        "reverse(group_zscore(ts_std_dev(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 60), sector))",
+        "reverse(group_zscore(ts_std_dev(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 60), sector))"
+    ]
+}

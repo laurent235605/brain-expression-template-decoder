@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(divide(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), ts_std_dev(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 20)), sector), 10)",
+    "idea": "特质性资产流的夏普比率化与半衰期加权：先提取126日特质性残差，计算其20日滚动波动率进行风险调整（类似信息比率），再在行业层面zscore标准化，最后应用10日线性衰减以降低换手并平滑噪声，捕捉风险调整后的异常资金加速度。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(divide(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), ts_std_dev(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 20)), sector), 10)"
+    ]
+}

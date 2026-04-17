@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window({volume}, 6, factor=0.5)",
+    "idea": "**Concept**: Exponentially Weighted Volume Average\n- **Sample Fields Used**: volume\n- **Definition**: Exponentially weighted moving average of volume over 6 months with decay factor 0.5 (recent months weighted higher)\n- **Why This Feature**: Emphasizes recent liquidity conditions while maintaining memory of distant past; smooths single-month anomalies\n- **Logical Meaning**: \"Liquidity memory\" with fading recollection—more representative of current tradability than simple average\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 2) to ensure decay calculation doesn't drop due to sparse data\n- **Directionality**: High = recent high volume; Low = recent low volume\n- **Boundary Conditions**: Smooths toward long-term average; resistant to single-month spikes but responsive to sustained changes",
+    "expression_list": [
+        "ts_decay_exp_window(mdl234_volume, 6, factor=0.5)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "divide({sedol_chg3yocfast}, add({sedol_astcomp}, 0.01))",
+    "idea": "**Concept**: Asset Composition Efficiency Shift\n- **Sample Fields Used**: {sedol_astcomp}, {sedol_invast}, {sedol_chginvavgast}, {sedol_chg3yocfast}\n- **Definition**: Change in operating cash flow efficiency relative to shifts in asset composition (current vs. fixed assets) to detect business model transitions\n- **Why This Feature**: Structural shifts between asset-light and asset-heavy models affect capital intensity and ROIC persistence; this captures the efficiency of the transition\n- **Logical Meaning**: Improving cash flow generation despite increasing asset intensity indicates pricing power; declining efficiency with asset-light shift indicates competitive pressure\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Positive values indicate successful operational leverage; negative values indicate diseconomies of scale\n- **Boundary Conditions**: Requires 3-year history for valid asset change measurement",
+    "expression_list": [
+        "divide(fnd65_allcap_sedol_chg3yocfast, add(fnd65_allcap_sedol_astcomp, 0.01))",
+        "divide(fnd65_allcap_sedol_chg3yocfast, add(fnd65_dev_sedol_astcomp, 0.01))",
+        "divide(fnd65_dev_sedol_chg3yocfast, add(fnd65_dev_sedol_astcomp, 0.01))",
+        "divide(fnd65_dev_sedol_chg3yocfast, add(fnd65_allcap_sedol_astcomp, 0.01))"
+    ]
+}

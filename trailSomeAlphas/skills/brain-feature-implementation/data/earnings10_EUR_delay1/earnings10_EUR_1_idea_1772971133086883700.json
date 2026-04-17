@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(trade_when(greater(ts_rank(winsorize(ts_backfill(vec_max({aily_delta_recon_value}), 63), std=4), 60), 0.8), ts_zscore(winsorize(ts_backfill(vec_max({aily_delta_recon_value}), 63), std=4), 20), 0), sector), ts_decay_exp_window(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 20), 20)), 0.85))",
+    "idea": "使用向量最大值(vec_max)替代均值，捕捉日内极端修正信号而非平均变化，对突发重大事件更敏感；结合60日时间序列排名(ts_rank)筛选处于历史高位的极端信号；通过指数衰减(ts_decay_exp_window)赋予最新事件更高权重，并先进行行业标准化(group_zscore)再衰减，确保信号在行业内部可比且随时间平滑衰减。",
+    "expression_list": [
+        "multiply(group_zscore(trade_when(greater(ts_rank(winsorize(ts_backfill(vec_max(ern10_aily_delta_recon_value), 63), std=4), 60), 0.8), ts_zscore(winsorize(ts_backfill(vec_max(ern10_aily_delta_recon_value), 63), std=4), 20), 0), sector), ts_decay_exp_window(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 20), 20)), 0.85))"
+    ]
+}

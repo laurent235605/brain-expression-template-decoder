@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), 126), 0.8), signed_power(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), 1.5), trade_when(less(ts_rank(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), 126), 0.2), signed_power(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), 1.5), multiply(0.3, ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63))))",
+    "idea": "历史分位非对称响应偏度动量：利用126日历史分位数识别偏度加速的极端区间（前20%或后20%），在极端区间使用幂变换（signed_power）放大信号强度，中间区间（噪音）大幅衰减至0.3倍，实现仅在风险结构急剧转变时的非线性下注。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63), 126), 0.8), signed_power(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63), 1.5), trade_when(less(ts_rank(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63), 126), 0.2), signed_power(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63), 1.5), multiply(0.3, ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63))))"
+    ]
+}

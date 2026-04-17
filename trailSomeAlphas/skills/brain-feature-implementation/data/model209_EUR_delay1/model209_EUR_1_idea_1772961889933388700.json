@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(vec_avg({investment}) / (1 + vec_sum({lastcostingfailed})), 20)",
+    "idea": "**概念**: 时序平滑风险资本效率\n- **逻辑**: 将原始风险调整投资比率（投资均值/失败次数）通过20日移动平均(ts_mean)平滑，降低单日噪声。根据运算符选择逻辑，ts_mean相比ts_decay_linear能显著降低turnover（相同窗口下turnover约16% vs 73%），更适合作为基础风险度量持有。\n- **边界**: 当失败次数为0时，分母为1，指标退化为投资均值；当投资为0时，指标为0。",
+    "expression_list": [
+        "ts_mean(vec_avg(mdl209_investment) / (1 + vec_sum(mdl209_lastcostingfailed)), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(ts_backfill({hfown_pctown}, 21), std=4), 63), industry)",
+    "idea": "应用时序差分算子ts_delta（63日窗口）于模板1的持仓数据，结合模板2的行业中性化框架。捕捉机构增持/减持的边际变化动量而非静态持仓水平，适用于识别正在发生conviction变化的潜在alpha标的。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), 63), industry)"
+    ]
+}

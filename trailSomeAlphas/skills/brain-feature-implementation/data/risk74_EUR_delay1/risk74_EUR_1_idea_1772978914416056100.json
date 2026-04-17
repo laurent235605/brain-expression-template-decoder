@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_rank(ts_delta(ts_mean({hfown_pctown}, 3), 5), sector), 3)",
+    "idea": "平滑行业相对排名：先对原始持仓进行3日移动平均降噪，再计算5日变化率，随后在行业内进行横截面分位数排名（0-1），最后应用3日线性衰减加权。此模板兼顾了噪声过滤、行业相对强度捕捉以及换手率控制，适合作为低频配置的稳健信号。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(ts_delta(ts_mean(rsk74_hfown_pctown, 3), 5), sector), 3)"
+    ]
+}

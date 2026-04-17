@@ -1,0 +1,7 @@
+{
+    "template": "if_else(equal(vec_avg({etype_219}), 1), 1, 0)",
+    "idea": "**Concept**: Information Verification Premium\n- **Sample Fields Used**: etype_219\n- **Definition**: Binary indicator for verified (1) vs. tentative/inferred (0) earnings dates\n- **Why This Feature**: Cuts to the essence of information quality; verified dates likely have different uncertainty premiums than algorithmically inferred dates\n- **Logical Meaning**: Captures the categorical distinction between confirmed corporate communication and modeled estimation; proxy for information reliability\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. NaN status should be treated as unverified (0) for conservative positioning.\n- **Directionality**: 1 indicates high-confidence verified date (potentially lower volatility); 0 indicates tentative/inferred (higher uncertainty, potentially higher risk premium)\n- **Boundary Conditions**: Binary classification; transitions from 0 to 1 indicate corporate confirmation events",
+    "expression_list": [
+        "if_else(equal(vec_avg(ern6_etype_219), 1), 1, 0)"
+    ]
+}

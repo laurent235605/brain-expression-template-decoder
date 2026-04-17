@@ -1,0 +1,7 @@
+{
+    "template": "{mean_revenue_fp1} / ({stddev_revenue_fp1} + 0.01)",
+    "idea": "**Concept**: Fundamental Information Ratio\n- **Sample Fields Used**: mean_revenue_fp1, stddev_revenue_fp1\n- **Definition**: The ratio of expected value (mean estimate) to uncertainty (standard deviation), analogous to Sharpe ratio for fundamentals\n- **Why This Feature**: Captures the risk-adjusted opportunity in the fundamental outlook. Essential distillation of risk vs reward in the analyst forecasts.\n- **Logical Meaning**: High values indicate attractive risk-reward (high expected growth relative to uncertainty); low/negative values indicate poor risk-reward or negative growth expectations with high uncertainty.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values indicate better risk-adjusted growth expectations; negative values indicate expected decline\n- **Boundary Conditions**: Zero-crossing behavior when estimates change sign; extreme values near zero stddev",
+    "expression_list": [
+        "anl14_mean_revenue_fp1 / (anl14_stddev_revenue_fp1 + 0.01)"
+    ]
+}

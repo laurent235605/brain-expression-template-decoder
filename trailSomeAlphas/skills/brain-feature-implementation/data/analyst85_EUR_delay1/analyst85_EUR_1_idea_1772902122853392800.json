@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(vec_count(vec_filter({version}, \"nan\")), 5), group_rank(vec_skewness(vec_filter({version}, \"nan\")), industry), NaN)",
+    "idea": "数据质量筛选的组内相对偏度：先使用vec_filter去除NaN值，通过vec_count统计有效数据点数量，仅当观测值充足（>5个）时才计算偏度并在行业内排名(group_rank)，数据不足时返回NaN剔除该样本。该模板确保信号仅来自信息可靠的样本，避免少量分析师覆盖导致的偏度计算失真，适用于分析师覆盖度差异较大的股票池。",
+    "expression_list": [
+        "trade_when(greater(vec_count(vec_filter(anl85_version, \"nan\")), 5), group_rank(vec_skewness(vec_filter(anl85_version, \"nan\")), industry), NaN)"
+    ]
+}

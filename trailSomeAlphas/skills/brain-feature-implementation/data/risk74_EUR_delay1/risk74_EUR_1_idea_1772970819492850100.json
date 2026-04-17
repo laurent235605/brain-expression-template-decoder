@@ -1,0 +1,8 @@
+{
+    "template": "multiply(winsorize(ts_sum(ts_delta({shortint}, 1), 15), std=4), signed_power(inverse(winsorize(ts_std_dev(ts_delta({shortint}, 1), 60), std=4)), 0.5))",
+    "idea": "**概念**: 波动率调整的做空强度（Signal-to-Noise Ratio）\n- **逻辑**: 将15日累计做空变化除以历史60日波动率（通过inverse和multiply实现除法，并用signed_power取平方根压缩尺度），对做空兴趣变化稳定（低波动）的股票赋予更高权重\n- **噪音过滤**: 高波动往往代表数据噪音或一次性事件，通过逆波动率加权惩罚此类信号，强调趋势的可信度和持续性\n- **数据清洗**: 对分子分母均进行4倍标准差截尾，防止除零或极端值\n- **方向性**: 最终信号方向与原始累计变化一致，但幅度经过波动率调整",
+    "expression_list": [
+        "multiply(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), std=4), signed_power(inverse(winsorize(ts_std_dev(ts_delta(rsk74_shortint, 1), 60), std=4)), 0.5))",
+        "multiply(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), std=4), signed_power(inverse(winsorize(ts_std_dev(ts_delta(rsk74_shortint_ts, 1), 60), std=4)), 0.5))"
+    ]
+}

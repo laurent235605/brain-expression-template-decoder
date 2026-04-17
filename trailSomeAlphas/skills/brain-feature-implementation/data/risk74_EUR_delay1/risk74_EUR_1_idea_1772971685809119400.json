@@ -1,0 +1,8 @@
+{
+    "template": "multiply(quantile(group_zscore(ts_backfill({factor_e},63) + ts_backfill({factor_s},63) + ts_backfill({factor_g},63), sector), driver=\"gaussian\"), {hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\"))",
+    "idea": "分位数映射非线性增强：将行业中性化的ESG总分映射到高斯分位数（强调尾部极值），与HF持仓的均匀分位数偏离度相乘。此模板结合了输入1的非线性组合思想与输入2的quantile-based deviation方法，通过quantile driver='gaussian'将中间区间压缩、尾部拉伸，再与HF偏离度交互，放大'优质ESG且超配'或'劣质ESG且低配'的联合信号。",
+    "expression_list": [
+        "multiply(quantile(group_zscore(ts_backfill(rsk74_factor_e,63) + ts_backfill(rsk74_factor_s,63) + ts_backfill(rsk74_factor_g,63), sector), driver=\"gaussian\"), rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"))",
+        "multiply(quantile(group_zscore(ts_backfill(rsk74_factor_esg,63) + ts_backfill(rsk74_factor_s,63) + ts_backfill(rsk74_factor_g,63), sector), driver=\"gaussian\"), rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"))"
+    ]
+}

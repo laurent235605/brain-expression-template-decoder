@@ -1,0 +1,7 @@
+{
+    "template": "abs({special_items_score} - {overall_score}) + abs({accrued_expenses_score} - {overall_score})",
+    "idea": "**Concept**: Component-Aggregate Divergence Flag\n- **Sample Fields Used**: `special_items_score`, `accrued_expenses_score`, `overall_score`\n- **Definition**: Absolute deviation of specific high-risk components from the overall quality score to detect localized accounting aggression\n- **Why This Feature**: When specific red-flag areas (special items, accruals) score significantly worse than the overall composite, it suggests management is hiding problems in granular line items while maintaining aggregate appearance\n- **is filling nan necessary**: Yes, use ts_backfill for missing component scores, but only if overall_score is present to maintain divergence calculation validity\n- **Directionality**: Large positive deviations (component worse than overall) indicate hidden risk concentration; Negative deviations (component better) indicate conservative practices in that area\n- **Boundary Conditions**: Deviations >2 quintiles indicate severe anomaly warranting investigation; Consistent deviations suggest systematic bias in the aggregation algorithm",
+    "expression_list": [
+        "abs(mdl255_special_items_score - mdl255_overall_score) + abs(mdl255_accrued_expenses_score - mdl255_overall_score)"
+    ]
+}

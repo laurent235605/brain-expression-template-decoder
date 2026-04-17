@@ -1,0 +1,7 @@
+{
+    "template": "vec_ir({version})",
+    "idea": "**Concept**: Version Irregularity Ratio\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Vector information ratio (mean/standard deviation) of versions, measuring signal-to-noise in contributor versioning\n- **Why This Feature**: High IR indicates consistent versioning across contributors (reliable signal); low IR indicates noisy, inconsistent versioning\n- **is filling nan necessary**: Filter NaN values before calculating vector statistics to ensure accurate IR computation\n- **Directionality**: High values indicate consensus and stability; low values indicate disagreement and uncertainty\n- **Boundary Conditions**: Infinity indicates zero dispersion (perfect consensus); zero indicates zero mean or infinite dispersion (chaos)",
+    "expression_list": [
+        "vec_ir(anl85_version)"
+    ]
+}

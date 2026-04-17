@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract({p_erati1}, {p_erati2}), add({prc_book}, {prc_sale}))",
+    "idea": "**Concept**: Valuation Multiple Decomposition\n- **Sample Fields Used**: p_erati1, p_erati2, prc_book, prc_sale\n- **Definition**: Structural composition of valuation across earnings, book value, and sales, measuring which component drives the valuation premium/discount\n- **Why This Feature**: Distinguishes between earnings-driven value (P/E), asset-driven value (P/B), and revenue-driven value (P/S) to identify the economic basis of market pricing\n- **Logical Meaning**: High earnings component = profitability focus; high book component = asset focus; high sales component = growth optionality focus\n- **is filling nan necessary**: No, preserve NaN as inability to calculate specific valuation components indicates missing fundamental data (red flag).\n- **Directionality**: Balanced composition = stable valuation; extreme skew = vulnerability to specific metric revision\n- **Boundary Conditions**: Ratios >1 indicate that metric trades at premium to others; <-1 indicates deep discount",
+    "expression_list": [
+        "divide(subtract(mdl172_p_erati1, mdl172_p_erati2), add(mdl172_prc_book, mdl172_prc_sale))"
+    ]
+}

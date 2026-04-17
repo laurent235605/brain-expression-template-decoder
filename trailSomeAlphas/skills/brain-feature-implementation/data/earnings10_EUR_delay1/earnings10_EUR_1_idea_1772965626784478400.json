@@ -1,0 +1,7 @@
+{
+    "template": "if_else({elta_period_year} == {aily_delta_recon_period_year}, 1.0, 0.0)",
+    "idea": "**Concept**: Fiscal Period Alignment Consistency\n- **Sample Fields Used**: `{elta_period_year}`, `{aily_delta_recon_period_year}`\n- **Definition**: Binary indicator checking if current estimate and delta recon refer to the same fiscal year\n- **Why This Feature**: Structural breaks occur at fiscal year-ends when analysts roll estimates forward. Misalignment indicates transition periods where estimates may be less reliable or subject to seasonal effects.\n- **is filling nan necessary**: Period years are metadata; NaN unlikely. If present, treat as misaligned (0).\n- **Directionality**: 1 indicates aligned periods (stable structure); 0 indicates transition (potential structural break)\n- **Boundary Conditions**: Values flipping from 1 to 0 indicate fiscal year rollover; sustained 0 indicates data quality issues",
+    "expression_list": [
+        "if_else(ern10_elta_period_year == ern10_aily_delta_recon_period_year, 1.0, 0.0)"
+    ]
+}

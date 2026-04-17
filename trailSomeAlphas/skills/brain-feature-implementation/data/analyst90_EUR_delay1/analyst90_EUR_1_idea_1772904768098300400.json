@@ -1,0 +1,7 @@
+{
+    "template": "multiply(zscore(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), subtract(1, multiply(0.3, abs(ts_zscore(ts_std_dev(vec_avg({likelihood_score}), 60), 60)))))",
+    "idea": "不确定性加权的背离强度：使用滚动60天置信度波动率的标准化水平（ts_zscore）作为风险调整权重，对背离信号进行动态缩放。高不确定性环境下自动降低因子暴露，提升稳健性。",
+    "expression_list": [
+        "multiply(zscore(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), subtract(1, multiply(0.3, abs(ts_zscore(ts_std_dev(vec_avg(success_likelihood_score), 60), 60)))))"
+    ]
+}

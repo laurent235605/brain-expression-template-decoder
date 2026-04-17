@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_normalize(quantile(divide(if_else(is_nan({exp_usa}),0,{exp_usa}),add(if_else(is_nan({exp_nondomicile1}),0.001,{exp_nondomicile1}),0.0001)),driver=\"cauchy\"),industry),10)",
+    "idea": "相对国际化程度的柯西分位缓慢衰减：构建美国暴露相对于总体非本土暴露的比率（加小常数避免除零），进行柯西分布分位数转换以极度强调极端本土聚焦或极度国际化这两个尾部，在行业层面归一化后应用10日线性衰减(ts_decay_linear)，降低换手率同时保持对地理结构转型信号的持续性捕捉。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(quantile(divide(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),add(if_else(is_nan(rsk74_raw_exp_nondomicile1),0.001,rsk74_raw_exp_nondomicile1),0.0001)),driver=\"cauchy\"),industry),10)",
+        "ts_decay_linear(group_normalize(quantile(divide(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),add(if_else(is_nan(rsk74_std_exp_nondomicile1),0.001,rsk74_std_exp_nondomicile1),0.0001)),driver=\"cauchy\"),industry),10)"
+    ]
+}

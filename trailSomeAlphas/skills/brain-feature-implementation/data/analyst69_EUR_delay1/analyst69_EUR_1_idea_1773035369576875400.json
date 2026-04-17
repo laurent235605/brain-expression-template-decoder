@@ -1,0 +1,8 @@
+{
+    "template": "multiply(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), add(1, multiply(0.3, quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian))))",
+    "idea": "**修正增强型效率因子（从属信号放大结构）**：以模板A的效率比率为核心信号（A），模板B的分析师修正强度为从属放大器（B）。遵循\"B不改变方向只改变力度\"的安全范式（第1节算术类指导），通过add/multiply构造factor = 1 + 0.3×Revision，实现当分析师上修强烈时放大效率因子暴露，下修时缩减，形成\"基本面质量+情绪动量\"的双层增强。",
+    "expression_list": [
+        "multiply(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), add(1, multiply(0.3, quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian))))",
+        "multiply(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), add(1, multiply(0.3, quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian))))"
+    ]
+}

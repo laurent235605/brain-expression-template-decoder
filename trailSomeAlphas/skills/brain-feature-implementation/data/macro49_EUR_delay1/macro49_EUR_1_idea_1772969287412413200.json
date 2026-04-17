@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), std=4), industry), signed_power(ts_rank(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), 126), 2))",
+    "idea": "行业中性与时序位置叠加：第一层通过行业zscore得到相对同行的效率定位，第二层通过126日（半年）时序排名并平方拉伸，强调那些既在行业内领先又处于自身历史高位（双重极端）的标的，压制仅短期波动导致的伪高效信号。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), std=4), industry), signed_power(ts_rank(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), 126), 2))"
+    ]
+}

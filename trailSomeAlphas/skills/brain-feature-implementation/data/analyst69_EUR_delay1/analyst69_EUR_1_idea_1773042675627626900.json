@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(group_rank(hump_decay(days_from_last_change({eps_expected_report_dt}), hump=0.01, window=20), industry), 0.8), ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 0)",
+    "idea": "采用hump_decay对原始天数进行事件后指数衰减处理，仅在个股经衰减后的稳定性处于行业前20%（极高排位）时，才启用原252日时序Z-score信号；通过截面分位过滤（group_rank）与逻辑门控（trade_when），剔除中庸区间噪音，专注于报告日程最稳定且偏离长期常态的极端样本。",
+    "expression_list": [
+        "trade_when(greater(group_rank(hump_decay(days_from_last_change(anl69_aeps_expected_report_dt), hump=0.01, window=20), industry), 0.8), ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 0)",
+        "trade_when(greater(group_rank(hump_decay(days_from_last_change(anl69_eps_expected_report_dt), hump=0.01, window=20), industry), 0.8), ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 0)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "multiply( signed_power( ts_rank( ts_delta( group_zscore( {concentration}, {sector} ), 20 ), 60 ), 0.5 ), group_zscore( multiply( signed_power( {crowding}, 0.5 ), {value_ts} ), {sector} ) )",
+    "idea": "行业相对平滑过渡：使用行业中性化后的集中度20日变化率的60日历史分位进行0.5次方压缩，构建非线性的条件权重，乘以经半衰期压缩的拥挤度与原始价值信号的乘积，实现从\"分散化安全期\"到\"集中化危险期\"的平滑过渡而非硬切换。",
+    "expression_list": []
+}

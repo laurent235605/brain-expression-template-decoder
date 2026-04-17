@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 42), 21), 63)",
+    "idea": "二阶偏度加速度（曲率）信号：计算偏度变化的二阶差分（即加速度的变化率），识别风险结构转变的“拐点加速”时刻（如从负偏加剧转向负偏缓解的陡峭变化），经63日Z-score标准化后捕捉风险情绪的极端反转。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 42), 21), 63)"
+    ]
+}

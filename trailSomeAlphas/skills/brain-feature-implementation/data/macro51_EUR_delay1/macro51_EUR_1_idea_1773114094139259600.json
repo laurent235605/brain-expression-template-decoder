@@ -1,0 +1,7 @@
+{
+    "template": "hump( group_normalize( trade_when( less( days_from_last_change( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 10 ), ts_delta( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 21 ), 0 ), industry ), hump=0.02 )",
+    "idea": "事件驱动变化率模板。利用days_from_last_change识别过去10天内权重均值发生显著变化的事件点，计算21日变化率(ts_delta)作为动量信号，通过hump(0.02)忽略小于2%的日间权重波动以降低换手率，行业中性强平。捕捉基金调仓后的短期价格延续效应，避免在 stale 仓位上过度暴露。",
+    "expression_list": [
+        "hump( group_normalize( trade_when( less( days_from_last_change( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 10 ), ts_delta( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 21 ), 0 ), industry ), hump=0.02 )"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(ts_delta({eps_best_eeps_cur_yr}, 5), 252), driver=\"gaussian\")",
+    "idea": "高斯拉伸的动量分位数：交叉融合模板A的'ts_rank+quantile高斯拉伸'尾部增强技术与模板B的'ts_delta'短期变化检测。计算5日EPS变化率在252日历史窗口中的时序分位，并通过高斯分布映射将极端变化拉伸至分布尾部。构建对称的动量暴露指标，使历史极端上涨与下跌均获得更大的因子载荷，增强对尾部事件的识别能力。",
+    "expression_list": [
+        "quantile(ts_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 252), driver=\"gaussian\")"
+    ]
+}

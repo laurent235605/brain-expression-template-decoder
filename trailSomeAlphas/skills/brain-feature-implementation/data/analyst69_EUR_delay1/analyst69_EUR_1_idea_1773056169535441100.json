@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(days_from_last_change({eps_expected_report_dt}), 30), group_zscore(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), industry), 0)",
+    "idea": "双重过滤机制：仅当报告日期高度稳定（30天未变更）时，计算行业中性化的预期修订加速度。通过group_zscore消除行业整体景气周期影响，聚焦个股特异性动量与日程确定性的交叉优势。",
+    "expression_list": [
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 30), group_zscore(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), industry), 0)",
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 30), group_zscore(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), industry), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 30), group_zscore(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), industry), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 30), group_zscore(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), industry), 0)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_exp_window(group_zscore(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 1), industry), 10)",
+    "idea": "直接使用报告日期变更的幅度（delta为负，其绝对值反映此前稳定期长度）作为连续信号强度，替代原始的二元标记。通过126日回溯填充确保长历史窗口的连续性，利用行业组内zscore标准化剔除不同行业间财报季节性的固有差异，并以10日指数衰减刻画市场对重大日程调整信息的快速初始反应与后续边际递减的消化过程。",
+    "expression_list": [
+        "ts_decay_exp_window(group_zscore(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 1), industry), 10)",
+        "ts_decay_exp_window(group_zscore(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 1), industry), 10)"
+    ]
+}

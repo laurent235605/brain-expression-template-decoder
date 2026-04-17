@@ -1,0 +1,26 @@
+{
+    "template": "multiply(zscore(winsorize(ts_sum(ts_delta({shortint}, 1), 15), 4)), zscore(winsorize(multiply({concentration}, {nondomicile}), 4)))",
+    "idea": "先对两个信号分别进行4倍标准差winsorize去极值和zscore标准化，再相乘得到干净的标准化复合信号，防止数据错误、极端异常值或长尾分布主导投资组合，确保信号稳健性。",
+    "expression_list": [
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_nondomicile), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_nondomicile), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_nondomicile), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_nondomicile), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2), 4)))",
+        "multiply(zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 4)), zscore(winsorize(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2), 4)))"
+    ]
+}

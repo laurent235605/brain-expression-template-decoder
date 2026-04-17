@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(trade_when(greater(abs(group_zscore(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), industry)), 1.5), multiply(group_zscore(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), industry), max(0, subtract(1, abs(group_zscore(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 10), industry))))), 0), hump=0.02)",
+    "idea": "在模板1的完整逻辑（极端阈值+动态降权）基础上，引入hump_decay算子进行换手率控制。当效率比率信号满足极端偏离条件时，通过hump参数（0.02）忽略微小的日间权重调整，仅当信号变化幅度超过该阈值时才执行仓位变动。此举在保留模板1对趋势饱和敏感性的同时，显著降低交易频率，提升策略容量与稳定性。",
+    "expression_list": [
+        "hump_decay(trade_when(greater(abs(group_zscore(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), industry)), 1.5), multiply(group_zscore(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), industry), max(0, subtract(1, abs(group_zscore(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 10), industry))))), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(abs(group_zscore(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), industry)), 1.5), multiply(group_zscore(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), industry), max(0, subtract(1, abs(group_zscore(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 10), industry))))), 0), hump=0.02)"
+    ]
+}

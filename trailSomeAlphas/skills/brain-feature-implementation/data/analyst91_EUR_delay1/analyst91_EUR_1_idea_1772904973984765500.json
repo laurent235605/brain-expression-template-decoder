@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(vec_skewness({exposure_value}), sector), add(1, multiply(0.3, signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 3))))",
+    "idea": "以地理集中度偏度为主信号（决定方向），用模板2的波动率三次幂变换作为从属放大器（1+0.3*factor），遵循\"B不颠覆A方向\"的安全范式。当公司地理布局既高度集中（高偏度）又极度不稳定（高波动率zscore）时，信号强度非线性增强（最大1.3倍），但多空方向始终由偏度主导，避免波动率单独驱动反转。",
+    "expression_list": [
+        "multiply(group_zscore(vec_skewness(anl91_exposure_value), sector), add(1, multiply(0.3, signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 3))))"
+    ]
+}

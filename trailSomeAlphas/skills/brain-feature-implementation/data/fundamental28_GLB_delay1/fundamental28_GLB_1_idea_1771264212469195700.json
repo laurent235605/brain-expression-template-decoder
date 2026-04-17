@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(signed_power(quantile(rank(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252))), \"gaussian\"), 1.5), 10)",
+    "idea": "非线性尾部强化与平滑处理的结合。首先将原始动量信号转换为横截面排名消除量纲影响，再通过高斯分位数映射将中间区间压缩、头尾极值拉伸（强调极端改善/恶化），随后使用1.5次幂有符号幂函数（signed_power）非线性放大极端值同时保留方向信息，最后应用10日线性衰减（ts_decay_linear）降低换手率。适用于希望持有基本面改善/恶化趋势稳定、且避免短期噪音干扰的低频策略。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(quantile(rank(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252))), \"gaussian\"), 1.5), 10)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 63)",
+    "idea": "时序维度激进扩展：在模板2的TTM EPS累积基础上，叠加63日（季度）变化率算子（ts_delta）。该重组将静态的年度盈利水平转化为动态的盈利动能（Earnings Momentum），捕捉年度盈利能力的边际改善而非绝对数值，适用于景气拐点识别。",
+    "expression_list": [
+        "ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 63)",
+        "ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 63)"
+    ]
+}

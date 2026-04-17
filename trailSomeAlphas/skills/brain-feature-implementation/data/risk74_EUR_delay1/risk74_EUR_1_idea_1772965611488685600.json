@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev({exp_usa}, 60)",
+    "idea": "**Concept**: Geographic Exposure Persistence\n- **Sample Fields Used**: `exp_usa`, `exp_chn`, `exp_nondomicile1`\n- **Definition**: Rolling standard deviation of geographic exposure metrics to identify companies with stable vs. shifting geographic footprints\n- **Why This Feature**: Revenue stability vs. volatility in specific regions affects tariff vulnerability persistence\n- **Logical Meaning**: Stable geographic exposure suggests integrated supply chains/established markets; volatile exposure suggests opportunistic trading or restructuring\n- **is filling nan necessary**: Yes, geographic data often has quarterly reporting gaps; use `ts_backfill({exp_usa}, 20)` to carry forward last reported value\n- **Directionality**: Low values = stable geographic footprint; High values = geographic business model in flux\n- **Boundary Conditions**: Zero values indicate no change in exposure (diversified multinationals or pure domestic plays); spikes indicate M&A or divestitures",
+    "expression_list": [
+        "ts_std_dev(rsk74_raw_exp_usa, 60)"
+    ]
+}

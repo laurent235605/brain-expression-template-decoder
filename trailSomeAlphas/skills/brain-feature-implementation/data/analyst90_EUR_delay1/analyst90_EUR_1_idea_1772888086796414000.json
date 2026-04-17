@@ -1,0 +1,8 @@
+{
+    "template": "ts_std_dev(vec_avg({recommendation_weighting}), 20) / abs(ts_mean(vec_avg({recommendation_weighting}), 20))",
+    "idea": "**Concept**: Author Conviction Stability Ratio\n- **Sample Fields Used**: `recommendation_weighting`\n- **Definition**: Coefficient of variation (standard deviation / mean) of buy recommendation weightings over a rolling window\n- **Why This Feature**: Identifies analysts or periods with consistent vs. erratic conviction; stable conviction suggests deeper research while volatile weightings may indicate reactionary trading\n- **is filling nan necessary**: NaN values in vector fields indicate no active recommendations; these should not be filled with zeros as absence of recommendation is informationally distinct from zero weighting. Use ts_backfill only for gaps within existing recommendation series.\n- **Logical Meaning**: Lower values indicate stable, persistent conviction; high values indicate choppy, inconsistent recommendation patterns\n- **Directionality**: Low values (stability) typically associated with higher quality signals; high values suggest noise\n- **Boundary Conditions**: Values near 0 indicate perfectly stable recommendations; values > 2 indicate extreme volatility or sparse data",
+    "expression_list": [
+        "ts_std_dev(vec_avg(buy_recommendation_weighting), 20) / abs(ts_mean(vec_avg(buy_recommendation_weighting), 20))",
+        "ts_std_dev(vec_avg(sell_recommendation_weighting), 20) / abs(ts_mean(vec_avg(sell_recommendation_weighting), 20))"
+    ]
+}

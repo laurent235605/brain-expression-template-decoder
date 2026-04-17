@@ -1,0 +1,7 @@
+{
+    "template": "normalize(add(multiply(0.6, zscore(ts_regression(ts_mean(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), 20), ts_mean(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 63, rettype=0))), multiply(0.4, zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4), 252, rettype=0)))))",
+    "idea": "融合短周期(63日)与长周期(252日)的规模中性残差信号。短期成分使用20日移动平均(ts_mean)平滑以降低噪音，权重60%；长期成分权重40%。通过不同时间维度的叠加，既能捕捉近期的结构性变化，又能保持长期统计稳健性。最终normalize确保多空平衡与可交易性。",
+    "expression_list": [
+        "normalize(add(multiply(0.6, zscore(ts_regression(ts_mean(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), 20), ts_mean(winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 20), 63, rettype=0))), multiply(0.4, zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 252, rettype=0)))))"
+    ]
+}

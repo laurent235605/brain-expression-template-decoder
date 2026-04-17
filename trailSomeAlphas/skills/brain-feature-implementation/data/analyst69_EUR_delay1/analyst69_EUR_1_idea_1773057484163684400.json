@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(days_from_last_change({eps_expected_report_dt}), 20)",
+    "idea": "事件衰减加权的日程稳定性（Event-Decay Weighted Schedule Stability）。对报告日期变更间隔应用输入2隐含使用的时序平滑逻辑（ts_decay_linear），使近期发生的日程变更获得线性递减的权重。相比简单均值，这能更快响应最新的报告日程修订，同时保留历史记忆，适用于捕捉事件驱动后的持续效应。",
+    "expression_list": [
+        "ts_decay_linear(days_from_last_change(anl69_aeps_expected_report_dt), 20)",
+        "ts_decay_linear(days_from_last_change(anl69_eps_expected_report_dt), 20)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),industry)),2),group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),industry),0),10)",
+    "idea": "引入高置信度条件交易逻辑：仅当特质残差的行业zscore绝对值超过2倍标准差(显著偏离)时才持有信号，中段噪音置零；随后应用10日线性衰减平滑以降低换手率，平衡信号时效性与交易成本，构建低频高 conviction 的特质空头策略。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry)),2),group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry),0),10)",
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry)),2),group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry),0),10)"
+    ]
+}

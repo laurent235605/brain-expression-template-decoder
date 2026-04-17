@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({score}) * ts_delta(vec_avg({score}), 20)",
+    "idea": "**Concept**: Momentum-Level Interaction\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: Product of normalized score level and normalized score momentum, amplifying signals where both are high\n- **Why This Feature**: Combines absolute likelihood with trend confirmation; high score with positive momentum suggests accelerating deal probability\n- **is filling nan necessary**: Yes, backfill score data using `ts_backfill(vec_avg({score}), 5)` before calculating both level and momentum components.\n- **Logical Meaning**: Captures \"hot\" acquisition targets—both likely and becoming more likely; reduces false positives from mean-reverting noise\n- **Directionality**: High positive values indicate high and rising likelihood (strongest signal); negative values indicate declining high-probability targets\n- **Boundary Conditions**: Extreme values occur when both level and momentum are extreme; near-zero when either is average",
+    "expression_list": [
+        "vec_avg(mdl249_score) * ts_delta(vec_avg(mdl249_score), 20)"
+    ]
+}

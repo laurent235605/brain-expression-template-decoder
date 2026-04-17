@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15), ts_step(), 10, rettype=2),std=4),252)",
+    "idea": "计算15日空头累积流量在10日窗口内的时序回归斜率（加速度），识别空头建仓或回补行为的动量增强趋势，捕捉空头异动从量变到质变的加速拐点，而非仅关注静态累积水平。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15), ts_step(), 10, rettype=2),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15), ts_step(), 10, rettype=2),std=4),252)"
+    ]
+}

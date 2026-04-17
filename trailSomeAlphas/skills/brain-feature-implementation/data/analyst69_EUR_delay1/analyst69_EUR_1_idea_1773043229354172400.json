@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_rank(abs(ts_delta({eps_best_eeps_cur_yr}, 5)), 60), 0.8), ts_mean(winsorize({ebitda_best_eeps_cur_yr}, std=4), 20), 0)",
+    "idea": "平滑处理的条件持仓（低换手率版本）：融合模板B的条件触发逻辑与运算符指南推荐的ts_mean平滑（相比ts_decay_linear显著降低换手率）。当近期EPS修正幅度的绝对值处于60日历史高位（前20%分位）时，交易经20日简单移动平均平滑后的EBITDA预期。通过均值平滑替代线性衰减，在保持信号有效性的同时将换手率控制在合理水平，实现创新性与稳定性的均衡。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(abs(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 60), 0.8), ts_mean(winsorize(anl69_ebitda_best_eeps_cur_yr, std=4), 20), 0)",
+        "trade_when(greater(ts_rank(abs(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 60), 0.8), ts_mean(winsorize(anl69_ebitda_best_eeps_cur_yr, std=4), 20), 0)"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "template": "ts_av_diff(vec_avg({probability}), 60) / ts_std_dev(vec_avg({probability}), 60)",
+    "idea": "**Concept**: Extreme Conviction Alert\n- **Sample Fields Used**: `probability`, `conviction_probability_score`\n- **Definition**: Standardized deviation of current probability from 60-day rolling mean, identifying statistical outliers in analyst confidence\n- **Why This Feature**: Extreme readings (>2 sigma) often mark turning points—either peak conviction before reversal or capitulation before bounce\n- **is filling nan necessary**: Historical mean calculation requires complete series. Fill NaN in historical window with ts_backfill to ensure robust mean estimation, but keep current day NaN if no update exists (don't fill current day to avoid stale data bias).\n- **Directionality**: High positive = extreme bullishness (contrarian sell signal); high negative = extreme bearishness (contrarian buy)\n- **Boundary Conditions**: Winsorize output at ±3 to prevent infinite values during low-volatility periods",
+    "expression_list": [
+        "ts_av_diff(vec_avg(anl56_daily_probability), 60) / ts_std_dev(vec_avg(anl56_daily_probability), 60)",
+        "ts_av_diff(vec_avg(anl56_probability), 60) / ts_std_dev(vec_avg(anl56_probability), 60)",
+        "ts_av_diff(vec_avg(conviction_probability_score), 60) / ts_std_dev(vec_avg(conviction_probability_score), 60)"
+    ]
+}

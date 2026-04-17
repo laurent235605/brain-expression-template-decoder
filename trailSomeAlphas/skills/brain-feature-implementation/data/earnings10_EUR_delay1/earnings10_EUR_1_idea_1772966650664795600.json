@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(vec_skewness({aily_delta_recon_value}), 20)",
+    "idea": "**修订分布偏度累积**：交叉应用vec_skewness（向量偏度）替代vec_avg，与ts_sum结合。捕捉分析师日内修订分布的不对称性：正偏表示少数极端上调主导，负偏表示集中下调。累积20日偏度可识别持续的单边预期倾斜，而非简单的平均方向。",
+    "expression_list": [
+        "ts_sum(vec_skewness(ern10_aily_delta_recon_value), 20)"
+    ]
+}

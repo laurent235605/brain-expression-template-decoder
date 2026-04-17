@@ -1,0 +1,8 @@
+{
+    "template": "quantile({risk_score}, driver=\"uniform\")",
+    "idea": "**Concept**: Relative Tariff Risk Percentile\n- **Sample Fields Used**: `risk_score`, `risk_score_specialized`\n- **Definition**: Cross-sectional percentile rank of tariff risk scores to identify most/least exposed companies relative to peers\n- **Why This Feature**: Absolute tariff risk matters less than relative risk; tariffs affect sector-relative performance, not just absolute prices\n- **Logical Meaning**: Values near 1 indicate highest tariff risk in universe; values near 0 indicate lowest risk; 0.5 indicates median risk\n- **is filling nan necessary**: Yes, rank calculation requires complete data; backfill missing risk scores with neutral assumption (0 or median)\n- **Directionality**: High = high relative risk (sector underperformance likely in trade wars); Low = low relative risk (safe haven)\n- **Boundary Conditions**: 0.0 = minimum risk; 1.0 = maximum risk; values cluster around 0.5 in normal times",
+    "expression_list": [
+        "quantile(tariff_risk_score, driver=\"uniform\")",
+        "quantile(tariff_risk_score_specialized, driver=\"uniform\")"
+    ]
+}

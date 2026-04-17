@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_rank(ts_delta(winsorize(ts_backfill({reported_asset_value}, 10), std=4), 20), sector)), 0.8), group_zscore(ts_delta(winsorize(ts_backfill({reported_asset_value}, 10), std=4), 20), sector), 0)",
+    "idea": "极端分位截断策略：延长数据回填窗口至10日确保数据完整性，计算20日资产变化后，仅保留行业内排名前20%或后20%的极端个股（中间60%视为噪音置零），最后进行行业Z-score标准化，专注于捕捉资产_gathering能力最极端的异常值。",
+    "expression_list": [
+        "trade_when(greater(abs(group_rank(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 10), std=4), 20), sector)), 0.8), group_zscore(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 10), std=4), 20), sector), 0)"
+    ]
+}

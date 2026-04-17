@@ -1,0 +1,5 @@
+{
+    "template": "ts_regression(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), log(ts_mean({market_cap}, 21)), 252, rettype=0)",
+    "idea": "市值调整残差数据质量：以log市值为解释变量对数据丰富度做252日时序回归，提取残差(rettype=0)，剔除公司规模对数据历史的天然影响（大市值通常历史更长），获得“超预期”的数据完备性指标，代表信息披露质量独立于规模的纯粹Alpha。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(zscore(winsorize(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0), std=4)), 10)",
+    "idea": "稳健平滑残差版。先对原始换手率和资产规模进行63日回溯填充与4倍标准差极值截断，确保数据质量；随后通过252日滚动回归剥离规模影响得到残差（规模净化活跃度），再次截断极值并标准化（zscore），最后进行10日线性衰减平滑。该模板显著降低异常值干扰与组合换手率，适合捕捉长期稳定的主动管理风格。",
+    "expression_list": [
+        "ts_decay_linear(zscore(winsorize(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0), std=4)), 10)"
+    ]
+}

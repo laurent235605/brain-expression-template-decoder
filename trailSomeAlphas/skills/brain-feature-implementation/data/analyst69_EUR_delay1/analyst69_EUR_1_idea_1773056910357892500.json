@@ -1,0 +1,8 @@
+{
+    "template": "multiply(trade_when(less(group_zscore(ts_std_dev(returns, 20), industry), 1), 1, 0.5), group_normalize(if_else(greater(days_from_last_change({eps_expected_report_dt}), 90), 1, if_else(less(days_from_last_change({eps_expected_report_dt}), 5), reverse(1), 0)), industry))",
+    "idea": "引入实现波动率作为从属信号进行条件过滤：仅当个股20日波动率处于行业均值1个标准差以下时全额配置原始信号，高波动环境下权重衰减至50%；避免在earnings revision伴随的高波动噪音期间过度交易，提升信号信噪比。",
+    "expression_list": [
+        "multiply(trade_when(less(group_zscore(ts_std_dev(returns, 20), industry), 1), 1, 0.5), group_normalize(if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), reverse(1), 0)), industry))",
+        "multiply(trade_when(less(group_zscore(ts_std_dev(returns, 20), industry), 1), 1, 0.5), group_normalize(if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_eps_expected_report_dt), 5), reverse(1), 0)), industry))"
+    ]
+}

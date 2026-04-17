@@ -1,0 +1,10 @@
+{
+    "template": "add(right_tail(group_zscore(divide(ts_delta(vec_avg({cap_expend_prpty_add}), 252), ts_mean(vec_avg({tot_asset}), 252)), industry), 1.5), left_tail(group_zscore(divide(ts_delta(vec_avg({cap_expend_prpty_add}), 252), ts_mean(vec_avg({tot_asset}), 252)), industry), -1.5))",
+    "idea": "基于边界条件逻辑构建双尾事件驱动模板。对投资加速度进行行业中性化后，使用right_tail(1.5)隔离右尾（高于1.5倍标准差的激进扩张），使用left_tail(-1.5)隔离左尾（低于-1.5倍标准差的战略收缩），两者相加后中间区间自动变为NaN。该模板严格对应原始逻辑中“>50%资产规模的激进增长”与“持续负值”的边界条件，仅在极端制度转换时建仓，适用于捕捉战略层面的资产轻重模式切换。",
+    "expression_list": [
+        "add(right_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 252)), industry), 1.5), left_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 252)), industry), -1.5))",
+        "add(right_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 252)), industry), 1.5), left_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 252)), industry), -1.5))",
+        "add(right_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 252)), industry), 1.5), left_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 252)), industry), -1.5))",
+        "add(right_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 252)), industry), 1.5), left_tail(group_zscore(divide(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 252)), industry), -1.5))"
+    ]
+}

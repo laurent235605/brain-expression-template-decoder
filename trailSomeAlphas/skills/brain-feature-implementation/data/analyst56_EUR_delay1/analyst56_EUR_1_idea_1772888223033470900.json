@@ -1,0 +1,10 @@
+{
+    "template": "vector_neut(vec_avg({buy_weight}), vec_avg({sell_weight}))",
+    "idea": "**Concept**: Pure Directional Signal\n- **Sample Fields Used**: `buy_weight`, `sell_weight`\n- **Definition**: Buy weight purified of sell weight correlation, extracting the orthogonal long-only component\n- **Why This Feature**: Isolates the \"pure\" long signal by removing the market-neutral (long/short) component; essential for directional strategies\n- **is filling nan necessary**: If sell_weight is NaN (pure long idea), treat as 0; if buy_weight is NaN, treat as 0. This preserves pure directional signals.\n- **Directionality**: High values = pure long exposure; Near-zero = market-neutral or mixed\n- **Boundary Conditions**: Both weights zero = no position (return NaN)",
+    "expression_list": [
+        "vector_neut(vec_avg(daily_buy_weight), vec_avg(daily_sell_weight))",
+        "vector_neut(vec_avg(main_buy_weight), vec_avg(daily_sell_weight))",
+        "vector_neut(vec_avg(main_buy_weight), vec_avg(main_sell_weight))",
+        "vector_neut(vec_avg(daily_buy_weight), vec_avg(main_sell_weight))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(subtract(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 1), 0.5)",
+    "idea": "非线性稳定性评分（凸性压缩）：对变更次数进行非线性变换，先减1（使稳定公司计数为0），再开平方根。此操作压缩了频繁变更公司（如变更3次vs变更4次）之间的差异，同时突出首次偏离稳定状态（从1次变为2次）的信号强度，适用于认为'从无变更到首次变更'蕴含最大信息量的投资逻辑",
+    "expression_list": [
+        "signed_power(subtract(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 1), 0.5)"
+    ]
+}

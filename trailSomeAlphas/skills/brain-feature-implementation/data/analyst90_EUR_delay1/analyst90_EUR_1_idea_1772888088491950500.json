@@ -1,0 +1,10 @@
+{
+    "template": "vec_avg({likelihood_score}) * sign(vec_sum({recommendation_weighting}) - vec_sum({weighting}))",
+    "idea": "**Concept**: Pure Directional Alpha Signal\n- **Sample Fields Used**: `likelihood_score`, `recommendation_weighting`, `weighting`\n- **Definition**: Success likelihood multiplied by sign of net sentiment (buy - sell weightings)\n- **Why This Feature**: Distills the dataset to its essence: high-probability directional bets; removes magnitude noise to focus on sign and quality\n- **is filling nan necessary**: Net sentiment calculation requires both buy and sell; if either is NaN, treat missing side as 0 to preserve available information.\n- **Logical Meaning**: Positive values indicate high-probability long opportunities; negative indicate high-probability short opportunities\n- **Directionality**: Sign indicates direction; magnitude indicates confidence\n- **Boundary Conditions**: Bounded by max likelihood score in positive and negative directions",
+    "expression_list": [
+        "vec_avg(success_likelihood_score) * sign(vec_sum(buy_recommendation_weighting) - vec_sum(buy_recommendation_weighting))",
+        "vec_avg(success_likelihood_score) * sign(vec_sum(buy_recommendation_weighting) - vec_sum(sell_recommendation_weighting))",
+        "vec_avg(success_likelihood_score) * sign(vec_sum(sell_recommendation_weighting) - vec_sum(sell_recommendation_weighting))",
+        "vec_avg(success_likelihood_score) * sign(vec_sum(sell_recommendation_weighting) - vec_sum(buy_recommendation_weighting))"
+    ]
+}

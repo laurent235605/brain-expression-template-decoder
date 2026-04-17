@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({hfown_pctown}, 5)",
+    "idea": "**Concept**: Hedge Fund Accumulation Velocity\n- **Sample Fields Used**: `hfown_pctown`, `fund_pct_ownership_encr`\n- **Definition**: Rate of change in hedge fund ownership over 5-day and 20-day windows to capture smart money flow acceleration\n- **Why This Feature**: Static ownership levels matter less than the direction and speed of change; rapid accumulation precedes price pressure\n- **Logical Meaning**: Positive values indicate hedge funds increasing positions (conviction buying); negative values indicate exits (conviction selling or risk reduction)\n- **is filling nan necessary**: No, NaN in ownership data typically means no reported position (zero or missing); filling would artificially create false flows\n- **Directionality**: Positive = accelerating HF buying; Negative = accelerating HF selling; Zero = stable positioning\n- **Boundary Conditions**: Extreme positive values may signal crowded entry; extreme negative values may signal forced liquidation or sentiment reversal",
+    "expression_list": [
+        "ts_delta(rsk74_hfown_pctown, 5)"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "template": "multiply(ts_decay_linear(winsorize({crowding} * {value_ts}, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), 0.5)))",
+    "idea": "结合衰减与放大：对拥挤价值信号进行5日线性衰减平滑以降低换手率，同时以源2的空头利息Z-score作为非线性放大器（signed_power压缩极端值）。当空头异动确认时动态增强信号强度，实现平滑与敏感的平衡。",
+    "expression_list": [
+        "multiply(ts_decay_linear(winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(rsk74_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(rsk74_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 0.5)))",
+        "multiply(ts_decay_linear(winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), 5), add(1, signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 0.5)))"
+    ]
+}

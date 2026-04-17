@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(ts_backfill({active_return_decile_rank_long}, 21), ts_backfill({active_weight_decile_rank_long}, 21)), sector), 10)",
+    "idea": "行业中性平滑模板：对原始分位数据进行21日滞后填充处理缺失值，计算收益与权重的分位偏离度，并在行业层面进行标准化以消除行业配置偏差，最后应用10日线性衰减平滑以降低换手率，捕捉持续性的定价偏离而非短期波动。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(ts_backfill(insd8_black_litterman_implied_active_return_decile_rank_long, 21), ts_backfill(insd8_active_weight_decile_rank_long, 21)), sector), 10)"
+    ]
+}

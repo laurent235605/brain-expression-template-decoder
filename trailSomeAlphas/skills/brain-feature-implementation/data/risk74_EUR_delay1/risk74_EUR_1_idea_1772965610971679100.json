@@ -1,0 +1,10 @@
+{
+    "template": "ts_quantile({crowding}, 120, driver=\"uniform\")",
+    "idea": "**Concept**: Crowding Relative to History\n- **Sample Fields Used**: `crowding`, `raw_crowding`\n- **Definition**: Current crowding percentile relative to stock's own historical distribution (time-series quantile)\n- **Why This Feature**: Crowding is stock-specific; high crowding for a blue-chip may be normal while same level for a small-cap is extreme\n- **Logical Meaning**: Values near 1 indicate historically high crowding for that specific stock; near 0 indicates historically empty\n- **is filling nan necessary**: No, `ts_quantile` handles lookback window NaNs appropriately\n- **Directionality**: High = historically crowded (mean reversion likely); Low = historically uncrowded (potential entry); 0.5 = normal\n- **Boundary Conditions**: 0.0 = historical minimum; 1.0 = historical maximum; persistence at extremes predicts regime change",
+    "expression_list": [
+        "ts_quantile(liquidity_factor_crowding, 120, driver=\"uniform\")",
+        "ts_quantile(liquidity_timeseries_crowding, 120, driver=\"uniform\")",
+        "ts_quantile(rsk74_crowding, 120, driver=\"uniform\")",
+        "ts_quantile(rsk74_raw_crowding, 120, driver=\"uniform\")"
+    ]
+}

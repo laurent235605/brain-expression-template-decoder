@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(quantile(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), driver=\"cauchy\"), industry)",
+    "idea": "使用柯西分布分位数转换（quantile）替代线性排名，强化极端尾部区分度，结合行业归一化（group_normalize），实现“重尾分布+行业平衡”的激进配置。",
+    "expression_list": [
+        "group_normalize(quantile(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), driver=\"cauchy\"), industry)"
+    ]
+}

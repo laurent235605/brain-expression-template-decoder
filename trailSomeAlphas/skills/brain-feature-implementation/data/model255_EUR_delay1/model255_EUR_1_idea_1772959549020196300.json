@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(winsorize(ts_backfill({overall_score},2),std=4), sector), 0.8), subtract(group_zscore(winsorize(ts_backfill({overall_score},2),std=4), sector), multiply(0.3, group_zscore(winsorize(ts_backfill({intangible_exposure_score},2),std=4), sector))), subtract(group_zscore(winsorize(ts_backfill({overall_score},2),std=4), sector), multiply(2.0, group_zscore(winsorize(ts_backfill({intangible_exposure_score},2),std=4), sector))))",
+    "idea": "质量分层非对称惩罚模板：采用条件逻辑区分高质量阵营（前20%）与普通质量阵营。对高质量公司给予无形资产曝光的低系数惩罚（0.3倍），认可其消化软实力风险的能力；对普通质量公司施加高系数惩罚（2.0倍），严厉折价其无形资产减值风险。这种非对称设计更精准地捕捉质量与无形资产交互的非线性关系。",
+    "expression_list": [
+        "if_else(greater(group_rank(winsorize(ts_backfill(mdl255_overall_score,2),std=4), sector), 0.8), subtract(group_zscore(winsorize(ts_backfill(mdl255_overall_score,2),std=4), sector), multiply(0.3, group_zscore(winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4), sector))), subtract(group_zscore(winsorize(ts_backfill(mdl255_overall_score,2),std=4), sector), multiply(2.0, group_zscore(winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4), sector))))"
+    ]
+}

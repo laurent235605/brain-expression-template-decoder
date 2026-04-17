@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(group_zscore(winsorize(ts_backfill({concentration},63),std=4), industry), 1.0), ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), 0)",
+    "idea": "利用条件运算符仅在地理集中度处于行业高位(>1标准差)时激活空头累积Z-score信号，过滤中等集中度环境下的噪音，专注高地理风险叠加空头异动的尾部场景，实现事件驱动型触发。",
+    "expression_list": [
+        "trade_when(greater(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 1.0), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 0)",
+        "trade_when(greater(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 1.0), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 0)",
+        "trade_when(greater(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 1.0), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 0)",
+        "trade_when(greater(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 1.0), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 0)"
+    ]
+}

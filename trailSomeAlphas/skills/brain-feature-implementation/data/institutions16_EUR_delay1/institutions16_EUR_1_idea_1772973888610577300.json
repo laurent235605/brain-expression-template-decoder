@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 60), 2)",
+    "idea": "**历史极端性动量加速（Historical Extremity Signal）**：在清洗数据后，将当前20日资产流速置于60日历史波动背景下计算Z-score，识别统计上显著的异动事件；随后使用 signed_power(..., 2) 非线性放大尾部（无论极端流入或流出），压缩中段噪音，强化“异常变动即信号”的逻辑，适用于捕捉并购或巨额赎回带来的极端偏离。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 60), 2)"
+    ]
+}

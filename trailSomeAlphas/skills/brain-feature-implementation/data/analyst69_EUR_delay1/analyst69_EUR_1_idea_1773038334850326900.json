@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(ts_backfill(days_from_last_change({eps_best_eeps_cur_yr}), 126), 252), driver=\"gaussian\")",
+    "idea": "将模板1的'历史稳定性分位数'完整方法论迁移至模板2的盈利预期字段：对分析师预期修正日期进行126日回溯填充，计算当前稳定天数在过去252日中的时序分位，并通过高斯分布映射拉伸尾部，识别'历史罕见长期未修正'的信息凝固状态。",
+    "expression_list": [
+        "quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 126), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_best_eeps_cur_yr), 126), 252), driver=\"gaussian\")"
+    ]
+}

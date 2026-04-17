@@ -1,0 +1,8 @@
+{
+    "template": "quantile(multiply(group_zscore(subtract(ts_delta({eps_best_eeps_cur_yr}, 5), ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 21)), industry), inverse(add(0.01, ts_std_dev(ts_delta({eps_best_eeps_cur_yr}, 5), 63)))), driver=gaussian)",
+    "idea": "个股波动率加权的修正加速度信号。计算5日修正变化相对于21日均值的加速度（二阶导），经行业标准化后，以个股近期波动率的倒数加权（低波动时信号更稳健）。适用于识别预期转向的加速阶段，通过inverse运算符实现“信噪比”调整，强化趋势形成初期的定价效率。",
+    "expression_list": [
+        "quantile(multiply(group_zscore(subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 21)), industry), inverse(add(0.01, ts_std_dev(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63)))), driver=gaussian)",
+        "quantile(multiply(group_zscore(subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 21)), industry), inverse(add(0.01, ts_std_dev(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63)))), driver=gaussian)"
+    ]
+}

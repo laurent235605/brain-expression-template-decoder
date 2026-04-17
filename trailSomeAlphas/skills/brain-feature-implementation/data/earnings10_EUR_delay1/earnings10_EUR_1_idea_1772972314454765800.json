@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), signed_power(add(1, winsorize(vec_stddev({aily_delta_recon_value}), std=4)), -0.5)), industry)",
+    "idea": "将模板2的修订惊喜Z-Score计算方式与模板1的分析师分歧度加权框架融合，形成“分歧度调整后的修订惊喜”信号。利用vec_stddev计算同一时点上分析师预测的分歧度，以(1+分歧度)^(-0.5)作为置信权重对标准化后的修订惊喜进行缩放——当分析师群体高度一致（低标准差）时赋予更高置信权重，分歧巨大时自动压低权重；最后进行行业中性化，捕捉高质量的信息冲击。",
+    "expression_list": [
+        "group_zscore(multiply(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), signed_power(add(1, winsorize(vec_stddev(ern10_aily_delta_recon_value), std=4)), -0.5)), industry)"
+    ]
+}

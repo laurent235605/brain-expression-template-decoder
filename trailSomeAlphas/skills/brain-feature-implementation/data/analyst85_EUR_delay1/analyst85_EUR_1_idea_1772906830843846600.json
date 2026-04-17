@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_regression(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), ts_step(), 20, rettype=2), std=4), industry)",
+    "idea": "对20日累积修订强度做时序线性回归取斜率（加速度），替代原静态累加值，捕捉调研活跃度正处于“趋势性增强”或“加速上升”阶段的早期标的，经行业中性化后构建动量型调研因子。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_regression(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), ts_step(), 20, rettype=2), std=4), industry)"
+    ]
+}

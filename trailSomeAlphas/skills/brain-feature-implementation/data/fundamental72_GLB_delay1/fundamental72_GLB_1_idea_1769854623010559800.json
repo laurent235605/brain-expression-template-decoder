@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore(subtract(ts_sum(subtract(ts_backfill(vec_avg({cash_from_oper}),63), ts_backfill(vec_avg({cap_expend_prpty_add}),63)), 126), ts_sum(subtract(ts_backfill(vec_avg({cash_from_oper}),63), ts_backfill(vec_avg({cap_expend_prpty_add}),63)), 504)), 504)",
+    "idea": "计算最近126日(半年)与最近504日(两年)累计自由现金流的差值，并进行504日时序Z-score标准化。该信号捕捉的是现金创造能力的'加速度'或'边际变化'而非绝对水平：当短期累计显著优于长期累计时，表明公司现金流生成进入改善通道；反之则提示业务恶化拐点，适用于识别财务趋势的动态反转。",
+    "expression_list": [
+        "ts_zscore(subtract(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add),63)), 126), ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add),63)), 504)), 504)",
+        "ts_zscore(subtract(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add),63)), 126), ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add),63)), 504)), 504)",
+        "ts_zscore(subtract(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add),63)), 126), ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add),63)), 504)), 504)",
+        "ts_zscore(subtract(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add),63)), 126), ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add),63)), 504)), 504)"
+    ]
+}

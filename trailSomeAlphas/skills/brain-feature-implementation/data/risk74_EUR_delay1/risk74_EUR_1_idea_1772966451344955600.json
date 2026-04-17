@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)",
+    "idea": "构建中美敞口在行业内的相对价差因子（Region Spread）。多头具有高美国敞口但低中国敞口的公司，空头具有相反特征的公司，捕捉地缘政治周期中的区域配置轮动机会，同时通过group_zscore控制行业中性以剥离行业Beta。",
+    "expression_list": [
+        "group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)"
+    ]
+}

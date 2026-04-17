@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_regression(winsorize(ts_backfill({exp_usa}, 126), std=3), add(group_mean(winsorize(ts_backfill({exp_usa}, 126), std=3), log(ts_mean({cap}, 21)), {industry}), winsorize(ts_backfill({exp_nondomicile1}, 126), std=3)), 252, rettype=0), 252)), 2.0), group_rank(signed_power(ts_zscore(ts_regression(winsorize(ts_backfill({exp_usa}, 126), std=3), add(group_mean(winsorize(ts_backfill({exp_usa}, 126), std=3), log(ts_mean({cap}, 21)), {industry}), winsorize(ts_backfill({exp_nondomicile1}, 126), std=3)), 252, rettype=0), 63), 2), {industry}), 0)",
+    "idea": "仅当特质性残差的长期（252日）zscore绝对值超过2个标准差（极端尾部）时才进行交易，信号采用残差短期zscore的平方（signed_power）并在行业内排名，非极端情况下仓位为0，实现高确信度的异常偏离捕捉与噪音过滤。",
+    "expression_list": []
+}

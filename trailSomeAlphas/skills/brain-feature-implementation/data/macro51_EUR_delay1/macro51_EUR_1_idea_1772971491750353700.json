@@ -1,0 +1,7 @@
+{
+    "template": "subtract(zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 21) / ts_backfill({600_ucits_weight}, 21), std=4)), ts_mean(zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 126) / ts_backfill({600_ucits_weight}, 126), std=4)), 63))",
+    "idea": "长短周期背离的均值回归信号。计算短期（21日回溯）比值的z-score减去长期（126日回溯）比值z-score的63日移动平均。正值表示当前对STOXX渠道的偏好显著高于其长期平均水平，暗示可能存在过度反应或临时性流动性分流，未来可能向长期均值回归，适用于捕捉配置比例的周期性摆动和反转机会。",
+    "expression_list": [
+        "subtract(zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21), std=4)), ts_mean(zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 126) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 126), std=4)), 63))"
+    ]
+}

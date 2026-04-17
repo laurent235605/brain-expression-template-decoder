@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(group_zscore(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),size_tier),industry),10)",
+    "idea": "实施双重中性化：先在市值分位组(size_tier)内进行Z-Score标准化剔除规模效应，再在行业(industry)内进行二次标准化，彻底剥离规模与行业双重Beta；最后以10日线性衰减平滑，显著降低组合换手并提升单因子容量。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(group_zscore(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),size_tier),industry),10)"
+    ]
+}

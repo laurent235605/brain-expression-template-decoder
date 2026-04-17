@@ -1,0 +1,10 @@
+{
+    "template": "bucket(rank(multiply(and(not(is_nan(vec_avg({actual_eps}))), and(not(is_nan(vec_avg({board_of_directors_meeting}))), is_nan(vec_avg({stock_split_ratio_243})))), add(inverse(1+days_from_last_change(vec_avg({actual_eps}))), inverse(1+days_from_last_change(vec_avg({board_of_directors_meeting})))))), range=\"0,1,0.2\")",
+    "idea": "**特定事件组合择时（业绩+治理但无拆分）**：专门捕捉\"业绩发布(actual_eps) + 董事会会议(board_of_directors_meeting)\"同时发生但无\"股票拆分(stock_split_ratio_243)\"的特定组合（通常预示基本面价值重估而非技术性股本调整）。使用days_from_last_change计算距上次事件的天数，并通过inverse(1+days)进行时间衰减加权（越近期权重越高），最后用bucket分桶将信号离散化为5档，便于构建分档组合或进行非线性择时。",
+    "expression_list": [
+        "bucket(rank(multiply(and(not(is_nan(vec_avg(ern6_actual_eps))), and(not(is_nan(vec_avg(ern6_board_of_directors_meeting))), is_nan(vec_avg(ern6_stock_split_ratio_243)))), add(inverse(1+days_from_last_change(vec_avg(ern6_actual_eps))), inverse(1+days_from_last_change(vec_avg(ern6_board_of_directors_meeting)))))), range=\"0,1,0.2\")",
+        "bucket(rank(multiply(and(not(is_nan(vec_avg(ern6_actual_eps_274))), and(not(is_nan(vec_avg(ern6_board_of_directors_meeting))), is_nan(vec_avg(ern6_stock_split_ratio_243)))), add(inverse(1+days_from_last_change(vec_avg(ern6_actual_eps_274))), inverse(1+days_from_last_change(vec_avg(ern6_board_of_directors_meeting)))))), range=\"0,1,0.2\")",
+        "bucket(rank(multiply(and(not(is_nan(vec_avg(ern6_actual_eps))), and(not(is_nan(vec_avg(ern6_board_of_directors_meeting_247))), is_nan(vec_avg(ern6_stock_split_ratio_243)))), add(inverse(1+days_from_last_change(vec_avg(ern6_actual_eps))), inverse(1+days_from_last_change(vec_avg(ern6_board_of_directors_meeting_247)))))), range=\"0,1,0.2\")",
+        "bucket(rank(multiply(and(not(is_nan(vec_avg(ern6_actual_eps_274))), and(not(is_nan(vec_avg(ern6_board_of_directors_meeting_247))), is_nan(vec_avg(ern6_stock_split_ratio_243)))), add(inverse(1+days_from_last_change(vec_avg(ern6_actual_eps_274))), inverse(1+days_from_last_change(vec_avg(ern6_board_of_directors_meeting_247)))))), range=\"0,1,0.2\")"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "template": "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill({nondomicile},63),std=4), industry))",
+    "idea": "将空头Z-score分桶离散化(基于关键阈值-3,-1.5,0,1.5,3)，再与海外收入行业标准化值相乘，创造非线性交互效应：仅在空头极端区间赋予地理因子权重，中间区间信号压缩至零，强化头部alpha区分。",
+    "expression_list": [
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry))",
+        "multiply(bucket(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), range=\"-3,-1.5,0,1.5,3\"), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry))"
+    ]
+}

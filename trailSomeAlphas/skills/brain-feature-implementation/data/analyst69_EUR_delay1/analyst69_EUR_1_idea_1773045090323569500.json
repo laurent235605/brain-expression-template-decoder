@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change({eps_best_eeps_cur_yr}), 5), group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), industry), 0)",
+    "idea": "结合事件驱动逻辑与行业中性化框架，仅在分析师预期数据于近5天内发生过更新（days_from_last_change）时才交易，捕捉信息扩散初期的价格反应溢价，同时通过group_zscore确保信号仅在行业内可比，避免对陈旧预期（stale forecast）产生无效暴露。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 5), group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), 0)",
+        "trade_when(less(days_from_last_change(anl69_eps_best_eeps_cur_yr), 5), group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), 0)"
+    ]
+}

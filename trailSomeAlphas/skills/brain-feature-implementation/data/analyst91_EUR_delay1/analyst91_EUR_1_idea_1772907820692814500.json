@@ -1,0 +1,7 @@
+{
+    "template": "multiply(signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 5), sector), 2), group_zscore(ts_decay_linear(ts_std_dev(vec_avg({exposure_value}), 60), 20), sector))",
+    "idea": "期限结构交叉乘数策略。将短期波动率的行业标准化二次幂（温和强调）与经20日深度线性衰减后的长期波动率行业Z-score进行乘法组合。创新性地融合模板A的非线性变换与模板B的时序平滑技术，通过不同期限、不同处理强度的交叉相乘，捕捉\"短期极端动荡且长期趋势确认\"（双高）或\"短期平稳但长期风险累积未释放\"（双低）的复杂地域敞口模式，构建多空双向非线性增强信号。",
+    "expression_list": [
+        "multiply(signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 5), sector), 2), group_zscore(ts_decay_linear(ts_std_dev(vec_avg(anl91_exposure_value), 60), 20), sector))"
+    ]
+}

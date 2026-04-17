@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_rank(subtract({cfroichg}, ts_delay({cfroichg}, 5)), industry), group_rank(ts_sum({cfroidrs}, 10), industry))",
+    "idea": "行业内分位秩背离套利：分别计算Input 1加速度与Input 2累积漂移在行业内的百分比排名(group_rank)，然后求差。该模板捕捉‘短期加速度脱离中期趋势’的背离瞬间(如排名差极大时)，属于激进的统计套利结构，利用两个时间维度(5日变化 vs 10日累积)的交叉验证寻找反转或加速确认点。",
+    "expression_list": [
+        "subtract(group_rank(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5)), industry), group_rank(ts_sum(mdl172_cfroidrs, 10), industry))"
+    ]
+}

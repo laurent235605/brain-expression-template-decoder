@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum({cfroidrs}, 10)",
+    "idea": "**Concept**: CFROI Drift Accumulation\n- **Sample Fields Used**: cfroidrs, cfroi_1, cfroi_5, cfroify5\n- **Definition**: Cumulative directional drift of CFROI over the 5-period horizon, measuring persistent improvement or deterioration trends\n- **Why This Feature**: Captures whether profitability changes are temporary blips or sustained trajectories via accumulation of period-over-period changes\n- **Logical Meaning**: Positive accumulation indicates sustained operational improvement; negative indicates structural decline\n- **is filling nan necessary**: No, cfroidrs is a derived drift metric; NaN indicates insufficient data for trend calculation and should be preserved.\n- **Directionality**: Positive = improving economics; Negative = deteriorating economics\n- **Boundary Conditions**: Extreme values indicate accelerating trends likely to mean-revert",
+    "expression_list": [
+        "ts_sum(mdl172_cfroidrs, 10)"
+    ]
+}

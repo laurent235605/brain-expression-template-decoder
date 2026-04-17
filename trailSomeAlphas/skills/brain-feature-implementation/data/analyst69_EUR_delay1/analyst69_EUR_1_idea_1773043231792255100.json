@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(and(greater(abs(quantile(ts_rank(days_from_last_change({eps_expected_report_dt}), 126), driver=\"gaussian\")), 1.0), greater(abs(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=\"gaussian\")), 1.0)), winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), 0)",
+    "idea": "双重极端验证的稳健比率：交叉融合模板A的时间维度极端检测与模板B的修正幅度极端检测，结合模板B的winsorize清洗与比率计算。必须同时满足'时间处于历史极端'和'修正幅度处于历史极端'两个条件，才交易经过去极值处理的效率比率（EPS/EBITDA）。实现时间维度与幅度维度的交叉验证，显著降低单一维度噪音导致的误交易。",
+    "expression_list": [
+        "trade_when(and(greater(abs(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 126), driver=\"gaussian\")), 1.0), greater(abs(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=\"gaussian\")), 1.0)), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)",
+        "trade_when(and(greater(abs(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 126), driver=\"gaussian\")), 1.0), greater(abs(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=\"gaussian\")), 1.0)), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)",
+        "trade_when(and(greater(abs(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 126), driver=\"gaussian\")), 1.0), greater(abs(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=\"gaussian\")), 1.0)), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)",
+        "trade_when(and(greater(abs(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 126), driver=\"gaussian\")), 1.0), greater(abs(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=\"gaussian\")), 1.0)), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_delta(subtract(ts_std_dev(vec_stddev({exposure_value}), 5), ts_std_dev(vec_stddev({exposure_value}), 60)), 5), industry), 2)",
+    "idea": "地理集中度变化加速度：改用vec_stddev衡量地理分散度（而非平均敞口），计算其短期与长期波动率差值的5日变化率（ts_delta，二阶导数），捕捉地域业务结构突变的加速moment。通过group_zscore行业内标准化后，使用signed_power(..., 2)非线性放大极端值，识别处于地理资产剥离或激进扩张临界点的公司，而对温和调整反应钝化。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_delta(subtract(ts_std_dev(vec_stddev(anl91_exposure_value), 5), ts_std_dev(vec_stddev(anl91_exposure_value), 60)), 5), industry), 2)"
+    ]
+}

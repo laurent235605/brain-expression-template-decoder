@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({data_item_value}), 63) / abs(ts_mean(vec_avg({data_item_value}), 63))",
+    "idea": "**Concept**: Financial Metric Stability Score\n- **Sample Fields Used**: data_item_value\n- **Definition**: Coefficient of variation (standard deviation divided by absolute mean) of financial values over a rolling window, measuring the stability of fundamental performance\n- **Why This Feature**: Identifies companies with predictable, stable operations versus those with volatile or cyclical financial results; stable fundamentals often indicate mature businesses or competitive moats\n- **Logical Meaning**: The relative variability of financial performance over time; quantifies business model stability\n- **is filling nan necessary**: Yes, use ts_backfill to ensure continuous time series before calculating statistics, as missing data points would bias volatility calculations\n- **Directionality**: Low values (near 0) indicate stable, predictable financial performance; high values indicate volatility, cyclicality, or operational instability\n- **Boundary Conditions**: Value of 0 indicates perfectly constant financial performance (rare, potentially suspicious); values >1 indicate high volatility relative to mean, potentially signaling distress or cyclical exposure",
+    "expression_list": [
+        "ts_std_dev(vec_avg(anl89_data_item_value), 63) / abs(ts_mean(vec_avg(anl89_data_item_value), 63))"
+    ]
+}

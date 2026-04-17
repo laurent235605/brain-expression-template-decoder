@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(less(days_from_last_change({eps_expected_report_dt}), 3), -1, trade_when(greater(days_from_last_change({eps_expected_report_dt}), 60), 1, 0)), 10)",
+    "idea": "**事件衰减型离散信号**：构建三段式逻辑：当距离上次变动小于3天（刚修订日程）时赋权-1（做空），大于60天（长期稳定）时赋权+1（做多），中间区间视为噪音赋权0。通过`ts_decay_linear`对产生的离散信号进行10日线性衰减平滑，既保留了事件驱动的即时性，又避免了因单日数据抖动导致的过高换手率。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 3), -1, trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 60), 1, 0)), 10)",
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 3), -1, trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 60), 1, 0)), 10)"
+    ]
+}

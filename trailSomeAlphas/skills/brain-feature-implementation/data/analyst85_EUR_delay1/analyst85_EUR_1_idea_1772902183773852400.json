@@ -1,0 +1,5 @@
+{
+    "template": "group_rank(trade_when(less(days_from_last_change(winsorize(ts_backfill(vec_avg({version}), 63), std=4)), 5), multiply(ts_delta(vec_avg({version}), 5), add(vec_range({version}), multiply(vec_skewness({version}), 0.5))), 0), {sector})",
+    "idea": "**事件驱动分歧衰减模板**：利用days_from_last_change检测版本均值最近一次更新的时间，仅在过去5天内发生更新的股票上计算信号。信号由5日动量与极差相乘构成，并用vec_skewness（偏度）进行方向增强：正偏（右尾长）时加大权重，暗示上行潜力更大。不满足时间条件的设为0。最后做行业内排名（group_rank）。经济逻辑：版本数据往往是台阶式更新而非连续变化，只在“刚刚发生修订”的窗口期内捕捉分歧与动量的交互，利用偏度识别非对称收益机会，结合时间衰减逻辑降低 stale signal 的持仓。",
+    "expression_list": []
+}

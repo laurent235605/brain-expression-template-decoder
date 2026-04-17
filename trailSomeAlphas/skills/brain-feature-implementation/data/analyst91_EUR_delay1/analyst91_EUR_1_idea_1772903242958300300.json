@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr(group_zscore(vec_avg({exposure_value}), sector), tvr=0.5, unit=252) * vec_ir({exposure_value})",
+    "idea": "目标换手率约束下的信息比率增强：先对地域敞口均值进行行业标准化并施加严格的目标换手率约束（降频至年化50%），再乘以敞口向量自身的信息比率（均值/标准差）。结合长期配置稳定性与跨地域风险调整收益，构建低换手高信念的地理战略质量因子，适用于捕捉慢变但持久的地理布局优势。",
+    "expression_list": [
+        "ts_target_tvr(group_zscore(vec_avg(anl91_exposure_value), sector), tvr=0.5, unit=252) * vec_ir(anl91_exposure_value)"
+    ]
+}

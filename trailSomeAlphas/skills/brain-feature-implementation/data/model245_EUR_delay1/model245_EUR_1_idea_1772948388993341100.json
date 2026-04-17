@@ -1,0 +1,7 @@
+{
+    "template": "inverse(ts_std_dev(vec_avg({rank}), 20))",
+    "idea": "**Concept**: Rank Stability Premium\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Inverse of the rank volatility (1/std_dev) to treat stability itself as a valuable attribute\n- **Why This Feature**: In the context of model rankings, stability may be as important as the rank level itself; this feature isolates the \"confidence\" component from the \"signal\" component\n- **Logical Meaning**: Represents the precision or reliability of the model's view; high values indicate the model consistently evaluates this stock similarly (high confidence), regardless of whether the rank is good or bad\n- **is filling nan necessary**: Inverse of volatility requires non-zero denominator; volatility of zero (perfectly stable) creates infinity (handled by pasteurize). Do not fill small volatilities with artificial floors as this distorts the premium calculation.\n- **Directionality**: Higher values indicate more stable/reliable rankings; lower values indicate volatile/noisy rankings\n- **Boundary Conditions**: Approaches infinity as volatility approaches zero; approaches zero as volatility increases",
+    "expression_list": [
+        "inverse(ts_std_dev(vec_avg(mdl245_rank), 20))"
+    ]
+}

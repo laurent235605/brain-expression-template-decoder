@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract(1, vec_avg({lastcostingfailed})), add(1, vec_stddev({lastcostingfailed})))",
+    "idea": "风险调整可靠性：用失败向量的标准差衡量运营波动性作为分母，对原始可靠性进行风险调整（加1避免除零）。惩罚那些平均可靠性尚可但波动剧烈、时高时低的系统，奖励稳定可靠的运营。",
+    "expression_list": [
+        "divide(subtract(1, vec_avg(mdl209_lastcostingfailed)), add(1, vec_stddev(mdl209_lastcostingfailed)))"
+    ]
+}

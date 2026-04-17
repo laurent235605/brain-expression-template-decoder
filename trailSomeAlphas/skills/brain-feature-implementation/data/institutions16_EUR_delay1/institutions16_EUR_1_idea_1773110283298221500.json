@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(group_zscore(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), sector), 252)",
+    "idea": "在行业中性残差基础上，进一步计算252日时间序列Z-Score，衡量当前特质性资金流动相对个股自身历史分布的极端偏离程度，识别正在经历“历史性”资金异动的 Alpha 机会，避免静态阈值带来的时变偏差。",
+    "expression_list": [
+        "ts_zscore(group_zscore(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), sector), 252)"
+    ]
+}

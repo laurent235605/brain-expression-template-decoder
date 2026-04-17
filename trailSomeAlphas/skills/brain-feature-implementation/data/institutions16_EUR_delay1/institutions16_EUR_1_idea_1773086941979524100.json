@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_normalize(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(sqrt(multiply(ts_std_dev(returns, 21), ts_std_dev(ts_backfill({reported_asset_value}, 63), 63))), 0.001)), industry), maxPercent=0.02)",
+    "idea": "采用双重风险调整：分母同时纳入收益波动率(21日)和底层资产价值波动率(63日)的几何平均，更精准识别真实风险承担；通过group_normalize实现行业内严格的市值中性，最后使用truncate限制个股权重不超过2%，防止过度集中。",
+    "expression_list": [
+        "truncate(group_normalize(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(sqrt(multiply(ts_std_dev(returns, 21), ts_std_dev(ts_backfill(fund_reported_asset_value, 63), 63))), 0.001)), industry), maxPercent=0.02)"
+    ]
+}

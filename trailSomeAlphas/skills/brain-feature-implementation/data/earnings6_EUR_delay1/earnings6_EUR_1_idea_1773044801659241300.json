@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( trade_when( and(greater(vec_avg({x_dividend}), 0.001), greater(ts_rank(vec_avg({x_dividend}), 252), 0.1)), divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 0 ), industry )",
+    "idea": "融合模板2的条件化逻辑与模板1的股息持续性结构，引入时序分位数过滤（ts_rank）。仅当当前股息处于历史高位（前90%分位）且大于噪声阈值时，才计算相对于历史均值的持续性比率，并进行行业标准化，以识别真正具有分红趋势改善的行业龙头。",
+    "expression_list": [
+        "group_zscore( trade_when( and(greater(vec_avg(ern6_x_dividend), 0.001), greater(ts_rank(vec_avg(ern6_x_dividend), 252), 0.1)), divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 0 ), industry )",
+        "group_zscore( trade_when( and(greater(vec_avg(ern6_x_dividend_233), 0.001), greater(ts_rank(vec_avg(ern6_x_dividend_233), 252), 0.1)), divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 0 ), industry )",
+        "group_zscore( trade_when( and(greater(vec_avg(ern6_x_dividend_oc), 0.001), greater(ts_rank(vec_avg(ern6_x_dividend_oc), 252), 0.1)), divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 0 ), industry )",
+        "group_zscore( trade_when( and(greater(vec_avg(ern6_x_dividend_oc_235), 0.001), greater(ts_rank(vec_avg(ern6_x_dividend_oc_235), 252), 0.1)), divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 0 ), industry )"
+    ]
+}

@@ -1,0 +1,2 @@
+id,description,dataset,category,subcategory,region,delay,universe,type,dateCoverage,coverage,userCount,alphaCount,pyramidMultiplier,themes,dataset_id,dataset_name,category_id,category_name,subcategory_id,subcategory_name
+mcr51_ishares_stoxx_europe_600_ucits_weight,ISHARES Weight.,"{'id': 'macro51', 'name': 'ETF Market Data'}","{'id': 'macro', 'name': 'Macro'}","{'id': 'macro-macroeconomic-activities', 'name': 'Macroeconomic Activities'}",EUR,1,TOPCS1600,MATRIX,1.0,0.4435,0,0,1.1,[],macro51,ETF Market Data,macro,Macro,macro-macroeconomic-activities,Macroeconomic Activities

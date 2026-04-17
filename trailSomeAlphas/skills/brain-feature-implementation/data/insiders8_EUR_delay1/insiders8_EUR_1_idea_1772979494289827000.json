@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), sector)), 2.0), signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 2.5), multiply(0.3, signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.0))), sector)",
+    "idea": "实施动态阈值与幂次分层：仅当行业中性化后的定价偏离绝对值超过2个标准差（极端两端）时，使用2.5次幂极致放大尾部信号；对于中等偏离（|zscore|<2）仅保留30%仓位并降至线性（1.0次幂），严格压制中间区间的无效交易，强化“只有极端才有信号”的逻辑。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), sector)), 2.0), signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 2.5), multiply(0.3, signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.0))), sector)"
+    ]
+}

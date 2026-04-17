@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_delta(zscore(vec_avg({likelihood_score})), 5)), 1.0), rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 0)",
+    "idea": "边际变化极端捕捉：用5日zscore变化量的绝对值替代原水平值作为触发条件，仅当分析师信心发生剧烈边际变化(|Δzscore|>1)时激活模板2的排名信号，捕捉预期修正初期的价格错配机会。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_delta(zscore(vec_avg(success_likelihood_score)), 5)), 1.0), rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater(group_rank(vec_skewness({version}), industry), 0.8), 1, if_else(less(group_rank(vec_skewness({version}), industry), 0.2), -1, 0)), industry), 3)",
+    "idea": "极端偏度分桶衰减策略：计算版本分布偏度后在行业内排名(group_rank)，仅保留极端偏度的股票（前20%赋值+1，后20%赋值-1，中间60%赋值0），通过行业归一化(group_normalize)控制行业暴露，最后应用3日线性衰减(ts_decay_linear)降低换手率。该模板专注于捕捉分布形态极化的反转或动量信号，避免中等偏度带来的噪音干扰。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(greater(group_rank(vec_skewness(anl85_version), industry), 0.8), 1, if_else(less(group_rank(vec_skewness(anl85_version), industry), 0.2), -1, 0)), industry), 3)"
+    ]
+}

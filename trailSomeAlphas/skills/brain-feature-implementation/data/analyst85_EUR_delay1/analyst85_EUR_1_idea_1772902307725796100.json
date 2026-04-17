@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_decay_exp_window(winsorize(vec_avg({version}), std=4), 5, factor=0.3), ts_decay_exp_window(winsorize(vec_avg({version}), std=4), 60, factor=0.05))",
+    "idea": "版本活跃度期限结构（斜率信号）。对比短期（5日，高敏感因子0.3）与长期（60日，低敏感因子0.05）的指数衰减序列，构建版本更新速度的期限利差。陡峭化（短期远高于长期）预示近期版本活动激增，可能伴随重大信息释放；平坦或倒挂则暗示活动减缓。",
+    "expression_list": [
+        "subtract(ts_decay_exp_window(winsorize(vec_avg(anl85_version), std=4), 5, factor=0.3), ts_decay_exp_window(winsorize(vec_avg(anl85_version), std=4), 60, factor=0.05))"
+    ]
+}

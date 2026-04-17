@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(and(greater(abs(vec_avg({estimated_eps})), 0.01), greater(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 60), 0.001)), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0)",
+    "idea": "应用条件过滤逻辑提升信号质量：使用60日平均股息作为质量过滤器(trade_when)，仅当公司具有稳定分红历史（排除壳公司）且预期EPS不为零时才交易盈利惊喜，其余情况强制为零仓位，有效规避数据错误和垃圾股风险。",
+    "expression_list": [
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 60), 0.001)), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0)"
+    ]
+}

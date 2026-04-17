@@ -1,0 +1,16 @@
+{
+    "template": "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill({nondomicile},63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill({concentration},21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+    "idea": "趋势确认与事件衰减版：使用20日线性回归斜率（rettype=2）替代简单差分，以稳健估计集中度恶化速度，过滤短期噪声。仅当海外收入处于60日历史前15%时触发。对最终信号应用hump_decay（阈值2%），忽略微小日度波动，显著降低换手率，更适合捕捉持续性的地理集中恶化而非短期脉冲。",
+    "expression_list": [
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)",
+        "hump_decay(trade_when(greater(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 60), 0.85), ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,21),std=4), ts_step(), 20, rettype=2), 0), hump=0.02)"
+    ]
+}

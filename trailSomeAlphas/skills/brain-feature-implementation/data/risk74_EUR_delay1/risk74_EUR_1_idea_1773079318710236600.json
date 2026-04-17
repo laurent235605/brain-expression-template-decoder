@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), hump=0.02)",
+    "idea": "将时序操作符指南中的hump_decay应用于模板2的持仓流压计算，在保持SNR信号敏感度的同时通过hump阈值(0.02)忽略微小日间权重变化，显著降低组合换手率。相比ts_decay_linear的高换手特性，此结构更适合捕捉机构持仓的持续性战略调整而非高频噪音。",
+    "expression_list": [
+        "hump_decay(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), hump=0.02)"
+    ]
+}

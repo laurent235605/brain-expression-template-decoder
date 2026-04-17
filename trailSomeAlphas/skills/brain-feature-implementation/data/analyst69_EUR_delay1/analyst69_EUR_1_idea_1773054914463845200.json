@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(ts_delta(ts_mean(ts_delta(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), 5), 20), 5), industry), driver=gaussian)",
+    "idea": "效率比率加速度：将模板2的加速度计算框架完全迁移至模板1的效率比率维度，计算盈利效率比率的二阶变化率（加速度），并经行业中性高斯分位转换，识别行业内盈利转化效率正在加速改善或恶化的极端标的。",
+    "expression_list": [
+        "quantile(group_zscore(ts_delta(ts_mean(ts_delta(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 5), 20), 5), industry), driver=gaussian)",
+        "quantile(group_zscore(ts_delta(ts_mean(ts_delta(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 5), 20), 5), industry), driver=gaussian)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(trade_when(greater(abs(zscore(vector_neut(ts_backfill({fundreportedequityassets}, 21), ts_backfill({reported_asset_value}, 21)))), 2), zscore(vector_neut(ts_backfill({fundreportedequityassets}, 21), ts_backfill({reported_asset_value}, 21))), 0), hump=0.01)",
+    "idea": "极端配置信号提取：基于21日回溯填充数据计算向量中性残差，仅保留截面Z-score绝对值大于2的极端值（前约5%与后约5%），其余仓位设为0，配合hump_decay控制微小调仓并降低换手率。适用于捕捉极端偏离常态的配置决策，过滤掉中等强度配置变化的噪音，专注于高确信度或异常防御性的仓位变动。",
+    "expression_list": [
+        "hump_decay(trade_when(greater(abs(zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), ts_backfill(fund_reported_asset_value, 21)))), 2), zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), ts_backfill(fund_reported_asset_value, 21))), 0), hump=0.01)"
+    ]
+}

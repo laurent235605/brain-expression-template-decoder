@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_zscore(ts_backfill(vec_ir({vda}), lookback=5, k=1), 120), std=4), 2), sector)",
+    "idea": "使用信息比率（vec_ir，均值/标准差）替代简单均值，更稳健地衡量流动性质量。通过 winsorize 去除时间序列计算中的极端异常值，应用 signed_power 放大尾部信号，并在行业内进行标准化（group_zscore），消除行业间流动性水平差异，精准捕捉行业内流动性压力异常。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_zscore(ts_backfill(vec_ir(mcr49_vda), lookback=5, k=1), 120), std=4), 2), sector)"
+    ]
+}

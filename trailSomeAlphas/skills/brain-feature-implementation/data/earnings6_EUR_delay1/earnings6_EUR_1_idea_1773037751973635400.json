@@ -1,0 +1,5 @@
+{
+    "template": "if_else(greater(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 0), multiply(right_tail(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {industry}), minimum=0.8), add(1, abs(vec_skewness({estimated_eps})))), multiply(left_tail(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {industry}), maximum=-0.8), add(1, abs(vec_skewness({estimated_eps})))))",
+    "idea": "基于分析师预期分布偏度（vec_skewness）的极端Surprise非对称放大策略：利用right_tail和left_tail分别隔离正负Surprise的极端尾部（前20%与后20%），将中间噪音区间直接归零；针对分析师普遍乐观（正偏）或悲观（负偏）的市场环境，通过(1+|偏度|)对极端信号进行动态增益，在一致预期偏见严重时加大对极端Surprise的暴露，实现非对称风险补偿。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_decay_linear(pasteurize({volume}), 10), driver=\"gaussian\")",
+    "idea": "激进重组：先使用pasteurize对成交量进行极端值和无穷值清洗确保数据稳健性，再通过ts_decay_linear进行10日线性衰减平滑（降低换手率），最后映射到gaussian分位数拉长尾部，构建对极端流动性事件敏感但交易摩擦低的复合信号",
+    "expression_list": [
+        "quantile(ts_decay_linear(pasteurize(mdl234_volume), 10), driver=\"gaussian\")"
+    ]
+}

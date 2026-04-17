@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(winsorize(ts_backfill({concentration}, 10), std=4), group_mean(winsorize(ts_backfill({concentration}, 10), std=4), log(ts_mean(cap, 21)), sector), 60, rettype=0)",
+    "idea": "将模板2的地理集中度变化通过模板1的回归残差方法进行行业中性化处理。以市值加权的行业平均集中度作为解释变量，剔除行业共同趋势后的残差代表公司特质性的地理布局调整信号，避免行业周期性国际化浪潮的干扰，更精准捕捉公司个体战略转型（如近岸外包、供应链重组）带来的Alpha。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_backfill(rsk74_concentration, 10), std=4), group_mean(winsorize(ts_backfill(rsk74_concentration, 10), std=4), log(ts_mean(cap, 21)), sector), 60, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), group_mean(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), log(ts_mean(cap, 21)), sector), 60, rettype=0)"
+    ]
+}

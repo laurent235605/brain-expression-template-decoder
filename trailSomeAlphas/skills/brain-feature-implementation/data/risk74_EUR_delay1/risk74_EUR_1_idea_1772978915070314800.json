@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_rank(ts_delta({hfown_pctown}, 5), 126), 0.9), ts_delta({hfown_pctown}, 5), if_else(less(ts_rank(ts_delta({hfown_pctown}, 5), 126), 0.1), ts_delta({hfown_pctown}, 5), 0))",
+    "idea": "双尾极端信号过滤：基于126日（半年）历史窗口，仅保留当前流速位于历史分布前10%（极度加仓）或后10%（极度减仓）的样本，中间80%分位区间视为无效信息并归零。该结构专门用于捕捉“聪明钱”的定向极端行为（如逼空或流动性危机抛售），避免在仓位稳定期承担无效风险。",
+    "expression_list": [
+        "if_else(greater(ts_rank(ts_delta(rsk74_hfown_pctown, 5), 126), 0.9), ts_delta(rsk74_hfown_pctown, 5), if_else(less(ts_rank(ts_delta(rsk74_hfown_pctown, 5), 126), 0.1), ts_delta(rsk74_hfown_pctown, 5), 0))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(ts_backfill(vec_avg({x_dividend}), 63), 63), industry), 5)",
+    "idea": "关注股息变化趋势而非绝对水平，先对向量股息进行63日回溯填充，计算63日变化率（ts_delta）以捕捉股息增减动量，按行业进行zscore标准化消除行业间股息政策差异，最后使用5日线性衰减（ts_decay_linear）平滑信号降低换手率，适用于跟踪股息持续改善或恶化的趋势动量。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(ts_backfill(vec_avg(ern6_x_dividend), 63), 63), industry), 5)",
+        "ts_decay_linear(group_zscore(ts_delta(ts_backfill(vec_avg(ern6_x_dividend_233), 63), 63), industry), 5)",
+        "ts_decay_linear(group_zscore(ts_delta(ts_backfill(vec_avg(ern6_x_dividend_oc), 63), 63), industry), 5)",
+        "ts_decay_linear(group_zscore(ts_delta(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 63), 63), industry), 5)"
+    ]
+}

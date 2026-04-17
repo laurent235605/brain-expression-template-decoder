@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_delta(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 5), 252)",
+    "idea": "计算20日平滑稳定性指标的5日一阶差分（变化速度），再对该速度进行252日时序Z-score，识别“稳定性趋势的加速度”而非绝对水平，专门捕捉预期披露日从稳定到不稳定（或反之）的拐点信号。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 5), 252)",
+        "ts_zscore(ts_delta(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 5), 252)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 126, rettype=0), 252)",
+    "idea": "**历史自适应偏离度检测**：不仅关注截面规模中性，更关注基金相对于自身历史的异常程度。先计算126日窗口的规模中性残差，再计算该残差在252日历史窗口中的时序zscore（ts_zscore）。此操作回答“该基金当前的规模调整后的活跃度是否处于历史极端水平”，捕捉基金交易风格的结构性转变（如从被动变为主动或反之），而非仅仅捕捉截面偏离，适用于识别行为模式突变的alpha机会。",
+    "expression_list": [
+        "ts_zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 126, rettype=0), 252)"
+    ]
+}

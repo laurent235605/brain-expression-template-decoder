@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(vector_neut(ts_backfill({fundreportedequityassets},63), ts_backfill({reported_asset_value},63)), 21), 252)",
+    "idea": "基于回溯填充后的数据，先计算规模中性化的权益配置残差，再取该残差的21日变化率（delta），最后计算这一变化率在252日历史窗口中的时序Z分数。该模板识别基金当前相对规模的调仓速度是否处于历史极端水平，捕捉配置动量的加速或减速信号。",
+    "expression_list": [
+        "ts_zscore(ts_delta(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,63), ts_backfill(fund_reported_asset_value,63)), 21), 252)"
+    ]
+}

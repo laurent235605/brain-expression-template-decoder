@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_skewness(vec_avg({data_item_value}), 252), 1.5), signed_power(ts_skewness(vec_avg({data_item_value}), 252), 1.5), if_else(less(ts_skewness(vec_avg({data_item_value}), 252), -1.5), multiply(-1, signed_power(abs(ts_skewness(vec_avg({data_item_value}), 252)), 1.5)), 0))",
+    "idea": "双向尾部极端偏度策略：建立非对称阈值逻辑——当252日偏度>1.5时强力做多（右尾极厚，存在超预期上涨期权价值），当偏度<-1.5时反向做空（左尾风险积聚），中间区间仓位归零。使用1.5次幂非线性放大极端偏度的alpha贡献，构建基于分布形态极端化的择时因子。",
+    "expression_list": [
+        "if_else(greater(ts_skewness(vec_avg(anl89_data_item_value), 252), 1.5), signed_power(ts_skewness(vec_avg(anl89_data_item_value), 252), 1.5), if_else(less(ts_skewness(vec_avg(anl89_data_item_value), 252), -1.5), multiply(-1, signed_power(abs(ts_skewness(vec_avg(anl89_data_item_value), 252)), 1.5)), 0))"
+    ]
+}

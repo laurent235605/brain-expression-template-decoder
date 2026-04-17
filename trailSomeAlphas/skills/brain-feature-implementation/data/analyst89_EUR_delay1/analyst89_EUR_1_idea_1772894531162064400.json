@@ -1,0 +1,7 @@
+{
+    "template": "252 - ts_count_nans(vec_avg({fiscal_period_end}), 252)",
+    "idea": "**Concept**: Fiscal Data Richness\n- **Sample Fields Used**: fiscal_period_end\n- **Definition**: Count of unique, valid fiscal period ends within the lookback window, measuring data availability and reporting frequency\n- **Why This Feature**: Data richness affects statistical reliability of all other features; sparse data indicates limited history, recent IPOs, or delisting risk\n- **Logical Meaning**: The density of historical data points available for analysis; proxy for corporate maturity and information transparency\n- **is filling nan necessary**: No, NaN counting is explicitly the mechanism to measure data sparsity; filling would obscure the information content\n- **Directionality**: Higher values indicate rich data history (better statistical reliability); lower values indicate sparse data (higher estimation uncertainty)\n- **Boundary Conditions**: 0 indicates no data; expected ~4 for quarterly reporters over 1 year; values significantly below expected indicate reporting gaps or recent listing/delisting",
+    "expression_list": [
+        "252 - ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)"
+    ]
+}

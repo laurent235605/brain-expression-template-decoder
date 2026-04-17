@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(less(ts_rank(ts_std_dev(vec_avg({exposure_value}), 20), 120), 0.1), greater(ts_rank(ts_std_dev(vec_avg({exposure_value}), 20), 120), 0.9)), ts_std_dev(vec_avg({exposure_value}), 20), 0)",
+    "idea": "基于120日历史分位(ts_rank)进行极端区间切割，仅在地理暴露波动处于历史前10%(极度重组)或后10%(极度稳定)时保留原始信号，中间80%区间通过trade_when置零。此非线性处理将连续波动率转化为离散信号，避免中等波动区间的模糊噪音干扰。",
+    "expression_list": [
+        "trade_when(or(less(ts_rank(ts_std_dev(vec_avg(anl91_exposure_value), 20), 120), 0.1), greater(ts_rank(ts_std_dev(vec_avg(anl91_exposure_value), 20), 120), 0.9)), ts_std_dev(vec_avg(anl91_exposure_value), 20), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(winsorize(ts_delta(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 63), std=4))), 2), zscore(winsorize(ts_delta(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 63), std=4)), 0)",
+    "idea": "检测财年离散度的季度变化（63日差分），仅当变化幅度超过2倍标准差时保留信号。用于精准捕捉财年重组、并购整合或会计政策变更事件，通过极端值阈值过滤降低稳定期的噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(winsorize(ts_delta(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 63), std=4))), 2), zscore(winsorize(ts_delta(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 63), std=4)), 0)"
+    ]
+}

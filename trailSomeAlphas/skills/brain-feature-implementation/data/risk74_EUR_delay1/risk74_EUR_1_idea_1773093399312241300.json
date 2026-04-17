@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(signed_power(ts_sum(ts_delta({hfown_pctown},1),20), 0.5), signed_power(ts_sum(ts_delta({fund_pct_ownership_encr},1),20), 0.5)), sector)",
+    "idea": "双边非线性分解差分：先对对冲基金流和共同基金流分别进行signed_power(0.5)非线性变换（放大各自极端流），再进行行业中性差分。相比原线性差分，此方法能同时捕捉\"极端聪明钱买入+极端散户钱卖出\"的双向极端组合，信号更锐利。",
+    "expression_list": [
+        "group_zscore(subtract(signed_power(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), 0.5), signed_power(ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20), 0.5)), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), std=4), 20), 60)",
+    "idea": "流动性效率动量：计算流动性效率比率在20日内的变化率（delta），并相对于60日历史进行zscore标准化，识别那些近期正在显著改善（资金流入效率提升，正值）或恶化（流动性消耗加剧，负值）的标的，捕捉效率变化的加速度而非绝对水平。",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), std=4), 20), 60)"
+    ]
+}

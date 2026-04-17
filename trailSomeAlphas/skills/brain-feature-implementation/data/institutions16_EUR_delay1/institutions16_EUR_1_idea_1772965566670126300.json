@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr({reported_asset_value}, {companyreportedtotalassets}, 60)",
+    "idea": "**Concept**: Company-Fund Asset Correlation\n- **Sample Fields Used**: `reported_asset_value`, `companyreportedtotalassets`\n- **Definition**: Rolling 60-day correlation between individual fund AUM and parent company total AUM\n- **Why This Feature**: High correlation suggests the fund is the dominant product or tracks overall firm flows; low correlation indicates the fund operates independently of company-wide trends\n- **Logical Meaning**: Captures the systemic importance of the fund to its parent; stable correlation indicates consistent contribution, divergence suggests fund-specific flows or company diversification\n- **is filling nan necessary**: Yes, `ts_backfill()` is necessary for quarterly company data aligned to daily fund data, but use `k=1` to avoid forward-looking bias\n- **Directionality**: High positive correlation (0.8-1.0) indicates dominant/fundamental status; low/negative correlation indicates satellite/niche positioning\n- **Boundary Conditions**: Correlation near 1.0 suggests mono-line risk; near 0 suggests independent business lines; negative suggests counter-cyclical hedging strategy",
+    "expression_list": [
+        "ts_corr(fund_reported_asset_value, inst16_ipreo_companyreportedtotalassets, 60)"
+    ]
+}

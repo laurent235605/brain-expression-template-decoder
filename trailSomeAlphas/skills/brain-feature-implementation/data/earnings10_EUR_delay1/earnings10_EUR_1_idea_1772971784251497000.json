@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(greater(ts_rank(winsorize(vec_stddev({elta_value}), std=4), 60), 0.8), 0, multiply(ts_regression(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), ts_delta(group_mean(winsorize(vec_avg({elta_value}), std=4), log(ts_mean(cap,21)), industry), 5), 60, rettype=0), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5))), industry)",
+    "idea": "行业残差提纯与极端分歧剔除：先用CAPM残差法剥离行业贝塔动量，保留个股特质动量；再通过 trade_when 剔除历史分歧度位于前20%的标的（视为信息混乱），仅对“干净”样本施加分歧度加权，实现双重质量过滤。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(ts_rank(winsorize(vec_stddev(ern10_elta_value), std=4), 60), 0.8), 0, multiply(ts_regression(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), ts_delta(group_mean(winsorize(vec_avg(ern10_elta_value), std=4), log(ts_mean(cap,21)), industry), 5), 60, rettype=0), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5))), industry)"
+    ]
+}

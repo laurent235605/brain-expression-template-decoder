@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(group_zscore(vec_skewness({exposure_value}), sector), 20)",
+    "idea": "关注地理集中度在行业内的变化率（改善/恶化），而非绝对水平。结合模板1的偏度概念与模板2的组内标准化，使用ts_delta计算20日差分，捕捉公司正在\"加速集中\"或\"开始分散\"的动态调整过程，适用于事件驱动型地理重组的早期识别。",
+    "expression_list": [
+        "ts_delta(group_zscore(vec_skewness(anl91_exposure_value), sector), 20)"
+    ]
+}

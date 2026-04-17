@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_rank(divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 20), add(0.0001, ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 20))), industry), group_rank(divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120))), industry))",
+    "idea": "**跨时间尺度均值回归/动量**: 计算短期(20天)与长期(120天)流动性Z-Score的行业内排名差(subtract)。正值表示短期流动性压力显著高于长期趋势(潜在反转信号或动量延续)，负值表示短期流动性异常宽松；通过group_rank转换为分位数，确保跨行业可比性并控制异常值影响，捕捉流动性状态的周期性背离。",
+    "expression_list": [
+        "subtract(group_rank(divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 20), add(0.0001, ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 20))), industry), group_rank(divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120))), industry))"
+    ]
+}

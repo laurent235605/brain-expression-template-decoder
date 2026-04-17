@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_rank(ts_delta({eps_best_eeps_cur_yr}, 5), 60), group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry))",
+    "idea": "融合时序相对位置（60日内分位，ts_rank）与截面行业中性化（group_zscore），将当前预期修订动量相对于自身历史的位置作为动态权重（0-1之间），仅当处于近期历史高位时全额配置，低位时自动减仓，实现信号强度的自适应调节，避免在历史低位区接刀。",
+    "expression_list": [
+        "multiply(ts_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry))",
+        "multiply(ts_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(rank(winsorize(log({volume}), std=4)), 0.8), zscore(winsorize(log({volume}), std=4)), trade_when(less(rank(winsorize(log({volume}), std=4)), 0.2), reverse(zscore(winsorize(log({volume}), std=4))), 0))",
+    "idea": "双尾极端成交量策略（区间选择器）：仅保留成交量排名前20%（极度活跃）和后20%（极度冷清）的股票，分别赋予正向和反向zscore权重，中间60%视为噪音赋值为0。通过 trade_when 实现分段函数，专注于流动性极端状态下的 alpha，避免中等成交量区间的随机波动干扰。",
+    "expression_list": [
+        "trade_when(greater(rank(winsorize(log(mdl234_volume), std=4)), 0.8), zscore(winsorize(log(mdl234_volume), std=4)), trade_when(less(rank(winsorize(log(mdl234_volume), std=4)), 0.2), reverse(zscore(winsorize(log(mdl234_volume), std=4))), 0))"
+    ]
+}

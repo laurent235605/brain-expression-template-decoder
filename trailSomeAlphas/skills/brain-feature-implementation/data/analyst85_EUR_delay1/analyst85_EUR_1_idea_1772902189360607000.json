@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(multiply(ts_rank(ts_delta(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 5), 63), ts_rank(ts_mean(vec_range(winsorize(ts_backfill({version}, 63), std=4)), 5), 21)), 0.5)",
+    "idea": "**多时间尺度分位数趋势模板**：构建双时间维度验证：63日时间序列排名（ts_rank）捕捉短期动量强度，21日时间序列排名捕捉中期极差（disagreement）趋势。两者相乘后取0.5次幂（signed_power）相当于几何平均，平滑极端值。先对原始数据做清洗与平滑（ts_mean(range,5)）以降低日频噪音。经济逻辑：短期动量与中期分歧趋势的共振比单一截面更可靠；几何平均惩罚单维度极端而另一维度平庸的情况，确保信号来自多维度的协同确认。",
+    "expression_list": [
+        "signed_power(multiply(ts_rank(ts_delta(winsorize(ts_backfill(vec_avg(anl85_version), 63), std=4), 5), 63), ts_rank(ts_mean(vec_range(winsorize(ts_backfill(anl85_version, 63), std=4)), 5), 21)), 0.5)"
+    ]
+}

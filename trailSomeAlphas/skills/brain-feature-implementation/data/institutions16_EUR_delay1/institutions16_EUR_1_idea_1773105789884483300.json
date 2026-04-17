@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(quantile(ts_delta(winsorize(ts_backfill({reported_asset_value}, 10), std=4), 20), driver=\"gaussian\"), sector)",
+    "idea": "分布形态高斯变换：对20日资产变化进行高斯分位数转换(quantile-gaussian)，将原始分布映射为标准正态形态以强化尾部极端值、压缩中间噪音，再进行行业中性化，使得因子对极端资产变动更加敏感且跨行业可比。",
+    "expression_list": [
+        "group_zscore(quantile(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 10), std=4), 20), driver=\"gaussian\"), sector)"
+    ]
+}

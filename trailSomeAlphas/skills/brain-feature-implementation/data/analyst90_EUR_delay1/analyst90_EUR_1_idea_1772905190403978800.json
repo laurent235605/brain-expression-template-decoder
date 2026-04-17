@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_std_dev(vec_avg({likelihood_score}), 60), ts_std_dev(vec_avg({likelihood_score}), 20)), vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 60)), vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20)))",
+    "idea": "基于输入2的期限结构进行自适应窗口选择：当长期波动大于短期（发散状态）时，使用60日波动率作为分母（更保守）；当收敛时使用20日波动率（更敏感）。实现根据波动率制度动态调整回望期的增强型信噪比。",
+    "expression_list": [
+        "if_else(greater(ts_std_dev(vec_avg(success_likelihood_score), 60), ts_std_dev(vec_avg(success_likelihood_score), 20)), vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 60)), vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20)))"
+    ]
+}

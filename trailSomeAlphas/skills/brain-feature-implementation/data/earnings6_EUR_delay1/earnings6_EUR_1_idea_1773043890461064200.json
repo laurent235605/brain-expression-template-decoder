@@ -1,0 +1,8 @@
+{
+    "template": "quantile(add(multiply(0.6, group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry)), multiply(0.4, ts_delta(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), 5))), driver=\"cauchy\")",
+    "idea": "盈利惊喜加速度与柯西尾部分布。结合盈利惊喜的水平（60%权重）与短期变化率（40%权重，ts_delta捕捉加速改善/恶化），使用柯西分布（driver=\"cauchy\"）进行分位数拉伸（比高斯分布更强调极端尾部），对正在加速恶化的惊喜给予超线性惩罚。",
+    "expression_list": [
+        "quantile(add(multiply(0.6, group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry)), multiply(0.4, ts_delta(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 5))), driver=\"cauchy\")",
+        "quantile(add(multiply(0.6, group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry)), multiply(0.4, ts_delta(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 5))), driver=\"cauchy\")"
+    ]
+}

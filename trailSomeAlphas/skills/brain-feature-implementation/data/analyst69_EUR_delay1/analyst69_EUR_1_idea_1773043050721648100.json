@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_decay_linear(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 5), 63)",
+    "idea": "融合Template B的回填需求与Template A的衰减平滑思路：先对盈利预测进行5日回溯填充（避免假零值），计算日变化后施加5日线性衰减加权（`ts_decay_linear`），强调近期调整而非均匀累积，最后进行63日求和。此结构降低陈旧调整的影响，聚焦于近期信息 arrival 的加权强度，兼顾累积性与时效性。",
+    "expression_list": [
+        "ts_sum(ts_decay_linear(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 5), 63)",
+        "ts_sum(ts_decay_linear(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 5), 63)"
+    ]
+}

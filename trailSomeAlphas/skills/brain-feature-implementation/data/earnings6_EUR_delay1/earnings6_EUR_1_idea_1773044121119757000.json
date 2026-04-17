@@ -1,0 +1,10 @@
+{
+    "template": "ts_mean( group_zscore( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry ), 20 )",
+    "idea": "对行业内相对股息持续性信号应用时间序列平滑算子，降低短期分红波动噪音，提取更为稳定的行业相对分红趋势，平衡即时反应与信号持续性。",
+    "expression_list": [
+        "ts_mean( group_zscore( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry ), 20 )",
+        "ts_mean( group_zscore( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry ), 20 )",
+        "ts_mean( group_zscore( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry ), 20 )",
+        "ts_mean( group_zscore( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry ), 20 )"
+    ]
+}

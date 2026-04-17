@@ -1,0 +1,7 @@
+{
+    "template": "ls_clean = winsorize(vec_avg(ts_backfill({likelihood_score}, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill({exit_price}, 63)), vec_avg(ts_backfill({openprice}, 63))), std=4)\nls_mean = ts_mean(ls_clean, 30)\nret_mean = ts_mean(ret_clean, 30)\ndivergence = subtract(ls_clean, multiply(ls_mean, divide(ret_clean, ret_mean)))\ncore = zscore(winsorize(divergence, std=4))",
+    "idea": "稳健标准化分歧模板：首先对向量数据做63日回溯填充并取均值，随后进行4倍标准差截尾处理以消除极端脏数据。计算概率得分与价格隐含收益的30日均值，构建原始分歧度（当前概率偏离其历史均值的程度，经相对收益动能调整），最后进行截尾与截面Z-Score标准化，确保跨股票可比性并控制尾部极端值对组合权重的影响。",
+    "expression_list": [
+        "ls_clean = winsorize(vec_avg(ts_backfill(success_likelihood_score, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill(expected_exit_price, 63)), vec_avg(ts_backfill(anl90_openprice, 63))), std=4)\nls_mean = ts_mean(ls_clean, 30)\nret_mean = ts_mean(ret_clean, 30)\ndivergence = subtract(ls_clean, multiply(ls_mean, divide(ret_clean, ret_mean)))\ncore = zscore(winsorize(divergence, std=4))"
+    ]
+}

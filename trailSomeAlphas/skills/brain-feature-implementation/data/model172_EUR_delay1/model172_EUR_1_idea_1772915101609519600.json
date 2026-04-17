@@ -1,0 +1,7 @@
+{
+    "template": "subtract(quantile({prc_book}, driver=\"uniform\"), quantile({p_erati1}, driver=\"uniform\"))",
+    "idea": "**Concept**: Cross-Valuation Rank Divergence\n- **Sample Fields Used**: prc_book, prc_sale, p_erati1, grow_fy5\n- **Definition**: Relative ranking discrepancy between different valuation metrics (value vs. growth), identifying market inconsistencies\n- **Why This Feature**: Companies ranked cheap on P/B but expensive on P/E may have asset-heavy but low-margin businesses; divergence signals business model complexity\n- **Logical Meaning**: High divergence indicates mixed quality (cheap on some metrics, expensive on others); low divergence indicates consistent valuation consensus\n- **is filling nan necessary**: Yes, use quantile() to normalize before comparison, and ts_backfill() for any missing fundamental data.\n- **Directionality**: High divergence = potential mispricing opportunity; Low divergence = fairly valued across metrics\n- **Boundary Conditions**: Extreme divergence (>2 standard deviations) indicates potential value trap or hidden asset",
+    "expression_list": [
+        "subtract(quantile(mdl172_prc_book, driver=\"uniform\"), quantile(mdl172_p_erati1, driver=\"uniform\"))"
+    ]
+}

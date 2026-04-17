@@ -1,0 +1,5 @@
+{
+    "template": "add(group_zscore(winsorize({eps_best_eeps_cur_yr}, 4), {sector}), multiply(0.3, ts_zscore(group_zscore(winsorize({eps_best_eeps_cur_yr}, 4), {sector}), 63)))",
+    "idea": "行业中性化后的EPS预期水平叠加近期修正动量，捕捉'高预期且预期仍在上升'的强化效应；通过0.3系数控制动量项权重避免过度波动，同时保持原始预期的方向性主导",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(ts_zscore(ts_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), 20), 252), industry)",
+    "idea": "融合模板1的修正变化与模板2的时序标准化，先计算个股修正变化的252日Z-score，再进行行业内排序（group_rank），识别在各自行业内部历史修正波动中处于极端位置的股票。",
+    "expression_list": [
+        "group_rank(ts_zscore(ts_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), 20), 252), industry)",
+        "group_rank(ts_zscore(ts_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), 20), 252), industry)"
+    ]
+}

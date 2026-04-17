@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({score}) - ts_mean(vec_avg({score}), 20) * (vec_avg({quintile}) / 3)",
+    "idea": "**Concept**: Score-Quintile Alignment Spread\n- **Sample Fields Used**: `mdl249_score`, `mdl249_quintile`\n- **Definition**: The residual of score after accounting for quintile level (score minus quintile-mean score), measuring within-quintile extremity\n- **Why This Feature**: Identifies stocks at the top or bottom of their quintile bucket; top of Q4 may be more attractive than bottom of Q5 due to positioning or valuation\n- **is filling nan necessary**: Yes, both fields need alignment. Use `ts_backfill(vec_avg({score}), 3)` and `ts_backfill(vec_avg({quintile}), 3)` separately.\n- **Logical Meaning**: Relative position within quintile; positive values indicate high likelihood within quintile (approaching next quintile threshold)\n- **Directionality**: Positive values indicate \"almost upgraded\" status; negative values indicate \"almost downgraded\" status\n- **Boundary Conditions**: Extreme positive values in Q4 suggest imminent Q5 upgrade; extreme negative values in Q5 suggest imminent downgrade",
+    "expression_list": [
+        "vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 20) * (vec_avg(mdl249_quintile) / 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(group_normalize(trade_when(and(greater(group_rank(vec_stddev({version}), industry), 0.2), less(group_rank(vec_stddev({version}), industry), 0.8)), if_else(greater(group_rank(vec_skewness({version}), industry), 0.8), 1, if_else(less(group_rank(vec_skewness({version}), industry), 0.2), -1, 0)), 0), industry), 5, 0.3)",
+    "idea": "波动率过滤的偏度反转策略：利用vec_stddev计算版本波动率作为过滤条件，仅在中等波动率区间(20%-80%行业分位)交易偏度信号，避免高噪音(极高波动)或低流动性(极低波动)环境；采用指数衰减窗口(ts_decay_exp_window)替代线性衰减，赋予近期数据更高权重以更灵敏地退出失效信号，同时通过trade_when实现条件化交易。",
+    "expression_list": [
+        "ts_decay_exp_window(group_normalize(trade_when(and(greater(group_rank(vec_stddev(anl85_version), industry), 0.2), less(group_rank(vec_stddev(anl85_version), industry), 0.8)), if_else(greater(group_rank(vec_skewness(anl85_version), industry), 0.8), 1, if_else(less(group_rank(vec_skewness(anl85_version), industry), 0.2), -1, 0)), 0), industry), 5, 0.3)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( group_zscore( quantile( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver=\"gaussian\" ), industry ), 20 )",
+    "idea": "行业中性高斯极端值持久化：先将Surprise在行业内部标准化（去除行业bias），再进行高斯分位数拉伸以放大极端值，最后通过线性衰减平滑（降低换手率），捕捉具有持续性的极端业绩偏离信号。",
+    "expression_list": [
+        "ts_decay_linear( group_zscore( quantile( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" ), industry ), 20 )",
+        "ts_decay_linear( group_zscore( quantile( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" ), industry ), 20 )"
+    ]
+}

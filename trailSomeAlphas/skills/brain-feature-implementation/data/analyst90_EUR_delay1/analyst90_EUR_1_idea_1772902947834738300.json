@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( less( group_rank( vec_stddev( {likelihood_score} ), industry ), 0.3 ), ts_delta( group_rank( vec_avg( {likelihood_score} ), industry ), 30 ), multiply( 0.3, ts_delta( group_rank( vec_avg( {likelihood_score} ), industry ), 30 ) ) )",
+    "idea": "共识条件下的动量增强：计算行业内分析师分歧度（向量标准差），当分歧处于历史低位（行业前30%，高共识）时给予完整动量权重；分歧高位时仅保留30%权重，构建\"共识强化型\"动量因子，避免在意见混乱时期过度暴露。",
+    "expression_list": [
+        "trade_when( less( group_rank( vec_stddev( success_likelihood_score ), industry ), 0.3 ), ts_delta( group_rank( vec_avg( success_likelihood_score ), industry ), 30 ), multiply( 0.3, ts_delta( group_rank( vec_avg( success_likelihood_score ), industry ), 30 ) ) )"
+    ]
+}

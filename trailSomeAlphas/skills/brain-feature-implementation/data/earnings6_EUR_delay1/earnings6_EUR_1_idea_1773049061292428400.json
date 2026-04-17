@@ -1,0 +1,14 @@
+{
+    "template": "subtract(ts_zscore(divide(vec_avg({actual_eps}), add(ts_mean(ts_backfill(vec_avg({actual_eps}), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 252))",
+    "idea": "双信号交叉融合：同时计算盈利持续率与股息持续率，并取二者Z-Score的截面差值（Persistence Divergence Spread）。该激进重组可识别“盈利强劲但分红保守”的再投资型公司或“盈利下滑但维持派息”的价值陷阱，利用两个原始占位符的交互产生新的alpha维度。",
+    "expression_list": [
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 252))",
+        "subtract(ts_zscore(divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001)), 252), ts_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 252))"
+    ]
+}

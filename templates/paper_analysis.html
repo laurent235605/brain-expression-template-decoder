@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文关键词分析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>论文关键词分析</h1>
+            <p class="subtitle">使用 Deepseek AI 从研究论文中提取和分析关键词</p>
+            <a href="/" class="btn btn-outline">← 返回主页</a>
+        </header>
+
+        <div class="paper-analysis-container">
+            <!-- API Key Configuration -->
+            <div class="api-key-section">
+                <h2>Deepseek API 配置</h2>
+                <div class="form-group">
+                    <label for="apiKey">API 密钥:</label>
+                    <input type="password" id="apiKey" class="form-input secret-toggle-target" placeholder="输入您的 Deepseek API 密钥">
+                    <button id="saveApiKey" class="btn btn-secondary">保存 API 密钥</button>
+                </div>
+            </div>
+
+            <!-- File Upload Section -->
+            <div class="upload-section">
+                <h2>上传论文</h2>
+                <div class="file-upload-container">
+                    <input type="file" id="paperFile" accept=".pdf,.txt,.doc,.docx,.rtf,.tex,.latex,.md,.markdown" class="file-input">
+                    <label for="paperFile" class="file-label">
+                        <span class="upload-icon">📄</span>
+                        <span class="upload-text">选择文件或拖放到此处</span>
+                        <span class="file-types">支持格式: PDF, TXT, DOC/DOCX, RTF, LaTeX, Markdown</span>
+                    </label>
+                </div>
+                <div id="fileInfo" class="file-info"></div>
+            </div>
+
+            <!-- Analysis Options -->
+            <div class="analysis-options">
+                <h2>分析选项</h2>
+                <div class="options-grid">
+                    <label class="option-checkbox">
+                        <input type="checkbox" id="findRelatedWorks" checked>
+                        提取数学公式
+                    </label>
+                    <label class="option-checkbox">
+                        <input type="checkbox" id="extractKeywords">
+                        提取关键词
+                    </label>
+                    <label class="option-checkbox">
+                        <input type="checkbox" id="generateSummary">
+                        生成摘要
+                    </label>
+                </div>
+                <button id="analyzePaper" class="btn btn-primary btn-large">分析论文</button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" style="display: none;">
+                <h2>分析结果</h2>
+                <div class="results-tabs">
+                    <button class="tab-btn active" data-tab="keywords">关键词</button>
+                    <button class="tab-btn" data-tab="summary">摘要</button>
+                    <button class="tab-btn" data-tab="related">公式</button>
+                </div>
+                <div class="tab-content">
+                    <div id="keywordsTab" class="tab-pane active">
+                        <div class="keywords-container"></div>
+                    </div>
+                    <div id="summaryTab" class="tab-pane">
+                        <div class="summary-container"></div>
+                    </div>
+                    <div id="relatedTab" class="tab-pane">
+                        <div class="related-works-container"></div>
+                    </div>
+                </div>
+                <div class="export-section">
+                    <button id="exportResults" class="btn btn-secondary">导出结果</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='secret_toggle.js') }}"></script>
+    <script src="{{ url_for('static', filename='paper_analysis.js') }}"></script>
+    <script src="{{ url_for('static', filename='usage_widget.js') }}"></script>
+</body>
+</html> 

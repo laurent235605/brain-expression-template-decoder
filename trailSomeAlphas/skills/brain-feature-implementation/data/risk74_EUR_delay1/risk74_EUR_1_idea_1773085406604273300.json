@@ -1,0 +1,16 @@
+{
+    "template": "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill({nondomicile},63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize({concentration},std=4), 20), 1.2), 0), industry), hump=0.01)",
+    "idea": "行业中性化非线性动量：在行业内部比较海外收入占比历史分位，仅对行业内前20%的股票，使用1.2次幂放大地理集中度20日变化的尾部极端值以强调加速恶化，并通过hump算子控制日间微小波动导致的换手率，最终进行行业中性化以剔除行业系统性偏差。",
+    "expression_list": [
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)",
+        "hump(group_normalize(trade_when(greater(group_rank(ts_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 60), industry), 0.8), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 1.2), 0), industry), hump=0.01)"
+    ]
+}

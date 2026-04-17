@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.5), quantile(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), driver='gaussian'), 0), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "三重增强结构：首先以模板2的Z分数阈值（|Z|>1.5）过滤显著信号，其次通过模板1的高斯分位数对时序排名进行尾部拉伸，最后叠加模板2的信息时效性衰减（10天线性归零）。该结构仅对新鲜且显著的持续趋势赋予权重，构建高信噪比的复合Alpha。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5), quantile(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), driver='gaussian'), 0), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

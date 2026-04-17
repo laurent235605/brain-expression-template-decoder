@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff(vec_avg({aily_delta_recon_value}), 20)",
+    "idea": "**Concept**: Mean Revision Deviation\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: Deviation of current revision from the 20-day moving average (unstandardized)\n- **Why This Feature**: Raw deviation captures magnitude of surprise without normalization, useful when absolute change matters more than relative to historical volatility\n- **is filling nan necessary**: Use ts_backfill on the historical window to ensure robust mean calculation; current NaN propagates as NaN.\n- **Directionality**: Large positive values indicate unusual upward revision; large negative indicates unusual downgrade\n- **Boundary Conditions**: Values exceeding historical percentiles indicate regime change in expectations",
+    "expression_list": [
+        "ts_av_diff(vec_avg(ern10_aily_delta_recon_value), 20)"
+    ]
+}

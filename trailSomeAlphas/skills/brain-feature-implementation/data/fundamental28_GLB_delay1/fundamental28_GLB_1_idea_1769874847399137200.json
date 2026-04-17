@@ -1,0 +1,8 @@
+{
+    "template": "quantile({value_08301q}, driver=\"gaussian\")",
+    "idea": "**Concept**: ROE Cross-Sectional Percentile\n- **Sample Fields Used**: `value_08301q`\n- **Definition**: Gaussian-quantile rank of Return on Equity within the cross-sectional universe\n- **Why This Feature**: Relative profitability positioning independent of market-wide ROE shifts; identifies top-tier operators\n- **Logical Meaning**: Standardized position within the profit distribution; robust to inflation/period effects that raise all boats\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Quantile calculation requires complete cross-section; NaN values should be excluded from ranking, not filled.\n- **Directionality**: Higher values indicate top-quartile profitability relative to peers (positive for selection)\n- **Boundary Conditions**: Gaussian transformation caps extreme tails; values beyond +/- 2 sigma are rare",
+    "expression_list": [
+        "quantile(fnd28_newq_value_08301q, driver=\"gaussian\")",
+        "quantile(fnd28_ratesq_value_08301q, driver=\"gaussian\")"
+    ]
+}

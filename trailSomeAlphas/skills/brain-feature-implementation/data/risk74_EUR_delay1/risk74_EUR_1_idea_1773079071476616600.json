@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),log(ts_mean({cap},21)),sector),252,rettype=0),std=4),252)",
+    "idea": "通过时序回归先剔除行业市值加权的系统性空头变动成分（以流通市值对数加权行业均值为解释变量），得到个股特有的空头累积残差，再对该残差进行252日时序Z-score标准化。该模板识别“独立于行业贝塔”的纯粹个股空头异动，避免行业整体做空或板块轮动带来的伪信号，专注于捕捉个股层面的极端空头压力。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),log(ts_mean(market_cap_usd,21)),sector),252,rettype=0),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),log(ts_mean(market_cap_usd,21)),sector),252,rettype=0),std=4),252)"
+    ]
+}

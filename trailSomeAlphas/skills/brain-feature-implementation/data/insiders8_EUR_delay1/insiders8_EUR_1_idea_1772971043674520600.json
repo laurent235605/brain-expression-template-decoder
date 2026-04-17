@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(signed_power(quantile(group_zscore(ts_regression(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), group_mean(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), 60, rettype=0), sector), \"gaussian\"), 3), sector)",
+    "idea": "通过时序回归提取个股所有权稳定性相对于行业均值的残差（剥离行业beta影响，聚焦特质性所有权结构离散或协同），在行业内部进行高斯分位数映射与三次幂非线性放大，最后进行行业中性化归一。该模板排除了行业整体趋势干扰，专门捕捉个股层面的极端所有权结构异常，并通过凸性变换强化尾部收益。",
+    "expression_list": [
+        "group_normalize(signed_power(quantile(group_zscore(ts_regression(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 60, rettype=0), sector), \"gaussian\"), 3), sector)",
+        "group_normalize(signed_power(quantile(group_zscore(ts_regression(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 60, rettype=0), sector), \"gaussian\"), 3), sector)",
+        "group_normalize(signed_power(quantile(group_zscore(ts_regression(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 60, rettype=0), sector), \"gaussian\"), 3), sector)",
+        "group_normalize(signed_power(quantile(group_zscore(ts_regression(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 60, rettype=0), sector), \"gaussian\"), 3), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_delta(vec_avg({rank}), 5), inverse(ts_std_dev(vec_avg({rank}), 20)))",
+    "idea": "**Concept**: Rank Volatility Interaction\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Product of rank momentum (5-day change) and inverse of rank volatility to identify stocks with strong directional movement but historically stable rankings\n- **Why This Feature**: Identifies regime changes where a historically stable ranking begins to move rapidly (potential inflection points), filtering out stocks with naturally volatile rankings\n- **Logical Meaning**: High values indicate significant recent rank changes in stocks that typically have stable rankings, suggesting a fundamental reassessment by the model\n- **is filling nan necessary**: Ensure both inputs handle NaN consistently; if either input is NaN, the product is NaN, which is appropriate.\n- **Directionality**: Sign follows momentum direction; magnitude amplified by low historical volatility\n- **Boundary Conditions**: Zero if no momentum or infinite volatility; extreme values when stable stocks begin moving rapidly",
+    "expression_list": [
+        "multiply(ts_delta(vec_avg(mdl245_rank), 5), inverse(ts_std_dev(vec_avg(mdl245_rank), 20)))"
+    ]
+}

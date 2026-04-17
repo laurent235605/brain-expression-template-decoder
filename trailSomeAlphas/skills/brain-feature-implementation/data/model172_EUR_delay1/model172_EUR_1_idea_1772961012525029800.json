@@ -1,0 +1,5 @@
+{
+    "template": "vector_neut(add(multiply(0.7, group_zscore(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)), {industry})), multiply(0.3, group_zscore(ts_delta(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)),21), {industry}))), {mark_cap})",
+    "idea": "行业相对动量增强策略：在行业内部对CFROI利差进行标准化（组内Z-score），同时计算21日利差变化率捕捉改善趋势，将水平因子（70%权重）与动量因子（30%权重）线性加权合成，最后进行市值中性化处理，旨在筛选出兼具高质量现金流（高绝对水平）与边际改善（上升动能）的行业内优质标的。",
+    "expression_list": []
+}

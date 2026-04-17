@@ -1,0 +1,8 @@
+{
+    "template": "days_from_last_change({eps_expected_report_dt})",
+    "idea": "**Concept**: Report Date Uncertainty Indicator\n- **Sample Fields Used**: eps_expected_report_dt\n- **Definition**: Days since last change in expected report date using days_from_last_change operator\n- **Why This Feature**: Stability in reporting dates indicates corporate planning consistency; frequent changes may signal audit issues, M&A activity, or operational instability\n- **Logical Meaning**: Corporate event planning stability; unstable dates often correlate with negative events or complex reporting situations\n- **is filling nan necessary**: Date fields should not have NaNs unless coverage is missing; if NaN present, it indicates no known report date (significant signal), do not fill.\n- **Directionality**: Low values (recent change) indicate schedule uncertainty; high values (stable for long period) indicate predictable reporting\n- **Boundary Conditions**: Value resetting to 0 indicates date revision; values > 90 suggest long-stable schedule (quarterly reporters)",
+    "expression_list": [
+        "days_from_last_change(anl69_aeps_expected_report_dt)",
+        "days_from_last_change(anl69_eps_expected_report_dt)"
+    ]
+}

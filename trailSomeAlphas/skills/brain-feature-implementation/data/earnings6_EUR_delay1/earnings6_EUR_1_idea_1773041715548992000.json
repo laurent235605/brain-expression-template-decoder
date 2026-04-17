@@ -1,0 +1,10 @@
+{
+    "template": "multiply(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01)), add(1, signed_power(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 0.5)))",
+    "idea": "使用估计EPS的向量标准差（离散度）而非绝对值作为分母，更精确衡量惊喜的统计显著性；同时通过事件数量的平方根变换（signed_power 0.5）进行加权，避免单一事件过度放大，适用于分析师预期分歧较大的环境。",
+    "expression_list": [
+        "multiply(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), add(1, signed_power(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0.5)))",
+        "multiply(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), add(1, signed_power(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0.5)))",
+        "multiply(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), add(1, signed_power(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0.5)))",
+        "multiply(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), add(1, signed_power(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 0.5)))"
+    ]
+}

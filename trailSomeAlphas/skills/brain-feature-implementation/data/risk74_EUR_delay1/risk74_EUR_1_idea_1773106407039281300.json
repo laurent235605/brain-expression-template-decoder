@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr(trade_when(or(greater(group_rank(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),0.9),less(group_rank(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),0.1)),quantile(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),\"gaussian\"),0),0.05)",
+    "idea": "高斯分位尾端拉伸与目标换手率控制：在行业内部进行横截面排名（group_rank）后，仅保留极端头尾（前10%与后10%）进入交易池，通过quantile将均匀分布映射为高斯分布以拉伸极端值、压缩中段噪音，最后使用ts_target_tvr将组合换手率自动约束在5%以内，实现信号强度与交易成本的平衡。",
+    "expression_list": [
+        "ts_target_tvr(trade_when(or(greater(group_rank(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),industry),0.9),less(group_rank(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),industry),0.1)),quantile(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),\"gaussian\"),0),0.05)"
+    ]
+}

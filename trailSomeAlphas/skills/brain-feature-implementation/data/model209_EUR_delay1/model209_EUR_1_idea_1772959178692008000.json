@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(equal(vec_max({lastcostingfailed}), 0), subtract(1, vec_avg({lastcostingfailed})), 0)",
+    "idea": "纯度门控机制：利用输入2的严格纯度标准（vec_max）作为逻辑开关，只有当系统完全无失败（max=0）时，才使用输入1的平均可靠性度量；否则视为无效（0）。这是两个原始逻辑的条件组合，确保仅在绝对清洁状态下才暴露于平均可靠性。",
+    "expression_list": [
+        "trade_when(equal(vec_max(mdl209_lastcostingfailed), 0), subtract(1, vec_avg(mdl209_lastcostingfailed)), 0)"
+    ]
+}

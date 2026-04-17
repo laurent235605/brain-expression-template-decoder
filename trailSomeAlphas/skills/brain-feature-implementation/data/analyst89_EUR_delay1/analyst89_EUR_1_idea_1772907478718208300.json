@@ -1,0 +1,5 @@
+{
+    "template": "ts_regression(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), group_mean(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), log(ts_mean({cap}, 21)), sector), 126, rettype=0)",
+    "idea": "特质性偏度加速残差（市场剥离）：通过时序回归剔除行业市值加权平均偏度变化的系统性影响，提取个股特质性偏度加速（idiosyncratic skewness acceleration），专注捕捉公司特定风险分布的异质性转变，而非跟随整体市场偏度漂移。",
+    "expression_list": []
+}

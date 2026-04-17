@@ -1,0 +1,7 @@
+{
+    "template": "divide(group_zscore(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), industry), add(group_zscore(ts_std_dev(ts_regression(returns, group_mean(returns, log(ts_backfill({reported_asset_value}, 63)), industry), 21, rettype=0), 21), industry), 0.001))",
+    "idea": "将总风险调整改进为特质风险（idiosyncratic risk）调整：先通过CAPM回归剥离市场/行业beta得到残差收益，计算其21日波动率作为分母；分子分母分别进行行业内标准化后再相除，剔除系统性风险敞口干扰，得到更纯粹的alpha生成效率比率。",
+    "expression_list": [
+        "divide(group_zscore(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), industry), add(group_zscore(ts_std_dev(ts_regression(returns, group_mean(returns, log(ts_backfill(fund_reported_asset_value, 63)), industry), 21, rettype=0), 21), industry), 0.001))"
+    ]
+}

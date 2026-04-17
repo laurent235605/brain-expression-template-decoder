@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 10), hump_decay(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 0.01), 0)",
+    "idea": "事件驱动逻辑：仅当EPS Surprise在过去10天内发生显著变化时才开仓（days_from_last_change），忽略 stale signal；使用hump_decay替代线性衰减，在控制换手率（TVR）的同时保留对最新信息的敏感度，适合捕捉盈利公告或预期修正后的短期动量窗口。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 10), hump_decay(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0.01), 0)",
+        "trade_when(less(days_from_last_change(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 10), hump_decay(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 0.01), 0)"
+    ]
+}

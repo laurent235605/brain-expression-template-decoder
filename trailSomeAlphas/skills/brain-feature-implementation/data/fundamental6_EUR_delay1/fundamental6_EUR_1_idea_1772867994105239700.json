@@ -1,0 +1,7 @@
+{
+    "template": "divide({ewq_gpq}, {cptnewq_revtq})",
+    "idea": "**Concept**: Gross Profit Margin\n- **Sample Fields Used**: `ewq_gpq`, `cptnewq_revtq`\n- **Definition**: Gross profit divided by revenue, representing the markup over direct production costs before operating overhead.\n- **Why This Feature**: Pure measure of product-level profitability and pricing power; industry comparisons reveal competitive positioning.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Revenue rarely missing for operating companies; missing gross profit implies missing COGS data.\n- **Directionality**: Higher values indicate pricing power or cost efficiency; declining values indicate commodity pressure or input cost inflation.\n- **Boundary Conditions**: Negative gross margins indicate unsustainable pricing (burning cash on each unit); service companies may have minimal COGS.",
+    "expression_list": [
+        "divide(fnd6_ewq_gpq, fnd6_cptnewq_revtq)"
+    ]
+}

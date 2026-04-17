@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(add(signed_power(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), std=4), 1.5), multiply(0.5, ts_delta(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 21))), {sector})",
+    "idea": "惊喜加速度与行业动量：结合当前盈利惊喜的非线性放大（signed_power 1.5次幂，适度放大极端值而不改变符号）与惊喜变化率（21日ts_delta，捕捉业绩加速或减速趋势）；通过加权和将水平值与变化率结合，识别\"业绩加速超预期\"或\"业绩恶化放缓\"的拐点；在行业层面（{sector}）进行标准化，剔除行业 Beta 干扰，构建纯阿尔法动量信号。",
+    "expression_list": []
+}

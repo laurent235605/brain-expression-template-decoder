@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(if_else(is_nan({exp_usa}),0,{exp_usa}) - if_else(is_nan({exp_chn}),0,{exp_chn}),std=4),2),sector)",
+    "idea": "美中暴露利差的非线性增强：分别对美国和中国暴露进行缺失值零填充，构建美中暴露差值（ USA minus China ），通过4倍标准差缩尾去除极值噪音，使用平方函数(signed_power)放大极端利差，最后在行业内标准化，捕捉相对看好美国市场vs看好中国市场的行业内相对优势，适用于区域轮动配对交易。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa) - if_else(is_nan(rsk74_raw_exp_chn),0,rsk74_raw_exp_chn),std=4),2),sector)"
+    ]
+}

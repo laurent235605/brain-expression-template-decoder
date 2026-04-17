@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 0, subtract(vec_avg({stock_split_ratio_243}), 1)), 63), sector)",
+    "idea": "**概念**: 时序衰减的拆分冲击（行业中性）\n**逻辑**: 将拆分幅度（ratio-1）视为一次性冲击事件，使用ts_decay_linear在63天内线性衰减其影响（近期拆分影响最大），随后通过group_normalize确保行业内多空平衡。该模板适用于拆分 announcement effect 随时间递减的场景，且通过行业中性化避免因某些行业（如科技）更爱拆分而产生的系统性偏差。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, subtract(vec_avg(ern6_stock_split_ratio_243), 1)), 63), sector)"
+    ]
+}

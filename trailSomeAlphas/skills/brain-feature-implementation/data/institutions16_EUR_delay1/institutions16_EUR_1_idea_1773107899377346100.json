@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(ts_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252), 2), industry)",
+    "idea": "将当前风险调整后的配置强度与其252日历史水平比较得到时序Z分数，再通过平方非线性放大极端偏离值，捕捉基金风险调整配置信念的持续性突破，在行业层面进行标准化以识别相对历史自身表现异常强化或弱化的标的。",
+    "expression_list": [
+        "group_zscore(signed_power(ts_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252), 2), industry)"
+    ]
+}

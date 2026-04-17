@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), driver=gaussian)",
+    "idea": "行业中性效率分位：将模板2的行业中性高斯分位结构直接应用于模板1的效率比率，对行业内的盈利转化效率进行高斯分布拉伸，识别行业内盈利效率处于极端分位的公司，作为独立的相对价值信号。",
+    "expression_list": [
+        "quantile(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), driver=gaussian)",
+        "quantile(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), driver=gaussian)"
+    ]
+}

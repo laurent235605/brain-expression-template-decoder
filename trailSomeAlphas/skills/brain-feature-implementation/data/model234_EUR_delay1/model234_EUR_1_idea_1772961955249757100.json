@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(log({volume}), std=4), industry), 10)",
+    "idea": "板块中性化对数成交量（流动性质量因子）：先对成交量取对数并缩尾去极值，在行业内部进行zscore标准化以消除行业间的 liquidity 水平差异，最后应用10日线性衰减加权平滑。该模板捕捉的是稳定的相对流动性结构而非单日异常放量，显著降低换手率并提高信号持续性。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(log(mdl234_volume), std=4), industry), 10)"
+    ]
+}

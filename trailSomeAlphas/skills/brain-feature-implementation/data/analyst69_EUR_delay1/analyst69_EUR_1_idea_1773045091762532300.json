@@ -1,0 +1,8 @@
+{
+    "template": "hump(trade_when(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.9), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.1)), ts_delta({eps_best_eeps_cur_yr}, 5), 0), hump=0.02)",
+    "idea": "在模板2的极端头尾筛选（前10%/后10%）结构基础上引入hump函数进行换手率控制，当日间权重变化小于2%时忽略调整，显著降低因短期数据抖动导致的高频交易，同时保留对强烈预期修订的纯多头/空头暴露，实现信号强度与交易成本的平衡。",
+    "expression_list": [
+        "hump(trade_when(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.9), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.1)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0), hump=0.02)",
+        "hump(trade_when(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.9), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.1)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0), hump=0.02)"
+    ]
+}

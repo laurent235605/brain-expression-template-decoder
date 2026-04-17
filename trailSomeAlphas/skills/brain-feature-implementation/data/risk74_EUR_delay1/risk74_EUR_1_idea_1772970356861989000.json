@@ -1,0 +1,7 @@
+{
+    "template": "subtract(zscore(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 20), 4)), zscore(winsorize(ts_sum(ts_delta({fund_pct_ownership_encr}, 1), 20), 4)))",
+    "idea": "聪明钱分歧策略：标准化对冲基金与共同基金的20日累积流向差异，构建机构间观点分歧指标，做多对冲资金流入且共同资金流出的标的，捕捉信息不对称优势",
+    "expression_list": [
+        "subtract(zscore(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 4)), zscore(winsorize(ts_sum(ts_delta(hedge_fund_pct_ownership_encr, 1), 20), 4)))"
+    ]
+}

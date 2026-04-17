@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(multiply(reverse(group_rank({crowding}, industry)), subtract(1, abs(subtract(group_zscore({factor_e}, industry), group_zscore({factor_g}, industry))))), 10) * group_zscore({value_ts}, industry)",
+    "idea": "构建ESG均衡度指标（1减去E与G的行业zscore差异绝对值，越均衡越接近1），乘以反向拥挤度作为流动性/情绪过滤，经10日线性衰减平滑后，与价值因子相乘，寻找基本面结构稳健且交易情绪不拥挤的价值标的。",
+    "expression_list": [
+        "ts_decay_linear(multiply(reverse(group_rank(liquidity_factor_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_e, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(liquidity_factor_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_esg, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(liquidity_timeseries_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_e, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(liquidity_timeseries_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_esg, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(rsk74_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_e, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(rsk74_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_esg, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(rsk74_raw_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_e, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)",
+        "ts_decay_linear(multiply(reverse(group_rank(rsk74_raw_crowding, industry)), subtract(1, abs(subtract(group_zscore(rsk74_factor_esg, industry), group_zscore(rsk74_factor_g, industry))))), 10) * group_zscore(rsk74_value_ts, industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater( rank( ({hfown_pctown} / {hfown_numown}) ), 0.9 ), rank( ({hfown_pctown} / {hfown_numown}) ) - 0.5, trade_when( less( rank( ({hfown_pctown} / {hfown_numown}) ), 0.1 ), rank( ({hfown_pctown} / {hfown_numown}) ) - 0.5, 0 ) )",
+    "idea": "极端分位数双向切割（头尾信号）：仅保留集中度最高的前10%（排名>0.9）和最低的后10%（排名<0.1）的标的，中间80%视为噪音并赋值为0。对于极端集中赋予正向权重（排名减0.5，范围0.4~0.5），极端分散赋予负向权重（排名减0.5，范围-0.5~-0.4），构建多空双向组合。该模板基于“只有极端结构才产生显著超额收益/风险”的逻辑，剔除了中间状态的市场Beta干扰。",
+    "expression_list": [
+        "trade_when( greater( rank( (rsk74_hfown_pctown / rsk74_hfown_numown) ), 0.9 ), rank( (rsk74_hfown_pctown / rsk74_hfown_numown) ) - 0.5, trade_when( less( rank( (rsk74_hfown_pctown / rsk74_hfown_numown) ), 0.1 ), rank( (rsk74_hfown_pctown / rsk74_hfown_numown) ) - 0.5, 0 ) )"
+    ]
+}

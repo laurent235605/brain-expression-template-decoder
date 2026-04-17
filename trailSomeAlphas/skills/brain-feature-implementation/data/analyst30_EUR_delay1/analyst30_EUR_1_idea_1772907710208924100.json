@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(vec_range(vec_filter({fiscalyearend}, \"nan\")), 252), industry)",
+    "idea": "捕捉结构性突变：计算当前财政年度离散度相对过去252日历史分布的Z-score，识别正处于业务重组、并购整合或会计政策变更导致的财政结构异常波动期，而非持续性复杂状态。",
+    "expression_list": [
+        "group_zscore(ts_zscore(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), 252), industry)"
+    ]
+}

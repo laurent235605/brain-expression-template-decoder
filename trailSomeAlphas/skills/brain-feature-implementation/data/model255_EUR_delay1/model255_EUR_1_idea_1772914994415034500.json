@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else(ts_delta({overall_score}, 1) < 0, 1, 0), 20)",
+    "idea": "**Concept**: Persistent Quality Deterioration Count\n- **Sample Fields Used**: `overall_score`\n- **Definition**: Cumulative count of days with negative quality momentum over rolling window to detect sustained erosion vs. temporary dips\n- **Why This Feature**: One-day quality drops can be noise; cumulative persistent deterioration indicates fundamental business model stress or ongoing audit adjustments\n- **is filling nan necessary**: Yes, use ts_backfill to handle gaps, treating backfilled periods as \"no change\" (0 delta) to avoid false deterioration counts\n- **Directionality**: High counts indicate sustained quality crisis; Zero counts indicate stable or improving quality\n- **Boundary Conditions**: Counts >10 in 20-day window indicate severe persistent issues; Counts =0 with high volatility indicates mean-reverting noise",
+    "expression_list": [
+        "ts_sum(if_else(ts_delta(mdl255_overall_score, 1) < 0, 1, 0), 20)"
+    ]
+}

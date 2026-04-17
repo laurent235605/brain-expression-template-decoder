@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(ts_mean({adv}, 21), ts_median({adv}, 63)), ts_zscore(vec_skewness({exposure_value}), 126), NaN)",
+    "idea": "仅在流动性充足（21日均ADV高于63日中位数）时激活地域集中度信号，低流动性时置NaN。避免在交易清淡期因价格噪音误判地域风险，确保信号仅在可交易状态下生效。",
+    "expression_list": []
+}

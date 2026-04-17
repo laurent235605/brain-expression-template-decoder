@@ -1,0 +1,7 @@
+{
+    "template": "subtract(1, vec_percentage({lastcostingfailed}, 0.95))",
+    "idea": "尾部风险聚焦：关注失败成本的95分位数而非平均值，专门捕捉“最昂贵的那次失败”的影响。与原始的平均或最大值不同，此度量聚焦于极端尾部风险，适合构建针对黑天鹅操作风险的对冲信号。",
+    "expression_list": [
+        "subtract(1, vec_percentage(mdl209_lastcostingfailed, 0.95))"
+    ]
+}

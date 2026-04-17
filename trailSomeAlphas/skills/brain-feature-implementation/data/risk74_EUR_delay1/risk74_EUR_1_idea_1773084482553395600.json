@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize({crowding}, std=4), industry) * group_zscore(winsorize({value_ts}, std=4), industry)",
+    "idea": "引入CAPM残差模板的行业中性化逻辑，在行业内部分别对拥挤度和价值进行Z-score标准化后再相乘。避免不同行业间拥挤度基线差异导致的误判，适合行业轮动场景下识别行业内部的相对价值陷阱。",
+    "expression_list": [
+        "group_zscore(winsorize(liquidity_factor_crowding, std=4), industry) * group_zscore(winsorize(rsk74_value_ts, std=4), industry)",
+        "group_zscore(winsorize(liquidity_timeseries_crowding, std=4), industry) * group_zscore(winsorize(rsk74_value_ts, std=4), industry)",
+        "group_zscore(winsorize(rsk74_crowding, std=4), industry) * group_zscore(winsorize(rsk74_value_ts, std=4), industry)",
+        "group_zscore(winsorize(rsk74_raw_crowding, std=4), industry) * group_zscore(winsorize(rsk74_value_ts, std=4), industry)"
+    ]
+}

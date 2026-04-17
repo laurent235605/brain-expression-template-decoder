@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), add(0.01, ts_std_dev(ts_backfill(vec_avg({actual_eps}), 5), 252)))",
+    "idea": "盈利质量调整模板。将TTM EPS累积值除以其过去252天的滚动标准差（波动率），并加入常数0.01避免除零。该模板惩罚盈利波动剧烈的公司，偏好盈利稳定、可预测性高的标的，体现“高质量盈利”因子的构建逻辑。",
+    "expression_list": [
+        "divide(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), add(0.01, ts_std_dev(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)))",
+        "divide(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), add(0.01, ts_std_dev(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)))"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "template": "group_rank(multiply(divide({value_03051q}, {value_03999q}), divide({value_04001q}, {value_02300q})), sector)",
+    "idea": "**概念**: 流动性-效率交叉乘积行业分位\n- **融合来源**: 模板3（短期债务比）+ 模板5（资产效率）+ 分组运算符（group_rank）\n- **定义**: 将流动性风险比率与资产效率比率相乘后，在行业内进行横截面排名（0-1分位）\n- **为何有效**: 高流动性风险（高短债）叠加低资产效率（周转慢）的公司风险最高，但跨行业直接比较多重比率有偏；通过乘积耦合风险维度后组内排名，识别行业内的\"双差\"或\"双优\"公司\n- **逻辑含义**: 乘积项同时惩罚高杠杆+低周转（资金链脆弱），奖励低杠杆+高周转；group_rank确保在资本密集度不同的行业内公平比较\n- **边界条件**: 乘积天然处理量级差异（两个0-1比率相乘）；排名转换消除尾部极端值影响\n- **方向性**: 反向因子，高排名（接近1）对应低流动性风险+高效率，预示更好的经营稳健性",
+    "expression_list": [
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)), sector)",
+        "group_rank(multiply(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)), sector)"
+    ]
+}

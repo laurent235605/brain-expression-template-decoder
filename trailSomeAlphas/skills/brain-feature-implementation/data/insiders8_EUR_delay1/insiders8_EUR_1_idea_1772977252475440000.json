@@ -1,0 +1,5 @@
+{
+    "template": "group_rank(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long}, group_cartesian_product(sector, bucket(rank({cap}), \"0,1,0.2\")), 63), std=4), winsorize(group_backfill({owners_decile_rank_long}, group_cartesian_product(sector, bucket(rank({cap}), \"0,1,0.2\")), 63), std=4), 60, rettype=0), group_cartesian_product(sector, bucket(rank({cap}), \"0,1,0.2\")))",
+    "idea": "行业-规模双重分组精细化模板。使用笛卡尔积（group_cartesian_product）构建“行业×市值五分位”微分组，在组内进行缺失值回填和回归残差计算，消除不同规模企业在所有权结构上的系统性差异；最后进行组内排序（group_rank），捕捉同规模同行业内的相对异常，提高横截面可比性，避免因大/小盘股固有差异导致的误判。",
+    "expression_list": []
+}

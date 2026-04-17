@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1))",
+    "idea": "**Concept**: Rebalance Efficiency Ratio\n- **Sample Fields Used**: notional, vda\n- **Definition**: Notional per unit of VDA (dollar value per day of volume), representing the liquidity efficiency of executing the rebalance\n- **Why This Feature**: First principles measure of market capacity utilization; high ratio means high dollar throughput per day of liquidity (efficient); low ratio means wasting liquidity on small dollars (inefficient)\n- **is filling nan necessary**: Yes, backfill required for both components.\n- **Directionality**: High values indicate efficient use of liquidity capacity (large flows in liquid names); low values indicate inefficient liquidity consumption (small flows in illiquid names)\n- **Boundary Conditions**: Ratio > $100M/day indicates institutional-grade liquidity; ratio < $1M/day indicates retail-level liquidity in micro-caps",
+    "expression_list": [
+        "divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1))"
+    ]
+}

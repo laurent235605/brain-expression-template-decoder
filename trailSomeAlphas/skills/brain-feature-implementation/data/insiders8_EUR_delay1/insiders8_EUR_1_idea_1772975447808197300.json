@@ -1,0 +1,7 @@
+{
+    "template": "truncate(scale(group_normalize(ts_mean(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), multiply(1.5, add(0.5, ts_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 126)))), sector), 20), maxPercent=0.02)",
+    "idea": "创新性地让幂次指数随时间序列排名动态变化（0.75至2.25），排名越高幂次越高（极端放大），排名居中则趋近线性。结合行业中性化、20日平滑及截断（truncate）控制单一标的暴露不超过2%，实现自适应强度的非线性增强，兼顾信号灵活性与风险控制。",
+    "expression_list": [
+        "truncate(scale(group_normalize(ts_mean(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), multiply(1.5, add(0.5, ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 126)))), sector), 20), maxPercent=0.02)"
+    ]
+}

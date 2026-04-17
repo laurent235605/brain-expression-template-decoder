@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(vec_skewness(vec_filter({version}, value=\\\"nan\\\")), std=4))",
+    "idea": "基础清洗与标准化：先通过vec_filter剔除缺失值，对版本分布计算偏度，使用winsorize消除极端异常点的干扰，最后进行zscore标准化，得到截面可比的不对称性指标，用于识别版本更新的结构性偏离。",
+    "expression_list": [
+        "zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\\\"nan\\\")), std=4))"
+    ]
+}

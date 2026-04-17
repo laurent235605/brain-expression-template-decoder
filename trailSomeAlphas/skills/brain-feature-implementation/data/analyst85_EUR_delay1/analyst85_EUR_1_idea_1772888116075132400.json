@@ -1,0 +1,7 @@
+{
+    "template": "vec_skewness({version})",
+    "idea": "**Concept**: Version Distribution Skewness\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Asymmetry of the version distribution within the vector, indicating whether most contributors cluster at low or high versions\n- **Why This Feature**: Skewed distributions reveal structural biases - positive skew suggests most use old versions with few updates; negative skew suggests most updated to recent versions\n- **is filling nan necessary**: Use `vec_filter` to remove NaN values before calculating skewness to prevent distortion from missing data points\n- **Directionality**: Positive skew indicates tail of high versions (few active updaters, many stale views); negative skew indicates concentration at high versions (widespread updating)\n- **Boundary Conditions**: Zero indicates symmetric version distribution; extreme values indicate polarized contributor bases",
+    "expression_list": [
+        "vec_skewness(anl85_version)"
+    ]
+}

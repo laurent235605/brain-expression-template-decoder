@@ -1,0 +1,8 @@
+{
+    "template": "winsorize(quantile(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),industry),driver=\"gaussian\"),std=3)",
+    "idea": "引入市值加权（{cap}）修正行业均值计算，对回归残差先进行行业内标准化（group_zscore），再通过高斯分位数（quantile）拉伸极端值、压缩中段噪音，最后进行3倍标准差尾部裁剪（winsorize），突出具有显著特质性做空压力的个股，同时保持行业中性。",
+    "expression_list": [
+        "winsorize(quantile(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry),driver=\"gaussian\"),std=3)",
+        "winsorize(quantile(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry),driver=\"gaussian\"),std=3)"
+    ]
+}

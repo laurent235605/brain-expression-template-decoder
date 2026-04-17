@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4), group_mean(winsorize(ts_sum(ts_delta({shortint},1),15),std=4), log(ts_mean({cap},21)), industry), 252, rettype=0)",
+    "idea": "剥离行业层面空头流量的共同趋势（以市值加权行业均值为基准），通过252日滚动回归提取个股特有的残差空头累积量，捕捉无法用行业空头情绪解释的异质性极端做空或回补压力，避免行业贝塔干扰。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4), group_mean(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4), log(ts_mean(market_cap_usd,21)), industry), 252, rettype=0)",
+        "ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4), group_mean(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4), log(ts_mean(market_cap_usd,21)), industry), 252, rettype=0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_delta(vec_avg({version}), 5))), 2), signed_power(zscore(ts_delta(vec_avg({version}), 5)), 2), 0)",
+    "idea": "极端变动事件捕捉：仅在版本变化幅度超过2个标准差时触发交易信号，并使用signed_power进行非线性放大（平方），中间区间视为噪音置零。适用于捕捉突发信息冲击或评级批量调整事件。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_delta(vec_avg(anl85_version), 5))), 2), signed_power(zscore(ts_delta(vec_avg(anl85_version), 5)), 2), 0)"
+    ]
+}

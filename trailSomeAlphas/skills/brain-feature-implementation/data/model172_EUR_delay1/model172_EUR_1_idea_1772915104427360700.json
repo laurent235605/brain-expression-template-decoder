@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(add(add(add(add({1_gaigr}, {2_igaigr}), {3_igaigr}), {4_igaigr}), {5_igaigr}), 5)",
+    "idea": "**Concept**: IGAIGR Cross-Estimate Consensus\n- **Sample Fields Used**: 1_gaigr, 2_igaigr, 3_igaigr, 4_igaigr, 5_igaigr\n- **Definition**: Standard deviation across the five IGAIGR growth estimates, measuring model confidence in sustainable growth rates\n- **Why This Feature**: Agreement across multiple estimation methodologies indicates reliable, model-robust growth prospects; disagreement signals estimation uncertainty or data quality issues\n- **Logical Meaning**: Low spread = high confidence in growth sustainability; High spread = model uncertainty, potentially avoiding forecast errors\n- **is filling nan necessary**: Yes, some igaigr variants may not compute for certain sectors. Use group_mean() within sector buckets to fill NaN, as growth estimates should be comparable within industries.\n- **Directionality**: Low values (consensus) = investable growth; High values (disagreement) = avoid or investigate further\n- **Boundary Conditions**: Zero spread indicates all models agree (rare); spreads >10% of mean value indicate significant model divergence",
+    "expression_list": [
+        "ts_std_dev(add(add(add(add(mdl172_1_gaigr, mdl172_2_igaigr), mdl172_3_igaigr), mdl172_4_igaigr), mdl172_5_igaigr), 5)"
+    ]
+}

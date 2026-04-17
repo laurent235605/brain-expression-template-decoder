@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), industry ) ), 1.5 ), ts_decay_linear( group_zscore( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), industry ), 20 ), 0 )",
+    "idea": "采用条件交易逻辑（trade_when），仅在行业标准化后的Surprise绝对值超过1.5个标准差（显著极端意外）时开仓，中段噪音直接置零；结合线性衰减（ts_decay_linear）保持对近期事件的敏感性，构建高置信度的极端盈利惊喜事件驱动策略。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ) ), 1.5 ), ts_decay_linear( group_zscore( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ), 20 ), 0 )",
+        "trade_when( greater( abs( group_zscore( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ) ), 1.5 ), ts_decay_linear( group_zscore( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ), 20 ), 0 )"
+    ]
+}

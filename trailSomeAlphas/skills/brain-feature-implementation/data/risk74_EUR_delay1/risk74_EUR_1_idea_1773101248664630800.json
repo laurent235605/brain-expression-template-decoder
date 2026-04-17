@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(ts_sum(ts_delta(winsorize({shortint},4),1),15), industry), group_zscore(ts_mean(returns, 5), industry))",
+    "idea": "**量价背离逼空检测器（交互效应）**：计算15日空头累积流量的行业内zscore与5日收益率的行业内zscore，两者相乘构造交互项。经济逻辑：当空头持续增加（高正zscore）但股价仍强势上涨（高正zscore），产生正向乘积，预示强烈的逼空风险（空头被迫回补将推升股价）；当空头减少（负zscore）且股价下跌（负zscore），乘积同样为正，确认下跌趋势的有效性。若两者反向（如空头增加但股价跌），乘积为负，视为正常趋势不生成信号。此模板利用价格与空头行为的背离捕捉非线性收益机会。",
+    "expression_list": [
+        "multiply(group_zscore(ts_sum(ts_delta(winsorize(rsk74_shortint,4),1),15), industry), group_zscore(ts_mean(returns, 5), industry))",
+        "multiply(group_zscore(ts_sum(ts_delta(winsorize(rsk74_shortint_ts,4),1),15), industry), group_zscore(ts_mean(returns, 5), industry))"
+    ]
+}

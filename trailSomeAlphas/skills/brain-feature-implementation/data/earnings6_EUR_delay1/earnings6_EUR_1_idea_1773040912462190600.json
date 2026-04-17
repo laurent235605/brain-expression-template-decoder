@@ -1,0 +1,8 @@
+{
+    "template": "quantile( group_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01)), industry ), driver=\"gaussian\" )",
+    "idea": "离散度调整的信号噪音比：将分母从绝对值改为分析师预期分歧度（vec_stddev），构建'惊喜/不确定性'比率，经行业中性化和高斯变换后，突出那些不仅超预期且市场一致性低（潜在信息差更大）的标的。",
+    "expression_list": [
+        "quantile( group_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), industry ), driver=\"gaussian\" )",
+        "quantile( group_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), industry ), driver=\"gaussian\" )"
+    ]
+}

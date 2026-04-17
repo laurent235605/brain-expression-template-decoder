@@ -1,0 +1,5 @@
+{
+    "template": "ts_zscore(ts_rank({return}-{asset},15) - ts_rank({return}-{asset},90), 252)",
+    "idea": "融合短期(15日)与长期(90日)时序排名的背离，通过252日滚动标准化得到截面zscore，捕捉资产收益差动量的收敛与发散信号",
+    "expression_list": []
+}

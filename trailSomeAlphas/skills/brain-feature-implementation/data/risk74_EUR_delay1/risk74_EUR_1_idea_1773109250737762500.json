@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(ts_regression(winsorize(ts_backfill({concentration},63),std=4), group_mean(winsorize(ts_backfill({concentration},63),std=4), log(ts_mean({concentration},21)), industry), 252, rettype=0), 10), industry)",
+    "idea": "长期窗口残差平滑：以市值加权行业基准提取地理集中度的长期特质残差（252日窗口），经10日线性衰减后行业中性归一化，构建慢速变化的结构性地理风险因子，避免短期噪音干扰。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), group_mean(winsorize(ts_backfill(rsk74_concentration,63),std=4), log(ts_mean(rsk74_concentration,21)), industry), 252, rettype=0), 10), industry)",
+        "group_normalize(ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), group_mean(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), log(ts_mean(rsk74_raw_concentration,21)), industry), 252, rettype=0), 10), industry)"
+    ]
+}

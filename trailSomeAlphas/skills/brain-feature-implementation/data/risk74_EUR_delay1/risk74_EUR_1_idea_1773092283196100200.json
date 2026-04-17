@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(({momentum} / ({value_ts} + {earnyild} + 0.0001)), sector) - signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 20), sector), 0.5)",
+    "idea": "先将输入1的因子暴露比进行行业内标准化，再减去经输入2方法处理后的持仓流量压力因子，实现流量中性化。该结构剥离被机构持仓主导的风格暴露（如被动配置导致的虚假价值特征），提取纯粹的因子Alpha残差，适用于识别未被流量驱动的独立风格动量。",
+    "expression_list": [
+        "group_zscore((rsk74_momentum / (rsk74_value_ts + rsk74_earnyild + 0.0001)), sector) - signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5)",
+        "group_zscore((rsk74_momentum_ts / (rsk74_value_ts + rsk74_earnyild + 0.0001)), sector) - signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5)"
+    ]
+}

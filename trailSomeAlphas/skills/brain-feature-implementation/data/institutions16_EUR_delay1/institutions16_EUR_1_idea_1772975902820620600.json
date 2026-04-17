@@ -1,0 +1,5 @@
+{
+    "template": "asset_clean = winsorize(ts_backfill({reported_asset_value}, 5), std=4); delta = ts_delta(asset_clean, 20); liq_adv = ts_mean(winsorize(ts_backfill({volume}, 5), std=4), 20); liq_rank = group_rank(liq_adv, sector); high_liq = greater(liq_rank, 0.7); signal = group_zscore(delta, sector); core = trade_when(high_liq, multiply(signal, 1.2), multiply(signal, 0.6)); enhanced = hump(core, hump=0.01)",
+    "idea": "流动性条件加权：引入成交量作为从属信号，仅在行业高流动性分位（前30%）时 fully weighted 信号（1.2倍），低流动性时衰减（0.6倍），并通过hump算子控制微观结构噪音导致的权重抖动，确保信号在可交易状态下生效。",
+    "expression_list": []
+}

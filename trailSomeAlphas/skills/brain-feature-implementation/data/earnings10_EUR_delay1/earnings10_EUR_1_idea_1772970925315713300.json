@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(group_zscore(ts_delta(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 5), industry)), 1.0), group_zscore(ts_delta(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 5), industry), 0), subtract(1, group_rank(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 20), industry)))",
+    "idea": "行业相对动量与相对新鲜度：基于5日变化率（ts_delta）捕捉修正加速度而非绝对水平，进行行业中性化处理；新鲜度采用行业内相对排名（group_rank），确保与同行业peers的信息时效性对比，避免不同行业间披露节奏差异导致的权重偏差，20天窗口适应不同行业的披露周期。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(group_zscore(ts_delta(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 5), industry)), 1.0), group_zscore(ts_delta(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 5), industry), 0), subtract(1, group_rank(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 20), industry)))"
+    ]
+}

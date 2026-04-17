@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_mean(sign(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60)), 10) - multiply(0.5, ts_std_dev(ts_delta({reported_asset_value}, 20), 20)), sector)",
+    "idea": "动量方向持续性排序：计算资产流加速度的10日方向持续性（sign均值），惩罚高波动标的（减去0.5倍20日标准差），在行业内部进行排名。该模板偏好那些资金流入加速方向稳定且波动较低的股票，排除高波动噪音导致的假加速信号。",
+    "expression_list": [
+        "group_rank(ts_mean(sign(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60)), 10) - multiply(0.5, ts_std_dev(ts_delta(fund_reported_asset_value, 20), 20)), sector)"
+    ]
+}

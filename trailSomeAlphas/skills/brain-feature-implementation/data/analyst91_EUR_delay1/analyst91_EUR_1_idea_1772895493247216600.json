@@ -1,0 +1,7 @@
+{
+    "template": "rank(vec_avg({exposure_value}))",
+    "idea": "**Concept**: Cross-Sectional Exposure Percentile\n- **Sample Fields Used**: exposure_value\n- **Definition**: Rank-normalized exposure value across the European universe (0 to 1 scale), indicating relative geographic concentration versus peers\n- **Why This Feature**: Absolute exposure values vary by sector; relative ranking identifies outliers within peer groups and enables cross-sector comparison\n- **Logical Meaning**: Relative positioning within the market; high values indicate market leaders in specific geographic exposure; low values indicate domestic-focused firms\n- **is filling nan necessary**: For cross-sectional ranking, NaN values must be excluded from the ranking calculation. Do not fill NaN with 0 or mean values before ranking, as this distorts the percentile distribution. The rank operator inherently handles NaN by excluding them.\n- **Directionality**: Higher values indicate top percentile exposure (highest in universe); lower values indicate bottom percentile (lowest exposure)\n- **Boundary Conditions**: Uniform distribution expected; clusters at extremes indicate market segmentation",
+    "expression_list": [
+        "rank(vec_avg(anl91_exposure_value))"
+    ]
+}

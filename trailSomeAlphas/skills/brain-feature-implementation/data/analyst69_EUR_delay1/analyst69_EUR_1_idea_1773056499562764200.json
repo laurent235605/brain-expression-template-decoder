@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(less(days_from_last_change({eps_best_eeps_cur_yr}), 5), ts_delta({eps_best_eeps_cur_yr}, 1), 0), 10)",
+    "idea": "结合事件驱动逻辑（days_from_last_change）与模板B的衰减结构，只在EPS数据近期（5日内）发生过实质性变化时才纳入10日线性衰减平均，否则视为0。构建'近期修订事件触发+平滑后续跟进'的脉冲响应模型，避免对陈旧预期持续持仓。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 0), 10)",
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_eps_best_eeps_cur_yr), 5), ts_delta(anl69_eps_best_eeps_cur_yr, 1), 0), 10)"
+    ]
+}

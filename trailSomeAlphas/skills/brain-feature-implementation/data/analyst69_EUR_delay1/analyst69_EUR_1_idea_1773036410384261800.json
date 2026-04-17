@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.85), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.15)), ts_delta({eps_best_eeps_cur_yr}, 5), 0)",
+    "idea": "应用头尾区间逻辑，仅保留极端修订信号。通过rank将横截面修订动量映射至0-1分位，利用逻辑运算符筛选出前15%（强烈上修）和后15%（强烈下修）的股票，中段70%视为噪音置零。此结构强化了多空组合的纯度，避免了对预期调整不明显的股票产生无效暴露，符合alpha只存在于分布尾部的经济直觉。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.85), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.15)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0)",
+        "trade_when(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.85), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.15)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0)"
+    ]
+}

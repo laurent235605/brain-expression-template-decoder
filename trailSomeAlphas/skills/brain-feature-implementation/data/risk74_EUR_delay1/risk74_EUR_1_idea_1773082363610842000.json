@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(bucket(rank(ts_delta(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),3)),range=\"0,1,0.1\"),hump=0.02)",
+    "idea": "对特质性残差进行3日差分（ts_delta）捕捉做空压力的“加速度”而非存量，通过分桶（bucket）仅保留头尾极端分位（前10%与后10%）信号，并应用hump_decay（hump=0.02）控制日间换手率，识别空头压力的突变拐点并降低交易摩擦。",
+    "expression_list": [
+        "hump_decay(bucket(rank(ts_delta(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),3)),range=\"0,1,0.1\"),hump=0.02)",
+        "hump_decay(bucket(rank(ts_delta(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),3)),range=\"0,1,0.1\"),hump=0.02)"
+    ]
+}

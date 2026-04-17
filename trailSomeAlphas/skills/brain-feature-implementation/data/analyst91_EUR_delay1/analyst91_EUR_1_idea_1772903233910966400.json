@@ -1,0 +1,7 @@
+{
+    "template": "bucket(group_rank(vec_stddev({exposure_value}), sector), range=\"0,1,0.2\") * group_zscore(vec_avg({exposure_value}), sector)",
+    "idea": "分位桶非对称交互：先将地域波动率按行业分五档（0.2间隔分桶），再与行业标准化敞口水平相乘。高波动桶（5档）配合高敞口产生极端多头信号，低波动桶（1档）配合低敞口产生极端空头信号，中段模糊地带自然压缩至接近零。实现\"极端稳定高敞口 vs 极端动荡低敞口\"的激进配对逻辑，利用离散化增强信号纯度。",
+    "expression_list": [
+        "bucket(group_rank(vec_stddev(anl91_exposure_value), sector), range=\"0,1,0.2\") * group_zscore(vec_avg(anl91_exposure_value), sector)"
+    ]
+}

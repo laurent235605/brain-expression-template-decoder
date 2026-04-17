@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(multiply(ts_delta(vec_avg({rank}), 1), inverse(add(ts_std_dev(vec_avg({rank}), 20), 0.01))), 20)",
+    "idea": "**概念**: 日度波动率调整累积流\n- **融合逻辑**: 将模板2的\"每日波动率调整\"逻辑应用到模板1的每日delta上，再进行20日累积。每一天的变化都经过该股票20日历史波动率标准化，确保累积和不受高波动股票的噪音主导。\n- **数学改进**: 添加0.01常数避免除零，保证所有样本可计算。\n- **经济含义**: 捕捉\"经风险调整的排名迁移总量\"，类似于信息比率的时序累积版本；适合发现持续、稳健的评级趋势而非剧烈但无序的波动。\n- **适用场景**: 当原始排名在日度上有较高噪音时，此结构能提取更干净的alpha。",
+    "expression_list": [
+        "ts_sum(multiply(ts_delta(vec_avg(mdl245_rank), 1), inverse(add(ts_std_dev(vec_avg(mdl245_rank), 20), 0.01))), 20)"
+    ]
+}

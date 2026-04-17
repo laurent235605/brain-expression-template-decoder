@@ -1,0 +1,8 @@
+{
+    "template": "zscore(ts_backfill({factor_e} + {factor_s} + {factor_g}, 63)) - zscore(ts_backfill({hfown_pctown}, 63))",
+    "idea": "将模板1的ESG总分与模板2的持仓水平直接对比，计算两者经过去极值（winsorize隐含在zscore前）和填充（ts_backfill）后的标准化差异。正值表示ESG质量相对于持仓热度被低估（潜在机会），负值表示持仓过热而ESG质量跟不上（潜在风险）。形成质量与资金行为的交叉背离信号。",
+    "expression_list": [
+        "zscore(ts_backfill(rsk74_factor_e + rsk74_factor_s + rsk74_factor_g, 63)) - zscore(ts_backfill(rsk74_hfown_pctown, 63))",
+        "zscore(ts_backfill(rsk74_factor_esg + rsk74_factor_s + rsk74_factor_g, 63)) - zscore(ts_backfill(rsk74_hfown_pctown, 63))"
+    ]
+}

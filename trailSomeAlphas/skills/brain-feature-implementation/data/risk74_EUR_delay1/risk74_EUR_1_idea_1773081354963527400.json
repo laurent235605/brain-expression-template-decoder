@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore({exp_usa}, industry)",
+    "idea": "引入分组标准化逻辑到地理暴露因子。由于不同行业天然具有不同的地理暴露基准（如科技行业天生比公用事业更国际化），仅在行业内zscore标准化暴露水平，识别行业内的\"异常国际化\"或\"异常本土\"公司，剥离行业共同模式，实现组内可比。",
+    "expression_list": [
+        "group_zscore(rsk74_raw_exp_usa, industry)"
+    ]
+}

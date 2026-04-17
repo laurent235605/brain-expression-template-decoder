@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), group_mean(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), log(ts_mean(cap, 21)), sector), 126, rettype=0)",
+    "idea": "特质性稳定残差因子：以流通市值对数加权的行业平均波动率差作为解释变量，通过126日滚动回归提取个股稳定性变化的特质性残差（剔除行业共同趋势）。该因子捕捉公司自身治理结构改善/恶化的独立信息，避免行业层面政策冲击或季节性招聘周期带来的系统性噪音，更纯粹地反映个体治理质量的内生变化。",
+    "expression_list": [
+        "ts_regression(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), group_mean(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), log(ts_mean(cap, 21)), sector), 126, rettype=0)"
+    ]
+}

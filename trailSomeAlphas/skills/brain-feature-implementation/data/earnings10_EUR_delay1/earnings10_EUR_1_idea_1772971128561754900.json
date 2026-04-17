@@ -1,0 +1,7 @@
+{
+    "template": "scale(truncate(signed_power(rank(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_skewness({aily_delta_recon_value}), 63), std=4), 60)), 1.5), multiply(ts_mean(winsorize(ts_backfill(vec_skewness({aily_delta_recon_value}), 63), std=4), 5), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 15), 15))), 0)), 1.5), maxPercent=0.02), scale=1)",
+    "idea": "使用偏度(vec_skewness)捕捉修正值分布的不对称性与尾部风险，结合60日Z分数阈值过滤极端事件，并通过5日移动平均(ts_mean)平滑噪声；利用排名(rank)和符号幂变换(signed_power)非线性放大极端分位数信号，压缩中间噪音区间；采用15日半衰期线性衰减确保信息时效性，最后通过截断(truncate)和标准化(scale)控制单票权重与组合杠杆。",
+    "expression_list": [
+        "scale(truncate(signed_power(rank(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_skewness(ern10_aily_delta_recon_value), 63), std=4), 60)), 1.5), multiply(ts_mean(winsorize(ts_backfill(vec_skewness(ern10_aily_delta_recon_value), 63), std=4), 5), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 15), 15))), 0)), 1.5), maxPercent=0.02), scale=1)"
+    ]
+}

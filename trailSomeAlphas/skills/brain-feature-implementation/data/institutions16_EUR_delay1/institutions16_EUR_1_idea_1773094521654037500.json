@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(and(greater(ts_rank(ts_mean({volume}, 21), 252), 0.3), greater(abs(ts_zscore(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0), 120)), 1.5)), ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0), 0)",
+    "idea": "流动性过滤与历史极端值条件触发：仅当股票过去252日成交量分位高于30%（确保流动性充足）且当前特质性残差偏离其120日历史均值超过1.5个标准差（确保统计显著性）时保留信号，其余时间强制归零，有效规避低流动性冲击与弱信号区间的假阳性交易。",
+    "expression_list": []
+}

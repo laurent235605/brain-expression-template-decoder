@@ -1,0 +1,8 @@
+{
+    "template": "divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) )",
+    "idea": "EPS Surprise持续性比率。将模板2的'当前值/历史均值'框架迁移应用于模板1的Surprise计算，构建'当前Surprise / 历史平均Surprise'比率，识别那些不仅当期超预期且超预期幅度显著高于历史常态的标的，捕捉盈利趋势的加速或拐点。",
+    "expression_list": [
+        "divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) )",
+        "divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) )"
+    ]
+}

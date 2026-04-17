@@ -1,0 +1,10 @@
+{
+    "template": "multiply(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), rank(days_from_last_change({eps_expected_report_dt})))",
+    "idea": "预期修订加速度与报告日期稳定性的非线性交互，利用排名算子将日期稳定性映射为[0,1]权重系数。高稳定性（高分位）放大修订加速度信号，低稳定性压缩权重，强化'预期改善且日程确定'情境的多头暴露。",
+    "expression_list": [
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), rank(days_from_last_change(anl69_aeps_expected_report_dt)))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), rank(days_from_last_change(anl69_aeps_expected_report_dt)))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), rank(days_from_last_change(anl69_eps_expected_report_dt)))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), rank(days_from_last_change(anl69_eps_expected_report_dt)))"
+    ]
+}

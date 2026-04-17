@@ -1,0 +1,7 @@
+{
+    "template": "rank(vec_avg({aily_delta_recon_value}))",
+    "idea": "**Concept**: Cross-Sectional Revision Rank\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: Cross-sectional rank of today's revision magnitude across the universe\n- **Why This Feature**: Identifies which instruments are experiencing the most significant analyst updates relative to peers. Extreme ranks indicate idiosyncratic information flow.\n- **is filling nan necessary**: NaN values should remain NaN (no rank assigned) rather than being filled, as missing revision data is not comparable to zero revision.\n- **Directionality**: High rank (top decile) indicates most positive revision in universe; low rank (bottom decile) indicates most negative revision\n- **Boundary Conditions**: Values near 0.5 indicate median revision; near 0 or 1 indicate extreme tails",
+    "expression_list": [
+        "rank(vec_avg(ern10_aily_delta_recon_value))"
+    ]
+}

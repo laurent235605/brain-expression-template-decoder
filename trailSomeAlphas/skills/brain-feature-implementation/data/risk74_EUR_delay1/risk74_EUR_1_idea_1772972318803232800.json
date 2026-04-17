@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)), 1.0), signed_power(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 1.5), 0), 5)",
+    "idea": "仅在敞口价差处于行业分布极端值（|zscore|>1）时进行交易，对极端值采用非线性幂变换（signed_power）放大尾部信号，中间区间视为噪音置零，并通过线性衰减（ts_decay_linear）平滑信号以降低换手率，捕捉极端配置轮动的非对称收益。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)), 1.0), signed_power(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 1.5), 0), 5)"
+    ]
+}

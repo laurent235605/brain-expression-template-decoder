@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), industry), sign(group_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), industry))), 10)",
+    "idea": "在行业内部进行标准化（group_zscore），剥离不同行业间的估值水平差异，捕捉行业内的预期修正方向与预期水平的纯净交互；通过10日线性衰减（ts_decay_linear）降低换手率，适合捕捉中期趋势而非短期噪音。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), industry), sign(group_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), industry))), 10)"
+    ]
+}

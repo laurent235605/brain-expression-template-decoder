@@ -1,0 +1,20 @@
+[
+    "abs(subtract(anl40_overall_genderratio, 0.5))",
+    "divide(subtract(anl40_netturnoverrate, ts_mean(anl40_netturnoverrate, 60)), ts_std_dev(anl40_netturnoverrate, 60))",
+    "divide(ts_std_dev(anl40_overall_timerole, 20), abs(ts_mean(anl40_overall_timerole, 20)))",
+    "divide(anl40_sd_stdevage, anl40_overall_stdevage)",
+    "divide(anl40_sd_timerole, anl40_overall_timerole)",
+    "multiply(anl40_overall_timerole, subtract(1, anl40_overall_genderratio))",
+    "multiply(anl40_overall_timerole, anl40_brdcount)",
+    "multiply(anl40_netturnoverrate, anl40_overall_timeretirement)",
+    "multiply(anl40_turnoverrate, anl40_overall_timeretirement)",
+    "reverse(ts_delta(anl40_overall_timeretirement, 10))",
+    "subtract(anl40_ed_genderratio, anl40_sd_genderratio)",
+    "subtract(anl40_ed_timerole, anl40_sd_timerole)",
+    "subtract(anl40_employmentrate, anl40_netturnoverrate)",
+    "subtract(anl40_employmentrate, anl40_turnoverrate)",
+    "ts_delta(anl40_netturnoverrate, 5)",
+    "ts_std_dev(anl40_overall_genderratio, 20)",
+    "ts_sum(anl40_employmentrate, 60)",
+    "ts_sum(anl40_netturnoverrate, 60)"
+]

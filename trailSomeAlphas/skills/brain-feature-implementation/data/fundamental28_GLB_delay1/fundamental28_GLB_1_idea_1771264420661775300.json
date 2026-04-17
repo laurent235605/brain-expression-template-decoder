@@ -1,0 +1,12 @@
+{
+    "template": "group_zscore(quantile(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), driver=\"gaussian\"), industry)",
+    "idea": "**高斯分位数非线性风险定价 (Gaussian Quantile Non-linear Risk Pricing)**：使用 `quantile` 运算符将原始比率映射至高斯分布（正态分布）分位数，将原本可能偏斜的债务结构数据进行概率化拉伸，使极端风险（接近1的短期债务占比）和极端安全（接近0的占比）在信号空间中距离中性区域更远，增强尾部区分度。随后进行行业中性化 `group_zscore`，确保信号来源于行业内的相对极端位置而非行业属性。此变换压缩了中间区间（噪音）的权重，强化了对\"接近违约的高再融资风险\"和\"过度保守的零短期债务策略\"这两种极端状态的定价能力。",
+    "expression_list": [
+        "group_zscore(quantile(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), driver=\"gaussian\"), industry)"
+    ]
+}

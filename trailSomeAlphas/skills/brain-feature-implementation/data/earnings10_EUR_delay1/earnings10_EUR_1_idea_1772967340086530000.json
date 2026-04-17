@@ -1,0 +1,7 @@
+{
+    "template": "quantile(hump(group_rank(ts_rank(winsorize(ts_backfill(vec_sum({aily_delta_recon_value}), 63), std=4), 60), industry), hump=0.01), driver=\"gaussian\")",
+    "idea": "自适应分位数排名策略：使用vec_sum聚合日内所有修正值以捕捉总冲击量而非单纯均值，通过63日回溯填充处理历史缺失值，进行4倍标准差截尾。将传统zscore替换为60日时序排名(ts_rank)以增强对异常值的稳健性，进行行业内分组排名(group_rank)确保跨行业可比性，使用hump算子(hump=0.01)控制日间微小波动降低换手，最后通过高斯分位数拉伸(quantile)将中间区间压缩至0附近，强调尾部极端值的分化效果。",
+    "expression_list": [
+        "quantile(hump(group_rank(ts_rank(winsorize(ts_backfill(vec_sum(ern10_aily_delta_recon_value), 63), std=4), 60), industry), hump=0.01), driver=\"gaussian\")"
+    ]
+}

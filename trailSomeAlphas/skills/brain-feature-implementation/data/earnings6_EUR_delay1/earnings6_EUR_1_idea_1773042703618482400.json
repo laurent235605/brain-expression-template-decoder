@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_decay_linear(ts_sum(ts_backfill(vec_sum({actual_eps}), 5), 252), 63), driver=\"gaussian\")",
+    "idea": "先使用向量求和(vec_sum)精确计算TTM盈利总量，配合63日线性衰减(ts_decay_linear)赋予近期财报更高权重以反映最新趋势，再通过高斯分位数转换(quantile)将原始分布映射到正态分布。该变换将中间区间的噪音压缩至零附近，同时将极端盈利异常值(极好或极差)向两侧拉伸，增强尾部选股区分度。",
+    "expression_list": [
+        "quantile(ts_decay_linear(ts_sum(ts_backfill(vec_sum(ern6_actual_eps), 5), 252), 63), driver=\"gaussian\")",
+        "quantile(ts_decay_linear(ts_sum(ts_backfill(vec_sum(ern6_actual_eps_274), 5), 252), 63), driver=\"gaussian\")"
+    ]
+}

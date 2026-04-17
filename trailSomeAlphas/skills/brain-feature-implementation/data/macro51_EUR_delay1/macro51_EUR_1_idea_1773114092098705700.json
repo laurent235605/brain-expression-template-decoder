@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window( group_normalize( if_else( greater( ts_rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 126 ), 0.8 ), reverse( ts_delta( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 63 ) ), if_else( less( ts_rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 126 ), 0.2 ), ts_delta( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 63 ), 0 ) ), industry ), halflife=5 )",
+    "idea": "历史分位双向动量反转模板。识别当前权重处于历史高位(80%以上)或低位(20%以下)的股票：对历史高位组做空其63日变化率(reverse ts_delta，捕捉均值回复)，对历史低位组做多其63日变化率(捕捉趋势延续)，使用半衰期为5的指数衰减窗口平滑信号，行业中性强平。该模板混合了极端仓位的反转与趋势效应。",
+    "expression_list": [
+        "ts_decay_exp_window( group_normalize( if_else( greater( ts_rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 126 ), 0.8 ), reverse( ts_delta( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 63 ) ), if_else( less( ts_rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 126 ), 0.2 ), ts_delta( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 63 ), 0 ) ), industry ), halflife=5 )"
+    ]
+}

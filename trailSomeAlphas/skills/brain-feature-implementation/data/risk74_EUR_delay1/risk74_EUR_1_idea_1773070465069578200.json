@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize( truncate( quantile( group_zscore( subtract( multiply(2, winsorize(ts_backfill({exp_usa},63),std=4)), add(winsorize(ts_backfill({exp_chn},63),std=4), winsorize(ts_backfill({exp_nondomicile1},63),std=4)) ), industry ), driver=\"gaussian\" ), maxPercent=0.02 ), industry )",
+    "idea": "综合地域倾斜（多头空头平衡）：将美国暴露减去中国与非本土暴露的等权平均，经行业zscore和高斯分位数变换拉伸尾部，再截断个股权重上限至2%，最后进行行业归一化确保每个行业多空净暴露为零。用于构建严格行业中性的地域分散化 vs 集中化套利组合。",
+    "expression_list": [
+        "group_normalize( truncate( quantile( group_zscore( subtract( multiply(2, winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4)), add(winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)) ), industry ), driver=\"gaussian\" ), maxPercent=0.02 ), industry )",
+        "group_normalize( truncate( quantile( group_zscore( subtract( multiply(2, winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4)), add(winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)) ), industry ), driver=\"gaussian\" ), maxPercent=0.02 ), industry )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(right_tail(divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120))), minimum=2.0), add(1.0, abs(vec_skewness({vda}))))",
+    "idea": "**偏度加权右尾流动性危机**: 仅关注右尾极端正向冲击(Z>2)使用right_tail截断；用vec_skewness(向量偏度)作为权重乘数，当日内成交量分布呈现高度右偏(存在极端大单)时放大信号强度，分布对称时权重趋近于1。此设计区分了'均匀的大量成交'与'集中的爆发式成交'，后者往往伴随更高的信息含量和价格冲击。",
+    "expression_list": [
+        "multiply(right_tail(divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120))), minimum=2.0), add(1.0, abs(vec_skewness(mcr49_vda))))"
+    ]
+}

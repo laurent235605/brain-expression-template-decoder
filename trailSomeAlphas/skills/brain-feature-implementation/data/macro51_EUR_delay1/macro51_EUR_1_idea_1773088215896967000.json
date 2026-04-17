@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(s_log_1p(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 21), std=4)), industry), 2), 3)",
+    "idea": "对原始权重进行对数化（s_log_1p）与去极值（winsorize）处理，在行业层面进行标准化（group_zscore）以剔除行业市值偏差，使用signed_power非线性放大极端偏离信号，最后通过3日线性衰减（ts_decay_linear）平滑降低换手率，捕捉稳健的相对市值配置溢价。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(s_log_1p(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21), std=4)), industry), 2), 3)"
+    ]
+}

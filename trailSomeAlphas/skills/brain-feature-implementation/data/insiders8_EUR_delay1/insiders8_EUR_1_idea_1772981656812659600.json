@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), group_mean(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), log(ts_mean(cap,21)), sector), 126, rettype=0)",
+    "idea": "行业Beta剥离：将CAPM残差模板推广至分位差领域，以市值加权行业平均偏离作为\"市场组合\"，剥离行业系统性偏离后保留特异性定价错误（idiosyncratic dislocation），提纯alpha来源，避免行业轮动干扰。",
+    "expression_list": [
+        "ts_regression(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), group_mean(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), log(ts_mean(cap,21)), sector), 126, rettype=0)"
+    ]
+}

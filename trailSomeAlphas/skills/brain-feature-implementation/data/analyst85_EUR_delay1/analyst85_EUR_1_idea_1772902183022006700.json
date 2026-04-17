@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(winsorize(divide(ts_delta(ts_mean(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 5), 5), add(vec_stddev(winsorize(ts_backfill({version}, 63), std=4)), 0.001)), std=4), {industry})",
+    "idea": "**风险调整动量模板**：使用vec_stddev替代range作为更稳健的离散度代理。先对版本均值进行5日平滑后再求5日差分（降低单日噪音），除以当日版本向量的标准差（加0.001防除零）得到单位风险调整后的修订速度。经winsorize截尾后在行业内标准化。经济逻辑：简单的range可能被极端单一观点拉高，标准差更能反映整体离散；通过“动量/波动”比率，识别那些以较低内部争议成本实现快速修订的标的，避免高波动噪音陷阱。",
+    "expression_list": []
+}

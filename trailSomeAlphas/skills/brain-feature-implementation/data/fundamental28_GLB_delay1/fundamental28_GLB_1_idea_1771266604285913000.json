@@ -1,0 +1,10 @@
+{
+    "template": "quantile(divide(ts_delta(divide({value_04001q}, {value_02300q}), 63), ts_mean(divide({value_04001q}, {value_02300q}), 252)), \"gaussian\")",
+    "idea": "**概念**: 资产效率动量高斯分位映射\n- **融合来源**: 模板2（动量标准化结构）+ 模板5（资产效率字段）+ 分位运算符（quantile）\n- **定义**: 资产效率的短期动量（63日变化/年度均值）经高斯分布映射转换为分位值，中间区间压缩，两端拉伸\n- **为何有效**: 原始动量分布可能偏态，quantile(\"gaussian\")强制转换为类正态分布，使极端效率改善/恶化（分布两端）获得更大权重，中间微弱变化被压缩至0附近，实现\"要么显著，要么无视\"的区间选择\n- **逻辑含义**: 输出值在-1到1之间，接近±1表示该股票正处于历史上罕见的效率变化期（业务转型或周期拐点），接近0表示效率平稳\n- **边界条件**: 高斯拉伸放大尾部2-3个标准差区域的区分度；与bucket不同，quantile保持连续性避免边界跳跃\n- **方向性**: 正向因子，高分位（右尾）预示资产周转率正突破，可能伴随ROE提升",
+    "expression_list": [
+        "quantile(divide(ts_delta(divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q), 63), ts_mean(divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q), 252)), \"gaussian\")",
+        "quantile(divide(ts_delta(divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q), 63), ts_mean(divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q), 252)), \"gaussian\")",
+        "quantile(divide(ts_delta(divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q), 63), ts_mean(divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q), 252)), \"gaussian\")",
+        "quantile(divide(ts_delta(divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q), 63), ts_mean(divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q), 252)), \"gaussian\")"
+    ]
+}

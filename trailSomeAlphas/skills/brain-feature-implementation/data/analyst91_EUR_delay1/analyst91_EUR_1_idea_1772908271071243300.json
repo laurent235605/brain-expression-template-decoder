@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 20), 252), 2)",
+    "idea": "稳定性动量（二阶导数）策略：不交易稳定性水平本身，而交易稳定性的变化率（ts_delta, 20日差分）。捕捉公司业务结构'正在快速优化'（加速稳定）或'正在快速恶化'（加速动荡）的拐点；使用平方变换（signed_power, y=2）放大加速信号，对温和变化保持中性。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 20), 252), 2)"
+    ]
+}

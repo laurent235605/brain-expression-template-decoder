@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(less(divide(add(ts_std_dev(returns, 21), 0.001), add(ts_std_dev(returns, 63), 0.001)), 1.2), group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0), 5)",
+    "idea": "引入波动率期限结构过滤，当短期波动率相对长期波动率超过阈值时视为高风险regime，信号置零以规避不确定性；对通过过滤的有效信号进行5日线性衰减平滑，显著降低换手并提升信号稳定性。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(less(divide(add(ts_std_dev(returns, 21), 0.001), add(ts_std_dev(returns, 63), 0.001)), 1.2), group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0), 5)"
+    ]
+}

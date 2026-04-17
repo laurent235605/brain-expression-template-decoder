@@ -1,0 +1,15 @@
+{
+    "template": "vec_avg({targetprice}) / ((vec_avg({investmentprice}) + vec_avg({openprice})) / 2)",
+    "idea": "**Concept**: Price Target Structure\n- **Sample Fields Used**: `targetprice`, `investmentprice`, `openprice`\n- **Definition**: Ratio of target price to average entry price (open and investment) indicating the expected return structure\n- **Why This Feature**: Measures the \"distance to target\" which determines position holding period and return potential; structural breaks indicate target revisions\n- **is filling nan necessary**: Investment price may differ from open price due to partial fills. Use average of the two if both exist: (vec_avg({investmentprice}) + vec_avg({openprice})) / 2, filling missing with available value.\n- **Directionality**: Values >1.0 indicate long bias; <1.0 indicate short bias; =1.0 indicates current price at target (closure imminent)\n- **Boundary Conditions**: Prices must be positive; use pasteurize to handle negative or zero prices",
+    "expression_list": [
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_daily_investmentprice) + vec_avg(anl56_daily_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_daily_investmentprice) + vec_avg(anl56_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_daily_investmentprice) + vec_avg(anl56_reduced_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_investmentprice) + vec_avg(anl56_daily_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_investmentprice) + vec_avg(anl56_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_investmentprice) + vec_avg(anl56_reduced_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_reduced_investmentprice) + vec_avg(anl56_reduced_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_reduced_investmentprice) + vec_avg(anl56_daily_openprice)) / 2)",
+        "vec_avg(anl56_targetprice) / ((vec_avg(anl56_reduced_investmentprice) + vec_avg(anl56_openprice)) / 2)"
+    ]
+}

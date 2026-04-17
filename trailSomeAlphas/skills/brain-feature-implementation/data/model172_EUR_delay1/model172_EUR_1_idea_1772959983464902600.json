@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_mean({cfroidrs}, 5), 0), group_zscore(divide(ts_sum({cfroidrs}, 15), add(ts_std_dev({cfroidrs}, 15), 0.0001)), industry), trade_when(less(ts_mean({cfroidrs}, 5), 0), -group_zscore(divide(ts_sum({cfroidrs}, 15), add(ts_std_dev({cfroidrs}, 15), 0.0001)), industry), NaN))",
+    "idea": "引入风险调整与方向确认双重过滤。计算15日CFROI漂移累加除以同期标准差（信息比率形式）并经行业标准化，同时要求最近5日漂移均值为正才建立多头头寸，为负则建立空头头寸，其余情况置空。该模板通过波动率调整剔除不稳定信号，并利用短期均值确认趋势持续性，避免在震荡无方向时期建仓。",
+    "expression_list": [
+        "trade_when(greater(ts_mean(mdl172_cfroidrs, 5), 0), group_zscore(divide(ts_sum(mdl172_cfroidrs, 15), add(ts_std_dev(mdl172_cfroidrs, 15), 0.0001)), industry), trade_when(less(ts_mean(mdl172_cfroidrs, 5), 0), -group_zscore(divide(ts_sum(mdl172_cfroidrs, 15), add(ts_std_dev(mdl172_cfroidrs, 15), 0.0001)), industry), NaN))"
+    ]
+}

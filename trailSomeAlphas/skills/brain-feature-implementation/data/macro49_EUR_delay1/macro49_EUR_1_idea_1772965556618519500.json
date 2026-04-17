@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120), ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120))",
+    "idea": "**Concept**: Liquidity Event Z-Score\n- **Sample Fields Used**: vda\n- **Definition**: Standardized deviation of current VDA from its historical mean to identify statistically extreme liquidity events\n- **Why This Feature**: Identifies rebalances that represent true liquidity outliers vs. normal operations; extreme Z-scores predict price dislocation and temporary volatility spikes\n- **is filling nan necessary**: Yes, backfill required to maintain time-series continuity for accurate mean/std calculation.\n- **Directionality**: High positive values indicate extreme liquidity pressure (potential short-term shorting opportunity or avoidance); negative values indicate unusually light rebalancing\n- **Boundary Conditions**: |Z| > 2 indicates significant anomaly; Z > 3 suggests potential market breakdown where rebalance volume exceeds multiple days of normal trading",
+    "expression_list": [
+        "divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120), ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120))"
+    ]
+}

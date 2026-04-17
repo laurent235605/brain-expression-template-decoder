@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({version}), 5)",
+    "idea": "**Concept**: Version Update Momentum\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Rate of change in average version numbers over a 5-day window, capturing acceleration of analyst updates\n- **Why This Feature**: Rapid version increases signal fresh information or changing analyst views that may precede price movements. Momentum in versions indicates building or waning conviction.\n- **is filling nan necessary**: NaN values in the input should be preserved through the calculation using `pasteurize` to prevent artificial momentum from data gaps\n- **Directionality**: Positive values indicate accelerating revisions (potentially increasing uncertainty or new catalysts); negative values indicate version stabilization (consensus forming)\n- **Boundary Conditions**: Extreme positive values indicate data discontinuities or batch updates; zero indicates static recommendation environment",
+    "expression_list": [
+        "ts_delta(vec_avg(anl85_version), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({cost_exposure_range_end}) - vec_avg({cost_exposure_range_begin}), 10)",
+    "idea": "**Concept**: Cost Uncertainty Expansion\n- **Sample Fields Used**: cost_exposure_range_begin, cost_exposure_range_end\n- **Definition**: 10-day change in the width of cost exposure ranges, measuring whether analysts are becoming more or less certain about cost forecasts\n- **Why This Feature**: Widening ranges often precede earnings volatility or margin compression; narrowing ranges suggest cost stabilization\n- **Logical Meaning**: Rate of change in analyst confidence; expanding ranges suggest emerging cost risks or inflationary pressures\n- **is filling nan necessary**: Cost range changes reflect analyst consensus shifts. NaN handling should preserve the state (use last known value) via ts_backfill because analyst updates are discrete events, and the last valid estimate remains relevant until updated.\n- **Directionality**: Positive values (widening) indicate increasing uncertainty; negative values (narrowing) indicate improving cost visibility\n- **Boundary Conditions**: Rapid expansion may signal upcoming guidance cuts; rapid narrowing may follow cost-cutting initiatives",
+    "expression_list": [
+        "ts_delta(vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin), 10)"
+    ]
+}

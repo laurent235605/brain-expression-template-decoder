@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(ts_std_dev(vec_avg({exposure_value}), 20), industry), 0.8), -1, if_else(less(group_rank(ts_std_dev(vec_avg({exposure_value}), 20), industry), 0.2), 1, 0))",
+    "idea": "基于组内排名（group_rank）对波动率进行极端分桶：仅对行业内波动率最低的20%分位（业务结构最稳定）赋予+1权重，对最高20%分位（剧烈重组或动荡）赋予-1权重，中段60%视为噪音赋0值。该离散化模板严格遵循“中间区间无信号”的逻辑，剔除模棱两可的标的，仅保留高置信度的多空两端，可直接作为条件权重或结合其他因子使用。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_std_dev(vec_avg(anl91_exposure_value), 20), industry), 0.8), -1, if_else(less(group_rank(ts_std_dev(vec_avg(anl91_exposure_value), 20), industry), 0.2), 1, 0))"
+    ]
+}

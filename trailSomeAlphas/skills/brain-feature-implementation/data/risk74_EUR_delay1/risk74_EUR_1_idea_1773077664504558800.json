@@ -1,0 +1,7 @@
+{
+    "template": "hump(add(trade_when(greater(bucket(rank(winsorize(ts_backfill({exp_usa}, 5), std=4)), \"0,1,0.1\"), 0.8), 0.6, trade_when(less(bucket(rank(winsorize(ts_backfill({exp_usa}, 5), std=4)), \"0,1,0.1\"), 0.2), -0.6, 0)), trade_when(greater(bucket(rank(winsorize(ts_backfill({exp_usa}, 63), std=4)), \"0,1,0.1\"), 0.8), 0.4, trade_when(less(bucket(rank(winsorize(ts_backfill({exp_usa}, 63), std=4)), \"0,1,0.1\"), 0.2), -0.4, 0))), hump=0.02)",
+    "idea": "双频非线性合成与hump降噪：将短期（5日，权重0.6）与长期（63日，权重0.4）的极端信号非线性叠加，仅在双周期同向极端时信号最强；使用hump（阈值0.02）忽略权重的小幅日间抖动，显著降低换手率，同时保留大幅调仓能力，实现低频有效的出口敞口轮动。",
+    "expression_list": [
+        "hump(add(trade_when(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 5), std=4)), \"0,1,0.1\"), 0.8), 0.6, trade_when(less(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 5), std=4)), \"0,1,0.1\"), 0.2), -0.6, 0)), trade_when(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4)), \"0,1,0.1\"), 0.8), 0.4, trade_when(less(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4)), \"0,1,0.1\"), 0.2), -0.4, 0))), hump=0.02)"
+    ]
+}

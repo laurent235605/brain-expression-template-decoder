@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(zscore(vec_avg({likelihood_score})), 1.5), quantile(rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), driver=\"gaussian\"), 0)",
+    "idea": "高斯尾部拉伸触发：在模板1的条件过滤基础上，将模板2的排名结果通过高斯分位数转换拉伸尾部距离，使极端错配股票在信号强度上进一步放大，强化头部alpha的区分度。",
+    "expression_list": [
+        "trade_when(greater(zscore(vec_avg(success_likelihood_score)), 1.5), quantile(rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), driver=\"gaussian\"), 0)"
+    ]
+}

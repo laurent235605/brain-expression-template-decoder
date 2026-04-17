@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), 60), ts_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 20), 60))",
+    "idea": "回填动量双周期背离：结合模板2的数据回填机制与模板1的双时间尺度delta结构，对5日与20日修订动量进行60日滚动zscore标准化后差分。回填处理确保数据连续性，适合处理分析师预测稀疏更新场景，降低缺值导致的信号跳变。",
+    "expression_list": [
+        "subtract(ts_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), 60), ts_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 20), 60))",
+        "subtract(ts_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), 60), ts_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 20), 60))"
+    ]
+}

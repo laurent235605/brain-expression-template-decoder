@@ -1,0 +1,30 @@
+{
+    "template": "ts_decay_linear(subtract(group_zscore(divide({value_03501a}, {value_02300q}), industry), group_zscore(divide({value_03051q}, {value_03999q}), industry)), 10)",
+    "idea": "对模板3与模板2的利差信号（质量减风险）进行时间序列线性衰减平滑（ts_decay_linear），降低单期数据噪音和换手率。该结构将静态的截面质量-风险利差转化为更稳定的持续信号，平衡反应速度与交易稳定性。",
+    "expression_list": [
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), group_zscore(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), industry)), 10)"
+    ]
+}

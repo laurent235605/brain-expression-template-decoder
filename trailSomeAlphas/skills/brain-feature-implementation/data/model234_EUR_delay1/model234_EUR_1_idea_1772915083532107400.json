@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum({volume}, 3)",
+    "idea": "**Concept**: Cumulative Volume Flow\n- **Sample Fields Used**: volume\n- **Definition**: Sum of trading volume over the past 3 months (quarterly accumulation)\n- **Why This Feature**: Captures sustained trading interest rather than single-month spikes; proxy for \"ease of building large positions\"\n- **Logical Meaning**: Total liquidity pool available over the quarter; represents cumulative market attention and position turnover capacity\n- **is filling nan necessary**: Yes, treat NaN as 0 for accumulation using add with filter=true, or carry forward using ts_backfill to assume continued liquidity\n- **Directionality**: High = high recent cumulative liquidity; Low = low recent trading activity\n- **Boundary Conditions**: Near zero indicates extended period of no trading (delisting risk); high values indicate sustained active markets",
+    "expression_list": [
+        "ts_sum(mdl234_volume, 3)"
+    ]
+}

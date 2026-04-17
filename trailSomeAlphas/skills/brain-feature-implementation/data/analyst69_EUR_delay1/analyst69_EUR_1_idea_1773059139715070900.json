@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(multiply(group_zscore(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), 5), industry), group_zscore(s_log_1p(days_from_last_change({eps_expected_report_dt})), industry)), industry)",
+    "idea": "双维度行业中性化共振：同时对模板1的效率比率变化（经平滑后）和模板2的事件时间（经对数压缩后）进行行业中性化（group_zscore），计算两者的交互乘积，寻找“效率趋势改善”与“信息环境极度稳定”双重背离的行业内 outliers，增强信号纯净度。",
+    "expression_list": [
+        "group_normalize(multiply(group_zscore(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), industry), group_zscore(s_log_1p(days_from_last_change(anl69_eps_expected_report_dt)), industry)), industry)",
+        "group_normalize(multiply(group_zscore(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), industry), group_zscore(s_log_1p(days_from_last_change(anl69_eps_expected_report_dt)), industry)), industry)",
+        "group_normalize(multiply(group_zscore(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), industry), group_zscore(s_log_1p(days_from_last_change(anl69_aeps_expected_report_dt)), industry)), industry)",
+        "group_normalize(multiply(group_zscore(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), industry), group_zscore(s_log_1p(days_from_last_change(anl69_aeps_expected_report_dt)), industry)), industry)"
+    ]
+}

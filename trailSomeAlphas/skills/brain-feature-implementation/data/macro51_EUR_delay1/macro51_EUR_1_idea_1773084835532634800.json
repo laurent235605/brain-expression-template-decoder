@@ -1,0 +1,5 @@
+{
+    "template": "ts_rank(winsorize(subtract(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),group_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),log(ts_mean({cap},21)),industry)),std=4),252)",
+    "idea": "行业相对残差时序分位。先通过市值加权行业均值剔除组内共同趋势，得到个股特异的残差序列，再进行252日时序分位排名。该模板剥离了行业Beta与市值风格，专注于捕捉个股流动性权重的特异性均值回复。",
+    "expression_list": []
+}

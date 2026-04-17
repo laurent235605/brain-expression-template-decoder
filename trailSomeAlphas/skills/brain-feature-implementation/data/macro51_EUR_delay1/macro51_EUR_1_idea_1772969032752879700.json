@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), industry)",
+    "idea": "**截面行业中性化水平信号**：先对两个权重字段进行63日回溯填充确保数据连续性，计算其比值后使用4倍标准差缩尾处理极端值（消除异常权重导致的无限大比率），最后进行行业中性化Z-score标准化。该模板捕捉个股在其行业内部相对于 peers 的 STOXX 特定份额溢价程度，消除行业间权重结构差异（如金融股与科技股天然权重分布不同），适用于挖掘行业内的份额类别偏好alpha。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), industry)"
+    ]
+}

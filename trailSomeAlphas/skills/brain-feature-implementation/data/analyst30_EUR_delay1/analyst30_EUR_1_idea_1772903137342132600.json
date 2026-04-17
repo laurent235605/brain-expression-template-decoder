@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_mean(winsorize(ts_backfill(vec_avg({adjustedgrossamt}), 63), std=4), 21), industry)",
+    "idea": "行业相对稳健高股息：先以向量均值提取当日经调整股息水平，使用63日回溯填充处理暂时性缺失（假设股息政策短期连续性），通过4倍标准差截断消除一次性特别股息等极端噪音，再以21日移动平均平滑获取稳健趋势，最终在行业内zscore标准化，识别相对于同业具有持续现金分派能力的优质标的。",
+    "expression_list": [
+        "group_zscore(ts_mean(winsorize(ts_backfill(vec_avg(anl30_adjustedgrossamt), 63), std=4), 21), industry)",
+        "group_zscore(ts_mean(winsorize(ts_backfill(vec_avg(anl30_unadjustedgrossamt), 63), std=4), 21), industry)"
+    ]
+}

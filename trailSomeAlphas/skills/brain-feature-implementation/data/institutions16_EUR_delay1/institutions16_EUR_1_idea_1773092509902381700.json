@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(subtract(vector_neut(ts_mean(ts_backfill({fundreportedequityassets}, 21), 21), ts_mean(ts_backfill({reported_asset_value}, 21), 21)), vector_neut(ts_mean(ts_backfill({fundreportedequityassets}, 21), 252), ts_mean(ts_backfill({reported_asset_value}, 21), 252))), std=4))",
+    "idea": "多时间尺度配置偏离（战术偏离度）：分别计算21日短期和252日长期的规模中性残差，取两者差异以识别近期股票配置相对历史战略常态的偏离程度，经过去极值和截面标准化后，捕捉基金在股票资产上的战术性调仓（Tactical Deviation）与长期配置基准的差值，适用于发现配置风格正在发生转变的基金。",
+    "expression_list": [
+        "zscore(winsorize(subtract(vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), 21), ts_mean(ts_backfill(fund_reported_asset_value, 21), 21)), vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), 252), ts_mean(ts_backfill(fund_reported_asset_value, 21), 252))), std=4))"
+    ]
+}

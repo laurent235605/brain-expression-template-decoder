@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_sum(subtract(ts_delta(group_zscore({hfown_pctown}, sector), 1), ts_delta(group_zscore({fund_pct_ownership_encr}, sector), 1)), 20), 10)",
+    "idea": "**聪明钱分歧加速（HF vs 公募基金）**：捕捉对冲基金与传统公募基金在行业内的资金流向背离。分别计算两类资金持仓的行业标准化日变化，求差值得到每日“聪明钱净流向”，累积20日观察持续分歧强度；最后使用10日线性衰减加权（近期数据权重更高），降低早期数据干扰，强调近期正在发酵的资金博弈，适用于发现机构间认知差异带来的定价偏差。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(subtract(ts_delta(group_zscore(rsk74_hfown_pctown, sector), 1), ts_delta(group_zscore(hedge_fund_pct_ownership_encr, sector), 1)), 20), 10)"
+    ]
+}

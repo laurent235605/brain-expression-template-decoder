@@ -1,0 +1,8 @@
+{
+    "template": "hump(subtract(ts_zscore(ts_decay_linear(ts_delta({eps_best_eeps_cur_yr}, 5), 10), 60), ts_zscore(ts_decay_linear(ts_delta({eps_best_eeps_cur_yr}, 20), 10), 60)), hump=0.01)",
+    "idea": "融合模板1的加速度结构与模板2的衰减平滑思路，对短期与中期动量均先进行10日线性衰减平滑以降低噪声，再计算标准化差分捕捉稳健加速度，最后应用hump算子(阈值0.01)控制日度权重调整幅度。该设计在保留对预期修订趋势变化敏感性的同时，通过hump机制忽略微小波动，有效降低策略换手率，提升实施可行性。",
+    "expression_list": [
+        "hump(subtract(ts_zscore(ts_decay_linear(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 10), 60), ts_zscore(ts_decay_linear(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 10), 60)), hump=0.01)",
+        "hump(subtract(ts_zscore(ts_decay_linear(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 10), 60), ts_zscore(ts_decay_linear(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 10), 60)), hump=0.01)"
+    ]
+}

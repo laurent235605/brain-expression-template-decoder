@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 63) / ts_backfill({600_ucits_weight}, 63), std=4))",
+    "idea": "基础清洁后的横截面溢价信号。对两个权重字段进行63日回溯填充以处理缺失值，计算STOXX特定权重与通用UCITS权重的比值，进行4倍标准差极值截尾消除极端异常，最后进行横截面z-score标准化。捕捉全市场范围内对特定上市渠道的相对配置偏好，值越高表明基金越倾向于持有该特定上市渠道而非通用渠道，适用于捕捉结构性配置偏离。",
+    "expression_list": [
+        "zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 63), std=4))"
+    ]
+}

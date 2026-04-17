@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 60)",
+    "idea": "计算当前EPS/EBITDA比率在过去60个交易日中的分位数位置（ts_rank）。识别那些当前利润转化效率处于历史极端水平（极高或极低）的股票，捕捉盈利结构均值回归或趋势延续的机会。",
+    "expression_list": [
+        "ts_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 60)",
+        "ts_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 60)"
+    ]
+}

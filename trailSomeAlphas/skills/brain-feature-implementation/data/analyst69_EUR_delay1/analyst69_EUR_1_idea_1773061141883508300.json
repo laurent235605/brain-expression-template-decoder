@@ -1,0 +1,14 @@
+{
+    "template": "if_else(and(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), less(ts_delta(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+    "idea": "双重确认逻辑（AND操作）：仅当报告日期发生变更（输入1）且同时今明两年预期相关性下降（输入2）时，才生成空头衰减信号，要求信息层面的时间不确定性与逻辑层面的预期不连续性同时成立，提高信号纯度。",
+    "expression_list": [
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), less(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0)), ts_decay_linear(-1, 20), 0)"
+    ]
+}

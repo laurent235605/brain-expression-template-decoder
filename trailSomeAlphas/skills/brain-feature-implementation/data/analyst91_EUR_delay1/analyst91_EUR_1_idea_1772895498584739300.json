@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({cost_exposure_range_end}) - vec_avg({cost_exposure_range_begin})",
+    "idea": "**Concept**: Cost Estimation Precision\n- **Sample Fields Used**: cost_exposure_range_begin, cost_exposure_range_end\n- **Definition**: The width of the cost exposure uncertainty range, measuring analyst confidence in cost estimates\n- **Why This Feature**: Narrow ranges indicate stable, predictable cost structures where analysts agree on forecasts; wide ranges indicate volatile or uncertain cost environments\n- **Logical Meaning**: Represents the uncertainty premium or estimation risk in geographic operations; inversely related to forecasting confidence\n- **is filling nan necessary**: If cost range bounds are NaN, it indicates missing analyst coverage or undisclosed cost structures. These should not be filled blindly as the absence of range data itself signals information uncertainty. If filling is necessary for computational continuity, ts_backfill with a short window (5 days) may be used under the assumption that cost estimates change slowly.\n- **Directionality**: Lower values indicate higher precision/stability; higher values indicate estimation volatility\n- **Boundary Conditions**: Zero width suggests perfect certainty (rare, potentially stale data); extremely wide ranges suggest either high volatility or analyst disagreement",
+    "expression_list": [
+        "vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_returns(ts_backfill(vec_avg({notional}), lookback=5, k=1), 60, mode=1)",
+    "idea": "**Concept**: Rebalance Flow Momentum\n- **Sample Fields Used**: notional\n- **Definition**: Log returns of expected notional over rebalance event windows to capture trend in dollar flow magnitude\n- **Why This Feature**: Trending notional indicates sustained accumulation or distribution by passive funds; momentum in flows may predict continuation of pressure through effective date\n- **is filling nan necessary**: Yes, ts_backfill essential to bridge announcement gaps before calculating returns.\n- **Directionality**: Positive momentum indicates growing dollar flows and potential price pressure; negative momentum indicates declining index weight or outflows\n- **Boundary Conditions**: Extreme positive values suggest entry into major indices or massive AUM growth in tracking funds; extreme negative suggests deletion or severe weight reduction",
+    "expression_list": [
+        "ts_returns(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), 60, mode=1)"
+    ]
+}

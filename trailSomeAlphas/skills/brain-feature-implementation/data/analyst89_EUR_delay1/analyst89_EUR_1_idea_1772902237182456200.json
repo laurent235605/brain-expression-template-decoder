@@ -1,0 +1,5 @@
+{
+    "template": "min(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), 252 - ts_count_nans(vec_count({total_revenue}), 252))",
+    "idea": "交叉字段数据一致性校验：取财报期数(fiscal_period_end)与关键财务指标(revenue)非缺失计数的较小值，构建“交集覆盖度”。识别有报告期但无财务数据的“空壳”记录或数据不同步问题，确保双重数据验证下的统计可靠性，避免单一字段假象。",
+    "expression_list": []
+}

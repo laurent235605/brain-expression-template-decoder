@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), industry), 2), if_else(less(group_rank(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), industry), 0.2), signed_power(group_zscore(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), industry), 2), 0))",
+    "idea": "结合模板2的敞口加速度与模板1的行业内比较逻辑，采用极端尾部分桶策略(group_rank截断前20%与后20%)，中段视为噪音置零，并对保留的尾部使用signed_power(2)非线性放大，构建高置信度的行业中性动量择时因子。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), industry), 0.8), signed_power(group_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), industry), 2), if_else(less(group_rank(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), industry), 0.2), signed_power(group_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), industry), 2), 0))"
+    ]
+}

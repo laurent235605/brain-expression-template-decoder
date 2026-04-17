@@ -1,0 +1,8 @@
+{
+    "template": "ts_std_dev({value_08251q}, 20)",
+    "idea": "**Concept**: Coverage Stability Score\n- **Sample Fields Used**: `value_08251q`\n- **Definition**: Standard deviation of fixed charge coverage ratio over 20 days to identify companies with predictable debt servicing capacity\n- **Why This Feature**: Stable coverage indicates predictable cash generation and disciplined capital structure management, reducing refinancing risk\n- **Logical Meaning**: Measures the volatility of the safety margin for fixed obligations; low volatility suggests business model stability\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. For coverage ratios, NaN often indicates missing data rather than meaningful absence, so ts_backfill may be appropriate for short gaps.\n- **Directionality**: Lower values indicate more stable coverage (positive for credit quality)\n- **Boundary Conditions**: Values near 0 indicate constant coverage; extremely high values indicate earnings volatility or near-zero denominators",
+    "expression_list": [
+        "ts_std_dev(fnd28_newq_value_08251q, 20)",
+        "ts_std_dev(fnd28_ratesq_value_08251q, 20)"
+    ]
+}

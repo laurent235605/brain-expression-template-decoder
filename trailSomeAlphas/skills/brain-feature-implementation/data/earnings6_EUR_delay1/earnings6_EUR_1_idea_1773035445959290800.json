@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252) * signed_power(winsorize(zscore(vec_avg({stock_split_ratio_243})), 2), 2)",
+    "idea": "交叉增强逻辑：将模板1的TTM盈利累积与模板2的拆股信号进行非线性耦合。利用拆股比率（>1为正向信号，<1为 distress）作为盈利强度的放大器——当管理层通过拆股传递信心时，放大EPS累积的权重；当反向拆股时压缩权重。使用signed_power保留方向性，winsorize防止极端拆股比率（如10:1或1:10）过度主导，实现盈利质量与资本结构事件的交叉验证。",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252) * signed_power(winsorize(zscore(vec_avg(ern6_stock_split_ratio_243)), 2), 2)",
+        "ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252) * signed_power(winsorize(zscore(vec_avg(ern6_stock_split_ratio_243)), 2), 2)"
+    ]
+}

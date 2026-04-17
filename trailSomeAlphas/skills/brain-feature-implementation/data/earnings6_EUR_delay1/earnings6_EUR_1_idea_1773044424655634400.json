@@ -1,0 +1,8 @@
+{
+    "template": "multiply( divide( subtract( vec_avg( {actual_eps} ), vec_avg( {estimated_eps} ) ), add( abs( vec_avg( {estimated_eps} ) ), 0.01 ) ), add( 1, multiply( 0.5, signed_power( winsorize( subtract( if_else( is_nan( vec_avg( {stock_split_ratio_243} ) ), 1, vec_avg( {stock_split_ratio_243} ) ), 1 ), std = 2 ), 0.5 ) ) ), filter = true )",
+    "idea": "交叉增强：用模板2的分拆信号作为模板1盈利惊喜的'信心乘数'。先将分拆比例偏离1的程度经winsorize截断和signed_power(y=0.5)非线性压缩（保留方向但抑制10:1等极端值），映射为[0.5, 1.5]区间的放大系数。盈利惊喜为正且近期正向分拆（信号强）时权重放大，盈利惊喜为负且反向分拆（困境确认）时负向敞口加深，实现事件信号对基本面信号的增强。",
+    "expression_list": [
+        "multiply( divide( subtract( vec_avg( ern6_actual_eps ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ), add( 1, multiply( 0.5, signed_power( winsorize( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ), std = 2 ), 0.5 ) ) ), filter = true )",
+        "multiply( divide( subtract( vec_avg( ern6_actual_eps_274 ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ), add( 1, multiply( 0.5, signed_power( winsorize( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ), std = 2 ), 0.5 ) ) ), filter = true )"
+    ]
+}

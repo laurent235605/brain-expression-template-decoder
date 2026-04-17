@@ -1,0 +1,7 @@
+{
+    "template": "s_log_1p(multiply(10, quantile(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), driver=\"cauchy\")))",
+    "idea": "使用柯西分布对收益-权重偏离进行分位数拉伸（强调极端值），经缩放后应用对称对数压缩，构造对极端错配敏感但防爆仓的非线性信号。",
+    "expression_list": [
+        "s_log_1p(multiply(10, quantile(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), driver=\"cauchy\")))"
+    ]
+}

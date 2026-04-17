@@ -1,0 +1,2 @@
+id,description,dataset,category,subcategory,region,delay,universe,type,dateCoverage,coverage,userCount,alphaCount,pyramidMultiplier,themes,dataset_id,dataset_name,category_id,category_name,subcategory_id,subcategory_name
+anl85_version,version,"{'id': 'analyst85', 'name': 'Trade idea dataset'}","{'id': 'analyst', 'name': 'Analyst'}","{'id': 'analyst-analyst-estimates', 'name': 'Analyst Estimates'}",EUR,1,TOPCS1600,VECTOR,0.5079,0.4766,0,0,1.4,[],analyst85,Trade idea dataset,analyst,Analyst,analyst-analyst-estimates,Analyst Estimates

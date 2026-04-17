@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_delta({eps_best_eeps_cur_yr}, 5), hump_decay(days_from_last_change({eps_best_eeps_cur_yr}), 5))",
+    "idea": "事件驱动的衰减型修订信号。利用days_from_last_change识别预期数据最近一次发生变动的时间点，通过hump_decay赋予新近发生修订的股票更高权重，并随时间推移（半衰期5日）指数衰减。此模板专注于新鲜信息的价值，避免对 stale consensus 的过度交易，适用于事件驱动型策略，强调信息的时效性溢价。",
+    "expression_list": [
+        "multiply(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), hump_decay(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 5))",
+        "multiply(ts_delta(anl69_eps_best_eeps_cur_yr, 5), hump_decay(days_from_last_change(anl69_eps_best_eeps_cur_yr), 5))"
+    ]
+}

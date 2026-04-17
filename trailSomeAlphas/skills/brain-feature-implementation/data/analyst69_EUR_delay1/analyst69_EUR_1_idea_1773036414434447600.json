@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252)",
+    "idea": "将短期修订动量置于历史时间序列语境中评估。通过252日（一年）滚动窗口计算当前5日预期修订的分位数水平，识别极端的分析师行为事件。此模板不关注绝对修订幅度，而是关注相对自身历史的位置，适用于捕捉季节性调整或突发业绩指引引发的异常预期变动，具有更强的跨周期可比性。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252)",
+        "ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252)"
+    ]
+}

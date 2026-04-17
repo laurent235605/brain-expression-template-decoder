@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_rank(winsorize(vec_skewness(vec_filter({version}, value=\"nan\")), std=4), industry), driver=\"gaussian\")",
+    "idea": "行业分位数高斯变换策略：在行业内部对版本偏度进行排名（group_rank），消除行业间不可比性，随后通过高斯分位数变换（quantile driver=gaussian）将均匀分布的行业排名映射至标准正态分布，显著拉伸尾部区域（极端偏态股票）的信号强度，同时压缩中间区域的噪音影响，适用于捕捉版本使用两极分化的异常状态。",
+    "expression_list": [
+        "quantile(group_rank(winsorize(vec_skewness(vec_filter(anl85_version, value=\"nan\")), std=4), industry), driver=\"gaussian\")"
+    ]
+}

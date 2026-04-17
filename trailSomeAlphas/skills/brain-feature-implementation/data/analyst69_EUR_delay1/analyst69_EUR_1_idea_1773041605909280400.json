@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(quantile({eps_best_eeps_cur_yr}, driver=gaussian), 0.8), group_zscore(ts_delta({eps_best_eeps_cur_yr}, 126), industry), group_zscore({eps_best_eeps_cur_yr}, industry))",
+    "idea": "**双轨制预期策略 (Dual-Regime Expectation Strategy)**\n- **逻辑**：对高预期股票（截面分位前20%）采用动量策略（关注126日预期改善速度），对低预期股票采用价值策略（关注绝对预期水平），实现成长与价值的双轨配置。\n- **关键操作**：if_else分割样本空间，高预期组用ts_delta捕捉趋势加速，低预期组用原始水平捕捉估值修复。\n- **适用场景**：适用于市场风格切换频繁的环境，自适应不同预期水平的有效信号类型。",
+    "expression_list": [
+        "if_else(greater(quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian), 0.8), group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 126), industry), group_zscore(anl69_aeps_best_eeps_cur_yr, industry))",
+        "if_else(greater(quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian), 0.8), group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 126), industry), group_zscore(anl69_eps_best_eeps_cur_yr, industry))"
+    ]
+}

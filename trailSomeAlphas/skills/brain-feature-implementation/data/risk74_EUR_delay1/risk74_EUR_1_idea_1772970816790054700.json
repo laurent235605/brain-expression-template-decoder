@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(ts_zscore(ts_rank(ts_sum(ts_delta({shortint}, 1), 15), 252), 60), std=4), industry)",
+    "idea": "**概念**: 历史极端分位与行业中性叠加\n- **逻辑**: 先计算15日累计做空变化在过去252日中的历史分位（ts_rank），再通过时序zscore识别是否处于历史极端水平，最后进行行业中性化（group_zscore），捕捉在行业内部相对历史极端的做空压力累积或异常回补信号\n- **数据清洗**: 对中间结果进行双向4倍标准差截尾（winsorize），防止极值扭曲行业均值\n- **方向性**: 正值表示该股票做空压力处于历史极端高位且高于行业平均（强烈看空）；负值表示处于历史极端低位（强烈看多/回补）",
+    "expression_list": [
+        "group_zscore(winsorize(ts_zscore(ts_rank(ts_sum(ts_delta(rsk74_shortint, 1), 15), 252), 60), std=4), industry)",
+        "group_zscore(winsorize(ts_zscore(ts_rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 252), 60), std=4), industry)"
+    ]
+}

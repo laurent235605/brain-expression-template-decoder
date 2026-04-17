@@ -1,0 +1,7 @@
+{
+    "template": "ts_percentage(vec_avg({score}), 252, 0.5)",
+    "idea": "**Concept**: Historical Score Percentile Position\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The percentile of current score relative to its own 252-day history (long-term historical context)\n- **Why This Feature**: Stock-specific historical context matters; a moderate score may be extreme for a typically quiet stock, suggesting unusual corporate activity\n- **is filling nan necessary**: Yes, historical percentiles require complete history. Use `ts_backfill(vec_avg({score}), 5)` to fill gaps before calculating historical distribution.\n- **Logical Meaning**: How current acquisition likelihood compares to the stock's own history; identifies unusual corporate events for that specific company\n- **Directionality**: 0.9 indicates score is higher than 90% of historical observations (extreme high); 0.1 indicates lower than 90% of history\n- **Boundary Conditions**: 1.0 indicates all-time high likelihood; 0.0 indicates all-time low; 0.5 indicates median historical likelihood",
+    "expression_list": [
+        "ts_percentage(vec_avg(mdl249_score), 252, 0.5)"
+    ]
+}

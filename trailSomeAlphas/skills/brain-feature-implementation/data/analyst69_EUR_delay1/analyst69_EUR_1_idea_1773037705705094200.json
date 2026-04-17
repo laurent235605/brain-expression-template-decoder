@@ -1,0 +1,10 @@
+{
+    "template": "ts_regression(ts_delta({eps_best_eeps_cur_yr}, 5), days_from_last_change({eps_expected_report_dt}), 60, rettype=0)",
+    "idea": "**残差剥离纯净修正**：借鉴CAPM残差模板思路，将分析师修正动量对财报日期稳定性做60日时序回归(ts_regression, rettype=0提取残差)。目的是剥离\"因报告日期变更导致的被动预期调整\"(如审计延迟引发的共识下调)，仅保留由基本面变化驱动的\"纯净修正alpha\"，增强信号的因果纯度。",
+    "expression_list": [
+        "ts_regression(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), days_from_last_change(anl69_aeps_expected_report_dt), 60, rettype=0)",
+        "ts_regression(ts_delta(anl69_eps_best_eeps_cur_yr, 5), days_from_last_change(anl69_aeps_expected_report_dt), 60, rettype=0)",
+        "ts_regression(ts_delta(anl69_eps_best_eeps_cur_yr, 5), days_from_last_change(anl69_eps_expected_report_dt), 60, rettype=0)",
+        "ts_regression(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), days_from_last_change(anl69_eps_expected_report_dt), 60, rettype=0)"
+    ]
+}

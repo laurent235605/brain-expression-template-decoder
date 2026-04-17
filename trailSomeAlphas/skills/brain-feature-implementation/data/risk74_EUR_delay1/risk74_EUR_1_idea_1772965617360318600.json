@@ -1,0 +1,10 @@
+{
+    "template": "{crowding} - ts_delay({crowding}, 20)",
+    "idea": "**Concept**: Crowding Momentum\n- **Sample Fields Used**: `crowding`, `timeseries_crowding`, `raw_crowding`\n- **Definition**: Change in crowding scores relative to recent historical averages to detect building or unwinding of crowded positions\n- **Why This Feature**: Crowding is a precursor to volatility; accelerating crowding indicates increasing liquidation risk\n- **Logical Meaning**: Positive momentum suggests positions becoming more crowded (risk increasing); negative momentum suggests dispersion (risk reducing)\n- **is filling nan necessary**: No, crowding data is typically daily and complete; NaN values are rare and meaningful (insufficient data to calculate)\n- **Directionality**: Positive = crowding increasing (dangerous); Negative = crowding decreasing (safer); Zero = stable crowdedness\n- **Boundary Conditions**: Values approaching historical maxima indicate extreme crowdedness; sharp negative spikes indicate rapid de-risking",
+    "expression_list": [
+        "liquidity_factor_crowding - ts_delay(liquidity_factor_crowding, 20)",
+        "liquidity_timeseries_crowding - ts_delay(liquidity_timeseries_crowding, 20)",
+        "rsk74_crowding - ts_delay(rsk74_crowding, 20)",
+        "rsk74_raw_crowding - ts_delay(rsk74_raw_crowding, 20)"
+    ]
+}

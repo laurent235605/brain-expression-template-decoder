@@ -1,0 +1,14 @@
+{
+    "template": "group_normalize( multiply( ts_regression( ts_backfill({concentration}, 63), ts_step(), 20, rettype=2 ), group_zscore({crowding}, industry), signed_power( group_zscore({value_ts}, industry), 1.5 ) ), industry )",
+    "idea": "趋势加速度与非线性价值暴露：使用20日回归斜率（ts_regression, rettype=2）替代简单均线差分，捕捉集中度上升的加速度而非绝对水平；结合行业内相对拥挤度与非线性价值信号（signed_power压缩中段、放大头尾）；通过group_normalize确保每日各行业多空净敞口为零，纯捕捉行业内风险积聚期的特质性价值陷阱。",
+    "expression_list": [
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(rsk74_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(rsk74_raw_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(liquidity_factor_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(liquidity_timeseries_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_raw_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(rsk74_raw_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_raw_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(rsk74_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_raw_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(liquidity_factor_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )",
+        "group_normalize( multiply( ts_regression( ts_backfill(rsk74_raw_concentration, 63), ts_step(), 20, rettype=2 ), group_zscore(liquidity_timeseries_crowding, industry), signed_power( group_zscore(rsk74_value_ts, industry), 1.5 ) ), industry )"
+    ]
+}

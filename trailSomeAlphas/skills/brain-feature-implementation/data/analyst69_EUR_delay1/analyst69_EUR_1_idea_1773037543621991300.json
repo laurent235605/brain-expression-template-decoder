@@ -1,0 +1,8 @@
+{
+    "template": "subtract(group_zscore(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), industry), group_zscore(ts_delta({ebitda_best_eeps_cur_yr}, 20), industry))",
+    "idea": "计算EPS短期速度（模板1，5日窗口）与EBITDA中期变化（模板2，20日窗口）在行业内的zscore差值，捕捉两者背离（divergence）信号。当EPS快速上修但EBITDA尚未反映时，预示潜在预期差；采用组内标准化（group_zscore）确保跨行业可比性，构建'领先-滞后'型套利信号。",
+    "expression_list": [
+        "subtract(group_zscore(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), industry), group_zscore(ts_delta(anl69_ebitda_best_eeps_cur_yr, 20), industry))",
+        "subtract(group_zscore(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), industry), group_zscore(ts_delta(anl69_ebitda_best_eeps_cur_yr, 20), industry))"
+    ]
+}

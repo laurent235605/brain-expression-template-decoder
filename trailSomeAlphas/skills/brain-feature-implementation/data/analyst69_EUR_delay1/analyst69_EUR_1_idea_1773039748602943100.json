@@ -1,0 +1,10 @@
+{
+    "template": "multiply(quantile(ts_rank(winsorize(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 4), 252), driver=\"gaussian\"), quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"))",
+    "idea": "双高斯分位拉伸策略：对累积修正压力与历史稳定天数两个维度均进行去极值(winsorize)和时序分位(ts_rank)映射，再通过高斯分布(quantile)将中间区间压缩、极端状态拉伸至尾部。最终信号为两者的乘积，仅当“极端修正压力”与“历史罕见稳定状态”同时出现时产生强信号，捕捉高置信度的共振机会。",
+    "expression_list": [
+        "multiply(quantile(ts_rank(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 4), 252), driver=\"gaussian\"), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"))",
+        "multiply(quantile(ts_rank(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 4), 252), driver=\"gaussian\"), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"))",
+        "multiply(quantile(ts_rank(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 4), 252), driver=\"gaussian\"), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"))",
+        "multiply(quantile(ts_rank(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 4), 252), driver=\"gaussian\"), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"))"
+    ]
+}

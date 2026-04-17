@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), industry)",
+    "idea": "先通过行业组内Z-score消除不同行业间财报披露周期差异的结构性影响，再计算该行业相对值在过去252日的时序偏离度，捕捉“相对于同行的历史极端稳定性”信号，避免行业混淆。",
+    "expression_list": [
+        "group_zscore(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), industry)",
+        "group_zscore(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), industry)"
+    ]
+}

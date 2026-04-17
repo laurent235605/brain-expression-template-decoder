@@ -1,0 +1,8 @@
+{
+    "template": "vec_avg({likelihood_score}) * vec_avg({recommendation_weighting}) / (ts_std_dev(vec_avg({recommendation_weighting}), 20) + 0.0001)",
+    "idea": "**Concept**: Risk-Adjusted Conviction Alpha\n- **Sample Fields Used**: `likelihood_score`, `recommendation_weighting`\n- **Definition**: Product of average success likelihood and average recommendation weighting, scaled by the coefficient of variation of the weighting\n- **Why This Feature**: High recommendations with low probability are noise; this filter ensures only high-conviction, high-probability ideas pass through\n- **is filling nan necessary**: If either field is NaN, the product should be NaN to avoid false signals from partial data; do not fill.\n- **Logical Meaning**: Represents quality-weighted sentiment; accounts for both strength and reliability\n- **Directionality**: Higher values indicate better risk-adjusted opportunities\n- **Boundary Conditions**: Near zero indicates low confidence or low conviction; high values indicate strong consensus with high probability",
+    "expression_list": [
+        "vec_avg(success_likelihood_score) * vec_avg(buy_recommendation_weighting) / (ts_std_dev(vec_avg(buy_recommendation_weighting), 20) + 0.0001)",
+        "vec_avg(success_likelihood_score) * vec_avg(sell_recommendation_weighting) / (ts_std_dev(vec_avg(sell_recommendation_weighting), 20) + 0.0001)"
+    ]
+}

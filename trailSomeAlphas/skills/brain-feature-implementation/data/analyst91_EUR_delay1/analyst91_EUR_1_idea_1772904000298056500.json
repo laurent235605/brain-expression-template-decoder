@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 5)",
+    "idea": "计算行业中性波动率利差的5日变化率（二阶导数），捕捉地域敞口动荡的加速度变化而非绝对水平。适用于识别业务重组从\"加速动荡\"到\"趋于稳定\"的拐点，或反之。",
+    "expression_list": [
+        "ts_delta(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 5)"
+    ]
+}

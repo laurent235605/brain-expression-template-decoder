@@ -1,0 +1,7 @@
+{
+    "template": "raw = winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4); sec_neutral = group_zscore(raw, sector); cap_clean = ts_regression(sec_neutral, log(ts_mean(cap,21)), 252, rettype=0); r = rank(cap_clean); signal = if_else(greater(r, 0.9), signed_power(cap_clean, 1.3), if_else(less(r, 0.1), signed_power(cap_clean, 1.3), multiply(cap_clean, 0.2))); final = group_normalize(signal, sector)",
+    "idea": "双重中性化增强：先行业中性，再通过回归残差剔除市值对定价偏离度的影响（解决大小盘结构偏差）。随后采用激进桶化策略——仅保留前后各10%极端分位给予1.3次幂放大，中间80%区间信号权重压缩至20%以抑制噪音，最后组内归一化确保行业多空平衡，突出纯粹的头尾alpha。",
+    "expression_list": [
+        "raw = winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4); sec_neutral = group_zscore(raw, sector); cap_clean = ts_regression(sec_neutral, log(ts_mean(cap,21)), 252, rettype=0); r = rank(cap_clean); signal = if_else(greater(r, 0.9), signed_power(cap_clean, 1.3), if_else(less(r, 0.1), signed_power(cap_clean, 1.3), multiply(cap_clean, 0.2))); final = group_normalize(signal, sector)"
+    ]
+}

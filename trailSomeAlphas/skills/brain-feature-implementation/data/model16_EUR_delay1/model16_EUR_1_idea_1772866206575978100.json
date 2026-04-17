@@ -1,0 +1,10 @@
+{
+    "template": "{profitability} * {momentum}",
+    "idea": "**Concept**: Profitability-Momentum Synergy\n- **Sample Fields Used**: `fscore_profitability`, `fscore_momentum`, `fscore_bfl_profitability`, `fscore_bfl_momentum`\n- **Definition**: Multiplicative interaction between profitability levels and momentum signals, capturing the amplification effect when quality companies experience positive analyst revisions\n- **Why This Feature**: Profitability alone may indicate value traps; momentum alone may indicate overextension. Their intersection identifies \"quality growth\" with confirmation from analysts\n- **Logical Meaning**: Geometric representation of \"quality at a reasonable price with upward trajectory\"; high values require both strong cash generation and positive sentiment\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values indicate strong profitability with positive momentum (optimal); low values indicate either weak profitability or negative momentum (avoid)\n- **Boundary Conditions**: Zero values occur when either factor is zero (missing data or true zero); extreme values may indicate unsustainable combinations",
+    "expression_list": [
+        "fscore_bfl_profitability * fscore_bfl_momentum",
+        "fscore_bfl_profitability * fscore_momentum",
+        "fscore_profitability * fscore_bfl_momentum",
+        "fscore_profitability * fscore_momentum"
+    ]
+}

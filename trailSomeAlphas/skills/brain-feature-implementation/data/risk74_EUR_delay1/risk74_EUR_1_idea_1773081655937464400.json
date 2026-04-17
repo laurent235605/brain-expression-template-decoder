@@ -1,0 +1,8 @@
+{
+    "template": "subtract(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), sector), group_zscore(ts_sum(ts_delta({shortint}, 1), 15), sector))",
+    "idea": "行业中性下的多空力量共振信号。在行业内部标准化后，用基金持仓变化Z-score减去空头持仓变化Z-score（空头增加为负向信号，减去负值等于加分），当基金增持叠加空头回补时产生强正向协同效应，捕捉多空极端情绪下的逼空行情。",
+    "expression_list": [
+        "subtract(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), sector), group_zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15), sector))",
+        "subtract(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), sector), group_zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), sector))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120)), 2), ts_delta(ts_zscore(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120), 20), 0), 3), hump=0.02)",
+    "idea": "仅当流动性事件的 Z-Score 绝对值超过阈值（2）时才激活信号，关注流动性压力的变化率（ts_delta，动量）而非绝对水平。通过线性衰减（ts_decay_linear）和 hump 衰减双重平滑，显著降低换手率，同时保留对持续性流动性恶化的暴露。",
+    "expression_list": [
+        "hump_decay(ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120)), 2), ts_delta(ts_zscore(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120), 20), 0), 3), hump=0.02)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_zscore({hfown_pctown}, sector), multiply(0.6, group_zscore({fund_num_owners_encr}, sector)))",
+    "idea": "用持仓占比的行业Z-score减去持有人数量的行业Z-score（加权），识别“高持仓低分散”（集中押注）与“高持仓高分散”（拥挤交易）的差异。正值代表少数HF高 conviction 持仓，负值代表过度拥挤可能反转。",
+    "expression_list": [
+        "subtract(group_zscore(rsk74_hfown_pctown, sector), multiply(0.6, group_zscore(hedge_fund_num_owners_encr, sector)))"
+    ]
+}

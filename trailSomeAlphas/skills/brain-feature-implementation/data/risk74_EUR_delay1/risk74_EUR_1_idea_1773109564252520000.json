@@ -1,0 +1,5 @@
+{
+    "template": "scale(trade_when(and(greater(ts_rank(winsorize({nondomicile},std=4), 60), 0.7), greater(ts_mean({volume},20), ts_mean({volume},60))), ts_regression(winsorize({concentration},std=4), group_mean(winsorize({concentration},std=4), log(ts_mean({cap},21)), industry), 20, rettype=0), 0), longscale=1, shortscale=1)",
+    "idea": "流动性过滤残差提取版：在原始条件基础上增加流动性确认（20日均量>60日均量），并使用CAPM残差法提取地理集中度相对于行业市值加权均值的偏离（rettype=0），剥离行业共同趋势Beta，精准捕捉个股特异性的地理集中风险积聚，避免行业轮动干扰。",
+    "expression_list": []
+}

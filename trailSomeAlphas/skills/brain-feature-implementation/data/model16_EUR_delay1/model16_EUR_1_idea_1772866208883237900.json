@@ -1,0 +1,8 @@
+{
+    "template": "{surface_accel} - {static_score_derivative}",
+    "idea": "**Concept**: Surface Acceleration vs. Static Change Tradeoff\n- **Sample Fields Used**: `surface_accel`, `static_score_derivative`, `bfl_surface_accel`\n- **Definition**: Relative comparison between pentagon surface velocity and general static score changes, identifying whether multi-factor improvement is geometric (surface) or arithmetic (linear)\n- **Why This Feature**: Geometric improvement (surface expansion) suggests broad-based factor improvement; arithmetic improvement may indicate single-factor dependency\n- **Logical Meaning**: \"Improvement quality\" differential; positive values indicate surface leading static (broad improvement), negative values indicate static leading surface (narrow improvement)\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Positive values indicate surface acceleration exceeding static changes (pentagon expanding faster than average factor); negative values indicate surface lagging\n- **Boundary Conditions**: Extreme values indicate unbalanced factor movements; zero indicates proportional improvement",
+    "expression_list": [
+        "fscore_bfl_surface_accel - multi_factor_static_score_derivative",
+        "fscore_surface_accel - multi_factor_static_score_derivative"
+    ]
+}

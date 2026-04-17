@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_delta(ts_decay_linear(vec_stddev(ts_backfill({version}, 63)), 20), 5))",
+    "idea": "版本分歧的加速度指标。利用vec_stddev计算版本分布的标准差以衡量分析师意见分歧度，经ts_decay_linear线性衰减平滑噪声后，计算5日变化率(ts_delta)识别共识分歧正在快速扩大或收敛的加速/减速形态，最终标准化为zscore便于跨期比较。",
+    "expression_list": [
+        "zscore(ts_delta(ts_decay_linear(vec_stddev(ts_backfill(anl85_version, 63)), 20), 5))"
+    ]
+}

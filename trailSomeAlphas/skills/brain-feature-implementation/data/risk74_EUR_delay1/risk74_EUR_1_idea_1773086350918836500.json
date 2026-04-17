@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( {concentration}, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( {crowding}, industry ), ts_mean( winsorize( {value_ts}, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+    "idea": "高置信度集中度突破与平滑价值陷阱信号：检测20日集中度变化率在一年历史窗口上的zscore，仅当突破1.5倍标准差阈值时触发；使用行业内标准化拥挤度与20日均滑价值因子的乘积构建核心信号，并通过20日指数衰减窗口（半衰因子0.5）平滑处理，重点捕捉持续性的价值陷阱而非短期噪音。",
+    "expression_list": [
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( rsk74_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( rsk74_raw_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( liquidity_factor_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( liquidity_timeseries_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_raw_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( rsk74_raw_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_raw_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( rsk74_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_raw_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( liquidity_factor_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )",
+        "ts_decay_exp_window( trade_when( greater( ts_zscore( winsorize( ts_delta( rsk74_raw_concentration, 20 ), std=4 ), 252 ), 1.5 ), multiply( group_scale( liquidity_timeseries_crowding, industry ), ts_mean( winsorize( rsk74_value_ts, 4 ), 20 ) ), 0 ), 20, factor=0.5 )"
+    ]
+}

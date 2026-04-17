@@ -1,0 +1,7 @@
+{
+    "template": "subtract({grow_fy5}, multiply({percgrowfy1}, 5))",
+    "idea": "**Concept**: Growth Expectation Revision\n- **Sample Fields Used**: grow_fy5, percgrowfy1, epsgrow5\n- **Definition**: Discrepancy between long-term (5-year) and near-term (1-year) growth expectations, normalized by historical volatility\n- **Why This Feature**: Identifies expectations mismatches where market may be overly optimistic/pessimistic about long-term vs short-term growth trajectories\n- **Logical Meaning**: Positive values indicate accelerating growth curves (concave growth); negative values indicate decelerating curves (maturing businesses)\n- **is filling nan necessary**: Yes, use ts_backfill() for grow_fy5 as long-term forecasts update infrequently; missing values likely mean stale but valid estimates.\n- **Directionality**: Positive = growth acceleration expected; Negative = growth deceleration expected\n- **Boundary Conditions**: Values >20% indicate extreme growth ramp expectations; <-20% suggest impending maturity/decline",
+    "expression_list": [
+        "subtract(mdl172_grow_fy5, multiply(mdl172_percgrowfy1, 5))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(greater(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 252), 1), 0), 1, 0), 20), 2), -1, 0), 20)",
+    "idea": "检测报告日期频繁变更的集群效应，通过252日回溯填充与20日滚动求和（ts_sum）统计近期内日期调整次数。当过去20日内发生超过2次报告日期变更时，视为管理层处于高度不确定性或试图操纵预期的信号，触发-1并经20日线性衰减构建对反复延期行为的持续惩罚机制，强化对顽固性负面事件的暴露。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 252), 1), 0), 1, 0), 20), 2), -1, 0), 20)",
+        "ts_decay_linear(if_else(greater(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 252), 1), 0), 1, 0), 20), 2), -1, 0), 20)"
+    ]
+}

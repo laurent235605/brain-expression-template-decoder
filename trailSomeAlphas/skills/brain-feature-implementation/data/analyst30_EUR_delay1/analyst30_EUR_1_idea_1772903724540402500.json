@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(zscore(ts_delta(vec_count(vec_filter({currency_code}, value=\"nan\")), 63)), std=4), 1.5)",
+    "idea": "币种结构变化动量（事件驱动）：计算季度维度（63日）币种数量的变化率，经zscore标准化和winsorize去极值后，使用signed_power放大极端变化，用于捕捉公司进入新跨境市场或进行跨国重组的扩张/收缩行为信号。",
+    "expression_list": [
+        "signed_power(winsorize(zscore(ts_delta(vec_count(vec_filter(payment_currency_code, value=\"nan\")), 63)), std=4), 1.5)"
+    ]
+}

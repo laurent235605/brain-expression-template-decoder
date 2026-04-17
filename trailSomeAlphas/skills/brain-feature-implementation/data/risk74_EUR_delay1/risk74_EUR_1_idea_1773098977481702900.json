@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize( trade_when( greater( ts_zscore( {concentration}, 60 ), ts_zscore( group_mean( {concentration}, log(ts_mean({cap},21)), {sector} ), 60 ) ), multiply( group_rank( {crowding}, {sector} ), signed_power( group_zscore( {value_ts}, {sector} ), 0.5 ) ), 0 ), {sector} )",
+    "idea": "相对行业均值的极端偏离触发：仅当个股集中度Z分数超过行业市值加权均值的Z分数时，启用经0.5次方压缩的行业内价值信号与拥挤度排名乘积，并进行行业中性化，确保只在个股显著异于行业趋势时捕捉价值陷阱。",
+    "expression_list": []
+}

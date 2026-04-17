@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry)), 2), signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5), 0)",
+    "idea": "交叉应用条件交易逻辑与幂变换：仅在行业内标准化残差的绝对值超过2倍标准差（极端头尾）时，使用signed_power放大信号；中间区域视为噪音通过trade_when置零。这种“强信号重仓、弱信号空仓”的结构，既保留了模板二对极端偏离的凸性暴露，又通过阈值控制避免了中段噪音导致的无效换手。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry)), 2), signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5), 0)"
+    ]
+}

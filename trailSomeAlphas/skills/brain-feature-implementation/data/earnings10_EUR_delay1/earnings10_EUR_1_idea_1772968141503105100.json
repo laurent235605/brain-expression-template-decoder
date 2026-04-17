@@ -1,0 +1,7 @@
+{
+    "template": "quantile(winsorize(group_zscore(subtract(ts_decay_linear(vec_avg({aily_delta_recon_value}), 5), ts_mean(vec_avg({aily_delta_recon_value}), 20)), industry), 4), driver=\"gaussian\")",
+    "idea": "**期限结构背离捕捉**: 对比短期（5日线性衰减平均，强调最新变化）与长期（20日简单平均）的修正趋势，捕捉分析师预期短期突变与长期趋势的分歧；行业中性化后使用高斯分位数变换将中间区间的微弱信号压缩至零附近，同时将两端的极端分歧信号进一步拉伸放大，适用于发现预期拐点。",
+    "expression_list": [
+        "quantile(winsorize(group_zscore(subtract(ts_decay_linear(vec_avg(ern10_aily_delta_recon_value), 5), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), industry), 4), driver=\"gaussian\")"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 20), sector), 0.5) * ({momentum} / ({value_ts} + {earnyild} + 0.0001))",
+    "idea": "以输入2的机构持仓流量压力作为动态权重放大器，对输入1的原始因子暴露比进行非线性缩放。当行业内经标准化后的持仓流量处于极端值（高流入或高流出）时，放大对应动量价值信号的强度，形成流量确认下的风格增强策略。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5) * (rsk74_momentum / (rsk74_value_ts + rsk74_earnyild + 0.0001))",
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5) * (rsk74_momentum_ts / (rsk74_value_ts + rsk74_earnyild + 0.0001))"
+    ]
+}

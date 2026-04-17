@@ -1,0 +1,7 @@
+{
+    "template": "truncate(trade_when(or(greater(ts_rank(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), 126), 0.9), less(ts_rank(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), 126), 0.1)), zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001))), 0), maxPercent=0.015)",
+    "idea": "引入“历史极端值触发”机制：仅当波动调整后的持仓流压处于过去126个交易日历史分位的前10%或后10%（即极端高位或低位）时才开仓，中间区间视为噪音并空仓(权重为0)；结合全局zscore标准化与truncate截断，避免在信号平淡期承担无谓的换手率与风险敞口，实现高确信度择时。",
+    "expression_list": [
+        "truncate(trade_when(or(greater(ts_rank(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), 126), 0.9), less(ts_rank(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), 126), 0.1)), zscore(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001))), 0), maxPercent=0.015)"
+    ]
+}

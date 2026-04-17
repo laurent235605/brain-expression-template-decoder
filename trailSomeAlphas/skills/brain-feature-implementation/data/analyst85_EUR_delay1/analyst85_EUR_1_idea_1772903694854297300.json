@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta( winsorize(vec_avg({version}), std=4), 5 ) * winsorize(vec_range({version}), std=4)",
+    "idea": "先对向量均值和区间分别进行4倍标准差极值裁剪(winsorize)，消除数据错误或极端异常值的影响，再构建动量-离散度乘积信号，提高模板在高波动环境下的鲁棒性和实现稳定性",
+    "expression_list": [
+        "ts_delta( winsorize(vec_avg(anl85_version), std=4), 5 ) * winsorize(vec_range(anl85_version), std=4)"
+    ]
+}

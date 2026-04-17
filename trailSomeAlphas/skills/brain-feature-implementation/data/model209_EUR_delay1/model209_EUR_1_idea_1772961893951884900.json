@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum({investment}) / (1 + power(vec_sum({lastcostingfailed}), 0.5))",
+    "idea": "**概念**: 幂变换风险边际递减\n- **逻辑**: 使用power(y=0.5)对失败次数进行平方根变换，实现高风险段的边际效应递减——第一次失败惩罚大，后续失败惩罚减小。符合\"只有部分区间有信号\"逻辑，避免线性增长过度惩罚已有多次失败记录的资产（可能已充分price in）。\n- **边界**: 当失败次数极大时，分母增长趋缓于sqrt(n)，保留基础投资暴露。",
+    "expression_list": [
+        "vec_sum(mdl209_investment) / (1 + power(vec_sum(mdl209_lastcostingfailed), 0.5))"
+    ]
+}

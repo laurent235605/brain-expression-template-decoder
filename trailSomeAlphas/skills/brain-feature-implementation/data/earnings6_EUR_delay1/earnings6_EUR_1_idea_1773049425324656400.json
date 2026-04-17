@@ -1,0 +1,7 @@
+{
+    "template": "divide( trade_when(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243})), add(ts_mean(ts_backfill(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243})), 63), 252), 0.001) )",
+    "idea": "拆分比率持续性 surprise：将EPS Surprise的'当前值/历史均值'框架迁移至股票拆分事件，识别那些拆分比率显著高于历史常态的标的（管理层的持续信心信号），同时用trade_when处理无拆分日期的NaN值，将无事件设为中性基准1，避免盲目填充导致的偏差。",
+    "expression_list": [
+        "divide( trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), add(ts_mean(ts_backfill(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), 63), 252), 0.001) )"
+    ]
+}

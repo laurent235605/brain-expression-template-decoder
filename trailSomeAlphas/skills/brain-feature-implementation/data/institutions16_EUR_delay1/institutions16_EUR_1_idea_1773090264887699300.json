@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr(trade_when(greater(abs(group_zscore(subtract(ts_delta({reported_asset_value}, 20), ts_mean(ts_delta({reported_asset_value}, 20), 60)), sector)), 1.5), group_zscore(subtract(ts_delta({reported_asset_value}, 20), ts_mean(ts_delta({reported_asset_value}, 20), 60)), sector), 0), target_tvr=0.3)",
+    "idea": "极端尾部分位数择时策略：仅当资产加速度在行业内的Z分数绝对值超过1.5倍标准差（即处于分布两端的极端状态）时建仓，其余区间零敞口。配合目标换手率控制（TVR targeting）将年化换手约束在0.3左右，专注于捕捉资金流向极端加速或衰竭的拐点行情，避免中间区域的无效波动。",
+    "expression_list": [
+        "ts_target_tvr(trade_when(greater(abs(group_zscore(subtract(ts_delta(fund_reported_asset_value, 20), ts_mean(ts_delta(fund_reported_asset_value, 20), 60)), sector)), 1.5), group_zscore(subtract(ts_delta(fund_reported_asset_value, 20), ts_mean(ts_delta(fund_reported_asset_value, 20), 60)), sector), 0), target_tvr=0.3)"
+    ]
+}

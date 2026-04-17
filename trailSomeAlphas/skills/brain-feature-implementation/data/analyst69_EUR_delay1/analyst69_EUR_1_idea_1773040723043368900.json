@@ -1,0 +1,5 @@
+{
+    "template": "group_rank(signed_power(multiply(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), group_zscore({eps_dispersion}, {industry})), 0.5), {size_group})",
+    "idea": "稳定性与分析师分歧的交互增强模板。将报告日期稳定性高斯分位数与分析师盈利预测分歧度（eps_dispersion）进行乘法交互，使用0.5次幂（signed_power）压缩极值但保留方向，在市值分组（size_group）内进行排名。逻辑在于：报告日期稳定但分析师分歧大的公司可能存在隐藏信息不对称；反之则信息环境透明。通过市值分层控制规模效应。",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore({concentration} - ts_mean({concentration}, 60), sector) * group_zscore({value_ts}, sector)",
+    "idea": "行业内中性化的地理集中度-价值交叉：在sector组内分别标准化集中度偏离和价值因子，消除行业间地理分布固有差异（如公用事业vs科技），识别行业内部的相对价值陷阱与地理风险叠加。",
+    "expression_list": [
+        "group_zscore(rsk74_concentration - ts_mean(rsk74_concentration, 60), sector) * group_zscore(rsk74_value_ts, sector)",
+        "group_zscore(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), sector) * group_zscore(rsk74_value_ts, sector)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(ts_backfill(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), 5), std=4) - winsorize(ts_backfill(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), 5), std=4)",
+    "idea": "**概念**: 清洗后的结构-信念背离差分\n对两个原始信号分别进行5日回溯填充（处理非交易日或数据缺失）和4倍标准差截尾（消除极端异常值），然后计算差分。正值表示所有权结构比内幕持仓更稳定，可能预示内幕即将跟随结构调整；负值表示内幕已提前反映而结构滞后，捕捉领先-滞后关系。",
+    "expression_list": [
+        "winsorize(ts_backfill(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 5), std=4) - winsorize(ts_backfill(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5), std=4)",
+        "winsorize(ts_backfill(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 5), std=4) - winsorize(ts_backfill(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5), std=4)",
+        "winsorize(ts_backfill(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 5), std=4) - winsorize(ts_backfill(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5), std=4)",
+        "winsorize(ts_backfill(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 5), std=4) - winsorize(ts_backfill(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 5), std=4)"
+    ]
+}

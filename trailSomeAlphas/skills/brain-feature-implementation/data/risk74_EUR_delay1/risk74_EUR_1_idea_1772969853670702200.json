@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_decay_linear(quantile({exp_usa}, driver=\"uniform\"), 10), quantile(ts_delta({hfown_pctown}, 5), driver=\"gaussian\"))",
+    "idea": "**交叉增强：持久性地理暴露 × 极端HF流动**\n对模板1的地理暴露应用10日线性衰减均值（强调近期稳定的高暴露），与模板2的HF流速经高斯quantile转换（将极端流入/流出拉伸至尾部）后相乘。高斯quantile将HF流速的中间噪音压缩至0附近，仅保留显著的聪明钱异动（>90%或<10%分位）与持久地理暴露交互，降低换手率的同时突出“坚定持仓+坚定地理扩张”的组合。",
+    "expression_list": [
+        "multiply(ts_decay_linear(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), 10), quantile(ts_delta(rsk74_hfown_pctown, 5), driver=\"gaussian\"))"
+    ]
+}

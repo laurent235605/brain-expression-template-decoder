@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(winsorize(if_else(greater(group_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), 0.1), -1, 0)), std=4), sector)",
+    "idea": "在模板1的离散化三元信号（-1,0,1）基础上，先通过winsorize剔除异常值，再使用group_normalize进行行业中性化约束，确保每个行业内部多空净暴露为零。此增强既保留了极端稳定性信号的筛选逻辑，又通过风险约束提升了策略的可实现性和分散化程度。",
+    "expression_list": [
+        "group_normalize(winsorize(if_else(greater(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0)), std=4), sector)",
+        "group_normalize(winsorize(if_else(greater(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0)), std=4), sector)",
+        "group_normalize(winsorize(if_else(greater(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0)), std=4), sector)",
+        "group_normalize(winsorize(if_else(greater(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0)), std=4), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0), ts_regression(winsorize(ts_backfill({exp_chn}, 63), std=4), group_mean(winsorize(ts_backfill({exp_chn}, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)), industry)",
+    "idea": "剥离行业共同趋势后的中美敞口残差价差：先分别对中美敞口进行行业市值加权回归取残差，消除行业Beta干扰后再构建行业中性价差，更纯粹地捕捉地缘轮动中的特质性区域配置偏离，避免行业结构性差异对区域因子的污染。",
+    "expression_list": [
+        "group_zscore(subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)), industry)"
+    ]
+}

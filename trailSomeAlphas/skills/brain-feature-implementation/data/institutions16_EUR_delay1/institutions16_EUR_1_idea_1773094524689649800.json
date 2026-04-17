@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(bucket(rank(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0)), range=\"0,1,0.2\"), hump=0.015)",
+    "idea": "分档非线性加权与严格换手率控制：将特质性残差按截面rank分为五等分桶（quintile），对极端桶赋予离散化权重，中间桶赋予零或低权重，并通过hump_decay(0.015)严格限制日度权重调整幅度，在保留头部/尾部非线性收益结构的同时将年化换手率控制在目标水平，提升策略容量。",
+    "expression_list": [
+        "hump_decay(bucket(rank(ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), sector), 252, rettype=0)), range=\"0,1,0.2\"), hump=0.015)"
+    ]
+}

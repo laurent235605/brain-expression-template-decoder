@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(quantile(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), \"gaussian\"), 1.5), less(quantile(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), \"gaussian\"), -1.5)), divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 0)",
+    "idea": "融合模板2的效率比率与分位分布拉伸技术：通过quantile算子将盈利效率比率映射至高斯分布(gaussian)，将中间区间压缩至均值附近而拉伸两端尾部，再仅当映射值超过±1.5标准差阈值时保留原始比率作为信号。该方法通过分布形态转换强化了极端效率偏离的区分度，使多空信号更加尖锐。",
+    "expression_list": [
+        "trade_when(or(greater(quantile(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), \"gaussian\"), 1.5), less(quantile(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), \"gaussian\"), -1.5)), divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 0)",
+        "trade_when(or(greater(quantile(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), \"gaussian\"), 1.5), less(quantile(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), \"gaussian\"), -1.5)), divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 0)"
+    ]
+}

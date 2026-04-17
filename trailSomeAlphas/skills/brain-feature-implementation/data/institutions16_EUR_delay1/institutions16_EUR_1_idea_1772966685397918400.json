@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 252)",
+    "idea": "历史极端偏离检测：计算当前20日资产变化在历史一年（252日）窗口中的Z-score位置，识别相对于自身历史而言的极端流入/流出事件，将截面比较转化为时序分位比较，捕捉'创历史新高/新低'的资金异动。",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 252)"
+    ]
+}

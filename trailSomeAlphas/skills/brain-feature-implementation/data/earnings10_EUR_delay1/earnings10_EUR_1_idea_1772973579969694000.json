@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(ts_regression(winsorize(vec_avg({elta_value}),std=4), group_mean(winsorize(vec_avg({elta_value}),std=4), industry), 252, rettype=0), sign(winsorize(vec_avg({aily_delta_recon_value}),std=4))), 10)",
+    "idea": "组内残差净化模型：通过时序回归（ts_regression）剥离行业均值解释的共性成分（rettype=0获取残差），保留公司特异性预期水平（idiosyncratic component），再与修正方向交互。该方法有效避免行业beta驱动导致的伪信号（如全行业预期上调时的高预期），聚焦公司特质性预期变化与修正方向的背离或共振，适用于寻找行业中性的 alpha。",
+    "expression_list": [
+        "ts_decay_linear(multiply(ts_regression(winsorize(vec_avg(ern10_elta_value),std=4), group_mean(winsorize(vec_avg(ern10_elta_value),std=4), industry), 252, rettype=0), sign(winsorize(vec_avg(ern10_aily_delta_recon_value),std=4))), 10)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(vector_neut(ts_backfill({fundreportedequityassets},63), ts_backfill({reported_asset_value},63)), {fund_sector})",
+    "idea": "在回溯填充确保数据 contemporaneous 后，进行向量中性化去除规模效应，随后在同类型基金（如{fund_sector}）内部进行组内标准化。该模板消除了不同基金类别（股票型、混合型、债券型）间的基准配置差异，专注于识别同类基金中的极端配置异常值。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_sum(vec_avg({aily_delta_recon_value}), 20), 10), industry)",
+    "idea": "行业相对修订动量衰减。先计算20日累计修订路径，再应用10日线性衰减加权（近期修订权重更高），最后进行行业内Z-Score中性化。该模板捕捉近期相对于远期的预期调整加速/减速，在行业内部识别预期拐点，同时控制行业Beta暴露，避免行业轮动噪音干扰。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), 10), industry)"
+    ]
+}

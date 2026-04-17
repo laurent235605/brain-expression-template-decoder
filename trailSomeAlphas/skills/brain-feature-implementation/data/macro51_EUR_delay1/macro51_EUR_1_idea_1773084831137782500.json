@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(trade_when(greater(abs(ts_zscore(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),industry),252)),2),ts_zscore(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),industry),252),0),5)",
+    "idea": "行业中性化时序极值捕捉。先通过group_zscore剔除行业系统性偏差，再计算个股在历史252日中的Z-score极端偏离，仅保留绝对值大于2倍标准差的尾部信号，并通过5日移动平均平滑降低换手。该模板隔离了板块轮动干扰，专注于个股相对自身及行业的双重偏离回归。",
+    "expression_list": [
+        "ts_mean(trade_when(greater(abs(ts_zscore(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),industry),252)),2),ts_zscore(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),industry),252),0),5)"
+    ]
+}

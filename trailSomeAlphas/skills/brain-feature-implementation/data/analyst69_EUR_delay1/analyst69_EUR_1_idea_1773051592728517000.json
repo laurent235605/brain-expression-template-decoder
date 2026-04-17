@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.8), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.2)), greater(multiply(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delta({eps_best_eeps_cur_yr}, 20)), 0)), group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0)",
+    "idea": "结合模板1的时序差分逻辑与模板2的极端区间筛选，引入多时间维度验证。要求短期（5日）修订处于全市场前20%或后20%极端区间，且短期与中期（20日）修订方向一致（同号相乘大于0），才输出行业标准化信号。这种结构过滤掉短期反向波动，确保捕获的是具有持续性的预期趋势转变，而非短暂的数据脉冲，增强了因子的稳定性。",
+    "expression_list": [
+        "trade_when(and(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.8), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.2)), greater(multiply(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 20)), 0)), group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0)",
+        "trade_when(and(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.8), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.2)), greater(multiply(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delta(anl69_eps_best_eeps_cur_yr, 20)), 0)), group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater({sector_percentile} - {corr_weighted_sector_percentile}, 0), multiply({sector_percentile} - {corr_weighted_sector_percentile}, sqrt(ts_mean({market_cap}, 63))), {sector_percentile} - {corr_weighted_sector_percentile}), industry), 5)",
+    "idea": "条件性市值加权与多空平衡。核心逻辑是：仅对正差距（ESG表现优于财务重要性）的股票，用其近期平均市值的平方根（sqrt(ts_mean(cap))）放大原始差距，这给予大公司更大的正差距以更多权重（假设大公司错配影响更大）。对负差距股票则保持原值。随后在行业内进行多空平衡（group_normalize），最后用线性衰减（ts_decay_linear）平滑权重、控制换手。",
+    "expression_list": []
+}

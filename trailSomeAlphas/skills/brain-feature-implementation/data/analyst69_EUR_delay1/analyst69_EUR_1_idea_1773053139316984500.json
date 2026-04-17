@@ -1,0 +1,5 @@
+{
+    "template": "ts_delta(ts_decay_linear(group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_ebitda_cur_yr}), industry), 20), 5)",
+    "idea": "调整运算符顺序的交叉验证结构：先对盈利效率比率进行行业组内ZScore标准化（剔除行业异质性），再应用20日线性衰减平滑（时序稳定性），最后计算5日变化率。与模板2的先平滑后标准化不同，此结构先消除截面偏差再捕捉时序趋势，适用于行业间可比性优先于绝对变化率的场景。",
+    "expression_list": []
+}

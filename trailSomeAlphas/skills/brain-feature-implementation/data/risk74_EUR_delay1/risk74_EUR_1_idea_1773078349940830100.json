@@ -1,0 +1,5 @@
+{
+    "template": "multiply(group_zscore(winsorize({hfown_pctown}, std=4), {sector}), ts_std_dev(group_mean({hfown_pctown}, {sector}), 63))",
+    "idea": "板块波动率调整偏离因子：将个股相对板块的持仓偏离（group_zscore）乘以该板块整体持仓比例的近期（63日）波动率（ts_std_dev of group_mean）。当板块整体持仓发生剧烈轮动（高波动率）时，个股偏离信号获得更高权重；当板块持仓结构稳定时自动降低信号强度。用于在板块轮动剧烈期放大alpha，在平静期控制风险暴露。",
+    "expression_list": []
+}

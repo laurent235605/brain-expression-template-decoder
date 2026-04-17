@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(winsorize(vec_skewness(vec_filter({version}, value=\"nan\")), std=4), industry), sign(group_zscore(winsorize(vec_mean(vec_filter({version}, value=\"nan\")), std=4), industry)))",
+    "idea": "均值-偏度方向协同策略：将行业中性化的版本偏度与行业中性化的平均版本号的符号（sign）相乘，构建方向性协同因子；当高正偏度（右尾长，存在少数高版本用户）伴随低均值版本（整体偏旧）时，或高负偏度伴随高均值版本时，信号被强化，用于识别\"多数保守少数激进\"或\"多数激进少数保守\"的特定版本采用模式，过滤掉方向不明的中间状态。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\"nan\")), std=4), industry), sign(group_zscore(winsorize(vec_mean(vec_filter(anl85_version, value=\"nan\")), std=4), industry)))"
+    ]
+}

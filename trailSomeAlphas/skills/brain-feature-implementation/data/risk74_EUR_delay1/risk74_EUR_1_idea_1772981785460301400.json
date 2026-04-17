@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 20), 0), group_zscore(signed_power(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 1.5), industry), NaN)",
+    "idea": "趋势确认的非线性增强因子。使用幂变换（1.5次方）非线性放大极端价差以强化尾部收益，同时通过20日价差Delta严格筛选：仅当价差正在扩大（趋势向上）时保留多头信号，剔除处于均值回归过程中的虚假极端值，确保区域敞口动量与方向一致性。",
+    "expression_list": [
+        "trade_when(greater(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 20), 0), group_zscore(signed_power(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 1.5), industry), NaN)"
+    ]
+}

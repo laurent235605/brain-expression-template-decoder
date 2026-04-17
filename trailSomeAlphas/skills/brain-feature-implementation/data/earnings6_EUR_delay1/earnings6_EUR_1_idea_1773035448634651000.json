@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), driver=\"gaussian\") * if_else(greater(vec_avg({stock_split_ratio_243}), 1.5), 1.2, 1.0)",
+    "idea": "分位条件增强：先对TTM EPS进行高斯分布拉伸（强调尾部），再根据拆股比率进行分段线性增强。逻辑在于：大幅正向拆股（>1.5倍）往往发生在强势上涨后，此时EPS的极端高分位应被赋予额外权重（1.2倍）；而无拆股或常规拆股时保持中性(1.0)。这种结构实现了\"仅在特定资本结构状态下放大极端盈利信号\"的激进策略，避免平庸EPS区间的噪音交易。",
+    "expression_list": [
+        "quantile(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), driver=\"gaussian\") * if_else(greater(vec_avg(ern6_stock_split_ratio_243), 1.5), 1.2, 1.0)",
+        "quantile(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), driver=\"gaussian\") * if_else(greater(vec_avg(ern6_stock_split_ratio_243), 1.5), 1.2, 1.0)"
+    ]
+}

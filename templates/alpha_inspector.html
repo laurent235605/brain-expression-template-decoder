@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN Alpha 跨界连锁 - 缘分一道桥</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .inspector-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .login-section, .filter-section, .results-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .alpha-item {
+            border: 1px solid #eee;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .alpha-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .alpha-header:hover {
+            background: #e9ecef;
+        }
+        .alpha-details {
+            padding: 15px;
+            display: none;
+            border-top: 1px solid #eee;
+        }
+        .alpha-details.active {
+            display: block;
+        }
+        .variant-btn {
+            margin: 5px;
+            padding: 8px 12px;
+            background: #fff;
+            border: 1px solid #007bff;
+            color: #007bff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .variant-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+        .variant-btn.simulating {
+            background: #ffc107;
+            border-color: #ffc107;
+            color: #000;
+            cursor: wait;
+        }
+        .variant-btn.success {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+        .variant-btn.sharpe-low {
+            background: #ffc107;
+            border-color: #ffc107;
+            color: #000;
+        }
+        .variant-btn.sharpe-high {
+            background: #6f42c1;
+            border-color: #6f42c1;
+            color: white;
+        }
+        .variant-btn.error {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+            border: 1px solid #ffc107;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        .btn-warning:disabled {
+            background-color: #ffeeba;
+            border-color: #ffeeba;
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="inspector-container">
+        <header style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <h1>🌉 缘分一道桥 (Alpha 跨区连锁)</h1>
+            <a href="/" class="btn btn-secondary">返回主页</a>
+        </header>
+
+        <div class="instructions-section" style="background: #e9ecef; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="margin-top: 0;">📖 使用说明</h3>
+            <ol style="padding-left: 20px; margin-bottom: 0; line-height: 1.6;">
+                <li>获取一段时间内的Alpha列表</li>
+                <li>分析每个Alpha里的数据字段并进行强替换，查看是否在其他Region/Universe/Delay有同样字段</li>
+                <li>生成新的Alpha</li>
+                <li>本页面的回测方式为排队回测，一个完成后才会发送另一个，因此中途退出页面会中断回测</li>
+                <li>过长的回测队列有时会因为账号超时登出而出现连续失败，因此不建议选择过长时间跨度</li>
+                <li>如想批量回测，请下载所有待回测的Alpha并选择首页回测器进行回测</li>
+                <li>如果你想，你可以输入个很大的时间范围，下载所有表达式，慢慢进行批量回测。</li>
+                <li>出现‘Field 'maxPercent' has no availability or not found. Intersection is empty’这类报错无需担心</li>
+                <li>如果您一个都桥不出来，说明您使用了太多model data</li>
+                <li>关于使用AI以跨区搭桥，我们已在72变里更新，跨区变换，最好还是使用72变功能</li>
+                <li>对了，我们还有Alpha ID模式，您把差点可以提交的AlphaID放进来，说不定会在其他地方找到缘分</li>
+            </ol>
+        </div>
+
+        <!-- Login Section -->
+        <div id="loginSection" class="login-section">
+            <h2>登录 BRAIN</h2>
+            <div class="form-group">
+                <label>用户名 (邮箱)</label>
+                <input type="text" id="username" placeholder="请输入您的邮箱">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" id="password" placeholder="请输入您的密码">
+            </div>
+            <button onclick="handleLogin()" class="btn btn-primary">登录</button>
+            <div id="loginStatus" style="margin-top: 10px;"></div>
+        </div>
+
+        <!-- Main Content (Hidden until login) -->
+        <div id="mainContent" class="hidden">
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <h2>选择模式</h2>
+                <div style="margin-bottom: 15px;">
+                    <label><input type="radio" name="fetchMode" value="date" checked onclick="toggleMode()"> 按日期范围</label>
+                    <label style="margin-left: 20px;"><input type="radio" name="fetchMode" value="id" onclick="toggleMode()"> 指定 Alpha ID</label>
+                </div>
+
+                <div id="dateModeInputs">
+                    <h3>选择Alpha提交的日期范围(不建议超过30天）</h3>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>开始日期</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>结束日期</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="idModeInputs" class="hidden">
+                    <h3>输入 Alpha ID (用逗号、空格或换行分隔)</h3>
+                    <div class="form-group">
+                        <textarea id="alphaIds" rows="5" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" placeholder="例如: QPdZrdQG, abc12345"></textarea>
+                    </div>
+                </div>
+
+                <button onclick="fetchAlphas()" class="btn btn-primary">获取 Alpha 并分析</button>
+                <button onclick="downloadResults()" class="btn btn-secondary" id="downloadBtn" disabled>下载所有待回测Alpha</button>
+                <button onclick="queueAllSimulations()" class="btn btn-warning" id="queueBtn" disabled>一键全部排队回测</button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <h2>Alpha 列表 <span id="alphaCount"></span></h2>
+                <div id="loadingIndicator" class="loading">
+                    正在分析 Alpha... 请耐心等待...
+                </div>
+                <div id="alphasList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSessionId = null;
+        let analyzedAlphas = [];
+
+        async function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const statusDiv = document.getElementById('loginStatus');
+
+            statusDiv.textContent = '正在登录...';
+            
+            try {
+                const response = await fetch('/api/yuanfen/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, password})
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    statusDiv.textContent = '登录成功！';
+                    statusDiv.style.color = 'green';
+                    currentSessionId = data.session_id;
+                    document.getElementById('loginSection').classList.add('hidden');
+                    document.getElementById('mainContent').classList.remove('hidden');
+                } else {
+                    statusDiv.textContent = '登录失败：' + data.message;
+                    statusDiv.style.color = 'red';
+                }
+            } catch (e) {
+                statusDiv.textContent = '错误：' + e.message;
+                statusDiv.style.color = 'red';
+            }
+        }
+
+        function toggleMode() {
+            const mode = document.querySelector('input[name="fetchMode"]:checked').value;
+            if (mode === 'date') {
+                document.getElementById('dateModeInputs').classList.remove('hidden');
+                document.getElementById('idModeInputs').classList.add('hidden');
+            } else {
+                document.getElementById('dateModeInputs').classList.add('hidden');
+                document.getElementById('idModeInputs').classList.remove('hidden');
+            }
+        }
+
+        async function fetchAlphas() {
+            const mode = document.querySelector('input[name="fetchMode"]:checked').value;
+            let payload = {
+                session_id: currentSessionId,
+                mode: mode === 'date' ? 'date_range' : 'ids'
+            };
+
+            if (mode === 'date') {
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                if (!startDate || !endDate) {
+                    alert('请选择开始和结束日期');
+                    return;
+                }
+                payload.start_date = startDate;
+                payload.end_date = endDate;
+            } else {
+                const alphaIds = document.getElementById('alphaIds').value;
+                if (!alphaIds.trim()) {
+                    alert('请输入 Alpha ID');
+                    return;
+                }
+                payload.alpha_ids = alphaIds;
+            }
+
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            loadingIndicator.style.display = 'block';
+            loadingIndicator.textContent = '正在初始化请求...';
+            document.getElementById('alphasList').innerHTML = '';
+            
+            try {
+                const response = await fetch('/api/yuanfen/fetch_alphas', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop(); // Keep the last incomplete line
+
+                    for (const line of lines) {
+                        if (!line.trim()) continue;
+                        try {
+                            const msg = JSON.parse(line);
+                            if (msg.type === 'progress') {
+                                loadingIndicator.textContent = msg.message;
+                            } else if (msg.type === 'result') {
+                                if (msg.success) {
+                                    analyzedAlphas = msg.alphas;
+                                    document.getElementById('alphaCount').textContent = `(${analyzedAlphas.length})`;
+                                    document.getElementById('downloadBtn').disabled = false;
+                                    document.getElementById('queueBtn').disabled = false;
+                                    renderAlphas(analyzedAlphas);
+                                } else {
+                                    throw new Error(msg.message || 'Unknown error');
+                                }
+                            } else if (msg.type === 'error') {
+                                throw new Error(msg.message);
+                            }
+                        } catch (e) {
+                            console.error("Error parsing stream:", e);
+                        }
+                    }
+                }
+            } catch (e) {
+                alert('获取 Alpha 失败：' + e.message);
+            } finally {
+                loadingIndicator.style.display = 'none';
+            }
+        }
+
+        function renderAlphas(alphas) {
+            const container = document.getElementById('alphasList');
+            container.innerHTML = '';
+
+            alphas.forEach((alpha, index) => {
+                const div = document.createElement('div');
+                div.className = 'alpha-item';
+                
+                const variantsHtml = alpha.variants.map(v => {
+                    const s = v.diff_settings;
+                    const label = `${s.region}/${s.universe}/delay_${s.delay}`;
+                    // Encode payload to pass to simulate function
+                    const payloadEncoded = encodeURIComponent(JSON.stringify(v.simulation_payload));
+                    return `<button class="variant-btn" onclick="simulateVariant(this, '${payloadEncoded}')">${label}</button>`;
+                }).join('');
+
+                div.innerHTML = `
+                    <div class="alpha-header" onclick="toggleDetails(${index})">
+                        <span>${alpha.id}${alpha.dateSubmitted ? ' - ' + alpha.dateSubmitted : ''}</span>
+                        <span>${alpha.variants.length} 个可用变体</span>
+                    </div>
+                    <div class="alpha-details" id="details-${index}">
+                        <p><strong>表达式:</strong> <code>${alpha.expression}</code></p>
+                        <div class="variants-list">
+                            ${variantsHtml || '未找到有效变体。'}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            details.classList.toggle('active');
+        }
+
+        async function simulateVariant(btn, payloadEncoded) {
+            // Allow retry if it was error, but prevent double click if simulating
+            if (btn.classList.contains('simulating')) return;
+            
+            // Reset state for retry
+            btn.classList.remove('error');
+            btn.classList.remove('success');
+            btn.classList.remove('sharpe-low');
+            btn.classList.remove('sharpe-high');
+            const originalText = btn.textContent; // Keep original label if needed, but we overwrite it
+            
+            const payload = JSON.parse(decodeURIComponent(payloadEncoded));
+            
+            btn.textContent = '回测中...';
+            btn.classList.add('simulating');
+            
+            try {
+                const response = await fetch('/api/yuanfen/simulate', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        session_id: currentSessionId,
+                        payload: payload
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    btn.classList.remove('simulating');
+                    
+                    const res = data.result.is;
+                    const sharpe = res.sharpe;
+                    
+                    if (sharpe > 1.5) {
+                        btn.classList.add('sharpe-high');
+                    } else if (sharpe > 1.0) {
+                        btn.classList.add('success');
+                    } else {
+                        btn.classList.add('sharpe-low');
+                    }
+
+                    const alphaId = data.result.id;
+                    const alphaUrl = `https://platform.worldquantbrain.com/alpha/${alphaId}`;
+                    
+                    // Determine text color for link based on background
+                    const linkColor = (sharpe <= 1.0) ? 'black' : 'white';
+                    
+                    btn.innerHTML = `夏普: ${res.sharpe.toFixed(2)} | 收益: ${(res.returns * 100).toFixed(1)}% | <a href="${alphaUrl}" target="_blank" style="color: ${linkColor}; text-decoration: underline;" onclick="event.stopPropagation()">${alphaId}</a>`;
+                    btn.title = `ID: ${alphaId}\n换手率: ${res.turnover}`;
+                    
+                    // Remove onclick to prevent re-simulation
+                    btn.removeAttribute('onclick');
+                    btn.style.cursor = 'default';
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (e) {
+                btn.classList.remove('simulating');
+                btn.classList.add('error');
+                btn.textContent = '错误';
+                btn.title = e.message;
+                console.error("Simulation Error Details:", e);
+                alert('回测失败: ' + e.message);
+            }
+        }
+
+        function downloadResults() {
+            // Flatten the list to get all simulatable payloads
+            const allPayloads = [];
+            analyzedAlphas.forEach(alpha => {
+                alpha.variants.forEach(v => {
+                    // Add some metadata to the payload if useful, or just keep it clean
+                    const p = JSON.parse(JSON.stringify(v.simulation_payload));
+                    // p._origin_alpha_id = alpha.id; // Removed as requested
+                    allPayloads.push(p);
+                });
+            });
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allPayloads, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "simulatable_alphas.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        async function queueAllSimulations() {
+            const buttons = document.querySelectorAll('.variant-btn');
+            const queueBtn = document.getElementById('queueBtn');
+            
+            if (buttons.length === 0) {
+                alert('没有可回测的变体');
+                return;
+            }
+
+            if (!confirm(`确定要开始 ${buttons.length} 个变体的排队回测吗？这可能需要一些时间。`)) {
+                return;
+            }
+
+            queueBtn.disabled = true;
+            const originalText = queueBtn.textContent;
+            queueBtn.textContent = '正在排队中... (请勿关闭页面)';
+
+            let count = 0;
+            for (const btn of buttons) {
+                // Skip if already running or done
+                if (btn.classList.contains('simulating') || btn.classList.contains('success')) {
+                    continue;
+                }
+                
+                // Trigger click to start simulation
+                btn.click();
+                count++;
+                
+                // Update button text to show progress
+                queueBtn.textContent = `正在排队... (${count}/${buttons.length})`;
+
+                // Wait 500ms between requests to avoid rate limiting
+                await new Promise(r => setTimeout(r, 500)); 
+            }
+            
+            queueBtn.textContent = '排队完成';
+            setTimeout(() => {
+                queueBtn.disabled = false;
+                queueBtn.textContent = originalText;
+            }, 2000);
+        }
+    </script>
+    <script src="{{ url_for('static', filename='usage_widget.js') }}"></script>
+</body>
+</html>

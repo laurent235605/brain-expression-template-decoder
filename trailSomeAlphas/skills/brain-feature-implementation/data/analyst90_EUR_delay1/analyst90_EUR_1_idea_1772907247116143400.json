@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_score = group_zscore(vol_clean, industry); level_score = group_zscore(winsorize(ts_backfill(b, 63), std=4), industry); weight = add(1, multiply(0.5, signed_power(winsorize(stab_score, 2), 1))); core = multiply(level_score, weight); group_normalize(core, industry)",
+    "idea": "融合期限结构差分与组内中性化，将长期减短期波动率差（vol_spread）作为连续稳定度评分。通过signed_power凸性放大极端稳定/不稳定股票的权重差异，实现比硬阈值（30%）更平滑的“稳定优先”配置，同时保持行业中性。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_score = group_zscore(vol_clean, industry); level_score = group_zscore(winsorize(ts_backfill(b, 63), std=4), industry); weight = add(1, multiply(0.5, signed_power(winsorize(stab_score, 2), 1))); core = multiply(level_score, weight); group_normalize(core, industry)"
+    ]
+}

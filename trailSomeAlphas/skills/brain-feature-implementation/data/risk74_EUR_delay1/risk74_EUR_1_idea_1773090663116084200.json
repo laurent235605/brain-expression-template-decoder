@@ -1,0 +1,10 @@
+{
+    "template": "subtract(group_zscore(winsorize({value_ts},std=4),industry),multiply(0.5,group_zscore(winsorize({crowding},std=4),industry)))",
+    "idea": "风险调整残差价值：将价值因子与拥挤度分别进行截尾和行业标准化后，从价值因子中线性扣除50%的拥挤度风险成分，构建经拥挤风险调整后的纯净价值暴露。该模板通过加法结构直接降低高拥挤价值股的得分，而非简单交互，更适合作为线性风险调整后的估值因子。",
+    "expression_list": [
+        "subtract(group_zscore(winsorize(rsk74_value_ts,std=4),industry),multiply(0.5,group_zscore(winsorize(rsk74_crowding,std=4),industry)))",
+        "subtract(group_zscore(winsorize(rsk74_value_ts,std=4),industry),multiply(0.5,group_zscore(winsorize(rsk74_raw_crowding,std=4),industry)))",
+        "subtract(group_zscore(winsorize(rsk74_value_ts,std=4),industry),multiply(0.5,group_zscore(winsorize(liquidity_factor_crowding,std=4),industry)))",
+        "subtract(group_zscore(winsorize(rsk74_value_ts,std=4),industry),multiply(0.5,group_zscore(winsorize(liquidity_timeseries_crowding,std=4),industry)))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(if_else(greater(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 0.8), 1, if_else(less(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 0.2), -1, 0)), industry)",
+    "idea": "将模板1的三态阈值逻辑（极端稳定/极端不稳定/中间噪音）应用于模板2的跨期盈利预期相关性。高相关性(>0.8)视为盈利预期结构稳定赋权+1，低相关性(<0.2)视为结构断裂或周期性拐点赋权-1，中间状态视为噪音赋权0。通过group_normalize确保每个行业内部多空平衡，避免行业配置偏差。",
+    "expression_list": [
+        "group_normalize(if_else(greater(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.8), 1, if_else(less(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.2), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.8), 1, if_else(less(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.2), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.8), 1, if_else(less(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.2), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.8), 1, if_else(less(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.2), -1, 0)), industry)"
+    ]
+}

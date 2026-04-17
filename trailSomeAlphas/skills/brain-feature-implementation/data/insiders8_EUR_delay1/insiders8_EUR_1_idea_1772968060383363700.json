@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(subtract(ts_decay_linear(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 20), 5), ts_decay_linear(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 10)), sector)",
+    "idea": "多时间框架背离策略：对比短期（20日，半衰期5天）与长期（60日，半衰期10天）的持有结构相关性。通过不同衰减速度的平滑处理捕捉资金结构的加速变化（短期远高于长期预示资金涌入，反之预示结构松动），计算两者差值后进行行业内Z-score标准化，形成均值回归或趋势增强信号。",
+    "expression_list": [
+        "group_zscore(subtract(ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 20), 5), ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 10)), sector)",
+        "group_zscore(subtract(ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 20), 5), ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 10)), sector)",
+        "group_zscore(subtract(ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 20), 5), ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 10)), sector)",
+        "group_zscore(subtract(ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 20), 5), ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 10)), sector)"
+    ]
+}

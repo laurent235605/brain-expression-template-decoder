@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), sector)",
+    "idea": "行业中性资产流动量：对原始资产变化进行清洗（回填缺失值、截断极值）后，在行业内部进行Z-score标准化，剔除行业beta影响，捕捉个股特有的资产_gathering能力，避免行业资金轮动导致的伪信号。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), sector)"
+    ]
+}

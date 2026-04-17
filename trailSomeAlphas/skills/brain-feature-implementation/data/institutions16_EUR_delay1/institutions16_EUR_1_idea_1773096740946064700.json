@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), signed_power(ts_rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 126), 0.5))",
+    "idea": "融合截面行业相对位置与个股自身历史时序分位（126日窗口）：仅当基金同时处于行业高位且相对于自身历史也处于高位时，通过signed_power(0.5)压缩时序极端值后给予最强权重；避免行业整体高位或个股历史极端回落时的假突破信号。",
+    "expression_list": [
+        "multiply(group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), signed_power(ts_rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 126), 0.5))"
+    ]
+}

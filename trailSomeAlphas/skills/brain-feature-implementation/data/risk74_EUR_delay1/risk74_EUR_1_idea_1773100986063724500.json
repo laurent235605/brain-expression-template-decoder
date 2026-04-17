@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_rank(ts_decay_linear(ts_sum(ts_delta({hfown_pctown},1),20),5), industry), ts_rank(ts_sum(ts_delta({hfown_pctown},1),20), 252))",
+    "idea": "时序与截面双重动量加权：首先使用ts_decay_linear对20日累积流进行5日线性衰减平滑，降低单日噪音并控制换手率；接着同时计算截面维度(group_rank, 行业内相对排名)和时序维度(ts_rank, 自身252日历史分位)。两者相乘构建复合信号，仅当资金流入既强于行业 peers 又处于自身历史高位时(或双低位时)才产生强多空信号，避免孤立解读单一维度数据。",
+    "expression_list": [
+        "multiply(group_rank(ts_decay_linear(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),5), industry), ts_rank(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), 252))"
+    ]
+}

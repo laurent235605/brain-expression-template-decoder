@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_mean(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20), 10)",
+    "idea": "结合股息持续性的历史平均思想与EPS惊喜信号：对单期惊喜进行20日滚动平均平滑以消除一次性噪音，再应用10日线性衰减函数(ts_decay_linear)降低换手率，捕捉具有持续性的盈利趋势而非短期波动。",
+    "expression_list": [
+        "ts_decay_linear(ts_mean(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), 10)",
+        "ts_decay_linear(ts_mean(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), 10)"
+    ]
+}

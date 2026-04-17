@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(abs(ts_zscore(ts_delta(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), 20), sector)) > 1.5, ts_decay_linear(group_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 5), 0)",
+    "idea": "捕捉相关性趋势的突变（二阶信息），仅当20日相关性变化率在行业内处于极端水平（|zscore|>1.5）时触发，并通过5日线性衰减平滑最终信号以降低换手率，避免对短期噪音过度反应。",
+    "expression_list": [
+        "trade_when(abs(ts_zscore(ts_delta(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), 20), sector)) > 1.5, ts_decay_linear(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 5), 0)",
+        "trade_when(abs(ts_zscore(ts_delta(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), 20), sector)) > 1.5, ts_decay_linear(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 5), 0)",
+        "trade_when(abs(ts_zscore(ts_delta(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), 20), sector)) > 1.5, ts_decay_linear(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 5), 0)",
+        "trade_when(abs(ts_zscore(ts_delta(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), 20), sector)) > 1.5, ts_decay_linear(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 5), 0)"
+    ]
+}

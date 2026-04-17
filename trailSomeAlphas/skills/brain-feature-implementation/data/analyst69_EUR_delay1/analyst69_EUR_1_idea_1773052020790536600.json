@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), add(0.5, multiply(0.5, rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63)))))",
+    "idea": "跨输入的截面-时序复合：先对短期盈利修正进行行业内标准化（group_zscore），再将预期日期稳定性的截面排名（Input 2的降维应用）映射为[0.5, 1.0]的缩放因子，使行业内的修正信号在日程稳定股票上权重放大、在频繁变动股票上压缩，实现‘质量加权’的修正动量。",
+    "expression_list": [
+        "multiply(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), add(0.5, multiply(0.5, rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63)))))",
+        "multiply(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), add(0.5, multiply(0.5, rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63)))))",
+        "multiply(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), add(0.5, multiply(0.5, rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63)))))",
+        "multiply(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), add(0.5, multiply(0.5, rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63)))))"
+    ]
+}

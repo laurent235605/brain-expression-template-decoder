@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum({fundportfolioturnover}, 20)",
+    "idea": "**Concept**: Accumulated Turnover Impact\n- **Sample Fields Used**: `fundportfolioturnover`\n- **Definition**: Rolling sum of turnover rates over 20 days, measuring total trading intensity accumulation\n- **Why This Feature**: Captures total trading costs accumulated over period; high cumulative turnover suggests high expense drag and potential tax inefficiency\n- **Logical Meaning**: Represents total portfolio churn; useful for identifying periods of high activity (earnings seasons, rebalancing) versus quiet periods\n- **is filling nan necessary**: Yes, turnover data is typically quarterly; use `ts_backfill(lookback=90)` to carry forward last known turnover, or `ts_decay_linear()` to fade old values\n- **Directionality**: High values indicate periods of high activity and transaction costs; low values indicate buy-and-hold periods\n- **Boundary Conditions**: Zero indicates no trading (passive); values >100% indicate complete portfolio turnover within period",
+    "expression_list": [
+        "ts_sum(inst16_ipreo_fundportfolioturnover, 20)"
+    ]
+}

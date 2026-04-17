@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_decay_linear(ts_delta(vec_avg({daily_probability}), 5), 3), driver=\"gaussian\")",
+    "idea": "平滑动量的稳健分位数：对日度概率动量应用3日线性衰减平滑后再进行高斯分位数转换，降低单日数据噪音干扰，提升信号稳定性",
+    "expression_list": [
+        "quantile(ts_decay_linear(ts_delta(vec_avg(anl56_daily_probability), 5), 3), driver=\"gaussian\")"
+    ]
+}

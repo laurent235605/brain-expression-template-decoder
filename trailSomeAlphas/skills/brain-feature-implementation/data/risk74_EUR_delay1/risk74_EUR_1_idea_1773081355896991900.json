@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore({exp_usa})), 2), zscore({exp_usa}), 0)",
+    "idea": "应用\"仅两端有信号，中间是噪音\"的区间结构逻辑到地理暴露。基于指南第2.3节，只有极高（纯出口商）和极低（纯本土）的暴露具有预测能力。通过2倍标准差阈值过滤，仅对极端地理beta进行交易，中段暴露视为无信号并置零，避免中间区域的噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(rsk74_raw_exp_usa)), 2), zscore(rsk74_raw_exp_usa), 0)"
+    ]
+}

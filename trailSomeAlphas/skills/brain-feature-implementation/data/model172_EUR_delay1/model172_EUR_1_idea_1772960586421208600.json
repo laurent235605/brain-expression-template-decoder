@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(group_zscore(subtract({cfroichg}, ts_delay({cfroichg}, 5)), industry), 10)",
+    "idea": "将Input 1的基本面加速度先进行行业中性化处理(group_zscore)，消除不同行业CFROI基差不可比问题，再应用Input 2的累积窗口逻辑(ts_sum, 10日)，构建‘行业纯化后的加速度累积’信号。此举保留了Input 1对二阶导数的敏感，同时通过Input 2的累积结构平滑噪声，并强制行业内可比，属于激进的跨模板管道重排。",
+    "expression_list": [
+        "ts_sum(group_zscore(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5)), industry), 10)"
+    ]
+}

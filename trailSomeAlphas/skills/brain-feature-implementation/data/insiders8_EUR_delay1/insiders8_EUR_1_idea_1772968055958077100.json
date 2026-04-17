@@ -1,0 +1,10 @@
+{
+    "template": "scale(ts_decay_linear(quantile(group_zscore(winsorize(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), std=4), sector), driver=\"cauchy\"), d=5), scale=1)",
+    "idea": "将硬截断改为基于组内Z-score的连续加权，并使用Cauchy分布拉伸尾部（相比Gaussian更强调极端值），通过5日线性衰减(ts_decay_linear)平滑信号降低换手率，最终标准化。相比原模板的非0即1，此版本根据所有权结构稳定性偏离行业均值的程度赋予连续权重，捕捉梯度信息。",
+    "expression_list": [
+        "scale(ts_decay_linear(quantile(group_zscore(winsorize(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), std=4), sector), driver=\"cauchy\"), d=5), scale=1)",
+        "scale(ts_decay_linear(quantile(group_zscore(winsorize(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), std=4), sector), driver=\"cauchy\"), d=5), scale=1)",
+        "scale(ts_decay_linear(quantile(group_zscore(winsorize(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), std=4), sector), driver=\"cauchy\"), d=5), scale=1)",
+        "scale(ts_decay_linear(quantile(group_zscore(winsorize(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), std=4), sector), driver=\"cauchy\"), d=5), scale=1)"
+    ]
+}

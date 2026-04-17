@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)),std=4))",
+    "idea": "对两个原始字段先进行63日回溯填补确保数据完整性，使用4倍标准差winsorize双向剔除极端基金规模或权益持仓的异常值，然后进行向量中性化剥离规模效应，得到残差后再次进行尾部裁剪防止极端残差主导，最后zscore标准化得到横截面上稳健、无量纲的权益配置偏离度指标，捕捉与基金容量无关的纯配置信念强度。",
+    "expression_list": [
+        "zscore(winsorize(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)),std=4))"
+    ]
+}

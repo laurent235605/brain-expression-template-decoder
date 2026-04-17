@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({investment}) / (1 + vec_sum({lastcostingfailed})), 5)",
+    "idea": "**概念**: 风险效率动量\n- **逻辑**: 计算风险调整比率5日变化(ts_delta)，捕捉资本部署效率的改善或恶化趋势。将截面风险指标转化为时序动量信号，利用\"相对自身历史的高低\"视角，识别风险调整资本效率的拐点。\n- **边界**: 正值表示效率提升（投资增加或失败减少），负值表示风险恶化。",
+    "expression_list": [
+        "ts_delta(vec_avg(mdl209_investment) / (1 + vec_sum(mdl209_lastcostingfailed)), 5)"
+    ]
+}

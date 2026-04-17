@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 10)",
+    "idea": "对事件密集度指标应用线性衰减时序平滑（ts_decay_linear），赋予近期事件更高权重，捕捉企业公告活动的持续性和动量效应；近期密集事件往往预示公司处于战略转折或信息披露窗口期，信号比单一截面更有持续性。",
+    "expression_list": [
+        "ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 10)",
+        "ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 10)",
+        "ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 10)",
+        "ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 10)"
+    ]
+}

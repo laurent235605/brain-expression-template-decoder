@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), industry)",
+    "idea": "将条件化Surprise转换为行业内分位数(group_rank)，关注股票在所在行业内的相对预期偏离程度而非绝对Surprise数值，适配不同行业盈利波动率差异大的特征，实现行业内的相对比较。",
+    "expression_list": [
+        "group_rank(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), industry)",
+        "group_rank(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), industry)"
+    ]
+}

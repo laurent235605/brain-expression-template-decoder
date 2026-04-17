@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_delta(vec_avg({elta_value}), 5), std=3), 2), industry)",
+    "idea": "非线性尾部增强策略：对清洗后的5日动量应用保留符号的平方变换（signed_power），显著放大极端修正（头部/尾部）的权重，压缩中间区间的噪音影响，适用于只有显著超预期修正才产生定价偏差的场景，最后行业内标准化。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_delta(vec_avg(ern10_elta_value), 5), std=3), 2), industry)"
+    ]
+}

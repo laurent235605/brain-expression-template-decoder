@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(group_zscore(trade_when(greater(ts_count_nans(subtract({exp_usa},{exp_chn}),21),0), 0, divide(ts_delta(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)),21), add(ts_std_dev(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)),63),0.0001))), industry), 10)",
+    "idea": "缺失稳健型变化率：针对数据缺失情况设置保护（近21日缺数据则标记为0），计算经波动率标准化的21日价差变化率（类似标准化动量），经行业中性后应用10日指数衰减，平滑信号并降低换手，聚焦近期区域配置动向的显著变化。",
+    "expression_list": [
+        "ts_decay_exp_window(group_zscore(trade_when(greater(ts_count_nans(subtract(rsk74_raw_exp_usa,rsk74_raw_exp_chn),21),0), 0, divide(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)),21), add(ts_std_dev(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)),63),0.0001))), industry), 10)"
+    ]
+}

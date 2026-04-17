@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_std_dev(vec_avg({actual_eps}), 252), abs(ts_mean(vec_avg({actual_eps}), 252)))",
+    "idea": "将股息稳定性逻辑迁移至盈利数据，计算每股收益的变异系数(CV)，衡量盈利稳定性而非股息稳定性。低值表示盈利可预测性强，高值表示盈利波动大，识别盈利质量。",
+    "expression_list": [
+        "divide(ts_std_dev(vec_avg(ern6_actual_eps), 252), abs(ts_mean(vec_avg(ern6_actual_eps), 252)))",
+        "divide(ts_std_dev(vec_avg(ern6_actual_eps_274), 252), abs(ts_mean(vec_avg(ern6_actual_eps_274), 252)))"
+    ]
+}

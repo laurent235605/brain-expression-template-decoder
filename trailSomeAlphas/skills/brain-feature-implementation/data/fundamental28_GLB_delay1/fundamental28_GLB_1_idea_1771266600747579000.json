@@ -1,0 +1,12 @@
+{
+    "template": "group_zscore(winsorize(divide(subtract(divide({value_03051q}, {value_03999q}), ts_mean(divide({value_03051q}, {value_03999q}), 252)), ts_std_dev(divide({value_03051q}, {value_03999q}), 252)), 4), industry)",
+    "idea": "**概念**: 行业中性流动性风险Z-Score\n- **融合来源**: 模板1（历史偏离标准化）+ 模板3（短期流动性比率）\n- **定义**: 当前短期债务占比相对其一年历史均值的行业标准化偏离程度\n- **为何有效**: 单纯的流动性比率无法跨行业比较（金融vs制造业基准不同），通过Z-Score识别个体历史上罕见的流动性紧缩，同时行业中性化剔除行业属性干扰\n- **逻辑含义**: 捕捉个体相对于自身历史和行业同侪的流动性压力异常值；极端负值预示 refinancing 风险激增\n- **边界条件**: 使用winsorize限制4倍标准差外极值，避免单次财报异常扭曲信号；group_zscore确保比较基准为行业内部相对位置\n- **方向性**: 负向因子，极低Z-Score（如<-2）预示流动性危机，可能伴随未来收益承压或均值回归机会",
+    "expression_list": [
+        "group_zscore(winsorize(divide(subtract(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), ts_mean(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), 252)), ts_std_dev(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), 252)), 4), industry)",
+        "group_zscore(winsorize(divide(subtract(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), ts_mean(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), 252)), ts_std_dev(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), 252)), 4), industry)",
+        "group_zscore(winsorize(divide(subtract(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), ts_mean(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), 252)), ts_std_dev(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), 252)), 4), industry)",
+        "group_zscore(winsorize(divide(subtract(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), ts_mean(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), 252)), ts_std_dev(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), 252)), 4), industry)",
+        "group_zscore(winsorize(divide(subtract(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), ts_mean(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), 252)), ts_std_dev(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), 252)), 4), industry)",
+        "group_zscore(winsorize(divide(subtract(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), ts_mean(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), 252)), ts_std_dev(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), 252)), 4), industry)"
+    ]
+}

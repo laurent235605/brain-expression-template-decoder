@@ -1,0 +1,7 @@
+{
+    "template": "truncate(quantile(group_zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), driver=\"gaussian\"), maxPercent=0.015)",
+    "idea": "对行业内标准化后的持仓流压信号进行高斯分位数转换(quantile with gaussian driver)，将中间区间压缩至0附近，同时将极端头尾信号拉伸至更远位置；这种非线性变换强化了“统计显著性强的极端异动”与“普通噪音”之间的区分度，使组合更集中于高确信度的尾部押注，提升多头与空头两端的区分能力。",
+    "expression_list": [
+        "truncate(quantile(group_zscore(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), industry), driver=\"gaussian\"), maxPercent=0.015)"
+    ]
+}

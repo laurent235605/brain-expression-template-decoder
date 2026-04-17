@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_delta(group_zscore(winsorize(ts_backfill({momentum},63),std=4) / (winsorize(ts_backfill({value_ts}+{earnyild},63),std=4) + 0.0001), industry), 5), 5)",
+    "idea": "因子轮动加速度动量策略：首先构建行业中性化的动量/价值暴露比率，计算其5日变化(ts_delta)以捕捉风格转换的加速度信号——正值表示向动量风格加速轮动，负值表示向价值风格加速轮动；随后应用5日线性衰减平滑(ts_decay_linear)降低单日噪音并控制换手率。该模板适用于捕捉因子动量的持续性而非静态暴露水平，在关税政策引发的风格快速切换环境中，能够及时响应趋势加速而非单纯依赖静态比率。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(group_zscore(winsorize(ts_backfill(rsk74_momentum,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001), industry), 5), 5)",
+        "ts_decay_linear(ts_delta(group_zscore(winsorize(ts_backfill(rsk74_momentum_ts,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001), industry), 5), 5)"
+    ]
+}

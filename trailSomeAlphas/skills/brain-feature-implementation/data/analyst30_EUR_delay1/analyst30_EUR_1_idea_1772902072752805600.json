@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(if_else(greater(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 60), 1.0, -1.0), 63)",
+    "idea": "将财年分散度大于60天（表明显著会计周期差异或变更）视为结构不稳定事件，转换为±1信号后经63日线性衰减平滑，构建'会计架构不稳定持续期'因子，捕捉重大财年调整后的市场适应过程（如研报覆盖下降、预测难度上升的持续影响）。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 60), 1.0, -1.0), 63)"
+    ]
+}

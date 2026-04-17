@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6, group_zscore(ts_mean(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 10), sector)), multiply(0.4, group_zscore(ts_decay_linear(ts_delta({reported_asset_value}, 5) - ts_mean(ts_delta({reported_asset_value}, 5), 20), 5), sector)))",
+    "idea": "多时间尺度资产流融合：主信号使用20日变化偏离60日均值经10日简单平均（低换手率，约16%），辅助信号使用5日高频变化经5日线性衰减（高灵敏度，快速响应），按6:4权重行业中性加权组合，平衡长期趋势跟踪与短期拐点捕捉，降低单一时间窗口的噪音。",
+    "expression_list": [
+        "add(multiply(0.6, group_zscore(ts_mean(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 10), sector)), multiply(0.4, group_zscore(ts_decay_linear(ts_delta(fund_reported_asset_value, 5) - ts_mean(ts_delta(fund_reported_asset_value, 5), 20), 5), sector)))"
+    ]
+}

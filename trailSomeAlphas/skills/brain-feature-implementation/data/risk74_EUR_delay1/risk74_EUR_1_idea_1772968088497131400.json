@@ -1,0 +1,14 @@
+{
+    "template": "group_zscore( {concentration} - ts_mean({concentration}, 60), industry ) * group_zscore( {crowding} * {value_ts}, industry )",
+    "idea": "行业内双重偏离价值陷阱：计算行业内相对集中度变化（相对于行业均值的偏离）与行业内相对拥挤价值陷阱信号的乘积。剥离行业beta后，捕捉个股特质性的'转型期+错误定价'组合，适用于行业轮动剧烈环境下的精准做空或回避。",
+    "expression_list": [
+        "group_zscore( rsk74_concentration - ts_mean(rsk74_concentration, 60), industry ) * group_zscore( rsk74_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_concentration - ts_mean(rsk74_concentration, 60), industry ) * group_zscore( rsk74_raw_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_concentration - ts_mean(rsk74_concentration, 60), industry ) * group_zscore( liquidity_factor_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_concentration - ts_mean(rsk74_concentration, 60), industry ) * group_zscore( liquidity_timeseries_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), industry ) * group_zscore( rsk74_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), industry ) * group_zscore( rsk74_raw_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), industry ) * group_zscore( liquidity_factor_crowding * rsk74_value_ts, industry )",
+        "group_zscore( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), industry ) * group_zscore( liquidity_timeseries_crowding * rsk74_value_ts, industry )"
+    ]
+}

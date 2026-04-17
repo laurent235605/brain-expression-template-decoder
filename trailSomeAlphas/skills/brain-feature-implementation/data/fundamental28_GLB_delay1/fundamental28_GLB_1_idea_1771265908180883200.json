@@ -1,0 +1,12 @@
+{
+    "template": "divide(group_zscore(winsorize(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), std=4), industry), ts_std_dev(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), 252))",
+    "idea": "**流动性风险的信息比率化**：将\"波动率调整动量\"的逻辑迁移至流动性风险领域。对短期债务比率进行行业中性化后，除以过去一年的时序标准差，构建\"流动性风险信息比率\"。该指标使得债务结构稳定（低波动）且处于行业极端位置的公司获得更高权重，而债务比率剧烈波动的公司（可能处于重组或并购导致的异常状态）被降权，提高了跨行业比较的风险调整后可信度。",
+    "expression_list": [
+        "divide(group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), industry), ts_std_dev(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 252))",
+        "divide(group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), industry), ts_std_dev(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 252))",
+        "divide(group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), industry), ts_std_dev(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 252))",
+        "divide(group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), industry), ts_std_dev(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 252))",
+        "divide(group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), industry), ts_std_dev(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 252))",
+        "divide(group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), industry), ts_std_dev(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 252))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(bucket(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), range=\"0,1,0.2\"), industry) * group_scale(days_from_last_change({eps_expected_report_dt}), industry)",
+    "idea": "**行业中性分桶归一化**：将修正动量按20%分桶(bucket)后在行业内归一化(group_normalize)，再乘以行业内的日期稳定性尺度(group_scale)。该结构实现\"行业内相对修正强度 × 行业内报告稳定性\"的交叉增强——即便某股票修正绝对值不高，若其在行业内相对领先且日程稳定，仍可获得高权重，确保信号在组内可比且可交易。",
+    "expression_list": [
+        "group_normalize(bucket(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), industry) * group_scale(days_from_last_change(anl69_aeps_expected_report_dt), industry)",
+        "group_normalize(bucket(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), industry) * group_scale(days_from_last_change(anl69_aeps_expected_report_dt), industry)",
+        "group_normalize(bucket(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), industry) * group_scale(days_from_last_change(anl69_eps_expected_report_dt), industry)",
+        "group_normalize(bucket(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), industry) * group_scale(days_from_last_change(anl69_eps_expected_report_dt), industry)"
+    ]
+}

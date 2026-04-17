@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(right_tail(group_rank(vec_count(vec_filter({currency_code}, value=\"nan\")), industry), minimum=0.8), industry)",
+    "idea": "极端复杂度行业中性策略：在行业内部对币种数量进行分位数排名，使用right_tail截断仅保留前20%的极高复杂度股票，随后通过group_normalize进行行业中性化处理，构建纯粹暴露于多币种复杂结构的 sector-neutral 组合。",
+    "expression_list": [
+        "group_normalize(right_tail(group_rank(vec_count(vec_filter(payment_currency_code, value=\"nan\")), industry), minimum=0.8), industry)"
+    ]
+}

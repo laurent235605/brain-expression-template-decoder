@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), multiply(nan_out(vec_avg({unadjustedgrossamt}), 0.0001), add(1, s_log_1p(vec_stddev({unadjustedgrossamt}))))), 4), industry)",
+    "idea": "**波动率惩罚调整深度 (Volatility-Penalized Impact)**：将原始调整比例除以(1+对数标准差)，对股利发放历史波动剧烈的公司进行惩罚；高分红波动性往往意味着盈利不稳定或一次性特殊分红，其调整比例的可预测性较低；经`winsorize`和`group_zscore`处理后，得到经风险调整的、行业中性化的公司行为 severity 评分。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), multiply(nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001), add(1, s_log_1p(vec_stddev(anl30_unadjustedgrossamt))))), 4), industry)",
+        "group_zscore(winsorize(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), multiply(nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001), add(1, s_log_1p(vec_stddev(anl30_unadjustedgrossamt))))), 4), industry)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), std=4), group_cartesian_product(industry, bucket(rank(log(ts_mean(cap, 21))), \"0,1,0.25\")))",
+    "idea": "双重分组精细化：在原有行业分组基础上，进一步按市值规模（通过cap字段的四分位分层）进行笛卡尔积分组，消除大型蓝筹与中小盘公司在同一行业内的分红政策天然差异，在更精细的\"行业-规模\"桶内计算Z-score，提升可比性。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), std=4), group_cartesian_product(industry, bucket(rank(log(ts_mean(cap, 21))), \"0,1,0.25\")))",
+        "group_zscore(winsorize(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), std=4), group_cartesian_product(industry, bucket(rank(log(ts_mean(cap, 21))), \"0,1,0.25\")))",
+        "group_zscore(winsorize(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), std=4), group_cartesian_product(industry, bucket(rank(log(ts_mean(cap, 21))), \"0,1,0.25\")))",
+        "group_zscore(winsorize(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), std=4), group_cartesian_product(industry, bucket(rank(log(ts_mean(cap, 21))), \"0,1,0.25\")))"
+    ]
+}

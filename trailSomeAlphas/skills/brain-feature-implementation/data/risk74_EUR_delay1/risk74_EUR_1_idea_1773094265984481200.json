@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(group_rank(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry),252)",
+    "idea": "先进行行业内分位排序消除行业间空头水平的结构性差异，再追踪该相对排名在过去252天中的时序偏离程度，识别'行业相对位置历史极值'而非绝对水平。",
+    "expression_list": [
+        "ts_zscore(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry),252)",
+        "ts_zscore(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry),252)"
+    ]
+}

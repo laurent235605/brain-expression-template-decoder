@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({momentum}, 63), 1), std=3), 20), sector), 0.5) / (signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({value_ts}, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({earnyild}, 63), 1), std=3), 20), sector), 0.5) + 0.0001)",
+    "idea": "将输入2的完整时间序列净化管道（回溯填充→差分→截尾→线性衰减→行业标准化→符号幂变换）分别应用于输入1的动量与价值因子组件，重构行业内时序动量价值比。通过63日回溯与20日衰减捕捉持续风格漂移，利用0.5次幂压缩中段噪音，识别经持仓流量验证后的极端风格暴露机会。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_momentum, 63), 1), std=3), 20), sector), 0.5) / (signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_value_ts, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_earnyild, 63), 1), std=3), 20), sector), 0.5) + 0.0001)",
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_momentum_ts, 63), 1), std=3), 20), sector), 0.5) / (signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_value_ts, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_earnyild, 63), 1), std=3), 20), sector), 0.5) + 0.0001)"
+    ]
+}

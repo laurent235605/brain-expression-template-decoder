@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(group_zscore(ts_delta(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 63), industry), 4)",
+    "idea": "事件活动动量（加速度）信号。计算当前事件密集度（三事件二进制加总）相对于63个交易日前的变化量（ts_delta），捕捉企业活动从平静期进入活跃期的拐点。进行行业中性化（group_zscore）后，正值表示该公司事件活动显著加速，可能预示重大战略调整或信息披露周期的开始。使用winsorize限制极端变化的影响。逻辑：事件数量的'变化'比'水平'更具预测力，突然增加的公司活动往往先于市场认知的转折点。",
+    "expression_list": [
+        "winsorize(group_zscore(ts_delta(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 63), industry), 4)",
+        "winsorize(group_zscore(ts_delta(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 63), industry), 4)",
+        "winsorize(group_zscore(ts_delta(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 63), industry), 4)",
+        "winsorize(group_zscore(ts_delta(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 63), industry), 4)"
+    ]
+}

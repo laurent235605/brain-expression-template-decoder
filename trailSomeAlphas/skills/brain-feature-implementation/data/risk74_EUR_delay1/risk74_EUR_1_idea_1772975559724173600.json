@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(multiply(subtract(1, group_rank({crowding}, industry)), group_zscore(add(add({factor_e}, {factor_s}), {factor_g}), industry)), 21)",
+    "idea": "**交叉增强逻辑**: 使用`subtract(1, group_rank)`将拥挤度转换为\"非拥挤度\"（反向逻辑），作为ESG综合得分的动态权重（源于Input 1的乘法结构）。`ts_decay_linear`对过去21天进行线性衰减加权（时序平滑算子，第4.2.2步），强调近期ESG趋势而非单期快照。这实现了\"越不拥挤的股票，其ESG动量信号越重要\"的激进交叉逻辑。",
+    "expression_list": [
+        "ts_decay_linear(multiply(subtract(1, group_rank(liquidity_factor_crowding, industry)), group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(liquidity_factor_crowding, industry)), group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(liquidity_timeseries_crowding, industry)), group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(liquidity_timeseries_crowding, industry)), group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(rsk74_crowding, industry)), group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(rsk74_crowding, industry)), group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(rsk74_raw_crowding, industry)), group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 21)",
+        "ts_decay_linear(multiply(subtract(1, group_rank(rsk74_raw_crowding, industry)), group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 21)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_decay_linear(signed_power(winsorize(add(multiply(0.6, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), multiply(0.4, subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 63), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 21), 63)))), std=4), 1.5), 5), driver=gaussian)",
+    "idea": "加速度增强与平滑复合模板。在行业相对动量（5日变化）基础上，引入个股加速度因子（5日Z分数减去21日Z分数，捕捉修正斜率变化），通过signed_power非线性放大极端修正的斜率变化，最后使用线性衰减平滑以降低换手率，既保留行业相对强度又捕捉盈利预期的二阶导数拐点信号。",
+    "expression_list": [
+        "quantile(ts_decay_linear(signed_power(winsorize(add(multiply(0.6, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), multiply(0.4, subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 21), 63)))), std=4), 1.5), 5), driver=gaussian)",
+        "quantile(ts_decay_linear(signed_power(winsorize(add(multiply(0.6, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), multiply(0.4, subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 21), 63)))), std=4), 1.5), 5), driver=gaussian)"
+    ]
+}

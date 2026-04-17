@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0), bucket(rank(winsorize(ts_backfill({reported_asset_value},63),std=4)), range=\"0,1,0.1\"))",
+    "idea": "规模分档组内中性化比较。先将基金按资产规模分十档(bucket)，在每档内部计算规模调整后的换手率残差(252日回归中性化)，再进行组内标准化(group_zscore)。此方法确保在超大、大、中、小规模基金内部分别识别相对活跃度，避免不同规模基金间的换手率水平不可比问题，最终输出在各规模组内均值为0、标准差为1的相对活跃度信号，实现真正的同类比较(peer-relative)。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0), bucket(rank(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), range=\"0,1,0.1\"))"
+    ]
+}

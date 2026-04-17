@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(and(greater(group_rank(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), industry), 0.05), less(group_rank(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), industry), 0.95)), group_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), industry), NaN), 5)",
+    "idea": "针对原始模板中提到的边界条件（并购/清算极值），在行业内进行5%-95%分位数截断（使用trade_when与group_rank组合），剔除极端尾部噪音，仅保留正常经营状态下的资产流动信号。对剩余样本进行行业中性zscore处理，并应用5日线性衰减。该模板专注于避免特殊公司事件导致的信号扭曲，提高因子的稳健性。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(and(greater(group_rank(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), industry), 0.05), less(group_rank(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), industry), 0.95)), group_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), industry), NaN), 5)"
+    ]
+}

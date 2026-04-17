@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=3), 252), 63)",
+    "idea": "偏度动量（Skewness Acceleration）：计算252日长期偏度的63日一阶差分，识别收益分布不对称性的动态转变拐点。正值表示分布正偏程度在增加（右尾风险积聚或上行潜力增强），负值表示负偏加剧。该模板专注于偏度的时间序列变化率而非绝对水平，适用于捕捉风险结构的加速转变期。",
+    "expression_list": [
+        "ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=3), 252), 63)"
+    ]
+}

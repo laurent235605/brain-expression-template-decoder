@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater(subtract(ts_rank(vec_skewness({version}), 20), ts_rank(vec_skewness({version}), 60)), 0.3), signed_power(subtract(ts_rank(vec_skewness({version}), 20), ts_rank(vec_skewness({version}), 60)), 2), if_else(less(subtract(ts_rank(vec_skewness({version}), 20), ts_rank(vec_skewness({version}), 60)), -0.3), reverse(signed_power(subtract(ts_rank(vec_skewness({version}), 60), ts_rank(vec_skewness({version}), 20)), 2)), 0)), industry), 5)",
+    "idea": "构建20日与60日时间尺度偏度排名的剪刀差，仅当短期排名显著超越长期排名(>0.3)或显著低于(<-0.3)时触发多空信号，使用signed_power对差值进行非线性增强，捕捉偏度形态的加速恶化或改善趋势，最后经5日线性衰减平滑。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(greater(subtract(ts_rank(vec_skewness(anl85_version), 20), ts_rank(vec_skewness(anl85_version), 60)), 0.3), signed_power(subtract(ts_rank(vec_skewness(anl85_version), 20), ts_rank(vec_skewness(anl85_version), 60)), 2), if_else(less(subtract(ts_rank(vec_skewness(anl85_version), 20), ts_rank(vec_skewness(anl85_version), 60)), -0.3), reverse(signed_power(subtract(ts_rank(vec_skewness(anl85_version), 60), ts_rank(vec_skewness(anl85_version), 20)), 2)), 0)), industry), 5)"
+    ]
+}

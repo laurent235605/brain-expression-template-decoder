@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(abs(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), 1.5), greater(group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 1.0)), winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), multiply(0.3, winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4)))",
+    "idea": "**双极端条件触发（AND逻辑门控）**：激进重组模板2的条件逻辑与模板1的算术结构，要求修正动量和效率比率同时处于行业内的极端分位(|z|>1.5且>1.0)才给予全额暴露，否则降至30%，构建高置信度双因子门控与分层仓位结构。",
+    "expression_list": [
+        "trade_when(and(greater(abs(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), 1.5), greater(group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 1.0)), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), multiply(0.3, winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4)))",
+        "trade_when(and(greater(abs(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), 1.5), greater(group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 1.0)), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), multiply(0.3, winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4)))"
+    ]
+}

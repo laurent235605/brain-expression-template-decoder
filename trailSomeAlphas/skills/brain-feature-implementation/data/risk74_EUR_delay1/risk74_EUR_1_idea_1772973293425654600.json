@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_backfill({exp_usa},63),std=4), add(group_mean(winsorize(ts_backfill({exp_usa},63),std=4), log(ts_mean(cap,21)), sector), winsorize(ts_backfill({exp_nondomicile1},63),std=4)), 252, rettype=0), industry)",
+    "idea": "对模板二经行业与非本土敞口双重剥离后的特质性残差Alpha，进一步施加行业Z-Score标准化。确保跨行业可比性的同时实现行业中性，形成可横向比较多行业的纯净美国敞口异常因子。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), log(ts_mean(cap,21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), log(ts_mean(cap,21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)), 252, rettype=0), industry)"
+    ]
+}

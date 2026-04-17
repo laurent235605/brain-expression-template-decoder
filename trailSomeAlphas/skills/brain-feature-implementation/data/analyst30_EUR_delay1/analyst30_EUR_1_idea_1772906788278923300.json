@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(group_zscore(reverse(winsorize(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), std=4)), industry), 5)",
+    "idea": "过滤缺失值后计算财年日期极差，截面去极值并反转方向（使离散度低的公司得高分），经行业中性化消除行业固有差异（如零售vs金融自然财年不同），最后5日平滑降低换手率。捕捉财务报告结构稳定、子公司会计期间高度一致的企业。",
+    "expression_list": [
+        "ts_mean(group_zscore(reverse(winsorize(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4)), industry), 5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), group_mean(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), log(ts_mean(cap,21)), industry), 252, rettype=0)",
+    "idea": "应用CAPM残差模板逻辑于输入1的修订速度。通过252日回归剥离行业贝塔（使用市值加权的行业平均速度作为市场因子），提取个股特有的预期修订残差。这种结构排除了行业层面的系统性预期变化（如板块轮动），专注于个股特有的信息冲击，符合'剥离共同模式，聚焦特质风险'的alpha构建原则，适用于行业中性策略。",
+    "expression_list": [
+        "ts_regression(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), group_mean(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), log(ts_mean(cap,21)), industry), 252, rettype=0)",
+        "ts_regression(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), group_mean(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), log(ts_mean(cap,21)), industry), 252, rettype=0)"
+    ]
+}

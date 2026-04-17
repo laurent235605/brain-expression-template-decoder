@@ -1,0 +1,14 @@
+{
+    "template": "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), nan, {eps_best_eeps_cur_yr}), trade_when(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), nan, {eps_best_eeps_nxt_yr}), 60)",
+    "idea": "使用trade_when算子在报告日期发生变更（输入1事件触发）时将预期数据置为NaN，仅在'非事件窗口'计算今明两年EPS的60日相关性（输入2），提取剔除事件噪音后的纯净预期结构关系。",
+    "expression_list": [
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_aeps_best_eeps_nxt_yr), 60)",
+        "ts_corr(trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_cur_yr), trade_when(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), nan, anl69_eps_best_eeps_nxt_yr), 60)"
+    ]
+}

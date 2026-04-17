@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(trade_when(greater(abs(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5))), 0.10), ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 1), 0), 63), 10)",
+    "idea": "结合输入1的边界条件逻辑（>10%为重大事件）与输入2的累积平滑框架。仅在单日修订速度超过10%阈值时，通过trade_when将该日delta纳入63日累积，否则视为0噪音过滤。这种'事件驱动型累积'避免了平淡期的噪音积累，保留了对重大基本面变化的敏感性，再通过10日线性衰减赋予近期事件更高权重，适合捕捉季度内的关键拐点。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(trade_when(greater(abs(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5))), 0.10), ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 1), 0), 63), 10)",
+        "ts_decay_linear(ts_sum(trade_when(greater(abs(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5))), 0.10), ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 1), 0), 63), 10)"
+    ]
+}

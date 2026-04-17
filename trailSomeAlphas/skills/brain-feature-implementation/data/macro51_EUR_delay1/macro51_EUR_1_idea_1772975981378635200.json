@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( subtract( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 63 ), ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ) ), sector )",
+    "idea": "流动性溢价的历史分位期限结构（Term Structure）。计算短周期（63日）与长周期（252日）历史百分位的差值，并进行行业中性化。正值表示近期流动性溢价快速上升至高于长期趋势（追涨风险），负值表示近期快速下跌至低于长期趋势（抄底机会），用于捕捉领先于长期均值回归的短期动量确认或透支信号。",
+    "expression_list": [
+        "group_zscore( subtract( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 63 ), ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ) ), sector )"
+    ]
+}

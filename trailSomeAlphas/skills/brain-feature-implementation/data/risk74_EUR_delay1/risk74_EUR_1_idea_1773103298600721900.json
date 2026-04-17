@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(ts_backfill({hfown_pctown}, 63), std=4), group_mean(winsorize(ts_backfill({hfown_pctown}, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)",
+    "idea": "行业-市值双重中性化残差（特质性持仓）：通过252日滚动回归，剥离由行业市值加权平均持仓解释的共同因素（sector-cap beta），保留残差项作为纯个股特质性持仓偏差。此举排除HF行业配置轮动的影响，专注于其个股选择能力，适用于区分sector-wide关税风险下的个体护城河。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), group_mean(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)"
+    ]
+}

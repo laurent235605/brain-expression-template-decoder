@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 1.5), industry)",
+    "idea": "对中美价差应用1.5次幂非线性变换（signed_power），放大极端偏离的权重同时保留方向信息，压缩中间区间的噪音，增强尾部区分度，适用于相信极端地缘政治暴露才是主要收益来源的场景。",
+    "expression_list": [
+        "group_zscore(signed_power(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 1.5), industry)"
+    ]
+}

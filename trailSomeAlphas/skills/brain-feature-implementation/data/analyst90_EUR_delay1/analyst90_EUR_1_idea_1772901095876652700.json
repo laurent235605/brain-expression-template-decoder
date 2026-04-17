@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({likelihood_score}), 60) - ts_std_dev(vec_avg({likelihood_score}), 20)",
+    "idea": "期限结构一致性差分：比较长期（60日）与短期（20日）的 likelihood 波动率差异，构建期限结构。当短期波动显著低于长期时，代表分析师信心从发散走向收敛，可能是催化剂落地的领先信号。",
+    "expression_list": [
+        "ts_std_dev(vec_avg(success_likelihood_score), 60) - ts_std_dev(vec_avg(success_likelihood_score), 20)"
+    ]
+}

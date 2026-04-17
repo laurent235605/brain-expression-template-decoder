@@ -1,0 +1,7 @@
+{
+    "template": "{hfown_pctown} / ({fund_pct_ownership_encr} + 0.0001)",
+    "idea": "**Concept**: HF Ownership Structure\n- **Sample Fields Used**: `hfown_pctown`, `fund_pct_ownership_encr`, `ownership_encr`\n- **Definition**: Ratio of hedge fund ownership to total institutional ownership to isolate \"active\" vs. \"passive\" holder concentration\n- **Why This Feature**: High HF ownership indicates active bets (higher turnover risk); high institutional but low HF indicates passive/index ownership (stickier)\n- **Logical Meaning**: High values indicate active manager dominance (short-term risk); low values indicate passive/long-only dominance (stability)\n- **is filling nan necessary**: No, ownership data typically complete; ratio of NaNs should remain NaN\n- **Directionality**: High = HF dominated (active risk); Low = passive dominated (stable); 0.5 = balanced\n- **Boundary Conditions**: Values > 0.7 indicate HF-controlled stocks; values < 0.1 indicate HF neglect or passive dominance",
+    "expression_list": [
+        "rsk74_hfown_pctown / (hedge_fund_pct_ownership_encr + 0.0001)"
+    ]
+}

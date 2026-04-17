@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), 0.8), ts_decay_linear(ts_delta({eps_best_eeps_cur_yr}, 5), 10), ts_decay_linear(ts_delta({eps_best_eeps_cur_yr}, 5), 3))",
+    "idea": "根据模板A的盈利效率分档实施差异化持仓周期：高盈利转化效率的股票（前20%分位）应用更长衰减窗口（10日）以捕捉长期趋势并降低换手，低效率股票使用短窗口（3日）快速轮换。实现'优质资产长持+劣质资产短炒'的非对称策略，优化资金使用效率。",
+    "expression_list": [
+        "if_else(greater(rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0.8), ts_decay_linear(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 10), ts_decay_linear(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 3))",
+        "if_else(greater(rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0.8), ts_decay_linear(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 10), ts_decay_linear(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 3))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(and(greater(group_rank(vec_skewness({version}), industry), 0.8), greater(ts_zscore(vec_skewness({version}), 126), 1.0)), 1.5, if_else(and(less(group_rank(vec_skewness({version}), industry), 0.2), less(ts_zscore(vec_skewness({version}), 126), -1.0)), -1.0, if_else(and(greater(group_rank(vec_skewness({version}), industry), 0.8), less(ts_zscore(vec_skewness({version}), 126), 0.5)), 0.5, if_else(and(less(group_rank(vec_skewness({version}), industry), 0.2), greater(ts_zscore(vec_skewness({version}), 126), -0.5)), -0.5, 0)))), industry), 5)",
+    "idea": "历史极端性双重确认策略：在原有行业横截面极值筛选基础上，引入126日时间序列zscore检验，确保当前偏度不仅相对于同行极端，也处于该股自身历史分布的尾部（±1σ外），并对确认信号赋予非对称权重（多头1.5倍 vs 空头1.0倍），对半确认信号赋予0.5倍权重，最后使用5日线性衰减降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(and(greater(group_rank(vec_skewness(anl85_version), industry), 0.8), greater(ts_zscore(vec_skewness(anl85_version), 126), 1.0)), 1.5, if_else(and(less(group_rank(vec_skewness(anl85_version), industry), 0.2), less(ts_zscore(vec_skewness(anl85_version), 126), -1.0)), -1.0, if_else(and(greater(group_rank(vec_skewness(anl85_version), industry), 0.8), less(ts_zscore(vec_skewness(anl85_version), 126), 0.5)), 0.5, if_else(and(less(group_rank(vec_skewness(anl85_version), industry), 0.2), greater(ts_zscore(vec_skewness(anl85_version), 126), -0.5)), -0.5, 0)))), industry), 5)"
+    ]
+}

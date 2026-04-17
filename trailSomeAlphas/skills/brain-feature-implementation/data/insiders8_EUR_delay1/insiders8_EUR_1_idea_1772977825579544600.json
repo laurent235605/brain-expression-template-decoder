@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 0.1), -1, 0)), 10)",
+    "idea": "保留模板2的离散化多空状态（+1/-1/0）与行业分位逻辑，但引入ts_decay_linear对状态切换进行10日线性衰减平滑，降低因离散跳跃导致的高换手，同时维持对极端所有权状态的暴露，实现信号持续性与交易成本的平衡。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 10)",
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 10)",
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 10)",
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 10)"
+    ]
+}

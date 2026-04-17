@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.9), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.1)), signed_power(quantile(zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), 3)), driver=\"cauchy\"), 1.5), 0)",
+    "idea": "重尾分布映射与更严格尾部分割：将极端阈值收紧至前10%/后10%，对信号先进行3倍标准差截断和Z-Score标准化，再进行Cauchy分布分位映射（比高斯分布更强调尾部），配合1.5次幂 signed_power非线性放大，构建'极值敏感型'Alpha，强化对极端预期修正的反应。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.9), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.1)), signed_power(quantile(zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 3)), driver=\"cauchy\"), 1.5), 0)",
+        "trade_when(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.9), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.1)), signed_power(quantile(zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 3)), driver=\"cauchy\"), 1.5), 0)"
+    ]
+}

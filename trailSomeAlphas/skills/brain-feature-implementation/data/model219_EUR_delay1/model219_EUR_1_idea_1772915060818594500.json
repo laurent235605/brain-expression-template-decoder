@@ -1,0 +1,8 @@
+{
+    "template": "subtract({fc_rev3y1}, ts_delay({fc_rev3y1}, 21))",
+    "idea": "**Concept**: Revision Acceleration\n- **Sample Fields Used**: `fc_rev3y1`, `fc_rev6`, `mrspe_cf`\n- **Definition**: Rate of change in analyst estimate revisions, capturing acceleration in sentiment\n- **Why This Feature**: Accelerating revisions predict price momentum better than static revision levels\n- **Logical Meaning**: Second derivative of expectations; positive values indicate improving analyst conviction\n- **is filling nan necessary**: Yes, use `group_mean()` to fill missing revision data within industries\n- **Directionality**: Positive values indicate accelerating positive sentiment (bullish)\n- **Boundary Conditions**: Extreme values may indicate event-driven revisions (mergers, earnings) rather than organic growth",
+    "expression_list": [
+        "subtract(mdl219_1_fc_rev3y1, ts_delay(mdl219_1_fc_rev3y1, 21))",
+        "subtract(mdl219_2_fc_rev3y1, ts_delay(mdl219_2_fc_rev3y1, 21))"
+    ]
+}

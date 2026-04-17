@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(subtract(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), group_mean(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry)), 252), 3)",
+    "idea": "行业内相对稳定性偏离策略：计算个股稳定性相对于同行业均值（group_mean）的残差，剥离行业beta，纯取个股特异性的'异常稳定'或'异常动荡'信号；通过年度Z-Score标准化后立方变换，捕捉在同业竞争中业务结构异质化程度极端的公司。",
+    "expression_list": [
+        "signed_power(ts_zscore(subtract(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), group_mean(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry)), 252), 3)"
+    ]
+}

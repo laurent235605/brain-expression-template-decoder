@@ -1,0 +1,7 @@
+{
+    "template": "({weight_long} - {weight_short}) / ({weight_long} + {weight_short} + 0.0001)",
+    "idea": "**Concept**: Pure Insider Imbalance Signal\n- **Sample Fields Used**: weight_long, weight_short\n- **Definition**: Fundamental net exposure stripped of market noise: (Long Weight - Short Weight) / (Long Weight + Short Weight), creating a normalized sentiment indicator\n- **Why This Feature**: Reduces the dataset to its essence - are insiders net long or net short? The normalization allows comparison across market caps and sectors\n- **is filling nan necessary**: Zero weights should be treated as true zeros (no position) rather than missing.\n- **Directionality**: +1 indicates pure long bias; -1 indicates pure short bias; 0 indicates market-neutral or no position\n- **Boundary Conditions**: Undefined when both weights are zero (undefined conviction); handle by returning NaN or zero",
+    "expression_list": [
+        "(insd8_weight_long - insd8_weight_short) / (insd8_weight_long + insd8_weight_short + 0.0001)"
+    ]
+}

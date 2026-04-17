@@ -1,0 +1,8 @@
+{
+    "template": "{surface_accel} / ts_std_dev({surface_accel}, 60)",
+    "idea": "**Concept**: Surface Expansion Velocity\n- **Sample Fields Used**: `fscore_surface_accel`, `fscore_bfl_surface_accel`\n- **Definition**: Quantifies the velocity of pentagon surface area expansion or contraction, normalized by historical volatility to identify significant versus noise-level changes\n- **Why This Feature**: Raw surface acceleration includes noise; comparing current acceleration to historical volatility distinguishes genuine regime shifts from random fluctuation\n- **Logical Meaning**: Z-score of surface changes; represents statistically significant deviations from normal rate of change in multi-factor strength\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Positive values indicate faster-than-normal improvement; negative values indicate faster-than-normal deterioration; magnitude indicates extremity\n- **Boundary Conditions**: Values beyond 3 standard deviations suggest unsustainable rates of change; near-zero values suggest equilibrium",
+    "expression_list": [
+        "fscore_bfl_surface_accel / ts_std_dev(fscore_bfl_surface_accel, 60)",
+        "fscore_surface_accel / ts_std_dev(fscore_surface_accel, 60)"
+    ]
+}

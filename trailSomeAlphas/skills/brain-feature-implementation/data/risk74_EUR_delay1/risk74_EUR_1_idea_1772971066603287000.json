@@ -1,0 +1,16 @@
+{
+    "template": "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill({concentration},63),std=4), sector) * winsorize(ts_backfill({nondomicile},63),std=4), 4), sector), maxPercent=0.02)",
+    "idea": "完全中性化可交易版本：在标准清洗（回填+4倍标准差裁剪）和行业Z-score标准化后，先进行4倍标准差二次裁剪，再进行行业内归一化（group_normalize）确保各行业的多空暴露平衡，最后截断（truncate）单票权重不超过2%。该模板将原始概念转化为可实际交易的纯因子组合，严格控制行业暴露和个股集中度风险。",
+    "expression_list": [
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_nondomicile,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), 4), sector), maxPercent=0.02)",
+        "truncate(group_normalize(winsorize(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), sector) * winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), 4), sector), maxPercent=0.02)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "abs({cash_flow_score} - {balance_sheet_recognition_score}) + abs({revenue_recognition_score} - {deferred_rev_score})",
+    "idea": "**Concept**: Component Dispersion Stability\n- **Sample Fields Used**: `accounts_payable_score`, `accounts_rec_score`, `inventory_score`, `cash_flow_score`, `balance_sheet_recognition_score`\n- **Definition**: Cross-sectional standard deviation across multiple quality components to measure internal consistency of accounting practices\n- **Why This Feature**: High-quality companies show aligned scores across all dimensions (low dispersion), while manipulators often show \"mixed signals\" (e.g., high cash flow quality but low balance sheet quality)\n- **is filling nan necessary**: Yes, use group_mean or ts_backfill for individual component gaps, but only if at least 3 components are available to preserve dispersion meaning\n- **Directionality**: Low dispersion indicates consistent accounting quality; High dispersion indicates selective manipulation or sector-specific accounting anomalies\n- **Boundary Conditions**: Zero dispersion impossible (different dimensions); Extreme dispersion (>2 quintile points) indicates potential fraud risk",
+    "expression_list": [
+        "abs(mdl255_cash_flow_score - mdl255_balance_sheet_recognition_score) + abs(mdl255_revenue_recognition_score - mdl255_deferred_rev_score)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "vec_stddev({adjustedgrossamt}) / abs(vec_avg({adjustedgrossamt}))",
+    "idea": "**Concept**: Dividend Stability Coefficient\n- **Sample Fields Used**: `adjustedgrossamt`\n- **Definition**: Coefficient of variation measuring relative stability of adjusted dividend amounts across the vector dimension\n- **Why This Feature**: Identifies companies with consistent dividend policies versus those with variable or unpredictable payouts; stable coefficients indicate reliable income streams\n- **Logical Meaning**: Signal-to-noise ratio of the dividend process; measures predictability of cash flows\n- **is filling nan necessary**: NaN values typically indicate periods with no dividend declaration rather than zero dividends. For stability measurement, filter NaNs using `vec_filter` to avoid treating missing data as zero volatility, or use `ts_backfill` only if assuming dividend continuity across gaps.\n- **Directionality**: Values approaching 0 indicate high stability; values >1 indicate high volatility relative to mean\n- **Boundary Conditions**: 0 = perfectly stable (single value); theoretically unbounded but practically <5 for viable dividend payers",
+    "expression_list": [
+        "vec_stddev(anl30_adjustedgrossamt) / abs(vec_avg(anl30_adjustedgrossamt))",
+        "vec_stddev(anl30_unadjustedgrossamt) / abs(vec_avg(anl30_unadjustedgrossamt))"
+    ]
+}

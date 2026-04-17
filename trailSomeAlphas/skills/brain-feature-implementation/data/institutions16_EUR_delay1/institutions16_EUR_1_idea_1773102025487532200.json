@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), 1.5), 10)",
+    "idea": "融合输入模板一的平滑与衰减思路以及模板二的非线性放大思路：先通过20日移动平均(ts_mean)过滤权益配置残差的短期噪音，经行业内标准化(group_zscore)后，使用signed_power(1.5)对称放大极端偏离的头尾权重（压缩中段区分度），最后以10日线性衰减(ts_decay_linear)控制换手率，实现“稳定趋势捕捉+极端信号强化+低频交易”的均衡。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), 1.5), 10)"
+    ]
+}

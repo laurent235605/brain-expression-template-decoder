@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), 0.9), less(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), 0.1)), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), 3), 0)",
+    "idea": "极端分位触发式哑铃策略：仅在业务结构稳定性处于历史极端分位（ts_rank前10%极动荡或后10%极稳定）时才保留信号，中间80%分位视为噪音并强制置零（trade_when）。避免在'温和波动'区间承担无谓风险，实现更纯净的多空两端暴露。",
+    "expression_list": [
+        "trade_when(or(greater(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), 0.9), less(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), 0.1)), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), 3), 0)"
+    ]
+}

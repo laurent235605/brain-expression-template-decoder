@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 63), std=4), 1.5), sector)",
+    "idea": "将原始截面差异转化为“历史时序分位偏离”信号：先计算收益-权重差异的63日时序Z分数，识别当前定价偏离是否处于该股票自身历史分布的极端区间，再进行行业中性化与1.5次幂非线性放大，捕捉持续恶化或改善的错配趋势而非单日噪音。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 63), std=4), 1.5), sector)"
+    ]
+}

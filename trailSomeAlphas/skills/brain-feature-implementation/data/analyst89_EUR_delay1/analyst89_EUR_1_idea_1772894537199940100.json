@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({fiscal_period_end}), 252)",
+    "idea": "**Concept**: Reporting Calendar Drift\n- **Sample Fields Used**: fiscal_period_end\n- **Definition**: Change in fiscal period end timing compared to the same period one year prior, detecting fiscal year shifts or reporting delays\n- **Why This Feature**: Changes in fiscal year-end can indicate mergers, acquisitions, or attempts to mask seasonality; persistent delays in reporting may signal accounting difficulties\n- **Logical Meaning**: Shifts in corporate fiscal calendar alignment; measures deviations from historical reporting timing\n- **is filling nan necessary**: Yes, fiscal periods must be continuously tracked to detect drift accurately\n- **Directionality**: Positive values indicate reporting is occurring later than historical norms (potential delay); negative values indicate earlier reporting; large absolute values suggest fiscal year changes\n- **Boundary Conditions**: Values near 0 indicate consistent fiscal calendar; values >30 or <-30 indicate fiscal year-end changes; gradual drift may indicate creeping delays",
+    "expression_list": [
+        "ts_delta(vec_avg(anl89_fiscal_period_end), 252)"
+    ]
+}

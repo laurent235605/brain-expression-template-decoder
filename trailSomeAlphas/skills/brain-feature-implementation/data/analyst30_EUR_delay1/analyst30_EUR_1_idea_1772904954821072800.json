@@ -1,0 +1,7 @@
+{
+    "template": "v = vec_range(vec_filter({fiscalyearend}, value=\"nan\")); r = group_rank(v, sector); z = group_zscore(v, sector); if_else(greater(r, 0.9), signed_power(z, 1.5), if_else(less(r, 0.1), multiply(-1, signed_power(z, 1.5)), 0))",
+    "idea": "捕捉会计年度分散度的双向极端异象：多头前10%高分散度（复杂架构风险），空头后10%低分散度（过度统一疑为盈余管理）；对两端均进行非对称幂变换放大，中段温和区间保持零暴露，实现非对称多空结构。",
+    "expression_list": [
+        "v = vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")); r = group_rank(v, sector); z = group_zscore(v, sector); if_else(greater(r, 0.9), signed_power(z, 1.5), if_else(less(r, 0.1), multiply(-1, signed_power(z, 1.5)), 0))"
+    ]
+}

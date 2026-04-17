@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(vec_avg({exposure_value}), 126)",
+    "idea": "平均地理敞口水平的长期漂移检测（算子迁移）。借鉴模板1的126日时序Z-score分析框架，将分析对象从vec_skewness（集中度）迁移至vec_avg（平均水平）：监测公司平均地理暴露水平在半年维度上的结构性迁移，识别渐进式地理扩张或收缩战略，适用于捕捉\"地理布局重心转移\"而非\"集中度变化\"的风险演变。",
+    "expression_list": [
+        "ts_zscore(vec_avg(anl91_exposure_value), 126)"
+    ]
+}

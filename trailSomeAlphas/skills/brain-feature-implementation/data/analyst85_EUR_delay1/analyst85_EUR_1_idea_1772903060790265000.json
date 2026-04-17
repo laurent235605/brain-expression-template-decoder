@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(group_zscore(ts_decay_exp_window(vec_count(ts_backfill({version}, 63)), 20, factor=0.1), industry), std=4)",
+    "idea": "行业中性化的版本活跃度信号。通过vec_count提取每日版本数量向量并计算其指数加权移动平均，利用group_zscore消除不同行业分析师覆盖密度差异带来的系统性偏差，最后经winsorize截尾处理极端值，捕捉持续的高版本更新强度而非一次性脉冲。",
+    "expression_list": [
+        "winsorize(group_zscore(ts_decay_exp_window(vec_count(ts_backfill(anl85_version, 63)), 20, factor=0.1), industry), std=4)"
+    ]
+}

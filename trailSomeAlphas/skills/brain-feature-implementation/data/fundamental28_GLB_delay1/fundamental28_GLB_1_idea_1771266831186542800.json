@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(subtract(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), group_mean(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), log(ts_mean(cap,21)), industry)), 5)",
+    "idea": "特异性残差剥离（Idiosyncratic Residual）。通过市值加权计算行业平均利润率动量作为基准，从个股动量中剔除，得到剥离行业Beta后的特异性Alpha。使用5日移动平均平滑，捕捉公司独立经营周期带来的超额收益。",
+    "expression_list": [
+        "ts_mean(subtract(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), group_mean(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), log(ts_mean(cap,21)), industry)), 5)",
+        "ts_mean(subtract(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), group_mean(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), log(ts_mean(cap,21)), industry)), 5)"
+    ]
+}

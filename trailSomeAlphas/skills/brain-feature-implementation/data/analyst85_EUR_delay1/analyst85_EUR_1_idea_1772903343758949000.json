@@ -1,0 +1,7 @@
+{
+    "template": "pasteurize(group_zscore(winsorize(ts_delta(vec_median({version}), 5), std=4), industry))",
+    "idea": "稳健行业中性版本加速信号。使用vec_median替代vec_avg以降低个别分析师极端版本号（如批量数据错误）的影响，经winsorize截断处理剔除批量更新导致的异常跳跃后，计算相对于同行业公司的Z-score，识别行业内的相对版本更新动能。pasteurize确保原始数据中的NaN值在整个计算链条中被正确传递，避免因数据缺失产生的虚假动量信号。",
+    "expression_list": [
+        "pasteurize(group_zscore(winsorize(ts_delta(vec_median(anl85_version), 5), std=4), industry))"
+    ]
+}

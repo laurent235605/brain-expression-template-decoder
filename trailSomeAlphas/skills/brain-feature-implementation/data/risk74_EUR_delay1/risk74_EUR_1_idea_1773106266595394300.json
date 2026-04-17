@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(winsorize(group_rank(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), std=3), 5)",
+    "idea": "将模板1的行业标准化改为非参数的行业分位数排名（group_rank），降低异常值敏感性，并使用5日简单平均（ts_mean）替代线性衰减，依据运算符指南中ts_mean可显著降低换手率的特性，构建适用于低频交易、高稳定性的机构背离因子。",
+    "expression_list": [
+        "ts_mean(winsorize(group_rank(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), std=3), 5)"
+    ]
+}

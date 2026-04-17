@@ -1,0 +1,14 @@
+{
+    "template": "multiply(group_zscore(trade_when(not(is_nan({exp_nondomicile1})), abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), NaN), industry), ts_delta(winsorize({concentration},std=4), 20))",
+    "idea": "数据质量动量加权：将输入1的双源差异指标进行行业内Z-Score标准化（差异越小值越低），与输入2的集中度20日Delta相乘。数据一致性高的股票获得正向动量权重，一致性差的股票动量被压缩或反向，实现测量误差自适应的动量增强。",
+    "expression_list": [
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_raw_exp_nondomicile1)), abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_raw_exp_nondomicile1)), abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_raw_exp_nondomicile1)), abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_raw_exp_nondomicile1)), abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_std_exp_nondomicile1)), abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_std_exp_nondomicile1)), abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_std_exp_nondomicile1)), abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20))",
+        "multiply(group_zscore(trade_when(not(is_nan(rsk74_std_exp_nondomicile1)), abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), NaN), industry), ts_delta(winsorize(rsk74_concentration,std=4), 20))"
+    ]
+}

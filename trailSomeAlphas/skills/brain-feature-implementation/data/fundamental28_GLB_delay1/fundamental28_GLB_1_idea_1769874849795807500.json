@@ -1,0 +1,8 @@
+{
+    "template": "ts_std_dev(ts_delta({value_02300q}, 252), 63)",
+    "idea": "**Concept**: Asset Growth Consistency\n- **Sample Fields Used**: `value_02300q`\n- **Definition**: Standard deviation of year-over-year asset changes measured over 63 days (quarterly window)\n- **Why This Feature**: Distinguishes between steady organic expansion and lumpy acquisition-driven growth or asset sales\n- **Logical Meaning**: Captures the volatility of the company's investment policy; consistent growth suggests predictable capital allocation\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Asset values are typically reported quarterly; interpolation between quarters may introduce false stability.\n- **Directionality**: Lower values indicate more stable asset base evolution (typically positive for forecasting)\n- **Boundary Conditions**: Zero indicates no asset changes; spikes indicate M&A activity or write-downs",
+    "expression_list": [
+        "ts_std_dev(ts_delta(fnd28_bsassetq_value_02300q, 252), 63)",
+        "ts_std_dev(ts_delta(fnd28_nddq1_value_02300q, 252), 63)"
+    ]
+}

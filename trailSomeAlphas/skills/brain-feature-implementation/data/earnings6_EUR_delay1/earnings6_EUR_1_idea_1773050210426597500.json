@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_delta(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 21), std=4), 1.5), industry)",
+    "idea": "非对称动量型：关注股息持续性比率的近期变化速度（21日一阶差分），使用signed_power（幂次1.5）放大尾部，使分红削减（负向变化）的信号强度大于同等幅度的分红增加，捕捉分红政策的边际恶化而非绝对水平，进行行业内标准化。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_delta(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 21), std=4), 1.5), industry)",
+        "group_zscore(signed_power(winsorize(ts_delta(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 21), std=4), 1.5), industry)",
+        "group_zscore(signed_power(winsorize(ts_delta(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 21), std=4), 1.5), industry)",
+        "group_zscore(signed_power(winsorize(ts_delta(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 21), std=4), 1.5), industry)"
+    ]
+}

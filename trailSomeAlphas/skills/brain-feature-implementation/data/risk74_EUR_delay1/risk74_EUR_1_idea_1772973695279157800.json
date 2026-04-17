@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(subtract(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4), winsorize(if_else(is_nan({exp_chn}), 0, {exp_chn}), std=4)), 21), industry)",
+    "idea": "中美相对地理敞口价差（行业中性）。将美国敞口与中国敞口作差，经21日平滑后去除极值，在行业内部标准化，识别在中美贸易关系中对单一市场暴露过度的相对价值机会，构建跨行业中性化的多空组合。",
+    "expression_list": [
+        "group_zscore(ts_mean(subtract(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), winsorize(if_else(is_nan(rsk74_raw_exp_chn), 0, rsk74_raw_exp_chn), std=4)), 21), industry)"
+    ]
+}

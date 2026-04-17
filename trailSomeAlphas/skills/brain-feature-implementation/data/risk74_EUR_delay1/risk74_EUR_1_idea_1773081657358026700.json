@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(group_rank(ts_sum(ts_delta({hfown_pctown}, 1), 20)), 0.9), less(group_rank(ts_sum(ts_delta({shortint}, 1), 15)), 0.1)), subtract(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry), group_zscore(ts_sum(ts_delta({shortint}, 1), 15), industry)), 0)",
+    "idea": "极端分位数条件触发机制。仅当基金持仓变化处于行业内前10%分位且空头变化处于后10%分位（空头大幅减少）时激活信号，其余时间置零。通过trade_when与rank组合，仅在多空情绪同时处于极端区间时捕捉拥挤后的空头回补与机构抢筹共振点，中段噪音视为无效。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20)), 0.9), less(group_rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), 0.1)), subtract(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry), group_zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15), industry)), 0)",
+        "trade_when(and(greater(group_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20)), 0.9), less(group_rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), 0.1)), subtract(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry), group_zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), industry)), 0)"
+    ]
+}

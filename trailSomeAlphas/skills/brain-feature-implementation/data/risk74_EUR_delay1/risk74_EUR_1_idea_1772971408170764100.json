@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(greater(abs({concentration} - ts_mean({concentration}, 60)), 0.15), {crowding} * {value_ts}, 0)",
+    "idea": "地理布局剧变期的拥挤价值条件策略：仅在地理集中度发生显著偏离（>0.15阈值）时，才应用拥挤度×价值的交互信号；在地理结构稳定期关闭仓位，避免在战略转型不确定性中持有拥挤头寸。",
+    "expression_list": [
+        "trade_when(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.15), rsk74_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.15), rsk74_raw_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.15), liquidity_factor_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.15), liquidity_timeseries_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.15), rsk74_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.15), rsk74_raw_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.15), liquidity_factor_crowding * rsk74_value_ts, 0)",
+        "trade_when(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.15), liquidity_timeseries_crowding * rsk74_value_ts, 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(winsorize(pasteurize({volume}), std=4)), 2)",
+    "idea": "多级管道增强：pasteurize处理数据无穷值→winsorize按4倍标准差截断长尾→zscore转换为标准正态形态→signed_power二次方非线性放大，既保持高流动性股票的正值方向，又通过幂运算强化极端流动性因子的区分度",
+    "expression_list": [
+        "signed_power(zscore(winsorize(pasteurize(mdl234_volume), std=4)), 2)"
+    ]
+}

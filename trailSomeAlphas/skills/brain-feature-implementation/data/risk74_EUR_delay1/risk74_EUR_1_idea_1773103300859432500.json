@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(group_zscore(ts_mean(winsorize(ts_backfill({hfown_pctown}, 21), std=4), 5), sector), 20)",
+    "idea": "相对持仓动量（变化优于水平）：计算5日平滑后的行业相对Z-Score，并取过去20日的变化率。该模板认为HF相对行业加/减仓的动态（flows）比静态持仓水平更具预测力，体现聪明钱的边际资金流向与信息更新速度，避免高位滞涨持仓的陷阱。",
+    "expression_list": [
+        "ts_delta(group_zscore(ts_mean(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), 5), sector), 20)"
+    ]
+}

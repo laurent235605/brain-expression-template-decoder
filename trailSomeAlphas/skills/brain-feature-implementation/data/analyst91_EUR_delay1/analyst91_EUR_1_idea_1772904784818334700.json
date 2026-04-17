@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_rank(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 252), driver=\"gaussian\")",
+    "idea": "保留原始向量均值提取，但引入252日时间序列分位(ts_rank)将当前利差映射至其历史分布中的相对位置，识别'历史极端'业务动荡；随后通过高斯分位拉伸(quantile)将中间区间压缩至0附近，同时将历史极值（前10%或后10%）进一步放大，构建均值回复或趋势跟踪的强信号。侧重历史相对位置与分布形态控制。",
+    "expression_list": [
+        "quantile(ts_rank(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 252), driver=\"gaussian\")"
+    ]
+}

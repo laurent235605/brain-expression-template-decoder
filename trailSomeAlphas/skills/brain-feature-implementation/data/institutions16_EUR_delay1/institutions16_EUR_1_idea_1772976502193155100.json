@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(if_else(greater(ts_std_dev(returns, 5), ts_mean(ts_std_dev(returns, 63), 21)), divide(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 5), add(ts_std_dev(returns, 5), 0.001)), divide(ts_mean(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 21), add(ts_std_dev(returns, 63), 0.001))), industry)",
+    "idea": "实现regime依赖的风险调整策略——当短期波动率显著高于长期均值时（高波动regime），使用残差的短期变化率除以短期波动率以捕捉快速信念转变；在低波动regime下，使用长期平滑残差除以长期波动率以捕捉稳定结构性押注。",
+    "expression_list": [
+        "group_zscore(if_else(greater(ts_std_dev(returns, 5), ts_mean(ts_std_dev(returns, 63), 21)), divide(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 5), add(ts_std_dev(returns, 5), 0.001)), divide(ts_mean(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 21), add(ts_std_dev(returns, 63), 0.001))), industry)"
+    ]
+}

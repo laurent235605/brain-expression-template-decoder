@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), 0.10), less(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), -0.10)), group_zscore(ts_delta({ebitda_best_eeps_cur_yr}, 20), industry), 0)",
+    "idea": "严格应用模板1的边界条件（10%阈值）作为事件触发器，仅当EPS出现极端修订（>10%或<-10%）时，加载EBITDA的20日行业相对趋势（模板2）作为仓位强度信号。结合or逻辑判断与组内标准化，实现'事件驱动+基本面确认'的双层结构，避免对微小修订过度交易。",
+    "expression_list": [
+        "trade_when(or(greater(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), 0.10), less(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), -0.10)), group_zscore(ts_delta(anl69_ebitda_best_eeps_cur_yr, 20), industry), 0)",
+        "trade_when(or(greater(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), 0.10), less(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), -0.10)), group_zscore(ts_delta(anl69_ebitda_best_eeps_cur_yr, 20), industry), 0)"
+    ]
+}

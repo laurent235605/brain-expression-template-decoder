@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(signed_power(divide(ts_regression(winsorize(ts_backfill({fundreportedequityassets}, 63), std=4), ts_backfill({reported_asset_value}, 63), 252, rettype=0), add(ts_std_dev(less(returns, 0), 21), 0.001)), 1.2), industry)",
+    "idea": "非对称下行风险调整：使用252日回归残差（rettype=0）替代简单中性化以剥离规模效应，以下行标准差（仅负收益）替代总波动率进行风险调整，通过1.2次幂 signed_power 放大高信念强度，并在行业内进行多空平衡归一化。",
+    "expression_list": [
+        "group_normalize(signed_power(divide(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), std=4), ts_backfill(fund_reported_asset_value, 63), 252, rettype=0), add(ts_std_dev(less(returns, 0), 21), 0.001)), 1.2), industry)"
+    ]
+}

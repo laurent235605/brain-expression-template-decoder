@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_ts_rank = ts_rank(vol_clean, 252); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); core = trade_when(greater(stab_ts_rank, 0.7), level_score, multiply(level_score, 0.3)); ts_decay_linear(core, 5)",
+    "idea": "将截面稳定性判断转化为时序视角，考察当前波动率差在过去一年的分位（ts_rank）。仅在稳定度处于历史前30%时给予全额likelihood权重，否则压缩至30%，并加入线性衰减控制换手率，避免频繁切换。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_ts_rank = ts_rank(vol_clean, 252); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); core = trade_when(greater(stab_ts_rank, 0.7), level_score, multiply(level_score, 0.3)); ts_decay_linear(core, 5)"
+    ]
+}

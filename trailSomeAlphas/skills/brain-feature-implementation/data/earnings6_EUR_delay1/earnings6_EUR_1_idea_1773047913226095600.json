@@ -1,0 +1,10 @@
+{
+    "template": "ts_mean(add(multiply(0.5, s_log_1p(if_else(is_nan(vec_count({board_of_directors_meeting})), 0, vec_count({board_of_directors_meeting})))), add(multiply(1.0, if_else(is_nan(vec_avg({actual_eps})), 0, signed_power(vec_avg({actual_eps}), 0.5))), multiply(2.0, if_else(is_nan(vec_max({stock_split_ratio_243})), 0, 1)))), 3)",
+    "idea": "多维度异构事件加权合成与平滑：针对不同事件的经济含义选择差异化向量算子与变换（董事会会议频次vec_count经对数压缩s_log_1p、盈利金额vec_avg经平方根变换signed_power降低极端值影响、拆股vec_max二元指示），按重要性加权（0.5/1.0/2.0）合成后，使用ts_mean进行3日移动平均平滑，降低单日事件跳变的噪音，构建稳健的企业活动强度趋势指标。",
+    "expression_list": [
+        "ts_mean(add(multiply(0.5, s_log_1p(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, vec_count(ern6_board_of_directors_meeting)))), add(multiply(1.0, if_else(is_nan(vec_avg(ern6_actual_eps)), 0, signed_power(vec_avg(ern6_actual_eps), 0.5))), multiply(2.0, if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))), 3)",
+        "ts_mean(add(multiply(0.5, s_log_1p(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, vec_count(ern6_board_of_directors_meeting)))), add(multiply(1.0, if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, signed_power(vec_avg(ern6_actual_eps_274), 0.5))), multiply(2.0, if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))), 3)",
+        "ts_mean(add(multiply(0.5, s_log_1p(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, vec_count(ern6_board_of_directors_meeting_247)))), add(multiply(1.0, if_else(is_nan(vec_avg(ern6_actual_eps)), 0, signed_power(vec_avg(ern6_actual_eps), 0.5))), multiply(2.0, if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))), 3)",
+        "ts_mean(add(multiply(0.5, s_log_1p(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, vec_count(ern6_board_of_directors_meeting_247)))), add(multiply(1.0, if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, signed_power(vec_avg(ern6_actual_eps_274), 0.5))), multiply(2.0, if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))), 3)"
+    ]
+}

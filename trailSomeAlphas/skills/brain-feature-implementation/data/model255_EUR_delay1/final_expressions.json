@@ -1,0 +1,18 @@
+[
+    "(mdl255_accounts_payable_score + mdl255_accounts_rec_score + mdl255_inventory_score) / 3",
+    "(mdl255_holt_debt_score + mdl255_other_liabilities_score + mdl255_accounts_payable_score) / 3",
+    "(mdl255_special_items_score + mdl255_accrued_expenses_score + mdl255_revenue_recognition_score + mdl255_deferred_rev_score) / 4",
+    "abs(mdl255_cash_flow_score - mdl255_balance_sheet_recognition_score) + abs(mdl255_revenue_recognition_score - mdl255_deferred_rev_score)",
+    "abs(mdl255_special_items_score - mdl255_overall_score) + abs(mdl255_accrued_expenses_score - mdl255_overall_score)",
+    "if_else(mdl255_management_incentive_score < 0, ts_delta(mdl255_overall_score, 5), 0)",
+    "quantile(mdl255_cacfroi50co2e, driver=\"uniform\")",
+    "ts_delta((mdl255_cacfroi50co2e - mdl255_cacfroi5co2e), 20)",
+    "ts_delta(mdl255_overall_score, 5)",
+    "ts_std_dev(mdl255_overall_score, 20) / abs(ts_mean(mdl255_overall_score, 20))",
+    "ts_sum((mdl255_cacfroi275co2e - mdl255_cacfroi5co2e), 60)",
+    "ts_sum(if_else(ts_delta(mdl255_overall_score, 1) < 0, 1, 0), 20)",
+    "mdl255_balance_sheet_recognition_score / mdl255_cash_flow_score",
+    "mdl255_cacfroi50co2e * (mdl255_cash_flow_score / 5) * (mdl255_payment_sustainability_score / 5)",
+    "mdl255_cacfroi50co2e * (mdl255_overall_score + mdl255_cash_flow_score) / 2",
+    "mdl255_overall_score - mdl255_intangible_exposure_score"
+]

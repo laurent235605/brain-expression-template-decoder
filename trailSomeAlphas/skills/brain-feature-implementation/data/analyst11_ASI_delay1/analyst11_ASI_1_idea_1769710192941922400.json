@@ -1,0 +1,31 @@
+{
+    "template": "{positive_corr_score} / {composite_score}",
+    "idea": "**Concept**: Core ESG Financial Alignment\n- **Sample Fields Used**: positive_corr_score, composite_score\n- **Definition**: Ratio of positive-correlation-weighted score to overall composite score\n- **Why This Feature**: Distills ESG performance to its financially essential core - what actually matters for returns\n- **Logical Meaning**: Measures proportion of ESG value that is financially material and positively correlated\n- **Directionality**: Higher = greater proportion of ESG value is financially essential\n- **Boundary Conditions**: 1 = all ESG value is financially essential; 0 = none is financially essential",
+    "expression_list": [
+        "community_positive_corr_score / community_pillar_composite_score",
+        "community_positive_corr_score / environmental_pillar_composite_score",
+        "community_positive_corr_score / governance_pillar_composite_score",
+        "community_positive_corr_score / social_pillar_composite_score",
+        "community_positive_corr_score / workforce_pillar_composite_score",
+        "environmental_positive_corr_score / environmental_pillar_composite_score",
+        "environmental_positive_corr_score / community_pillar_composite_score",
+        "environmental_positive_corr_score / governance_pillar_composite_score",
+        "environmental_positive_corr_score / social_pillar_composite_score",
+        "environmental_positive_corr_score / workforce_pillar_composite_score",
+        "governance_positive_corr_score / governance_pillar_composite_score",
+        "governance_positive_corr_score / community_pillar_composite_score",
+        "governance_positive_corr_score / environmental_pillar_composite_score",
+        "governance_positive_corr_score / social_pillar_composite_score",
+        "governance_positive_corr_score / workforce_pillar_composite_score",
+        "social_positive_corr_score / social_pillar_composite_score",
+        "social_positive_corr_score / community_pillar_composite_score",
+        "social_positive_corr_score / environmental_pillar_composite_score",
+        "social_positive_corr_score / governance_pillar_composite_score",
+        "social_positive_corr_score / workforce_pillar_composite_score",
+        "workforce_positive_corr_score / workforce_pillar_composite_score",
+        "workforce_positive_corr_score / community_pillar_composite_score",
+        "workforce_positive_corr_score / environmental_pillar_composite_score",
+        "workforce_positive_corr_score / governance_pillar_composite_score",
+        "workforce_positive_corr_score / social_pillar_composite_score"
+    ]
+}

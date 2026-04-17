@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(multiply(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), inverse(ts_std_dev(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 60))), industry)",
+    "idea": "信噪比自适应的预期修订因子。将5日预期修订动量除以其过去60日的历史波动率（使用inverse实现除法），实现波动率标准化；当近期修订幅度相对于历史常态显著放大时赋予更高权重，在历史波动剧烈期自动压缩信号强度，提升因子跨周期稳定性，最后进行行业内标准化以确保可比性。",
+    "expression_list": [
+        "group_zscore(multiply(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), inverse(ts_std_dev(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 60))), industry)",
+        "group_zscore(multiply(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), inverse(ts_std_dev(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 60))), industry)"
+    ]
+}

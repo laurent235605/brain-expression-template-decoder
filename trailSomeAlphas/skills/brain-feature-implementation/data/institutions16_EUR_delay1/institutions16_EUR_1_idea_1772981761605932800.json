@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(winsorize(ts_regression(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), ts_step(), 126, rettype=0), std=4), add(ts_std_dev(if_else(less(returns, 0), returns, 0), 21), 0.001)), industry)",
+    "idea": "先对权益资产与总资产关系进行126日时间序列回归取残差（剥离趋势性规模变化与线性漂移），再用21日下行收益标准差（仅负收益部分）替代总波动率，更精准地衡量承担单位下行风险所获的超额权益暴露，行业内zscore标准化识别真正的风险效率。",
+    "expression_list": [
+        "group_zscore(divide(winsorize(ts_regression(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), ts_step(), 126, rettype=0), std=4), add(ts_std_dev(if_else(less(returns, 0), returns, 0), 21), 0.001)), industry)"
+    ]
+}

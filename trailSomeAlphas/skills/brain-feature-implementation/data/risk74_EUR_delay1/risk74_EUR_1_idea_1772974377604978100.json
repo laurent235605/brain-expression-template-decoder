@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(ts_sum(ts_delta({hfown_pctown}, 1), 20), ts_step(), 60, rettype=2)",
+    "idea": "**资金流加速度（二阶导数）**：不同于原模版仅关注累积持仓变化的静态水平（一阶趋势），此模版关注累积资金流的变化速度（加速度）。通过对过去60日的20日累积和序列进行时序回归，提取斜率参数：正值且增大代表“买入正在加速”（动量积聚），负值代表“流出加速”或“买入衰竭”。适用于捕捉资金行为的早期趋势或反转拐点，而非跟随已经完成的持仓调整。",
+    "expression_list": [
+        "ts_regression(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), ts_step(), 60, rettype=2)"
+    ]
+}

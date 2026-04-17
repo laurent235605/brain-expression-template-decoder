@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), industry)",
+    "idea": "先对EPS预测数据进行回溯填充和截尾处理，计算5日变化率，再做行业中性化处理（group_zscore）。这样既保留了分析师预期调整的速度信息，又消除了行业间估计调整幅度的系统性差异，捕捉个股相对于同业的预期改善。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), industry)",
+        "group_zscore(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), industry)"
+    ]
+}

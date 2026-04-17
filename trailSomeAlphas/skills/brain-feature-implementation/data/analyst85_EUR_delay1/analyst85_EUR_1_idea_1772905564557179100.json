@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_delta(vec_avg({version}), 5), std=4), industry)",
+    "idea": "**行业中性相对加速度**：计算版本号平均值的5日变化后，先进行极值裁剪（4倍标准差）消除技术噪声，再以行业为分组进行Z分数标准化。该设计消除了不同行业分析师覆盖密度差异（如TMT行业更新频繁而公用事业更新缓慢）带来的系统性偏差，捕捉\"相对于同行业 peers 的信息更新紧迫性\"，避免行业配置偏差。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_delta(vec_avg(anl85_version), 5), std=4), industry)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), driver=\"gaussian\")",
+    "idea": "结合模板2的行业中性化与模板1的高斯分位数拉伸，先计算行业内标准化EPS惊喜，再对行业zscore进行高斯分位数变换，既消除行业偏差又强化极端惊喜信号的区分度。",
+    "expression_list": [
+        "quantile(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), driver=\"gaussian\")"
+    ]
+}

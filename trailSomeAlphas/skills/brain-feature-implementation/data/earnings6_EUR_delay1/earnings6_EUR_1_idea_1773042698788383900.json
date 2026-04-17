@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), add(0.001, ts_sum(ts_backfill(vec_stddev({actual_eps}), 5), 252)))",
+    "idea": "将TTM盈利累积视为收益，同时将盈利波动性(vec_stddev)的TTM累积作为风险度量，构建经波动率调整的盈利效率指标(类夏普比率)。通过惩罚高波动、低质量的盈利噪音，奖励增长稳健、可预测性强的盈利轨迹，提升因子的风险调整后区分度。",
+    "expression_list": [
+        "divide(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), add(0.001, ts_sum(ts_backfill(vec_stddev(ern6_actual_eps), 5), 252)))",
+        "divide(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), add(0.001, ts_sum(ts_backfill(vec_stddev(ern6_actual_eps_274), 5), 252)))"
+    ]
+}

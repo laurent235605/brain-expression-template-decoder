@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(signed_power(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), 0.5), industry)",
+    "idea": "非线性放大与行业中性结合：先对条件化盈余惊喜应用signed_power压缩中间区间、放大极端值，再进行行业标准化，增强头部/尾部股票的区分度。",
+    "expression_list": [
+        "group_zscore(signed_power(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 0.5), industry)",
+        "group_zscore(signed_power(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 0.5), industry)"
+    ]
+}

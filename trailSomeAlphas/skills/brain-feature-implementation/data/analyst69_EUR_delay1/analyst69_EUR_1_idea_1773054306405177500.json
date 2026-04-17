@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_std_dev(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 60)), std=4), 252)",
+    "idea": "构建经波动率调整的修订冲击信号（类似t统计量）。将原始5日修订幅度除以其过去60日的滚动标准差，标准化处理使得不同波动特征的股票可比；高值代表统计意义上显著的异常修订事件，再通过252日时序排名识别历史极端水平，避免单纯因高波动 genre 造成的假信号。",
+    "expression_list": [
+        "ts_rank(winsorize(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_std_dev(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 60)), std=4), 252)",
+        "ts_rank(winsorize(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_std_dev(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 60)), std=4), 252)"
+    ]
+}

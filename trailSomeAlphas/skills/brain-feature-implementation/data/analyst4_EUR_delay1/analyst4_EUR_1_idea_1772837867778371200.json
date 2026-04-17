@@ -1,0 +1,18 @@
+{
+    "template": "ts_delta({std}, 10) / ts_delay({std}, 10)",
+    "idea": "**Concept**: Disagreement Expansion/Contraction\n- **Sample Fields Used**: {std}, {standard_deviation}\n- **Definition**: Change in analyst standard deviation, measuring whether uncertainty is increasing (diverging opinions) or decreasing (convergence)\n- **Why This Feature**: Expanding disagreement often precedes volatility spikes and earnings events; contracting disagreement suggests information resolution and potential return to normal volatility\n- **Logical Meaning**: Second derivative of information flow - acceleration or deceleration of uncertainty\n- **is filling nan necessary**: Yes, backfill required as std changes only when new estimates arrive\n- **Directionality**: Positive ts_delta indicates emerging controversy or uncertainty; negative indicates analysts converging on consensus\n- **Boundary Conditions**: Rapid expansion suggests upcoming binary event; rapid contraction suggests earnings resolution or guidance clarity",
+    "expression_list": [
+        "ts_delta(anl4_adz_ebit_std, 10) / ts_delay(anl4_adz_ebit_std, 10)",
+        "ts_delta(anl4_adz_netprofit_std, 10) / ts_delay(anl4_adz_netprofit_std, 10)",
+        "ts_delta(anl4_af_div_std, 10) / ts_delay(anl4_af_div_std, 10)",
+        "ts_delta(anl4_sadaf_capex_std, 10) / ts_delay(anl4_sadaf_capex_std, 10)",
+        "ts_delta(anl4_sadaf_ebit_std, 10) / ts_delay(anl4_sadaf_ebit_std, 10)",
+        "ts_delta(anl4_sadaf_ebitda_std, 10) / ts_delay(anl4_sadaf_ebitda_std, 10)",
+        "ts_delta(anl4_sadaf_gric_std, 10) / ts_delay(anl4_sadaf_gric_std, 10)",
+        "ts_delta(anl4_sadaf_netdebt_std, 10) / ts_delay(anl4_sadaf_netdebt_std, 10)",
+        "ts_delta(anl4_sadaf_netprofit_std, 10) / ts_delay(anl4_sadaf_netprofit_std, 10)",
+        "ts_delta(anl4_sadaf_netprofita_std, 10) / ts_delay(anl4_sadaf_netprofita_std, 10)",
+        "ts_delta(anl4_sadaf_totassets_std, 10) / ts_delay(anl4_sadaf_totassets_std, 10)",
+        "ts_delta(anl4_sadaf_totgw_std, 10) / ts_delay(anl4_sadaf_totgw_std, 10)"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(and(greater(ts_rank({value_ts}, 21), 0.7), less(ts_rank({crowding}, 21), 0.3)), s_log_1p(group_zscore(add(add({factor_e}, {factor_s}), {factor_g}), industry)), 0)",
+    "idea": "**交叉增强逻辑**: 使用`and`逻辑运算符（第5步多条件）设定严格门槛：仅当价值处于近期高位（ts_rank>0.7）且拥挤度处于近期低位（ts_rank<0.3）时，才暴露于ESG信号。`s_log_1p`对ESG zscore进行对称对数压缩（第0.2步标准形态），防止极端ESG值过度主导。这是Input 1\"拥挤价值陷阱\"的完美逆向应用：寻找不拥挤的价值股票，并用ESG作为额外增强。",
+    "expression_list": [
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(rsk74_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(rsk74_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(rsk74_raw_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(rsk74_raw_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(liquidity_factor_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(liquidity_factor_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(liquidity_timeseries_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)), 0)",
+        "trade_when(and(greater(ts_rank(rsk74_value_ts, 21), 0.7), less(ts_rank(liquidity_timeseries_crowding, 21), 0.3)), s_log_1p(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)), 0)"
+    ]
+}

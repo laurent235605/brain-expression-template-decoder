@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252)), 2), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), 3), 0)",
+    "idea": "交叉应用模板1的年度Z-Score与立方变换，但通过trade_when逻辑运算符进行区间筛选：仅在波动率偏离自身历史均值超过2个标准差时才保留信号，中间温和区间视为噪音置零；构建“极端业务结构动荡/稳定事件驱动”策略，避免无效交易。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252)), 2), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), 3), 0)"
+    ]
+}

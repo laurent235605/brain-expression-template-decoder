@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 60)",
+    "idea": "时序分位透视：考察当前收益-权重偏离在其60日历史中的分位水平（ts_rank），识别\"历史极端偏离后的均值回复\"或\"趋势加速\"机会，将截面比较拓展到时序维度，符合\"相对自身历史位置\"的分析框架。",
+    "expression_list": [
+        "ts_rank(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 60)"
+    ]
+}

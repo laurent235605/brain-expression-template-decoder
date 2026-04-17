@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater(vec_avg({stock_split_ratio_243}), 1.0), 1.0, trade_when( less(vec_avg({stock_split_ratio_243}), 1.0), -1.0, 0 ) )",
+    "idea": "将模板2的阈值条件逻辑（trade_when）迁移到模板1的分拆比率数据，构建方向性信号：显式区分正向分拆（>1，多头信号）、反向分拆（<1，空头信号）与无事件（0），避免NaN值干扰，实现清晰的离散化资本结构事件交易逻辑。",
+    "expression_list": [
+        "trade_when( greater(vec_avg(ern6_stock_split_ratio_243), 1.0), 1.0, trade_when( less(vec_avg(ern6_stock_split_ratio_243), 1.0), -1.0, 0 ) )"
+    ]
+}

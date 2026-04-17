@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(vec_avg({likelihood_score}), std=4), winsorize(vec_avg({exit_price}) / vec_avg({openprice}), std=4), 60, rettype=0)",
+    "idea": "特质性分析师信心残差：将 likelihood 对价格收益率做时序回归，提取残差项（rettype=0）。剥离市场/行业收益解释后的 likelihood 代表分析师的纯主观 alpha 观点，不受价格趋势干扰的独立信息。",
+    "expression_list": [
+        "ts_regression(winsorize(vec_avg(success_likelihood_score), std=4), winsorize(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), std=4), 60, rettype=0)"
+    ]
+}

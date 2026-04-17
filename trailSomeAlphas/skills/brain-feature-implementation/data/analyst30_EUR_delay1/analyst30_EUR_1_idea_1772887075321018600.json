@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum({unadjustedgrossamt})",
+    "idea": "**Concept**: Cumulative Nominal Dividend Liability\n- **Sample Fields Used**: `unadjustedgrossamt`\n- **Definition**: Sum of unadjusted dividend amounts representing total declared obligations before adjustments\n- **Why This Feature**: Measures the raw cash commitment from corporate treasury perspective; useful for liquidity analysis\n- **Logical Meaning**: Total nominal liability of the company for dividend payments prior to capital structure adjustments\n- **is filling nan necessary**: Similar to adjusted amounts; NaNs should be treated as 0 for liability accumulation or backfilled if analyzing continuous obligations\n- **Directionality**: Higher values indicate heavy dividend obligations; lower values indicate conservative payout policies\n- **Boundary Conditions**: >= 0; 0 indicates no declared dividends",
+    "expression_list": [
+        "vec_sum(anl30_unadjustedgrossamt)"
+    ]
+}

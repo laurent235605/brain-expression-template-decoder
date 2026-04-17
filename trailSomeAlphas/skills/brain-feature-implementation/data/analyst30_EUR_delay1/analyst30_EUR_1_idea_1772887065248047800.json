@@ -1,0 +1,8 @@
+{
+    "template": "divide(vec_percentage({adjustedgrossamt}, percentage=0.5), vec_max({adjustedgrossamt}))",
+    "idea": "**Concept**: Dividend Median Relative Position\n- **Sample Fields Used**: `adjustedgrossamt`\n- **Definition**: Ratio of median dividend amount to maximum amount within the vector\n- **Why This Feature**: Measures how close typical dividends are to peak dividends; distinguishes between regular sustainable payouts and occasional special dividends\n- **Logical Meaning**: Relative positioning of median payout within the observed range; indicates special dividend contribution\n- **is filling nan necessary**: Percentile calculations require clean data; filter NaNs using `vec_filter` before computing median to avoid bias toward zero\n- **Directionality**: 0.5 indicates symmetric distribution; <0.5 indicates positive skew (occasional large specials); >0.5 indicates negative skew\n- **Boundary Conditions**: 0 to 1; 1 indicates flat dividend (all same); near 0 indicates highly skewed with occasional massive payouts",
+    "expression_list": [
+        "divide(vec_percentage(anl30_adjustedgrossamt, percentage=0.5), vec_max(anl30_adjustedgrossamt))",
+        "divide(vec_percentage(anl30_unadjustedgrossamt, percentage=0.5), vec_max(anl30_unadjustedgrossamt))"
+    ]
+}

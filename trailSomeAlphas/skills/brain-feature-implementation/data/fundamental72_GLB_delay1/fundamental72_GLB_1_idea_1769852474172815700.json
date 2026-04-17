@@ -1,0 +1,14 @@
+{
+    "template": "quantile(divide(vec_avg({comprehensive_income}), vec_avg({net_inc_avail_com_shrhldrs})), driver=\"gaussian\", sigma=1.0)",
+    "idea": "**Concept**: Comprehensive Income Gaussian Rank\n- **Sample Fields Used**: comprehensive_income, net_inc_avail_com_shrhldrs\n- **Definition**: Cross-sectional Gaussian quantile of the ratio of comprehensive income to net income\n- **Why This Feature**: Relative positioning within universe identifies outliers in earnings quality; extreme ranks indicate unusual comprehensive income components\n- **Logical Meaning**: Relative comparison of total economic income versus reported net income across peers\n- **is filling nan necessary**: Missing comprehensive income should be excluded from ranking rather than filled\n- **Directionality**: Extreme positive ranks indicate significant OCI gains; extreme negative indicate OCI losses\n- **Boundary Conditions**: Values beyond 2 sigma indicate material divergence from typical earnings composition",
+    "expression_list": [
+        "quantile(divide(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)",
+        "quantile(divide(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs)), driver=\"gaussian\", sigma=1.0)"
+    ]
+}

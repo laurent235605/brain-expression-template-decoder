@@ -1,0 +1,7 @@
+{
+    "template": "zscore(subtract(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 5), ts_mean(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20), 60)))",
+    "idea": "构建分歧度修订的期限结构动量，计算短期(5日)分歧度变化速度与长期(20日移动平均的60日均值)的差值。当短期显著高于长期时，表明不确定性正在加速发酵；反之则表明分歧收敛速度超预期，用于捕捉不确定性变化的二阶导(加速度)信号。",
+    "expression_list": [
+        "zscore(subtract(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 5), ts_mean(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20), 60)))"
+    ]
+}

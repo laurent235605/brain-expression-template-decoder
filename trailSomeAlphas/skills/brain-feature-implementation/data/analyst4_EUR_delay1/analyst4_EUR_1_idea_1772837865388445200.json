@@ -1,0 +1,18 @@
+{
+    "template": "rank({std}) / count({std})",
+    "idea": "**Concept**: Dispersion Rank Stability\n- **Sample Fields Used**: {std}, {number}\n- **Definition**: Rank of stock's analyst disagreement relative to universe, and stability of that rank over time\n- **Why This Feature**: Identifies stocks moving from low-disagreement to high-disagreement regimes (controversy emergence) or vice versa (information resolution); relative disagreement more predictive than absolute\n- **Logical Meaning**: Controversy lifecycle position - entering or exiting the \"hard to predict\" category\n- **is filling nan necessary**: Yes, backfill for rank calculation stability\n- **Directionality**: Rising rank indicates becoming more controversial than peers; falling rank indicates convergence to consensus; high stable rank indicates permanently controversial\n- **Boundary Conditions**: Top decile indicates highest uncertainty stocks; bottom decile indicates consensus blue chips; rapid rank changes indicate regime shifts",
+    "expression_list": [
+        "rank(anl4_adz_ebit_std) / count(anl4_adz_ebit_std)",
+        "rank(anl4_adz_netprofit_std) / count(anl4_adz_netprofit_std)",
+        "rank(anl4_af_div_std) / count(anl4_af_div_std)",
+        "rank(anl4_sadaf_capex_std) / count(anl4_sadaf_capex_std)",
+        "rank(anl4_sadaf_ebit_std) / count(anl4_sadaf_ebit_std)",
+        "rank(anl4_sadaf_ebitda_std) / count(anl4_sadaf_ebitda_std)",
+        "rank(anl4_sadaf_gric_std) / count(anl4_sadaf_gric_std)",
+        "rank(anl4_sadaf_netdebt_std) / count(anl4_sadaf_netdebt_std)",
+        "rank(anl4_sadaf_netprofit_std) / count(anl4_sadaf_netprofit_std)",
+        "rank(anl4_sadaf_netprofita_std) / count(anl4_sadaf_netprofita_std)",
+        "rank(anl4_sadaf_totassets_std) / count(anl4_sadaf_totassets_std)",
+        "rank(anl4_sadaf_totgw_std) / count(anl4_sadaf_totgw_std)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(trade_when(greater(rank(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 0.5), ts_regression(rank(winsorize(ts_backfill({exp_usa}, 63), std=4)), add(group_mean(rank(winsorize(ts_backfill({exp_usa}, 63), std=4)), log(ts_mean(cap, 21)), sector), rank(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4))), 126, rettype=0), 0), sector)",
+    "idea": "采用秩次回归（rank-based regression）提升稳健性，并引入交易条件（trade_when）仅当非本土敞口显著（高于中位数）时才开仓，结合更快的回归窗口（126日）捕捉近期动态，最终进行板块多空平衡（group_normalize）。",
+    "expression_list": [
+        "group_normalize(trade_when(greater(rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 0.5), ts_regression(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4)), add(group_mean(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4)), log(ts_mean(cap, 21)), sector), rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4))), 126, rettype=0), 0), sector)",
+        "group_normalize(trade_when(greater(rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 0.5), ts_regression(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4)), add(group_mean(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4)), log(ts_mean(cap, 21)), sector), rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4))), 126, rettype=0), 0), sector)"
+    ]
+}

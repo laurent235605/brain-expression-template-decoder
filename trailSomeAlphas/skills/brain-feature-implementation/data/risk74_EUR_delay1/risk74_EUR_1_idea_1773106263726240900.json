@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(subtract(ts_sum(ts_delta(ts_backfill({hfown_pctown}, 63), 1), 20), ts_sum(ts_delta(ts_backfill({fund_pct_ownership_encr}, 63), 1), 20)), std=3), 10), sector), 0.5)",
+    "idea": "融合模板1的机构流背离逻辑与模板2的数据预处理及非线性压缩技术：首先对两类持仓数据均进行63日回溯填充处理历史缺失，计算20日累计净流入差值后截尾异常值，采用10日线性衰减加权（平衡灵敏度与稳定性），行业标准化后使用0.5次幂符号函数压缩中段噪音、放大极端背离信号，专注于捕捉显著的聪明钱与散户跟随者行为分化。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(subtract(ts_sum(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), 20), ts_sum(ts_delta(ts_backfill(hedge_fund_pct_ownership_encr, 63), 1), 20)), std=3), 10), sector), 0.5)"
+    ]
+}

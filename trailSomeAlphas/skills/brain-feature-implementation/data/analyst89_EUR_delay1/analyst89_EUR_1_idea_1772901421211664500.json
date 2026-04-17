@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(rank(winsorize(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), std=4)), 0.05), -1, NaN)",
+    "idea": "仅针对数据丰富度位于全市场底部5%的股票（左尾极端）生成空头信号（-1），其余标记为NaN不参与交易。利用rank和trade_when构建极端稀疏数据警示器，专门捕捉因历史数据极度匮乏导致的统计不可信、流动性风险与估值模型失效风险。",
+    "expression_list": [
+        "trade_when(less(rank(winsorize(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), std=4)), 0.05), -1, NaN)"
+    ]
+}

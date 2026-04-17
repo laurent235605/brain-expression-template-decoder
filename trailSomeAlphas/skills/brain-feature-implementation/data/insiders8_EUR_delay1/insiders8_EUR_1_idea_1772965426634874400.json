@@ -1,0 +1,10 @@
+{
+    "template": "ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)",
+    "idea": "**Concept**: Ownership Structure Inertia\n- **Sample Fields Used**: of_owners_decile_rank_long, owners_decile_rank_long\n- **Definition**: Correlation between effective and total owners decile ranks over time, measuring whether concentration changes are driven by entry/exit of small holders vs large holders\n- **Why This Feature**: Stable correlation suggests coordinated movement of all holder types; breakdown suggests divergence between smart money and crowd behavior\n- **is filling nan necessary**: Decile ranks should always be populated (1-10) if data exists; NaN likely means insufficient data for ranking. Use ts_backfill for short gaps only if holding patterns are persistent.\n- **Directionality**: High stability indicates consistent ownership structure; low stability indicates shifting holder composition (e.g., institutional exit and retail entry)\n- **Boundary Conditions**: Perfect stability (1.0) suggests static shareholder base; rapid changes suggest M&A or index reconstitution events",
+    "expression_list": [
+        "ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)",
+        "ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)",
+        "ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)",
+        "ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)"
+    ]
+}

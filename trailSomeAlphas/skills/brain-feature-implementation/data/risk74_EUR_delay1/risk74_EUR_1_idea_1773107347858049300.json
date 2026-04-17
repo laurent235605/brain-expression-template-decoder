@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(ts_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), 120), 1), greater(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), 1)), multiply(ts_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), 120), group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector)), 0)",
+    "idea": "双重极端条件触发机制：仅当流偏离度同时满足（1）自身120日历史zscore大于1（历史高位）且（2）当日行业内zscore大于1（行业前~16%）时开仓；信号强度为历史zscore与行业zscore的乘积；不满足条件时强制归零（trade_when）。此逻辑确保只捕捉持续性强、行业共识度高的结构性机构博弈，避免中等偏离区间的假信号。",
+    "expression_list": [
+        "trade_when(and(greater(ts_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), 120), 1), greater(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 1)), multiply(ts_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), 120), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector)), 0)"
+    ]
+}

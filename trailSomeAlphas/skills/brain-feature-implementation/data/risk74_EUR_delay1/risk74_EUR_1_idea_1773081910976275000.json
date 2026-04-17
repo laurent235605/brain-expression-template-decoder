@@ -1,0 +1,16 @@
+{
+    "template": "multiply(group_zscore({concentration},industry), ts_decay_linear(group_zscore({nondomicile},industry), 20))",
+    "idea": "时序稳定性增强版：当前行业相对集中度乘以过去20日线性衰减加权的历史境外收入暴露均值。该结构惩罚那些当前高度集中且长期维持高海外敞口的公司（结构性风险），而对短期波动导致的暂时性高集中度赋予较低权重，区分临时性汇率对冲行为与根深蒂固的地理集中风险。",
+    "expression_list": [
+        "multiply(group_zscore(rsk74_concentration,industry), ts_decay_linear(group_zscore(rsk74_nondomicile,industry), 20))",
+        "multiply(group_zscore(rsk74_concentration,industry), ts_decay_linear(group_zscore(rsk74_raw_exp_nondomicile1,industry), 20))",
+        "multiply(group_zscore(rsk74_concentration,industry), ts_decay_linear(group_zscore(rsk74_raw_exp_nondomicile2,industry), 20))",
+        "multiply(group_zscore(rsk74_concentration,industry), ts_decay_linear(group_zscore(rsk74_std_exp_nondomicile1,industry), 20))",
+        "multiply(group_zscore(rsk74_concentration,industry), ts_decay_linear(group_zscore(rsk74_std_exp_nondomicile2,industry), 20))",
+        "multiply(group_zscore(rsk74_raw_concentration,industry), ts_decay_linear(group_zscore(rsk74_raw_exp_nondomicile1,industry), 20))",
+        "multiply(group_zscore(rsk74_raw_concentration,industry), ts_decay_linear(group_zscore(rsk74_raw_exp_nondomicile2,industry), 20))",
+        "multiply(group_zscore(rsk74_raw_concentration,industry), ts_decay_linear(group_zscore(rsk74_nondomicile,industry), 20))",
+        "multiply(group_zscore(rsk74_raw_concentration,industry), ts_decay_linear(group_zscore(rsk74_std_exp_nondomicile1,industry), 20))",
+        "multiply(group_zscore(rsk74_raw_concentration,industry), ts_decay_linear(group_zscore(rsk74_std_exp_nondomicile2,industry), 20))"
+    ]
+}

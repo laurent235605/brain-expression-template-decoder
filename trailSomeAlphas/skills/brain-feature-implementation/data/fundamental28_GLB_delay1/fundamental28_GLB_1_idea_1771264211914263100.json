@@ -1,0 +1,8 @@
+{
+    "template": "subtract(trade_when(greater(group_rank(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), industry), 0.8), 1, 0), trade_when(less(group_rank(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), industry), 0.2), 1, 0))",
+    "idea": "行业内极端分位离散化多空策略。将公司运营动量转换为行业内分位数排名，通过硬阈值逻辑仅保留极端信号：当处于行业前20%（top quintile）时开多仓（赋值+1），处于行业后20%（bottom quintile）时开空仓（赋值-1），中间60%分位视为噪音区间强制赋0。这种分段处理避免了对微小运营波动的过度交易，聚焦于统计显著的运营拐点，且天然实现行业中性多空平衡。",
+    "expression_list": [
+        "subtract(trade_when(greater(group_rank(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), 0.8), 1, 0), trade_when(less(group_rank(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), 0.2), 1, 0))",
+        "subtract(trade_when(greater(group_rank(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), 0.8), 1, 0), trade_when(less(group_rank(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), 0.2), 1, 0))"
+    ]
+}

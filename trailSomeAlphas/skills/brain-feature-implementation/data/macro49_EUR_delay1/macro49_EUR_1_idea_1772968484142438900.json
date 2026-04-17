@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 60), add(0.0001, ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 60))), 5)",
+    "idea": "**流动性加速度(动量)检测**: 不关注绝对水平，而是关注Z-Score的变化速度(ts_delta)。使用60天窗口计算短期Z-Score，并计算其5日变化率。正值表示流动性压力正在加速累积(可能预示即将发生的价格失衡)，负值表示流动性状况正在快速缓解；相比原始水平指标，对突发流动性危机具有更高的预警灵敏度。",
+    "expression_list": [
+        "ts_delta(divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 60), add(0.0001, ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 60))), 5)"
+    ]
+}

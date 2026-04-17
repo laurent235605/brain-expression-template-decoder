@@ -1,0 +1,10 @@
+{
+    "template": "{crowding} * ({value_ts} - ts_mean({value_ts}, 60))",
+    "idea": "拥挤度与价值动量的交互：将input1的时序偏离逻辑迁移至input2的价值因子，识别价值因子正在经历趋势变化且伴随拥挤度的股票，捕捉价值陷阱形成初期的动态过程。",
+    "expression_list": [
+        "liquidity_factor_crowding * (rsk74_value_ts - ts_mean(rsk74_value_ts, 60))",
+        "liquidity_timeseries_crowding * (rsk74_value_ts - ts_mean(rsk74_value_ts, 60))",
+        "rsk74_crowding * (rsk74_value_ts - ts_mean(rsk74_value_ts, 60))",
+        "rsk74_raw_crowding * (rsk74_value_ts - ts_mean(rsk74_value_ts, 60))"
+    ]
+}

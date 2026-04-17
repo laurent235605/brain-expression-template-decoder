@@ -1,0 +1,14 @@
+{
+    "template": "trade_when( greater( {concentration} - ts_mean({concentration}, 60), 0 ), {crowding} * {value_ts}, 0 )",
+    "idea": "条件式价值陷阱过滤：仅在地理集中度呈上升趋势（高于60日均线，即风险积聚期）时启用'拥挤价值陷阱'信号，其余情况置零。逻辑在于：公司地理分散化转型期（集中度下降）的因子拥挤信号可能是噪音，而集中化时期的拥挤才真正危险。",
+    "expression_list": [
+        "trade_when( greater( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ), rsk74_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ), rsk74_raw_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ), liquidity_factor_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ), liquidity_timeseries_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ), rsk74_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ), rsk74_raw_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ), liquidity_factor_crowding * rsk74_value_ts, 0 )",
+        "trade_when( greater( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ), liquidity_timeseries_crowding * rsk74_value_ts, 0 )"
+    ]
+}

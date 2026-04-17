@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(ts_rank(group_zscore(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),252),0.9),less(ts_rank(group_zscore(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),252),0.1)),signed_power(group_zscore(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),1.5),0)",
+    "idea": "行业中性化后的历史极端分位捕捉：先将持仓流强度在行业内部标准化（group_zscore），再通过252日时间序列排名（ts_rank）筛选出处于历史极端分位（前10%或后10%）的标的，最后使用signed_power放大尾部信号（y=1.5），仅在统计显著且历史罕见的时刻下注，避免在平庸区间过度交易。",
+    "expression_list": [
+        "trade_when(or(greater(ts_rank(group_zscore(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),industry),252),0.9),less(ts_rank(group_zscore(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),industry),252),0.1)),signed_power(group_zscore(winsorize(divide(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),add(ts_std_dev(ts_delta(rsk74_hfown_pctown,1),60),0.0001)),std=4),industry),1.5),0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize(vec_avg({elta_value}),std=4),industry), sign(winsorize(vec_ir({aily_delta_recon_value}),std=4))), 5)",
+    "idea": "信息比率修正方向：使用向量的信息比率（vec_ir，均值/标准差）替代简单均值来衡量修正力度，识别那些不仅方向一致且持续性高（信噪比高）的修正信号。与行业标准化预期水平相乘，捕捉高置信度修正与预期水平的交互，过滤掉波动大、持续性差的噪音修正。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(vec_avg(ern10_elta_value),std=4),industry), sign(winsorize(vec_ir(ern10_aily_delta_recon_value),std=4))), 5)"
+    ]
+}

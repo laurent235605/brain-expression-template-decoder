@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_sum(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 1), 63), industry)",
+    "idea": "算子迁移创新：将模板2的“累积动量”逻辑(差分后求和)迁移应用于模板1的稳定性指标。计算行业内个股报告日期变更频率的63日累积变化(ts_sum of ts_delta)，通过group_zscore实现行业中性化。该指标捕捉“稳定性恶化”(日期频繁变更)或“稳定性改善”趋势，作为传统盈利修正因子的补充风险预警维度。",
+    "expression_list": [
+        "group_zscore(ts_sum(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 1), 63), industry)",
+        "group_zscore(ts_sum(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 1), 63), industry)"
+    ]
+}

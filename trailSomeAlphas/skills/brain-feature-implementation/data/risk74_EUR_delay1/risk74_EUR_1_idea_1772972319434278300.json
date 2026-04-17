@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_normalize(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), bucket(rank(log(ts_mean(cap, 21))), range=\"0,1,0.1\")), divide(1, add(1, ts_std_dev(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 63))))",
+    "idea": "在行业中性的基础上，通过分位数分桶（bucket）实现市值分层中性（size neutrality），剥离大小盘风格漂移；同时引入敞口价差的历史波动率倒数作为稳定性权重，惩罚那些中美敞口关系波动剧烈的“噪音”公司，增强信号的稳健性与可持续性。",
+    "expression_list": [
+        "multiply(group_normalize(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), bucket(rank(log(ts_mean(cap, 21))), range=\"0,1,0.1\")), divide(1, add(1, ts_std_dev(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 63))))"
+    ]
+}

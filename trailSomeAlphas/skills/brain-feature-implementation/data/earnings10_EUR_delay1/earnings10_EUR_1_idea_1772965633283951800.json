@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({elta_value}) * sign(vec_avg({aily_delta_recon_value}))",
+    "idea": "**Concept**: Revision Direction-Estimate Level Interaction\n- **Sample Fields Used**: `{elta_value}`, `{aily_delta_recon_value}`\n- **Definition**: Product of estimate level and sign of revision\n- **Why This Feature**: Captures whether high expectations are being revised up (momentum acceleration) or low expectations revised down (value trap formation). Positive values when high estimates upgrade; negative when low estimates downgrade.\n- **is filling nan necessary**: Sign operator handles NaN by returning NaN; ensure vec_avg outputs are valid before multiplication.\n- **Directionality**: Positive values indicate optimism begetting optimism; negative values indicate pessimism begetting pessimism; crossing zero indicates inflection\n- **Boundary Conditions**: Extreme positive suggests bubble dynamics; extreme negative suggests capitulation",
+    "expression_list": [
+        "vec_avg(ern10_elta_value) * sign(vec_avg(ern10_aily_delta_recon_value))"
+    ]
+}

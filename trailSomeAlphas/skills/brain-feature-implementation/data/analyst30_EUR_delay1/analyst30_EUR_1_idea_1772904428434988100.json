@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(group_rank(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), sector), 0.85), less(days_from_last_change(vec_range(vec_filter({fiscalyearend}, value=\"nan\"))), 30)), signed_power(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.2), 0)",
+    "idea": "事件驱动重构捕捉：仅当会计复杂度处于行业前15%且近期30天内刚发生结构变化（新增/剥离子公司导致财年分散度突变）时建仓，使用较低幂次(1.2)温和放大，专门捕捉M&A重组后的会计整合风险窗口期。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 0.85), less(days_from_last_change(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\"))), 30)), signed_power(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.2), 0)"
+    ]
+}

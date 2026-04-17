@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(if_else(is_nan(vec_norm({aily_delta_recon_value})), 0, vec_norm({aily_delta_recon_value})), 20)",
+    "idea": "使用L1范数（vec_norm，各元素绝对值之和）替代平方均值，对极端异常值更稳健，结合指数衰减加权（ts_decay_exp_window），更重视近期修正能量，降低历史远期的影响，形成平滑的不确定性趋势指标。缺失值以0填充。",
+    "expression_list": [
+        "ts_decay_exp_window(if_else(is_nan(vec_norm(ern10_aily_delta_recon_value)), 0, vec_norm(ern10_aily_delta_recon_value)), 20)"
+    ]
+}

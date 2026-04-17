@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(vec_avg({likelihood_score}))), 1.5), rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 0)",
+    "idea": "双边极端置信捕捉：将模板1的单边阈值扩展为双边绝对值判断(|zscore|>1.5)，仅在高信心或极低信心区间激活交易，对有效信号进行截面排名分位转换，实现极端情绪下的多空双向增强。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(vec_avg(success_likelihood_score))), 1.5), rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 0)"
+    ]
+}

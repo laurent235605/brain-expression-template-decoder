@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({investment}) / (vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp}) + 1)",
+    "idea": "**Concept**: Latency-Adjusted Investment Efficiency\n- **Sample Fields Used**: investment, opentimestamp, loadedidstimestamp\n- **Definition**: Average investment scaled by inverse of operational latency (investment per unit time delay)\n- **Why This Feature**: Evaluates if large investments receive prioritized (faster) processing; low values indicate large positions suffering delays\n- **Logical Meaning**: Throughput efficiency of the investment process\n- **is filling nan necessary**: Filter entries with missing timestamps or investment values\n- **Directionality**: Higher values indicate efficient processing of large positions; near-zero indicates delays dominate\n- **Boundary Conditions**: Undefined at zero latency; high positive values when large investment meets low latency",
+    "expression_list": [
+        "vec_avg(mdl209_investment) / (vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp) + 1)"
+    ]
+}

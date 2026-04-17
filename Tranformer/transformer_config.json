@@ -1,0 +1,7 @@
+{
+  "LLM_model_name": "kimi-k2.5",
+  "LLM_API_KEY": "sk-xxxxxxx",
+  "llm_base_url": "https://api.moonshot.cn/v1",
+  "username": "xxxxx@xxx.com",
+  "password": "xxxxxxxx"
+}

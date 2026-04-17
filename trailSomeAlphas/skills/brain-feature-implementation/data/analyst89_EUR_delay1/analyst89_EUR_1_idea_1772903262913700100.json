@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(ts_skewness(vec_avg({data_item_value}), 63), 20), 5)",
+    "idea": "偏度动量与指数衰减平滑：监测63日窗口偏度的20日变化率（delta），捕捉分布不对称性的短期演化趋势（偏度动量），配合5日线性衰减平滑降低日间噪音，适用于识别盈利分布从对称向偏态转换的动量效应。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(ts_skewness(vec_avg(anl89_data_item_value), 63), 20), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "hump(if_else(greater(ts_rank(winsorize(vec_avg({aily_delta_recon_value}), std=4), 63), 0.8), multiply(multiply(ts_zscore(winsorize(vec_avg({elta_value}), std=4), 63), sign(winsorize(vec_avg({aily_delta_recon_value}), std=4))), 1.5), if_else(less(ts_rank(winsorize(vec_avg({aily_delta_recon_value}), std=4), 63), 0.2), multiply(multiply(ts_zscore(winsorize(vec_avg({elta_value}), std=4), 63), sign(winsorize(vec_avg({aily_delta_recon_value}), std=4))), 1.5), multiply(multiply(ts_zscore(winsorize(vec_avg({elta_value}), std=4), 63), sign(winsorize(vec_avg({aily_delta_recon_value}), std=4))), 0.5))), hump=0.01)",
+    "idea": "引入时序维度，通过63日历史分位数（ts_rank）识别极端修正事件（前20%强升级或后20%强降级），对极端事件给予1.5倍权重，对普通修正给予0.5倍权重以抑制噪音；结合预期水平的时序Z分数（ts_zscore）和修正方向，最后使用hump算子控制日度权重变化幅度，平衡信号及时性与交易成本。",
+    "expression_list": [
+        "hump(if_else(greater(ts_rank(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 63), 0.8), multiply(multiply(ts_zscore(winsorize(vec_avg(ern10_elta_value), std=4), 63), sign(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4))), 1.5), if_else(less(ts_rank(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 63), 0.2), multiply(multiply(ts_zscore(winsorize(vec_avg(ern10_elta_value), std=4), 63), sign(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4))), 1.5), multiply(multiply(ts_zscore(winsorize(vec_avg(ern10_elta_value), std=4), 63), sign(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4))), 0.5))), hump=0.01)"
+    ]
+}

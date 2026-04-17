@@ -1,0 +1,16 @@
+{
+    "template": "quantile( winsorize(ts_backfill({concentration},63),std=4) * winsorize(ts_backfill(if_else(is_nan({nondomicile}),0,{nondomicile}),63),std=4), driver=\"gaussian\" )",
+    "idea": "极值分位数变换的地理风险因子：将原始乘积通过 Gaussian 分位数映射（quantile）进行分布拉伸，使中间值压缩在0附近，极端高值（高集中度+高海外暴露）被显著放大，增强尾部风险识别能力，适用于极端风险厌恶策略。",
+    "expression_list": [
+        "quantile( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),std=4), driver=\"gaussian\" )",
+        "quantile( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),std=4), driver=\"gaussian\" )"
+    ]
+}

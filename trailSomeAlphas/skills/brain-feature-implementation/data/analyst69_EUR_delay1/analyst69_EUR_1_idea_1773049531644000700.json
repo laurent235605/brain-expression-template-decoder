@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_delta(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), 20), 252)",
+    "idea": "对模板1的高斯分位数结果进行二次时序差分（ts_delta）和Z-score标准化，检测盈利修正分位数的加速度（动量变化），识别情绪从常态向极端快速切换的拐点。",
+    "expression_list": [
+        "ts_zscore(ts_delta(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), 20), 252)",
+        "ts_zscore(ts_delta(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), 20), 252)"
+    ]
+}

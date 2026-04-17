@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), 30), 252)), 2), reverse(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), 30), 252)), 0), 5)",
+    "idea": "采用更稳健的30日平滑与4倍标准差缩尾，计算252日时序Z-score以识别极端偏离；仅在绝对值大于2个标准差的极端区域建立反向头寸（高稳定性做空、低稳定性做多，假设极端稳定后易出现日期修正），其余区间零暴露；最后通过5日线性衰减函数平滑权重变化，显著降低换手率，避免频繁调仓带来的交易成本。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), 30), 252)), 2), reverse(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), 30), 252)), 0), 5)",
+        "ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), 30), 252)), 2), reverse(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), 30), 252)), 0), 5)"
+    ]
+}

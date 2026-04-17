@@ -1,0 +1,8 @@
+{
+    "template": "multiply(bucket(group_rank({value_ts}, industry), \"0,1,0.2\"), ts_std_dev(add(add({factor_e}, {factor_s}), {factor_g}), 252))",
+    "idea": "**交叉增强逻辑**: 将价值因子分桶（第2.3步两端信号，`bucket`取前20%等分位），与ESG三因子在过去252天的标准差（时序波动）相乘。高ESG波动（内部不一致）配合极端价值分位（极高或极低），识别处于转型期或争议期的股票。这是将Input 2的\"成分不平衡\"概念扩展到时间维度，并与Input 1的价值极端值结合。",
+    "expression_list": [
+        "multiply(bucket(group_rank(rsk74_value_ts, industry), \"0,1,0.2\"), ts_std_dev(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), 252))",
+        "multiply(bucket(group_rank(rsk74_value_ts, industry), \"0,1,0.2\"), ts_std_dev(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), 252))"
+    ]
+}

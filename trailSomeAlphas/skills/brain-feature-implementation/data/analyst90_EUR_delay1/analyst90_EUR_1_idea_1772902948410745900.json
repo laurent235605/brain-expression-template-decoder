@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize( winsorize( add( multiply( vec_ir( {likelihood_score} ), ts_delta( group_zscore( vec_avg( {likelihood_score} ), industry ), 30 ) ), multiply( subtract( 1.0, min( vec_ir( {likelihood_score} ), 1.0 ) ), ts_delta( group_zscore( vec_skewness( {likelihood_score} ), industry ), 30 ) ) ), std=4 ), industry )",
+    "idea": "信息比率加权的多维度混合：利用向量信息比率(IR)作为可信度权重，对高IR标的采用均值变化（趋势），对低IR标的采用偏度变化（分布形态拐点）进行加权组合；经尾部裁剪和行业中性化后，自适应地根据数据质量选择最优信号源，提升因子的稳健性。",
+    "expression_list": [
+        "group_normalize( winsorize( add( multiply( vec_ir( success_likelihood_score ), ts_delta( group_zscore( vec_avg( success_likelihood_score ), industry ), 30 ) ), multiply( subtract( 1.0, min( vec_ir( success_likelihood_score ), 1.0 ) ), ts_delta( group_zscore( vec_skewness( success_likelihood_score ), industry ), 30 ) ) ), std=4 ), industry )"
+    ]
+}

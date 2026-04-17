@@ -1,0 +1,7 @@
+{
+    "template": "s1 = winsorize(ts_backfill({special_items_score}, 63), std=4)\ns2 = winsorize(ts_backfill({accrued_expenses_score}, 63), std=4)\ns3 = winsorize(ts_backfill({revenue_recognition_score}, 63), std=4)\ns4 = winsorize(ts_backfill({deferred_rev_score}, 63), std=4)\ncurr = divide(add(add(add(s1, s2), s3), s4), 4)\nshort_ma = ts_mean(curr, 21)\nmid_ma = ts_mean(curr, 63)\nlong_ma = ts_mean(curr, 252)\nconsistency = subtract(1.0, add(abs(subtract(short_ma, mid_ma)), abs(subtract(mid_ma, long_ma))))\nquality_weighted = multiply(curr, consistency)\nsignal = reverse(group_rank(quality_weighted, industry))",
+    "idea": "多时间尺度一致性加权：通过21日、63日、252日三个时间窗口的均值一致性检验（consistency），惩罚会计质量信号波动剧烈（时间序列不稳定）的股票。只有当高质量或低质量信号在多时间尺度上保持一致时才赋予高权重，有效过滤数据披露不稳定带来的噪音。",
+    "expression_list": [
+        "s1 = winsorize(ts_backfill(mdl255_special_items_score, 63), std=4)\ns2 = winsorize(ts_backfill(mdl255_accrued_expenses_score, 63), std=4)\ns3 = winsorize(ts_backfill(mdl255_revenue_recognition_score, 63), std=4)\ns4 = winsorize(ts_backfill(mdl255_deferred_rev_score, 63), std=4)\ncurr = divide(add(add(add(s1, s2), s3), s4), 4)\nshort_ma = ts_mean(curr, 21)\nmid_ma = ts_mean(curr, 63)\nlong_ma = ts_mean(curr, 252)\nconsistency = subtract(1.0, add(abs(subtract(short_ma, mid_ma)), abs(subtract(mid_ma, long_ma))))\nquality_weighted = multiply(curr, consistency)\nsignal = reverse(group_rank(quality_weighted, industry))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_sum(vec_avg({aily_delta_recon_value}), 20), 5)",
+    "idea": "**修订动量加速度**：基于模板2的累积路径，应用ts_delta算子计算20日累积和在5日窗口内的变化量。捕捉修订趋势的“二阶导数”——即上调/下调速度的加速或减速，用于识别预期拐点（加速度为正表示升级趋势强化）。",
+    "expression_list": [
+        "ts_delta(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), 5)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply(winsorize(group_zscore(multiply({crowding}, {value_ts}), sector), std=3), add(1, signed_power(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), 0.5)))",
+    "idea": "构建非线性缩放机制：以机构流偏离度的 signed_power（幂次0.5压缩后映射到有限区间）作为动态调节器，对 sector-neutral 的拥挤价值核心信号进行加权，当机构分歧极大时放大头寸，分歧小时轻微增强，保持方向性同时避免过度杠杆。",
+    "expression_list": [
+        "multiply(winsorize(group_zscore(multiply(liquidity_factor_crowding, rsk74_value_ts), sector), std=3), add(1, signed_power(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0.5)))",
+        "multiply(winsorize(group_zscore(multiply(liquidity_timeseries_crowding, rsk74_value_ts), sector), std=3), add(1, signed_power(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0.5)))",
+        "multiply(winsorize(group_zscore(multiply(rsk74_crowding, rsk74_value_ts), sector), std=3), add(1, signed_power(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0.5)))",
+        "multiply(winsorize(group_zscore(multiply(rsk74_raw_crowding, rsk74_value_ts), sector), std=3), add(1, signed_power(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0.5)))"
+    ]
+}

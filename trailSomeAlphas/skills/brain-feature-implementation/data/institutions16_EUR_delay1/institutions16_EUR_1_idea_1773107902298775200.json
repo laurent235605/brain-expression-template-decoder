@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(less(ts_rank(ts_std_dev(returns, 21), 252), 0.8), multiply(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), signed_power(ts_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 63), 2)), NaN), industry)",
+    "idea": "仅在当前21日波动率处于历史252日分布前80%分位以内（非极端高波动环境）时进行交易，将风险调整配置强度乘以其63日时序Z分数的平方，突出那些在风险可控前提下配置信念正在加速变化的基金，避免高波动噪音干扰。",
+    "expression_list": [
+        "group_zscore(trade_when(less(ts_rank(ts_std_dev(returns, 21), 252), 0.8), multiply(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), signed_power(ts_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 63), 2)), NaN), industry)"
+    ]
+}

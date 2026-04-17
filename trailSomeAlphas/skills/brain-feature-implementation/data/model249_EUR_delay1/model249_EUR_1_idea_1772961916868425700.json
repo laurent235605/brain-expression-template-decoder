@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(subtract((vec_avg({score}) - ts_mean(vec_avg({score}), 20)) / ts_std_dev(vec_avg({score}), 20), (vec_avg({score}) - ts_mean(vec_avg({score}), 60)) / ts_std_dev(vec_avg({score}), 60)), 5)",
+    "idea": "多时间框架背离（加速度）策略：计算短期（20日）与长期（60日）Z-score的差值，捕捉分数异常的变化速率（二阶导）。正值表示异常程度在加速恶化（或利好加速兑现），使用ts_decay_linear进行5日线性衰减平滑以降低换手率，避免对单日跳变的过度反应，适合捕捉事件驱动后的持续漂移。",
+    "expression_list": [
+        "ts_decay_linear(subtract((vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 20)) / ts_std_dev(vec_avg(mdl249_score), 20), (vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 60)) / ts_std_dev(vec_avg(mdl249_score), 60)), 5)"
+    ]
+}

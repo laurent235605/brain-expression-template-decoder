@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_sum(vec_avg({aily_delta_recon_value}), 20), ts_sum(vec_percentage({aily_delta_recon_value}, 0.5), 20))",
+    "idea": "均值-中位数背离（非对称性）信号。计算20日累计均值修订与累计中位数修订（50%分位数）的差值。正值表示分布右偏（少数极端乐观分析师或大幅上调主导），负值表示左偏（少数黑天鹅或大幅下调主导），零附近表示对称分布。用于识别预期调整是由共识形成还是由极端观点驱动，预警潜在的非对称风险。",
+    "expression_list": [
+        "subtract(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), ts_sum(vec_percentage(ern10_aily_delta_recon_value, 0.5), 20))"
+    ]
+}

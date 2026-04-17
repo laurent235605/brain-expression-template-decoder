@@ -1,0 +1,7 @@
+{
+    "template": "s1 = winsorize(ts_backfill({special_items_score}, 63), std=4)\ns2 = winsorize(ts_backfill({accrued_expenses_score}, 63), std=4)\ns3 = winsorize(ts_backfill({revenue_recognition_score}, 63), std=4)\ns4 = winsorize(ts_backfill({deferred_rev_score}, 63), std=4)\ncurr = divide(add(add(add(s1, s2), s3), s4), 4)\nhist_mean = ts_mean(curr, 252)\ndelta = subtract(curr, hist_mean)\ndelta_z = zscore(delta)\nts_r = ts_rank(curr, 252)\nsignal = subtract(multiply(0.7, reverse(delta_z)), multiply(0.3, ts_r))",
+    "idea": "会计质量恶化动量：检测当前得分相对一年历史均值的偏离（delta），标准化后反转（负向delta代表质量恶化）。同时结合历史分位数（ts_rank），识别当前处于历史极低位置的股票，双重捕捉会计操纵正在恶化的早期信号。",
+    "expression_list": [
+        "s1 = winsorize(ts_backfill(mdl255_special_items_score, 63), std=4)\ns2 = winsorize(ts_backfill(mdl255_accrued_expenses_score, 63), std=4)\ns3 = winsorize(ts_backfill(mdl255_revenue_recognition_score, 63), std=4)\ns4 = winsorize(ts_backfill(mdl255_deferred_rev_score, 63), std=4)\ncurr = divide(add(add(add(s1, s2), s3), s4), 4)\nhist_mean = ts_mean(curr, 252)\ndelta = subtract(curr, hist_mean)\ndelta_z = zscore(delta)\nts_r = ts_rank(curr, 252)\nsignal = subtract(multiply(0.7, reverse(delta_z)), multiply(0.3, ts_r))"
+    ]
+}

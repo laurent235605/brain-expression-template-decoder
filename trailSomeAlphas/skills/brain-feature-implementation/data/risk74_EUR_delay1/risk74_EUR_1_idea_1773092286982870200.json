@@ -1,0 +1,8 @@
+{
+    "template": "{momentum} / (ts_decay_linear(winsorize({value_ts}, std=3), 20) + ts_decay_linear(winsorize({earnyild}, std=3), 20) + 0.0001)",
+    "idea": "对输入1分母中的价值与盈利收益率组件分别应用20日线性衰减与3倍标准差截尾，构建低换手率的价值锚定Composite。通过衰减平滑降低单日异常值对价值因子的扰动，同时保留分子动量的原始敏感度，形成稳健的价值防御与动量进攻组合。",
+    "expression_list": [
+        "rsk74_momentum / (ts_decay_linear(winsorize(rsk74_value_ts, std=3), 20) + ts_decay_linear(winsorize(rsk74_earnyild, std=3), 20) + 0.0001)",
+        "rsk74_momentum_ts / (ts_decay_linear(winsorize(rsk74_value_ts, std=3), 20) + ts_decay_linear(winsorize(rsk74_earnyild, std=3), 20) + 0.0001)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(add(multiply(ts_std_dev(returns, 5), 0.7), multiply(ts_std_dev(returns, 63), 0.3)), 0.001)), industry)",
+    "idea": "使用5日短期波动率（权重70%）与63日长期波动率（权重30%）的加权组合替代单一21日波动率作为风险分母，自适应地平衡近期风险 regime 变化与长期风险基准，减少单一窗口滞后或异常跳变导致的误判。",
+    "expression_list": [
+        "group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(add(multiply(ts_std_dev(returns, 5), 0.7), multiply(ts_std_dev(returns, 63), 0.3)), 0.001)), industry)"
+    ]
+}

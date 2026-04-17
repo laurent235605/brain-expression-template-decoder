@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_exp_window(trade_when(greater(abs(group_zscore(ts_sum(ts_delta({shortint},1),15),industry)),2),ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),NaN),5)",
+    "idea": "引入事件驱动逻辑：仅当个股15日累积空头变化相对行业偏离超过2个标准差时触发信号，并应用5日指数衰减窗口降低历史事件权重，聚焦近期高冲击的特质性做空压力，避免噪音区间交易。",
+    "expression_list": [
+        "ts_decay_exp_window(trade_when(greater(abs(group_zscore(ts_sum(ts_delta(rsk74_shortint,1),15),industry)),2),ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),NaN),5)",
+        "ts_decay_exp_window(trade_when(greater(abs(group_zscore(ts_sum(ts_delta(rsk74_shortint_ts,1),15),industry)),2),ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),NaN),5)"
+    ]
+}

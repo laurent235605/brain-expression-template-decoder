@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), 1.5), 10)",
+    "idea": "将模板1的时序平滑（20日移动平均+10日线性衰减）与模板2的对称幂变换（signed_power 1.5）相结合。先计算权益配置残差的20日移动平均以过滤短期噪音，经行业标准化后应用幂变换放大极端偏离，最后通过10日线性衰减加权稳定信号，实现\"平滑去噪-凸性放大-时序稳定\"的三阶段处理，兼顾捕捉高置信度偏离与控制换手率。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), 1.5), 10)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(quantile(ts_rank(log({volume}), 252), driver=\"gaussian\"), {industry})",
+    "idea": "历史分位数高斯拉伸后的行业标准化。将当前成交量置于过去一年（252日）历史区间中定位，通过高斯分位数转换将处于历史极值区域（如前10%或后10%）的流动性信号进一步拉伸放大，再进行行业内Z-score标准化，强调成交量突破历史区间的极端信号，同时消除行业间不可比的量纲差异。",
+    "expression_list": []
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), industry) - group_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), industry)",
+    "idea": "结合行业中性化与双因子价差逻辑：将累积盈利调整压力与日期稳定性均在行业内进行`group_zscore`标准化，消除行业间披露节奏与分析师覆盖密度的系统性差异。构建“行业相对修正压力 minus 行业相对日期稳定性”的价差信号，做多“预测上调且日期稳定”的组合，做空“预测下调且日期混乱”的组合。",
+    "expression_list": [
+        "group_zscore(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), industry) - group_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), industry)",
+        "group_zscore(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), industry) - group_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), industry)",
+        "group_zscore(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), industry) - group_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), industry)",
+        "group_zscore(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), industry) - group_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "right_tail(divide(subtract(ts_zscore(vec_ir({rank}), 20), ts_zscore(vec_ir({rank}), 60)), ts_std_dev(subtract(ts_zscore(vec_ir({rank}), 20), ts_zscore(vec_ir({rank}), 60)), 60)), minimum=0.5)",
+    "idea": "**概念**：多期信息比率（IR）稳定性背离（Multi-Horizon IR Divergence）\n- **核心逻辑**：使用`vec_ir`（向量信息比率=均值/标准差）衡量当日排名信号的质量（信噪比）；分别计算20日短期与60日长期的IR Z-score（`ts_zscore`），捕捉稳定性趋势\n- **背离检测**：计算短长期Z-score之差，并除以该差值的历史标准差（`ts_std_dev`），得到标准化背离程度；`right_tail(minimum=0.5)`仅保留右尾（短期IR显著优于长期），过滤左尾（恶化信号）\n- **经济含义**：当模型对某股票的预测短期信噪比结构性提升并显著优于长期平均水平时，表明近期有新增信息被模型捕获，置信度上升，对应更高预期收益",
+    "expression_list": [
+        "right_tail(divide(subtract(ts_zscore(vec_ir(mdl245_rank), 20), ts_zscore(vec_ir(mdl245_rank), 60)), ts_std_dev(subtract(ts_zscore(vec_ir(mdl245_rank), 20), ts_zscore(vec_ir(mdl245_rank), 60)), 60)), minimum=0.5)"
+    ]
+}

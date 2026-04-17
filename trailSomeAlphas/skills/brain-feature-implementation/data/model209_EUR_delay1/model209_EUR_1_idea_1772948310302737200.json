@@ -1,0 +1,7 @@
+{
+    "template": "vec_max({lastcostingfailed})",
+    "idea": "**Concept**: Costing Failure Presence\n- **Sample Fields Used**: lastcostingfailed\n- **Definition**: Maximum value of failure flags indicating presence of any costing failures in the vector\n- **Why This Feature**: Binary detection of operational issues; any failure may indicate systemic problems requiring immediate attention\n- **Logical Meaning**: Boolean indicator of operational anomaly (1 = at least one failure exists)\n- **is filling nan necessary**: Treat NaN as 0 (no failure) to avoid false alarms from missing data\n- **Directionality**: 1 indicates anomaly present; 0 indicates clean operation across all entities\n- **Boundary Conditions**: Binary 0 or 1 output",
+    "expression_list": [
+        "vec_max(mdl209_lastcostingfailed)"
+    ]
+}

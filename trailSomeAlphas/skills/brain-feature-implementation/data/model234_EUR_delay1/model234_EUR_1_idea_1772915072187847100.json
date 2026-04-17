@@ -1,0 +1,7 @@
+{
+    "template": "bucket(ts_percentage({volume}, 12, 0.5), buckets=\"0,0.25,0.5,0.75,1\")",
+    "idea": "**Concept**: Volume Quartile Classification\n- **Sample Fields Used**: volume\n- **Definition**: Discrete quartile assignment (1-4) based on time-series historical distribution (not cross-sectional)\n- **Why This Feature**: Categorizes instruments into liquidity tiers based on their own history for regime-based strategies\n- **Logical Meaning**: 1 = bottom 25% of historical liquidity (tightest trading conditions historically); 4 = top 25% (most liquid historically)\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 2) for historical percentile calculation\n- **Directionality**: 1 = low liquidity quartile; 4 = high liquidity quartile\n- **Boundary Conditions**: Discrete values at 0.125, 0.375, 0.625, 0.875 representing quartile centers",
+    "expression_list": [
+        "bucket(ts_percentage(mdl234_volume, 12, 0.5), buckets=\"0,0.25,0.5,0.75,1\")"
+    ]
+}

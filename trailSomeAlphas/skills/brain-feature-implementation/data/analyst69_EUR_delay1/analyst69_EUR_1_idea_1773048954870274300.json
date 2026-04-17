@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize({eps_best_eeps_cur_yr}, 4), {sector}), abs(group_zscore(winsorize({eps_best_eeps_cur_yr}, 4), {sector}))), 3)",
+    "idea": "对行业中性化后的预期进行非线性放大(保留符号的平方效应)，增强极端值(无论极好或极差)的区分度，压缩中间区间的权重；叠加3日线性衰减平滑短期噪音，控制组合换手率",
+    "expression_list": []
+}

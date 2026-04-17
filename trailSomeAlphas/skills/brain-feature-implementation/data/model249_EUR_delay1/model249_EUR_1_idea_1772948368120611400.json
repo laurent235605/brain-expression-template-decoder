@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({score}) / (1 + ts_std_dev(vec_avg({score}), 20))",
+    "idea": "**Concept**: Likelihood Confidence Ratio\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The ratio of score level to its recent volatility (Information Ratio), measuring signal-to-noise of the acquisition prediction\n- **Why This Feature**: High scores with low volatility indicate high-confidence predictions (stable target characteristics); volatile scores indicate uncertainty\n- **is filling nan necessary**: Yes, volatility calculation requires continuous series. Use `ts_backfill(vec_avg({score}), 5)` to ensure robust std_dev calculation.\n- **Logical Meaning**: Confidence-adjusted likelihood; separates high-probability stable targets from high-probability uncertain/noisy targets\n- **Directionality**: High positive values indicate high likelihood with high confidence (best targets); low values indicate either low likelihood or uncertain high likelihood\n- **Boundary Conditions**: Extreme values occur with high stable scores; near-zero with volatile or low scores; negative impossible with positive scores",
+    "expression_list": [
+        "vec_avg(mdl249_score) / (1 + ts_std_dev(vec_avg(mdl249_score), 20))"
+    ]
+}

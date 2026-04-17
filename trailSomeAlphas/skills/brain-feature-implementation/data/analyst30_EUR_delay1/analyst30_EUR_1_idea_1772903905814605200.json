@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(negate(ts_mean(vec_range(vec_filter({fiscalyearend}, nan)), 252)), 4)",
+    "idea": "长期结构稳定性溢价：计算财年末日期离散度的252日移动平均(ts_mean)以捕捉持久性结构特征，取负值(negate)使得离散度越低信号越强，最后经winsorize(std=4)处理极端值，构建低turnover的长期结构化因子，奖励具有稳定fiscal year架构的公司并惩罚频繁变更者。",
+    "expression_list": [
+        "winsorize(negate(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, nan)), 252)), 4)"
+    ]
+}

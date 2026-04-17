@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_decay_linear(add(signed_power(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=3), 1.5), signed_power(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 20), 20), std=3), 0.8)), 10), industry)",
+    "idea": "多时间尺度预期修订动量融合。结合5日短期动量与20日中期趋势，通过signed_power分别赋予1.5和0.8的幂次以放大极端修订信号，抑制温和波动；使用ts_decay_linear进行10日线性衰减平滑，在保留信号时效性的同时降低换手率，最终进行行业内标准化，捕捉跨周期的分析师预期调整强度。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(add(signed_power(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=3), 1.5), signed_power(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 20), 20), std=3), 0.8)), 10), industry)",
+        "group_zscore(ts_decay_linear(add(signed_power(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=3), 1.5), signed_power(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 20), 20), std=3), 0.8)), 10), industry)"
+    ]
+}

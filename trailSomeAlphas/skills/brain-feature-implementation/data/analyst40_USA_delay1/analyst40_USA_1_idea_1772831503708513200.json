@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize( quantile( multiply( -1, ts_decay_linear( ts_std_dev( ts_backfill( {overall_genderratio}, 63 ), 20 ), 10 ) ), driver=\"gaussian\" ), industry )",
+    "idea": "近期加权稳定性分层。对20日滚动标准差应用10日线性衰减加权（ts_decay_linear），给予近期稳定性更高权重，快速反应最新变化但保持平滑。乘以-1反转方向后，通过高斯分位数转换（quantile）压缩中间区间、拉伸尾部，使极端稳定与极端不稳定的区分度最大化。最后按行业归一化（group_normalize）控制行业暴露，构建纯粹的公司特异性稳定性因子。",
+    "expression_list": [
+        "group_normalize( quantile( multiply( -1, ts_decay_linear( ts_std_dev( ts_backfill( anl40_overall_genderratio, 63 ), 20 ), 10 ) ), driver=\"gaussian\" ), industry )"
+    ]
+}

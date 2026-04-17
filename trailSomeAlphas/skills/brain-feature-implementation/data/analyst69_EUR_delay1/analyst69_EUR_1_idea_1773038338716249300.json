@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 0.8), ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 0)",
+    "idea": "条件触发增强（均衡型）：仅当披露日期稳定性分位数处于历史前20%（模板1的极端稳定区间）时，才暴露于累积修正压力信号（模板2），否则输出零（空仓）。实现了'只有在时间确定性强时才交易信息修正'的条件逻辑，平衡创新性与稳定性。",
+    "expression_list": [
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.8), ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 0)",
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.8), ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 0)",
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.8), ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 0)",
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.8), ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 0)"
+    ]
+}

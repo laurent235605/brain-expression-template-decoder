@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20 )",
+    "idea": "时间衰减加权近期Surprise。应用模板2的历史视角但改用ts_decay_linear（线性衰减加权）替代简单平均，对近期的EPS Surprise赋予更高权重，更快反应最新的盈利预期修正，同时通过衰减平滑降低单日极端值影响，适合捕捉短期动量。",
+    "expression_list": [
+        "ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 )",
+        "ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 )"
+    ]
+}

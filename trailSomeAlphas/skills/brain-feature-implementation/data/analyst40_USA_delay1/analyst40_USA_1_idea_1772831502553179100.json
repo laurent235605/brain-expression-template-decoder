@@ -1,0 +1,7 @@
+{
+    "template": "signed_power( multiply( -1, ts_rank( group_zscore( ts_std_dev( ts_backfill( {overall_genderratio}, 63 ), 20 ), industry ), 252 ) ), 1.5 )",
+    "idea": "跨行业历史极端稳定性识别。先通过63日回溯填充确保数据连续性，计算20日滚动标准差衡量近期性别构成波动。在行业层面zscore标准化消除行业差异后，计算该稳定性指标在过去252日的历史分位，识别当前是否处于历史极端稳定状态。使用signed_power(1.5)非线性放大极端值，最后取负号使得低波动（高稳定性）对应高分。捕捉相对于自身历史和同业的极端稳定所带来的治理溢价。",
+    "expression_list": [
+        "signed_power( multiply( -1, ts_rank( group_zscore( ts_std_dev( ts_backfill( anl40_overall_genderratio, 63 ), 20 ), industry ), 252 ) ), 1.5 )"
+    ]
+}

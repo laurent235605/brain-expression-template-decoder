@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(group_zscore(divide(subtract(winsorize(vec_avg({x_dividend}), std=4), ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252)), add(ts_std_dev(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252), 0.001)), industry), 5)",
+    "idea": "将当前股息相对于其历史波动率进行标准化（Z-score），而非简单比率，以识别统计意义上的显著偏离（股息异常）。通过行业中性化（group_zscore）消除不同行业股息政策差异带来的偏差，最后应用线性衰减（ts_decay_linear）降低换手率。适用于捕捉因盈利超预期或经营拐点导致的股息行为异常，值越大表示股息越高于历史常态波动。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(divide(subtract(winsorize(vec_avg(ern6_x_dividend), std=4), ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252)), add(ts_std_dev(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252), 0.001)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(subtract(winsorize(vec_avg(ern6_x_dividend_233), std=4), ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252)), add(ts_std_dev(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252), 0.001)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(subtract(winsorize(vec_avg(ern6_x_dividend_oc), std=4), ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252)), add(ts_std_dev(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252), 0.001)), industry), 5)",
+        "ts_decay_linear(group_zscore(divide(subtract(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252)), add(ts_std_dev(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252), 0.001)), industry), 5)"
+    ]
+}

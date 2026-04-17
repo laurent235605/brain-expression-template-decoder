@@ -1,0 +1,8 @@
+{
+    "template": "hump(subtract(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), group_rank(ts_delta({eps_best_eeps_cur_yr}, 20), industry)), hump=0.01)",
+    "idea": "组内排序动量分离：摒弃zscore标准化，改用group_rank计算行业内5日与20日修订变化的百分位排名差异。相比标准化值，排名差异对异常值更稳健，适合分析师预测分布偏斜的场景，配合hump算子控制日间微小波动导致的换手率，实现均衡的换手成本控制。",
+    "expression_list": [
+        "hump(subtract(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), industry)), hump=0.01)",
+        "hump(subtract(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 20), industry)), hump=0.01)"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "template": "trade_when( and( greater( ts_rank( winsorize( {concentration}, 4 ), 126 ), 0.7 ), less( days_from_last_change( {concentration} ), 20 ) ), multiply( quantile( winsorize( {value_ts}, 4 ), driver='gaussian' ), group_normalize( winsorize( {crowding}, 4 ), industry ) ), 0 )",
+    "idea": "历史分位与事件驱动结合：仅当集中度处于126日历史高位（前30%）且近期（20日内）发生过浓度变化（days_from_last_change）时触发信号，使用高斯分位数转换价值因子以突出尾部极端值，并对拥挤度进行行业归一化，捕捉“高位且加速集中”的危险价值陷阱。",
+    "expression_list": [
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( rsk74_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( rsk74_raw_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( liquidity_factor_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( liquidity_timeseries_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_raw_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_raw_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( rsk74_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_raw_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_raw_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( rsk74_raw_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_raw_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_raw_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( liquidity_factor_crowding, 4 ), industry ) ), 0 )",
+        "trade_when( and( greater( ts_rank( winsorize( rsk74_raw_concentration, 4 ), 126 ), 0.7 ), less( days_from_last_change( rsk74_raw_concentration ), 20 ) ), multiply( quantile( winsorize( rsk74_value_ts, 4 ), driver='gaussian' ), group_normalize( winsorize( liquidity_timeseries_crowding, 4 ), industry ) ), 0 )"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(s_log_1p(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63)), 4), 1, if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0)), industry)",
+    "idea": "采用非线性变换s_log_1p压缩天数分布的右偏长尾（少数极长期稳定的公司），使极端值不会过度主导排序。在压缩后的空间设定阈值（>4对应约55天以上极度稳定），结合模板2的近期变更检测（<0），形成非对称三状态：极度稳定+1，近期变更-1，中间状态0，最后经group_normalize实现行业均衡配置。",
+    "expression_list": [
+        "group_normalize(if_else(greater(s_log_1p(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63)), 4), 1, if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0)), industry)",
+        "group_normalize(if_else(greater(s_log_1p(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63)), 4), 1, if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0)), industry)"
+    ]
+}

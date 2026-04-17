@@ -1,0 +1,8 @@
+{
+    "template": "vec_avg({unadjustedgrossamt}) - vec_avg({adjustedgrossamt})",
+    "idea": "**Concept**: Corporate Action Adjustment Magnitude\n- **Sample Fields Used**: `adjustedgrossamt`, `unadjustedgrossamt`\n- **Definition**: Absolute difference between average unadjusted and adjusted dividend amounts\n- **Why This Feature**: Quantifies the raw impact of stock splits, spin-offs, and consolidations on dividend values; large values indicate significant capital structure events\n- **Logical Meaning**: The economic distance between declared promise and adjusted reality; measures corporate action intensity\n- **is filling nan necessary**: Both fields must be valid for comparison. Use `ts_backfill` if analyzing time series continuity, or ensure both are finite using `is_finite` checks before subtraction to avoid NaN propagation\n- **Directionality**: Positive values indicate adjustments reduced the amount (dilutionary splits); negative values indicate adjustments increased it (reverse splits)\n- **Boundary Conditions**: 0 = no corporate action impact; unbounded in both directions",
+    "expression_list": [
+        "vec_avg(anl30_unadjustedgrossamt) - vec_avg(anl30_unadjustedgrossamt)",
+        "vec_avg(anl30_unadjustedgrossamt) - vec_avg(anl30_adjustedgrossamt)"
+    ]
+}

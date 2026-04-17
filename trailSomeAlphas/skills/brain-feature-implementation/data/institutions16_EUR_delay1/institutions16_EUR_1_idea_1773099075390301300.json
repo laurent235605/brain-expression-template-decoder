@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_delta(ts_backfill({reported_asset_value}, 63), 20) - ts_mean(ts_delta(ts_backfill({reported_asset_value}, 63), 20), 60), 120), 0.9), group_zscore(ts_decay_linear(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 5), industry), multiply(0.1, group_zscore(ts_mean(ts_delta({reported_asset_value}, 20), 60), industry)))",
+    "idea": "历史分位触发式：仅在资产流入加速度处于过去120日历史极值区间（前10%）时启用强信号，否则仅保留微弱暴露，结合ts_decay_linear快速响应与group_zscore行业中性，用于捕捉拐点加速行情。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20) - ts_mean(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20), 60), 120), 0.9), group_zscore(ts_decay_linear(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 5), industry), multiply(0.1, group_zscore(ts_mean(ts_delta(fund_reported_asset_value, 20), 60), industry)))"
+    ]
+}

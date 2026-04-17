@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr(group_normalize(multiply(if_else(greater(group_rank(quantile(vec_skewness({version}), \"gaussian\"), industry), 0.9), 1, if_else(less(group_rank(quantile(vec_skewness({version}), \"gaussian\"), industry), 0.1), -1, 0)), add(1, multiply(0.5, multiply(10, inverse(add(10, days_from_last_change(vec_skewness({version})))))))), industry), 0.15, 20)",
+    "idea": "高斯拉伸新鲜度加权策略：先对偏度进行高斯分位数转换拉伸尾部，仅保留最极端10%/90%分位，使用\"10/(10+变化天数)\"公式量化信号新鲜度，对近期刚进入极端区间的股票赋予最高1.5倍权重，并采用目标换手率自适应衰减(ts_target_tvr)替代固定窗口，优化不同市场环境下的换手效率。",
+    "expression_list": [
+        "ts_target_tvr(group_normalize(multiply(if_else(greater(group_rank(quantile(vec_skewness(anl85_version), \"gaussian\"), industry), 0.9), 1, if_else(less(group_rank(quantile(vec_skewness(anl85_version), \"gaussian\"), industry), 0.1), -1, 0)), add(1, multiply(0.5, multiply(10, inverse(add(10, days_from_last_change(vec_skewness(anl85_version)))))))), industry), 0.15, 20)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), 0.8), ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20), 0)",
+    "idea": "条件化交叉激活：利用Template1的历史稳定性分位作为开关，仅在个股处于历史极端稳定区间（前20%分位）时，才对Template2的事件信号产生响应，否则信号归零。构建\"长期静默后的突然变更\"型择时逻辑，过滤常态波动中的噪音事件。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.8), ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.8), ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20), 0)"
+    ]
+}

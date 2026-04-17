@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(abs(group_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector)) > 1.5, signed_power(group_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 2), 0)",
+    "idea": "非线性放大极端捕获：在T1的极端值截断架构中引入signed_power平方变换，对|z|>1.5的尾部信号进行非线性放大，增强极端所有权结构状态的区分度，同时保持63日回溯填充与行业中性化框架。",
+    "expression_list": [
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, signed_power(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 2), 0)",
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, signed_power(group_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 2), 0)",
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, signed_power(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 2), 0)",
+        "trade_when(abs(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector)) > 1.5, signed_power(group_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 2), 0)"
+    ]
+}

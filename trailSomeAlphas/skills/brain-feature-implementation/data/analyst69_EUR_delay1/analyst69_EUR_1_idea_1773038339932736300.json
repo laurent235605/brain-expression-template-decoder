@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(abs(ts_delta(ts_backfill({eps_expected_report_dt}, 5), 1)), 63)",
+    "idea": "将模板2的'累积压力'概念应用于模板1的披露日期字段：借鉴模板2关于'回溯填充避免假零值'的处理逻辑，先对财报预约日期进行5日回溯填充，再计算每日变动的绝对值并在63日内累积求和，构建'披露日程不确定性累积指标'。",
+    "expression_list": [
+        "ts_sum(abs(ts_delta(ts_backfill(anl69_aeps_expected_report_dt, 5), 1)), 63)",
+        "ts_sum(abs(ts_delta(ts_backfill(anl69_eps_expected_report_dt, 5), 1)), 63)"
+    ]
+}

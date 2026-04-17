@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(winsorize(log({volume}), std=4), 63), industry)",
+    "idea": "成交量历史偏离 surprise（均值回归/动量混合）：计算个股对数成交量相对其过去63个交易日的时序zscore（衡量与自身历史的偏离程度），再进行行业中性化。正值表示异常放量，负值表示异常缩量，可用于捕捉资金关注度突变的 early signal。",
+    "expression_list": [
+        "group_zscore(ts_zscore(winsorize(log(mdl234_volume), std=4), 63), industry)"
+    ]
+}

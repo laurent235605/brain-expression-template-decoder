@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(({cacfroi50co2e} - {cacfroi5co2e}), 20)",
+    "idea": "**Concept**: Carbon Cost Trajectory Spread\n- **Sample Fields Used**: `cacfroi5co2e`, `cacfroi50co2e`, `cacfroi275co2e`\n- **Definition**: Change in the spread between low and high carbon price scenarios to identify transition risk acceleration\n- **Why This Feature**: Widening spread indicates increasing carbon intensity or regulatory vulnerability; narrowing spread suggests decarbonization progress or asset divestment\n- **is filling nan necessary**: No, NaN in carbon metrics likely indicates missing emissions data (meaningful signal - not all firms report), should not be filled\n- **Directionality**: Expanding spread (high carbon price CFROI falling faster than low) indicates increasing transition risk; Contracting spread indicates carbon risk mitigation\n- **Boundary Conditions**: Extreme widening suggests stranded asset risk; Inversion (5co2e > 275co2e) indicates data error or negative carbon intensity (offsets)",
+    "expression_list": [
+        "ts_delta((mdl255_cacfroi50co2e - mdl255_cacfroi5co2e), 20)"
+    ]
+}

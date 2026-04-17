@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(multiply(quantile({volume}, driver=\"gaussian\"), ts_zscore({returns}, 20)), {sector}), 2), 5)",
+    "idea": "量价Convexity共振动量：将成交量的高斯分位（强调极端）与20日收益率Z分数相乘，在行业内标准化后平方放大极端值，最后经5日线性衰减平滑，识别成交量与价格趋势共振的 Convexity 机会。",
+    "expression_list": []
+}

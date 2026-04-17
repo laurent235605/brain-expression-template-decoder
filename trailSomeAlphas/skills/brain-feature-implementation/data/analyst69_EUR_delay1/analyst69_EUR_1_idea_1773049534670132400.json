@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), 20), 252)",
+    "idea": "将模板2的Winsorize+平滑+时序标准化流程应用于模板1的EPS修正变化率，用3倍标准差缩尾抑制极端跳变，20日均值平滑降低噪音，252日Z-score识别修正趋势的持续性偏离。",
+    "expression_list": [
+        "ts_zscore(ts_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), 20), 252)",
+        "ts_zscore(ts_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), 20), 252)"
+    ]
+}

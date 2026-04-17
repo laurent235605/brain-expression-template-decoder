@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(less(abs(ts_zscore({spefcn},21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill({surp},21),4),sector), reverse(group_zscore(winsorize({ttmaccu},4),sector))),10), 0.0)",
+    "idea": "一次性项目过滤与事件衰减策略：利用{spefcn}字段识别一次性损益项目，当其过去21日的Z-score绝对值超过2倍标准差时视为存在重大非经常性损益，此时强制平仓（输出0）；仅在无异常项目时交易，并对信号施加10日线性衰减，确保随着财报发布日久，信号权重自然衰减，避免持有过期惊喜，同时维持行业中性框架下的质量-惊喜双因子暴露。",
+    "expression_list": [
+        "trade_when(less(abs(ts_zscore(mdl219_1_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_1_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_2_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_2_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_2_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_2_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_1_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector))),10), 0.0)",
+        "trade_when(less(abs(ts_zscore(mdl219_1_spefcn,21)),2), ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector))),10), 0.0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(group_rank(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector), 0.8), greater(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 3)), signed_power(group_zscore(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.5), 0)",
+    "idea": "多实体稳健性过滤：使用标准差替代极差以稳健衡量会计周期异质性，并额外要求子公司数量>3（排除单一主体公司的无意义分散度），仅对拥有实际多架构的企业进行行业前20%极值筛选，降低伪信号干扰。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 0.8), greater(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 3)), signed_power(group_zscore(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.5), 0)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(signed_power(divide(ts_delta(winsorize(ts_backfill(vec_avg({cap_expend_prpty_add}), 63), std=4), 252), ts_mean(winsorize(ts_backfill(vec_avg({tot_asset}), 63), std=4), 252)), 1.5), sector)",
+    "idea": "遵循清洗→非线性变换→组中性化逻辑链。首先对向量型资本开支与总资产数据进行63日回溯填充与4倍标准差截尾(winsorize)，消除极端脏点；计算252日同比投资加速度后，使用signed_power(1.5)放大尾部极端值（高扩张或高收缩）但保留方向符号，强化战略拐点的辨识度；最后通过sector层面的group_zscore剥离行业固有资本密集度差异，使得科技业与公用事业的投资加速信号具备可比性，适用于跨行业选股。",
+    "expression_list": [
+        "group_zscore(signed_power(divide(ts_delta(winsorize(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 63), std=4), 252), ts_mean(winsorize(ts_backfill(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 63), std=4), 252)), 1.5), sector)",
+        "group_zscore(signed_power(divide(ts_delta(winsorize(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 63), std=4), 252), ts_mean(winsorize(ts_backfill(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 63), std=4), 252)), 1.5), sector)",
+        "group_zscore(signed_power(divide(ts_delta(winsorize(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 63), std=4), 252), ts_mean(winsorize(ts_backfill(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 63), std=4), 252)), 1.5), sector)",
+        "group_zscore(signed_power(divide(ts_delta(winsorize(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 63), std=4), 252), ts_mean(winsorize(ts_backfill(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 63), std=4), 252)), 1.5), sector)"
+    ]
+}

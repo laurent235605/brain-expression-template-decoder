@@ -1,0 +1,8 @@
+{
+    "template": "quantile(add(multiply(0.6, zscore(winsorize(ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 1), 63), 10), std=4))), multiply(0.4, zscore(winsorize(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), std=4)))), driver=\"gaussian\")",
+    "idea": "交叉融合输入1的短期速度（权重40%）与输入2的长期累积压力（权重60%），构建双时间尺度动量信号。先分别对两个维度进行winsorize极值处理和zscore标准化，使量纲统一后线性组合，最后通过quantile(driver=\"gaussian\")将中间区间压缩、两端拉伸，强调极端修订事件。该结构既捕捉了季度趋势又纳入了近期加速度，通过高斯分位数转换增强尾部股票的区分度。",
+    "expression_list": [
+        "quantile(add(multiply(0.6, zscore(winsorize(ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 1), 63), 10), std=4))), multiply(0.4, zscore(winsorize(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), std=4)))), driver=\"gaussian\")",
+        "quantile(add(multiply(0.6, zscore(winsorize(ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 1), 63), 10), std=4))), multiply(0.4, zscore(winsorize(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), std=4)))), driver=\"gaussian\")"
+    ]
+}

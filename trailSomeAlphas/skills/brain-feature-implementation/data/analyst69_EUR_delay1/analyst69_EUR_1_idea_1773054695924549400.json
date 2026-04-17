@@ -1,0 +1,8 @@
+{
+    "template": "hump(group_zscore(winsorize(ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 1), 63), 10), std=4), industry), hump=0.01)",
+    "idea": "在输入2的平滑累积基础上，叠加行业中性化与hump衰减控制。先构建63日累积并线性衰减，经winsorize和group_zscore处理消除行业偏差，最后应用hump(hump=0.01)忽略日间微小波动（<1%变化视为噪音）。相比原始模板，该结构通过双重降噪（极值裁剪+hump阈值）显著降低换手率，同时保留对实质性趋势转折的响应，实现'均衡模式'下的稳定性优化。",
+    "expression_list": [
+        "hump(group_zscore(winsorize(ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 1), 63), 10), std=4), industry), hump=0.01)",
+        "hump(group_zscore(winsorize(ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 1), 63), 10), std=4), industry), hump=0.01)"
+    ]
+}

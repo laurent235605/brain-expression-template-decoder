@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(group_rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), industry), 10)",
+    "idea": "将截面排名替换为行业内排名（group_rank），并采用指数衰减窗口（ts_decay_exp_window）替代等权平滑，在保持行业相对排序的同时大幅降低换手率。",
+    "expression_list": [
+        "ts_decay_exp_window(group_rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), industry), 10)"
+    ]
+}

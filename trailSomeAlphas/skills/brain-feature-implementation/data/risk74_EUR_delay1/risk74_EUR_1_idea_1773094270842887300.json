@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252)",
+    "idea": "将行业市值加权回归残差（剔除系统性空头Beta后的特质信号）进行时序Z-score标准化，同时捕捉'相对于行业独立'且'相对于自身历史极端'的双重异常空头行为，兼顾截面去噪与时序异常检测。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252)"
+    ]
+}

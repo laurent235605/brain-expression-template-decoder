@@ -1,0 +1,8 @@
+{
+    "template": "hump(multiply(ts_regression(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), group_mean(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), log(ts_mean({ebitda_best_eeps_cur_yr}, 21)), industry), 126, rettype=0), add(1, multiply(0.3, s_log_1p(multiply(3, ts_zscore(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 10), 60)))))), 0.01)",
+    "idea": "CAPM残差+Cauchy压缩修正：先剥离行业市值加权效率基准获取特异性残差，对10日平滑修正进行60日时序zscore标准化后使用s_log_1p压缩尾部，配合hump控制日间权重变动，构建低换手的高质量特异性因子。",
+    "expression_list": [
+        "hump(multiply(ts_regression(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), group_mean(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), log(ts_mean(anl69_ebitda_best_eeps_cur_yr, 21)), industry), 126, rettype=0), add(1, multiply(0.3, s_log_1p(multiply(3, ts_zscore(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 10), 60)))))), 0.01)",
+        "hump(multiply(ts_regression(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), group_mean(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), log(ts_mean(anl69_ebitda_best_eeps_cur_yr, 21)), industry), 126, rettype=0), add(1, multiply(0.3, s_log_1p(multiply(3, ts_zscore(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 10), 60)))))), 0.01)"
+    ]
+}

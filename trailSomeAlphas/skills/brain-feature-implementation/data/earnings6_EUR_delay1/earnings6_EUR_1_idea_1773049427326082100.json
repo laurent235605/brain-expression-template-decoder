@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( less(days_from_last_change(vec_avg({stock_split_ratio_243})), 30), divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) ), 0 )",
+    "idea": "拆分事件窗口约束的盈利信号：利用days_from_last_change捕捉拆分事件后的时间衰减效应，仅在拆分事件发生后30天内激活EPS Surprise信号，捕捉资本结构变化与盈利动量的短期交互效应（管理层拆分后的业绩兑现期），其余时间设为0避免长期持仓噪音。",
+    "expression_list": [
+        "trade_when( less(days_from_last_change(vec_avg(ern6_stock_split_ratio_243)), 30), divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), 0 )",
+        "trade_when( less(days_from_last_change(vec_avg(ern6_stock_split_ratio_243)), 30), divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), 0 )"
+    ]
+}

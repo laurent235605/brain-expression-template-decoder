@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(vec_skewness({exposure_value}), 126), sector), 3)",
+    "idea": "行业中性极端地理集中度变化强调（跨模板融合）。融合模板1的半年期地理集中度（偏度）时序Z-score与模板2的行业标准化及非线性增强逻辑：先识别地理敞口结构性变化（偏度时序偏离），再进行行业内比较，最后使用3次幂signed_power大幅放大远离行业均值的极端尾部（高度集中或高度分散的异常变动），同时将中间噪音区间压缩至接近零，构建\"行业内的地理风险重构极端偏离者\"多空组合。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(vec_skewness(anl91_exposure_value), 126), sector), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_sum(winsorize({cfroidrs}, std=4), 10), 5), industry)",
+    "idea": "先对CFROI漂移序列进行4倍标准差截尾处理以消除极端噪音，随后进行10日累加捕捉中期趋势，再通过5日线性衰减平滑降低短期波动干扰，最后进行行业内zscore标准化，确保信号仅在可比群组内有效，适用于识别行业内的持续经营改善或恶化趋势。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_sum(winsorize(mdl172_cfroidrs, std=4), 10), 5), industry)"
+    ]
+}

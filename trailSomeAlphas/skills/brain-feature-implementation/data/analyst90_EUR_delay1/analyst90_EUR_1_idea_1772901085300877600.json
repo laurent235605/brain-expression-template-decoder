@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4), 20)",
+    "idea": "一致性趋势动量：捕捉分析师信心波动率的变化率（一阶差分），当不确定性加速下降（波动率负向变动）时代表信息逐渐明朗，可作为动量增强信号；正向变动则提示谨慎。",
+    "expression_list": [
+        "ts_delta(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4), 20)"
+    ]
+}

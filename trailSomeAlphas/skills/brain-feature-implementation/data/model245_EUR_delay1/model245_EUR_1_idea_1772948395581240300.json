@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_delta(vec_avg({rank}), 1), 20)",
+    "idea": "**Concept**: Cumulative Rank Change\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Net cumulative change in rank over 20 days (sum of daily differences)\n- **Why This Feature**: Total migration distance of the stock through the rankings over the period; captures the total \"ground traveled\" rather than just net displacement\n- **Logical Meaning**: Large absolute values indicate significant upgrade or downgrade journeys over the period; small values indicate the stock returned to its starting rank despite possible volatility\n- **is filling nan necessary**: Sum of deltas requires consistent day-over-day data; gaps in the underlying series will create gaps in deltas. Use ts_backfill(vec_avg({rank}), 5) before calculating deltas only for temporary single-day gaps.\n- **Directionality**: Negative values (if lower rank is better) indicate cumulative improvement over the period; positive values indicate cumulative deterioration\n- **Boundary Conditions**: Bounded by universe size in magnitude; extreme values indicate entry/exit from universe or dramatic rerating",
+    "expression_list": [
+        "ts_sum(ts_delta(vec_avg(mdl245_rank), 1), 20)"
+    ]
+}

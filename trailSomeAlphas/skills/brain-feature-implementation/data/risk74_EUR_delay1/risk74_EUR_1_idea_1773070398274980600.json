@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252)),2.0), ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), NaN),3)",
+    "idea": "极端阈值+衰减平滑：仅在15日累积空头变化处于过去252天极端区间(|Z|>2)时才开仓，信号值经3日线性衰减处理。通过'硬阈值'过滤掉微弱信号，仅保留统计上显著的空头异动，并以衰减函数降低换手率，延长极端事件的有效持有期。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252)),2.0), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), NaN),3)",
+        "ts_decay_linear(trade_when(greater(abs(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252)),2.0), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), NaN),3)"
+    ]
+}

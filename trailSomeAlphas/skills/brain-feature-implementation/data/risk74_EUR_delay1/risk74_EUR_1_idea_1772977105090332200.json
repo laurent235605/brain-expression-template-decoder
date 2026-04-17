@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), add(group_mean(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0)",
+    "idea": "融合模板1的价差构建与模板2的双因素剥离方法，在回归中同时控制行业平均区域偏好和整体非本土敞口（全球化水平），获取经双重清洗后的纯特质性地域配置Alpha，排除行业Beta和全球敞口共同因子的干扰。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), add(group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0)",
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), add(group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0)"
+    ]
+}

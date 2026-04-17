@@ -1,0 +1,16 @@
+{
+    "template": "group_zscore(winsorize({concentration},4) / max(winsorize({nondomicile},4), 0.001), sector) * if_else(greater({nondomicile}, 0), 1, -1)",
+    "idea": "单位暴露集中度效率比：计算每单位非本土暴露所对应的集中度（类似HHI/外国收入比），在行业中性化后得到'地理多元化效率'指标。数值越高代表单位外国收入对应的集中风险越大（即所有外国收入来自单一国家），数值低代表分散。通过if_else处理非本土暴露为负（定义问题）的情况，确保方向一致性。",
+    "expression_list": [
+        "group_zscore(winsorize(rsk74_concentration,4) / max(winsorize(rsk74_nondomicile,4), 0.001), sector) * if_else(greater(rsk74_nondomicile, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_concentration,4) / max(winsorize(rsk74_raw_exp_nondomicile1,4), 0.001), sector) * if_else(greater(rsk74_raw_exp_nondomicile1, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_concentration,4) / max(winsorize(rsk74_raw_exp_nondomicile2,4), 0.001), sector) * if_else(greater(rsk74_raw_exp_nondomicile2, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_concentration,4) / max(winsorize(rsk74_std_exp_nondomicile1,4), 0.001), sector) * if_else(greater(rsk74_std_exp_nondomicile1, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_concentration,4) / max(winsorize(rsk74_std_exp_nondomicile2,4), 0.001), sector) * if_else(greater(rsk74_std_exp_nondomicile2, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_raw_concentration,4) / max(winsorize(rsk74_raw_exp_nondomicile1,4), 0.001), sector) * if_else(greater(rsk74_raw_exp_nondomicile1, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_raw_concentration,4) / max(winsorize(rsk74_raw_exp_nondomicile2,4), 0.001), sector) * if_else(greater(rsk74_raw_exp_nondomicile2, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_raw_concentration,4) / max(winsorize(rsk74_nondomicile,4), 0.001), sector) * if_else(greater(rsk74_nondomicile, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_raw_concentration,4) / max(winsorize(rsk74_std_exp_nondomicile1,4), 0.001), sector) * if_else(greater(rsk74_std_exp_nondomicile1, 0), 1, -1)",
+        "group_zscore(winsorize(rsk74_raw_concentration,4) / max(winsorize(rsk74_std_exp_nondomicile2,4), 0.001), sector) * if_else(greater(rsk74_std_exp_nondomicile2, 0), 1, -1)"
+    ]
+}

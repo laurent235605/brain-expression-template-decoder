@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), 252), 2), sector)), 2), reverse(group_zscore(signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), 252), 2), sector)), 0), 5)",
+    "idea": "行业中性极端阈值反转：在原始波动率反转基础上加入行业中性化（group_zscore），仅当个体相对于自身历史及行业均出现极端偏离（|z|>2）时才建仓，配合线性衰减降低换手率。捕捉治理结构在行业内出现极端异常后的均值回归。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), 252), 2), sector)), 2), reverse(group_zscore(signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), 252), 2), sector)), 0), 5)"
+    ]
+}

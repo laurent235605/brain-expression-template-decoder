@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(ts_delta(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 5), industry), driver=gaussian)",
+    "idea": "捕捉盈利预测修正的加速度信号。首先对5日预测变化进行20日平滑以降低噪音，再计算平滑序列的5日差分得到修正动量的变化率（加速度），经行业中性高斯分位转换后，识别行业内预测调整正在加速的极端标的，适用于捕捉分析师预期调整的拐点。",
+    "expression_list": [
+        "quantile(group_zscore(ts_delta(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 5), industry), driver=gaussian)",
+        "quantile(group_zscore(ts_delta(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 5), industry), driver=gaussian)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry)",
+    "idea": "跨结构增强：在Template1的稳定性高斯映射基础上，增加行业内标准化处理。先通过高斯分布识别全市场极端稳定/不稳定状态，再在行业内剔除披露周期差异，精准定位组内相对异常个体，避免行业集中披露期的系统性误判。",
+    "expression_list": [
+        "group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry)"
+    ]
+}

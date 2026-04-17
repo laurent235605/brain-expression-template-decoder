@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(group_rank({stoxx_europe_600_ucits_weight}, sector), 0.8), less(group_rank({stoxx_europe_600_ucits_weight}, sector), 0.2)), ts_delta(ts_mean(group_rank({stoxx_europe_600_ucits_weight}, sector), 21), 63), 0)",
+    "idea": "仅在权重处于行业极端分位数（前20%或后20%）时激活信号，检测其短期（21天平滑）相对长期（63天）分位数的变化趋势（ts_delta），利用trade_when过滤中间噪音，捕捉机构资金在大小盘风格间的持续性迁移动量，避免无效持仓。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(mcr51_ishares_stoxx_europe_600_ucits_weight, sector), 0.8), less(group_rank(mcr51_ishares_stoxx_europe_600_ucits_weight, sector), 0.2)), ts_delta(ts_mean(group_rank(mcr51_ishares_stoxx_europe_600_ucits_weight, sector), 21), 63), 0)"
+    ]
+}

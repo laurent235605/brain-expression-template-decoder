@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize( trade_when( or( greater( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 0.85 ), less( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 0.15 ) ), signed_power( ts_zscore( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 252 ), 0.5 ), 0 ), industry )",
+    "idea": "时序Zscore非线性放大模板。将原始比率转换为252日时序Zscore以衡量当前权重在历史中的极端程度，通过signed_power(0.5)对极端值进行开方压缩（保留方向但降低极端离群点主导性），仅对截面排名前15%和后15%的股票施加信号，最后进行行业中性强平。适用于捕捉历史上相对极端的仓位配置偏离，同时防止单次极端比率扭曲整体排序。",
+    "expression_list": [
+        "group_normalize( trade_when( or( greater( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0.85 ), less( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0.15 ) ), signed_power( ts_zscore( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 252 ), 0.5 ), 0 ), industry )"
+    ]
+}

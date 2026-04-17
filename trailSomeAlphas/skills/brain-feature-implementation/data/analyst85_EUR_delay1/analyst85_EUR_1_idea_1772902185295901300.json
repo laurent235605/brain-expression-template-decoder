@@ -1,0 +1,7 @@
+{
+    "template": "quantile(multiply(ts_delta(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 5), subtract(vec_percentage(winsorize(ts_backfill({version}, 63), std=4), 0.9), vec_percentage(winsorize(ts_backfill({version}, 63), std=4), 0.1))), driver=\"gaussian\")",
+    "idea": "**百分位宽度动量模板**：用vec_percentage提取版本向量90分位与10分位之差（inter-percentile spread）代替简单极差，对异常值更稳健。该宽度与5日动量相乘后，通过高斯分位数转换（quantile with gaussian driver）将中间区间压缩至0附近，同时将双尾极端值拉远，形成类似Z-score但尾部更厚的分布。经济逻辑：关注“大多数分析师”之间的观点宽度（剔除极端单一观点），结合动量方向；高斯转换强化了对极端分歧-动量组合的暴露，弱化温和信号，适合作为高conviction的卫星因子。",
+    "expression_list": [
+        "quantile(multiply(ts_delta(winsorize(ts_backfill(vec_avg(anl85_version), 63), std=4), 5), subtract(vec_percentage(winsorize(ts_backfill(anl85_version, 63), std=4), 0.9), vec_percentage(winsorize(ts_backfill(anl85_version, 63), std=4), 0.1))), driver=\"gaussian\")"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), {industry}), 20)",
+    "idea": "行业相对数据丰富度与持续性平滑：首先计算个股在过去252个交易日中有效财报期数据点数量（非缺失值计数），通过行业组内标准化（group_zscore）剔除行业间信息披露制度的系统性差异，突出同行业内的数据质量相对优劣；最后施加20日线性时间衰减（ts_decay_linear），降低因子换手率，捕捉具有持续稳定数据披露历史的优质公司，避免因短期数据延迟导致的噪声交易。",
+    "expression_list": []
+}

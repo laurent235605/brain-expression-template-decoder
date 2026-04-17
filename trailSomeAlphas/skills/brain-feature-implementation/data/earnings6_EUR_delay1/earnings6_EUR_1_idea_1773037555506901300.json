@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), industry )",
+    "idea": "在模板2的稳健Surprise计算基础上，叠加组内中性化（group_zscore），消除行业间盈余预测偏差水平差异，使得\"超预期\"概念仅在行业内部可比，同时保留原模板的零值保护机制。",
+    "expression_list": [
+        "group_zscore( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), industry )",
+        "group_zscore( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), industry )"
+    ]
+}

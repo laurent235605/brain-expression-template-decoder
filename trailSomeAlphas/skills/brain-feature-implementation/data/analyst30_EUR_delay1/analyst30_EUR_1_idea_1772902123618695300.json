@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(ts_decay_linear(divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), nan_out(vec_avg({unadjustedgrossamt}), 0.0001)), 10), 4), industry)), 1.5), group_zscore(winsorize(ts_decay_linear(divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), nan_out(vec_avg({unadjustedgrossamt}), 0.0001)), 10), 4), industry), 0)",
+    "idea": "**时间衰减极值捕获 (Event-Decay Extremes)**：利用`ts_decay_linear`对近期公司行为冲击赋予更高权重，模拟事件驱动型alpha的半衰期；通过`group_zscore`在行业内部标准化，剔除行业本身的股利政策差异；最后使用`trade_when`仅保留极端偏离（|zscore|>1.5）的标的，中段噪音置零，降低换手并聚焦高置信度信号。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(ts_decay_linear(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), 10), 4), industry)), 1.5), group_zscore(winsorize(ts_decay_linear(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), 10), 4), industry), 0)",
+        "trade_when(greater(abs(group_zscore(winsorize(ts_decay_linear(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), 10), 4), industry)), 1.5), group_zscore(winsorize(ts_decay_linear(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), 10), 4), industry), 0)"
+    ]
+}

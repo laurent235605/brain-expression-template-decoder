@@ -1,0 +1,7 @@
+{
+    "template": "left_tail(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 0)",
+    "idea": "仅保留收益-权重偏离的左尾（负值区域），即高配置低收益的拥挤空头陷阱，反向交易机构过度拥挤的权重配置。",
+    "expression_list": [
+        "left_tail(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(ts_zscore(winsorize(({hfown_pctown} / {hfown_numown}), std=4), 60)), 2), ts_zscore(winsorize(({hfown_pctown} / {hfown_numown}), std=4), 60), 0), 3)",
+    "idea": "历史极值事件平滑处理：首先计算当前分散度相对其60日历史均值的Zscore（识别历史极端偏离），仅当绝对值超过2个标准差时保留信号（极值过滤），其余时间视为无效信号归零，最后通过3日线性衰减平滑（ts_decay_linear）降低信号突变带来的高换手率，适合捕捉持续性极值回归机会。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(ts_zscore(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), 60)), 2), ts_zscore(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), 60), 0), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_delta(subtract(ts_std_dev(vec_range({exposure_value}), 5), ts_std_dev(vec_range({exposure_value}), 60)), 1)), 0.5), ts_mean(subtract(ts_std_dev(vec_range({exposure_value}), 5), ts_std_dev(vec_range({exposure_value}), 60)), 3), 0)",
+    "idea": "采用vec_range（极差）替代均值，以识别地域分布的极端分散程度；计算期限利差后取其一日差分(ts_delta)捕捉'加速度的变化率'（二阶导）；通过trade_when设定阈值门限，仅当单日利差变化超过0.5个标准差时开仓，其余时间归零以过滤噪音；使用ts_mean(3日等权)替代线性衰减，显著降低换手率（据指导原则，等权平滑比线性衰减降低约80%换手）。事件驱动型改良。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_delta(subtract(ts_std_dev(vec_range(anl91_exposure_value), 5), ts_std_dev(vec_range(anl91_exposure_value), 60)), 1)), 0.5), ts_mean(subtract(ts_std_dev(vec_range(anl91_exposure_value), 5), ts_std_dev(vec_range(anl91_exposure_value), 60)), 3), 0)"
+    ]
+}

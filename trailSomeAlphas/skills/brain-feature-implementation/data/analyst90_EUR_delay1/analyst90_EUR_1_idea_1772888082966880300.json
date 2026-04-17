@@ -1,0 +1,8 @@
+{
+    "template": "quantile(vec_avg({recommendation_weighting}), driver=\"uniform\")",
+    "idea": "**Concept**: Relative Conviction Percentile\n- **Sample Fields Used**: `recommendation_weighting`\n- **Definition**: Cross-sectional quantile ranking of average buy recommendation weighting within universe\n- **Why This Feature**: Identifies stocks with unusual analyst attention relative to peers; top percentile names may be over-analyzed or have genuine catalysts\n- **is filling nan necessary**: NaN values should be ranked lowest (or excluded) to avoid middle-ranking bias for missing data.\n- **Logical Meaning**: 0.9 indicates top 10% of stocks by analyst interest; 0.1 indicates bottom 10%\n- **Directionality**: High percentile may indicate overcrowding (contrarian short) or momentum (trend following); context dependent\n- **Boundary Conditions**: 0 to 1 scale; extreme values (0.95+) indicate consensus concentration",
+    "expression_list": [
+        "quantile(vec_avg(buy_recommendation_weighting), driver=\"uniform\")",
+        "quantile(vec_avg(sell_recommendation_weighting), driver=\"uniform\")"
+    ]
+}

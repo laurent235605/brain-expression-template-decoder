@@ -1,0 +1,16 @@
+{
+    "template": "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression({concentration}, group_mean({concentration}, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize({nondomicile},std=4), 20), industry)), industry)",
+    "idea": "残差剥离与变化率交互：借鉴CAPM残差模板逻辑，先通过252日回归剔除地理集中度的行业共同成分得到残差，再与海外收入占比的20日变化率（模板1的delta算子）进行组内Z标准化后的非线性交互，提纯特异性国家风险暴露的加速变化信号。",
+    "expression_list": [
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_concentration, group_mean(rsk74_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_nondomicile,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_concentration, group_mean(rsk74_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_raw_exp_nondomicile1,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_concentration, group_mean(rsk74_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_raw_exp_nondomicile2,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_concentration, group_mean(rsk74_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_std_exp_nondomicile1,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_concentration, group_mean(rsk74_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_std_exp_nondomicile2,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_raw_concentration, group_mean(rsk74_raw_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_nondomicile,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_raw_concentration, group_mean(rsk74_raw_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_raw_exp_nondomicile1,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_raw_concentration, group_mean(rsk74_raw_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_raw_exp_nondomicile2,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_raw_concentration, group_mean(rsk74_raw_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_std_exp_nondomicile1,std=4), 20), industry)), industry)",
+        "group_normalize(multiply(signed_power(group_zscore(winsorize(ts_regression(rsk74_raw_concentration, group_mean(rsk74_raw_concentration, industry), 252, rettype=0), std=4), industry), 2), group_zscore(ts_delta(winsorize(rsk74_std_exp_nondomicile2,std=4), 20), industry)), industry)"
+    ]
+}

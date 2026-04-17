@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(subtract(ts_rank(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), 504), 0.5), 3)",
+    "idea": "观察当前数据丰富度在其两年历史（504日）中的分位位置，减去中位数中心化后，使用signed_power进行三次方非线性变换。此操作压缩中间分位（0.4-0.6区间）的噪音，同时显著放大处于历史极端高丰富度（成熟蓝筹）或极端低丰富度（新近上市/困境）的信号强度，强调尾部分位的重要性。",
+    "expression_list": [
+        "signed_power(subtract(ts_rank(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), 504), 0.5), 3)"
+    ]
+}

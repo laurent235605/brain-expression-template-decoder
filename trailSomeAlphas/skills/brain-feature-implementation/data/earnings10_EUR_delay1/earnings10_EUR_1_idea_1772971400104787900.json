@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_rank(winsorize(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), std=4), 252), industry)",
+    "idea": "采用双重排名机制：先将5日变化率进行252日历史时序分位数排名(ts_rank)，识别相对自身历史的极端修正分位，再进行行业内横向排名(group_rank)，双重筛选确保信号既具有历史极端性又具备行业相对优势，避免静态阈值导致的行业偏差。",
+    "expression_list": [
+        "group_rank(ts_rank(winsorize(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), std=4), 252), industry)"
+    ]
+}

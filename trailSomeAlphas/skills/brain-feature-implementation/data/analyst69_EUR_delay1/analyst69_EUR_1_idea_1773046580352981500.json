@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(signed_power(ts_rank(winsorize(ts_delta(ts_delta({eps_best_eeps_cur_yr}, 5), 5), std=4), 252), 2), industry)",
+    "idea": "捕捉预期修订的加速度（二阶动量），即短期修订速度的变化率。通过连续两次5日差分识别分析师行为的拐点，经历史252日分位数标准化后，使用signed_power非线性放大极端值，并进行行业中性化处理。适用于识别业绩指引发布初期或趋势反转的加速阶段，强调极端事件而非线性趋势。",
+    "expression_list": [
+        "group_zscore(signed_power(ts_rank(winsorize(ts_delta(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 252), 2), industry)",
+        "group_zscore(signed_power(ts_rank(winsorize(ts_delta(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 252), 2), industry)"
+    ]
+}

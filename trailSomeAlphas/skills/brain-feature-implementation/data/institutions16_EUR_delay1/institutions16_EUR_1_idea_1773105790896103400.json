@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 10), ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20)), sector)), 1.0), group_zscore(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 10), ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20)), sector), 0), 5)",
+    "idea": "变化加速度与信号过滤：构建资产变化的二阶导数（10日变化减20日变化）捕捉资产_gathering动能的加速或减速，经行业中性化后仅当|Z-score|>1时才暴露仓位（过滤弱信号），并应用5日衰减平滑，专门捕捉资产流入流出趋势的拐点信号。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(subtract(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 10), ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20)), sector)), 1.0), group_zscore(subtract(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 10), ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20)), sector), 0), 5)"
+    ]
+}

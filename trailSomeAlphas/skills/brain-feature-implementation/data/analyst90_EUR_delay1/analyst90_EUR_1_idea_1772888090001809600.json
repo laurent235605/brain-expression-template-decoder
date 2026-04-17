@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30))",
+    "idea": "**Concept**: Probability-Price Divergence\n- **Sample Fields Used**: `likelihood_score`, `exit_price`, `openprice`\n- **Definition**: Deviation of expected return (implied by prices) from what the success likelihood would predict based on historical regression\n- **Why This Feature**: Detects mismatches between analyst confidence and implied return magnitude; high likelihood with low expected return suggests risk aversion or constraints\n- **is filling nan necessary**: Both fields must be present; use if_else to check is_nan on both before calculation to avoid false divergences from missing data.\n- **Logical Meaning**: Positive divergence (high likelihood, low implied return) suggests conservative targeting; negative divergence suggests aggressive targeting with low confidence\n- **Directionality**: Context-dependent; extreme values indicate potential mispricing of risk\n- **Boundary Conditions**: Values beyond 2 standard deviations indicate calibration errors between price targets and probability assessments",
+    "expression_list": [
+        "vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30))"
+    ]
+}

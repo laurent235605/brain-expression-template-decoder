@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater(winsorize(vec_avg({stock_split_ratio_243}), std=4), 1.0), 1.0, trade_when( less(winsorize(vec_avg({stock_split_ratio_243}), std=4), 1.0), -1.0, 0 ) )",
+    "idea": "在模板1的基础上引入极值处理（winsorize），针对极端分拆比率（如10:1或1:10）可能包含的数据错误或市场操纵噪音进行标准差裁剪（4倍标准差），再执行方向性判断，提升因子的稳健性。",
+    "expression_list": [
+        "trade_when( greater(winsorize(vec_avg(ern6_stock_split_ratio_243), std=4), 1.0), 1.0, trade_when( less(winsorize(vec_avg(ern6_stock_split_ratio_243), std=4), 1.0), -1.0, 0 ) )"
+    ]
+}

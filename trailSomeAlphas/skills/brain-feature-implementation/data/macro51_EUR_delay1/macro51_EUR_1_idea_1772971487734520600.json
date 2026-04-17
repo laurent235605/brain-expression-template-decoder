@@ -1,0 +1,7 @@
+{
+    "template": "quantile(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 21) / ts_backfill({600_ucits_weight}, 21), std=4), driver=\"gaussian\")",
+    "idea": "非线性尾部增强的溢价信号。在数据清洗和截尾后，使用高斯分位数转换将原始比值分布映射到标准正态分布。该变换压缩中间区间（中性配置）的距离，放大极端值（显著超配或低配）的差异，使信号对接近套利边界的大幅偏离更加敏感，适用于极端配置情绪的捕捉和尾部风险预警。",
+    "expression_list": [
+        "quantile(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21), std=4), driver=\"gaussian\")"
+    ]
+}

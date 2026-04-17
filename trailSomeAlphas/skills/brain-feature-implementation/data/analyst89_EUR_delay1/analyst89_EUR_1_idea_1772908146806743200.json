@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), sector), 2)",
+    "idea": "行业内数据丰富度的极端偏离捕捉策略，对组内Z-Score进行幂变换放大尾部差异，专注于极度数据匮乏（潜在财务困境或新上市）与极度高频报告（业务复杂或重组）的双向异常值",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), sector), 2)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply({sustratfy1}, subtract({grow_fy5}, {1_gaigr}))",
+    "idea": "**Concept**: Growth-Financing Sustainability\n- **Sample Fields Used**: grow_fy5, igaigr variants, sustratfy1\n- **Definition**: Interaction between desired growth rate and internally sustainable growth capacity, adjusted for strategic feasibility\n- **Why This Feature**: Identifies companies attempting to grow faster than their internal capital generation allows (funding gap) or underutilizing growth capacity\n- **Logical Meaning**: Positive values indicate self-fundable growth (excess capacity); negative values indicate external financing dependency\n- **is filling nan necessary**: Yes, sustratfy1 may have limited coverage. Use group_mean() by sector to fill, as sustainability strategies vary by industry norms.\n- **Directionality**: Positive = sustainable growth; Negative = financing risk ahead\n- **Boundary Conditions**: Large positive = cash accumulation potential; large negative = equity dilution or debt buildup risk",
+    "expression_list": [
+        "multiply(mdl172_sustratfy1, subtract(mdl172_grow_fy5, mdl172_1_gaigr))"
+    ]
+}

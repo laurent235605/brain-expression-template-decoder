@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( winsorize( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( vec_stddev({estimated_eps}), 0.001 ) ), std=4 ), industry ) ), 2 ), quantile( group_zscore( winsorize( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( vec_stddev({estimated_eps}), 0.001 ) ), std=4 ), industry ), driver=\"gaussian\" ), 0 )",
+    "idea": "将原始Surprise除以估计的标准差(vec_stddev)转化为t统计量，消除估计不确定性差异；经winsorize去极值后，在行业内进行group_zscore标准化，最后用trade_when仅保留|zscore|>2的极端尾部信号，并结合gaussian quantile拉伸，强化对统计显著且极端的超预期/低于预期事件的暴露，中段噪音直接置0。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( winsorize( divide( subtract( vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps) ), add( vec_stddev(ern6_estimated_eps), 0.001 ) ), std=4 ), industry ) ), 2 ), quantile( group_zscore( winsorize( divide( subtract( vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps) ), add( vec_stddev(ern6_estimated_eps), 0.001 ) ), std=4 ), industry ), driver=\"gaussian\" ), 0 )",
+        "trade_when( greater( abs( group_zscore( winsorize( divide( subtract( vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps) ), add( vec_stddev(ern6_estimated_eps), 0.001 ) ), std=4 ), industry ) ), 2 ), quantile( group_zscore( winsorize( divide( subtract( vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps) ), add( vec_stddev(ern6_estimated_eps), 0.001 ) ), std=4 ), industry ), driver=\"gaussian\" ), 0 )"
+    ]
+}

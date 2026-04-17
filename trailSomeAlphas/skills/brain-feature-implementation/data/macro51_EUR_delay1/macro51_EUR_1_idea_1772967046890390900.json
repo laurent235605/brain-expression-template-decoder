@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta( group_rank( winsorize( {stoxx_europe_600_ucits_weight}, std=3 ), industry ), 21 ) / ( 1 + ts_std_dev( winsorize( {stoxx_europe_600_ucits_weight}, std=3 ), 63 ) )",
+    "idea": "行业内权重动量与波动率调整模板。计算经过winsorize清洗后的权重在行业内排名(group_rank)的21日变化率（捕捉行业内权重相对迁移速度），并用过去63日权重波动率进行标准化调整（分母加1避免除零）。该信号识别那些在行业内权重排名快速上升（资金流入加速）或下降（资金撤离）且波动率相对较低（趋势稳定）的标的，用于捕捉有序的市值层级转换。",
+    "expression_list": [
+        "ts_delta( group_rank( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight, std=3 ), industry ), 21 ) / ( 1 + ts_std_dev( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight, std=3 ), 63 ) )"
+    ]
+}

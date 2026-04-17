@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(right_tail(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.0), 1.5), 10)",
+    "idea": "先通过right_tail截取行业内标准化后的右尾（仅保留极端高配权益组合，剔除中间及左尾），再施加signed_power(1.5)二次强化，最后衰减平滑。这种\"先截断再放大\"的结构避免了中间噪音区域的干扰，专注于高置信度极端配置的持续性，适合\"只赌极端、放弃模糊地带\"的精确定位策略。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(right_tail(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.0), 1.5), 10)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "vec_percentage({version}, 0.9) - vec_percentage({version}, 0.1)",
+    "idea": "**Concept**: Version Percentile Concentration\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: 90th percentile of versions within the vector minus 10th percentile, measuring the structural spread of contributor versions\n- **Why This Feature**: Quantifies the structural diversity of opinion - wide percentiles indicate fragmented analytical views; narrow percentiles indicate uniform versioning\n- **is filling nan necessary**: Filter NaN values before percentile calculation to ensure accurate tail measurement\n- **Directionality**: High values indicate structural disagreement or asynchronous updates; low values indicates synchronized contributor behavior\n- **Boundary Conditions**: Zero indicates all contributors on same version; high values indicate maximum dispersion across the versioning spectrum",
+    "expression_list": [
+        "vec_percentage(anl85_version, 0.9) - vec_percentage(anl85_version, 0.1)"
+    ]
+}

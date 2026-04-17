@@ -1,0 +1,8 @@
+{
+    "template": "multiply( group_rank( quantile( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver=\"gaussian\" ), industry ), signed_power( subtract(1, divide(days_from_last_change(vec_avg({actual_eps})), 63) ), 0.5 ) )",
+    "idea": "事件新鲜度衰减加权：在原始高斯Surprise基础上，引入距离上次实际EPS变更的天数构建衰减因子，越近期的业绩惊喜权重越高，使用signed_power控制衰减曲线非线性，强调新发布业绩的alpha爆发力。",
+    "expression_list": [
+        "multiply( group_rank( quantile( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" ), industry ), signed_power( subtract(1, divide(days_from_last_change(vec_avg(ern6_actual_eps)), 63) ), 0.5 ) )",
+        "multiply( group_rank( quantile( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" ), industry ), signed_power( subtract(1, divide(days_from_last_change(vec_avg(ern6_actual_eps_274)), 63) ), 0.5 ) )"
+    ]
+}

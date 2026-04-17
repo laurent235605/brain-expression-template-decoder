@@ -1,0 +1,7 @@
+{
+    "template": "group_rank( vec_avg({stock_split_ratio_243}), industry )",
+    "idea": "应用组内排名（group_rank）于模板1的分拆比率，识别\"行业内相对罕见\"的资本结构调整事件（如某行业内唯一进行正向分拆的公司），而非关注绝对比率大小，捕捉行业层面的结构性alpha。",
+    "expression_list": [
+        "group_rank( vec_avg(ern6_stock_split_ratio_243), industry )"
+    ]
+}

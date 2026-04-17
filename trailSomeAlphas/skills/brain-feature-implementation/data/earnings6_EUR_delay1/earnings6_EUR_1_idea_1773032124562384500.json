@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))",
+    "idea": "**Concept**: Relative EPS Surprise Percentage\n- **Sample Fields Used**: actual_eps, estimated_eps\n- **Definition**: Percentage deviation of actual from estimated EPS (surprise / |estimate|)\n- **Why This Feature**: Normalizes surprise magnitude by estimate size; 0.10 surprise on $1.00 estimate is more significant than on $10.00 estimate in percentage terms\n- **Logical Meaning**: Standardized measure of expectation violation; comparable across companies of different sizes and earnings scales\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Division by zero protection needed if estimated_eps is 0; use if_else to handle.\n- **Directionality**: Positive values indicate beat (bullish); negative values indicate miss (bearish); magnitude indicates degree of surprise\n- **Boundary Conditions**: Extreme values when estimate near zero (divide by small number); zero indicates perfect consensus accuracy",
+    "expression_list": [
+        "divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))",
+        "divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_rank(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 10)",
+    "idea": "使用group_rank替代group_zscore，将信号转换为行业内分位数排名（0-1均匀分布），再施加10日线性衰减。排名转换消除了原始分布的偏度和特异值影响，使得衰减过程更专注于排序的持续性而非绝对偏离幅度，适合追求稳健相对收益、降低因子分布漂移影响的场景。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 10)"
+    ]
+}

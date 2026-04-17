@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_sum(ts_delta({shortint}, 1), 15))), 2), zscore(ts_sum(ts_delta({shortint}, 1), 15)), 0)",
+    "idea": "仅在15日空头累积变化的截面Z-score绝对值超过2个标准差（极端空头拥挤或极端空头回补）时保留原Z-score信号，中间区间视为噪音并置零，构造极端尾部事件驱动型因子，避免平庸区间的无效交易。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15))), 2), zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15)), 0)",
+        "trade_when(greater(abs(zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15))), 2), zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), 0)"
+    ]
+}

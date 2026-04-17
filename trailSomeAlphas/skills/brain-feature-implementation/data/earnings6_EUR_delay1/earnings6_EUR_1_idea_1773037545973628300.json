@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( vec_avg({stock_split_ratio_243}), 20 )",
+    "idea": "对模板1的分拆信号施加线性时序衰减（ts_decay_linear），将单日事件冲击平滑为持续20天的渐变影响，符合资本结构事件的市场消化过程，同时相比ts_mean赋予近期事件更高权重，提升对连续分拆事件的敏感度。",
+    "expression_list": [
+        "ts_decay_linear( vec_avg(ern6_stock_split_ratio_243), 20 )"
+    ]
+}

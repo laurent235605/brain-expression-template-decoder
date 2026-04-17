@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_regression(winsorize(ts_backfill({exp_usa},63),std=4), group_mean(winsorize(ts_backfill({exp_usa},63),std=4), log(ts_mean(cap,21)), sector), 252, rettype=0), ts_regression(winsorize(ts_backfill({exp_chn},63),std=4), group_mean(winsorize(ts_backfill({exp_chn},63),std=4), log(ts_mean(cap,21)), sector), 252, rettype=0))",
+    "idea": "分别对中美敞口进行行业趋势剥离得到特质性残差，再构建残差价差（Residual Spread）。双重净化后的信号同时去除了行业Beta和各自的国家共同因素，仅保留公司层面的相对跨境敞口异常，纯度高于原始价差。",
+    "expression_list": [
+        "subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), log(ts_mean(cap,21)), sector), 252, rettype=0), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4), log(ts_mean(cap,21)), sector), 252, rettype=0))"
+    ]
+}

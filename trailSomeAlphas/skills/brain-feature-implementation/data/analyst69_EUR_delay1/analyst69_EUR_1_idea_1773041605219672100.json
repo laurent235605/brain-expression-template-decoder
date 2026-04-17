@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(ts_delta({eps_best_eeps_cur_yr}, 5)), ts_mean(ts_std_dev({eps_best_eeps_cur_yr}, 63), 252)), signed_power(quantile({eps_best_eeps_cur_yr}, driver=gaussian), 1.5), NaN), 20)",
+    "idea": "**事件驱动衰减结构 (Event-Driven Decay Structure)**\n- **逻辑**：捕捉盈利预期大幅调整（5日绝对变化超过历史波动率均值）后的动量漂移，通过20日线性衰减窗口赋予近期调整更高权重，对非事件期返回NaN避免无效持仓。\n- **关键操作**：abs(ts_delta)识别变动幅度，与历史波动率比较确定事件阈值，signed_power在事件发生时放大信号，ts_decay_linear实现事件后信号衰减。\n- **适用场景**：适用于分析师密集调整预期后的价格发现过程，捕获漂移效应。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), ts_mean(ts_std_dev(anl69_aeps_best_eeps_cur_yr, 63), 252)), signed_power(quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian), 1.5), NaN), 20)",
+        "ts_decay_linear(trade_when(greater(abs(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), ts_mean(ts_std_dev(anl69_eps_best_eeps_cur_yr, 63), 252)), signed_power(quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian), 1.5), NaN), 20)"
+    ]
+}

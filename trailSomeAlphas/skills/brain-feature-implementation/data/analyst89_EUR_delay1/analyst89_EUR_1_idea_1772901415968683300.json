@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), std=4), industry)",
+    "idea": "通过vec_count统计每日财报期数（比vec_avg更直接反映数据密度），经252日滚动计算有效数据天数，4倍标准差截尾消除极端值后，在行业内部进行zscore标准化。此模板消除不同行业披露制度差异（如金融vs科技），得到可跨行业比较的数据透明度评分，高值代表相对同行的历史数据完备性。",
+    "expression_list": [
+        "group_zscore(winsorize(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), std=4), industry)"
+    ]
+}

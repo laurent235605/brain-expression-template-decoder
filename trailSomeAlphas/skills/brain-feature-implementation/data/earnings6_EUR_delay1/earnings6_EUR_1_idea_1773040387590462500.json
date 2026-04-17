@@ -1,0 +1,10 @@
+{
+    "template": "add(if_else(is_nan(vec_count({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_max({stock_split_ratio_243})), 0, 1)))",
+    "idea": "采用多统计量向量特征组合：对董事会会议使用计数（vec_count）而非均值以捕捉会议频次，对EPS使用均值存在性，对拆股使用最大值（vec_max）捕捉最激进的拆分比例。通过异构统计量的组合提升对企业活动强度的刻画鲁棒性。",
+    "expression_list": [
+        "add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))",
+        "add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))",
+        "add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))",
+        "add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1)))"
+    ]
+}

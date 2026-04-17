@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry)",
+    "idea": "风险调整后的信念强度：将剥离规模效应后的残差除以近期21日收益波动率（加0.001防止除零），得到经风险调整的权益配置强度；在行业内部进行zscore比较，识别那些承担单位风险获取超额权益暴露的基金，剔除高波动带来的虚假高配置信号。",
+    "expression_list": [
+        "group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry)"
+    ]
+}

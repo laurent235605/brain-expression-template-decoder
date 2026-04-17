@@ -1,0 +1,7 @@
+{
+    "template": "divide(vec_avg({rank}), ts_std_dev(vec_avg({rank}), 20))",
+    "idea": "**Concept**: Signal-to-Noise Ratio\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Ratio of current rank level to its historical volatility (rank divided by rolling standard deviation)\n- **Why This Feature**: Combines the signal magnitude (rank) with its stability; a high rank number (poor ranking) with low volatility represents a consistently disfavored stock, while the same rank with high volatility suggests uncertainty\n- **Logical Meaning**: Quantifies the confidence-adjusted strength of the model's view; high values indicate extreme ranking with high stability (strong conviction)\n- **is filling nan necessary**: Division requires non-zero denominator; std_dev of 0 (perfectly stable rank) is rare but possible, resulting in division by zero (NaN or Inf, handled by pasteurize). Do not fill std_dev with artificial values.\n- **Directionality**: Higher absolute values indicate stronger signal per unit of noise; sign depends on rank convention (typically positive values for extreme ranks)\n- **Boundary Conditions**: Undefined when volatility is zero; approaches infinity as volatility approaches zero with non-zero rank; zero when rank is at historical mean",
+    "expression_list": [
+        "divide(vec_avg(mdl245_rank), ts_std_dev(vec_avg(mdl245_rank), 20))"
+    ]
+}

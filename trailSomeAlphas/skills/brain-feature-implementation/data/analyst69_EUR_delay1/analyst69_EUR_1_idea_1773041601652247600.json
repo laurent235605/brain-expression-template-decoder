@@ -1,0 +1,5 @@
+{
+    "template": "ts_regression(winsorize(quantile({eps_best_eeps_cur_yr}, driver=gaussian), std=4), log(ts_mean({cap}, 21)), 252, rettype=0)",
+    "idea": "**市值中性化预期残差 (Size-Neutralized Expectation Residual)**\n- **逻辑**：消除市值规模对盈利预期水平的结构性影响（大市值往往有更高的绝对盈利预期），提取无法被市值解释的特异性预期残差（rettype=0），聚焦真正的盈利质量差异。\n- **关键操作**：对数市值作为解释变量，252日滚动回归提取残差，winsorize防止极值主导回归。\n- **适用场景**：适用于大小盘风格分化剧烈的市场，避免因子暴露于市值因子。",
+    "expression_list": []
+}

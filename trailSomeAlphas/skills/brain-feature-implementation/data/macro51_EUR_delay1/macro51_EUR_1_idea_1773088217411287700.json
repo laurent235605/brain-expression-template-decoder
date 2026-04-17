@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_rank({stoxx_europe_600_ucits_weight}, 126), 0.7), ts_delta({stoxx_europe_600_ucits_weight}, 21), if_else(less(ts_rank({stoxx_europe_600_ucits_weight}, 126), 0.3), reverse(ts_delta({stoxx_europe_600_ucits_weight}, 21)), 0))",
+    "idea": "基于半年历史分位数（ts_rank, 126天）划分市场状态：当权重处于历史高位（前30%）时追踪短期动量（ts_delta），处于历史低位（后30%）时追踪反向动量（reverse），中间区间置零，使用if_else构建非线性状态转换策略，适应风格趋势延续与反转的复合场景。",
+    "expression_list": [
+        "if_else(greater(ts_rank(mcr51_ishares_stoxx_europe_600_ucits_weight, 126), 0.7), ts_delta(mcr51_ishares_stoxx_europe_600_ucits_weight, 21), if_else(less(ts_rank(mcr51_ishares_stoxx_europe_600_ucits_weight, 126), 0.3), reverse(ts_delta(mcr51_ishares_stoxx_europe_600_ucits_weight, 21)), 0))"
+    ]
+}

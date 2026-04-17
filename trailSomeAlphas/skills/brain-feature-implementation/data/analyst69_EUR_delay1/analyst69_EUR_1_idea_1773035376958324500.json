@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), industry)",
+    "idea": "**行业内相对效率改善（组内时序交叉结构）**：计算效率比率的5日变化（模板B的delta时序视角应用于模板A的比率），再在行业内进行zscore标准化。识别出在同行中改善最显著的股票，既捕捉了盈利转化效率的动态变化，又控制了行业基准漂移。符合第3.1步组内比较与第4.2.2步变化趋势的结合逻辑。",
+    "expression_list": [
+        "group_zscore(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), industry)",
+        "group_zscore(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), industry)"
+    ]
+}

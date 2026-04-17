@@ -1,0 +1,14 @@
+{
+    "template": "zscore(winsorize({concentration} - ts_mean({concentration}, 60), std=4)) * zscore(winsorize({crowding}, std=4))",
+    "idea": "标准化集中度偏离与拥挤度的非线性叠加：对地理集中度偏离和拥挤度分别进行winsorize去极值和zscore标准化，消除量纲差异后相乘，识别极端地理变化伴随高拥挤的系统性风险。",
+    "expression_list": [
+        "zscore(winsorize(rsk74_concentration - ts_mean(rsk74_concentration, 60), std=4)) * zscore(winsorize(rsk74_crowding, std=4))",
+        "zscore(winsorize(rsk74_concentration - ts_mean(rsk74_concentration, 60), std=4)) * zscore(winsorize(rsk74_raw_crowding, std=4))",
+        "zscore(winsorize(rsk74_concentration - ts_mean(rsk74_concentration, 60), std=4)) * zscore(winsorize(liquidity_factor_crowding, std=4))",
+        "zscore(winsorize(rsk74_concentration - ts_mean(rsk74_concentration, 60), std=4)) * zscore(winsorize(liquidity_timeseries_crowding, std=4))",
+        "zscore(winsorize(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), std=4)) * zscore(winsorize(rsk74_crowding, std=4))",
+        "zscore(winsorize(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), std=4)) * zscore(winsorize(rsk74_raw_crowding, std=4))",
+        "zscore(winsorize(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), std=4)) * zscore(winsorize(liquidity_factor_crowding, std=4))",
+        "zscore(winsorize(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), std=4)) * zscore(winsorize(liquidity_timeseries_crowding, std=4))"
+    ]
+}

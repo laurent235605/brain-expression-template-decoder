@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({exposure_value}), 5)",
+    "idea": "**Concept**: Exposure Momentum\n- **Sample Fields Used**: exposure_value\n- **Definition**: 5-day change in geographic exposure values capturing recent shifts in regional revenue concentration\n- **Why This Feature**: Identifies companies actively pivoting geographic strategy or experiencing rapid regional growth/decline; early signal for momentum strategies\n- **Logical Meaning**: Rate of change in geographic footprint; positive values indicate increasing exposure to the measured region, negative values indicate retreat\n- **is filling nan necessary**: Short-term momentum requires recent data. NaN values should be forward-filled using ts_backfill only if the gap is temporary (1-2 days). Persistent NaNs should be treated as missing to avoid false momentum signals from stale data.\n- **Directionality**: Positive values indicate increasing regional exposure; negative values indicate decreasing exposure\n- **Boundary Conditions**: Extreme values may indicate data errors or one-time events like asset sales; should be winsorized",
+    "expression_list": [
+        "ts_delta(vec_avg(anl91_exposure_value), 5)"
+    ]
+}

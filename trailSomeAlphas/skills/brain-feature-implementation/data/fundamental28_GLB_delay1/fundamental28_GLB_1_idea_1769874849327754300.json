@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({growthratesa_value_08816a}, 63)",
+    "idea": "**Concept**: Earnings Growth Acceleration\n- **Sample Fields Used**: `growthratesa_value_08816a`\n- **Definition**: Change in annual EPS growth rate over a 63-day window to capture inflection points in momentum\n- **Why This Feature**: Markets price changes in growth rates, not just growth levels; acceleration signals improving business trends\n- **Logical Meaning**: Second derivative of earnings; positive values indicate growth is speeding up (positive momentum)\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Annual growth rates update infrequently; filling NaNs with stale data creates look-ahead bias.\n- **Directionality**: Positive values indicate accelerating growth (bullish); negative indicates deceleration\n- **Boundary Conditions**: Extreme values occur near earnings turning points (negative to positive growth)",
+    "expression_list": [
+        "ts_delta(fnd28_growthratesa_value_08816a, 63)"
+    ]
+}

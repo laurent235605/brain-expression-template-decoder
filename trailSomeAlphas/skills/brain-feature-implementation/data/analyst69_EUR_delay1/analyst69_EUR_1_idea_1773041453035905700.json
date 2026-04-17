@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(add(multiply(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), industry), 0.6), multiply(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 20), std=4), industry), 0.4)), 3)",
+    "idea": "将短期(5日)和中期(20日)EPS修正变化分别进行行业内标准化后按6:4加权合成，再通过3日线性衰减平滑处理，构建兼顾即时动量和中期趋势的低换手率分析师预期复合因子。",
+    "expression_list": [
+        "ts_decay_linear(add(multiply(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), 0.6), multiply(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), std=4), industry), 0.4)), 3)",
+        "ts_decay_linear(add(multiply(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), 0.6), multiply(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 20), std=4), industry), 0.4)), 3)"
+    ]
+}

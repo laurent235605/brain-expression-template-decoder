@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg({actual_eps}),252),max(abs(ts_mean(vec_avg({actual_eps}),252)),0.001)),divide(ts_std_dev(vec_avg({x_dividend}),252),max(abs(ts_mean(vec_avg({x_dividend}),252)),0.001))),industry),5)",
+    "idea": "行业中性化盈利-股息稳定性价差，通过max函数防止均值接近零时的数值不稳定，并采用线性衰减平滑降低换手率，捕捉跨行业相对政策不一致性。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend),252),max(abs(ts_mean(vec_avg(ern6_x_dividend),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_233),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_233),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc_235),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend),252),max(abs(ts_mean(vec_avg(ern6_x_dividend),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_233),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_233),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc),252)),0.001))),industry),5)",
+        "ts_decay_linear(group_zscore(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc_235),252)),0.001))),industry),5)"
+    ]
+}

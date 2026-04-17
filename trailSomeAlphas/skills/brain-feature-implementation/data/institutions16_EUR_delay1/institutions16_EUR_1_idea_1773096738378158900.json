@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(trade_when(less(days_from_last_change(ts_backfill({fundreportedequityassets}, 63)), 10), group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 5), add(ts_std_dev(returns, 21), 0.001)), industry), 0), 5)",
+    "idea": "事件驱动视角：仅捕捉过去10天内权益资产配置发生显著变化（5日变化量）的调仓事件，经行业风险调整标准化后，使用5日指数衰减窗口快速降低旧事件权重，专注近期主动管理行为带来的风险调整后暴露变化。",
+    "expression_list": [
+        "ts_decay_exp_window(trade_when(less(days_from_last_change(ts_backfill(inst16_ipreo_fundreportedequityassets, 63)), 10), group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 5), add(ts_std_dev(returns, 21), 0.001)), industry), 0), 5)"
+    ]
+}

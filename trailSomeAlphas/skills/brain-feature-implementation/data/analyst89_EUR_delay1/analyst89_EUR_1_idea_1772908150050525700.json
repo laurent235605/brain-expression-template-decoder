@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), std=4), 20)",
+    "idea": "经Winsorize极值处理和线性衰减平滑的稳健数据密度指标，既抑制极端异常值（如数据错误导致的异常计数）对截面的影响，又通过衰减加权赋予近期数据质量更高权重，控制换手率",
+    "expression_list": [
+        "ts_decay_linear(winsorize(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), std=4), 20)"
+    ]
+}

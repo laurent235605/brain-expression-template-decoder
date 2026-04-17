@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(divide(ts_delta(ts_mean(vec_avg({elta_value}), 3), 5), add(ts_std_dev(vec_avg({elta_value}), 20), 0.01)), industry)",
+    "idea": "波动率调整的行业内相对动量模板。先对估计序列进行3日时序平滑去噪，计算5日变化率作为修正速度，除以过去20日的波动率（加0.01防除零）进行风险调整，得到类似信息比率的稳定性指标，最后进行行业内排名。这度量的是单位风险下的预期调整强度，能够识别出那些以稳定、持续方式改善或恶化的标的，排除高波动但无趋势的价格噪音干扰。",
+    "expression_list": [
+        "group_rank(divide(ts_delta(ts_mean(vec_avg(ern10_elta_value), 3), 5), add(ts_std_dev(vec_avg(ern10_elta_value), 20), 0.01)), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 63), industry)",
+    "idea": "构建中美敞口价差的63日变化率（动量），并在行业内标准化，捕捉区域轮动加速中的早鸟机会，识别地缘政治周期中的动态调整信号而非静态配置水平。",
+    "expression_list": [
+        "group_zscore(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 63), industry)"
+    ]
+}

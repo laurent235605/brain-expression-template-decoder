@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),group_cartesian_product(industry,sector)),63,rettype=0),industry)",
+    "idea": "使用group_cartesian_product构建'行业×板块'的精细分组，在更同质的peer组内计算市值加权的空头变化基准，再进行回归残差提取；此举可进一步剔除细分板块内的共性空头趋势，获得更纯净的个股特质空头压力指标，适用于行业内部结构差异大的市场环境。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),group_cartesian_product(industry,sector)),63,rettype=0),industry)",
+        "group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),group_cartesian_product(industry,sector)),63,rettype=0),industry)"
+    ]
+}

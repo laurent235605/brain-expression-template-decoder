@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(ts_sum(ts_delta({hfown_pctown},1),20),5), 60)",
+    "idea": "持仓变化加速度(二阶导数)：先构建20日累积持仓变化，再计算其近5日的变化率(即资金流向的加速度/减速度)，最后相对于60日历史进行zscore标准化。相比原始累积流，该模板对资金流入/流出的拐点(开始加速建仓或加速出货)更为敏感，能够提前捕捉机构 conviction 的转向，而非仅仅反映持续持仓状态。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_sum(ts_delta(rsk74_hfown_pctown,1),20),5), 60)"
+    ]
+}

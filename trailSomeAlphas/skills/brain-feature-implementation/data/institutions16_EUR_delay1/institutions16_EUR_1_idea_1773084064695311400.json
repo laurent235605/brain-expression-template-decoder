@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_mean(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21)),20),252)",
+    "idea": "先计算经21日回溯填补的向量中性化残差，通过20日移动平均平滑短期调仓噪音以捕捉基金经理的持续性配置趋势，再计算该平滑值在252日（一年）历史窗口中的时序zscore，识别基金当前权益配置相对自身历史的极端程度，适用于捕捉配置周期的顶部与底部反转信号。",
+    "expression_list": [
+        "ts_zscore(ts_mean(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21)),20),252)"
+    ]
+}

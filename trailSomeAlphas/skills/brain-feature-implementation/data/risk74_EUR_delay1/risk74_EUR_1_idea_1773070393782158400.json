@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change({shortint}),5), ts_zscore(divide(ts_delta({shortint},1),ts_std_dev(ts_delta({shortint},1),63)),252), NaN)",
+    "idea": "事件驱动逻辑：仅在空头持仓数据发生实际变化后的5个交易日内生成信号，且信号强度为当日变化量经过去63天历史波动率标准化后的时序Z-score。专注捕捉'变化发生即反应'的短期alpha，避免在无变化期间的持仓磨损。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(rsk74_shortint),5), ts_zscore(divide(ts_delta(rsk74_shortint,1),ts_std_dev(ts_delta(rsk74_shortint,1),63)),252), NaN)",
+        "trade_when(less(days_from_last_change(rsk74_shortint_ts),5), ts_zscore(divide(ts_delta(rsk74_shortint_ts,1),ts_std_dev(ts_delta(rsk74_shortint_ts,1),63)),252), NaN)"
+    ]
+}

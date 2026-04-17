@@ -1,0 +1,8 @@
+{
+    "template": "multiply(winsorize(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), std=3), ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20))",
+    "idea": "多模板乘积融合：将Template1的截尾历史稳定性排名（3倍标准差winsorize处理）与Template2的事件衰减信号进行乘法组合。通过截尾去除极端历史分位异常值后，仅在历史上通常稳定但近期发生报告变更的个股上产生强负向信号，实现\"稳定被打破\"的强化逻辑。",
+    "expression_list": [
+        "multiply(winsorize(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), std=3), ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20))",
+        "multiply(winsorize(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), std=3), ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "rank(ts_av_diff(vec_avg({rank}), 60))",
+    "idea": "纯排序型均值回归（仅信排序）：完全放弃原始偏离值的幅度信息，仅保留其横截面排序（rank）。适用于认为“偏离幅度不可靠，唯有相对高低重要”的场景，将信号转换为均匀分布，避免极端偏离值主导组合权重，实现更均衡的多空配置。",
+    "expression_list": [
+        "rank(ts_av_diff(vec_avg(mdl245_rank), 60))"
+    ]
+}

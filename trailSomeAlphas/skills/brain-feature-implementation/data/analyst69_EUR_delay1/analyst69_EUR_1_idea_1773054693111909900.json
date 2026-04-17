@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), std=4), industry)",
+    "idea": "融合输入1的短期修正速度与输入2的行业中性逻辑。首先通过ts_backfill进行10日回溯填充确保数据有效性，使用winsorize裁剪极端异常值防止分母为0或极端跳变，再通过group_zscore实现行业中性化（分析师预期速度的行业差异较大，需在同行业内比较）。该结构保留了原始速度概念的敏感性，同时通过截面标准化和极值控制提升稳定性，适用于捕捉跨行业的相对预期变化速度。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), std=4), industry)",
+        "group_zscore(winsorize(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), std=4), industry)"
+    ]
+}

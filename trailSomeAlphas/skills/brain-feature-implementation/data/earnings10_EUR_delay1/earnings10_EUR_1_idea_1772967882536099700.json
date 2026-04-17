@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(ts_rank(winsorize(vec_range(vec_filter({aily_delta_recon_value}, value=\"nan\")), std=4), 60), 0.9), vec_range(vec_filter({aily_delta_recon_value}, value=\"nan\")), 0), 5)",
+    "idea": "**概念**: 极端修订冲击事件捕获（ Top Decile 触发）\n- **改进逻辑**: 使用vec_range（日内最大最小值之差）替代简单均值，捕捉极端分歧\"爆点\"；通过60日ts_rank定位历史分位，结合trade_when仅在波动率进入前10%分位（边界条件）时开仓，其余时间屏蔽信号；最后以ts_decay_linear线性衰减持仓5日，降低事件后迅速反转带来的换手，符合\"异常不确定性常先于波动扩张\"的经济逻辑。\n- **适用场景**: 事件驱动策略，仅捕捉Revision剧烈异动的高置信度时刻。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(vec_range(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), std=4), 60), 0.9), vec_range(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), 0), 5)"
+    ]
+}

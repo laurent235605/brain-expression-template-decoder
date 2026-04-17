@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), ts_step(), 252, rettype=0)",
+    "idea": "财报披露趋势残差：利用252日时间序列回归（rettype=0取残差）剥离数据丰富度的长期线性趋势（如正常季度报告带来的自然增长），提取超预期变化部分。正残差表明公司数据披露节奏异常加速（可能预示重大经营变化需跟踪调研），负残差表明披露延迟或中断（潜在风险信号），适用于捕捉偏离正常报告周期的异常信息披露行为。",
+    "expression_list": [
+        "ts_regression(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), ts_step(), 252, rettype=0)"
+    ]
+}

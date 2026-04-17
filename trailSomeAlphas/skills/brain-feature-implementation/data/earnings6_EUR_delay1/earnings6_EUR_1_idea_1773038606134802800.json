@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry ) ), 1.5 ), ts_decay_linear( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20 ), 0 )",
+    "idea": "采用条件交易机制（trade_when），仅在盈利惊喜处于行业均值1.5个标准差之外的显著区间时才持仓，其他区间视为噪音并强制置零，通过极值过滤聚焦强预期修正事件，降低无效持仓带来的摩擦成本。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ) ), 1.5 ), ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), 0 )",
+        "trade_when( greater( abs( group_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ) ), 1.5 ), ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), 0 )"
+    ]
+}

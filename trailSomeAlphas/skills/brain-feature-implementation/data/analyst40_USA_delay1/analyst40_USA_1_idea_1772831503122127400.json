@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( ts_delta( ts_std_dev( ts_backfill( {overall_genderratio}, 63 ), 20 ), 20 ), industry ) ), 2 ), multiply( -1, group_zscore( ts_delta( ts_std_dev( ts_backfill( {overall_genderratio}, 63 ), 20 ), 20 ), industry ) ), 0 )",
+    "idea": "稳定性改善动量捕捉。计算20日滚动标准差后，求其20日变化率（delta）以识别董事会性别构成稳定性的改善（波动率下降）或恶化（波动率上升）趋势。在行业层面标准化后，仅保留变化幅度超过2倍标准差的显著信号（过滤噪音）。取负号确保波动率下降（稳定性提升）对应正向Alpha。适用于捕捉治理结构优化或政策落地的动态过程。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( ts_delta( ts_std_dev( ts_backfill( anl40_overall_genderratio, 63 ), 20 ), 20 ), industry ) ), 2 ), multiply( -1, group_zscore( ts_delta( ts_std_dev( ts_backfill( anl40_overall_genderratio, 63 ), 20 ), 20 ), industry ) ), 0 )"
+    ]
+}

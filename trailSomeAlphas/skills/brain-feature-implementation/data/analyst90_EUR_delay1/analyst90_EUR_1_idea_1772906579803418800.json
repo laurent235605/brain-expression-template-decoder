@@ -1,0 +1,7 @@
+{
+    "template": "bucket(zscore(rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4))), range=\"-3,3,0.5\")",
+    "idea": "采用分桶操作（bucket）将连续信号离散化为多档，基于排名分位数的zscore进行非线性分段，实现“极强/强/中/弱/极弱”的阶梯式仓位配置。",
+    "expression_list": [
+        "bucket(zscore(rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4))), range=\"-3,3,0.5\")"
+    ]
+}

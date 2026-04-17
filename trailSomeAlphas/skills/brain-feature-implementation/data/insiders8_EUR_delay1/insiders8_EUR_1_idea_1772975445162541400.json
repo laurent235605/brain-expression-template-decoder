@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(if_else(greater(abs(group_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, sector)), 2), signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4)), sector)",
+    "idea": "结合仅极端有信号假设，使用条件判断（if_else）：当截面zscore超过2倍标准差（极端区）时应用模板2的1.5次幂放大，否则保持线性。这样在保持行业中性基础上，对极端定价错误进行非线性惩罚/奖励，中间区域保持线性以降低换手率并避免过度反应。",
+    "expression_list": [
+        "group_zscore(if_else(greater(abs(group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector)), 2), signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4)), sector)"
+    ]
+}

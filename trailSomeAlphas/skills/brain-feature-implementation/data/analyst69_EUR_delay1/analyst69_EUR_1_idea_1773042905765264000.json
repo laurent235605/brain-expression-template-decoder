@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(subtract(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 126), driver=\"gaussian\"), ts_mean(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 21)), industry)",
+    "idea": "多时间框架背离：构建短期（63日窗口）与长期（252日平滑）稳定性的背离指标，行业中性化后识别'近期波动但历史稳定'（潜在修复）或'近期稳定但历史波动'（潜在风险）的反转机会。",
+    "expression_list": [
+        "group_zscore(subtract(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 126), driver=\"gaussian\"), ts_mean(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 21)), industry)",
+        "group_zscore(subtract(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 126), driver=\"gaussian\"), ts_mean(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 21)), industry)"
+    ]
+}

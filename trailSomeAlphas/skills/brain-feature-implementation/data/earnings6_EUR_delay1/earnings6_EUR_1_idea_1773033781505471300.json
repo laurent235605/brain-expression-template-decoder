@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(trade_when(is_nan(subtract(vec_avg({stock_split_ratio_243}), last_diff_value(vec_avg({stock_split_ratio_243}), 252))), 0, subtract(vec_avg({stock_split_ratio_243}), last_diff_value(vec_avg({stock_split_ratio_243}), 252))), 63)",
+    "idea": "**概念**: 拆分政策动量（变化率）\n**逻辑**: 利用last_diff_value捕捉过去252天内最近一次拆分政策的变化（从无拆分到拆分，或拆分比例改变），计算当前值与该次变化的差异，并在63天窗口内计算时序zscore。这识别了拆分事件的\"新鲜度\"和强度，避免对长期维持同一拆分水平的公司产生重复信号，强调政策转变的边际效应。",
+    "expression_list": [
+        "ts_zscore(trade_when(is_nan(subtract(vec_avg(ern6_stock_split_ratio_243), last_diff_value(vec_avg(ern6_stock_split_ratio_243), 252))), 0, subtract(vec_avg(ern6_stock_split_ratio_243), last_diff_value(vec_avg(ern6_stock_split_ratio_243), 252))), 63)"
+    ]
+}

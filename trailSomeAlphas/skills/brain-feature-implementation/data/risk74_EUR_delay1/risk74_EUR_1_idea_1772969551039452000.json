@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(({hfown_pctown} / {hfown_numown}), std=4), 20), industry)",
+    "idea": "持仓集中度变化率动量：计算原始分散度指标经去极值后的20日时间序列差分（ts_delta），捕捉资金持仓正在快速集中（风险积聚）或分散（风险释放）的动态加速度，而非静态水平，并在行业层面进行标准化以消除行业间固有差异。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), 20), industry)"
+    ]
+}

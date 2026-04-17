@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(and(greater(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.8), greater(ts_delta(winsorize(ts_backfill({exp_usa}, 21), std=4), 10), 0)), 1.0, trade_when(and(less(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.2), less(ts_delta(winsorize(ts_backfill({exp_usa}, 21), std=4), 10), 0)), -1.0, 0)), 3)",
+    "idea": "趋势确认型极端分桶：仅在横截面处于前10%（后10%）且10日敞口变化为正（负）即敞口本身在扩大（缩小）时赋予信号，过滤掉震荡型噪音，使用更短3日衰减以保留趋势动能，确保做多正在变得更国际化的公司，做空正在收缩海外业务的公司。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(and(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.8), greater(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 10), 0)), 1.0, trade_when(and(less(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.2), less(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 10), 0)), -1.0, 0)), 3)"
+    ]
+}

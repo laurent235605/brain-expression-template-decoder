@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_delta({hfown_pctown}, 5), 252)), 2), ts_delta({hfown_pctown}, 5), 0)",
+    "idea": "历史极端分位数择时：计算当前5日流速在过去252个交易日中的z-score，并取绝对值。仅当变化幅度超过2倍历史标准差（极端拥挤或极端撤离）时才保留原始信号，中间区间视为噪音并置零。用于捕捉“聪明钱”交易的拐点与拥挤交易风险。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_delta(rsk74_hfown_pctown, 5), 252)), 2), ts_delta(rsk74_hfown_pctown, 5), 0)"
+    ]
+}

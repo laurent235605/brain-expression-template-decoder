@@ -1,0 +1,7 @@
+{
+    "template": "multiply(quantile({exp_usa}, driver=\"uniform\"), subtract(ts_delta({hfown_pctown}, 5), ts_delta({fund_pct_ownership_encr}, 5)))",
+    "idea": "**交叉增强：地理暴露 × 对冲基金与共同基金流速差**\n扩展模板2的 ownership 概念，引入提到的共同基金字段，构建HF流速与Fund流速的差值（聪明钱 vs  dumb money分歧）；与模板1的美国暴露quantile相乘。高美国暴露股票中，若HF买入而Fund卖出（差值为正），表明专业投资者看好美国业务扩张；若HF卖出而Fund买入（差值为负），则可能是机构撤离信号。利用减法运算符实现资金性质的精细化区分。",
+    "expression_list": [
+        "multiply(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), subtract(ts_delta(rsk74_hfown_pctown, 5), ts_delta(hedge_fund_pct_ownership_encr, 5)))"
+    ]
+}

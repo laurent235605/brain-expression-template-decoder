@@ -1,0 +1,14 @@
+{
+    "template": "divide(multiply({gspea2y_cf}, {mktcappera}), add({spe1yfvc_cf}, 0.01))",
+    "idea": "**Concept**: Analyst Conviction-Weighted Growth\n- **Sample Fields Used**: `gspea2y_cf`, `spe1yfvc_cf`, `mktcappera`\n- **Definition**: Long-term growth estimates weighted by estimate agreement and analyst coverage depth\n- **Why This Feature**: Growth estimates are noisy; weighting by dispersion and coverage improves precision\n- **Logical Meaning**: High values indicate consensus growth with high conviction and adequate coverage\n- **is filling nan necessary**: Yes, use `ts_backfill()` for growth estimates\n- **Directionality**: Higher values indicate high-quality growth opportunities\n- **Boundary Conditions**: Low coverage (low `mktcappera`) makes estimates unreliable",
+    "expression_list": [
+        "divide(multiply(mdl219_1_gspea2y_cf, mdl219_1_mktcappera), add(mdl219_1_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_1_gspea2y_cf, mdl219_2_mktcappera), add(mdl219_1_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_2_gspea2y_cf, mdl219_1_mktcappera), add(mdl219_1_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_2_gspea2y_cf, mdl219_2_mktcappera), add(mdl219_1_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_2_gspea2y_cf, mdl219_2_mktcappera), add(mdl219_2_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_2_gspea2y_cf, mdl219_1_mktcappera), add(mdl219_2_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_1_gspea2y_cf, mdl219_2_mktcappera), add(mdl219_2_spe1yfvc_cf, 0.01))",
+        "divide(multiply(mdl219_1_gspea2y_cf, mdl219_1_mktcappera), add(mdl219_2_spe1yfvc_cf, 0.01))"
+    ]
+}

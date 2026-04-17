@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(subtract(ts_std_dev(winsorize(group_backfill(vec_avg({exposure_value}), industry, 5), 4), 5), ts_std_dev(winsorize(group_backfill(vec_avg({exposure_value}), industry, 5), 4), 60)), 20), industry)",
+    "idea": "低换手稳健型地域稳定性：将高换手的ts_decay_linear替换为ts_mean(20)以显著降低换手率（根据operator指导，decay_linear turnover过高），结合group_backfill处理行业内缺失数据，先对原始暴露值进行winsorize(4)清洗极值，再计算期限利差，最后进行行业组内标准化。适用于捕捉缓慢而持续的地域业务转型趋势，过滤高频噪音，适合容量较大、追求低周转的策略。",
+    "expression_list": [
+        "group_zscore(ts_mean(subtract(ts_std_dev(winsorize(group_backfill(vec_avg(anl91_exposure_value), industry, 5), 4), 5), ts_std_dev(winsorize(group_backfill(vec_avg(anl91_exposure_value), industry, 5), 4), 60)), 20), industry)"
+    ]
+}

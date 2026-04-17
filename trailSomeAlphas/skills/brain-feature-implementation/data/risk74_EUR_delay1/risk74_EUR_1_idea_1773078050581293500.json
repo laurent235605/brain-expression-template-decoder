@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(greater(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.8), 1.0, trade_when(less(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.2), -1.0, 0)), industry)",
+    "idea": "先对美股敞口执行输入1的极端分桶策略（前10%赋+1/后10%赋-1），再将生成的离散多空信号进行输入2的行业中性化处理，得到相对于行业均值的极端暴露偏离，控制行业beta干扰。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.8), 1.0, trade_when(less(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.2), -1.0, 0)), industry)"
+    ]
+}

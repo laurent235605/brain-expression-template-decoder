@@ -1,0 +1,5 @@
+{
+    "template": "multiply(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), trade_when(greater(ts_rank({adv}, 63), 0.2), ts_rank({adv}, 63), 0))",
+    "idea": "流动性条件化的事件置信度加权。首先计算基础事件密集度（二进制加总）。引入流动性过滤机制：使用trade_when判断，只有当过去63天平均成交额排名（ts_rank of adv）处于前80%（即大于0.2）时，才赋予该股票事件信号，且权重与流动性排名成正比；流动性差的股票直接赋值为0（或极小值）。逻辑：事件信号在流动性充足时更可靠（减少冲击成本，信息反映更充分），且流动性本身可作为事件重要性的确认（重要事件往往伴随成交量放大）。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater( abs( ts_regression( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), group_mean( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), log( ts_mean( cap, 21 ) ), industry ), 252, rettype=0 ) ), 2 ), ts_regression( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), group_mean( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), log( ts_mean( cap, 21 ) ), industry ), 252, rettype=0 ), 0 )",
+    "idea": "先通过截面回归剔除行业共同流动成分（以市值加权行业均值为解释变量），提取特异性持仓变化残差，仅保留残差绝对值大于2倍标准差的极端事件作为交易信号；此方法过滤掉行业beta驱动的同步买卖，专注于个股层面的异质性聪明钱异动，符合'极端值可能预示拥挤或强制平仓'的边界条件。",
+    "expression_list": [
+        "trade_when( greater( abs( ts_regression( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), group_mean( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), log( ts_mean( cap, 21 ) ), industry ), 252, rettype=0 ) ), 2 ), ts_regression( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), group_mean( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), log( ts_mean( cap, 21 ) ), industry ), 252, rettype=0 ), 0 )"
+    ]
+}

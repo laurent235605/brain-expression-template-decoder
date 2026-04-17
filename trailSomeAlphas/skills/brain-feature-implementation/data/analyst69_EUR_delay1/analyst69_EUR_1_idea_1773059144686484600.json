@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(days_from_last_change({eps_expected_report_dt}), 90), group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 0)",
+    "idea": "条件性行业偏离捕捉：当模板2检测到信息极度稳定（>90天无变更，高确定性环境）时，激活模板1的效率比率行业偏离度计算（group_zscore），此时做多效率显著高于行业均值的股票，做空显著低于均值的，构建信息稳定期的行业中性价值偏离策略；信息不稳定时保持中性。",
+    "expression_list": [
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0)",
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0)",
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0)"
+    ]
+}

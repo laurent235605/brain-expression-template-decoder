@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(winsorize(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), std=3), 60)",
+    "idea": "历史极端偏离捕捉：在模板1的行业中性信号基础上，叠加60日时序Z-score(ts_zscore)，识别当前流偏离度相对于自身历史是否处于极端高位或低位，捕捉\"背离的背离\"——即资金流分歧正在突破历史区间的标的。",
+    "expression_list": [
+        "ts_zscore(winsorize(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), std=3), 60)"
+    ]
+}

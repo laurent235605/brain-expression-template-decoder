@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),3)",
+    "idea": "历史极端值非线性放大：对252日时序Z-score进行三次方signed_power变换，显著放大|Z|>2的尾部信号同时压缩中间区间，强化'历史罕见'空头的权重，构建对极端 buildup/covering 行为高度敏感的激进信号。",
+    "expression_list": [
+        "signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),3)",
+        "signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),3)"
+    ]
+}

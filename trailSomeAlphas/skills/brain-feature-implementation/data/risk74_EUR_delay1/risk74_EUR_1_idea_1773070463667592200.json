@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( subtract( winsorize(ts_backfill({exp_usa},63),std=4), winsorize(ts_backfill({exp_chn},63),std=4) ), industry )",
+    "idea": "双边地域套利（美中暴露差）：构建美国暴露与中国暴露的配对价差，在行业内部进行标准化。利用两国经济周期异步性，做多美国暴露相对高、中国暴露相对低的股票，做空相反组合，实现地域因子中性。",
+    "expression_list": [
+        "group_zscore( subtract( winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4) ), industry )"
+    ]
+}

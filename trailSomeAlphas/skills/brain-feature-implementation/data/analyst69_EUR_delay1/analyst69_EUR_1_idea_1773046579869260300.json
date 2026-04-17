@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(ts_rank(winsorize(ts_backfill(ts_delta({eps_best_eeps_cur_yr}, 5), 63), std=4), 252), 0.9), group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), industry), 0), 5)",
+    "idea": "在保留252日历史分位数识别极端事件的基础上，引入行业中性化(group_zscore)消除行业间分析师覆盖密度差异带来的偏差，仅当修订动量处于历史90%分位以上时激活信号(trade_when)，并通过5日线性衰减(ts_decay_linear)降低换手率。适用于捕捉跨行业可比、且经过去噪和缺失值回填(ts_backfill)的极端预期调整。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(ts_backfill(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63), std=4), 252), 0.9), group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), industry), 0), 5)",
+        "ts_decay_linear(trade_when(greater(ts_rank(winsorize(ts_backfill(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63), std=4), 252), 0.9), group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), industry), 0), 5)"
+    ]
+}

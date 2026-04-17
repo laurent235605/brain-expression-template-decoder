@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({likelihood_score}) / (1 + 0.5 * ts_std_dev(vec_avg({likelihood_score}), 20) + 0.5 * ts_std_dev(vec_avg({likelihood_score}), 60))",
+    "idea": "融合输入1的20日窗口与输入2的60日窗口，构建加权平均波动率作为分母的稳健信噪比，平衡对近期变化和历史基差的敏感度，降低单一窗口估计误差带来的扰动。",
+    "expression_list": [
+        "vec_avg(success_likelihood_score) / (1 + 0.5 * ts_std_dev(vec_avg(success_likelihood_score), 20) + 0.5 * ts_std_dev(vec_avg(success_likelihood_score), 60))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_skewness(vec_avg({rank}), 60)",
+    "idea": "**Concept**: Rank Distribution Skewness\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Asymmetry of the rank distribution over 60 days (third standardized moment)\n- **Why This Feature**: Measures whether the model has tended to rank the stock in the extremes (skewed toward good or bad) or centrally over the recent period\n- **Logical Meaning**: Positive skew indicates tendency toward lower rank numbers (better rankings); negative skew indicates tendency toward higher numbers (worse rankings); near zero indicates symmetric distribution around mean\n- **is filling nan necessary**: Skewness requires sufficient non-NaN observations (typically >20 for meaningful calculation). Filling with mean would artificially reduce skewness toward zero; preserve NaNs to ensure accurate distributional statistics.\n- **Directionality**: Positive = skewed toward better ranks; Negative = skewed toward worse ranks; 0 = symmetric\n- **Boundary Conditions**: Theoretical range -infinity to +infinity; practically typically between -3 and +3 for most financial data",
+    "expression_list": [
+        "ts_skewness(vec_avg(mdl245_rank), 60)"
+    ]
+}

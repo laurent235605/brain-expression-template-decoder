@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 63), 252)",
+    "idea": "配置动量（变化加速）：在清洗后的向量中性化残差基础上，计算63日变化率（delta），再对该变化率进行252日滚动zscore标准化，捕捉基金权益配置相对自身历史趋势的加速改善或恶化，识别管理人信心动态变化的拐点信号。",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 63), 252)"
+    ]
+}

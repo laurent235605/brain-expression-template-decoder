@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( ts_corr( rank( winsorize( ts_backfill( {of_owners_decile_rank_long}, 21 ), std=4 ) ), rank( winsorize( ts_backfill( {owners_decile_rank_long}, 21 ), std=4 ) ), 60 ), sector )",
+    "idea": "【秩次稳健型】预处理→非线性变换(截面rank排序替代原始值，消除量纲与极值影响)→稳健相关计算(Spearman思路)→行业中性化。迁移逻辑：将原始值映射为均匀分布的秩次后再计算60日滚动相关，大幅降低异常值对皮尔逊相关系数的非线性扭曲，提升因子在极端行情下的鲁棒性。",
+    "expression_list": [
+        "group_zscore( ts_corr( rank( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ) ), rank( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ) ), 60 ), sector )",
+        "group_zscore( ts_corr( rank( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ) ), rank( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ) ), 60 ), sector )",
+        "group_zscore( ts_corr( rank( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ) ), rank( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ) ), 60 ), sector )",
+        "group_zscore( ts_corr( rank( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ) ), rank( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ) ), 60 ), sector )"
+    ]
+}

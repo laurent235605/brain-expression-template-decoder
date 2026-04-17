@@ -1,0 +1,5 @@
+{
+    "template": "trade_when( greater( ts_regression( {concentration}, ts_step(), 20, rettype=2 ) - ts_regression( {concentration}, ts_step(), 60, rettype=2 ), 0 ), ts_decay_linear( multiply( group_rank( {crowding}, {sector} ), group_zscore( {value_ts}, {sector} ) ), 5 ), multiply( 0.1, group_zscore( {value_ts}, {sector} ) ) )",
+    "idea": "双时间尺度动量斜率差：比较20日与60日浓度回归斜率，当短期斜率大于长期（加速集中）时，启用5日线性衰减的拥挤价值信号；否则保留10%的轻仓价值暴露，避免完全空仓带来的基准偏离。",
+    "expression_list": []
+}

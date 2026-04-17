@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(ts_mean(winsorize(ts_backfill({fundportfolioturnover},63),std=4),20), log(ts_mean(winsorize(ts_backfill({reported_asset_value},63),std=4),60)), 252, rettype=0)",
+    "idea": "时序平滑净化版本：在回归前对换手率和规模分别进行20日与60日时序均值平滑，消除短期噪音后提取残差。通过降低高频扰动，该模板更准确地捕捉基金持续性的主动管理强度，避免因单日异常交易或规模波动导致的误判。",
+    "expression_list": [
+        "ts_regression(ts_mean(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4),20), log(ts_mean(winsorize(ts_backfill(fund_reported_asset_value,63),std=4),60)), 252, rettype=0)"
+    ]
+}

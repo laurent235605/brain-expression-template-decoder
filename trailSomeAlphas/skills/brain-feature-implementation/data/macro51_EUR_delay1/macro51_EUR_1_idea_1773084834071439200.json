@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(if_else(and(greater(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),252),0.9),less(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),20),0)),-1,if_else(and(less(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),252),0.1),greater(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),20),0)),1,0)),industry)",
+    "idea": "动量确认的均值反转择时。结合长期(252日)历史分位与短期(20日)变化率，仅在\"极端高估且近期下行\"或\"极端低估且近期上行\"时触发交易信号，利用短期动量过滤假突破，通过行业归一化控制组合风险暴露。",
+    "expression_list": [
+        "group_normalize(if_else(and(greater(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),252),0.9),less(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),20),0)),-1,if_else(and(less(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),252),0.1),greater(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),20),0)),1,0)),industry)"
+    ]
+}

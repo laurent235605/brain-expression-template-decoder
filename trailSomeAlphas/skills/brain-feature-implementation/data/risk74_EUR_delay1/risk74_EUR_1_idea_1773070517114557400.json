@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(ts_regression(add(ts_sum(ts_delta({shortint},1),15),multiply(0.5,ts_sum(ts_delta(ts_delta({shortint},1),1),15))),group_mean(add(ts_sum(ts_delta({shortint},1),15),multiply(0.5,ts_sum(ts_delta(ts_delta({shortint},1),1),15))),log(ts_mean({shortint},21)),industry),63,rettype=0),industry),driver=\"gaussian\")",
+    "idea": "将15日空头累积变动与15日空头变动加速度（二阶差分）等权融合，经行业中性化处理后，通过高斯分位数变换将残差分布映射至标准正态，极致拉伸尾部差异，专门识别做空压力急剧累积的异常状态。",
+    "expression_list": [
+        "quantile(group_zscore(ts_regression(add(ts_sum(ts_delta(rsk74_shortint,1),15),multiply(0.5,ts_sum(ts_delta(ts_delta(rsk74_shortint,1),1),15))),group_mean(add(ts_sum(ts_delta(rsk74_shortint,1),15),multiply(0.5,ts_sum(ts_delta(ts_delta(rsk74_shortint,1),1),15))),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),industry),driver=\"gaussian\")",
+        "quantile(group_zscore(ts_regression(add(ts_sum(ts_delta(rsk74_shortint_ts,1),15),multiply(0.5,ts_sum(ts_delta(ts_delta(rsk74_shortint_ts,1),1),15))),group_mean(add(ts_sum(ts_delta(rsk74_shortint_ts,1),15),multiply(0.5,ts_sum(ts_delta(ts_delta(rsk74_shortint_ts,1),1),15))),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),industry),driver=\"gaussian\")"
+    ]
+}

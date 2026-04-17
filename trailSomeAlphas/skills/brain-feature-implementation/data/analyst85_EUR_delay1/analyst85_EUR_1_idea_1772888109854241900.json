@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(vec_avg({version}), 20, factor=0.1)",
+    "idea": "**Concept**: Version Decay Weight\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Exponentially weighted average of versions over 20 days, giving higher weight to recent revisions while maintaining memory of historical versions\n- **Why This Feature**: Captures the persistence of version information with decay - recent updates matter more, but old versions influence the signal gradually fading\n- **is filling nan necessary**: Use `ts_backfill` before decay calculation to ensure continuous time series, then apply decay to prevent NaN propagation\n- **Directionality**: Higher values indicate recent high-version activity; lower values indicate recent low-version or old high-version activity decaying\n- **Boundary Conditions**: Approaches current value quickly if factor is high; maintains long memory if factor is low",
+    "expression_list": [
+        "ts_decay_exp_window(vec_avg(anl85_version), 20, factor=0.1)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "zscore(winsorize(subtract(ts_mean(days_from_last_change({eps_expected_report_dt}), 5), ts_mean(days_from_last_change({eps_expected_report_dt}), 20)), 4))",
+    "idea": "**稳定性变化动量（Inflection Detection）**：通过计算短期(5日)与长期(20日)均值之差，捕捉公司从\"不稳定转为稳定\"（正向信号，近期均值快速追赶历史均值）或\"刚刚发生变动\"（负向信号，近期均值骤降）的转换点。先使用`winsorize`处理极端历史值影响，再进行`zscore`标准化，形成均值为0的动量信号。",
+    "expression_list": [
+        "zscore(winsorize(subtract(ts_mean(days_from_last_change(anl69_aeps_expected_report_dt), 5), ts_mean(days_from_last_change(anl69_aeps_expected_report_dt), 20)), 4))",
+        "zscore(winsorize(subtract(ts_mean(days_from_last_change(anl69_eps_expected_report_dt), 5), ts_mean(days_from_last_change(anl69_eps_expected_report_dt), 20)), 4))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "winsorize(ts_regression(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), group_mean(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), log(ts_mean(cap, 21)), sector), 252, rettype=0), std=4)",
+    "idea": "特质性盈利剥离模板。以行业-市值加权平均的TTM EPS作为解释变量，对个股TTM EPS进行252天的时序回归取残差（rettype=0），再经过4倍标准差极值处理。该模板剔除行业景气度和市值规模的共同影响，纯粹捕捉个股独立的盈利动能，适用于寻找被行业掩盖的alpha。",
+    "expression_list": [
+        "winsorize(ts_regression(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), group_mean(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), log(ts_mean(cap, 21)), sector), 252, rettype=0), std=4)",
+        "winsorize(ts_regression(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), group_mean(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), log(ts_mean(cap, 21)), sector), 252, rettype=0), std=4)"
+    ]
+}

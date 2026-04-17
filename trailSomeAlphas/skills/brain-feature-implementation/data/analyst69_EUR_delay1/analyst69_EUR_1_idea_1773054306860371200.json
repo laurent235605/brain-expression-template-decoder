@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(trade_when(and(greater(rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4)), 0.9), greater(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), 0.9)), winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), NaN), industry)",
+    "idea": "双重极端性确认机制。要求信号同时在横截面（当日全市场前10%）和时序维度（自身历史前10%）均处于极端区间才开仓，有效剔除单一维度偶发噪音导致的假突破；不满足双极端条件的股票赋值为NaN不予交易，最终进行行业中性化处理，确保alpha来源于个体特异性而非行业轮动。",
+    "expression_list": [
+        "group_zscore(trade_when(and(greater(rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4)), 0.9), greater(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), 0.9)), winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), NaN), industry)",
+        "group_zscore(trade_when(and(greater(rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4)), 0.9), greater(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), 0.9)), winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), NaN), industry)"
+    ]
+}

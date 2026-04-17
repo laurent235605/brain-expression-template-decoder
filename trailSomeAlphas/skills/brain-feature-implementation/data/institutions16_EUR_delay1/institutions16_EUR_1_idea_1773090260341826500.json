@@ -1,0 +1,7 @@
+{
+    "template": "truncate(scale(signed_power(group_zscore(ts_decay_linear(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), 4), 20), ts_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), 4), 20), 60)), 10), sector), 1.3), longscale=1.0, shortscale=1.0), maxPercent=0.02)",
+    "idea": "行业中性非线性加速因子：先对原始资产数据进行63日回溯填充与4倍标准差截尾清洗，计算20日资产变化相对于60日均值的加速度，经10日线性衰减平滑后，在行业内部进行标准化（去除行业资金流规模差异），最后应用1.3次幂非线性变换放大极端值信号，并通过截断与缩放控制单票权重与多空敞口，捕捉行业内的资金流向拐点与动能积聚。",
+    "expression_list": [
+        "truncate(scale(signed_power(group_zscore(ts_decay_linear(subtract(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 63), 4), 20), ts_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 63), 4), 20), 60)), 10), sector), 1.3), longscale=1.0, shortscale=1.0), maxPercent=0.02)"
+    ]
+}

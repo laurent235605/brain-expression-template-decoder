@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(multiply(bucket(rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63))), range=\"0,1,0.2\"), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10))), industry)",
+    "idea": "使用分桶(bucket)将信号离散化为五档，乘以事件新鲜度衰减因子构造复合权重，最后进行行业内归一化(group_normalize)，实现行业内部基于新鲜度加权的离散仓位分配，避免连续数值的噪音干扰。",
+    "expression_list": [
+        "group_normalize(multiply(bucket(rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63))), range=\"0,1,0.2\"), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10))), industry)"
+    ]
+}

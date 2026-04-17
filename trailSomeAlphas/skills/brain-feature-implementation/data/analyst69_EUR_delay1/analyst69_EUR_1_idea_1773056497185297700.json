@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(multiply(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), 63), 10)",
+    "idea": "将模板A的盈利转化效率比率作为权重乘入模板B的累积预期修订流中，高盈利效率公司的分析师预期调整获得更高权重。这种交叉结构识别'基本面优质（高转化率）+ 预期改善（正修订）'的双重确认信号，剔除低效公司的虚假预期上调。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(multiply(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 63), 10)",
+        "ts_decay_linear(ts_sum(multiply(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 63), 10)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "days_from_last_change(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60))",
+    "idea": "相关性结构突变检测（Correlation Regime Change Detection）。将输入1的'距上次变化'逻辑元化（Meta-level），应用于输入2的滚动相关系数序列本身。该信号捕捉盈利预期跨年度相关性何时发生质变（如从0.8突降至0.2），相关性的突然瓦解往往领先于盈利周期拐点或基本面结构性断裂。",
+    "expression_list": [
+        "days_from_last_change(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60))",
+        "days_from_last_change(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60))",
+        "days_from_last_change(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60))",
+        "days_from_last_change(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60))"
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "template": "divide({sedol_fc_ebop}, {sedol_pb})",
+    "idea": "**Concept**: Intrinsic Value Convergence Potential\n- **Sample Fields Used**: {sedol_fc_ebop}, {sedol_pb}, {sedol_grahamnum}, {sedol_pvan}\n- **Definition**: Ratio of model-based intrinsic value estimates (EBO, Graham Number) to current price metrics to identify stocks with largest theoretical value gaps\n- **Why This Feature**: Multiple valuation models converging on undervaluation provides stronger signal than any single metric; represents first-principles value investing\n- **Logical Meaning**: Values > 1 indicate undervaluation; values < 1 indicate overvaluation relative to conservative intrinsic value estimates\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values predict mean-reversion toward intrinsic value; very low values predict growth optionality or value traps\n- **Boundary Conditions**: Negative book values or earnings create undefined ratios; financial companies require model adjustments",
+    "expression_list": [
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_allcap_sedol_pb)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_allcap_sedol_pbdwf)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_allcap_sedol_pbroeresidual)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_allcap_sedol_pbwt)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_dev_sedol_pb)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_dev_sedol_pbdwf)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_dev_sedol_pbroeresidual)",
+        "divide(fnd65_allcap_sedol_fc_ebop, fnd65_dev_sedol_pbwt)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_dev_sedol_pb)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_dev_sedol_pbdwf)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_dev_sedol_pbroeresidual)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_dev_sedol_pbwt)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_allcap_sedol_pb)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_allcap_sedol_pbdwf)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_allcap_sedol_pbroeresidual)",
+        "divide(fnd65_dev_sedol_fc_ebop, fnd65_allcap_sedol_pbwt)"
+    ]
+}

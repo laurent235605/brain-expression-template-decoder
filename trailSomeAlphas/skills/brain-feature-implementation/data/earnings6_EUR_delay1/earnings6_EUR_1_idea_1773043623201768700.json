@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 10), ts_mean(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 60))",
+    "idea": "构建Surprise的期限结构利差：短期（10日线性衰减）减去长期（60日简单平均），捕捉预期修正的加速度（第二阶导）而非绝对水平；当近期Surprise显著高于长期趋势时做多，反之类空，类似'盈利动量的动量'策略。",
+    "expression_list": [
+        "subtract(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 10), ts_mean(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 60))",
+        "subtract(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 10), ts_mean(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 60))"
+    ]
+}

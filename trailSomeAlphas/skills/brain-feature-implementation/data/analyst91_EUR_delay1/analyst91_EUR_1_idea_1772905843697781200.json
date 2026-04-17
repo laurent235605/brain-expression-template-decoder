@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(add(multiply(0.6, ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252)), multiply(0.4, group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 60), industry))), 2)",
+    "idea": "融合多时间维度与双重视角：短期20日波动率（权重60%）经全局年度Z-Score标准化捕捉个体历史极端，长期60日波动率（权重40%）经行业Z-Score标准化捕捉行业相对风险；加权叠加后平方处理，构建更稳健的多频段业务结构质量评分。",
+    "expression_list": [
+        "signed_power(add(multiply(0.6, ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252)), multiply(0.4, group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 60), industry))), 2)"
+    ]
+}

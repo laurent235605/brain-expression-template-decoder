@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(vec_median({opentimestamp}) - vec_median({loadedidstimestamp}), std=4), symbol) / (vec_stddev({opentimestamp}) + vec_stddev({loadedidstimestamp}) + 1)",
+    "idea": "稳健组内相对延迟因子：基于中位数差分抵抗异常值干扰，按交易标的分组Z-score标准化消除证券间固有差异，分母整合开盘与加载时间戳波动率以全面反映执行风险，适用于识别相对同业的异常执行效率",
+    "expression_list": [
+        "group_zscore(winsorize(vec_median(mdl209_opentimestamp) - vec_median(mdl209_loadedidstimestamp), std=4), symbol) / (vec_stddev(mdl209_opentimestamp) + vec_stddev(mdl209_loadedidstimestamp) + 1)"
+    ]
+}

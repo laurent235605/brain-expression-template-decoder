@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), s_log_1p(winsorize(ts_backfill({reported_asset_value},63),std=4)), 252, rettype=0)), 2)",
+    "idea": "非线性规模调整后的极端偏离强调。对规模字段先进行对数压缩(s_log_1p)以更好拟合规模与换手率的非线性对数关系，回归提取残差后进行截面Z-score标准化，再通过平方幂变换(signed_power)显著放大残差分布两端的极端值、压缩中间区域至接近零。此模板专注于识别异常激进(高残差)或异常保守(低残差)的基金交易行为，忽略温和偏离的规模调整换手率。",
+    "expression_list": [
+        "signed_power(zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), s_log_1p(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 252, rettype=0)), 2)"
+    ]
+}

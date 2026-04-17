@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) ), industry )",
+    "idea": "行业中性化盈利惊喜持续性：融合模板2的'当前/历史均值'持续性比率框架与模板1的行业中性化(group_zscore)方法，识别盈利惊喜持续性强于行业同业的标的，避免行业周期性差异干扰。",
+    "expression_list": [
+        "group_zscore( divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), industry )",
+        "group_zscore( divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), industry )"
+    ]
+}

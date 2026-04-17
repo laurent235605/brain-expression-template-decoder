@@ -1,0 +1,16 @@
+[
+    "bucket(rank(mcr51_ishares_stoxx_europe_600_ucits_weight), range=\"0,1,0.2\")",
+    "jump_decay(mcr51_ishares_stoxx_europe_600_ucits_weight, 5, sensitivity=0.3, force=0.05)",
+    "power(mcr51_ishares_stoxx_europe_600_ucits_weight, 2)",
+    "quantile(mcr51_ishares_stoxx_europe_600_ucits_weight, driver=\"gaussian\", sigma=1.0)",
+    "ts_av_diff(mcr51_ishares_stoxx_europe_600_ucits_weight, 20) / ts_std_dev(mcr51_ishares_stoxx_europe_600_ucits_weight, 20)",
+    "ts_decay_exp_window(mcr51_ishares_stoxx_europe_600_ucits_weight, 20, factor=0.9)",
+    "ts_delta(ts_delta(mcr51_ishares_stoxx_europe_600_ucits_weight, 5), 5)",
+    "ts_std_dev(mcr51_ishares_stoxx_europe_600_ucits_weight, 20) / abs(ts_mean(mcr51_ishares_stoxx_europe_600_ucits_weight, 20))",
+    "ts_sum(ts_delta(mcr51_ishares_stoxx_europe_600_ucits_weight, 1), 20)",
+    "ts_theilsen(mcr51_ishares_stoxx_europe_600_ucits_weight, ts_step(1), 20)",
+    "ts_vector_neut(mcr51_ishares_stoxx_europe_600_ucits_weight, ts_delay(mcr51_ishares_stoxx_europe_600_ucits_weight, 1), 20)",
+    "mcr51_ishares_stoxx_europe_600_ucits_weight * mcr51_ishares_stoxx_europe_600_ucits_weight",
+    "mcr51_ishares_stoxx_europe_600_ucits_weight / ts_mean(mcr51_ishares_stoxx_europe_600_ucits_weight, 20)",
+    "mcr51_ishares_stoxx_europe_600_ucits_weight / ts_median(mcr51_ishares_stoxx_europe_600_ucits_weight, 1)"
+]

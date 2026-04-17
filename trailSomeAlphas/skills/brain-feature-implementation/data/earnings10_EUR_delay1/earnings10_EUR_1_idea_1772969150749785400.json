@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), 0.8), multiply(quantile(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10))), 0)",
+    "idea": "仅当过去3天持续处于历史80%分位以上时(if_else条件)，才对原始信号进行高斯分位数转换并叠加新鲜度权重，否则置零，实现强持续性与高新鲜度的双重确认机制，过滤掉短期随机波动。",
+    "expression_list": [
+        "if_else(greater(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), 0.8), multiply(quantile(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), driver='gaussian'), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10))), 0)"
+    ]
+}

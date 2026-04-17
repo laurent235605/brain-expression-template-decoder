@@ -1,0 +1,7 @@
+{
+    "template": "hump(trade_when(or(greater(rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), 0.9), less(rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), 0.1)), quantile(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), driver=\"gaussian\"), 0), hump=0.01)",
+    "idea": "仅对极端分位（前/后10%）的基金进行交易，中间分位视为噪音直接置零；使用高斯分位数将尾部信号进一步拉伸以强化极端值，并通过hump控制日内微小变动带来的不必要调仓，专注于高conviction的极端风险调整配置。",
+    "expression_list": [
+        "hump(trade_when(or(greater(rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), 0.9), less(rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), 0.1)), quantile(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), driver=\"gaussian\"), 0), hump=0.01)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(if_else(or(less(bucket(rank(winsorize(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)),std=4)),\"0,1,0.1\"),0.1), greater(bucket(rank(winsorize(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)),std=4)),\"0,1,0.1\"),0.9)), winsorize(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)),std=4), 0), 5)",
+    "idea": "极端地理暴露尾部策略（Head-Tail Only）。仅交易美国暴露前10%（纯出口商）和后10%（纯国内防御）的标的，中间80%视为噪音赋值为0，并施加5日线性衰减控制换手率。利用纯地理因子溢价/折价在极端区间的非线性定价错误，避免中等暴露标的的beta混淆。",
+    "expression_list": [
+        "ts_decay_linear(if_else(or(less(bucket(rank(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)),std=4)),\"0,1,0.1\"),0.1), greater(bucket(rank(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)),std=4)),\"0,1,0.1\"),0.9)), winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)),std=4), 0), 5)"
+    ]
+}

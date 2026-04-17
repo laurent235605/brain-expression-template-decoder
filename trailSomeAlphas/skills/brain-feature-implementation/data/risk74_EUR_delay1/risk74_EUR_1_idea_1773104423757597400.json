@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(quantile(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), driver=\"gaussian\"), industry)",
+    "idea": "融合模板1的地理价差与分布变换技术：使用高斯分位数转换(quantile)将原始价差映射为正态分布形态，压缩中间区间噪音至零附近同时拉伸极端值尾部，增强多空组合的区分度，适用于截面回归框架下的非线性增强。",
+    "expression_list": [
+        "group_zscore(quantile(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), driver=\"gaussian\"), industry)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5)), 0.85), less(rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5)), 0.15)), ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5), 0)",
+    "idea": "在模板1的极端修订逻辑基础上引入数据稳健性处理：先使用ts_backfill对EPS修订序列进行21日回溯填充，确保在数据稀疏或缺失情况下仍能保持样本连续性，再应用头尾15%的极端区间筛选。此模板提升了信号在中小市值或低覆盖股票上的鲁棒性，避免因数据缺失导致的样本选择偏差。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5)), 0.85), less(rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5)), 0.15)), ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), 0)",
+        "trade_when(or(greater(rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5)), 0.85), less(rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5)), 0.15)), ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), 0)"
+    ]
+}

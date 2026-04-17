@@ -1,0 +1,7 @@
+{
+    "template": "quantile(subtract(group_zscore(winsorize(ts_backfill({overall_score},2),std=4), sector), group_zscore(winsorize(ts_backfill({intangible_exposure_score},2),std=4), sector)), driver='cauchy')",
+    "idea": "柯西分布尾部拉伸模板：对行业调整后的spread应用柯西分布分位数转换，利用其厚尾特性极度拉伸两端极端值，同时剧烈压缩中间区间。相比普通z-score，此变换更有效地识别那些具备极端无形资产折价（深度价值陷阱）或极端无形资产溢价（坚固护城河）的异常股票，强化尾部风险收益。",
+    "expression_list": [
+        "quantile(subtract(group_zscore(winsorize(ts_backfill(mdl255_overall_score,2),std=4), sector), group_zscore(winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4), sector)), driver='cauchy')"
+    ]
+}

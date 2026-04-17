@@ -1,0 +1,5 @@
+{
+    "template": "subtract(quantile({sector_percentile} - {corr_weighted_sector_percentile}, driver='cauchy'), group_mean(quantile({sector_percentile} - {corr_weighted_sector_percentile}, driver='cauchy'), log(ts_mean({market_cap}, 21)), sector))",
+    "idea": "柯西分布拉伸后的市值中性化结构。Preprocess阶段采用Source 3的quantile(...,'cauchy')对原始差距进行强尾部拉伸，使极端错配公司信号更突出；Normalize阶段直接应用Source 1的group_mean市值对数加权中性化，从拉伸后的信号中减去以市值对数为权重的行业均值，消除大盘股主导效应；Robustness通过cauchy分布的厚尾特性天然抑制中间区间噪音。",
+    "expression_list": []
+}

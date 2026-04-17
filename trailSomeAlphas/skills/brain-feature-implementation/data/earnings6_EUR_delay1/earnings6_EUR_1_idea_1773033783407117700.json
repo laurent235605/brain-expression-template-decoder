@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr(vec_avg({stock_split_ratio_243}), ts_step(), 252) * vec_stddev({stock_split_ratio_243})",
+    "idea": "**概念**: 拆分趋势性与波动性复合因子\n**逻辑**: 计算过去252天拆分比率与时间的相关系数（ts_corr with ts_step）捕捉拆分政策的趋势方向（ increasing/decreasing split ratio trend），乘以vec_stddev衡量拆分政策的波动性或不稳定性。高正相关+高波动可能预示激进的股本扩张政策；高负相关+高波动可能预示逐步收紧或间歇性合股。适用于识别资本结构政策的稳定性和方向性。",
+    "expression_list": [
+        "ts_corr(vec_avg(ern6_stock_split_ratio_243), ts_step(), 252) * vec_stddev(ern6_stock_split_ratio_243)"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "template": "trade_when(greater(ts_rank(group_rank(winsorize({nondomicile},std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize({concentration},std=4), industry), 20), 0)",
+    "idea": "截面时序双重排序条件：先进行行业内截面排名（模板2的组内思想），再对该排名进行时序历史分位判断（模板1的时序思想），形成'相对地位的极端偏离'信号，仅当股票在行业内的相对海外收入排名处于自身历史前20%时，才跟踪其行业内地理集中度排名的20日变化率。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_nondomicile,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_nondomicile,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), 20), 0)",
+        "trade_when(greater(ts_rank(group_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), industry), 60), 0.8), ts_delta(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), 20), 0)"
+    ]
+}

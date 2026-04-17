@@ -1,0 +1,8 @@
+{
+    "template": "{risk_score} * ({exp_usa} + {exp_chn})",
+    "idea": "**Concept**: Tariff-Geographic Vulnerability Product\n- **Sample Fields Used**: `risk_score`, `exp_usa`, `exp_chn`, `exp_nondomicile1`\n- **Definition**: Interaction between tariff risk scores and actual geographic revenue exposure to identify companies with both high policy risk and high economic dependence\n- **Why This Feature**: Tariff risk matters most when companies actually derive revenue from affected regions; this separates real vulnerability from theoretical risk\n- **Logical Meaning**: High values indicate dangerous combination of high tariff risk and high exposure to tariff-targeted regions\n- **is filling nan necessary**: Yes, fill NaN in exposure with 0 (no exposure) before multiplication to avoid losing valid risk scores\n- **Directionality**: High = high tariff risk + high geographic exposure (avoid); Low = either low risk or low exposure (safer)\n- **Boundary Conditions**: Zero indicates either no tariff risk or no foreign exposure; extreme values indicate pure-play exposure to tariff-targeted regions",
+    "expression_list": [
+        "tariff_risk_score * (rsk74_raw_exp_usa + rsk74_raw_exp_chn)",
+        "tariff_risk_score_specialized * (rsk74_raw_exp_usa + rsk74_raw_exp_chn)"
+    ]
+}

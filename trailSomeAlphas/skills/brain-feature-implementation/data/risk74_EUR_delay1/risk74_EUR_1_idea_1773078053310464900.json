@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4),industry), ts_step(), 5, rettype=2)",
+    "idea": "先对美股敞口进行输入2的行业中性化（group_zscore），再对其结果执行输入2的5日线性回归斜率计算，识别行业内敞口正在快速增加（正斜率）或减少（负斜率）的动量，而非绝对水平。",
+    "expression_list": [
+        "ts_regression(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4),industry), ts_step(), 5, rettype=2)"
+    ]
+}

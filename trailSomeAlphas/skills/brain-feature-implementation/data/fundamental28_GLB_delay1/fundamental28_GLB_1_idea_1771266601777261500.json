@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(abs(divide(subtract(divide({value_04001q}, {value_02300q}), ts_mean(divide({value_04001q}, {value_02300q}), 252)), ts_std_dev(divide({value_04001q}, {value_02300q}), 252))), 2), signed_power(divide({value_04001q}, {value_02300q}), 0.5), 0)",
+    "idea": "**概念**: 条件触发式资产效率极端信号\n- **融合来源**: 模板1（Z-Score阈值判断）+ 模板5（现金资产效率）+ 模板逻辑运算符（trade_when）\n- **定义**: 仅当资产效率比率偏离历史均值超过2个标准差时，才对该效率值进行非线性放大（signed_power 0.5压缩中间放大尾部），否则信号为0\n- **为何有效**: 中等效率波动多为噪音，只有极端偏离（异常高效或低效）才包含增量信息；通过trade_when实现\"头尾交易，中段忽略\"的区间结构\n- **逻辑含义**: 识别资产周转率的结构性突变或一次性冲击；signed_power(0.5)将效率值的右尾拉长，强调极端高效公司的稀缺性\n- **边界条件**: 2-sigma阈值过滤常态波动；0值填充避免中等效率公司进入组合\n- **方向性**: 正向因子，仅在效率显著高于历史常态时做多，极端低效时可反向做空（需反转符号）",
+    "expression_list": [
+        "trade_when(greater(abs(divide(subtract(divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q), ts_mean(divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q), 252)), ts_std_dev(divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q), 252))), 2), signed_power(divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q), 0.5), 0)",
+        "trade_when(greater(abs(divide(subtract(divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q), ts_mean(divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q), 252)), ts_std_dev(divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q), 252))), 2), signed_power(divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q), 0.5), 0)",
+        "trade_when(greater(abs(divide(subtract(divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q), ts_mean(divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q), 252)), ts_std_dev(divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q), 252))), 2), signed_power(divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q), 0.5), 0)",
+        "trade_when(greater(abs(divide(subtract(divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q), ts_mean(divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q), 252)), ts_std_dev(divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q), 252))), 2), signed_power(divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q), 0.5), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "pasteurize({volume})",
+    "idea": "**Concept**: Purified Volume Signal\n- **Sample Fields Used**: volume\n- **Definition**: Volume data cleaned of infinities and extreme outliers using pasteurization\n- **Why This Feature**: Ensures the core liquidity signal is robust, finite, and tradable without data artifacts causing simulation errors\n- **Logical Meaning**: The fundamental \"is this security tradable?\" signal stripped of data errors and extreme outliers\n- **is filling nan necessary**: No, pasteurize handles infinities but preserves NaN for true missing data\n- **Directionality**: Higher = more liquid; Lower = less liquid; NaN = untradable or error\n- **Boundary Conditions**: Upper bound by natural data limits after outlier removal; lower bound at 0 or minimum observable volume",
+    "expression_list": [
+        "pasteurize(mdl234_volume)"
+    ]
+}

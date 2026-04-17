@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay({eps_best_eeps_cur_yr}, 5)), 5)",
+    "idea": "预期修正加速度：对模板1的修正速度指标再次应用ts_delta，构建二阶导数(加速度)指标。不仅捕捉分析师预期是否在调整，更关注调整速度是在加快(动能积聚)还是减慢(趋势衰竭)，用于识别预期拐点与动量延续性。",
+    "expression_list": [
+        "ts_delta(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(anl69_aeps_best_eeps_cur_yr, 5)), 5)",
+        "ts_delta(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(anl69_eps_best_eeps_cur_yr, 5)), 5)"
+    ]
+}

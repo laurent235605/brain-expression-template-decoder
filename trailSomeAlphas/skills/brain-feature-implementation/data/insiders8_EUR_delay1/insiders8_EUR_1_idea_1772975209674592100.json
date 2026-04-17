@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_decay_linear(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20), std=4), 1.5), sector)",
+    "idea": "对模板1的相关性指标引入时序衰减加权（ts_decay_linear），赋予近期协同性更高权重，再通过signed_power进行非线性变换。相比等权重的60日窗口，此结构更快捕捉所有权结构的边际变化（加速趋同或分歧），同时保持行业中性，适合动量型所有权alpha的提取。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), std=4), 1.5), sector)"
+    ]
+}

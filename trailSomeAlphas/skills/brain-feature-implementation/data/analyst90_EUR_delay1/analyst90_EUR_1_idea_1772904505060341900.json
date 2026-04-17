@@ -1,0 +1,7 @@
+{
+    "template": "quantile(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4), \"gaussian\")",
+    "idea": "高斯分位数拉伸映射：对波动率进行去极值后，使用高斯分位数转换将原始分布映射到标准正态空间。将中间区间高度压缩至零附近，同时将极端稳定与极端不稳定的股票显著拉开距离，强化多空两端的区分度与权重分配。",
+    "expression_list": [
+        "quantile(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4), \"gaussian\")"
+    ]
+}

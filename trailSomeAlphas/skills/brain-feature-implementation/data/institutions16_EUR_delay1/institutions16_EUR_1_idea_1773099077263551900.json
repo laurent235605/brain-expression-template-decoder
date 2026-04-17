@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_delta(ts_backfill({reported_asset_value}, 20), 20) - ts_mean(ts_delta(ts_backfill({reported_asset_value}, 20), 20), 60), 10) - ts_decay_linear(ts_delta(ts_backfill({reported_asset_value}, 20), 60) - ts_mean(ts_delta(ts_backfill({reported_asset_value}, 20), 60), 120), 10), industry)",
+    "idea": "长短周期加速度利差：比较短期（20日）与长期（60日）资产流加速度的差值，通过decay平滑后做行业中性，捕捉资金流入动能的\"陡峭化\"或\"平坦化\"趋势，识别中期趋势强化与衰竭信号。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20) - ts_mean(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), 60), 10) - ts_decay_linear(ts_delta(ts_backfill(fund_reported_asset_value, 20), 60) - ts_mean(ts_delta(ts_backfill(fund_reported_asset_value, 20), 60), 120), 10), industry)"
+    ]
+}

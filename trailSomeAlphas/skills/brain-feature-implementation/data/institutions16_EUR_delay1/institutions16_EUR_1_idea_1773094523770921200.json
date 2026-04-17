@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), group_cartesian_product(sector, bucket(log(ts_mean({reported_asset_value}, 63)), range=\"0,1,5\"))), 252, rettype=0), sector)",
+    "idea": "行业-规模双维度中性化：利用group_cartesian_product将股票按行业与市值（使用63日均值对数分五档）交叉分组，在每个细分组内计算市值加权基准，通过252日回归剥离行业轮动与规模效应的双重影响，得到更纯净的公司特异性alpha，并在行业内归一化控制暴露。",
+    "expression_list": [
+        "group_normalize(ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), group_cartesian_product(sector, bucket(log(ts_mean(fund_reported_asset_value, 63)), range=\"0,1,5\"))), 252, rettype=0), sector)"
+    ]
+}

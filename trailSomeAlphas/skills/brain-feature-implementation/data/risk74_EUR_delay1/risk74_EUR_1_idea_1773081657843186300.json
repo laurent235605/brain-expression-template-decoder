@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_rank(ts_sum(ts_delta({hfown_pctown}, 1), 20), 60), ts_rank(ts_sum(ts_delta({shortint}, 1), 15), 60))",
+    "idea": "近期历史分位相对强弱。计算基金20日累积流与空头15日累积变化在最近60日内的时序分位(ts_rank)差值，识别短期资金流向相对自身历史周期的强弱转换，而非绝对水平，适用于捕捉资金行为的边际变化而非存量状态。",
+    "expression_list": [
+        "subtract(ts_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 60), ts_rank(ts_sum(ts_delta(rsk74_shortint, 1), 15), 60))",
+        "subtract(ts_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 60), ts_rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 60))"
+    ]
+}

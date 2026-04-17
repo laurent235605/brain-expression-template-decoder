@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(subtract(ts_decay_linear({exp_usa},20), ts_decay_linear({exp_chn},20)), {sector})",
+    "idea": "**跨区域暴露动量差（美中经济脱钩博弈）**\n- **逻辑**：对美国与中国暴露进行时序线性衰减平滑（强调近期趋势），计算两者差值并在行业内标准化；捕捉公司战略重心从单一市场向另一市场转移的动量，或受益于两国经济周期分化的标的\n- **适用场景**：中美周期错位时的 pair trading；识别正在经历地理多元化或地理集中度提升的转型期公司",
+    "expression_list": []
+}

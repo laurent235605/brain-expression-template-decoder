@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(multiply(winsorize(quantile({exp_usa}, driver=\"uniform\"), 4), winsorize(ts_delta({hfown_pctown}, 5), 3)), industry)",
+    "idea": "**交叉增强：风险截断后的地理-HF复合信号**\n对模板1的uniform quantile进行4倍标准差winsorize（处理极端纯出口商异常值），与模板2的HF流速经3倍winsorize后相乘，最终经group_normalize行业中性化。该结构首先通过winsorize控制两类数据的极端噪音（地理暴露的0/1异常值与HF流速的闪崩/闪涨），再通过行业归一化确保每个行业内部多空平衡，构建可交易的纯因子组合。",
+    "expression_list": [
+        "group_normalize(multiply(winsorize(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), 4), winsorize(ts_delta(rsk74_hfown_pctown, 5), 3)), industry)"
+    ]
+}

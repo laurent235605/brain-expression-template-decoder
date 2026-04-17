@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(winsorize(ts_backfill({fundportfolioturnover}, 63), std=4), bucket(rank(winsorize(ts_backfill({reported_asset_value}, 63), std=4)), \"0,1,0.2\")), 1.5)",
+    "idea": "采用非参数化方法替代线性回归：先将规模(report_asset_value)按截面分位数划分为5个等规模桶(bucket)，在每个规模桶内计算换手率的标准化zscore(group_zscore)。这种方法能捕捉规模与换手率之间可能存在的非线性关系（如小规模与大规模基金的行为边际差异），并通过signed_power增强同规模组内极端活跃基金的区分度。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover, 63), std=4), bucket(rank(winsorize(ts_backfill(fund_reported_asset_value, 63), std=4)), \"0,1,0.2\")), 1.5)"
+    ]
+}

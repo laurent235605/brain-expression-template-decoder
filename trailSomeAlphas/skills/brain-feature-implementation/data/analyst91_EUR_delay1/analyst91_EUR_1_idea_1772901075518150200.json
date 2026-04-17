@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 5)",
+    "idea": "地理敞口波动率期限利差（加速度指标）。通过5日短期波动率与60日长期波动率的差值，捕捉地域业务动荡的加速或减速趋势。正值表示近期地域重组加剧（可能处于并购整合期），负值表示业务地域趋于稳定。加入5日线性衰减平滑以降低单日噪声，但保留对近期变化的敏感性，用于识别业务地域转型的临界点。",
+    "expression_list": [
+        "ts_decay_linear(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 5)"
+    ]
+}

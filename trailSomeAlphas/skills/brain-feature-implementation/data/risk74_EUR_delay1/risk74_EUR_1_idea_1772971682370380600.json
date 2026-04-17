@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(abs({factor_e} - {factor_s}) + abs({factor_s} - {factor_g}), 4), sector)",
+    "idea": "ESG组分失衡度检测：计算环境、社会、治理三要素之间的绝对偏差和（表征profile的lopsided程度），经极值裁剪后在行业内部标准化。该模板将输入1的'lopsided ESG profiles'概念与输入2的行业中性化方法结合，高值表示ESG结构严重失衡（潜在风险点），低值表示均衡，适用于识别特定ESG风险敞口。",
+    "expression_list": [
+        "group_zscore(winsorize(abs(rsk74_factor_e - rsk74_factor_s) + abs(rsk74_factor_s - rsk74_factor_g), 4), sector)",
+        "group_zscore(winsorize(abs(rsk74_factor_esg - rsk74_factor_s) + abs(rsk74_factor_s - rsk74_factor_g), 4), sector)"
+    ]
+}

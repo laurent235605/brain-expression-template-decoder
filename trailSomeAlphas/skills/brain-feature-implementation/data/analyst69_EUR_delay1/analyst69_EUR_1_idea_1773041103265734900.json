@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(if_else(greater(group_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 0.8), 1, if_else(less(group_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 0.2), -1, 0)), 20), industry)",
+    "idea": "融合模板1的三状态逻辑与模板2的衰减结构，但将固定天数阈值（90/5天）替换为行业内分位数阈值（前/后20%），使信号具备跨行业适应性。先通过ts_backfill进行63日回溯填充确保历史连续性，再经group_rank实现组内相对化排序，最后用ts_decay_linear平滑状态切换带来的换手率冲击，group_normalize确保行业中性。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(if_else(greater(group_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 0.8), 1, if_else(less(group_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 0.2), -1, 0)), 20), industry)",
+        "group_normalize(ts_decay_linear(if_else(greater(group_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 0.8), 1, if_else(less(group_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 0.2), -1, 0)), 20), industry)"
+    ]
+}

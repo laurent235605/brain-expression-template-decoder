@@ -1,0 +1,8 @@
+{
+    "template": "multiply(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), group_rank(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), industry))",
+    "idea": "整合模板1的预期修订加速度与模板2的盈利效率水平，以行业内效率分位(group_rank, 0-1区间)作为动态权重系数，对加速度信号进行缩放。高盈利效率公司(分位接近1)的加速度信号被完整保留或放大，而低效率公司的信号被自然抑制。这种交互结构实现了'好公司变得更好'与'差公司预期改善'的差异化处理，增强风险调整收益。",
+    "expression_list": [
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), group_rank(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), industry))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), group_rank(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), industry))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({vda}), lookback=5, k=1), 60)",
+    "idea": "**Concept**: Accumulated Liquidity Drain\n- **Sample Fields Used**: vda\n- **Definition**: Sum of VDA over rolling window to measure total days of volume equivalent accumulated from multiple overlapping rebalances\n- **Why This Feature**: Captures cumulative pressure when securities are affected by multiple index changes simultaneously or in rapid succession; persistent high cumulative VDA indicates chronic liquidity stress\n- **is filling nan necessary**: Yes, backfill essential to treat sparse events as persistent pressure until effective date.\n- **Directionality**: High values indicate severe cumulative pressure (multiple days of volume pending); low values indicate isolated events\n- **Boundary Conditions**: Values >5 suggest severe liquidity crisis (weeks of normal flow compressed); values >10 indicate potential market structure breakdown",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 60)"
+    ]
+}

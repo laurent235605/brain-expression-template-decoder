@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(bucket(ts_delta(ts_mean(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 10), 5), range=\"-1,1,0.5\"), industry)",
+    "idea": "结合时序平滑与离散化思想。先用ts_mean(10日)平滑原始天数序列降低抖动，再计算5日变化率（ts_delta）捕捉趋势转向，最后用bucket将连续变化率离散为三类（-1~0, 0~1等效于改善/恶化/平稳），实现类似模板1的三状态结构但基于动量而非绝对水平，经group_normalize后形成行业中性配置。",
+    "expression_list": [
+        "group_normalize(bucket(ts_delta(ts_mean(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 10), 5), range=\"-1,1,0.5\"), industry)",
+        "group_normalize(bucket(ts_delta(ts_mean(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 10), 5), range=\"-1,1,0.5\"), industry)"
+    ]
+}

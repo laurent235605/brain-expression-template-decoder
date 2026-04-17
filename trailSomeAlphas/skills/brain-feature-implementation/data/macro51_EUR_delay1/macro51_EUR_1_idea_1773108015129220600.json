@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), industry), 252)",
+    "idea": "**行业中性历史分位数均值回归**：先通过group_zscore将溢价比率在行业内部标准化，消除不同行业间权重配置差异的系统性影响，再计算该行业相对溢价在过去252天中的历史分位排名（ts_rank）。该模板识别的是“相对于自身行业”的极端高估或低估，避免跨行业比较导致的伪信号，更适合在控制行业暴露的前提下捕捉行业内轮动反转机会。",
+    "expression_list": [
+        "ts_rank(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), industry), 252)"
+    ]
+}

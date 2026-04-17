@@ -1,0 +1,14 @@
+{
+    "template": "divide(vec_avg({cash_from_oper}), subtract(vec_avg({net_inc_avail_com_shrhldrs}), vec_avg({unrealized_gain_loss_comp_inc})))",
+    "idea": "**Concept**: Core Operating Cash Persistence\n- **Sample Fields Used**: cash_from_oper, net_inc_avail_com_shrhldrs, unrealized_gain_loss_comp_inc\n- **Definition**: Operating cash flow divided by net income adjusted for comprehensive income volatility, stripping out non-cash and non-operating distortions\n- **Why This Feature**: Distills true cash conversion efficiency by removing accounting artifacts and unrealized gains; essential measure of earnings quality\n- **Logical Meaning**: Pure cash generation capability independent of accrual accounting and mark-to-market volatility\n- **is filling nan necessary**: Unrealized gains may be zero for many firms; this is valid data\n- **Directionality**: Values consistently >1.0 indicate high-quality earnings converting to cash; <1.0 indicates aggressive revenue recognition\n- **Boundary Conditions**: Sustained values <0.5 indicate potential accounting issues; >2.0 indicates working capital optimization or deferred revenue",
+    "expression_list": [
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_a_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_a_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_a_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_a_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_q_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_q_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_q_is_unrealized_gain_loss_comp_inc)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), subtract(vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs), vec_avg(fnd72_pit_or_is_q_is_unrealized_gain_loss_comp_inc)))"
+    ]
+}

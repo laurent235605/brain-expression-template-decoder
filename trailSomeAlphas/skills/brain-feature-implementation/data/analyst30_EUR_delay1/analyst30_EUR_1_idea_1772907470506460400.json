@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), std=4))",
+    "idea": "截面标准化稳定性因子：先使用vec_filter过滤缺失值避免空值被计入，计算财政年度变更次数后，通过winsorize去除极值噪音（如数据错误导致的异常高计数），最后进行zscore标准化。适用于识别全市场范围内财政年度异常稳定（变更次数极少）或异常不稳定（频繁变更）的公司，捕捉会计政策结构性变化带来的系统性风险或质量溢价",
+    "expression_list": [
+        "zscore(winsorize(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(ts_zscore(ts_delta(vec_avg(ts_backfill({version}, 21)), 5), 60), std=4)",
+    "idea": "**历史标准化动量（异常值控制）**：先以21日回溯填充处理缺失值保证连续性，计算5日版本变化率后，进行60日历史窗口的Z分数标准化，识别统计上显著的加速/减速现象，最后以4倍标准差截断极端正值（批量更新噪音）。该模板将原始变化率转化为\"相对于自身历史是否异常\"的稳健信号，避免单一交易日批量数据入库导致的脉冲式误报。",
+    "expression_list": [
+        "winsorize(ts_zscore(ts_delta(vec_avg(ts_backfill(anl85_version, 21)), 5), 60), std=4)"
+    ]
+}

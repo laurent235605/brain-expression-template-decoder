@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_sum(ts_delta(vec_avg({rank}), 1), 20), inverse(ts_std_dev(vec_avg({rank}), 20)))",
+    "idea": "**概念**: 波动率调整后的累积排名迁移\n- **融合逻辑**: 将模板1的20日累积排名变化（总迁移距离）与模板2的波动率倒数加权相结合。高波动股票的累积变化被压缩，低波动股票的累积变化被放大，以识别在稳定排名基础上发生的真实趋势转变。\n- **清洗处理**: 隐含使用winsorize处理极端日度delta，避免单日期货错误影响20日累积和。\n- **时序意义**: 不仅关注总迁移距离，更关注单位风险下的迁移效率；适合发现低风险下的持续性评级调整。\n- **方向性**: 正值表示低风险下的持续恶化，负值表示低风险下的持续改善；绝对值越大信号越强。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(vec_avg(mdl245_rank), 1), 20), inverse(ts_std_dev(vec_avg(mdl245_rank), 20)))"
+    ]
+}

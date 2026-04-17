@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( multiply( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), signed_power( add( 1, vec_ir({estimated_eps}) ), 0.5 ) ), 20 )",
+    "idea": "利用估计EPS的信息比率（vec_ir，均值/标准差）作为分析师预期置信权重，预期稳定且分歧小的Surprise获得非线性放大（signed_power压缩极端权重防过曝）；通过乘法结构实现主信号与质量权重的交互，再经线性衰减捕捉高质量盈利惊喜的持续性。",
+    "expression_list": [
+        "ts_decay_linear( multiply( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), signed_power( add( 1, vec_ir(ern6_estimated_eps) ), 0.5 ) ), 20 )",
+        "ts_decay_linear( multiply( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), signed_power( add( 1, vec_ir(ern6_estimated_eps) ), 0.5 ) ), 20 )"
+    ]
+}

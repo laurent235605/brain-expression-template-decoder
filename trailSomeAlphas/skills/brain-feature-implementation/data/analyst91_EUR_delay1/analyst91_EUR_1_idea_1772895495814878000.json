@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({exposure_value}), 20)",
+    "idea": "**Concept**: Exposure Volatility\n- **Sample Fields Used**: exposure_value\n- **Definition**: Rolling standard deviation of geographic exposure values over a 20-day window\n- **Why This Feature**: Measures the stability of a company's geographic revenue mix; stable exposures indicate consistent business models while volatile exposures suggest shifting operational focus\n- **Logical Meaning**: Captures business model stability versus transition states; low volatility suggests durable competitive advantages in specific regions\n- **is filling nan necessary**: NaN values in exposure_value typically indicate missing data rather than zero exposure. Using ts_backfill is appropriate here because geographic exposure changes gradually due to operational inertia. However, if NaN persists for extended periods, it likely indicates no exposure (should be 0) rather than missing data.\n- **Directionality**: Lower values indicate stable geographic footprint; higher values indicate active restructuring or volatile regional performance\n- **Boundary Conditions**: Near-zero values suggest static operations; spikes indicate M&A activity or divestitures",
+    "expression_list": [
+        "ts_std_dev(vec_avg(anl91_exposure_value), 20)"
+    ]
+}

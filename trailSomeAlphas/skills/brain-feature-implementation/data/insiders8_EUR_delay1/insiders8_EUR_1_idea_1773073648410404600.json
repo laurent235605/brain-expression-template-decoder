@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, sector)), 1.5), group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), sector), 0)",
+    "idea": "使用硬阈值过滤：仅当行业标准化后的偏离绝对值超过1.5个标准差时才保留信号，中段噪音直接归零，严格执行\"只在信号明显时交易\"的逻辑。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector)), 1.5), group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), sector), 0)"
+    ]
+}

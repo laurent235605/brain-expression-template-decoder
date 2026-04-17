@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_exp_window(trade_when(abs(ts_delta(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), 10)) > 0.2, ts_zscore(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 0), 20)",
+    "idea": "将相关性的显著跳变（10日绝对变化>0.2）视为事件信号，仅在事件触发窗口内基于行业zscore建仓，并通过20日指数衰减窗口随时间降低权重，实现事件驱动型的动态暴露，适用于捕捉所有权结构突变后的短期持续性。",
+    "expression_list": [
+        "ts_decay_exp_window(trade_when(abs(ts_delta(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), 10)) > 0.2, ts_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0), 20)",
+        "ts_decay_exp_window(trade_when(abs(ts_delta(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), 10)) > 0.2, ts_zscore(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0), 20)",
+        "ts_decay_exp_window(trade_when(abs(ts_delta(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), 10)) > 0.2, ts_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0), 20)",
+        "ts_decay_exp_window(trade_when(abs(ts_delta(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), 10)) > 0.2, ts_zscore(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0), 20)"
+    ]
+}

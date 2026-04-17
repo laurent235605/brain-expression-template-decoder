@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(and(greater(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.8), less(ts_regression(winsorize(ts_backfill({exp_usa}, 21), std=4), ts_step(), 21, rettype=2), 0)), -1.0, trade_when(and(less(bucket(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), \"0,1,0.1\"), 0.2), greater(ts_regression(winsorize(ts_backfill({exp_usa}, 21), std=4), ts_step(), 21, rettype=2), 0)), 1.0, 0)), 5)",
+    "idea": "极端敞口均值回归捕捉：当美国敞口处于历史前10%但21日趋势斜率为负（开始回落）时反向做空（-1），处于后10%但趋势斜率为正（开始扩张）时反向做多（+1），利用5日衰减平滑，专门捕捉极端出口/内销因子的均值回复拐点，与动量策略形成互补。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(and(greater(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.8), less(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), ts_step(), 21, rettype=2), 0)), -1.0, trade_when(and(less(bucket(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), \"0,1,0.1\"), 0.2), greater(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), ts_step(), 21, rettype=2), 0)), 1.0, 0)), 5)"
+    ]
+}

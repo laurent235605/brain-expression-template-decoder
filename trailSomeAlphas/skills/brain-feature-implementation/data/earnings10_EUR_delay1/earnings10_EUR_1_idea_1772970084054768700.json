@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(rank(ts_delta(ts_sum(if_else(is_nan(signed_power(vec_avg({aily_delta_recon_value}), 2)), 0, signed_power(vec_avg({aily_delta_recon_value}), 2)), 20), 5)), 0.9), group_zscore(ts_sum(if_else(is_nan(signed_power(vec_avg({aily_delta_recon_value}), 2)), 0, signed_power(vec_avg({aily_delta_recon_value}), 2)), 20), industry), 0)",
+    "idea": "**概念**: 不确定性加速度事件驱动（条件触发）\n- **增强逻辑**: 先计算20日累积波动能量，再取其5日变化率（ts_delta）以捕捉\"不确定性加速积聚\"的时刻；仅当该变化率处于全市场前10%分位（rank>0.9）时才开仓，并暴露于行业内相对位置（group_zscore），其余时间仓位为0。此模板将原始因子从\"状态\"指标转化为\"事件\"指标，降低持续持仓成本。\n- **NaN处理**: 累积前将单日NaN替换为0。\n- **方向性**: 仅在信息flux急剧放大时做多高不确定性（或反向做空，依具体市场逻辑），属于高置信度择时信号。",
+    "expression_list": [
+        "trade_when(greater(rank(ts_delta(ts_sum(if_else(is_nan(signed_power(vec_avg(ern10_aily_delta_recon_value), 2)), 0, signed_power(vec_avg(ern10_aily_delta_recon_value), 2)), 20), 5)), 0.9), group_zscore(ts_sum(if_else(is_nan(signed_power(vec_avg(ern10_aily_delta_recon_value), 2)), 0, signed_power(vec_avg(ern10_aily_delta_recon_value), 2)), 20), industry), 0)"
+    ]
+}

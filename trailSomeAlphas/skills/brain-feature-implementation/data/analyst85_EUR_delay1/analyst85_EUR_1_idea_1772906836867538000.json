@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_corr(group_rank(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), industry), ts_rank(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 252), 60)), 0.5), group_zscore(winsorize(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), std=4), industry), 0)",
+    "idea": "仅当个股的行业内分位与其自身历史一年分位呈现高相关性（趋势一致）时开仓，即捕捉“持续处于行业调研活跃头部且不断突破自身历史高位”的强动量调研主题，中间状态或背离状态视为噪音不予交易，实现信号强度与一致性的双重过滤。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_corr(group_rank(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), industry), ts_rank(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 252), 60)), 0.5), group_zscore(winsorize(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), std=4), industry), 0)"
+    ]
+}

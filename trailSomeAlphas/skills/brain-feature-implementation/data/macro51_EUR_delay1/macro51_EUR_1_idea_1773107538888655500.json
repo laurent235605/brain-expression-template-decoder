@@ -1,0 +1,7 @@
+{
+    "template": "hump(quantile(group_normalize(divide(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252), add(1, ts_std_dev(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 63))), sector), \"gaussian\"), 0.01)",
+    "idea": "**风险调整后的高斯极值映射（高置信度）**：将原始比率的历史分位（252日）除以其近期波动率（自身比率的滚动标准差），得到风险调整后的配置溢价分位；经行业中性化（group_normalize）后，通过高斯分位数转换（quantile with gaussian driver）极度拉伸尾部、压缩中段，仅在极值区域赋予显著权重。最后应用hump（0.01阈值）忽略微小权重变动，构建极低换手率、高夏普的逆向配置信号。",
+    "expression_list": [
+        "hump(quantile(group_normalize(divide(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252), add(1, ts_std_dev(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 63))), sector), \"gaussian\"), 0.01)"
+    ]
+}

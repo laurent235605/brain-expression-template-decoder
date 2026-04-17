@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 3), 10)",
+    "idea": "平滑化极端偏离因子。先对20日地域敞口波动率进行行业标准化和三次幂非线性放大（模板A核心逻辑），再施加10日线性衰减平滑（模板B的平滑技术）。在保持\"只有极端稳定或极端动荡才有预测力\"的尾部增强特性的同时，降低单日脉冲噪音，构建换手率适中、信号更稳健的行业中性多空组合，适合中等持有期的策略实施。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 3), 10)"
+    ]
+}

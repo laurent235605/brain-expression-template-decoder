@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank( group_zscore( ts_decay_linear( winsorize( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 4 ), 20 ), industry ), 60 )",
+    "idea": "在行业中性化（group_zscore）基础上，通过60日时序分位数（ts_rank）识别近期盈利惊喜是否处于自身历史极端位置，结合20日线性衰减加权（ts_decay_linear）与截尾处理（winsorize），捕捉行业内历史相对高点的显著预期修正信号。",
+    "expression_list": [
+        "ts_rank( group_zscore( ts_decay_linear( winsorize( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 4 ), 20 ), industry ), 60 )",
+        "ts_rank( group_zscore( ts_decay_linear( winsorize( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 4 ), 20 ), industry ), 60 )"
+    ]
+}

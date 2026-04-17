@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), driver=gaussian)",
+    "idea": "**效率转换动量（交叉结构）**：融合模板A的EBITDA-EPS比率构建与模板B的\"时序变化+高斯分位数\"结构。先计算盈利转化效率比率，再取5日变化捕捉分析师对隐含杠杆/税率的预期修正，最后通过高斯分位数将横截面极端变动映射到标准正态分布，突出效率改善最显著的股票。符合第4.2.2步时序变化与第0.2步分布拉伸的指导思想。",
+    "expression_list": [
+        "quantile(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), driver=gaussian)",
+        "quantile(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), driver=gaussian)"
+    ]
+}

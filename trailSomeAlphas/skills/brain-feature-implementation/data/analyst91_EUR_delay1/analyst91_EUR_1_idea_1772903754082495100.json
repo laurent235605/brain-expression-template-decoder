@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_zscore(vec_skewness({exposure_value}), 126), add(1, ts_std_dev(vec_skewness({exposure_value}), 63)))",
+    "idea": "将半年期集中度Z-score除以（1+近期63日波动率），构建波动率调整后的稳定信号。惩罚那些地域敞口剧烈摇摆的噪音公司，保留执行稳健集中战略的目标。",
+    "expression_list": [
+        "divide(ts_zscore(vec_skewness(anl91_exposure_value), 126), add(1, ts_std_dev(vec_skewness(anl91_exposure_value), 63)))"
+    ]
+}

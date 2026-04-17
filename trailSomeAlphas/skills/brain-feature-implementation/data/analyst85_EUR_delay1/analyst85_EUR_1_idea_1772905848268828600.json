@@ -1,0 +1,7 @@
+{
+    "template": "hump(multiply(ts_delta(vec_avg(ts_backfill({version}, 5)), 5), vec_range({version})), 0.02) * ts_decay_linear(abs(ts_delta(vec_avg({version}), 1)), 20)",
+    "idea": "对模板1的动量-离散度乘积应用hump控制（忽略小于2%的变化以降低换手率），并与模板2的线性衰减累积强度结合。同时使用时序回填（ts_backfill）处理数据缺失，确保信号连续性。适用于希望降低换手率同时保留revision强度信息的均衡策略。",
+    "expression_list": [
+        "hump(multiply(ts_delta(vec_avg(ts_backfill(anl85_version, 5)), 5), vec_range(anl85_version)), 0.02) * ts_decay_linear(abs(ts_delta(vec_avg(anl85_version), 1)), 20)"
+    ]
+}

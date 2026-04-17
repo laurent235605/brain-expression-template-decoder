@@ -1,0 +1,12 @@
+{
+    "template": "ts_decay_linear(trade_when(and(equal(ts_count_nans({value_03051q}, 21), 0), equal(ts_count_nans({value_03999q}, 21), 0)), group_zscore(winsorize(divide(ts_backfill({value_03051q}, 21), ts_backfill({value_03999q}, 21)), std=4), sector), 0), 5)",
+    "idea": "强调**数据新鲜度与换手控制**的质量因子。使用ts_count_nans严格筛选最近21日无缺失数据的日子（避免回填数据带来的滞后偏差），仅当数据完全新鲜时才计算信号(trade_when)。进行行业中性化后，应用ts_decay_linear(5)对信号进行5日线性衰减平滑，相比简单移动平均能更快响应变化但比原始信号更稳定，有效控制换手率并降低短期噪声。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(and(equal(ts_count_nans(fnd28_bdeq_value_03051q, 21), 0), equal(ts_count_nans(fnd28_bdeq_value_03999q, 21), 0)), group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 21), ts_backfill(fnd28_bdeq_value_03999q, 21)), std=4), sector), 0), 5)",
+        "ts_decay_linear(trade_when(and(equal(ts_count_nans(fnd28_bdeq_value_03051q, 21), 0), equal(ts_count_nans(fnd28_newq_value_03999q, 21), 0)), group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 21), ts_backfill(fnd28_newq_value_03999q, 21)), std=4), sector), 0), 5)",
+        "ts_decay_linear(trade_when(and(equal(ts_count_nans(fnd28_fsq1_value_03051q, 21), 0), equal(ts_count_nans(fnd28_bdeq_value_03999q, 21), 0)), group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 21), ts_backfill(fnd28_bdeq_value_03999q, 21)), std=4), sector), 0), 5)",
+        "ts_decay_linear(trade_when(and(equal(ts_count_nans(fnd28_fsq1_value_03051q, 21), 0), equal(ts_count_nans(fnd28_newq_value_03999q, 21), 0)), group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 21), ts_backfill(fnd28_newq_value_03999q, 21)), std=4), sector), 0), 5)",
+        "ts_decay_linear(trade_when(and(equal(ts_count_nans(fnd28_nddq1_value_03051q, 21), 0), equal(ts_count_nans(fnd28_bdeq_value_03999q, 21), 0)), group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 21), ts_backfill(fnd28_bdeq_value_03999q, 21)), std=4), sector), 0), 5)",
+        "ts_decay_linear(trade_when(and(equal(ts_count_nans(fnd28_nddq1_value_03051q, 21), 0), equal(ts_count_nans(fnd28_newq_value_03999q, 21), 0)), group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 21), ts_backfill(fnd28_newq_value_03999q, 21)), std=4), sector), 0), 5)"
+    ]
+}

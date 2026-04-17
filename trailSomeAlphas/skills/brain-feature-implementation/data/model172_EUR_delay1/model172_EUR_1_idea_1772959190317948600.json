@@ -1,0 +1,7 @@
+{
+    "template": "zscore(trade_when(greater(rank(ts_backfill({sustratfy1},60)),0.7), multiply(ts_regression(winsorize(ts_backfill({cfroi_1},21),4), group_mean(winsorize(ts_backfill({cfroi_1},21),4),log(ts_mean(cap,21)),sector),252,rettype=0), ts_delta(winsorize(ts_backfill({fcg_in},21),4),21)),0))",
+    "idea": "残差现金流提取模型：采用CAPM残差模板，将{cfroi_1}对行业市值加权（log(ts_mean(cap,21))）均值进行252日滚动回归提取特异性收益（rettype=0），剥离行业周期和beta影响；乘以{fcg_in}的21日变化（ts_delta）捕捉现金流改善动量，并使用right_tail逻辑（rank>0.7）仅当{sustratfy1}处于全市场前30%时激活信号，确保只在高可持续性框架下交易特质性盈利。",
+    "expression_list": [
+        "zscore(trade_when(greater(rank(ts_backfill(mdl172_sustratfy1,60)),0.7), multiply(ts_regression(winsorize(ts_backfill(mdl172_cfroi_1,21),4), group_mean(winsorize(ts_backfill(mdl172_cfroi_1,21),4),log(ts_mean(cap,21)),sector),252,rettype=0), ts_delta(winsorize(ts_backfill(mdl172_fcg_in,21),4),21)),0))"
+    ]
+}

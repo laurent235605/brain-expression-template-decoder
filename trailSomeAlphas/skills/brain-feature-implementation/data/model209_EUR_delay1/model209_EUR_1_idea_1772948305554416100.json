@@ -1,0 +1,7 @@
+{
+    "template": "1 - vec_max({lastcostingfailed})",
+    "idea": "**Concept**: Operational Purity Flag\n- **Sample Fields Used**: lastcostingfailed\n- **Definition**: Binary indicator of perfect operational status (1 only if zero failures present, else 0)\n- **Why This Feature**: Essential operational state: either the system is working perfectly (1) or it is compromised (0), with no gradation\n- **Logical Meaning**: Boolean cleanliness of operational process\n- **is filling nan necessary**: Treat NaN as potential failure (conservative approach) by converting to 0 before max calculation, or exclude to require explicit failure indication\n- **Directionality**: 1 indicates perfect operations; 0 indicates any level of operational imperfection\n- **Boundary Conditions**: Binary 0 or 1",
+    "expression_list": [
+        "1 - vec_max(mdl209_lastcostingfailed)"
+    ]
+}

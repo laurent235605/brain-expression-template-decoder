@@ -1,0 +1,10 @@
+{
+    "template": "ts_delta({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 20) * ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)",
+    "idea": "交叉融合模板2的持仓收益背离动量（20日差分）与模板1的股权结构稳定性。当股权结构高度稳定（高corr）时，背离动量的方向更具持续性；当结构不稳定时，动量信号衰减。此构造实现了\"稳定环境下的动量增强\"与\"动荡环境下的信号抑制\"的双重逻辑。",
+    "expression_list": [
+        "ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)",
+        "ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)",
+        "ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)",
+        "ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)"
+    ]
+}

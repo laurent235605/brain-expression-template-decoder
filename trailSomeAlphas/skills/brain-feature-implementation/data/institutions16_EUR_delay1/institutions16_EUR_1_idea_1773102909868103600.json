@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_std_dev(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 20), 0.5), signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 10))",
+    "idea": "基于行业内残差的20日波动率进行动态切换：当波动率高于阈值时（高波动regime），使用signed_power放大极端值以捕捉错配机会；当波动率低时（低波动regime），使用ts_decay_linear捕捉缓慢持续的趋势。实现了\"高波动用凸性、低波动用惯性\"的适应性增强，提升因子在不同市场环境下的稳健性。",
+    "expression_list": [
+        "if_else(greater(ts_std_dev(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 20), 0.5), signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 10))"
+    ]
+}

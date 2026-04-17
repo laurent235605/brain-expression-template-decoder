@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(group_rank({hfown_pctown}, sector), 252)",
+    "idea": "使用分位数排名（rank）替代ZScore的非线性变换：先计算行业内持仓分位（group_rank），再计算该分位在过去252日的历史位置（ts_rank），对尾部极端值更稳健，避免ZScore对异常值的敏感，识别当前配置处于历史最高/最低分位的标的。",
+    "expression_list": [
+        "ts_rank(group_rank(rsk74_hfown_pctown, sector), 252)"
+    ]
+}

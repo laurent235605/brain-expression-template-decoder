@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 0), divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 0), 10)",
+    "idea": "高换手动量追踪模板：仅对累积修正压力为正（greater作为条件开关）的股票启用盈利转换效率信号，并通过ts_decay_linear(.,10)赋予近10日数据线性递减权重（最新日权重10，10日前权重1）。此结构反应速度远快于ts_mean，适用于激进捕捉短期信息扩散，但需注意turnover显著升高（参考指导中20日窗口73%换手 vs 16%）。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 0), divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 0), 10)",
+        "ts_decay_linear(trade_when(greater(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 0), divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 0), 10)"
+    ]
+}

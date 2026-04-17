@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(add(zscore(subtract({cfroichg}, ts_delay({cfroichg}, 5))), zscore(ts_sum({cfroidrs}, 10))), 1.5)",
+    "idea": "尾部幂次增强合成：将标准化后的Input 1与Input 2相加，得到综合基本面动量分数，再应用signed_power(1.5)进行非线性拉伸。此操作在保留正负方向(好/坏)的前提下，显著放大双因子同时处于极端值(右尾或左尾)时的信号强度，而对中间区间(噪音)进行压缩，实现激进的‘头部集中’策略。",
+    "expression_list": [
+        "signed_power(add(zscore(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5))), zscore(ts_sum(mdl172_cfroidrs, 10))), 1.5)"
+    ]
+}

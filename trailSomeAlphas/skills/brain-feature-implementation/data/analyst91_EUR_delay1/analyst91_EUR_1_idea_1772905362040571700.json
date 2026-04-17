@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(vec_skewness({exposure_value}), 126)), 2), signed_power(ts_zscore(vec_skewness({exposure_value}), 126), 3), 0)",
+    "idea": "极端区间择时与非线性增强。结合模板1的126日时序偏度Z-score与模板2的极端偏离理念，使用trade_when逻辑运算符仅在|Z-score|>2（极端地理集中度变化）时开仓，并应用signed_power(3)增强尾部收益，中间区间（|Z-score|≤2）视为噪音直接赋零，避免微弱信号带来的交易成本。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(vec_skewness(anl91_exposure_value), 126)), 2), signed_power(ts_zscore(vec_skewness(anl91_exposure_value), 126), 3), 0)"
+    ]
+}

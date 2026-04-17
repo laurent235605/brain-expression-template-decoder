@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else(is_nan(vec_skewness({aily_delta_recon_value})), 0, multiply(abs(vec_skewness({aily_delta_recon_value})), signed_power(vec_avg({aily_delta_recon_value}), 2))), 20)",
+    "idea": "引入偏度（skewness）作为不对称性调整因子，当分析师修正分布呈现极端偏斜（一致看多或看空）时，通过乘法放大波动率信号，捕捉具有方向性共识强迫特征的不确定性积累，NaN以0填充避免计算中断。",
+    "expression_list": [
+        "ts_sum(if_else(is_nan(vec_skewness(ern10_aily_delta_recon_value)), 0, multiply(abs(vec_skewness(ern10_aily_delta_recon_value)), signed_power(vec_avg(ern10_aily_delta_recon_value), 2))), 20)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "subtract({pctchg3yfcf}, {pctchg3yeps})",
+    "idea": "**Concept**: Cash Flow Trajectory Divergence\n- **Sample Fields Used**: `pctchg3yfcf`, `pctchg3yeps`, `fcfghc`\n- **Definition**: Difference between cash flow growth and earnings growth to identify quality of change\n- **Why This Feature**: Sustainable companies grow cash faster than earnings; deteriorating companies show earnings without cash\n- **Logical Meaning**: Positive values indicate cash-backed growth; negative values suggest accrual-based earnings inflation\n- **is filling nan necessary**: Yes, use `ts_backfill()` with 5-day window for missing growth metrics\n- **Directionality**: Positive divergence (cash > earnings growth) indicates quality improvement\n- **Boundary Conditions**: Extreme divergence may indicate working capital investment cycles",
+    "expression_list": [
+        "subtract(mdl219_1_pctchg3yfcf, mdl219_1_pctchg3yeps)",
+        "subtract(mdl219_1_pctchg3yfcf, mdl219_2_pctchg3yeps)",
+        "subtract(mdl219_2_pctchg3yfcf, mdl219_2_pctchg3yeps)",
+        "subtract(mdl219_2_pctchg3yfcf, mdl219_1_pctchg3yeps)"
+    ]
+}

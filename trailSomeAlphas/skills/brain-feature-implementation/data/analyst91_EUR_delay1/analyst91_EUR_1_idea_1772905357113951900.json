@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(vec_skewness({exposure_value}), 126), sector)",
+    "idea": "行业中性地理集中度风险重塑。融合模板1的偏度时序分析（vec_skewness+126日ts_zscore）与模板2的行业中性化（group_zscore），捕捉公司在半年窗口内相对于同行业的地域集中结构变化，剔除行业固有属性干扰，专注于行业内相对风险重塑。",
+    "expression_list": [
+        "group_zscore(ts_zscore(vec_skewness(anl91_exposure_value), 126), sector)"
+    ]
+}

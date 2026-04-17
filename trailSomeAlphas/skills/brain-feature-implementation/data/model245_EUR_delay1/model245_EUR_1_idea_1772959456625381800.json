@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(divide(ts_backfill(vec_avg({rank}), 5), ts_std_dev(ts_backfill(vec_avg({rank}), 5), 20)), std=4))",
+    "idea": "稳健信噪比：对原始排名向量先进行5日回溯填充确保数据连续性，计算均值后再除以20日滚动标准差得到原始SNR，最后通过winsorize去极值（4倍标准差）和zscore标准化，得到分布稳健、可比性强的截面信噪比因子，有效处理零波动极端情况。",
+    "expression_list": [
+        "zscore(winsorize(divide(ts_backfill(vec_avg(mdl245_rank), 5), ts_std_dev(ts_backfill(vec_avg(mdl245_rank), 5), 20)), std=4))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "greater({volume}, multiply(ts_median({volume}, 6), 1.5))",
+    "idea": "**Concept**: Volume Spike Indicator\n- **Sample Fields Used**: volume\n- **Definition**: Binary flag indicating when current volume exceeds 150% of the 6-month median (robust to outliers)\n- **Why This Feature**: Simple, interpretable filter for liquidity events that may accompany price movements or news\n- **Logical Meaning**: Boolean detection of \"unusual activity\" periods—useful for filtering signals or detecting potential informed trading\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 2) for median calculation to ensure robust central tendency estimation\n- **Directionality**: 1 = volume spike detected (high attention event); 0 = normal trading range\n- **Boundary Conditions**: Persistent 1s suggest new liquidity regime; isolated 1s suggest discrete events; prolonged 0s after 1s suggest post-event exhaustion",
+    "expression_list": [
+        "greater(mdl234_volume, multiply(ts_median(mdl234_volume, 6), 1.5))"
+    ]
+}

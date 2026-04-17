@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(multiply(ts_delta(vec_avg({version}), 5), vec_range({version})), group_mean(multiply(ts_delta(vec_avg({version}), 5), vec_range({version})), log(ts_mean(cap,21)), industry), 126, rettype=0)",
+    "idea": "将模板1的原始信号（动量×离散度）对行业市值加权均值进行半年（126日）回归，提取残差（rettype=0）作为纯特质性信号。剥离行业层面的共同revision模式（如板块整体性上调预期），专注个股特有的趋势-分歧背离机会，降低行业beta暴露。",
+    "expression_list": [
+        "ts_regression(multiply(ts_delta(vec_avg(anl85_version), 5), vec_range(anl85_version)), group_mean(multiply(ts_delta(vec_avg(anl85_version), 5), vec_range(anl85_version)), log(ts_mean(cap,21)), industry), 126, rettype=0)"
+    ]
+}

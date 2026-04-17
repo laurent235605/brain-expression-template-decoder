@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(ts_decay_linear(group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 20), 5)",
+    "idea": "行业中性化盈利效率趋势：将模板1的盈利转化效率比率先在行业层面进行标准化（group_zscore，消除行业间不可比差异），再应用模板1的线性衰减平滑（ts_decay_linear）和趋势变化检测（ts_delta），确保捕捉的是相对于行业 peers 的效率持续改善信号，而非行业 Beta 驱动，同时保持较 template1 原始版本更低的换手率。",
+    "expression_list": [
+        "ts_delta(ts_decay_linear(group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 20), 5)",
+        "ts_delta(ts_decay_linear(group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 20), 5)"
+    ]
+}

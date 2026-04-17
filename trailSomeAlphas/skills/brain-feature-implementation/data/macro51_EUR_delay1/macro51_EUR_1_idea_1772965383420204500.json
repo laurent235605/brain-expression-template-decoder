@@ -1,0 +1,7 @@
+{
+    "template": "log_diff({stoxx_europe_600_ucits_weight}, 5)",
+    "idea": "**Concept**: Log-Weight Drift\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The natural logarithm of the weight ratio between current and lagged values, measuring continuous compounding rate of allocation change\n- **Why This Feature**: Log transformation linearizes percentage changes and handles the asymmetry between weight increases (unbounded) and decreases (bounded by zero), providing a symmetric measure of allocation drift\n- **is filling nan necessary**: Yes, use ts_backfill() to ensure positive values for log calculation; weights should never be truly zero in this ETF, so any zero is likely a data error requiring backfill\n- **Directionality**: Positive values indicate growth in allocation (outperformance or accumulation); negative values indicate shrinking allocation (underperformance or distribution)\n- **Boundary Conditions**: Approaches negative infinity as weight approaches zero (removal from index); positive infinity theoretically unbounded",
+    "expression_list": [
+        "log_diff(mcr51_ishares_stoxx_europe_600_ucits_weight, 5)"
+    ]
+}

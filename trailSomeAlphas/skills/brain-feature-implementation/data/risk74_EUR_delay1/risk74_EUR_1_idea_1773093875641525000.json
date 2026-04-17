@@ -1,0 +1,7 @@
+{
+    "template": "truncate(scale(quantile(rank(multiply(add(multiply(0.6, divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 10), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 20), 0.0001)), multiply(0.4, divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 40), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 80), 0.0001)))), hump_decay(days_from_last_change({hfown_pctown}), hump=0.05))), driver=\"gaussian\")), maxPercent=0.015)",
+    "idea": "多时间尺度共识+事件衰减：融合短期(10日)与长期(40日)信噪比构建复合信号，利用days_from_last_change捕捉持仓披露事件时点，通过hump_decay实现事件后信号指数衰减以强调信息新鲜度；最后经高斯分位(quantile)拉伸横截面分布尾部，增强极端信号的区分度。",
+    "expression_list": [
+        "truncate(scale(quantile(rank(multiply(add(multiply(0.6, divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 10), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 20), 0.0001)), multiply(0.4, divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 40), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 80), 0.0001)))), hump_decay(days_from_last_change(rsk74_hfown_pctown), hump=0.05))), driver=\"gaussian\")), maxPercent=0.015)"
+    ]
+}

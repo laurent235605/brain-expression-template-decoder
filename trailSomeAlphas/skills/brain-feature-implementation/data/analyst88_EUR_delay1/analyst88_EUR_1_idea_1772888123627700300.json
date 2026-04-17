@@ -1,0 +1,16 @@
+{
+    "template": "vec_skewness({abstract_method1_pos})",
+    "idea": "**Concept**: Sentiment Skewness Profile\n- **Sample Fields Used**: abstract_method1_pos\n- **Definition**: Third moment of sentence sentiment distribution; measures asymmetry between tail risks and opportunities\n- **Why This Feature**: Positive skew = many small negative mentions, few large positive ones (asymmetric upside); Negative skew = many small positives, few disaster warnings (asymmetric downside)\n- **is filling nan necessary**: Skewness requires minimum number of sentences; if vec_count < 3, return NaN rather than fill\n- **Directionality**: Positive skew = lottery-like payoff structure emphasized; Negative skew = \"fading\" opportunity with tail risks highlighted\n- **Boundary Conditions**: Extreme positive = single massive positive outlier; Zero = symmetric sentiment distribution",
+    "expression_list": [
+        "vec_skewness(anl88_arr_barclays_abstract_method1_pos)",
+        "vec_skewness(anl88_arr_db_abstract_method1_pos)",
+        "vec_skewness(anl88_arr_jpm_abstract_method1_pos)",
+        "vec_skewness(anl88_arr_ms_abstract_method1_pos)",
+        "vec_skewness(anl88_baml_abstract_method1_pos)",
+        "vec_skewness(anl88_barclays_abstract_method1_pos)",
+        "vec_skewness(anl88_db_abstract_method1_pos)",
+        "vec_skewness(anl88_jefferies_abstract_method1_pos)",
+        "vec_skewness(anl88_jpm_abstract_method1_pos)",
+        "vec_skewness(anl88_ms_abstract_method1_pos)"
+    ]
+}

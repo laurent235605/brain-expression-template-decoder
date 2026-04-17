@@ -1,0 +1,7 @@
+{
+    "template": "ts_kurtosis(vec_avg({score}), 120)",
+    "idea": "**Concept**: Score Distribution Tail Weight\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The kurtosis of acquisition likelihood scores over 120 days, measuring binary outcome tendency\n- **Why This Feature**: Acquisition events are binary (deal happens or not); high kurtosis in score history suggests bimodal outcomes and predictive model confidence\n- **is filling nan necessary**: Yes, kurtosis requires continuous data. Use `ts_backfill(vec_avg({score}), 5)` to fill short gaps, or reduce lookback if too many NaNs.\n- **Logical Meaning**: Measures the \"peakedness\" of likelihood distribution; high kurtosis indicates the model sees this as a binary situation (target vs. non-target)\n- **Directionality**: High kurtosis indicates binary outcome prediction (high confidence in eventual outcome); low kurtosis indicates uncertain/continuous likelihood\n- **Boundary Conditions**: Kurtosis > 3 indicates fat tails (binary outcomes); kurtosis < 3 indicates thin tails (continuous likelihood)",
+    "expression_list": [
+        "ts_kurtosis(vec_avg(mdl249_score), 120)"
+    ]
+}

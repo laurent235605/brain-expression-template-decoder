@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(and(greater(ts_mean({volume}, 21), ts_median(ts_mean({volume}, 21), 252)), or(greater(group_rank({exp_usa}, sector), 0.9), less(group_rank({exp_usa}, sector), 0.1))), group_normalize(signed_power(group_zscore(winsorize(ts_backfill({exp_usa}, 21, 0), std=4), sector), 2), sector), NaN)",
+    "idea": "流动性门控的纯敞口极端值策略。仅当21日平均成交量高于历史年度中位数（确保流动性充足）且美国敞口处于行业极端分位（前10%激进纯多头或后10%纯国内防御）时交易，中段80%分位视为噪音置NaN。对有效信号进行行业中性Z分数标准化后平方放大，再通过group_normalize控制行业暴露，高值对应高纯度美国敞口。",
+    "expression_list": []
+}

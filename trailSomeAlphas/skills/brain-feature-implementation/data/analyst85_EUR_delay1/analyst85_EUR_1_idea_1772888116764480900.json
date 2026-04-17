@@ -1,0 +1,7 @@
+{
+    "template": "vec_stddev({version}) - ts_median(vec_stddev({version}), 20)",
+    "idea": "**Concept**: Vector Version Dispersion Anomaly\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Deviation of current vector standard deviation from its historical median, identifying when contributor disagreement is unusually high\n- **Why This Feature**: Anomalous dispersion across the vector indicates fragmentation of analyst views - potentially signaling controversial stocks or mixed signals from Goldman contributors\n- **is filling nan necessary**: Use `vec_filter` to remove NaN values within the vector before calculating dispersion statistics to ensure accurate standard deviation\n- **Directionality**: High positive values indicate unusually high disagreement among versions (divergent views); negative values indicate unusual consensus\n- **Boundary Conditions**: Zero indicates typical disagreement levels; extreme values indicate either data quality issues or genuine analytical disputes",
+    "expression_list": [
+        "vec_stddev(anl85_version) - ts_median(vec_stddev(anl85_version), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_rank(subtract(winsorize(ts_backfill({exp_usa}, 42), std=4), winsorize(ts_backfill({exp_chn}, 42), std=4)), 252), industry)",
+    "idea": "历史分位型（Historical Percentile）：考察当前中美敞口价差在个股过去一年（252天）历史窗口中的时序分位（ts_rank），识别个股层面区域敞口的极端偏离状态（如创一年新高或新低的错配）。42天的回望与winsorize处理确保输入稳健，最终信号既可用于均值回复（极端分位反转）也可用于趋势延续（突破分位）策略，且经行业中性化剔除板块轮动干扰。",
+    "expression_list": [
+        "group_zscore(ts_rank(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 42), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 42), std=4)), 252), industry)"
+    ]
+}

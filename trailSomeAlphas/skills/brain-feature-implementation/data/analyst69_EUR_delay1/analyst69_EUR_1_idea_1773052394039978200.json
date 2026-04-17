@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(trade_when(or(greater(bucket(rank(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4)), \"0,1,0.1\"), 0.9), less(bucket(rank(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4)), \"0,1,0.1\"), 0.1)), signed_power(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 1.2), 0), industry)",
+    "idea": "极端分位数阈值触发的高信念信号。仅在预期修订位于全市场前10%或后10%分位时才进行交易，中间区间视为噪音赋值为0；通过bucket对rank分箱识别极端值，配合signed_power将尾部信号强度非线性放大1.2次幂，过滤掉温和修订带来的假信号，专注于高确信度的预期上修或下修事件。",
+    "expression_list": [
+        "group_zscore(trade_when(or(greater(bucket(rank(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4)), \"0,1,0.1\"), 0.9), less(bucket(rank(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4)), \"0,1,0.1\"), 0.1)), signed_power(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 1.2), 0), industry)",
+        "group_zscore(trade_when(or(greater(bucket(rank(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4)), \"0,1,0.1\"), 0.9), less(bucket(rank(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4)), \"0,1,0.1\"), 0.1)), signed_power(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 1.2), 0), industry)"
+    ]
+}

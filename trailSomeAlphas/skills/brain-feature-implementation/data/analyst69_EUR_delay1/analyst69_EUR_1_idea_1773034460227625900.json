@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta({eps_best_eeps_cur_yr}, 5)",
+    "idea": "**Concept**: Short-Term Estimate Revision Momentum\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: 5-day difference in current year EPS estimates capturing recent analyst sentiment shifts\n- **Why This Feature**: Daily updates allow capture of fresh information; 5-day window balances noise vs. signal for revision strategies\n- **Logical Meaning**: Directional change in consensus expectations; positive values indicate upgrades, negative indicate downgrades\n- **is filling nan necessary**: Daily data rarely has gaps, but if present, ts_backfill(5) ensures we capture last known estimate before differencing to avoid false zeros.\n- **Directionality**: Positive values bullish (upgrades); negative values bearish (downgrades); magnitude indicates conviction of change\n- **Boundary Conditions**: Extreme values may follow earnings announcements or guidance updates; zero values indicate stale consensus",
+    "expression_list": [
+        "ts_delta(anl69_aeps_best_eeps_cur_yr, 5)",
+        "ts_delta(anl69_eps_best_eeps_cur_yr, 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), sector), std=3), 5)",
+    "idea": "将中美敞口价差的绝对水平与机构流因子的衰减平滑技术（ts_decay_linear）及sector层级中性化结合，延长衰减窗口至5日以降低换手率，捕捉更持久的区域配置轮动趋势而非短期噪音，同时保留21日数据回填与4倍标准差截尾的稳健预处理流程。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), sector), std=3), 5)"
+    ]
+}

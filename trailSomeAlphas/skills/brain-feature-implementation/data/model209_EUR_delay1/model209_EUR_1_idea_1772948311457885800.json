@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum(abs({investment}))",
+    "idea": "**Concept**: Total Exposure Magnitude\n- **Sample Fields Used**: investment\n- **Definition**: Sum of absolute investment values representing gross exposure regardless of direction\n- **Why This Feature**: Captures overall scale and leverage of the portfolio; changes indicate scaling or de-risking activities\n- **Logical Meaning**: Total capital at risk, combining both long and short exposures\n- **is filling nan necessary**: NaN should be treated as 0 (no position) for exposure calculations to avoid underestimating risk\n- **Directionality**: Higher values indicate larger gross positions; zero indicates flat or empty portfolio\n- **Boundary Conditions**: Non-negative values scaling with portfolio size",
+    "expression_list": [
+        "vec_sum(abs(mdl209_investment))"
+    ]
+}

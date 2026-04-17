@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(less(ts_delta(ts_regression(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), group_mean(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 252, rettype=0), 1), 0), -1, 0), 20)",
+    "idea": "引入CAPM残差逻辑剥离行业共同因子：先将报告日期天数对行业均值做252日回归，提取残差(特质性成分)，在残差序列上检测跳变事件(ts_delta<0)并应用20日衰减。捕捉剔除行业日历效应后的特质性不确定性冲击，避免行业beta干扰。",
+    "expression_list": [
+        "ts_decay_linear(if_else(less(ts_delta(ts_regression(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), group_mean(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 252, rettype=0), 1), 0), -1, 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_regression(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), group_mean(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 252, rettype=0), 1), 0), -1, 0), 20)"
+    ]
+}

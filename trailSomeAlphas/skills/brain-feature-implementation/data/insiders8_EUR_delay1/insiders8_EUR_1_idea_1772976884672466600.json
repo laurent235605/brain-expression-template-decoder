@@ -1,0 +1,10 @@
+{
+    "template": "group_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, bucket(rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)), \"0,1,0.2\"))",
+    "idea": "将股权结构稳定性（模板1的相关性）分桶为5个regime，在每个稳定性分层内独立计算持仓收益背离（模板2）的组内排名。这种\"分层竞争\"结构避免了高稳定性行业与低稳定性行业的直接比较，确保信号仅在可比的所有权结构背景下生成，增强横截面区分度。",
+    "expression_list": [
+        "group_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, bucket(rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)), \"0,1,0.2\"))",
+        "group_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, bucket(rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)), \"0,1,0.2\"))",
+        "group_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, bucket(rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)), \"0,1,0.2\"))",
+        "group_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, bucket(rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)), \"0,1,0.2\"))"
+    ]
+}

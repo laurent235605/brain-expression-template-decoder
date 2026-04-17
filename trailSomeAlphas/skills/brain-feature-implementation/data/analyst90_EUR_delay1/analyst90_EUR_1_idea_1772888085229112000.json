@@ -1,0 +1,7 @@
+{
+    "template": "ts_product(1 + vec_avg({likelihood_score}), 20)",
+    "idea": "**Concept**: Geometric Success Expectation\n- **Sample Fields Used**: `likelihood_score`\n- **Definition**: Compounded product of (1 + daily average success likelihood) over 20 days\n- **Why This Feature**: Models the multiplicative nature of sequential trade success probabilities; captures persistence in high-quality idea generation\n- **is filling nan necessary**: Use ts_backfill to carry forward last valid likelihood to maintain geometric continuity, or treat as 0 (no contribution).\n- **Logical Meaning**: Represents compounded confidence; values > 1 indicate sustained high-probability environment\n- **Directionality**: Values > 1 bullish for idea quality; < 1 indicates degrading confidence\n- **Boundary Conditions**: Exponential growth possible with high daily likelihoods; decay to zero if prolonged low probability periods",
+    "expression_list": [
+        "ts_product(1 + vec_avg(success_likelihood_score), 20)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply({roic}, tanh({booklev}))",
+    "idea": "**Concept**: Quality Leverage Efficiency\n- **Sample Fields Used**: `roic`, `booklev`, `ocfroi`\n- **Definition**: Return on capital multiplied by optimal leverage level, penalizing excess cash or excess debt\n- **Why This Feature**: Modigliani-Miller suggests value creation from ROIC > WACC; optimal leverage amplifies this\n- **Logical Meaning**: High values indicate efficient use of financial leverage to amplify quality returns\n- **is filling nan necessary**: No, NaN in leverage indicates financial companies with different capital structures\n- **Directionality**: Higher values indicate optimal capital structure deployment\n- **Boundary Conditions**: Very high leverage with declining ROIC signals distress",
+    "expression_list": [
+        "multiply(mdl219_1_roic, tanh(mdl219_1_booklev))",
+        "multiply(mdl219_2_roic, tanh(mdl219_1_booklev))",
+        "multiply(mdl219_2_roic, tanh(mdl219_2_booklev))",
+        "multiply(mdl219_1_roic, tanh(mdl219_2_booklev))"
+    ]
+}

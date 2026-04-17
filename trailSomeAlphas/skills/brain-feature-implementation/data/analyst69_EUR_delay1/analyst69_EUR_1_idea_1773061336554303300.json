@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(quantile(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), abs(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1)), 0), driver=\"gaussian\"), 20), industry)",
+    "idea": "对日期变更幅度进行高斯分位数转换（quantile）以拉伸尾部差异、压缩中间区间，经20日线性衰减后，使用group_normalize在每个行业内进行多空权重归一化，确保严格的行业中性，并强化极端不确定事件的信号区分度。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(quantile(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), abs(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1)), 0), driver=\"gaussian\"), 20), industry)",
+        "group_normalize(ts_decay_linear(quantile(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), abs(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1)), 0), driver=\"gaussian\"), 20), industry)"
+    ]
+}

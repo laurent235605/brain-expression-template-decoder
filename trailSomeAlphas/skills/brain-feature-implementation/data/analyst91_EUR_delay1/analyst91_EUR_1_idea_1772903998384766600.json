@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 3)",
+    "idea": "将期限利差（短期vs长期波动率）进行行业中性化后，应用三次幂非线性变换。既保留了原策略捕捉地域业务重组加速/减速的能力，又通过signed_power大幅放大了极端偏离信号（极度动荡或极度稳定），压缩中间噪音区间，强化多空两极分化。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 3)"
+    ]
+}

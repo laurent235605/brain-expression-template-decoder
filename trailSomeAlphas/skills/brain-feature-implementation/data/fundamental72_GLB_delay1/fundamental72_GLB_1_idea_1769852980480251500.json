@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_regression(divide(vec_avg({cap_expend_prpty_add}), vec_avg({tot_asset})), ts_step(), 252, rettype=2), add(1, ts_std_dev(divide(vec_avg({cap_expend_prpty_add}), vec_avg({tot_asset})), 252)))",
+    "idea": "将简单差分升级为趋势质量度量。使用ts_regression(..., rettype=2)计算过去252日资本开支占比（capex/assets）时间序列的线性斜率，捕捉持续性投资趋势而非一次性脉冲；分母引入(1+波动率)惩罚项，对投资节奏混乱（高ts_std_dev）的公司降权，形成“趋势/噪音”信息比。该模板识别的是管理层执行战略时的坚定程度与资金配置的稳定性，而非单纯的投资规模变化。",
+    "expression_list": [
+        "divide(ts_regression(divide(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset)), ts_step(), 252, rettype=2), add(1, ts_std_dev(divide(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset)), 252)))",
+        "divide(ts_regression(divide(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset)), ts_step(), 252, rettype=2), add(1, ts_std_dev(divide(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset)), 252)))",
+        "divide(ts_regression(divide(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset)), ts_step(), 252, rettype=2), add(1, ts_std_dev(divide(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset)), 252)))",
+        "divide(ts_regression(divide(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset)), ts_step(), 252, rettype=2), add(1, ts_std_dev(divide(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset)), 252)))"
+    ]
+}

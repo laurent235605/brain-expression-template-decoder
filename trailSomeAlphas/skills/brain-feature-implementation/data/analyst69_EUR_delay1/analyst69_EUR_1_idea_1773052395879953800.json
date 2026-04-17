@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(multiply(signed_power(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 1.0), signed_power(group_zscore(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 5), std=4), industry), 0.5)), industry)",
+    "idea": "动量与水平值的非线性交互增强。同时考虑预期修订的5日变化率（动量）与当前预期水平的行业内偏离度（价值），前者反映变化速度，后者反映绝对位置；通过signed_power分别赋予1.0和0.5的幂次，使动量成分保持线性而水平成分适度压缩，两者相乘实现\"高动量+高预期水平\"的强化叠加与\"低动量+低预期\"的负向强化，捕捉预期调整的速度与质量双重特征。",
+    "expression_list": [
+        "group_zscore(multiply(signed_power(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 1.0), signed_power(group_zscore(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), 0.5)), industry)",
+        "group_zscore(multiply(signed_power(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 1.0), signed_power(group_zscore(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), 0.5)), industry)"
+    ]
+}

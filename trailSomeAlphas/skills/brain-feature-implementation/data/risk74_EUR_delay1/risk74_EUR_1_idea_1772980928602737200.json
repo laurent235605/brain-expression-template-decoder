@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(trade_when(or(greater(bucket(rank(winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4)), \"0,1,0.2\"), 0.8), less(bucket(rank(winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4)), \"0,1,0.2\"), 0.2)), winsorize(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), std=4), 0), industry)",
+    "idea": "双尾分位扩散策略：在数据清洗后，将集中度偏离进行截面排名并分桶为五分位。仅对前20%（极度加速集中）和后20%（极度加速分散）的股票建立多空敞口，中间60%视为噪音并强制置零。最后进行行业组内归一化，确保每个行业内部多空净敞口为零，避免行业偏离风险，专注捕捉极端的地理重构事件。",
+    "expression_list": [
+        "group_normalize(trade_when(or(greater(bucket(rank(winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4)), \"0,1,0.2\"), 0.8), less(bucket(rank(winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4)), \"0,1,0.2\"), 0.2)), winsorize(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), std=4), 0), industry)",
+        "group_normalize(trade_when(or(greater(bucket(rank(winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4)), \"0,1,0.2\"), 0.8), less(bucket(rank(winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4)), \"0,1,0.2\"), 0.2)), winsorize(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4), 0), industry)"
+    ]
+}

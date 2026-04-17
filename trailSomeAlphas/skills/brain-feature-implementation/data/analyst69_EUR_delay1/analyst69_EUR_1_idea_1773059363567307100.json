@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(and(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), greater(ts_zscore(ts_delta(days_from_last_change({eps_expected_report_dt}), 1), 63), 1.5)), multiply(abs(ts_delta(days_from_last_change({eps_expected_report_dt}), 1)), if_else(less(ts_delta({eps_expected_report_dt}, 1), 0), 1, -1)), 0), 10)",
+    "idea": "区分报告日调整方向的不对称性：利用原始日期字段的delta识别提前(负delta)与推迟(正delta)，分别赋予+1/-1方向权重，乘以重置幅度构造有符号信号；仅当该变化同时满足日内重置且历史63日zscore大于1.5（极端罕见事件）时才触发，缩短衰减窗口至10日以加快对紧急信息的消化。",
+    "expression_list": [
+        "ts_decay_linear(if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), greater(ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 1), 63), 1.5)), multiply(abs(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 1)), if_else(less(ts_delta(anl69_aeps_expected_report_dt, 1), 0), 1, -1)), 0), 10)",
+        "ts_decay_linear(if_else(and(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), greater(ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 1), 63), 1.5)), multiply(abs(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 1)), if_else(less(ts_delta(anl69_eps_expected_report_dt, 1), 0), 1, -1)), 0), 10)"
+    ]
+}

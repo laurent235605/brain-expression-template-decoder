@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(abs(zscore(ts_delta(vec_avg({version}), 5))), 1.5), greater(group_rank(vec_stddev({version}), industry), 0.8)), multiply(zscore(ts_delta(vec_avg({version}), 5)), signed_power(group_zscore(vec_stddev({version}), industry), 0.5)), 0)",
+    "idea": "双重验证条件信号：融合Input 2的极端变动检测与Input 1的分歧度信息，仅在共识变化极端且分歧度处于行业前20%时交易，使用分歧度作为置信权重对共识信号进行非线性调整，中段噪音置零。",
+    "expression_list": [
+        "trade_when(and(greater(abs(zscore(ts_delta(vec_avg(anl85_version), 5))), 1.5), greater(group_rank(vec_stddev(anl85_version), industry), 0.8)), multiply(zscore(ts_delta(vec_avg(anl85_version), 5)), signed_power(group_zscore(vec_stddev(anl85_version), industry), 0.5)), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_delta(vec_count({currency_code}), 63), ts_delta(vec_count({fiscalyearend}), 63))",
+    "idea": "结构动量背离策略：计算季度环比（63日）货币种类变化率减去同期财务年度变更频率变化率。显著正值表明币种扩张速度快于会计调整能力，可能存在未充分对冲的FX风险或并购整合滞后；负值可能暗示业务收缩但会计先行重组。",
+    "expression_list": [
+        "subtract(ts_delta(vec_count(payment_currency_code), 63), ts_delta(vec_count(anl30_fiscalyearend), 63))"
+    ]
+}

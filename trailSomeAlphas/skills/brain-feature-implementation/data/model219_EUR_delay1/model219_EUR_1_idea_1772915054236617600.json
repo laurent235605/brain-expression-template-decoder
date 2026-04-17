@@ -1,0 +1,14 @@
+{
+    "template": "divide(reverse({nlmktcap}), add({visiratio}, {volpre6m}))",
+    "idea": "**Concept**: Liquidity-Adjusted Size Premium\n- **Sample Fields Used**: `nlmktcap`, `visiratio`, `volpre6m`, `milliq`\n- **Definition**: Size factor adjusted for trading liquidity to identify small caps that are tradable\n- **Why This Feature**: Small cap premium disappears if liquidity costs exceed return premium\n- **Logical Meaning**: Large values indicate small size with adequate liquidity for institutional sizing\n- **is filling nan necessary**: Yes, use `ts_backfill()` for volume data\n- **Directionality**: Higher values indicate exploitable small-cap opportunities\n- **Boundary Conditions**: Very low liquidity makes theoretical premium unrealizable",
+    "expression_list": [
+        "divide(reverse(mdl219_1_nlmktcap), add(mdl219_1_visiratio, mdl219_1_volpre6m))",
+        "divide(reverse(mdl219_1_nlmktcap), add(mdl219_1_visiratio, mdl219_2_volpre6m))",
+        "divide(reverse(mdl219_2_nlmktcap), add(mdl219_1_visiratio, mdl219_1_volpre6m))",
+        "divide(reverse(mdl219_2_nlmktcap), add(mdl219_1_visiratio, mdl219_2_volpre6m))",
+        "divide(reverse(mdl219_2_nlmktcap), add(mdl219_2_visiratio, mdl219_2_volpre6m))",
+        "divide(reverse(mdl219_2_nlmktcap), add(mdl219_2_visiratio, mdl219_1_volpre6m))",
+        "divide(reverse(mdl219_1_nlmktcap), add(mdl219_2_visiratio, mdl219_2_volpre6m))",
+        "divide(reverse(mdl219_1_nlmktcap), add(mdl219_2_visiratio, mdl219_1_volpre6m))"
+    ]
+}

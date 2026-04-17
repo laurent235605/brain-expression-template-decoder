@@ -1,0 +1,8 @@
+{
+    "template": "add(group_zscore(winsorize(ts_backfill({factor_e},63) + ts_backfill({factor_s},63) + ts_backfill({factor_g},63), 4), sector), winsorize({hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\"), 2))",
+    "idea": "双维度行业中性化复合（均衡型）：将行业中性化的ESG总分与行业中性化的HF持仓偏离度直接等权相加，构建稳健的风险整合信号。该模板均衡融合了输入1的ESG数据清洗需求（ts_backfill+winsorize）与输入2的sector-relative quantile deviation方法，通过双重winsorize控制组合后的极值风险，适合作为基础配置因子。",
+    "expression_list": [
+        "add(group_zscore(winsorize(ts_backfill(rsk74_factor_e,63) + ts_backfill(rsk74_factor_s,63) + ts_backfill(rsk74_factor_g,63), 4), sector), winsorize(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"), 2))",
+        "add(group_zscore(winsorize(ts_backfill(rsk74_factor_esg,63) + ts_backfill(rsk74_factor_s,63) + ts_backfill(rsk74_factor_g,63), 4), sector), winsorize(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"), 2))"
+    ]
+}

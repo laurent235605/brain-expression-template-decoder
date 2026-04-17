@@ -1,0 +1,7 @@
+{
+    "template": "core = vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)); current_rank = group_rank(core, industry); rank_change = ts_delta(current_rank, 21); is_extreme = or(greater(current_rank, 0.9), less(current_rank, 0.1)); is_accelerating = or(and(greater(current_rank, 0.9), greater(rank_change, 0)), and(less(current_rank, 0.1), less(rank_change, 0))); base_z = group_zscore(core, industry); momentum_boost = add(1, abs(rank_change)); signal = if_else(is_accelerating, multiply(base_z, momentum_boost), if_else(is_extreme, base_z, 0)); final = hump_decay(signal, hump=0.01)",
+    "idea": "动量确认的加速偏离策略：结合横截面排名与21日排名变化（ts_delta），仅当基金已处于行业前10%/后10%且偏离程度正在扩大（加速超配/低配）时，通过排名变化幅度放大权重；使用hump_decay忽略微小波动，降低无效换手率。",
+    "expression_list": [
+        "core = vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)); current_rank = group_rank(core, industry); rank_change = ts_delta(current_rank, 21); is_extreme = or(greater(current_rank, 0.9), less(current_rank, 0.1)); is_accelerating = or(and(greater(current_rank, 0.9), greater(rank_change, 0)), and(less(current_rank, 0.1), less(rank_change, 0))); base_z = group_zscore(core, industry); momentum_boost = add(1, abs(rank_change)); signal = if_else(is_accelerating, multiply(base_z, momentum_boost), if_else(is_extreme, base_z, 0)); final = hump_decay(signal, hump=0.01)"
+    ]
+}

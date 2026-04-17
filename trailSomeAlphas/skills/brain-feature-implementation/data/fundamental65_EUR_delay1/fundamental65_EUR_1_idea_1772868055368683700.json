@@ -1,0 +1,10 @@
+{
+    "template": "divide({sedol_slope4qeps5y}, add({sedol_y5speq4vc}, 0.001))",
+    "idea": "**Concept**: Long-term Earnings Information Ratio\n- **Sample Fields Used**: {sedol_slope4qeps5y}, {sedol_y5speq4rqsr}, {sedol_aspemtty3gc}, {sedol_y5speq4vc}\n- **Definition**: 5-year earnings trend slope divided by earnings volatility to measure persistence of growth per unit of uncertainty (Sharpe-like ratio for fundamentals)\n- **Why This Feature**: Distinguishes between high-growth cyclicals (volatile) and steady compounders (persistent); investors overpay for volatile growth\n- **Logical Meaning**: High values indicate quality growth with low uncertainty (compounding machines); low values indicate cyclical or speculative growth\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher ratios predict defensive growth characteristics and lower drawdowns during corrections\n- **Boundary Conditions**: Negative slopes create negative values; requires sign handling for interpretation",
+    "expression_list": [
+        "divide(fnd65_allcap_sedol_slope4qeps5y, add(fnd65_allcap_sedol_y5speq4vc, 0.001))",
+        "divide(fnd65_allcap_sedol_slope4qeps5y, add(fnd65_dev_sedol_y5speq4vc, 0.001))",
+        "divide(fnd65_dev_sedol_slope4qeps5y, add(fnd65_dev_sedol_y5speq4vc, 0.001))",
+        "divide(fnd65_dev_sedol_slope4qeps5y, add(fnd65_allcap_sedol_y5speq4vc, 0.001))"
+    ]
+}

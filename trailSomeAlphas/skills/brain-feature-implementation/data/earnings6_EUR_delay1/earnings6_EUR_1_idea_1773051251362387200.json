@@ -1,0 +1,8 @@
+{
+    "template": "quantile( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), driver='gaussian' )",
+    "idea": "分布形态重塑与尾部强调。将条件化Surprise通过quantile映射至高斯分布，将中间区间压缩至0附近而拉伸尾部，使极端盈利惊喜（大幅超预期/不及预期）获得更显著的权重分配，增强因子对极端alpha事件的敏感性。",
+    "expression_list": [
+        "quantile( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), driver='gaussian' )",
+        "quantile( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), driver='gaussian' )"
+    ]
+}

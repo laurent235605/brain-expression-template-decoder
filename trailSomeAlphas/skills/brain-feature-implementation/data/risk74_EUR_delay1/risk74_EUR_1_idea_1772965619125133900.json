@@ -1,0 +1,7 @@
+{
+    "template": "{hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\")",
+    "idea": "**Concept**: HF Ownership Relative to Sector\n- **Sample Fields Used**: `hfown_pctown`, `fund_num_owners_encr`\n- **Definition**: Deviation of HF ownership from sector average to identify sector outliers (HF favorites or rejects)\n- **Why This Feature**: Sector-relative ownership indicates stock-picking skill vs. sector bets; tariff risks are often sector-wide\n- **Logical Meaning**: Positive values indicate HF overweight relative to sector peers (conviction pick); negative indicates underweight (avoid)\n- **is filling nan necessary**: No, cross-sectional mean calculation handles NaNs by exclusion\n- **Directionality**: High = HF favorite vs. sector (good if sector rallies); Low = HF avoid (bad if sector rallies, good if tariff hits sector)\n- **Boundary Conditions**: Extreme values indicate contrarian sector bets; near-zero indicates sector-mirror holdings",
+    "expression_list": [
+        "rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\")"
+    ]
+}

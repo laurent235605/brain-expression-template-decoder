@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(multiply(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), divide(1, add(1, vec_stddev({estimated_eps})))), 20)",
+    "idea": "引入分析师预期分歧度（vec_stddev）作为置信度权重，分歧度越高（标准差越大）则权重越低，构建加权Surprise；该做法降低了高不确定性股票（预测分散）的噪音干扰，保留高共识下的超预期信号，再通过20日线性衰减加权。",
+    "expression_list": [
+        "ts_decay_linear(multiply(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), divide(1, add(1, vec_stddev(ern6_estimated_eps)))), 20)",
+        "ts_decay_linear(multiply(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), divide(1, add(1, vec_stddev(ern6_estimated_eps)))), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(trade_when(greater(abs(ts_zscore(multiply(group_zscore(winsorize(ts_backfill({hfown_pctown},63),std=4),sector),if_else(greater(group_rank(abs(ts_delta({hfown_pctown},21)),sector),0.8),2.0,1.0)),252)),1.5),ts_zscore(multiply(group_zscore(winsorize(ts_backfill({hfown_pctown},63),std=4),sector),if_else(greater(group_rank(abs(ts_delta({hfown_pctown},21)),sector),0.8),2.0,1.0)),252),0),3),sector)",
+    "idea": "**概念**: 事件驱动加权历史偏离（Event-Weighted Historical Deviation）\\n- **核心逻辑**: 识别近期持仓发生显著变化的标的（通过`ts_delta`计算21日变化量，并用`group_rank`筛选行业内变化最大的前20%作为事件信号），利用`if_else`对近期有事件的标的赋予2倍权重，无事件标的维持原权重；在此基础上计算252日历史Z-Score，并仅保留1.5倍标准差外的极端值；通过`ts_decay_linear`平滑事件后的信号衰减。该模板强化了“持仓变化加速触及历史极端”的反转信号，过滤掉静态持仓的噪音。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(trade_when(greater(abs(ts_zscore(multiply(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown,63),std=4),sector),if_else(greater(group_rank(abs(ts_delta(rsk74_hfown_pctown,21)),sector),0.8),2.0,1.0)),252)),1.5),ts_zscore(multiply(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown,63),std=4),sector),if_else(greater(group_rank(abs(ts_delta(rsk74_hfown_pctown,21)),sector),0.8),2.0,1.0)),252),0),3),sector)"
+    ]
+}

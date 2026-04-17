@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(bucket(group_rank(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), industry), range=\"0,1,0.1\"), 0.9), less(bucket(group_rank(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), industry), range=\"0,1,0.1\"), 0.1)), subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), 0)",
+    "idea": "将中美价差经行业内分位桶化（bucket），仅保留极端前10%（多头）和后10%（空头）的仓位，中间80%分位视为噪音清零，构建更纯粹的地缘博弈尾部策略，降低中段噪音干扰。",
+    "expression_list": [
+        "trade_when(or(greater(bucket(group_rank(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), industry), range=\"0,1,0.1\"), 0.9), less(bucket(group_rank(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), industry), range=\"0,1,0.1\"), 0.1)), subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), 0)"
+    ]
+}

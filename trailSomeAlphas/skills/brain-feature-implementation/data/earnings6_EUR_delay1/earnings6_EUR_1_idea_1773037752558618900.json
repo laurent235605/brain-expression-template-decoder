@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(quantile(winsorize(subtract(divide(subtract(vec_avg({actual_eps}), vec_median({estimated_eps})), add(abs(vec_median({estimated_eps})), 0.01)), multiply(0.3, divide(vec_stddev({actual_eps}), add(abs(vec_avg({actual_eps})), 0.01)))), std=4), driver=\"cauchy\"), {industry})",
+    "idea": "采用稳健统计量构建抗噪Surprise信号：以vec_median替代vec_avg作为估计基准，降低个别极端分析师预测对共识的扭曲；引入实际EPS的离散度（vec_stddev(actual_eps)）作为不确定性惩罚项，对实际盈利波动大的公司向下修正信号强度；使用Cauchy分位数驱动（比Gaussian更厚尾）进一步拉伸极端值；最后通过group_normalize确保行业内多空净暴露为零，实现纯粹的行业内相对预期差交易。",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(trade_when(or(greater(rank(winsorize({eps_best_eeps_cur_yr}, std=4)), 0.9), less(rank(winsorize({eps_best_eeps_cur_yr}, std=4)), 0.1)), quantile(winsorize({eps_best_eeps_cur_yr}, std=4), driver=gaussian), 0), 2)",
+    "idea": "**概念**: 非线性尾部放大策略（Top/Bottom 10%）\n**核心逻辑**: 仅对排名极值区域（前10%或后10%）的股票保留信号，中间80%视为无效噪音并置零。对保留的极值信号应用signed_power（幂次=2）进行非线性放大，使极端好/坏的股票与次极端股票之间的差距进一步拉大，强化多空两端的风险暴露，适合用于构建高偏度的Alpha组合。",
+    "expression_list": [
+        "signed_power(trade_when(or(greater(rank(winsorize(anl69_aeps_best_eeps_cur_yr, std=4)), 0.9), less(rank(winsorize(anl69_aeps_best_eeps_cur_yr, std=4)), 0.1)), quantile(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), driver=gaussian), 0), 2)",
+        "signed_power(trade_when(or(greater(rank(winsorize(anl69_eps_best_eeps_cur_yr, std=4)), 0.9), less(rank(winsorize(anl69_eps_best_eeps_cur_yr, std=4)), 0.1)), quantile(winsorize(anl69_eps_best_eeps_cur_yr, std=4), driver=gaussian), 0), 2)"
+    ]
+}

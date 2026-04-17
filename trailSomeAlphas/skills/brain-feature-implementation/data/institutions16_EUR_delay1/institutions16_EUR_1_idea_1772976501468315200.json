@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(quantile(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), driver=\"gaussian\"), add(ts_std_dev(returns, 21), ts_std_dev(ts_std_dev(returns, 21), 21))), industry)",
+    "idea": "对分子应用高斯分位数变换以突出极端配置偏离（肥尾效应），并在分母中加入波动率的波动率（二阶矩）以惩罚风险regime不稳定的情况，旨在识别'稳定高信念'而非'高波动造成的虚假高配置'。",
+    "expression_list": [
+        "group_zscore(divide(quantile(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), driver=\"gaussian\"), add(ts_std_dev(returns, 21), ts_std_dev(ts_std_dev(returns, 21), 21))), industry)"
+    ]
+}

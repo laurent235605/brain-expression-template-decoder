@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_delta(group_rank(winsorize(vec_avg({likelihood_score}), std=4), industry), 30), add(0.1, ts_std_dev(group_rank(winsorize(vec_avg({likelihood_score}), std=4), industry), 60)))",
+    "idea": "波动率调整趋势强度：将30日行业排名变化除以其60日历史波动率(加0.1防止除零)，构造类似信息比率的稳健指标，识别出那些排名稳步改善而非高波动噪音导致的假突破，通过风险调整过滤掉不稳定的信号，提高持仓稳定性与夏普比率。",
+    "expression_list": [
+        "divide(ts_delta(group_rank(winsorize(vec_avg(success_likelihood_score), std=4), industry), 30), add(0.1, ts_std_dev(group_rank(winsorize(vec_avg(success_likelihood_score), std=4), industry), 60)))"
+    ]
+}

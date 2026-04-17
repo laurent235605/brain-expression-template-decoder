@@ -1,0 +1,7 @@
+{
+    "template": "if_else(and(greater(group_rank(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 21), ts_backfill({reported_asset_value}, 21)), std=3), industry), 0.8), less(group_rank(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 126), ts_backfill({reported_asset_value}, 126)), std=4), industry), 0.2)), -1, if_else(and(less(group_rank(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 21), ts_backfill({reported_asset_value}, 21)), std=3), industry), 0.2), greater(group_rank(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 126), ts_backfill({reported_asset_value}, 126)), std=4), industry), 0.8)), 1, 0))",
+    "idea": "配置反转与拥挤度预警：构建双重条件逻辑——当短期权益配置处于行业前20%但长期配置处于行业后20%时，判定为短期过度拥挤（赋权-1）；反之当短期低配但长期高配时，判定为暂时性防御（赋权1）。利用长短周期背离捕捉配置均值回复机会。",
+    "expression_list": [
+        "if_else(and(greater(group_rank(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), ts_backfill(fund_reported_asset_value, 21)), std=3), industry), 0.8), less(group_rank(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 126), ts_backfill(fund_reported_asset_value, 126)), std=4), industry), 0.2)), -1, if_else(and(less(group_rank(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), ts_backfill(fund_reported_asset_value, 21)), std=3), industry), 0.2), greater(group_rank(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 126), ts_backfill(fund_reported_asset_value, 126)), std=4), industry), 0.8)), 1, 0))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(vec_count({opentimestamp}), 5), (vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp})) / (vec_stddev({opentimestamp}) + 1) + 0.3 * (vec_max({opentimestamp}) - vec_min({loadedidstimestamp})) / (vec_range({opentimestamp}) + 1), NaN)",
+    "idea": "多维度复合执行质量分：条件过滤确保向量样本充足(vec_count>5)，加权组合均值延迟与极差延迟(Max-Min)信息，综合反映平均效率与极端风险，剔除数据不足样本避免统计偏差",
+    "expression_list": [
+        "trade_when(greater(vec_count(mdl209_opentimestamp), 5), (vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp)) / (vec_stddev(mdl209_opentimestamp) + 1) + 0.3 * (vec_max(mdl209_opentimestamp) - vec_min(mdl209_loadedidstimestamp)) / (vec_range(mdl209_opentimestamp) + 1), NaN)"
+    ]
+}

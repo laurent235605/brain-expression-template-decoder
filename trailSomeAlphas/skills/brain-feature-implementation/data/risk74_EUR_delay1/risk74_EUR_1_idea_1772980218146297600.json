@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_delta(ts_sum(ts_delta({shortint}, 1), 15), 5), 3)",
+    "idea": "计算15日空头累积变化的5日变化率（二阶导，捕捉建仓/回补的加速度），再通过3日线性衰减平滑处理，用于识别空头压力从匀速累积转向加速恶化或加速回补的拐点时刻，同时控制换手。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(ts_sum(ts_delta(rsk74_shortint, 1), 15), 5), 3)",
+        "ts_decay_linear(ts_delta(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 5), 3)"
+    ]
+}

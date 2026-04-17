@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(subtract(group_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector), ts_mean(group_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector), 126)), 63)",
+    "idea": "**跨截面动量-历史均值背离**：计算当日行业相对排名（group_rank）与其近期历史平均水平（126日移动平均）的偏离值，再对该偏离值进行短期标准化（63日zscore）。该信号识别那些正在快速脱离其历史配置常态的股票（即“异常调仓”），适用于捕捉缓慢但持续的配置趋势反转或早期动量突破。",
+    "expression_list": [
+        "ts_zscore(subtract(group_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector), ts_mean(group_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector), 126)), 63)"
+    ]
+}

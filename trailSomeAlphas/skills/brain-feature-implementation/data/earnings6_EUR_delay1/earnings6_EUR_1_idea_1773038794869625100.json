@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(and(greater(abs(vec_avg({estimated_eps})), 0.01), greater(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), group_zscore(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry), 0)",
+    "idea": "双重条件筛选机制：仅当盈余估计值有效（|estimate|>0.01）且历史股息数据可靠时，才输出股息持续性信号，结合两个模板的条件逻辑提高数据质量。",
+    "expression_list": [
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), group_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), group_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), group_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry), 0)",
+        "trade_when(and(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), group_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry), 0)"
+    ]
+}

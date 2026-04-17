@@ -1,0 +1,7 @@
+{
+    "template": "let(short_sig, multiply(subtract(vec_avg({likelihood_score}), ts_mean(vec_avg({likelihood_score}), 10)), divide(vec_avg({exit_price}), vec_avg({openprice}))), long_sig, multiply(subtract(vec_avg({likelihood_score}), ts_mean(vec_avg({likelihood_score}), 60)), ts_mean(divide(vec_avg({exit_price}), vec_avg({openprice})), 5)), combined, add(multiply(0.6, zscore(winsorize(short_sig, std=4))), multiply(0.4, zscore(winsorize(long_sig, std=4)))), ts_target_tvr(combined, target_tvr=0.4, max_blend=0.25))",
+    "idea": "双轨融合：短期（10日）信号反应灵敏但噪音大，长期（60日）信号稳健但滞后，通过6:4加权组合平衡时效与稳健性，最后应用目标换手控制算子将日均换手强制限制在40%以内，确保高换手场景下的信号可执行性。",
+    "expression_list": [
+        "let(short_sig, multiply(subtract(vec_avg(success_likelihood_score), ts_mean(vec_avg(success_likelihood_score), 10)), divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice))), long_sig, multiply(subtract(vec_avg(success_likelihood_score), ts_mean(vec_avg(success_likelihood_score), 60)), ts_mean(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), 5)), combined, add(multiply(0.6, zscore(winsorize(short_sig, std=4))), multiply(0.4, zscore(winsorize(long_sig, std=4)))), ts_target_tvr(combined, target_tvr=0.4, max_blend=0.25))"
+    ]
+}

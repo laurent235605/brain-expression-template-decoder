@@ -1,0 +1,16 @@
+{
+    "template": "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill({concentration},63),std=4), industry), 2), group_zscore(winsorize(ts_backfill({nondomicile},63),std=4), industry)), industry))",
+    "idea": "目标换手率约束优化：在模板2的完整数据清洗（63日回溯）、交互与行业中性化流程基础上，引入目标换手率控制算子替代固定窗口衰减，通过自适应平滑自动调节衰减参数以降低高频噪音导致的过度交易，平衡信号强度与实施成本。",
+    "expression_list": [
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry)), industry))",
+        "ts_target_tvr_10(group_normalize(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry)), industry))"
+    ]
+}

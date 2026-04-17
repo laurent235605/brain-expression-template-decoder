@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(bucket(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), \"0,1,0.2\"), 0.8), ts_mean(ts_delta({eps_best_eeps_cur_yr}, 1), 20), ts_delta({eps_best_eeps_cur_yr}, 1))",
+    "idea": "分桶自适应时序处理：利用bucket算子将历史稳定天数分为5个分位桶，在极端稳定桶(>0.8)内采用长窗口均值(ts_mean)平滑修正动量以捕捉持续趋势；在不稳定桶内采用最新单日变化(ts_delta)捕捉即时信息。该结构根据模板1的稳定性状态动态选择模板2的时序处理方式(趋势跟踪 vs 即时反应)，实现状态依赖的信号提取。",
+    "expression_list": [
+        "if_else(greater(bucket(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), \"0,1,0.2\"), 0.8), ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 20), ts_delta(anl69_aeps_best_eeps_cur_yr, 1))",
+        "if_else(greater(bucket(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), \"0,1,0.2\"), 0.8), ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 20), ts_delta(anl69_eps_best_eeps_cur_yr, 1))",
+        "if_else(greater(bucket(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), \"0,1,0.2\"), 0.8), ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 20), ts_delta(anl69_eps_best_eeps_cur_yr, 1))",
+        "if_else(greater(bucket(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), \"0,1,0.2\"), 0.8), ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 20), ts_delta(anl69_aeps_best_eeps_cur_yr, 1))"
+    ]
+}

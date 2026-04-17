@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(ts_sum(ts_delta({hfown_pctown}, 1), 20), ts_sum(ts_delta({fund_pct_ownership_encr}, 1), 20), 252, rettype=0), industry)",
+    "idea": "对冲基金特异性剥离（残差流）：将HF累积流对共同基金累积流做时序回归取残差(rettype=0)，剥离广义机构资金流的系统性Beta，保留HF独有的择时Alpha信号，并做行业中性化处理",
+    "expression_list": [
+        "group_zscore(ts_regression(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr, 1), 20), 252, rettype=0), industry)"
+    ]
+}

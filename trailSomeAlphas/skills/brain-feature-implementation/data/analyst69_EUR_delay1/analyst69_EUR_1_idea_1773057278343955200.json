@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 5)",
+    "idea": "在模板1原始加速度信号的基础上，后置应用5日线性衰减平均(ts_decay_linear)。不同于前置平滑，此举对已经计算出的加速度信号进行后置平滑处理，赋予近期加速度更高的权重，形成对预期动量变化的滞后确认机制。该结构适用于希望牺牲部分时效性以换取信号稳健性、降低假突破干扰的场景。",
+    "expression_list": [
+        "ts_decay_linear(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 5)",
+        "ts_decay_linear(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 5)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize({value_ts},std=4),industry),ts_delta(group_rank(winsorize({crowding},std=4),industry),5)),3)",
+    "idea": "时序动量平滑型拥挤价值：先对拥挤度进行行业内排名，计算其5日变化（动量）以捕捉拥挤度正在恶化的股票，与经清洗和行业标准化后的价值因子相乘，最后通过3日线性衰减加权平滑，在保留价值暴露的同时，动态惩罚拥挤度近期显著上升的价值股，并控制组合换手率。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),ts_delta(group_rank(winsorize(rsk74_crowding,std=4),industry),5)),3)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),ts_delta(group_rank(winsorize(rsk74_raw_crowding,std=4),industry),5)),3)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),ts_delta(group_rank(winsorize(liquidity_factor_crowding,std=4),industry),5)),3)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),ts_delta(group_rank(winsorize(liquidity_timeseries_crowding,std=4),industry),5)),3)"
+    ]
+}

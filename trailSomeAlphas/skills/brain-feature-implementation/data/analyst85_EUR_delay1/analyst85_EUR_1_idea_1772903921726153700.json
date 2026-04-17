@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(vec_count(vec_filter({version}, value=\\\"nan\\\")), 10), signed_power(zscore(winsorize(vec_skewness(vec_filter({version}, value=\\\"nan\\\")), std=4)), 2), 0)",
+    "idea": "条件化极端偏度信号：仅在样本量充足（有效版本数据点大于10）的股票上，对标准化偏度进行幂变换以放大尾部差异，其余情况置零，确保信号质量，专注于捕捉版本分化的极端情形。",
+    "expression_list": [
+        "trade_when(greater(vec_count(vec_filter(anl85_version, value=\\\"nan\\\")), 10), signed_power(zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\\\"nan\\\")), std=4)), 2), 0)"
+    ]
+}

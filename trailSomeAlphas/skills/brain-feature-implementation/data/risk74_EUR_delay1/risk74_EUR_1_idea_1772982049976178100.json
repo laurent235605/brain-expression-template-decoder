@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(ts_regression(ts_mean(winsorize(ts_backfill({exp_usa}, 126), std=4), 21), add(group_mean(ts_mean(winsorize(ts_backfill({exp_usa}, 126), std=4), 21), log(ts_mean(cap, 21)), sector), ts_mean(winsorize(ts_backfill({exp_nondomicile1}, 126), std=4), 21)), 252, rettype=0), 10), sector)",
+    "idea": "预平滑稳健回归 - 对原始敞口数据先进行21日移动平均及更长回测期（126日）预处理，降低日度噪音与幸存者偏差后再提取残差，最后进行10日线性衰减平滑，得到更稳定、换手率更低的特质性敞口信号，并强制行业中性。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(ts_regression(ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 126), std=4), 21), add(group_mean(ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 126), std=4), 21), log(ts_mean(cap, 21)), sector), ts_mean(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 126), std=4), 21)), 252, rettype=0), 10), sector)",
+        "group_normalize(ts_decay_linear(ts_regression(ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 126), std=4), 21), add(group_mean(ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 126), std=4), 21), log(ts_mean(cap, 21)), sector), ts_mean(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 126), std=4), 21)), 252, rettype=0), 10), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_mean(ts_std_dev(vec_avg({exposure_value}), 5), 3), ts_mean(ts_std_dev(vec_avg({exposure_value}), 60), 10)), sector)",
+    "idea": "行业中性化地理波动率期限利差，使用短中期等权移动平均（3日与10日）替代高换手的线性衰减加权，在剔除行业固有地域波动特征后，识别相对同业而言地域业务重构加速（多头）或减速稳定（空头）的异质性信号，降低组合的行业偏度暴露。",
+    "expression_list": [
+        "group_zscore(subtract(ts_mean(ts_std_dev(vec_avg(anl91_exposure_value), 5), 3), ts_mean(ts_std_dev(vec_avg(anl91_exposure_value), 60), 10)), sector)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "divide({value_03501a}, {value_02300q})",
+    "idea": "**Concept**: Equity Capital Structure Ratio\n- **Sample Fields Used**: `value_03501a`, `value_02300q`\n- **Definition**: Common equity as a proportion of total assets (Equity/Assets ratio)\n- **Why This Feature**: Measures financial leverage and capital structure conservatism; higher equity indicates lower leverage risk\n- **Logical Meaning**: Ownership cushion against asset value declines; inverse of leverage ratio\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Annual equity vs quarterly assets creates frequency mismatch; do not interpolate annual data to quarterly.\n- **Directionality**: Higher values indicate less leveraged, more conservative capital structure (typically lower risk)\n- **Boundary Conditions**: Values near 1 indicate no debt; near 0 indicate highly leveraged or negative equity situations",
+    "expression_list": [
+        "divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q)",
+        "divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q)",
+        "divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q)",
+        "divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q)"
+    ]
+}

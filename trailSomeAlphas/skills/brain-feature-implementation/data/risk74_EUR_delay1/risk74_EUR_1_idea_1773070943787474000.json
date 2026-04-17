@@ -1,0 +1,26 @@
+{
+    "template": "trade_when(greater(multiply({concentration}, {nondomicile}), 0.5), ts_sum(ts_delta({shortint}, 1), 15), 0)",
+    "idea": "使用trade_when条件运算符，仅在地理集中度与非本土暴露的乘积超过阈值时（表明存在显著单一国家风险），才暴露于空头兴趣累积信号，否则归零，实现'有风险才下注'的条件触发逻辑。",
+    "expression_list": [
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_nondomicile), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_nondomicile), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_nondomicile), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_nondomicile), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint, 1), 15), 0)",
+        "trade_when(greater(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2), 0.5), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 0)"
+    ]
+}

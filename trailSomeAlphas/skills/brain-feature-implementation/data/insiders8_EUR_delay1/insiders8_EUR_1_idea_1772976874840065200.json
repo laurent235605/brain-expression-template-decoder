@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(and(greater(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 0.7), greater(abs({active_return_decile_rank_long} - {active_weight_decile_rank_long}), 2)), signed_power({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 1.5), 0)",
+    "idea": "激进的条件触发结构：仅在股权结构高度稳定（corr>0.7，模板1逻辑）且收益-权重背离极端（>2分位，模板2逻辑）时激活交易。使用signed_power非线性放大极端背离，在\"静态股东基础+动态持仓错配\"的稀缺场景下集中下注，其余时间空仓避免噪音。",
+    "expression_list": [
+        "trade_when(and(greater(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 0.7), greater(abs(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long), 2)), signed_power(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 1.5), 0)",
+        "trade_when(and(greater(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 0.7), greater(abs(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long), 2)), signed_power(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 1.5), 0)",
+        "trade_when(and(greater(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 0.7), greater(abs(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long), 2)), signed_power(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 1.5), 0)",
+        "trade_when(and(greater(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 0.7), greater(abs(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long), 2)), signed_power(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 1.5), 0)"
+    ]
+}

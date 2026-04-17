@@ -1,0 +1,10 @@
+{
+    "template": "subtract({mktlev}, {booklev})",
+    "idea": "**Concept**: Capital Structure Flexibility\n- **Sample Fields Used**: `booklev`, `mktlev`, `netdebt`, `cashratio`\n- **Definition**: Distance from optimal capital structure based on market vs. book leverage divergence\n- **Why This Feature**: Large divergence between market and book leverage indicates either undervalued assets or distress\n- **Logical Meaning**: Measures the gap between accounting values and market assessment of financial risk\n- **is filling nan necessary**: No, financial firms have different structures and should be excluded\n- **Directionality**: Moderate positive values indicate leverage flexibility; extreme values indicate distress or over-leverage\n- **Boundary Conditions**: Negative net debt (cash > debt) indicates under-leverage and value destruction via excess liquidity",
+    "expression_list": [
+        "subtract(mdl219_1_mktlev, mdl219_1_booklev)",
+        "subtract(mdl219_2_mktlev, mdl219_1_booklev)",
+        "subtract(mdl219_2_mktlev, mdl219_2_booklev)",
+        "subtract(mdl219_1_mktlev, mdl219_2_booklev)"
+    ]
+}

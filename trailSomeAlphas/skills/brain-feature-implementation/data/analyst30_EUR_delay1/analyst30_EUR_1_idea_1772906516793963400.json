@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(add(vec_count({currency_code}), reverse(vec_count({fiscalyearend}))), 20)",
+    "idea": "构建复合运营稳定性指标：币种多样化（正向贡献）与财务年度变更频率（负向贡献，经reverse反转）的20日线性衰减平滑。高值代表全球化布局成熟且会计结构稳定的公司，低值提示要么业务单一要么财务混乱。",
+    "expression_list": [
+        "ts_decay_linear(add(vec_count(payment_currency_code), reverse(vec_count(anl30_fiscalyearend))), 20)"
+    ]
+}

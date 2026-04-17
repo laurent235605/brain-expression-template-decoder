@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(ts_rank(winsorize({crowding} * {value_ts}, std=4), 252), 0.9), winsorize({crowding} * {value_ts}, std=4), if_else(less(ts_rank(winsorize({crowding} * {value_ts}, std=4), 252), 0.1), winsorize({crowding} * {value_ts}, std=4), 0))",
+    "idea": "应用'仅极端区间有信号'的逻辑：仅当拥挤价值乘积处于自身252天历史分布的极端尾部（前10%或后10%）时才保留信号，中间80%区间视为噪音并赋零值。强化极端配置，剔除模糊地带的无效暴露。",
+    "expression_list": [
+        "if_else(greater(ts_rank(winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), 252), 0.9), winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), if_else(less(ts_rank(winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), 252), 0.1), winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), 0))",
+        "if_else(greater(ts_rank(winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), 252), 0.9), winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), if_else(less(ts_rank(winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), 252), 0.1), winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), 0))",
+        "if_else(greater(ts_rank(winsorize(rsk74_crowding * rsk74_value_ts, std=4), 252), 0.9), winsorize(rsk74_crowding * rsk74_value_ts, std=4), if_else(less(ts_rank(winsorize(rsk74_crowding * rsk74_value_ts, std=4), 252), 0.1), winsorize(rsk74_crowding * rsk74_value_ts, std=4), 0))",
+        "if_else(greater(ts_rank(winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), 252), 0.9), winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), if_else(less(ts_rank(winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), 252), 0.1), winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), 0))"
+    ]
+}

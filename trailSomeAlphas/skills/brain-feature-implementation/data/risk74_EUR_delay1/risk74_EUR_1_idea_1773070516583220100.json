@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(less(ts_std_dev({close},21),ts_mean(ts_std_dev({close},21),63)),truncate(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),industry),0.02),0)",
+    "idea": "仅在低波动市场环境（21日收益波动低于其63日历史均值）下激活信号，提取行业中性残差并组内标准化，同时对个股权重进行2%硬截断，避免极端个股主导，确保因子在市场平稳期捕捉纯净的特质性空头压力。",
+    "expression_list": []
+}

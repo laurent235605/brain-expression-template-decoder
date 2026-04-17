@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( ts_delta( winsorize(ts_backfill({exp_usa},63),std=4), 21 ), industry ) ), 1.5 ), group_zscore( ts_delta( winsorize(ts_backfill({exp_usa},63),std=4), 21 ), industry ), 0 )",
+    "idea": "地域暴露动量（事件驱动）：计算21天暴露变化率，在行业内标准化后仅保留极端变化（|zscore|>1.5）的股票，其余置零。用于捕捉正在快速国际化或收缩海外业务的拐点信号，避免对暴露水平稳定的公司频繁交易。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( ts_delta( winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), 21 ), industry ) ), 1.5 ), group_zscore( ts_delta( winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), 21 ), industry ), 0 )"
+    ]
+}

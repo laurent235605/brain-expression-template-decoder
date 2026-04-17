@@ -1,0 +1,10 @@
+{
+    "template": "ts_delta({eps_best_eeps_cur_yr}, 5) * signed_power(group_zscore(days_from_last_change({eps_expected_report_dt}), industry), 0.5)",
+    "idea": "**非线性稳定性调制**：利用signed_power(0.5<1)对分组标准化后的日期稳定性进行压缩处理，使其作为修正动量的乘数因子时，既能区分稳定与不稳定，又不会让极端稳定值过度放大信号。相比线性加权，此结构对中等稳定性股票的惩罚更温和，保持投资组合的均衡分散性。",
+    "expression_list": [
+        "ts_delta(anl69_aeps_best_eeps_cur_yr, 5) * signed_power(group_zscore(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.5)",
+        "ts_delta(anl69_eps_best_eeps_cur_yr, 5) * signed_power(group_zscore(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.5)",
+        "ts_delta(anl69_eps_best_eeps_cur_yr, 5) * signed_power(group_zscore(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.5)",
+        "ts_delta(anl69_aeps_best_eeps_cur_yr, 5) * signed_power(group_zscore(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.5)"
+    ]
+}

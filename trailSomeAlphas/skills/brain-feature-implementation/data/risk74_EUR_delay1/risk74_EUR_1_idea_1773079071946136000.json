@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(and(or(greater(rank(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252)),0.9),less(rank(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252)),0.1)),greater(ts_zscore(ts_mean({volume},20),252),0)),signed_power(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),1.5),0)",
+    "idea": "仅当15日空头累积变化处于历史极端分位（全市场前10%或后10%）且当日成交量高于其20日均量历史均值时，才触发交易信号，并使用signed_power对极端Z-score进行非线性放大（幂次1.5）。该“极端分位+流动性确认”机制有效过滤掉噪音区间，仅在空头行为呈现高确信度（历史罕见+交易活跃）时下注，显著降低中间平庸区间的无效换手。",
+    "expression_list": []
+}

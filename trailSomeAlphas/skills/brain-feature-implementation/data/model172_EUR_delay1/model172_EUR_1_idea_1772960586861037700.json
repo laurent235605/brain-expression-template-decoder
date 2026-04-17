@@ -1,0 +1,7 @@
+{
+    "template": "multiply(zscore(winsorize(subtract({cfroichg}, ts_delay({cfroichg}, 5)), 4)), zscore(winsorize(ts_sum({cfroidrs}, 10), 4)))",
+    "idea": "非线性共振放大器：分别对Input 1的加速度与Input 2的漂移累积进行winsorize(去极值)与zscore(标准化)截面处理，使两者处于同一量纲后做乘法交互。该结构强调‘高加速且高累积’的共振尾部，对单因子有效区间进行交叉乘积，显著放大双确认信号的强度，同时压缩单因子噪音区间的权重。",
+    "expression_list": [
+        "multiply(zscore(winsorize(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5)), 4)), zscore(winsorize(ts_sum(mdl172_cfroidrs, 10), 4)))"
+    ]
+}

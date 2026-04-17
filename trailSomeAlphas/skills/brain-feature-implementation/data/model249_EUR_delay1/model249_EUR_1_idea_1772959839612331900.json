@@ -1,0 +1,7 @@
+{
+    "template": "multiply( -1, ts_std_dev( vec_avg({quintile}), 60 ), log( add( 1, vec_stddev({quintile}) ) ) )",
+    "idea": "跨模型共识调整稳定性因子。假设{quintile}为多个子模型或情景的分位数向量输出，同时惩罚时间序列波动率（ts_std_dev）和横截面模型分歧度（vec_stddev）。通过对数变换处理模型分歧度的尺度差异，只有当模型间共识高（低vec_stddev）且时间序列稳定（低ts_std_dev）时得分最高，识别结构性特征明确、无模型争议的标的。",
+    "expression_list": [
+        "multiply( -1, ts_std_dev( vec_avg(mdl249_quintile), 60 ), log( add( 1, vec_stddev(mdl249_quintile) ) ) )"
+    ]
+}

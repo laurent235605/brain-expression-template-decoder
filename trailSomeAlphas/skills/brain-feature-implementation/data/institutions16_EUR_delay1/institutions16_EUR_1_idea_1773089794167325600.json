@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_decay_linear(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 10), std=4), 1.5), sector)",
+    "idea": "行业中性非线性资产流加速度：先对20日资产变化相对60日均值的偏离进行10日线性衰减平滑，经4倍标准差winsorize去极值后，应用1.5次幂signed_power放大尾部极端信号（强化极好/极差的动能分化），最后行业标准化，用于捕捉行业内资金动能的相对拐点并降低行业beta干扰。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_decay_linear(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 10), std=4), 1.5), sector)"
+    ]
+}

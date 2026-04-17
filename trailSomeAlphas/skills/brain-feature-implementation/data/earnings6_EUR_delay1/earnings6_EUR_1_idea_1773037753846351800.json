@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(vec_count({estimated_eps}), 3), multiply(group_zscore(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.0001)), std=4), {industry}), subtract(1.5, rank(vec_stddev({estimated_eps})))), 0)",
+    "idea": "引入分析师分歧度（vec_stddev）作为动态置信度加权机制：以估计值的标准差衡量市场共识清晰度，分歧越小信号越可靠；通过(1.5-rank(分歧度))构建反向加权乘数，实现高置信度Surprise放大、低置信度Surprise衰减；同时以vec_count过滤覆盖度低于3的股票避免样本量不足导致的统计噪音，最后用trade_when将低覆盖样本置零，仅交易有效信号。",
+    "expression_list": []
+}

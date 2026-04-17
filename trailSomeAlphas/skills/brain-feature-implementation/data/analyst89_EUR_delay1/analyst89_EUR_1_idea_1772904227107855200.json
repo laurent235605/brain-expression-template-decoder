@@ -1,0 +1,5 @@
+{
+    "template": "multiply(group_zscore(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), {industry}), signed_power(reverse(group_rank({market_cap}, {industry})), 0.5))",
+    "idea": "小市值数据稀缺风险放大器：基于信息不对称理论，数据缺失对流动性差、研究覆盖少的小盘股危害更大。该模板将行业中性后的数据丰富度与市值分位数的非线性变换（signed_power压缩中间区间、放大尾部）相乘，在小市值组内显著惩罚数据稀疏的股票，而对大市值的数据缺失给予较低权重，实现规模与信息质量的双因子非线性交互。",
+    "expression_list": []
+}

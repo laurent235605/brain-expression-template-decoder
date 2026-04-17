@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), ts_regression(winsorize(ts_backfill({exp_chn}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_chn}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0))",
+    "idea": "双重残差净化价差：分别对中美敞口执行Input2的残差提取流程(同时剔除行业Beta和非本土敞口影响)，然后构建 purified spread。该模板实现了对两个区域因子的平行净化后再比较，消除了行业属性和全球化水平的混杂效应，仅保留纯粹的区域特质性差异。",
+    "expression_list": [
+        "subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0))",
+        "subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_zscore(trade_when(greater(abs(ts_mean(subtract(greater(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), 0), less(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), 0))), 5)), 0.6), ts_target_tvr(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), target=0.08), 0), industry), maxPercent=0.015)",
+    "idea": "自适应平滑+方向持续性过滤：引入ts_target_tvr根据目标换手率(8%)自动优化衰减参数，解决原模板换手率不可控问题；同时计算5日方向一致性(通过sign函数代理)作为过滤条件，仅当资金流入/流出趋势持续超过阈值时才开仓，有效过滤短期假突破噪音。",
+    "expression_list": [
+        "truncate(group_zscore(trade_when(greater(abs(ts_mean(subtract(greater(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), 0), less(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), 0))), 5)), 0.6), ts_target_tvr(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), target=0.08), 0), industry), maxPercent=0.015)"
+    ]
+}

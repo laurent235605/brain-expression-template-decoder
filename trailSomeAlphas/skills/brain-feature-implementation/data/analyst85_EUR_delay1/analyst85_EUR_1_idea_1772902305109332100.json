@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(rank(ts_decay_exp_window(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 20, factor=0.1)), 0.9), rank(ts_decay_exp_window(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 20, factor=0.1)), nan)",
+    "idea": "极端版本活动择时（右尾信号）。仅当decay后的版本值处于全市场前10%分位（greater + rank）时保留其分位数值作为信号，中段及低段视为噪音并置空（nan）。通过分位数截断（trade_when）聚焦极端版本更新事件带来的非对称收益机会，避免中等水平版本波动的干扰。",
+    "expression_list": [
+        "trade_when(greater(rank(ts_decay_exp_window(winsorize(ts_backfill(vec_avg(anl85_version), 63), std=4), 20, factor=0.1)), 0.9), rank(ts_decay_exp_window(winsorize(ts_backfill(vec_avg(anl85_version), 63), std=4), 20, factor=0.1)), nan)"
+    ]
+}

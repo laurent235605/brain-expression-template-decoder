@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(zscore(ts_decay_linear(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 60), 60, rettype=0), 10)), {sector})",
+    "idea": "双时间框架回归残差提取：将短期（20日）资产变动对长期（60日）趋势做252日滚动时序回归，提取残差项（剔除长期趋势性配置后的纯交易性加速流），经10日线性衰减平滑后，在行业层面进行多空归一化（group_normalize），确保组合在行业间中性，专注于捕捉剔除长期beta后的短期alpha加速信号。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "rank(if_else(greater(vec_count({fiscalyearend}), 1), vec_count({currency_code}), 0))",
+    "idea": "对发生财务年度变更（值>1）的公司子集单独进行货币复杂度横截面排名，其余公司视为零。此策略专注识别并购重组期间的跨境多币种特征，区分自然有机增长（币种多但财务稳定）与并购驱动的复杂性（币种多且财务变更）。",
+    "expression_list": [
+        "rank(if_else(greater(vec_count(anl30_fiscalyearend), 1), vec_count(payment_currency_code), 0))"
+    ]
+}

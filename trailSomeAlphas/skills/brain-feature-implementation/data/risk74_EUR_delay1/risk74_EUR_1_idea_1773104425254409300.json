@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(group_zscore(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), industry), 0), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 0)",
+    "idea": "融合模板1的静态地理价差与模板2的敞口加速度信号，构建趋势确认型策略：仅当美国敞口在行业内有正向动量(126日变化>0)时才做多高美低中敞口组合，利用trade_when实现条件触发，避免均值回归期间的假信号，兼顾水平价差与动量验证双维度。",
+    "expression_list": [
+        "trade_when(greater(group_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), industry), 0), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 0)"
+    ]
+}

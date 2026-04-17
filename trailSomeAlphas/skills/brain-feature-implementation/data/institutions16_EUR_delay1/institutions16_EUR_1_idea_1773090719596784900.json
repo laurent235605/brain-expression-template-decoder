@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(quantile(ts_rank(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 252), driver=\"gaussian\"), sector), 2)",
+    "idea": "历史极值分位数与高斯尾部强化：将特质性残差映射至252日历史分位数（ts_rank），再经高斯分位转换（quantile-gaussian）将极端值拉伸、中间值压缩，最后行业中性化并应用signed_power非线性放大极端异常流信号，精准捕捉公司特定事件冲击。",
+    "expression_list": [
+        "signed_power(group_zscore(quantile(ts_rank(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 252), driver=\"gaussian\"), sector), 2)"
+    ]
+}

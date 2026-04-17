@@ -1,0 +1,5 @@
+{
+    "template": "group_rank(multiply(divide(subtract(vec_avg({actual_eps}), vec_percentage({estimated_eps}, 0.5)), add(abs(vec_avg({estimated_eps})), 0.01)), add(1, abs(vec_skewness({estimated_eps})))), {industry})",
+    "idea": "利用预测分布的偏度（vec_skewness）识别分析师乐观/悲观倾向，调整意外计算权重；使用中位数预测（vec_percentage 0.5）替代均值，降低个别极端预测值的影响，更稳健地度量\"典型预期\"的偏离；通过行业内排名（group_rank）而非原始值比较，解决不同行业盈利波动率差异导致的不可比问题；特别适用于分析师分布非对称（如系统性过度乐观）的市场环境。",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(winsorize(add(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), divide(ts_delta({ebitda_best_eeps_cur_yr}, 10), ts_delay(ts_backfill({ebitda_best_eeps_cur_yr}, 20), 5))), std=4), industry), 2.0)",
+    "idea": "等权叠加EPS（5日窗口）与EBITDA（10日窗口）的修正速度，经winsorize去极值（std=4）和行业zscore标准化后，使用signed_power（y=2.0）非线性放大极端修订信号（对应模板1中>10%显著事件的边界概念），压缩中间噪音区间，突出强烈预期转变的尾部alpha。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(add(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 10), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5))), std=4), industry), 2.0)",
+        "signed_power(group_zscore(winsorize(add(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 10), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5))), std=4), industry), 2.0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(quantile(pasteurize({volume}), driver=\"cauchy\"), std=3)",
+    "idea": "重尾分布稳健化：先通过pasteurize清洗数据，再使用cauchy驱动进行分位数变换（产生比gaussian更厚的尾部以强调极端值），最后通过winsorize按3倍标准差截断，在增强极端流动性信号的同时控制尾部风险",
+    "expression_list": [
+        "winsorize(quantile(pasteurize(mdl234_volume), driver=\"cauchy\"), std=3)"
+    ]
+}

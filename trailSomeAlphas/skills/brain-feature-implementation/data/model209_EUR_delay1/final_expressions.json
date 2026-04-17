@@ -1,0 +1,18 @@
+[
+    "(vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp)) / (vec_stddev(mdl209_opentimestamp) + 1)",
+    "1 - vec_avg(mdl209_lastcostingfailed)",
+    "1 - vec_max(mdl209_lastcostingfailed)",
+    "1 / (1 + vec_stddev(mdl209_investment) / abs(vec_avg(mdl209_investment)))",
+    "sign(vec_avg(mdl209_investment))",
+    "vec_avg(mdl209_investment) * vec_avg(mdl209_lastcostingfailed)",
+    "vec_avg(mdl209_investment) / (1 + vec_sum(mdl209_lastcostingfailed))",
+    "vec_avg(mdl209_investment) / (vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp) + 1)",
+    "vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp)",
+    "vec_max(mdl209_investment) / abs(vec_avg(mdl209_investment))",
+    "vec_max(mdl209_lastcostingfailed)",
+    "vec_skewness(mdl209_investment)",
+    "vec_sum(abs(mdl209_investment))",
+    "vec_sum(mdl209_investment)",
+    "vec_sum(mdl209_lastcostingfailed)",
+    "vec_sum(mdl209_lastcostingfailed) / vec_count(mdl209_lastcostingfailed)"
+]

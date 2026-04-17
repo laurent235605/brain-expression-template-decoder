@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(bucket(group_rank(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), 1, 0), 10), industry), range=\"0,1,0.2\"), 20)",
+    "idea": "检测短期内多次日期变更的聚集效应（ts_sum统计10日内变更次数），通过group_rank在行业内部排序后分桶（bucket），仅对变更最频繁的前20%分位赋予权重，模拟管理层不确定性升级的累积效应，并压缩中间噪音区间。",
+    "expression_list": [
+        "ts_decay_linear(bucket(group_rank(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), 1, 0), 10), industry), range=\"0,1,0.2\"), 20)",
+        "ts_decay_linear(bucket(group_rank(ts_sum(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), 1, 0), 10), industry), range=\"0,1,0.2\"), 20)"
+    ]
+}

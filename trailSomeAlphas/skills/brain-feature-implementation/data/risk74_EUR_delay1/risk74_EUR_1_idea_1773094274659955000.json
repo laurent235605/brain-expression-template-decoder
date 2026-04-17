@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252),3)",
+    "idea": "对最终合成信号应用3日线性衰减平滑（ts_decay_linear），在保留行业中性化与时序异常检测能力的同时降低组合换手率，提升策略容量与稳定性。",
+    "expression_list": [
+        "ts_decay_linear(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252),3)",
+        "ts_decay_linear(ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252),3)"
+    ]
+}

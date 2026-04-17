@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(signed_power(ts_zscore(vec_skewness({exposure_value}), 60), 2), sector)",
+    "idea": "使用较短窗口（60日替代126日）捕捉更及时的地理集中度变化，经signed_power二次幂非线性放大后，通过group_normalize在行业内进行权重归一化（控制组内多空平衡）。相比原模板，缩短了信号滞后，同时确保行业中性约束，适用于捕捉快速重组的地理风险重塑期。",
+    "expression_list": [
+        "group_normalize(signed_power(ts_zscore(vec_skewness(anl91_exposure_value), 60), 2), sector)"
+    ]
+}

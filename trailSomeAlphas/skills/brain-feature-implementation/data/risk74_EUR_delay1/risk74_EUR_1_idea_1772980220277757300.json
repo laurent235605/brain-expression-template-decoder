@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_rank(ts_sum(ts_delta({shortint}, 1), 15), sector), 5)",
+    "idea": "在行业内部对15日空头累积变化进行0-1分位数排序（消除行业间可比性问题），再通过5日线性衰减平滑，强调跨行业中具有持续性的空头压力累积，过滤单日脉冲噪音，并保持行业中性配置。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(ts_sum(ts_delta(rsk74_shortint, 1), 15), sector), 5)",
+        "ts_decay_linear(group_rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), sector), 5)"
+    ]
+}

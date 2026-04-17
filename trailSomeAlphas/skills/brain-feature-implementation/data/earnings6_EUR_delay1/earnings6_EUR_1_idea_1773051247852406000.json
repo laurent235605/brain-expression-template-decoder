@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 60 )",
+    "idea": "历史分位定位。使用ts_rank观察当前Surprise在其过去60个交易日历史中的相对位置，识别\"创历史新高\"或\"历史低位\"的盈利惊喜，结合trade_when的条件过滤，专注于具有历史显著性的超预期事件，过滤常规波动噪音。",
+    "expression_list": [
+        "ts_rank( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 60 )",
+        "ts_rank( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 60 )"
+    ]
+}

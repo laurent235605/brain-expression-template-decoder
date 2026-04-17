@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(multiply(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), signed_power(winsorize(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), std=4), 2)), group_cartesian_product(sector, industry))",
+    "idea": "激进交叉分组模板：先将累积修正压力经winsorize后做signed_power(.,2)以放大极端情绪（保留正负号但平方幅度），与盈利转换效率相乘构造复合信号，再在sector与industry的笛卡尔积（group_cartesian_product）内进行组内排名。寻找在细分领域中基本面效率与极端分析师情绪共振的 outliers。",
+    "expression_list": [
+        "group_rank(multiply(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), signed_power(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), std=4), 2)), group_cartesian_product(sector, industry))",
+        "group_rank(multiply(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), signed_power(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), std=4), 2)), group_cartesian_product(sector, industry))"
+    ]
+}

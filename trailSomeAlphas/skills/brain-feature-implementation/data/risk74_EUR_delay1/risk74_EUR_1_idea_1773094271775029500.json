@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),ts_step(),63,rettype=2)",
+    "idea": "计算行业中性空头残差在过去63天的变化斜率（rettype=2），识别特质性做空压力正在加速累积或缓解的动量信号，而非仅关注静态水平高低，捕捉空头趋势的加速度。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),ts_step(),63,rettype=2)",
+        "ts_regression(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),ts_step(),63,rettype=2)"
+    ]
+}

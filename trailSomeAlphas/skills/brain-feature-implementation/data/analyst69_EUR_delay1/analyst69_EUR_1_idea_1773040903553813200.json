@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(right_tail(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay({eps_best_eeps_cur_yr}, 5)), 0.8), 10)",
+    "idea": "极端修正信号衰减加权：融合模板1的边界条件(>10%显著事件)与衰减平滑技术。先用right_tail提取前20%的极端修正速度，再应用ts_decay_linear进行10日线性衰减加权，在保留极端信号冲击的同时降低换手率，避免对短期脉冲过度反应。",
+    "expression_list": [
+        "ts_decay_linear(right_tail(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(anl69_aeps_best_eeps_cur_yr, 5)), 0.8), 10)",
+        "ts_decay_linear(right_tail(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(anl69_eps_best_eeps_cur_yr, 5)), 0.8), 10)"
+    ]
+}

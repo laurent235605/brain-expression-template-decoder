@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({rank}), 5)",
+    "idea": "**Concept**: Rank Momentum\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Change in rank over 5 days (current rank minus rank 5 days ago) to capture recent upgrades or downgrades\n- **Why This Feature**: Identifies stocks experiencing rapid improvements or deteriorations in model perception, potentially signaling inflection points before they become consensus\n- **Logical Meaning**: Positive values indicate the rank number is increasing (worse ranking, if 1 is best); negative values indicate improving rank (better positioning)\n- **is filling nan necessary**: Use ts_backfill(vec_avg({rank}), 10) to ensure the 5-day lagged value exists if temporary gaps exist, but only if the stock remained in the universe; otherwise NaN is meaningful.\n- **Directionality**: Negative values typically indicate positive momentum (improving rank), assuming lower rank numbers are better; positive values indicate deterioration\n- **Boundary Conditions**: Bounded by universe size (max change ~1600); extreme values indicate recent entry to or exit from top/bottom rankings",
+    "expression_list": [
+        "ts_delta(vec_avg(mdl245_rank), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({exit_price}) - vec_avg({closing_price})) / (vec_avg({closing_price}) + 0.0001)",
+    "idea": "**Concept**: Expected Return Achievement Gap\n- **Sample Fields Used**: `exit_price`, `closing_price`\n- **Definition**: Ratio of expected exit price to actual closing price minus 1 (remaining upside for open ideas)\n- **Why This Feature**: For active ideas, measures how much of the analyst target remains unachieved; low values indicate targets already hit (exit signal)\n- **is filling nan necessary**: Only valid if both target and current price exist; do not fill NaN as closed ideas lack targets.\n- **Logical Meaning**: 0.10 indicates 10% upside remaining; -0.05 indicates target exceeded (potential reversal)\n- **Directionality**: High positive values indicate holding potential; negative values indicate overachievement (sell)\n- **Boundary Conditions**: Theoretically unbounded; practical limits based on market volatility",
+    "expression_list": [
+        "(vec_avg(expected_exit_price) - vec_avg(trade_closing_price)) / (vec_avg(trade_closing_price) + 0.0001)"
+    ]
+}

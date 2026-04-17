@@ -1,0 +1,10 @@
+{
+    "template": "ts_corr(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), 60)",
+    "idea": "**概念**: 跨维度稳定性共振\n将内幕持仓权重的波动稳定性（CV）与所有权结构的惯性相关性进行跨时序相关性分析。当两者相关性升高时，表明所有权结构变化与内幕信心变化同步；当相关性断裂时，可能预示信息不对称加剧或结构性事件。使用60日窗口捕捉季度性持仓调整周期。",
+    "expression_list": [
+        "ts_corr(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 60)",
+        "ts_corr(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 60)",
+        "ts_corr(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 60)",
+        "ts_corr(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 60)"
+    ]
+}

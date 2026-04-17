@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(ts_delta(days_from_last_change({eps_expected_report_dt}), 5), std=4), 252)",
+    "idea": "将模板B的“事件间隔天数”与模板A的“短期Delta+历史分位”框架交叉融合。通过计算距离上次报告日变化的天数之5日变化率（加速度），识别财报披露时间预期的不稳定性是否正在急剧恶化或改善，252日历史窗口提供相对自身历史的极端性评估，捕捉财报节奏紊乱的加速信号。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 5), std=4), 252)",
+        "ts_rank(winsorize(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 5), std=4), 252)"
+    ]
+}

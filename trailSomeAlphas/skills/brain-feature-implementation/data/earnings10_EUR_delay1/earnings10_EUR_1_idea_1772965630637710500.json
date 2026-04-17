@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(vec_avg({aily_delta_recon_value}), 10)",
+    "idea": "**Concept**: Accumulated Revision Drift\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: 10-day cumulative sum of daily reconciliation values\n- **Why This Feature**: Captures the total magnitude of revision over a period, distinguishing between large one-day moves and sustained gradual adjustments\n- **is filling nan necessary**: NaN daily deltas should be treated as zero (no change) for accumulation purposes to avoid bias. Use replace or assume ts_sum handles NaN as identity.\n- **Directionality**: Positive accumulation indicates sustained upward pressure on estimates; negative indicates persistent downgrades\n- **Boundary Conditions**: Extreme positive/negative values indicate analyst conviction; near-zero after volatile period indicates reversal or noise",
+    "expression_list": [
+        "ts_sum(vec_avg(ern10_aily_delta_recon_value), 10)"
+    ]
+}

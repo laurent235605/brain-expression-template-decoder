@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(vec_sum({recommendation_weighting}), 5)",
+    "idea": "**Concept**: Recommendation Momentum Flow\n- **Sample Fields Used**: `recommendation_weighting`\n- **Definition**: 5-day change in total aggregated buy recommendation weighting\n- **Why This Feature**: Captures accelerating or decelerating bullish sentiment; changes often precede price movements as new ideas enter the system\n- **is filling nan necessary**: NaN should be treated as 0 for change calculation only if the absence truly indicates no activity; however, to distinguish between no data and no recommendation, use ts_backfill first, then calculate delta.\n- **Logical Meaning**: Positive values indicate increasing analyst interest; negative values indicate waning conviction or profit-taking\n- **Directionality**: Positive momentum bullish; negative momentum bearish or cooling\n- **Boundary Conditions**: Extreme positive values may indicate overcrowding; extreme negative values may indicate capitulation",
+    "expression_list": [
+        "ts_delta(vec_sum(buy_recommendation_weighting), 5)",
+        "ts_delta(vec_sum(sell_recommendation_weighting), 5)"
+    ]
+}

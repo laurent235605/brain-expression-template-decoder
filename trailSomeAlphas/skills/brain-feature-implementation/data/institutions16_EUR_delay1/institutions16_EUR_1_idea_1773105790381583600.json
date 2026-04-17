@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(signed_power(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 2.0), sector), 5)",
+    "idea": "非线性尾部放大与平滑：对资产变化应用signed_power=2进行平方放大以突出极端异动，经行业中性化后使用5日线性衰减(ts_decay_linear)降低换手率，利用非线性变换增强对资产剧烈变动的敏感度，同时通过时序平滑控制交易摩擦。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(signed_power(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 2.0), sector), 5)"
+    ]
+}

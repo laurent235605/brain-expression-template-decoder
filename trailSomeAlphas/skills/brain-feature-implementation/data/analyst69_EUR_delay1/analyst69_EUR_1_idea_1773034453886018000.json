@@ -1,0 +1,10 @@
+{
+    "template": "divide(subtract({eps_best_eeps_nxt_yr}, {eps_best_eeps_cur_yr}), {eps_best_eeps_cur_yr})",
+    "idea": "**Concept**: Implied Fiscal Year Growth Structure\n- **Sample Fields Used**: eps_best_eeps_cur_yr, eps_best_eeps_nxt_yr\n- **Definition**: Forward growth rate implied by next year vs. current year estimate spread\n- **Why This Feature**: Captures the structural growth trajectory embedded in analyst models; positive spread indicates growth expectations\n- **Logical Meaning**: Expected year-over-year earnings growth rate; reflects business cycle position and company-specific growth initiatives\n- **is filling nan necessary**: Next year estimates may have sparser coverage than current year; ts_backfill(20) on both to ensure paired observations exist.\n- **Directionality**: Positive values indicate growth expected; negative values indicate earnings decline expected; magnitude indicates growth rate\n- **Boundary Conditions**: Extreme values (>50% or <-50%) may indicate base year anomalies or transformational events",
+    "expression_list": [
+        "divide(subtract(anl69_aeps_best_eeps_nxt_yr, anl69_aeps_best_eeps_cur_yr), anl69_aeps_best_eeps_cur_yr)",
+        "divide(subtract(anl69_aeps_best_eeps_nxt_yr, anl69_eps_best_eeps_cur_yr), anl69_eps_best_eeps_cur_yr)",
+        "divide(subtract(anl69_eps_best_eeps_nxt_yr, anl69_eps_best_eeps_cur_yr), anl69_eps_best_eeps_cur_yr)",
+        "divide(subtract(anl69_eps_best_eeps_nxt_yr, anl69_aeps_best_eeps_cur_yr), anl69_aeps_best_eeps_cur_yr)"
+    ]
+}

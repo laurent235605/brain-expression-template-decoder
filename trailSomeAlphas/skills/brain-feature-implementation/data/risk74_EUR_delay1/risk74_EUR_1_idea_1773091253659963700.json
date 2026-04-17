@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(signed_power(trade_when(greater(abs(winsorize(ts_backfill({value_ts},63),std=4)) + abs(winsorize(ts_backfill({earnyild},63),std=4)), 0.01), winsorize(ts_backfill({momentum},63),std=4) / (abs(winsorize(ts_backfill({value_ts},63),std=4)) + abs(winsorize(ts_backfill({earnyild},63),std=4)) + 0.0001), NaN), 1.5), industry)",
+    "idea": "行业中性化因子纯度尾部增强策略：首先对价值与盈利收益字段做绝对值处理和63日回填及4倍标准差截尾，确保分母稳定性；使用trade_when过滤分母过小的无效样本避免除零误差；构建动量/(价值+盈利)比率后，通过signed_power(1.5)非线性放大极端纯动量或纯价值暴露的尾部收益，压缩中间混合暴露区间的贡献；最后经group_zscore(industry)进行行业中性化处理，消除不同行业间基础因子暴露水平差异，使跨行业比较具备统一标准。",
+    "expression_list": [
+        "group_zscore(signed_power(trade_when(greater(abs(winsorize(ts_backfill(rsk74_value_ts,63),std=4)) + abs(winsorize(ts_backfill(rsk74_earnyild,63),std=4)), 0.01), winsorize(ts_backfill(rsk74_momentum,63),std=4) / (abs(winsorize(ts_backfill(rsk74_value_ts,63),std=4)) + abs(winsorize(ts_backfill(rsk74_earnyild,63),std=4)) + 0.0001), NaN), 1.5), industry)",
+        "group_zscore(signed_power(trade_when(greater(abs(winsorize(ts_backfill(rsk74_value_ts,63),std=4)) + abs(winsorize(ts_backfill(rsk74_earnyild,63),std=4)), 0.01), winsorize(ts_backfill(rsk74_momentum_ts,63),std=4) / (abs(winsorize(ts_backfill(rsk74_value_ts,63),std=4)) + abs(winsorize(ts_backfill(rsk74_earnyild,63),std=4)) + 0.0001), NaN), 1.5), industry)"
+    ]
+}

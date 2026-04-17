@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_decay_exp_window(vec_skewness(ts_backfill({version}, 63)), 20, factor=0.1), 2), 1, if_else(less(ts_decay_exp_window(vec_skewness(ts_backfill({version}, 63)), 20, factor=0.1), -2), -1, 0))",
+    "idea": "版本分布非对称性极端值捕捉。通过vec_skewness计算版本分布的偏度并经指数衰减平滑，采用嵌套条件判断(if_else)构建多空开关信号：当偏度显著为正（>2，表明少数高版本主导分布）时做多，显著为负（<-2，表明少数低版本主导）时做空，中间区间视为噪音赋值为零，实现极端尾部择时。",
+    "expression_list": [
+        "if_else(greater(ts_decay_exp_window(vec_skewness(ts_backfill(anl85_version, 63)), 20, factor=0.1), 2), 1, if_else(less(ts_decay_exp_window(vec_skewness(ts_backfill(anl85_version, 63)), 20, factor=0.1), -2), -1, 0))"
+    ]
+}

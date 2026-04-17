@@ -1,0 +1,24 @@
+{
+    "template": "((vec_avg({expected_exit_price}) - vec_avg({openprice})) / vec_avg({openprice})) * vec_avg({probability})",
+    "idea": "**Concept**: Probability-Adjusted Expected Return\n- **Sample Fields Used**: `expected_exit_price`, `openprice`, `probability`\n- **Definition**: Core expected return metric scaled by analyst confidence, representing the risk-adjusted opportunity size\n- **Why This Feature**: Captures the essential trade-off between return potential and conviction—high return with low probability is speculative; high return with high probability is the \"holy grail\"\n- **is filling nan necessary**: Forward-fill expected_exit_price using ts_backfill if missing, as targets persist until changed; do not fill probability (must be explicit).\n- **Directionality**: High positive = high expected return, high confidence (strong buy); High negative = high expected downside, high confidence (strong sell)\n- **Boundary Conditions**: Limit return calculation to ±100% to prevent extreme outliers from data errors",
+    "expression_list": [
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_daily_openprice)) / vec_avg(anl56_daily_openprice)) * vec_avg(anl56_daily_probability)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_openprice)) / vec_avg(anl56_openprice)) * vec_avg(anl56_daily_probability)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_reduced_openprice)) / vec_avg(anl56_reduced_openprice)) * vec_avg(anl56_daily_probability)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_daily_openprice)) / vec_avg(anl56_daily_openprice)) * vec_avg(anl56_probability)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_openprice)) / vec_avg(anl56_openprice)) * vec_avg(anl56_probability)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_reduced_openprice)) / vec_avg(anl56_reduced_openprice)) * vec_avg(anl56_probability)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_daily_openprice)) / vec_avg(anl56_daily_openprice)) * vec_avg(conviction_probability_score)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_openprice)) / vec_avg(anl56_openprice)) * vec_avg(conviction_probability_score)",
+        "((vec_avg(daily_expected_exit_price) - vec_avg(anl56_reduced_openprice)) / vec_avg(anl56_reduced_openprice)) * vec_avg(conviction_probability_score)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_daily_openprice)) / vec_avg(anl56_daily_openprice)) * vec_avg(anl56_daily_probability)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_openprice)) / vec_avg(anl56_openprice)) * vec_avg(anl56_daily_probability)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_reduced_openprice)) / vec_avg(anl56_reduced_openprice)) * vec_avg(anl56_daily_probability)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_daily_openprice)) / vec_avg(anl56_daily_openprice)) * vec_avg(anl56_probability)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_openprice)) / vec_avg(anl56_openprice)) * vec_avg(anl56_probability)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_reduced_openprice)) / vec_avg(anl56_reduced_openprice)) * vec_avg(anl56_probability)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_daily_openprice)) / vec_avg(anl56_daily_openprice)) * vec_avg(conviction_probability_score)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_openprice)) / vec_avg(anl56_openprice)) * vec_avg(conviction_probability_score)",
+        "((vec_avg(expected_exit_price_5) - vec_avg(anl56_reduced_openprice)) / vec_avg(anl56_reduced_openprice)) * vec_avg(conviction_probability_score)"
+    ]
+}

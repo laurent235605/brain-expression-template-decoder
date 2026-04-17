@@ -1,0 +1,5 @@
+{
+    "template": "winsorize(ts_regression(log(ts_backfill({volume}, 63)), group_mean(log(ts_backfill({volume}, 63)), log(ts_mean({market_cap}, 21)), {sector}), 252, rettype=0), std=4)",
+    "idea": "剥离行业和市值影响的特质成交量残差（CAPM风格）。先对成交量进行63日回溯填充确保数据连续性，取对数后对行业市值加权的市场平均成交量做252日时序回归，提取残差部分并截尾处理，捕捉与板块流动性无关的个券独立异常交易活跃度，实现真正的特质流动性暴露。",
+    "expression_list": []
+}

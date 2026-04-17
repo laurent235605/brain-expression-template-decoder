@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(quantile(ts_rank(vec_avg({aily_delta_recon_value}), 20), driver=\"gaussian\"), 0.02)",
+    "idea": "时序分位数高斯映射与换手率控制：将当前修订值在过去20日历史中的分位数（ts_rank）通过高斯分布转换（quantile）进行尾部拉伸、中部压缩，强化极端修订的区分度，再通过hump_decay（阈值0.02）忽略微小波动以降低换手率，适用于捕捉极端预期修正同时控制交易摩擦成本。",
+    "expression_list": [
+        "hump_decay(quantile(ts_rank(vec_avg(ern10_aily_delta_recon_value), 20), driver=\"gaussian\"), 0.02)"
+    ]
+}

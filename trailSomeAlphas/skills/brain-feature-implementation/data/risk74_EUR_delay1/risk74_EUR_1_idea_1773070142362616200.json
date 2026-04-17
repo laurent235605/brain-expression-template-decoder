@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),signed_power(ts_rank(ts_sum(ts_delta({shortint},1),15),252),0.5))",
+    "idea": "构建时序相对增强型残差：将横截面回归得到的特质性空头残差，乘以个股自身252日历史分位数的平方根压缩变换，使得信号仅在近期空头累积变动处于历史极端分位（高位或低位）时被放大，过滤掉历史常态区间的中等波动干扰。",
+    "expression_list": [
+        "multiply(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),signed_power(ts_rank(ts_sum(ts_delta(rsk74_shortint,1),15),252),0.5))",
+        "multiply(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),signed_power(ts_rank(ts_sum(ts_delta(rsk74_shortint_ts,1),15),252),0.5))"
+    ]
+}

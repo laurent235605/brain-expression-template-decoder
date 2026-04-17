@@ -1,0 +1,26 @@
+{
+    "template": "ts_decay_linear(multiply(ts_sum(ts_delta({shortint}, 1), 15), multiply({concentration}, {nondomicile})), 10)",
+    "idea": "对空头累积与地理风险乘积应用线性衰减平滑（ts_decay_linear），赋予近期数据更高权重，以激进的高换手率换取对风险积聚的更快反应，区别于等权重的ts_mean，适合捕捉快速变化的做空压力。",
+    "expression_list": [
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_nondomicile)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_nondomicile)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_concentration, rsk74_std_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_nondomicile)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_nondomicile)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2)), 10)",
+        "ts_decay_linear(multiply(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2)), 10)"
+    ]
+}

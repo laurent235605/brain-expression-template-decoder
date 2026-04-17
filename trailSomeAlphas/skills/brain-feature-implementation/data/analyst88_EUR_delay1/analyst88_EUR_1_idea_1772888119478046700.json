@@ -1,0 +1,16 @@
+{
+    "template": "subtract(vec_max({abstract_method1_pos}), vec_avg({abstract_method1_pos}))",
+    "idea": "**Concept**: Sentence-Level Outlier Intensity\n- **Sample Fields Used**: abstract_method1_pos, abstract_method1_neg\n- **Definition**: Maximum deviation of any single sentence from the document mean; identifies \"bombshell\" sentences in otherwise balanced reports\n- **Why This Feature**: Analysts may bury critical caveats or explosive insights in single sentences while maintaining overall neutral tone\n- **is filling nan necessary**: Vector fields may have varying lengths; pasteurize() to handle division by zero if document has single sentence\n- **Directionality**: High values = extreme outlier sentences exist (hidden risks/opportunities); Low values = uniform document tone\n- **Boundary Conditions**: Zero = all sentences identical; Extreme values = one sentence dominates sentiment",
+    "expression_list": [
+        "subtract(vec_max(anl88_arr_barclays_abstract_method1_pos), vec_avg(anl88_arr_barclays_abstract_method1_pos))",
+        "subtract(vec_max(anl88_arr_db_abstract_method1_pos), vec_avg(anl88_arr_db_abstract_method1_pos))",
+        "subtract(vec_max(anl88_arr_jpm_abstract_method1_pos), vec_avg(anl88_arr_jpm_abstract_method1_pos))",
+        "subtract(vec_max(anl88_arr_ms_abstract_method1_pos), vec_avg(anl88_arr_ms_abstract_method1_pos))",
+        "subtract(vec_max(anl88_baml_abstract_method1_pos), vec_avg(anl88_baml_abstract_method1_pos))",
+        "subtract(vec_max(anl88_barclays_abstract_method1_pos), vec_avg(anl88_barclays_abstract_method1_pos))",
+        "subtract(vec_max(anl88_db_abstract_method1_pos), vec_avg(anl88_db_abstract_method1_pos))",
+        "subtract(vec_max(anl88_jefferies_abstract_method1_pos), vec_avg(anl88_jefferies_abstract_method1_pos))",
+        "subtract(vec_max(anl88_jpm_abstract_method1_pos), vec_avg(anl88_jpm_abstract_method1_pos))",
+        "subtract(vec_max(anl88_ms_abstract_method1_pos), vec_avg(anl88_ms_abstract_method1_pos))"
+    ]
+}

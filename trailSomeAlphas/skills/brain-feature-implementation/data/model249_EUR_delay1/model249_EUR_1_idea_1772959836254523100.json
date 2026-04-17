@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( trade_when( greater( vec_avg({quintile}), 4 ), signed_power( multiply( -1, ts_std_dev( ts_backfill( vec_avg({quintile}), 3 ), 60 ) ), 0.5 ), NaN ), industry )",
+    "idea": "行业中性条件下的顶级分位数稳定性因子。仅对当前处于顶级分位数（第5档）的股票计算60日滚动标准差，取负值使低波动对应高分，进行0.5次幂压缩以惩罚极端不稳定者，并在行业内进行z-score标准化。捕捉\"优质且稳定\"的收购目标特征，排除分位数波动大的伪优质标的，NaN处理避免行业偏差。",
+    "expression_list": [
+        "group_zscore( trade_when( greater( vec_avg(mdl249_quintile), 4 ), signed_power( multiply( -1, ts_std_dev( ts_backfill( vec_avg(mdl249_quintile), 3 ), 60 ) ), 0.5 ), NaN ), industry )"
+    ]
+}

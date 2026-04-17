@@ -1,0 +1,7 @@
+{
+    "template": "subtract(vector_neut(ts_mean(ts_backfill({fundreportedequityassets},5),60), ts_mean(ts_backfill({reported_asset_value},5),60)), vector_neut(ts_mean(ts_backfill({fundreportedequityassets},5),5), ts_mean(ts_backfill({reported_asset_value},5),5)))",
+    "idea": "**概念**：长短期配置背离（Long-Short Horizon Divergence）\n**逻辑**：分别计算60日长期和5日短期移动平均后的向量中性化敞口，求两者差异（subtract）。\n**为什么**：短期敞口与长期均值的背离反映配置的均值回归压力或趋势强化；大幅正偏离可能预示风格动量延续，负偏离可能预示再平衡交易即将发生；双时间尺度减少单一时点的噪音干扰。\n**方向性**：正值表示短期配置强度显著高于长期趋势（超配动能），负值表示低于趋势（低配或回归）。\n**边界条件**：零值表示配置处于趋势线上；极端差异可能触发后续反向调仓，适合作为反转或动量的辅助确认信号。",
+    "expression_list": [
+        "subtract(vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets,5),60), ts_mean(ts_backfill(fund_reported_asset_value,5),60)), vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets,5),5), ts_mean(ts_backfill(fund_reported_asset_value,5),5)))"
+    ]
+}

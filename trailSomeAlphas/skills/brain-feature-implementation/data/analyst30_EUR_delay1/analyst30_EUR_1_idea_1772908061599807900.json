@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(trade_when(greater(group_rank(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), sector), 0.9), signed_power(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.5), 0), hump=0.02)",
+    "idea": "整合模板2的极端尾部分析（前10%阈值）与signed_power非线性放大，通过hump_decay算子设置0.02的日度变化阈值过滤微小波动，在不牺牲对极端会计异常值敏感性的前提下显著降低换手率。",
+    "expression_list": [
+        "hump_decay(trade_when(greater(group_rank(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 0.9), signed_power(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.5), 0), hump=0.02)"
+    ]
+}

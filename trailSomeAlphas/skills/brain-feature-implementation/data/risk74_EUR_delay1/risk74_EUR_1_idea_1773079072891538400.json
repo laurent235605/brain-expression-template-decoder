@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),power(subtract(1,divide(min(days_from_last_change({shortint}),20),20)),1.5))",
+    "idea": "引入空头数据更新的时效性（freshness）权重，以空头头寸最近一次实际发生变动距今天数为基准，构造幂函数衰减权重（最近变动满权重，20天后衰减至0）。将该权重乘到传统Z-score上，使得刚发生的空头异动获得全额信号强度，而陈旧的变动自然衰减。这解决了传统因子对“最新信息”和“历史存量”一视同仁的缺陷，增强了对即时空头事件的敏感度。",
+    "expression_list": [
+        "multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),power(subtract(1,divide(min(days_from_last_change(rsk74_shortint),20),20)),1.5))",
+        "multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),power(subtract(1,divide(min(days_from_last_change(rsk74_shortint_ts),20),20)),1.5))"
+    ]
+}

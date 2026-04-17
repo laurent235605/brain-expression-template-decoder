@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(ts_sum(subtract(ts_backfill(vec_avg({cash_from_oper}),63), ts_backfill(vec_avg({cap_expend_prpty_add}),63)), 504), std=4), industry)",
+    "idea": "对季度经营现金流与资本支出进行63日回溯填充以确保数据连续性，经4倍标准差Winsorize处理极端会计异常值后，计算504日滚动累计自由现金流，最后进行行业内Z-score标准化。此举消除了不同行业资本密集度差异（如重工业 vs 服务业）带来的不可比性，使得现金创造能力的衡量具备跨行业可比性，同时极端值处理防止了单次大额资产处置或并购对累积值的扭曲。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add),63)), 504), std=4), industry)",
+        "group_zscore(winsorize(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add),63)), 504), std=4), industry)",
+        "group_zscore(winsorize(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add),63)), 504), std=4), industry)",
+        "group_zscore(winsorize(ts_sum(subtract(ts_backfill(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper),63), ts_backfill(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add),63)), 504), std=4), industry)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore( subtract( 1, rank( winsorize( divide( ts_std_dev( ts_backfill( {weight_net}, 63 ), 20 ), add( abs( ts_mean( ts_backfill( {weight_net}, 63 ), 20 ) ), 0.0001 ) ), std=4 ) ) ), {industry} )",
+    "idea": "行业内相对持仓稳定性因子（低波动=高信念）。先对{weight_net}进行63日回溯填充与4倍标准差去极值，计算20日变异系数(CV)；由于CV越低代表持仓越稳定、信念越强，通过`subtract(1, rank(...))`将低CV映射为高分位，最后在行业内标准化。该模板捕捉相对同行的“长期持有 conviction”，剔除行业整体仓位轮动带来的伪信号。",
+    "expression_list": []
+}

@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(ts_zscore(ts_std_dev({returns},63),252),0.5),group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),sector),multiply(0.3,group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),sector)))",
+    "idea": "实现市场环境自适应：当市场整体波动率（63日收益率标准差）处于历史高位（Z-score>0.5）时，启用行业中性化Z-score（group_zscore）以获取纯粹个股空头alpha；当市场处于低波动环境时，信号权重自动压缩至30%。空头异动在高波动/恐慌时期往往蕴含更强的价格发现信息，该模板通过trade_when实现“高波动期重仓、低波动期轻仓”的动态杠杆，优化风险调整后的收益。",
+    "expression_list": []
+}

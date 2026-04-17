@@ -1,0 +1,8 @@
+{
+    "template": "quantile( trade_when( or( greater( ts_rank( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01) ), 60 ), 0.9 ), less( ts_rank( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01) ), 60 ), 0.1 ) ), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01)), 0 ), driver=\\\"gaussian\\\" )",
+    "idea": "分歧度加权尾端隔离。使用vec_stddev计算分析师预测标准差作为分母（替代原绝对值均值），构造“单位不确定性下的惊喜”，通过ts_rank定位该股票自身历史分位，仅保留历史分位>90%或<10%的极端值(trade_when+or+greater/less)，最后进行高斯拉伸，强化“高不确定性下的极端意外”。",
+    "expression_list": [
+        "quantile( trade_when( or( greater( ts_rank( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01) ), 60 ), 0.9 ), less( ts_rank( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01) ), 60 ), 0.1 ) ), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), 0 ), driver=\\\"gaussian\\\" )",
+        "quantile( trade_when( or( greater( ts_rank( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01) ), 60 ), 0.9 ), less( ts_rank( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01) ), 60 ), 0.1 ) ), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), 0 ), driver=\\\"gaussian\\\" )"
+    ]
+}

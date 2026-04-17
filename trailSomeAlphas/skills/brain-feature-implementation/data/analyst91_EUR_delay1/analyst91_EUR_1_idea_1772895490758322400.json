@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({exposure_value}) - ts_mean(vec_avg({exposure_value}), 60)) / ts_std_dev(vec_avg({exposure_value}), 60)",
+    "idea": "**Concept**: Exposure Z-Score\n- **Sample Fields Used**: exposure_value\n- **Definition**: Standardized deviation of current exposure from its 60-day historical mean\n- **Why This Feature**: Identifies statistically significant deviations in geographic exposure that may indicate strategic shifts or data anomalies requiring investigation\n- **Logical Meaning**: Measures how unusual current exposure levels are relative to recent history; extreme values suggest structural breaks or measurement errors\n- **is filling nan necessary**: For Z-score calculation, missing data creates look-ahead bias if filled. NaN values should remain NaN for the calculation window. Only if the NaN is isolated (single day gap) should ts_backfill be considered to maintain statistical power.\n- **Directionality**: Positive values indicate unusually high exposure; negative values indicate unusually low exposure; extreme absolute values (>2) indicate anomalies\n- **Boundary Conditions**: Values beyond ±3 suggest data errors or major corporate actions; should be pasteurized",
+    "expression_list": [
+        "(vec_avg(anl91_exposure_value) - ts_mean(vec_avg(anl91_exposure_value), 60)) / ts_std_dev(vec_avg(anl91_exposure_value), 60)"
+    ]
+}

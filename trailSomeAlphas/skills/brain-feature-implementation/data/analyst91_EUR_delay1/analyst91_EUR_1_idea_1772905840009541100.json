@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), industry), 2)",
+    "idea": "融合模板1的252日时间序列Z-Score与模板2的行业截面Z-Score，实现双重标准化：先识别个股波动率相对自身历史的极端偏离，再消除行业固有差异（如基建业天然波动高于软件业）；最后采用平方变换放大尾部，构建既具历史可比性又行业中性化的业务结构稳定性哑铃策略。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), industry), 2)"
+    ]
+}

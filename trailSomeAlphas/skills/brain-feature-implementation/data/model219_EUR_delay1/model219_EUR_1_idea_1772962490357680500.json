@@ -1,0 +1,10 @@
+{
+    "template": "quantile(add(multiply(0.6, ts_corr({bmpo}, {pctchgqtrsales}, 12)), multiply(0.4, ts_corr({bmpo}, {pctchgqtrsales}, 6))), \"gaussian\")",
+    "idea": "多时间尺度复合质量因子。结合12期（长期）和6期（短期）两种时间窗口的相关系数，以6:4权重加权构建复合信号，平衡长期稳定性与短期时效性。应用高斯分位数拉伸（quantile）将中间区间压缩至零附近、将极端相关值拉远放大，强调经营杠杆一致性的显著性，降低边际相关股票的权重干扰。",
+    "expression_list": [
+        "quantile(add(multiply(0.6, ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 12)), multiply(0.4, ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 6))), \"gaussian\")",
+        "quantile(add(multiply(0.6, ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 12)), multiply(0.4, ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 6))), \"gaussian\")",
+        "quantile(add(multiply(0.6, ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 12)), multiply(0.4, ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 6))), \"gaussian\")",
+        "quantile(add(multiply(0.6, ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 12)), multiply(0.4, ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 6))), \"gaussian\")"
+    ]
+}

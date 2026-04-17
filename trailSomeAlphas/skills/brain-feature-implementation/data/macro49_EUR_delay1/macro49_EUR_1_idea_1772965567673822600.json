@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(ts_backfill(vec_avg({vda}), lookback=5, k=1), greater(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_mean(ts_backfill(vec_avg({notional}), lookback=5, k=1), 120)), 1)",
+    "idea": "**Concept**: Pure Forced Flow Intensity\n- **Sample Fields Used**: vda, notional\n- **Definition**: VDA conditioned on high notional to capture only the liquidity stress from significant dollar flows (the essence of non-discretionary market impact)\n- **Why This Feature**: Isolates the essential risk: forced trading in size. Small VDA with small notional is noise; large VDA with large notional is the essence of rebalance risk.\n- **is filling nan necessary**: Yes, backfill both fields; condition uses ts_mean threshold to identify \"high notional\" regimes.\n- **Directionality**: High values capture severe liquidity events that matter; zero values indicate either liquid names or trivial flows\n- **Boundary Conditions**: Activated only when notional exceeds historical mean; captures tail risk essence",
+    "expression_list": [
+        "trade_when(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), greater(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_mean(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), 120)), 1)"
+    ]
+}

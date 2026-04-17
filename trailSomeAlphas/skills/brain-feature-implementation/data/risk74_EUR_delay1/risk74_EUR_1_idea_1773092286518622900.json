@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({momentum}, 63), 1), std=3), 20), sector), 0.5) - signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 20), sector), 0.5)",
+    "idea": "分别对动量因子与持仓流量因子应用输入2的时序处理与行业标准化流程，构建两者在行业内的标准化差值。该模板捕捉动量趋势与机构资金流向的背离信号（如动量上涨但机构减持，或动量下跌但机构增持），利用幂变换后的极值差异生成反向或趋势确认Alpha。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_momentum, 63), 1), std=3), 20), sector), 0.5) - signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5)",
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_momentum_ts, 63), 1), std=3), 20), sector), 0.5) - signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5)"
+    ]
+}

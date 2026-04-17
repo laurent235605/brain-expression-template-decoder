@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( winsorize( subtract( if_else( is_nan( vec_avg( {stock_split_ratio_243} ) ), 1, vec_avg( {stock_split_ratio_243} ) ), 1 ), std = 3 ), 20 )",
+    "idea": "结合模板2的事件属性与模板1的时间序列平滑逻辑。将分拆事件视为脉冲信号（偏离1的程度），经winsorize处理极端值后，使用ts_decay_linear（线性衰减）在事件发生后20天内维持信号强度，而非仅在公告日有效。这捕捉了'分拆后动量'或'分拆后基本面持续改善'的延迟反应，同时通过衰减控制换手率。",
+    "expression_list": [
+        "ts_decay_linear( winsorize( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ), std = 3 ), 20 )"
+    ]
+}

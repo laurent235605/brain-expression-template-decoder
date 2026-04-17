@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(winsorize(ts_backfill(ts_std_dev(vec_avg({likelihood_score}), 60), 63), std=4), industry), 3)",
+    "idea": "行业中性化后使用三次方非线性放大：先将likelihood波动率在行业内部进行Z-score标准化，再通过signed_power(., 3)压缩中间区间、放大极端稳定（高正分）与极端不稳定（高负分）的信号，捕捉尾部定价偏差而忽略中庸状态。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(ts_backfill(ts_std_dev(vec_avg(success_likelihood_score), 60), 63), std=4), industry), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(right_tail(zscore(subtract({cfroichg}, ts_delay({cfroichg}, 5))), minimum=1.0), right_tail(zscore(ts_sum({cfroidrs}, 10)), minimum=1.0))",
+    "idea": "双右尾收敛过滤：分别对Input 1的加速度与Input 2的累积漂移进行zscore标准化后，使用right_tail(minimum=1.0)过滤，仅保留各自分布中高于1个标准差(约前16%)的极端值，再将两者相乘。该模板强制要求两个维度同时处于极端强势(右尾收敛)，其余情况视为噪音并置零，构建极高门槛的激进alpha捕捉机制。",
+    "expression_list": [
+        "multiply(right_tail(zscore(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5))), minimum=1.0), right_tail(zscore(ts_sum(mdl172_cfroidrs, 10)), minimum=1.0))"
+    ]
+}

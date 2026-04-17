@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 10)",
+    "idea": "对5日EPS差异进行10日移动平均平滑（ts_mean）。原生的5日delta可能包含单日噪音，通过平滑处理提取分析师共识调整的持续趋势，降低因单日数据异常导致的假信号，适用于平衡型策略的噪声控制。",
+    "expression_list": [
+        "ts_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 10)",
+        "ts_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 10)"
+    ]
+}

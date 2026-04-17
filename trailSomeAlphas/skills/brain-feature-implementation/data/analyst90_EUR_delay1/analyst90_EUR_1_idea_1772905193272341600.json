@@ -1,0 +1,7 @@
+{
+    "template": "(ts_std_dev(vec_avg({likelihood_score}), 60) - ts_std_dev(vec_avg({likelihood_score}), 20)) / (1 + ts_std_dev(ts_std_dev(vec_avg({likelihood_score}), 20), 20))",
+    "idea": "对输入2的波动率期限结构差分应用输入1的信噪比范式，以短期波动率的时序标准差（波动率的波动率）作为噪音调整项，构建'收敛信号的信噪比'，过滤掉波动率自身不稳定的虚假收敛。",
+    "expression_list": [
+        "(ts_std_dev(vec_avg(success_likelihood_score), 60) - ts_std_dev(vec_avg(success_likelihood_score), 20)) / (1 + ts_std_dev(ts_std_dev(vec_avg(success_likelihood_score), 20), 20))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(group_rank(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry),20)",
+    "idea": "计算空头累积变化在行业内排名的20日变化率，捕捉'空头压力在行业内部相对位置的动态趋势'，相比绝对水平更关注边际变化动能，融合截面排序稳定性与序列差分算子，识别正在积聚或消退的做空压力。",
+    "expression_list": [
+        "ts_delta(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry),20)",
+        "ts_delta(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry),20)"
+    ]
+}

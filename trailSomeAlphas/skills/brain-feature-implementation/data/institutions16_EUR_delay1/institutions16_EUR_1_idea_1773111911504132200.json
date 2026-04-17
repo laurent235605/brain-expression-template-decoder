@@ -1,0 +1,7 @@
+{
+    "template": "bucket(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), range=\"0,1,0.1\")",
+    "idea": "采用分桶算子（bucket）替代连续的幂变换或线性衰减，将行业中性残差按十等分离散化。每个分桶内视为同质信号，避免连续函数在边界处的敏感跳跃，同时天然实现\"中间区域等权、极端区域区分\"的效果（头尾桶可进一步赋予更高权重）。这种方法比幂变换更稳健，且便于结合模板1的衰减逻辑进行分桶级别的时序平滑。",
+    "expression_list": [
+        "bucket(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), range=\"0,1,0.1\")"
+    ]
+}

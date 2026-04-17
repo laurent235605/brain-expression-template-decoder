@@ -1,0 +1,8 @@
+{
+    "template": "subtract( ts_decay_linear( group_zscore( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), industry ), 10 ), ts_mean( group_zscore( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), industry ), 60 ) )",
+    "idea": "期限结构动量差分：计算短期（10天线性衰减，高 turnover 敏感）与长期（60天简单平均，低 turnover 稳定）行业标准化Surprise的差值，捕捉盈利惊喜的近期加速或反转信号；利用ts_decay_linear与ts_mean的 turnover 特性差异（前者73% vs 后者16%），在信号突变时快速反应，在信号稳定时参考长期趋势。",
+    "expression_list": [
+        "subtract( ts_decay_linear( group_zscore( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ), 10 ), ts_mean( group_zscore( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ), 60 ) )",
+        "subtract( ts_decay_linear( group_zscore( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ), 10 ), ts_mean( group_zscore( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), industry ), 60 ) )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_mean(add(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), winsorize(vec_kurtosis(ts_backfill({exposure_value}, 21)), std=4)), 63), 252), 1.5)",
+    "idea": "多矩综合集中度稳定性（非线性增强）。融合偏度（分布不对称性）与峰度（尾部厚度）构建复合集中度指标，经63日移动平均平滑后计算252日长期Z-score。使用signed_power(..., 1.5)放大极端正负值，压缩中间区间，突出具有\"尖峰厚尾\"特征的高度集中风险或极端分散状态，适用于识别All-in单一市场的非线性尾部风险。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_mean(add(winsorize(vec_skewness(ts_backfill(anl91_exposure_value, 21)), std=4), winsorize(vec_kurtosis(ts_backfill(anl91_exposure_value, 21)), std=4)), 63), 252), 1.5)"
+    ]
+}

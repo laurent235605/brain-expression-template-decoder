@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 10), sector), 2)",
+    "idea": "在原始残差基础上加入时序衰减平滑（ts_decay_linear）和板块内标准化（group_zscore），并使用幂变换（signed_power）放大极端残差，识别持续偏离行业且偏离程度处于近期极值的特质性敞口。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), 10), sector), 2)",
+        "signed_power(group_zscore(ts_decay_linear(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), 10), sector), 2)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_corr(days_from_last_change({eps_best_eeps_cur_yr}), days_from_last_change({eps_best_eeps_nxt_yr}), 60)",
+    "idea": "跨期修订同步性（Cross-Temporal Revision Synchronicity）。将输入1的'days_from_last_change'操作符交叉应用于输入2的两个EPS预期字段，检测分析师对今明两年盈利预期的调整节奏是否同步。高相关意味着盈利预期调整具有结构性一致性（业务模型稳定），低相关则暗示年度间存在断点、一次性项目或周期拐点干扰。",
+    "expression_list": [
+        "ts_corr(days_from_last_change(anl69_aeps_best_eeps_cur_yr), days_from_last_change(anl69_aeps_best_eeps_nxt_yr), 60)",
+        "ts_corr(days_from_last_change(anl69_aeps_best_eeps_cur_yr), days_from_last_change(anl69_eps_best_eeps_nxt_yr), 60)",
+        "ts_corr(days_from_last_change(anl69_eps_best_eeps_cur_yr), days_from_last_change(anl69_eps_best_eeps_nxt_yr), 60)",
+        "ts_corr(days_from_last_change(anl69_eps_best_eeps_cur_yr), days_from_last_change(anl69_aeps_best_eeps_nxt_yr), 60)"
+    ]
+}

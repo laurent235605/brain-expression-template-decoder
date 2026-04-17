@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(winsorize(group_zscore(ts_delta(ts_mean(winsorize(ts_backfill({hfown_pctown}, 63), std=4), 22), 5), {sector}), std=3), 2)",
+    "idea": "板块中性化持仓动量因子：先对原始持仓比例进行去极值（winsorize）和63日回溯填充（ts_backfill），再经22日移动平均平滑后计算5日变化率（ts_delta捕捉动量），进行板块中性化（group_zscore）消除行业beta，最后通过非线性变换（signed_power, y=2）放大极端偏离。用于捕捉对冲基金在板块内加速增持或减持的标的，强调高 conviction 的动量信号。",
+    "expression_list": []
+}

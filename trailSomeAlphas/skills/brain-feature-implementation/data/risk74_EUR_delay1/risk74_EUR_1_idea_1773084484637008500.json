@@ -1,0 +1,14 @@
+{
+    "template": "multiply(right_tail(winsorize({crowding} * {value_ts}, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), maximum=-2)))",
+    "idea": "双尾非线性叠加策略：仅选取拥挤价值乘积的右尾（高拥挤区域）与空头利息Z-score的左尾（极端负值，代表空头回补）相乘。专门捕捉'高拥挤价值陷阱遭遇空头回补'的特定反转场景，利用两边极端值共振产生高置信度信号。",
+    "expression_list": [
+        "multiply(right_tail(winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(liquidity_factor_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(liquidity_timeseries_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(rsk74_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(rsk74_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), maximum=-2)))",
+        "multiply(right_tail(winsorize(rsk74_raw_crowding * rsk74_value_ts, std=4), minimum=0), abs(left_tail(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), maximum=-2)))"
+    ]
+}

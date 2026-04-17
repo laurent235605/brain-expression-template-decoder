@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(and(greater(group_rank(ts_zscore(winsorize(vec_skewness({version}), std=4), 60), industry), 0.8), greater(group_rank(vec_skewness({version}), industry), 0.7)), signed_power(group_zscore(vec_skewness({version}), industry), 1.5), if_else(and(less(group_rank(ts_zscore(winsorize(vec_skewness({version}), std=4), 60), industry), 0.2), less(group_rank(vec_skewness({version}), industry), 0.3)), reverse(signed_power(group_zscore(vec_skewness({version}), industry), 1.5)), 0)), industry), 5)",
+    "idea": "时序极端性增强的偏度动量策略：引入60日时间序列zscore(ts_zscore)判断当前偏度是否处于该股票历史分布的极端区间，结合截面行业排名(group_rank)进行双重确认；使用signed_power非线性放大极端值信号以强化尾部收益，延长衰减窗口至5日并配合group_normalize控制行业暴露，适用于捕捉分布形态历史极值带来的均值回复或动量延续信号。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(and(greater(group_rank(ts_zscore(winsorize(vec_skewness(anl85_version), std=4), 60), industry), 0.8), greater(group_rank(vec_skewness(anl85_version), industry), 0.7)), signed_power(group_zscore(vec_skewness(anl85_version), industry), 1.5), if_else(and(less(group_rank(ts_zscore(winsorize(vec_skewness(anl85_version), std=4), 60), industry), 0.2), less(group_rank(vec_skewness(anl85_version), industry), 0.3)), reverse(signed_power(group_zscore(vec_skewness(anl85_version), industry), 1.5)), 0)), industry), 5)"
+    ]
+}

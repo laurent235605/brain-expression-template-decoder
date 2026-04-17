@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_decay_linear(ts_sum(ts_delta(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 5), std=4), 1), 63), 10), ts_decay_linear(ts_sum(ts_delta(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 5), std=4), 1), 20), 10))",
+    "idea": "累积修订压力加速度：将模板1的差分加速度概念应用于模板2的累积求和结构，计算长短期累积修订压力的背离（63日vs20日），通过winsorize清洗极端值后，识别季度级别与月度级别预期调整趋势的分离，适用于捕捉中期预期拐点。",
+    "expression_list": [
+        "subtract(ts_decay_linear(ts_sum(ts_delta(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), std=4), 1), 63), 10), ts_decay_linear(ts_sum(ts_delta(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), std=4), 1), 20), 10))",
+        "subtract(ts_decay_linear(ts_sum(ts_delta(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), std=4), 1), 63), 10), ts_decay_linear(ts_sum(ts_delta(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), std=4), 1), 20), 10))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_stddev({aily_delta_recon_value}), 63), std=4), 20), 3), driver='gaussian'), 2)",
+    "idea": "将向量均值(vec_avg)替换为向量标准差(vec_stddev)以捕捉重建价值的不确定性/离散度，先通过时序分位数排名确认持续性，再经高斯分位数拉伸尾部，最后用signed_power二次放大极端值，专门交易高波动且趋势持续的修正信号。",
+    "expression_list": [
+        "signed_power(quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_stddev(ern10_aily_delta_recon_value), 63), std=4), 20), 3), driver='gaussian'), 2)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(winsorize(vec_stddev({elta_value}), std=4), ts_mean(winsorize(vec_stddev({elta_value}), std=4), 20)), group_zscore(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), industry), 0)",
+    "idea": "条件化高置信交易：仅当模板1的分歧度指标低于其20日滚动均值（分析师群体当前达成共识，离散度处于历史低位）时，才开仓交易模板2的修订惊喜信号；否则仓位归零（NaN或0）。实现“只在高置信环境下捕捉信息冲击”的防御性策略，避免在分析师观点混乱期承担不确定性风险。",
+    "expression_list": [
+        "trade_when(less(winsorize(vec_stddev(ern10_elta_value), std=4), ts_mean(winsorize(vec_stddev(ern10_elta_value), std=4), 20)), group_zscore(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), industry), 0)"
+    ]
+}

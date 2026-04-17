@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN 72变 - Web 界面</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .simulator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .simulator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .simulator-panel {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .form-group input[type="number"] {
+            width: 120px;
+        }
+        
+        .log-viewer {
+            background: #1e1e1e;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 10px;
+        }
+        
+        .btn-block {
+            width: 100%;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <div class="header-flex">
+            <h1>BRAIN 72变 (Transformer)</h1>
+            <a href="/" class="btn btn-outline">返回主页</a>
+        </div>
+
+        <div class="simulator-grid">
+            <div class="simulator-panel">
+                <h3>配置</h3>
+                <form id="transformerForm">
+                    <div class="form-group">
+                        <label for="llm_model">大模型名称 (LLM Model)</label>
+                        <input type="text" id="llm_model" name="LLM_model_name" value="kimi-k2.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="llm_api_key">大模型 API 密钥</label>
+                        <input type="password" id="llm_api_key" name="LLM_API_KEY" class="secret-toggle-target" placeholder="请输入您的 API 密钥">
+                    </div>
+                    <div class="form-group">
+                        <label for="llm_base_url">大模型 Base URL</label>
+                        <input type="text" id="llm_base_url" name="llm_base_url" value="https://api.moonshot.cn/v1">
+                    </div>
+                    <button type="button" id="testConnectionBtn" class="btn btn-secondary btn-block">测试大模型连接</button>
+                    <div id="connectionStatus" style="margin-top: 5px; font-size: 0.9em;"></div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="username">BRAIN 用户名</label>
+                        <input type="text" id="username" name="username" placeholder="邮箱或用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">BRAIN 密码</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <button type="button" id="loginBtn" class="btn btn-info btn-block" style="background-color: #17a2b8; color: white;">登录并获取选项</button>
+                    <div id="loginStatus" style="margin-top: 5px; font-size: 0.9em;"></div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="template_summary_content">模板摘要 (Template Summary)</label>
+                        <div style="display: flex; gap: 10px; margin-bottom: 5px;">
+                            <button type="button" class="btn btn-small btn-outline" onclick="document.getElementById('templateFile').click()">📂 从文件加载</button>
+                            <input type="file" id="templateFile" accept=".txt,.md" style="display: none;" onchange="loadTemplateFile(event)">
+                        </div>
+                        <textarea id="template_summary_content" name="template_summary_content" style="height: 150px; font-family: monospace; font-size: 12px;" placeholder="正在加载默认模板摘要..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="alpha_id">Alpha ID</label>
+                        <input type="text" id="alpha_id" name="alpha_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="top_n">Datafield Top N (数值越大变种数量越多,建议低于50)</label>
+                        <input type="number" id="top_n" name="top_n_datafield" value="50">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="region">目标地区 (可选 - 留空则使用种子Alpha的默认值)</label>
+                        <select id="region" name="region" disabled>
+                            <option value="">使用种子Alpha默认值</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="delay">目标Delay (可选 - 留空则使用种子Alpha的默认值)</label>
+                        <select id="delay" name="delay" disabled>
+                            <option value="">使用种子Alpha默认值</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="data_type">数据类型 (Data Type)</label>
+                        <select id="data_type" name="data_type">
+                            <option value="MATRIX" selected>MATRIX</option>
+                            <option value="VECTOR">VECTOR</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="universe">目标股票池 (可选 - 留空则使用种子Alpha的默认值)</label>
+                        <select id="universe" name="universe" disabled>
+                            <option value="">使用种子Alpha默认值</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>目标数据类别 (可多选)</label>
+                        <div id="category-container" style="max-height: 300px; overflow-y: auto; border: 1px solid #ced4da; padding: 10px; border-radius: 4px; background-color: white;">
+                             <div id="category-buttons" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <button type="button" class="btn btn-sm btn-primary category-btn active" id="cat_btn_all" data-value="" onclick="toggleCategory(this)">
+                                    不筛选 (默认)
+                                </button>
+                                <!-- Dynamic buttons will be added here -->
+                             </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="runBtn" class="btn btn-primary btn-block" disabled>运行 72变</button>
+                </form>
+            </div>
+            
+            <div class="simulator-panel">
+                <h3>输出日志</h3>
+                <div id="logViewer" class="log-viewer">等待开始...</div>
+                <div id="downloadSection" class="hidden" style="margin-top: 20px; text-align: center;">
+                    <p>生成完成！</p>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a id="downloadCandidatesBtn" href="#" class="btn btn-success" style="background-color: #28a745; color: white;" download>下载 Alpha_candidates.json</a>
+                        <small style="color: #6c757d;">Alpha 模板文件，可放入<a href="/">首页</a>载入并精细化调整</small>
+                        
+                        <a id="downloadSuccessBtn" href="#" class="btn btn-info" style="background-color: #17a2b8; color: white;" download>下载 Alpha_generated_expressions_success.json</a>
+                        <small style="color: #6c757d;">Alpha表达式列表，可放入<a href="/">首页</a>或machine_lib载入后添加setting进行回测</small>
+                        
+                        <a id="downloadErrorBtn" href="#" class="btn btn-warning" style="background-color: #ffc107; color: black;" download>下载 Alpha_generated_expressions_error.json</a>
+                        <small style="color: #6c757d;">被过滤的Alpha表达式，可检查AI模板是否有大规模错误</small>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 15px; background-color: #e9ecef; border-radius: 5px; font-size: 0.9em; color: #495057;">
+                    <h4 style="margin-top: 0; color: #343a40;">使用说明</h4>
+                    <ol style="padding-left: 20px; margin-bottom: 0;">
+                        <li>请在输入大语言模型相关参数后点击测试，测试成功再进行下一步。</li>
+                        <li>如遇任何报错，欢迎使用AI帮助你解答，有时候一个截图，AI就能帮你解答了。</li>
+                        <li>本页中的Template Summary是启发72变的核心提示词，请不断丰富完善您的武林秘籍并替换，你的结果会更好。</li>
+                        <li>72变支持将原本的Alpha到另外一个区跨区变身，现在它已经从原版本纵向同区点塔，变升级支持跨区点塔。</li>
+                        <li>生成后的模板配置，您可以到<a href="/">主页</a>进行加载后按需修改，增加个性化内容，这会使得您的Alpha更加独特。</li>
+                        <li>如果您不想修改生成后的模板，也可以直接载入生成好的表达式列表，入口同样在<a href="/">主页</a>。</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('transformerForm');
+        const logViewer = document.getElementById('logViewer');
+        const runBtn = document.getElementById('runBtn');
+        const testConnectionBtn = document.getElementById('testConnectionBtn');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const downloadSection = document.getElementById('downloadSection');
+        const downloadCandidatesBtn = document.getElementById('downloadCandidatesBtn');
+        const downloadSuccessBtn = document.getElementById('downloadSuccessBtn');
+        const downloadErrorBtn = document.getElementById('downloadErrorBtn');
+        const templateSummaryTextarea = document.getElementById('template_summary_content');
+        
+        const loginBtn = document.getElementById('loginBtn');
+        const loginStatus = document.getElementById('loginStatus');
+        const regionSelect = document.getElementById('region');
+        const delaySelect = document.getElementById('delay');
+        const universeSelect = document.getElementById('universe');
+        // const categorySelect = document.getElementById('category'); // Removed
+        
+        let optionsData = {};
+
+        loginBtn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                loginStatus.textContent = 'Please enter Username and Password';
+                loginStatus.style.color = 'red';
+                return;
+            }
+            
+            loginStatus.textContent = 'Logging in and fetching options...';
+            loginStatus.style.color = 'blue';
+            loginBtn.disabled = true;
+            
+            try {
+                const response = await fetch('/api/transformer/login-and-fetch-options', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    loginStatus.textContent = 'Login Successful! Options fetched.';
+                    loginStatus.style.color = 'green';
+                    optionsData = result.options;
+                    
+                    // Enable Run button
+                    runBtn.disabled = false;
+                    
+                    // Populate Region Select
+                    populateRegionSelect();
+                    
+                    // Enable selects
+                    regionSelect.disabled = false;
+
+                    // Populate Category Select
+                    if (result.categories) {
+                        populateCategorySelect(result.categories);
+                    }
+                    
+                } else {
+                    loginStatus.textContent = 'Error: ' + result.error;
+                    loginStatus.style.color = 'red';
+                    loginBtn.disabled = false;
+                }
+            } catch (error) {
+                loginStatus.textContent = 'Error: ' + error.message;
+                loginStatus.style.color = 'red';
+                loginBtn.disabled = false;
+            }
+        });
+        
+        function populateRegionSelect() {
+            // Clear existing options except default
+            while (regionSelect.options.length > 1) {
+                regionSelect.remove(1);
+            }
+            
+            const regions = Object.keys(optionsData);
+            regions.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region;
+                option.textContent = region;
+                regionSelect.appendChild(option);
+            });
+        }
+
+        function populateCategorySelect(categories) {
+            const container = document.getElementById('category-buttons');
+            // Remove all buttons except the first one (All)
+            while (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+
+            categories.forEach(category => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'btn btn-sm btn-outline-secondary category-btn';
+                
+                let labelText = '';
+                let value = '';
+                if (typeof category === 'object' && category !== null) {
+                    value = category.id;
+                    labelText = category.name;
+                } else {
+                    value = category;
+                    labelText = String(category).charAt(0).toUpperCase() + String(category).slice(1);
+                }
+                
+                btn.textContent = labelText;
+                btn.dataset.value = value;
+                btn.onclick = function() { toggleCategory(this); };
+                
+                container.appendChild(btn);
+            });
+        }
+
+        function toggleCategory(btn) {
+            const allBtn = document.getElementById('cat_btn_all');
+            const isAllBtn = (btn === allBtn);
+            
+            if (isAllBtn) {
+                // If clicking "All", activate it and deactivate others
+                if (!btn.classList.contains('btn-primary')) {
+                    btn.classList.remove('btn-outline-secondary');
+                    btn.classList.add('btn-primary');
+                    btn.classList.add('active');
+                    
+                    const otherBtns = document.querySelectorAll('.category-btn:not(#cat_btn_all)');
+                    otherBtns.forEach(b => {
+                        b.classList.remove('btn-primary');
+                        b.classList.remove('active');
+                        b.classList.add('btn-outline-secondary');
+                    });
+                }
+            } else {
+                // Toggle current button
+                if (btn.classList.contains('btn-primary')) {
+                    // Deactivate
+                    btn.classList.remove('btn-primary');
+                    btn.classList.remove('active');
+                    btn.classList.add('btn-outline-secondary');
+                } else {
+                    // Activate
+                    btn.classList.remove('btn-outline-secondary');
+                    btn.classList.add('btn-primary');
+                    btn.classList.add('active');
+                }
+                
+                // Check if any specific category is active
+                const anyActive = document.querySelectorAll('.category-btn:not(#cat_btn_all).btn-primary').length > 0;
+                
+                if (anyActive) {
+                    // Deactivate "All"
+                    allBtn.classList.remove('btn-primary');
+                    allBtn.classList.remove('active');
+                    allBtn.classList.add('btn-outline-secondary');
+                } else {
+                    // Activate "All" if nothing else is selected
+                    allBtn.classList.remove('btn-outline-secondary');
+                    allBtn.classList.add('btn-primary');
+                    allBtn.classList.add('active');
+                }
+            }
+        }
+        
+        regionSelect.addEventListener('change', () => {
+            const selectedRegion = regionSelect.value;
+            
+            // Reset Delay and Universe
+            delaySelect.innerHTML = '<option value="">使用种子Alpha默认值</option>';
+            universeSelect.innerHTML = '<option value="">使用种子Alpha默认值</option>';
+            delaySelect.disabled = true;
+            universeSelect.disabled = true;
+            
+            if (selectedRegion && optionsData[selectedRegion]) {
+                const delays = Object.keys(optionsData[selectedRegion]);
+                delays.forEach(delay => {
+                    const option = document.createElement('option');
+                    option.value = delay;
+                    option.textContent = delay;
+                    delaySelect.appendChild(option);
+                });
+                delaySelect.disabled = false;
+            }
+        });
+        
+        delaySelect.addEventListener('change', () => {
+            const selectedRegion = regionSelect.value;
+            const selectedDelay = delaySelect.value;
+            
+            // Reset Universe
+            universeSelect.innerHTML = '<option value="">使用种子Alpha默认值</option>';
+            universeSelect.disabled = true;
+            
+            if (selectedRegion && selectedDelay && optionsData[selectedRegion][selectedDelay]) {
+                const universes = optionsData[selectedRegion][selectedDelay];
+                universes.forEach(universe => {
+                    const option = document.createElement('option');
+                    option.value = universe;
+                    option.textContent = universe;
+                    universeSelect.appendChild(option);
+                });
+                universeSelect.disabled = false;
+            }
+        });
+
+        const dataTypeSelect = document.getElementById('data_type');
+        dataTypeSelect.addEventListener('change', function() {
+            if (this.value === 'VECTOR') {
+                if (!confirm("请确保您输入的原型Alpha中正确地使用了vector operator,否则极容易造成数据类型错误")) {
+                    this.value = 'MATRIX';
+                }
+            }
+        });
+        
+        let eventSource = null;
+
+        // Load default template summary on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Restore saved LLM config from localStorage
+            const savedLlmModel = localStorage.getItem('transformer_llm_model');
+            const savedLlmKey = localStorage.getItem('transformer_llm_api_key');
+            const savedLlmUrl = localStorage.getItem('transformer_llm_base_url');
+            if (savedLlmModel) document.getElementById('llm_model').value = savedLlmModel;
+            if (savedLlmKey) document.getElementById('llm_api_key').value = savedLlmKey;
+            if (savedLlmUrl) document.getElementById('llm_base_url').value = savedLlmUrl;
+
+            // Auto-save LLM config on input change
+            document.getElementById('llm_model').addEventListener('input', function() { localStorage.setItem('transformer_llm_model', this.value); });
+            document.getElementById('llm_api_key').addEventListener('input', function() { localStorage.setItem('transformer_llm_api_key', this.value); });
+            document.getElementById('llm_base_url').addEventListener('input', function() { localStorage.setItem('transformer_llm_base_url', this.value); });
+
+            try {
+                const response = await fetch('/api/get-default-template-summary');
+                const result = await response.json();
+                if (result.success) {
+                    templateSummaryTextarea.value = result.summary;
+                } else {
+                    templateSummaryTextarea.value = "Error loading default template summary: " + result.error;
+                }
+            } catch (error) {
+                templateSummaryTextarea.value = "Error loading default template summary: " + error.message;
+            }
+        });
+
+        function loadTemplateFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                templateSummaryTextarea.value = e.target.result;
+            };
+            reader.readAsText(file);
+        }
+
+        testConnectionBtn.addEventListener('click', async () => {
+            const apiKey = document.getElementById('llm_api_key').value;
+            const baseUrl = document.getElementById('llm_base_url').value;
+            const model = document.getElementById('llm_model').value;
+            
+            if (!apiKey) {
+                connectionStatus.textContent = 'Please enter API Key';
+                connectionStatus.style.color = 'red';
+                return;
+            }
+            
+            connectionStatus.textContent = 'Testing connection...';
+            connectionStatus.style.color = 'blue';
+            
+            try {
+                const response = await fetch('/api/test-llm-connection', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ apiKey, baseUrl, model })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    connectionStatus.textContent = 'Connection Successful!';
+                    connectionStatus.style.color = 'green';
+                } else {
+                    connectionStatus.textContent = 'Connection Failed: ' + result.error;
+                    connectionStatus.style.color = 'red';
+                }
+            } catch (error) {
+                connectionStatus.textContent = 'Error: ' + error.message;
+                connectionStatus.style.color = 'red';
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (eventSource) {
+                eventSource.close();
+            }
+            
+            logViewer.textContent = 'Starting Transformer（此步骤稍久）...\n';
+            runBtn.disabled = true;
+            downloadSection.classList.add('hidden');
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Handle multiple select for category (Buttons)
+            const allBtn = document.getElementById('cat_btn_all');
+            let selectedCategories = [];
+            
+            if (!allBtn.classList.contains('btn-primary')) {
+                const activeBtns = document.querySelectorAll('.category-btn:not(#cat_btn_all).btn-primary');
+                selectedCategories = Array.from(activeBtns).map(btn => btn.dataset.value);
+            }
+            
+            if (selectedCategories.length > 0) {
+                data.category = selectedCategories;
+            } else {
+                data.category = null;
+            }
+            
+            try {
+                const response = await fetch('/api/run-transformer-web', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    const taskId = result.taskId;
+                    startLogStreaming(taskId);
+                } else {
+                    logViewer.textContent += 'Error starting: ' + result.error;
+                    runBtn.disabled = false;
+                }
+            } catch (error) {
+                logViewer.textContent += 'Error: ' + error.message;
+                runBtn.disabled = false;
+            }
+        });
+        
+        function startLogStreaming(taskId) {
+            eventSource = new EventSource(`/api/stream-transformer-logs/${taskId}`);
+            
+            eventSource.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                if (data.log) {
+                    logViewer.textContent += data.log; // + '\n';
+                    logViewer.scrollTop = logViewer.scrollHeight;
+                }
+                
+                if (data.status === 'completed') {
+                    eventSource.close();
+                    runBtn.disabled = false;
+                    logViewer.textContent += '\nProcess Completed Successfully!';
+                    
+                    // Enable download
+                    downloadCandidatesBtn.href = `/api/download-transformer-result/${taskId}/candidates`;
+                    downloadSuccessBtn.href = `/api/download-transformer-result/${taskId}/success`;
+                    downloadErrorBtn.href = `/api/download-transformer-result/${taskId}/error`;
+                    downloadSection.classList.remove('hidden');
+                } else if (data.status === 'error') {
+                    eventSource.close();
+                    runBtn.disabled = false;
+                    logViewer.textContent += '\nProcess Failed!';
+                }
+            };
+            
+            eventSource.onerror = () => {
+                eventSource.close();
+                runBtn.disabled = false;
+                logViewer.textContent += '\nConnection lost.';
+            };
+        }
+    </script>
+    <script src="{{ url_for('static', filename='secret_toggle.js') }}"></script>
+    <script src="{{ url_for('static', filename='usage_widget.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(winsorize(multiply(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), ts_zscore(days_from_last_change({eps_expected_report_dt}), 60)), 4), 1.5)",
+    "idea": "构建两个字段的交互项并施加尾部增强。将EPS修订加速度与报告日期变更天数（经zscore标准化）相乘，对乘积结果进行4倍标准差截断（winsorize）后，使用signed_power进行1.5次幂变换以放大极端组合（如高加速度+高稳定性，或负加速度+高不确定性）的收益贡献。该模板体现了激进的风险因子交叉暴露，追求非线性alpha。",
+    "expression_list": [
+        "signed_power(winsorize(multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), ts_zscore(days_from_last_change(anl69_aeps_expected_report_dt), 60)), 4), 1.5)",
+        "signed_power(winsorize(multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), ts_zscore(days_from_last_change(anl69_aeps_expected_report_dt), 60)), 4), 1.5)",
+        "signed_power(winsorize(multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), ts_zscore(days_from_last_change(anl69_eps_expected_report_dt), 60)), 4), 1.5)",
+        "signed_power(winsorize(multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), ts_zscore(days_from_last_change(anl69_eps_expected_report_dt), 60)), 4), 1.5)"
+    ]
+}

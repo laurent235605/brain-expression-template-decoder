@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_sum(ts_delta({shortint}, 1), 15), 60)",
+    "idea": "计算15日空头持仓累积变化在过去60日窗口中的时序Z-score，识别相对于自身近期历史均值的显著偏离，捕捉突破近期区间的异常空头压力或密集回补信号，强调时间序列上的异常度而非绝对水平。",
+    "expression_list": [
+        "ts_zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15), 60)",
+        "ts_zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 60)"
+    ]
+}

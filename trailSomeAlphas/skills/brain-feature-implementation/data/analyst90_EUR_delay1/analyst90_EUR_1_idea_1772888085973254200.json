@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({likelihood_score}), 60)",
+    "idea": "**Concept**: Success Likelihood Consistency Score\n- **Sample Fields Used**: `likelihood_score`\n- **Definition**: Rolling standard deviation of average success likelihood scores over 60 days\n- **Why This Feature**: Measures whether analysts maintain consistent probability assessments or adjust them erratically; stable likelihoods suggest well-calibrated models\n- **is filling nan necessary**: NaN values represent periods with no score updates; use ts_backfill with limited lookback (5 days) to avoid stale data bias while preserving information gaps.\n- **Logical Meaning**: Quantifies the volatility of confidence itself; stable confidence allows better position sizing\n- **Directionality**: Lower values preferred (consistent assessment); rapidly changing likelihoods indicate uncertainty about catalysts\n- **Boundary Conditions**: 0 indicates static probability assessments; high values indicate shifting confidence in trade thesis",
+    "expression_list": [
+        "ts_std_dev(vec_avg(success_likelihood_score), 60)"
+    ]
+}

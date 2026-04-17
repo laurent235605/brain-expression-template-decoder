@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(add(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 252), quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\")), 20)",
+    "idea": "融合Input 1的修正强度与Input 2的稳定性信号：将短期修正动量的zscore（时序标准化）与预期日期稳定性的高斯分位（Input 2核心逻辑）等权相加，构建复合得分后，应用20日线性衰减平滑（ts_decay_linear），在控制换手率的同时，构建兼顾‘情绪变动’与‘事件确定性’的双因子混合信号。",
+    "expression_list": [
+        "ts_decay_linear(add(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 252), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\")), 20)",
+        "ts_decay_linear(add(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 252), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\")), 20)",
+        "ts_decay_linear(add(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 252), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\")), 20)",
+        "ts_decay_linear(add(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 252), quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\")), 20)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "winsorize(group_zscore(subtract(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), ts_mean(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 63)), {sector}), std=4)",
+    "idea": "稳定性均值回归偏离度模板。计算当前稳定性指标在过去252日的历史分位高斯映射，减去其63日移动平均，得到相对于近期均值的偏离程度，在行业层面进行zscore标准化，并做4倍标准差缩尾处理。该模板识别'稳定性异常偏离近期常态'的股票，暗示信息披露节奏发生潜在结构性变化。",
+    "expression_list": []
+}

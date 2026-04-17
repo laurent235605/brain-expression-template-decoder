@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN 编排任务看板</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        * { box-sizing: border-box; }
+        body { background: #f0f2f5; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+
+        .orch-container { max-width: 1440px; margin: 0 auto; padding: 16px 20px; }
+
+        /* ---- header ---- */
+        .orch-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .orch-header h1 { font-size: 22px; margin: 0; }
+        .orch-header .back-link { color: #0ea5e9; text-decoration: none; font-size: 14px; }
+        .orch-header .back-link:hover { text-decoration: underline; }
+
+        /* ---- summary cards ---- */
+        .summary-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+        .summary-card {
+            flex: 1 1 140px; min-width: 120px;
+            background: #fff; border-radius: 8px; padding: 14px 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.08); text-align: center;
+        }
+        .summary-card .num { font-size: 28px; font-weight: 700; }
+        .summary-card .label { font-size: 13px; color: #666; margin-top: 4px; }
+        .summary-card.ready   .num { color: #0ea5e9; }
+        .summary-card.running  .num { color: #f59e0b; }
+        .summary-card.completed .num { color: #22c55e; }
+        .summary-card.failed   .num { color: #ef4444; }
+        .summary-card.deadletter .num { color: #9333ea; }
+
+        /* ---- toolbar ---- */
+        .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+        .toolbar select, .toolbar input {
+            padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 13px;
+        }
+        .toolbar .btn-sm {
+            padding: 6px 14px; border: none; border-radius: 4px; cursor: pointer;
+            font-size: 13px; color: #fff; background: #0ea5e9;
+        }
+        .toolbar .btn-sm:hover { background: #0284c7; }
+        .toolbar .btn-sm.btn-green { background: #22c55e; }
+        .toolbar .btn-sm.btn-green:hover { background: #16a34a; }
+
+        /* ---- kanban board ---- */
+        .kanban-board { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; min-height: 420px; }
+        .kanban-col {
+            flex: 1 0 220px; min-width: 220px; max-width: 320px;
+            background: #f8f9fb; border-radius: 8px; padding: 10px;
+            display: flex; flex-direction: column;
+        }
+        .kanban-col-header {
+            font-weight: 700; font-size: 14px; padding: 6px 4px 10px;
+            border-bottom: 2px solid #e5e7eb; margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .kanban-col-header .badge {
+            font-size: 11px; padding: 2px 8px; border-radius: 10px; color: #fff; font-weight: 600;
+        }
+        .col-ready .kanban-col-header .badge   { background: #0ea5e9; }
+        .col-running .kanban-col-header .badge  { background: #f59e0b; }
+        .col-completed .kanban-col-header .badge{ background: #22c55e; }
+        .col-failed .kanban-col-header .badge   { background: #ef4444; }
+        .col-deadletter .kanban-col-header .badge{ background: #9333ea; }
+
+        .kanban-cards { flex: 1; overflow-y: auto; }
+
+        /* ---- task card ---- */
+        .task-card {
+            background: #fff; border-radius: 6px; padding: 10px 12px; margin-bottom: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.06); cursor: pointer; border-left: 3px solid transparent;
+            transition: box-shadow .15s;
+        }
+        .task-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,.12); }
+        .col-ready .task-card      { border-left-color: #0ea5e9; }
+        .col-running .task-card     { border-left-color: #f59e0b; }
+        .col-completed .task-card   { border-left-color: #22c55e; }
+        .col-failed .task-card      { border-left-color: #ef4444; }
+        .col-deadletter .task-card  { border-left-color: #9333ea; }
+
+        .task-card .tc-id { font-size: 12px; color: #888; word-break: break-all; }
+        .task-card .tc-stage { font-size: 13px; font-weight: 600; margin: 4px 0 2px; }
+        .task-card .tc-time { font-size: 11px; color: #aaa; }
+        .task-card .tc-error { font-size: 11px; color: #ef4444; margin-top: 4px; word-break: break-word; }
+
+        /* ---- detail modal ---- */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45);
+            z-index: 1000; align-items: center; justify-content: center;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: #fff; border-radius: 10px; width: 560px; max-width: 94vw;
+            max-height: 80vh; overflow-y: auto; padding: 24px; position: relative;
+        }
+        .modal-box h2 { margin-top: 0; font-size: 18px; }
+        .modal-close {
+            position: absolute; top: 12px; right: 16px; background: none; border: none;
+            font-size: 22px; cursor: pointer; color: #888;
+        }
+        .modal-close:hover { color: #333; }
+        .detail-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+        .detail-table td { padding: 6px 8px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+        .detail-table td:first-child { font-weight: 600; color: #555; white-space: nowrap; width: 110px; }
+        .modal-actions { margin-top: 16px; display: flex; gap: 10px; }
+        .modal-actions button {
+            padding: 7px 18px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; color: #fff;
+        }
+        .btn-retry { background: #0ea5e9; }
+        .btn-retry:hover { background: #0284c7; }
+        .btn-cancel { background: #ef4444; }
+        .btn-cancel:hover { background: #dc2626; }
+
+        /* ---- create task panel ---- */
+        .create-panel {
+            background: #fff; border-radius: 8px; padding: 18px; margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.08); display: none;
+        }
+        .create-panel.open { display: block; }
+        .create-panel h3 { margin-top: 0; font-size: 16px; }
+        .create-form { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+        .create-form .fg { display: flex; flex-direction: column; gap: 4px; }
+        .create-form .fg label { font-size: 12px; font-weight: 600; color: #555; }
+        .create-form .fg input, .create-form .fg select {
+            padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 13px;
+        }
+
+        /* ---- stage info ---- */
+        .by-stage-section { margin-bottom: 16px; }
+        .stage-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+        .stage-chip {
+            background: #fff; border-radius: 6px; padding: 8px 14px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.06); font-size: 13px;
+        }
+        .stage-chip strong { color: #334155; }
+
+        /* ---- toast ---- */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px; z-index: 2000;
+            padding: 10px 20px; border-radius: 6px; color: #fff; font-size: 13px;
+            opacity: 0; transition: opacity .3s; pointer-events: none;
+        }
+        .toast.show { opacity: 1; pointer-events: auto; }
+        .toast.ok   { background: #22c55e; }
+        .toast.err  { background: #ef4444; }
+
+        .empty-col { text-align: center; color: #bbb; font-size: 13px; padding: 30px 0; }
+    </style>
+</head>
+<body>
+
+<div class="orch-container">
+    <!-- Header -->
+    <div class="orch-header">
+        <h1>📌 编排任务看板</h1>
+        <a href="/" class="back-link">← 返回主页</a>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-row" id="summaryRow">
+        <div class="summary-card ready"><div class="num" id="cnt-ready">0</div><div class="label">就绪 Ready</div></div>
+        <div class="summary-card running"><div class="num" id="cnt-running">0</div><div class="label">运行中 Running</div></div>
+        <div class="summary-card completed"><div class="num" id="cnt-completed">0</div><div class="label">已完成 Completed</div></div>
+        <div class="summary-card failed"><div class="num" id="cnt-failed">0</div><div class="label">失败 Failed</div></div>
+        <div class="summary-card deadletter"><div class="num" id="cnt-deadletter">0</div><div class="label">死信 Deadletter</div></div>
+    </div>
+
+    <!-- By-stage breakdown -->
+    <div class="by-stage-section">
+        <div class="stage-chips" id="stageChips"></div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <select id="filterStatus">
+            <option value="">全部状态</option>
+            <option value="ready">就绪</option>
+            <option value="running">运行中</option>
+            <option value="completed">已完成</option>
+            <option value="failed">失败</option>
+            <option value="deadletter">死信</option>
+        </select>
+        <select id="filterStage">
+            <option value="">全部阶段</option>
+        </select>
+        <input id="filterDayKey" type="text" placeholder="day_key 筛选" style="width:130px;" />
+        <button class="btn-sm" onclick="loadAll()">🔄 刷新</button>
+        <button class="btn-sm btn-green" onclick="toggleCreatePanel()">＋ 新建任务</button>
+    </div>
+
+    <!-- Create Task Panel -->
+    <div class="create-panel" id="createPanel">
+        <h3>新建任务</h3>
+        <div class="create-form">
+            <div class="fg">
+                <label>Task ID</label>
+                <input id="newTaskId" type="text" placeholder="例: gen_20250101_001" />
+            </div>
+            <div class="fg">
+                <label>Day Key</label>
+                <input id="newDayKey" type="text" placeholder="例: 2025-01-01" />
+            </div>
+            <div class="fg">
+                <label>Stage</label>
+                <select id="newStage">
+                    <option value="generate">generate</option>
+                    <option value="inspect">inspect</option>
+                    <option value="enhance">enhance</option>
+                    <option value="simulate">simulate</option>
+                    <option value="review">review</option>
+                    <option value="custom">custom</option>
+                </select>
+            </div>
+            <div class="fg">
+                <label>依赖 (逗号分隔)</label>
+                <input id="newDeps" type="text" placeholder="可选: task_id_1,task_id_2" />
+            </div>
+            <div class="fg">
+                <label>备注</label>
+                <input id="newNote" type="text" placeholder="可选备注" />
+            </div>
+            <button class="btn-sm btn-green" onclick="createTask()">创建</button>
+        </div>
+    </div>
+
+    <!-- Kanban Board -->
+    <div class="kanban-board" id="kanbanBoard">
+        <div class="kanban-col col-ready">
+            <div class="kanban-col-header">就绪 <span class="badge" id="badge-ready">0</span></div>
+            <div class="kanban-cards" id="col-ready"></div>
+        </div>
+        <div class="kanban-col col-running">
+            <div class="kanban-col-header">运行中 <span class="badge" id="badge-running">0</span></div>
+            <div class="kanban-cards" id="col-running"></div>
+        </div>
+        <div class="kanban-col col-completed">
+            <div class="kanban-col-header">已完成 <span class="badge" id="badge-completed">0</span></div>
+            <div class="kanban-cards" id="col-completed"></div>
+        </div>
+        <div class="kanban-col col-failed">
+            <div class="kanban-col-header">失败 <span class="badge" id="badge-failed">0</span></div>
+            <div class="kanban-cards" id="col-failed"></div>
+        </div>
+        <div class="kanban-col col-deadletter">
+            <div class="kanban-col-header">死信 <span class="badge" id="badge-deadletter">0</span></div>
+            <div class="kanban-cards" id="col-deadletter"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="detailModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle">任务详情</h2>
+        <table class="detail-table" id="detailTable"><tbody></tbody></table>
+        <div class="modal-actions" id="modalActions"></div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ====== state ====== */
+let allTasks = [];
+let currentTask = null;
+let knownStages = new Set();
+
+/* ====== helpers ====== */
+function esc(s) {
+    const d = document.createElement('div');
+    d.textContent = String(s ?? '');
+    return d.innerHTML;
+}
+
+function toast(msg, ok) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = 'toast show ' + (ok ? 'ok' : 'err');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.className = 'toast', 2500);
+}
+
+async function api(url, opts) {
+    const res = await fetch(url, opts);
+    return res.json();
+}
+
+/* ====== load data ====== */
+async function loadAll() {
+    await Promise.all([loadSummary(), loadTasks()]);
+}
+
+async function loadSummary() {
+    const data = await api('/api/orchestrator/summary');
+    if (!data.ok) return;
+    const c = data.summary?.counts || {};
+    for (const s of ['ready','running','completed','failed','deadletter']) {
+        document.getElementById('cnt-' + s).textContent = c[s] || 0;
+        document.getElementById('badge-' + s).textContent = c[s] || 0;
+    }
+
+    /* stage chips */
+    const byStage = data.summary?.by_stage || {};
+    const container = document.getElementById('stageChips');
+    container.innerHTML = '';
+    for (const [stage, counts] of Object.entries(byStage)) {
+        const parts = Object.entries(counts).filter(([,v])=>v>0).map(([k,v])=>`${k}:${v}`).join(' · ');
+        if (!parts) continue;
+        const chip = document.createElement('div');
+        chip.className = 'stage-chip';
+        chip.innerHTML = `<strong>${esc(stage)}</strong> &nbsp;${esc(parts)}`;
+        container.appendChild(chip);
+    }
+}
+
+async function loadTasks() {
+    const status = document.getElementById('filterStatus').value;
+    const stage = document.getElementById('filterStage').value;
+    const dayKey = document.getElementById('filterDayKey').value.trim();
+
+    const params = new URLSearchParams();
+    if (status) params.set('status', status);
+    if (stage)  params.set('stage', stage);
+    if (dayKey) params.set('day_key', dayKey);
+
+    const data = await api('/api/orchestrator/tasks?' + params.toString());
+    if (!data.ok) { toast('加载任务失败', false); return; }
+
+    allTasks = data.tasks || [];
+    renderKanban();
+    updateStageFilter();
+}
+
+/* ====== render ====== */
+function renderKanban() {
+    const buckets = { ready: [], running: [], completed: [], failed: [], deadletter: [] };
+    for (const t of allTasks) {
+        const s = String(t.status || 'ready').toLowerCase();
+        (buckets[s] || buckets.ready).push(t);
+    }
+
+    for (const [status, tasks] of Object.entries(buckets)) {
+        const col = document.getElementById('col-' + status);
+        if (!col) continue;
+        if (tasks.length === 0) {
+            col.innerHTML = '<div class="empty-col">暂无任务</div>';
+            continue;
+        }
+        col.innerHTML = tasks.map(t => {
+            const err = t.last_error ? `<div class="tc-error">⚠ ${esc(t.last_error)}</div>` : '';
+            return `<div class="task-card" onclick="openDetail('${esc(t.task_id)}')">
+                <div class="tc-stage">${esc(t.stage || '—')}</div>
+                <div class="tc-id">${esc(t.task_id)}</div>
+                <div class="tc-time">${esc(t.updated_at || t.created_at || '')}</div>
+                ${err}
+            </div>`;
+        }).join('');
+    }
+}
+
+function updateStageFilter() {
+    for (const t of allTasks) {
+        if (t.stage) knownStages.add(t.stage);
+    }
+    const sel = document.getElementById('filterStage');
+    const cur = sel.value;
+    const opts = ['<option value="">全部阶段</option>'];
+    for (const s of [...knownStages].sort()) {
+        opts.push(`<option value="${esc(s)}" ${s===cur?'selected':''}>${esc(s)}</option>`);
+    }
+    sel.innerHTML = opts.join('');
+}
+
+/* ====== detail modal ====== */
+async function openDetail(taskId) {
+    const data = await api('/api/orchestrator/task/' + encodeURIComponent(taskId));
+    if (!data.ok) { toast(data.error || '加载失败', false); return; }
+    currentTask = data.task;
+    currentTask.task_id = currentTask.task_id || taskId;
+
+    const fields = [
+        ['task_id', 'Task ID'],
+        ['stage', '阶段'],
+        ['status', '状态'],
+        ['day_key', 'Day Key'],
+        ['created_at', '创建时间'],
+        ['updated_at', '更新时间'],
+        ['depends_on', '依赖'],
+        ['last_error', '最后错误'],
+        ['note', '备注'],
+        ['reasoning_required', '需要推理'],
+    ];
+
+    document.getElementById('modalTitle').textContent = '任务: ' + (taskId || '');
+    const tbody = document.getElementById('detailTable').querySelector('tbody') || document.getElementById('detailTable');
+    tbody.innerHTML = '';
+    for (const [key, label] of fields) {
+        let val = currentTask[key];
+        if (val === undefined || val === null) continue;
+        if (Array.isArray(val)) val = val.join(', ');
+        if (typeof val === 'object') val = JSON.stringify(val, null, 2);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${esc(label)}</td><td>${esc(val)}</td>`;
+        tbody.appendChild(tr);
+    }
+
+    /* extra fields not in the list */
+    const shown = new Set(fields.map(f=>f[0]));
+    for (const [key, val] of Object.entries(currentTask)) {
+        if (shown.has(key)) continue;
+        const display = typeof val === 'object' ? JSON.stringify(val) : String(val);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${esc(key)}</td><td>${esc(display)}</td>`;
+        tbody.appendChild(tr);
+    }
+
+    /* action buttons */
+    const actions = document.getElementById('modalActions');
+    actions.innerHTML = '';
+    const st = String(currentTask.status || '').toLowerCase();
+    if (['failed','deadletter','completed'].includes(st)) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-retry';
+        btn.textContent = '🔄 重试';
+        btn.onclick = () => doAction(currentTask.task_id, 'retry');
+        actions.appendChild(btn);
+    }
+    if (['ready','running'].includes(st)) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-cancel';
+        btn.textContent = '✖ 取消';
+        btn.onclick = () => doAction(currentTask.task_id, 'cancel');
+        actions.appendChild(btn);
+    }
+
+    document.getElementById('detailModal').classList.add('open');
+}
+
+function closeModal() {
+    document.getElementById('detailModal').classList.remove('open');
+    currentTask = null;
+}
+
+/* ====== actions ====== */
+async function doAction(taskId, action) {
+    const reason = action === 'cancel' ? (prompt('取消原因（可选）:') || '') : '';
+    const data = await api('/api/orchestrator/task/' + encodeURIComponent(taskId) + '/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, reason })
+    });
+    if (data.ok) {
+        toast(`${action} 成功: ${data.from_status} → ${data.to_status}`, true);
+        closeModal();
+        loadAll();
+    } else {
+        toast(data.error || '操作失败', false);
+    }
+}
+
+/* ====== create task ====== */
+function toggleCreatePanel() {
+    document.getElementById('createPanel').classList.toggle('open');
+}
+
+async function createTask() {
+    const taskId = document.getElementById('newTaskId').value.trim();
+    const dayKey = document.getElementById('newDayKey').value.trim();
+    const stage  = document.getElementById('newStage').value;
+    const deps   = document.getElementById('newDeps').value.trim();
+    const note   = document.getElementById('newNote').value.trim();
+
+    if (!taskId) { toast('请填写 Task ID', false); return; }
+    if (!dayKey) { toast('请填写 Day Key', false); return; }
+
+    const body = { task_id: taskId, day_key: dayKey, stage: stage };
+    if (deps) body.depends_on = deps.split(',').map(s => s.trim()).filter(Boolean);
+    if (note) body.note = note;
+
+    const data = await api('/api/orchestrator/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+
+    if (data.ok) {
+        toast('任务已创建: ' + taskId, true);
+        document.getElementById('newTaskId').value = '';
+        document.getElementById('newDeps').value = '';
+        document.getElementById('newNote').value = '';
+        loadAll();
+    } else {
+        toast(data.error || '创建失败', false);
+    }
+}
+
+/* ====== init ====== */
+document.getElementById('filterStatus').addEventListener('change', loadTasks);
+document.getElementById('filterStage').addEventListener('change', loadTasks);
+document.getElementById('filterDayKey').addEventListener('input', debounce(loadTasks, 400));
+
+function debounce(fn, ms) {
+    let t;
+    return function(...a) { clearTimeout(t); t = setTimeout(()=>fn.apply(this,a), ms); };
+}
+
+/* click outside modal to close */
+document.getElementById('detailModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+/* auto-fill today as day_key */
+document.getElementById('newDayKey').value = new Date().toISOString().slice(0, 10);
+
+loadAll();
+
+/* auto-refresh every 15s */
+setInterval(loadAll, 15000);
+</script>
+</body>
+</html>

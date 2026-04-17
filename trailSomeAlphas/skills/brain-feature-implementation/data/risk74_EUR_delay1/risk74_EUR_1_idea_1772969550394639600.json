@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(ts_backfill(({hfown_pctown} / {hfown_numown}), 5), std=4), industry)), 1.5), group_zscore(winsorize(ts_backfill(({hfown_pctown} / {hfown_numown}), 5), std=4), industry), 0)",
+    "idea": "行业中性极端尾部捕捉模型：先对持仓分散度进行5日回溯填充和4倍标准差去极值处理，然后在行业内进行Zscore标准化，最后通过条件交易运算符仅保留偏离行业均值超过1.5个标准差的极端值（极度集中或极度分散），将中间区间视为噪音归零，从而构建高信噪比的反转或动量信号。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(ts_backfill((rsk74_hfown_pctown / rsk74_hfown_numown), 5), std=4), industry)), 1.5), group_zscore(winsorize(ts_backfill((rsk74_hfown_pctown / rsk74_hfown_numown), 5), std=4), industry), 0)"
+    ]
+}

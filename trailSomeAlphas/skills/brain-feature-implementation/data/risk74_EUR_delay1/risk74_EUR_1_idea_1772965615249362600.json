@@ -1,0 +1,14 @@
+{
+    "template": "vector_neut({shortint}, {crowding} + {hfown_pctown})",
+    "idea": "**Concept**: Short Interest Essence (Residual of Crowding)\n- **Sample Fields Used**: `shortint`, `shortint_ts`, `crowding`, `hfown_pctown`\n- **Definition**: Short interest orthogonalized against crowding and HF ownership to capture \"organic\" shorting vs. crowded shorting\n- **Why This Feature**: Shorting in crowded names is dangerous (squeeze risk); shorting in uncrowded names is safer; this isolates the non-crowded component\n- **Logical Meaning**: High values indicate high short interest despite low crowding (fundamental shorts); low values indicate short interest is just part of crowded trade\n- **is filling nan necessary**: No, all three fields typically available together or not at all\n- **Directionality**: High = organic shorting (informational); Low = crowded shorting (squeeze risk); Negative = short interest lower than crowding suggests\n- **Boundary Conditions**: Extreme values indicate fundamental disagreements; near-zero indicates mechanical/crowded shorting",
+    "expression_list": [
+        "vector_neut(rsk74_shortint, rsk74_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint, rsk74_raw_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint, liquidity_factor_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint, liquidity_timeseries_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint_ts, rsk74_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint_ts, rsk74_raw_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint_ts, liquidity_factor_crowding + rsk74_hfown_pctown)",
+        "vector_neut(rsk74_shortint_ts, liquidity_timeseries_crowding + rsk74_hfown_pctown)"
+    ]
+}

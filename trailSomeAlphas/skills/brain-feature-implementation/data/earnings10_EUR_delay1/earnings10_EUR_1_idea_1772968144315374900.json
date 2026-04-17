@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(ts_sum(vec_avg({aily_delta_recon_value}), 20), add(0.001, ts_std_dev(vec_avg({aily_delta_recon_value}), 20))), industry)",
+    "idea": "**稳健性加权累积修正**: 将20日累积修正幅度除以同期每日修正值的标准差（加0.001防止除零），构建类似信息比率的指标——惩罚那些波动剧烈、方向反复的不稳定修正，奖励持续单向调整的稳健信号；再进行行业标准化确保可比性。此模板通过波动率调整过滤掉'鞭梢噪音'，仅保留分析师有坚定信念的累积调整。",
+    "expression_list": [
+        "group_zscore(divide(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), add(0.001, ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20))), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_regression(winsorize(ts_backfill({hfown_pctown}, 63), std=4), group_mean(winsorize(ts_backfill({hfown_pctown}, 63), std=4), log(ts_mean({cap}, 21)), industry), 252, rettype=0))",
+    "idea": "特质性持仓残差：通过252日时序回归剥离行业市值加权平均持仓（行业Beta）的影响，提取剔除板块配置后的个股纯Alpha残差，再进行全局Zscore标准化，精准定位相对同行的独立选股能力。",
+    "expression_list": [
+        "zscore(ts_regression(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), group_mean(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), log(ts_mean(market_cap_usd, 21)), industry), 252, rettype=0))"
+    ]
+}

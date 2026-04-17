@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), industry), group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry))",
+    "idea": "行业内长短期预期修订的乘数效应。将季度累积压力与短期动量均进行行业内标准化后相乘，当两者同向（均为正或均为负）时信号增强，异向时信号减弱或反转。此模板通过非线性交互捕捉一致性强且持续的分析师预期调整，过滤掉方向不确定的噪音波动，强化高确信度的alpha信号。",
+    "expression_list": [
+        "multiply(group_zscore(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), industry), group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry))",
+        "multiply(group_zscore(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), industry), group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry))"
+    ]
+}

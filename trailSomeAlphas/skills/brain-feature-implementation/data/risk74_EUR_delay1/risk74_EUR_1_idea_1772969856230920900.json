@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_zscore(ts_delta({exp_usa}, 21), 63), ts_zscore(ts_delta({hfown_pctown}, 5), 20))",
+    "idea": "**交叉增强：地理暴露动量 × 对冲基金流速**\n融合模板1的地理暴露概念与模板2的持仓速度逻辑，将静态的区域暴露扩展为21日变化率（捕捉企业转向美国市场的动态），并与对冲基金5日持仓变化速度标准化后相乘。通过双重zscore标准化消除量纲差异，捕捉“基本面地理扩张”与“聪明钱加速流入”的共振信号，适用于识别国际业务扩张获得机构验证的成长股。",
+    "expression_list": [
+        "multiply(ts_zscore(ts_delta(rsk74_raw_exp_usa, 21), 63), ts_zscore(ts_delta(rsk74_hfown_pctown, 5), 20))"
+    ]
+}

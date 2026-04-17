@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), industry)",
+    "idea": "行业中性化数据丰富度因子，通过组内Z-Score消除不同行业报告频率差异（如金融、科技与传统制造业的报告周期差异），获取纯粹的数据质量溢价而非行业暴露偏差",
+    "expression_list": [
+        "group_zscore(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), industry)"
+    ]
+}

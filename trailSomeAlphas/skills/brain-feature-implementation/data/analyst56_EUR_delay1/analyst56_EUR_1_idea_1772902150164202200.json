@@ -1,0 +1,9 @@
+{
+    "template": "add(multiply(0.6, quantile(vec_avg({probability}), driver=\"gaussian\")), multiply(0.4, quantile(ts_delta(vec_avg({daily_probability}), 5), driver=\"gaussian\")))",
+    "idea": "均衡加权双因子合成：将信念水平（60%权重）与信念动量（40%权重）分别经高斯标准化后线性相加，构建稳健的综合得分",
+    "expression_list": [
+        "add(multiply(0.6, quantile(vec_avg(anl56_daily_probability), driver=\"gaussian\")), multiply(0.4, quantile(ts_delta(vec_avg(anl56_daily_probability), 5), driver=\"gaussian\")))",
+        "add(multiply(0.6, quantile(vec_avg(anl56_probability), driver=\"gaussian\")), multiply(0.4, quantile(ts_delta(vec_avg(anl56_daily_probability), 5), driver=\"gaussian\")))",
+        "add(multiply(0.6, quantile(vec_avg(conviction_probability_score), driver=\"gaussian\")), multiply(0.4, quantile(ts_delta(vec_avg(anl56_daily_probability), 5), driver=\"gaussian\")))"
+    ]
+}

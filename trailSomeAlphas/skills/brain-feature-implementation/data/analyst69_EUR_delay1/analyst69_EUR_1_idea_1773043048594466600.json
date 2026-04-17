@@ -1,0 +1,10 @@
+{
+    "template": "ts_sum(trade_when(less(days_from_last_change({eps_expected_report_dt}), 20), ts_delta({eps_best_eeps_cur_yr}, 1), 0), 63)",
+    "idea": "融合Template B的“累积修正压力”与Template A的“事件时间”概念：利用`days_from_last_change`识别最近20天内发生过财报日期变更的事件窗口，仅在此窗口期内累积盈利预测日变化（`ts_delta`），其余时间视为零贡献。此举过滤无事件期间的噪音，聚焦于信息 arrival 后的持续修正趋势，同时继承Template A的20日窗口参数以降低换手率。",
+    "expression_list": [
+        "ts_sum(trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 20), ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 0), 63)",
+        "ts_sum(trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 20), ts_delta(anl69_eps_best_eeps_cur_yr, 1), 0), 63)",
+        "ts_sum(trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 20), ts_delta(anl69_eps_best_eeps_cur_yr, 1), 0), 63)",
+        "ts_sum(trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 20), ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 0), 63)"
+    ]
+}

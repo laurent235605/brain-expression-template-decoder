@@ -1,0 +1,5 @@
+{
+    "template": "if_else(greater(vec_stddev({version}), group_mean(vec_stddev({version}), log(ts_mean({cap},21)), industry)), ts_decay_linear(group_normalize(if_else(greater(group_rank(vec_skewness({version}), industry), 0.8), 1, if_else(less(group_rank(vec_skewness({version}), industry), 0.2), -1, 0)), industry), 2), ts_mean(group_normalize(if_else(greater(group_rank(vec_skewness({version}), industry), 0.8), 1, if_else(less(group_rank(vec_skewness({version}), industry), 0.2), -1, 0)), industry), 10))",
+    "idea": "波动率自适应衰减策略：通过比较个股分布波动(vec_stddev)与行业市值加权平均波动，动态识别高波动与低波动两种市场微观结构状态；在高波动状态下采用短窗口(2日)线性衰减(ts_decay_linear)快速反应偏度极值变化，而在低波动状态下切换至长窗口(10日)等权平滑(ts_mean)降低换手；核心逻辑在于高波动时期偏度信号衰减更快需及时调仓，低波动时期信号更持久应减少交易摩擦，实现条件化的换手率管理。",
+    "expression_list": []
+}

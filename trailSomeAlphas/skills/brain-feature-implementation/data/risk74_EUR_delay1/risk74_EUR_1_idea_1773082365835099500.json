@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),industry),subtract(1,abs(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=2),industry))))",
+    "idea": "同时提取特质性残差（rettype=0）与行业敏感度Beta（rettype=2），构建“低Beta-高残差”交互项：用(1-|Beta|)作为权重乘数，偏好那些空头变动与行业趋势相关性低（|Beta|小）但个股特质性压力大的股票，实现行业系统性风险的对冲。",
+    "expression_list": [
+        "multiply(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry),subtract(1,abs(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=2),industry))))",
+        "multiply(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),industry),subtract(1,abs(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=2),industry))))"
+    ]
+}

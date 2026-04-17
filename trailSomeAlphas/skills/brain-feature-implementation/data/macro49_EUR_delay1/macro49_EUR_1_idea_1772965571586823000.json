@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({notional}), lookback=5, k=1), 90)",
+    "idea": "**Concept**: Rolling Notional Exposure Window\n- **Sample Fields Used**: notional\n- **Definition**: Cumulative sum of expected notional over time to capture total dollar value of pending rebalances\n- **Why This Feature**: Measures the total inventory risk building up in the market; high cumulative notional indicates potential for cascading liquidations or crowded trades\n- **is filling nan necessary**: Yes, backfill to accumulate sparse announcement effects.\n- **Directionality**: High values indicate large pending dollar flows; low values indicate minimal exposure\n- **Boundary Conditions**: Exponentially increasing risk with cumulative size; threshold effects at institutional capacity limits",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), 90)"
+    ]
+}

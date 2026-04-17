@@ -1,0 +1,7 @@
+{
+    "template": "group_rank( multiply( -1, ts_std_dev( winsorize( vec_avg({quintile}), 4 ), 60 ) ), industry )",
+    "idea": "行业内相对稳定性非参数排序因子。对向量均值进行4倍标准差极值 Winsorize 处理后，计算60日滚动标准差并取负（稳定性越高值越大），仅在各自行业内进行0-1分位数排序（rank）。完全非参数化处理避免分布假设偏差，严格筛选各行业中最稳定分位数的标的，有效控制不同行业间分位数波动率不可比的问题。",
+    "expression_list": [
+        "group_rank( multiply( -1, ts_std_dev( winsorize( vec_avg(mdl249_quintile), 4 ), 60 ) ), industry )"
+    ]
+}

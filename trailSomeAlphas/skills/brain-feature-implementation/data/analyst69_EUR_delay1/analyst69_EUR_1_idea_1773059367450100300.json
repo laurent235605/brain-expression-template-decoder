@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(hump(multiply(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), multiply(abs(ts_delta(days_from_last_change({eps_expected_report_dt}), 1)), ts_rank(abs(ts_delta(days_from_last_change({eps_expected_report_dt}), 1)), 252)), 0), hump=0.01), 10)",
+    "idea": "自适应历史极端性加权：利用ts_rank将当前变更幅度置于252日历史分位数中评估其极端程度（0-1之间），仅对负向重置事件赋予abs(delta)×历史排名的复合权重，使得历史罕见的巨幅调整获得更高得分；通过hump算子过滤微小日间波动以降低换手率，最后经10日线性衰减平衡信号时效性与交易成本。",
+    "expression_list": [
+        "ts_decay_linear(hump(multiply(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), multiply(abs(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 1)), ts_rank(abs(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 1)), 252)), 0), hump=0.01), 10)",
+        "ts_decay_linear(hump(multiply(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), multiply(abs(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 1)), ts_rank(abs(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 1)), 252)), 0), hump=0.01), 10)"
+    ]
+}

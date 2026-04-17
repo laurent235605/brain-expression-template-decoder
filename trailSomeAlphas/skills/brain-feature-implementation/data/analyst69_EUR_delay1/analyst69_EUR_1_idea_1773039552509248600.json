@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_delta({eps_best_eeps_cur_yr}, 5), add(1, multiply(0.3, ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252))))",
+    "idea": "使用模板B构建的信息披露稳定性指标（经平滑和Z-score处理的天数）作为模板A修正动量的动态乘数。基础仓位由5日盈利修正决定，再通过'稳定性偏离度'进行0.7-1.3倍的动态缩放：对信息披露节奏稳定的公司给予更高权重。该结构体现'稳定基础上的变化更有价值'的经济直觉，增强信号质量而非改变方向。",
+    "expression_list": [
+        "multiply(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), add(1, multiply(0.3, ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252))))",
+        "multiply(ts_delta(anl69_eps_best_eeps_cur_yr, 5), add(1, multiply(0.3, ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252))))",
+        "multiply(ts_delta(anl69_eps_best_eeps_cur_yr, 5), add(1, multiply(0.3, ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252))))",
+        "multiply(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), add(1, multiply(0.3, ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252))))"
+    ]
+}

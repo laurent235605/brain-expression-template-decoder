@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), industry), 2)",
+    "idea": "先计算地理暴露的20日滚动波动率(ts_std_dev)，通过行业中性化(group_zscore)消除不同行业间地理分布固有差异，再使用signed_power(..., 2)平方变换放大极端值。此模板压缩中间噪音区间，仅保留显著重组(高波动)或极度稳定(低波动)的极端信号，适合捕捉商业模式的结构性两极分化。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), industry), 2)"
+    ]
+}

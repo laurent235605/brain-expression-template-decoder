@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0)",
+    "idea": "通过63日回归剔除行业平均空头变动的影响（以市值加权行业空头变化为自变量），提取纯粹由个股特质驱动的空头累积残差，得到真正的 idiosyncratic 做空压力指标，避免行业系统性空头beta干扰。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0)",
+        "ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0)"
+    ]
+}

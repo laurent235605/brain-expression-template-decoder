@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry), driver=\"cauchy\")",
+    "idea": "先进行行业内标准化消除行业特性导致的财年差异（如零售业集中在1月 vs 教育业集中在6月），再使用柯西分布拉伸将极端分散度（厚尾部分）进一步放大，强调具有异常会计周期分散度的离群公司，作为潜在的信息不对称或财务质量风险信号。",
+    "expression_list": [
+        "quantile(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), driver=\"cauchy\")"
+    ]
+}

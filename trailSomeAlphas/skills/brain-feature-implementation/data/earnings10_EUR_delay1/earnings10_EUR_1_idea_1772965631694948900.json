@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({aily_delta_recon_value})",
+    "idea": "**Concept**: Pure Revision Signal\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: The raw average daily revision across all KEI items\n- **Why This Feature**: Strips away all complexity to capture the essential change in analyst expectations. This is the first derivative of sentiment - the most direct measure of analyst belief changes.\n- **is filling nan necessary**: NaN indicates no data, distinct from zero revision. Preserve NaN to avoid false signals.\n- **Directionality**: Positive indicates upgrading expectations (bullish); negative indicates downgrading (bearish); zero indicates status quo\n- **Boundary Conditions**: Extreme values indicate conviction; near-zero indicates indecision or lack of new information",
+    "expression_list": [
+        "vec_avg(ern10_aily_delta_recon_value)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "not(equal(vec_choose({denomination_currency}, nth=0), vec_choose({price_denomination}, nth=0)))",
+    "idea": "**Concept**: Currency Mismatch Exposure\n- **Sample Fields Used**: `denomination_currency`, `price_denomination`\n- **Definition**: Binary indicator of whether investment currency differs from target price denomination (FX risk present)\n- **Why This Feature**: Currency mismatches introduce exchange rate risk not captured in local price returns; ideas with mismatched currencies require hedging\n- **is filling nan necessary**: Currency fields should not have NaN if properly populated; if NaN occurs, treat as mismatch (conservative approach) or exclude.\n- **Logical Meaning**: 1 indicates FX risk present; 0 indicates single currency exposure\n- **Directionality**: 0 preferred for pure equity plays; 1 indicates additional FX alpha/risk\n- **Boundary Conditions**: Simple binary classification based on string comparison of denominations",
+    "expression_list": [
+        "not(equal(vec_choose(investment_denomination_currency, nth=0), vec_choose(expected_price_denomination, nth=0)))"
+    ]
+}

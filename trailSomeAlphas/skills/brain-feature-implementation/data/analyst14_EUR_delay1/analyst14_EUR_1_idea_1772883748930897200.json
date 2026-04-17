@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({mean_revenue_fp2} / ({mean_revenue_fp1} + 0.01), 10)",
+    "idea": "**Concept**: Growth Trajectory Shift\n- **Sample Fields Used**: mean_revenue_fp1, mean_revenue_fp2\n- **Definition**: The changing relationship between near-term and longer-term growth expectations, calculated as the delta of the fp2/fp1 ratio\n- **Why This Feature**: Distinguishes between sustainable growth (stable or improving fp2/fp1) and decelerating growth (declining fp2/fp1). Captures inflection points in business cycles.\n- **Logical Meaning**: Measures acceleration/deceleration. Ratio > 1 indicates growth expected to continue or accelerate; declining ratio indicates peak growth concerns.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Increasing ratio indicates acceleration (positive); decreasing indicates deceleration (negative)\n- **Boundary Conditions**: Volatile when fp1 estimates cross zero or change signs",
+    "expression_list": [
+        "ts_delta(anl14_mean_revenue_fp2 / (anl14_mean_revenue_fp1 + 0.01), 10)"
+    ]
+}

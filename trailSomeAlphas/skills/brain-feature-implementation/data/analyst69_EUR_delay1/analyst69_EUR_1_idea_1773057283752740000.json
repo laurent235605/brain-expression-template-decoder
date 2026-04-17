@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), 5), 0), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 0)",
+    "idea": "结合模板2的效率趋势作为过滤器，仅当盈利效率比率呈现稳健上升趋势(5日变化为正)时，才启用模板1的预期修订加速度信号。这种'基本面趋势确认+预期动量加速'的双层结构确保多头仓位建立在盈利质量改善的基础之上，避免在基本面恶化时追逐短期预期上调的陷阱，体现质量与动量的协同增强逻辑。",
+    "expression_list": [
+        "trade_when(greater(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)"
+    ]
+}

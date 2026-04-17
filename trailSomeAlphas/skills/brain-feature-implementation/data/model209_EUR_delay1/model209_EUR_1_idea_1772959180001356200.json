@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6, subtract(1, vec_avg({lastcostingfailed}))), multiply(0.4, subtract(1, vec_max({lastcostingfailed}))))",
+    "idea": "加权混合评分：激进地结合两种原始度量的优点，60%权重给平均可靠性（容忍偶尔失败，反映整体趋势），40%权重给纯度标志（奖励完美记录，惩罚任何失败），形成更 nuanced 的复合运营质量信号。",
+    "expression_list": [
+        "add(multiply(0.6, subtract(1, vec_avg(mdl209_lastcostingfailed))), multiply(0.4, subtract(1, vec_max(mdl209_lastcostingfailed))))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "subtract(bucket(group_rank({momentum},industry),range=\"0,1,0.1\"), bucket(group_rank(add({value_ts},{earnyild}),industry),range=\"0,1,0.1\"))",
+    "idea": "**离散化因子集中度评分**：将行业内的动量排名与综合价值排名分别进行10分位桶化（bucket），计算排名分位差；+9表示纯动量（动量前10%且价值后10%），-9表示纯价值（动量后10%且价值前10%），0表示混合或中性；通过离散化（bucket）消除排名中间的细微噪音，仅保留显著的因子结构差异，适用于构建多头纯动量+空头纯价值的配对策略。",
+    "expression_list": [
+        "subtract(bucket(group_rank(rsk74_momentum,industry),range=\"0,1,0.1\"), bucket(group_rank(add(rsk74_value_ts,rsk74_earnyild),industry),range=\"0,1,0.1\"))",
+        "subtract(bucket(group_rank(rsk74_momentum_ts,industry),range=\"0,1,0.1\"), bucket(group_rank(add(rsk74_value_ts,rsk74_earnyild),industry),range=\"0,1,0.1\"))"
+    ]
+}

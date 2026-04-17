@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize({momentum},std=4),sector) / (s_log_1p(abs(group_zscore(winsorize({value_ts},std=4),sector)) + abs(group_zscore(winsorize({earnyild},std=4),sector))) + 0.01)",
+    "idea": "**行业中性化纯因子比率**：先对三个因子进行行业中性化处理（group_zscore），消除行业间因子水平差异（如科技板块整体高动量、银行板块整体高价值）；分母使用绝对值之和并经s_log_1p压缩，防止个别股票价值因子极端值主导分母，从而精准识别\"高动量+低价值\"的纯动量敞口；适用于捕捉行业内部的纯粹风格因子暴露，避免跨行业不可比性带来的噪音。",
+    "expression_list": [
+        "group_zscore(winsorize(rsk74_momentum,std=4),sector) / (s_log_1p(abs(group_zscore(winsorize(rsk74_value_ts,std=4),sector)) + abs(group_zscore(winsorize(rsk74_earnyild,std=4),sector))) + 0.01)",
+        "group_zscore(winsorize(rsk74_momentum_ts,std=4),sector) / (s_log_1p(abs(group_zscore(winsorize(rsk74_value_ts,std=4),sector)) + abs(group_zscore(winsorize(rsk74_earnyild,std=4),sector))) + 0.01)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(group_zscore(add(subtract(ts_sum(ts_delta({hfown_pctown},1),10), ts_sum(ts_delta({fund_pct_ownership_encr},1),40)), multiply(0.5, ts_delta(subtract(ts_sum(ts_delta({hfown_pctown},1),10), ts_sum(ts_delta({fund_pct_ownership_encr},1),40)),5))), sector), std=4), 1.5)",
+    "idea": "非对称时间窗口动量增强：对冲基金使用10日短窗口捕捉战术性流入，共同基金使用40日长窗口反映战略配置；加入5日动量项（ts_delta）加速信号响应；通过1.5次幂变换（signed_power）放大极端偏离的边际效应；4倍标准差截尾；保持行业中性标准化（group_zscore）。该结构利用两类机构投资期限差异，强化短期聪明钱对长期配置资金的领先效应。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(add(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),10), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),40)), multiply(0.5, ts_delta(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),10), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),40)),5))), sector), std=4), 1.5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(vec_avg({stock_split_ratio_243}), 1.0), ts_delta(ts_delta(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 63), 63), 0)",
+    "idea": "制度转换加速器：利用拆股作为\"增长 regime\"的确认标志，仅当存在正向拆股（ratio>1）时，计算EPS的二阶导数（加速度）；否则输出0。这是一种激进的区间选择逻辑——假设只有在管理层主动拆分股票的自信状态下，EPS的加速增长才具有可持续性；其他时期的EPS加速可能是噪音。通过if_else实现条件性交易，将两个模板的经济含义（拆股信号+盈利加速度）进行非对称耦合。",
+    "expression_list": [
+        "if_else(greater(vec_avg(ern6_stock_split_ratio_243), 1.0), ts_delta(ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 63), 63), 0)",
+        "if_else(greater(vec_avg(ern6_stock_split_ratio_243), 1.0), ts_delta(ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 63), 63), 0)"
+    ]
+}

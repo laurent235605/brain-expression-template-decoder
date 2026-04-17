@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_sum(ts_delta({hfown_pctown},1),20), 0), group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), 0)",
+    "idea": "引入阵营分离逻辑（结合模板1的背离与条件运算符）：仅当对冲基金呈现净流入（聪明钱看多阵营）时计算与共同基金的背离差异，空头阵营对称处理可另建因子，此版本专注于“聪明钱主动增持但散户跟随者减持”的特定场景，避免反向信号干扰，提升逻辑纯净度。",
+    "expression_list": [
+        "trade_when(greater(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), 0), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0)"
+    ]
+}

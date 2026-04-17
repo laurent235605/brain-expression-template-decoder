@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(vector_neut(ts_backfill({fundreportedequityassets},63), ts_backfill({reported_asset_value},63)))), 2.5), vector_neut(ts_backfill({fundreportedequityassets},63), ts_backfill({reported_asset_value},63)), 0)",
+    "idea": "仅在规模中性后的权益配置偏离度绝对值超过2.5倍标准差时才保留信号（否则置0）。通过逻辑运算符与条件交易函数，该模板构建了一个极端仓位择时器，专门捕捉基金面临 capacity 约束、战略转向或极端市场观点时的尾部配置行为，过滤掉噪音区间的中性仓位。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,63), ts_backfill(fund_reported_asset_value,63)))), 2.5), vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,63), ts_backfill(fund_reported_asset_value,63)), 0)"
+    ]
+}

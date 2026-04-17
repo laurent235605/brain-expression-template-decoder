@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_zscore(vec_skewness({exposure_value}), 126), add(1, multiply(0.5, group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector))))",
+    "idea": "集中度-波动率协同增强（主从架构）。以模板1的偏度时序Z-score（地理集中度变化）为主信号，模板2的短期地理敞口波动率经行业标准化后作为从属调节因子（factor = 1 + 0.5×B），实现“地理集中度变化幅度经自身波动率状态调整”的复合逻辑：高波动率环境下放大集中度信号，低波动率环境下保守处理。",
+    "expression_list": [
+        "multiply(ts_zscore(vec_skewness(anl91_exposure_value), 126), add(1, multiply(0.5, group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector))))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_sum(ts_delta({hfown_pctown}, 1), 20), subtract(1, rank(ts_sum(ts_delta({shortint}, 1), 15))))",
+    "idea": "空头信号作为动态权重调节器。以(1 - 空头变化排名)作为对冲基金流的权重系数，当空头处于高位（排名接近1，空头累积）时降低配置权重至接近零，当空头处于低位（回补，排名接近0）时全额配置。实现从属信号（空头）对主信号（基金流）的强度自适应缩放，避免在空头拥挤时盲目跟随机构。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), subtract(1, rank(ts_sum(ts_delta(rsk74_shortint, 1), 15))))",
+        "multiply(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), subtract(1, rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15))))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "right_tail( group_zscore(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243})), industry), 1.5 )",
+    "idea": "行业中性化极端拆分信号：结合分组运算符与尾部筛选，在行业内对拆分比率进行标准化（group_zscore），仅保留极端正向拆分（right_tail>1.5倍标准差）作为独立alpha信号，排除不同行业间资本结构政策差异的干扰，聚焦真正异常的管理层信心释放。",
+    "expression_list": [
+        "right_tail( group_zscore(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243)), industry), 1.5 )"
+    ]
+}

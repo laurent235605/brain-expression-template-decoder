@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), signed_power(subtract(1, ts_rank(days_from_last_change(vec_avg({exposure_value})), 252)), 0.5))",
+    "idea": "引入“距离上次地理暴露调整的时间”作为时效性权重：通过days_from_last_change检测暴露向量均值最近一次变动，用ts_rank转化为0-1分位，并用1-rank使得近期变动者权重高；经signed_power(...,0.5)开根号放大近期事件影响。最终与原始波动率相乘，突出“近期发生战略调整且历史波动大”的公司，暗示管理层战略摇摆风险。",
+    "expression_list": [
+        "multiply(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), signed_power(subtract(1, ts_rank(days_from_last_change(vec_avg(anl91_exposure_value)), 252)), 0.5))"
+    ]
+}

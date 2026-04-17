@@ -1,0 +1,5 @@
+{
+    "template": "add(multiply(0.6, group_zscore(quantile(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver=\"gaussian\"), {industry})), multiply(0.4, ts_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 63)))",
+    "idea": "构建Surprise的\"水平+趋势\"双维度复合信号：将当前经高斯分位数拉伸的极端Surprise水平（60%权重）与过去63日Surprise的时序zscore变化率（40%权重）线性组合，既捕捉静态的极端预期差本身，又捕捉预期差加速改善或恶化的动量效应；通过不同时域信息的正交叠加，有效区分一次性噪音与持续性盈利拐点。",
+    "expression_list": []
+}

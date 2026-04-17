@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(vec_skewness({exposure_value}), vec_avg({exposure_value}), 126, rettype=0), sector)",
+    "idea": "将CAPM残差模板移植到地理敞口分析：用126日回归剥离地域集中度（偏度）与整体敞口水平（均值）的共线性，保留纯结构性集中alpha，并进行行业中性化。激进地捕捉\"在同等总敞口水平下，异常的地域集中或分散\"带来的非线性风险溢价，剔除由总敞口水平驱动的伪信号。",
+    "expression_list": [
+        "group_zscore(ts_regression(vec_skewness(anl91_exposure_value), vec_avg(anl91_exposure_value), 126, rettype=0), sector)"
+    ]
+}

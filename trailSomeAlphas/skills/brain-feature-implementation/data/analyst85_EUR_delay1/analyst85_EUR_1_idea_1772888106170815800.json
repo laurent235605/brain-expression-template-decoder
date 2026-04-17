@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({version}) - ts_mean(vec_avg({version}), 20)) / ts_std_dev(vec_avg({version}), 20)",
+    "idea": "**Concept**: Version Z-Score Deviation\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Standardized deviation of current version from its 20-day historical mean, identifying unusual version levels\n- **Why This Feature**: Outlier version numbers indicate unusual analyst activity - either major revisions or data anomalies that require scrutiny\n- **is filling nan necessary**: Calculate mean and std dev ignoring NaNs using standard operators, but return NaN if input is NaN to avoid false signals from missing data\n- **Directionality**: High positive z-scores indicate unusually high version numbers (many revisions, potentially contested ideas); negative z-scores indicate unusually low/stable versions\n- **Boundary Conditions**: Values beyond ±3 standard deviations suggest data errors or extraordinary corporate events driving multiple revisions",
+    "expression_list": [
+        "(vec_avg(anl85_version) - ts_mean(vec_avg(anl85_version), 20)) / ts_std_dev(vec_avg(anl85_version), 20)"
+    ]
+}

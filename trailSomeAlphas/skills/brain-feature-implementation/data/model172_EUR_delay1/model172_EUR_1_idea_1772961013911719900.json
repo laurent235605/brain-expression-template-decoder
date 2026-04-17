@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut(hump(trade_when(and(less(days_from_last_change(winsorize(ts_backfill({cfroi_1},63),std=4)),10), greater(abs(ts_delta(winsorize(ts_backfill({cfroi_1},63),std=4),5)),0.02)), subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)), 0), 0.01), {mark_cap})",
+    "idea": "事件驱动型动态调整策略：利用days_from_last_change识别CFROI数据近期（10日内）更新的样本，结合5日变化幅度（>2%）过滤出显著变动事件，仅在事件窗口期内保留利差信号，并使用hump(0.01)算子忽略微小波动以降低换手率，最终进行市值中性化，捕捉信息扩散初期的非对称alpha。",
+    "expression_list": [
+        "vector_neut(hump(trade_when(and(less(days_from_last_change(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4)),10), greater(abs(ts_delta(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4),5)),0.02)), subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)), 0), 0.01), mdl172_mark_cap)"
+    ]
+}

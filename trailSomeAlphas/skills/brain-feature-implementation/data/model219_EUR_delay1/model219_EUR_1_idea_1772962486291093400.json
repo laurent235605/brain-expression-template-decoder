@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_corr(winsorize({bmpo},4), winsorize({pctchgqtrsales},4), 12), 5), industry)",
+    "idea": "稳健经营杠杆筛选器。先对原始数据进行4倍标准差截尾处理去除极端噪音，计算12期滚动相关系数以捕捉长期稳定的经营杠杆关系，应用5期线性衰减降低信号抖动和换手率，最后进行行业中性化zscore处理。该模板识别行业内经营杠杆与营收增长关系最持续稳定的公司，有效剔除行业周期beta干扰。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_corr(winsorize(mdl219_1_bmpo,4), winsorize(mdl219_1_pctchgqtrsales,4), 12), 5), industry)",
+        "group_zscore(ts_decay_linear(ts_corr(winsorize(mdl219_2_bmpo,4), winsorize(mdl219_1_pctchgqtrsales,4), 12), 5), industry)",
+        "group_zscore(ts_decay_linear(ts_corr(winsorize(mdl219_2_bmpo,4), winsorize(mdl219_2_pctchgqtrsales,4), 12), 5), industry)",
+        "group_zscore(ts_decay_linear(ts_corr(winsorize(mdl219_1_bmpo,4), winsorize(mdl219_2_pctchgqtrsales,4), 12), 5), industry)"
+    ]
+}

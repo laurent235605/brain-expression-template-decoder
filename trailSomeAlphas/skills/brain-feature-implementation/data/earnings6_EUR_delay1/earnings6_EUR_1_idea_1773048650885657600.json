@@ -1,0 +1,5 @@
+{
+    "template": "winsorize(multiply(group_zscore(divide(subtract(vec_avg(ts_backfill({actual_eps}, 63)), vec_avg(ts_backfill({estimated_eps}, 63))), add(abs(vec_avg(ts_backfill({estimated_eps}, 63))), 0.01)), {industry}), divide(1, add(0.001, vec_stddev({estimated_eps})))), std=4)",
+    "idea": "行业中性置信加权惊喜：首先对原始数据进行63日回溯填补（ts_backfill）处理缺失值；计算标准化盈利惊喜后，在行业层面进行zscore中性化（group_zscore），消除行业间不可比性；通过估计值标准差的倒数（1/(0.001+vec_stddev)）进行加权，惩罚分析师分歧度高的股票，奖励预期高度一致下的惊喜；最后进行4倍标准差截尾（winsorize）处理极端异常值，构建高置信度的盈利惊喜信号。",
+    "expression_list": []
+}

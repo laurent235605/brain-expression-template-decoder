@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(pasteurize({volume}), 60)",
+    "idea": "历史分位定位：将pasteurize清洗应用于原始成交量确保无极端异常值后，计算当前值在过去60个交易日中的时序分位(ts_rank)，识别处于历史流动性极端高位（超买拥挤）或低位（流动性枯竭）的证券，融合截面与历史比较逻辑",
+    "expression_list": [
+        "ts_rank(pasteurize(mdl234_volume), 60)"
+    ]
+}

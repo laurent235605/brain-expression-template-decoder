@@ -1,0 +1,7 @@
+{
+    "template": "scale(group_normalize(signed_power(ts_zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 60), 1.5), industry), scale=1, longscale=1.2, shortscale=0.8)",
+    "idea": "非对称多空配置模板：计算60日窗口的分位偏离度Z分数，通过幂变换（1.5次方）适度放大极端值，在行业层面进行归一化确保行业内多空平衡，最后应用非对称缩放（多头1.2倍、空头0.8倍），表达对机构低配高收益股票（多头机会）的更强信心，同时控制空头风险暴露。",
+    "expression_list": [
+        "scale(group_normalize(signed_power(ts_zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 60), 1.5), industry), scale=1, longscale=1.2, shortscale=0.8)"
+    ]
+}

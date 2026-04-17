@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(right_tail(ts_backfill({reported_asset_value}, 63), 0.1), power(group_scale(subtract(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 21), ts_backfill({reported_asset_value}, 21)), std=4), add(ts_std_dev(returns, 21), 0.001)), divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 126), ts_backfill({reported_asset_value}, 126)), std=4), add(ts_std_dev(returns, 126), 0.001))), industry), 1.5), 0)",
+    "idea": "对比短期（21日）与长期（126日）风险调整配置强度的差异（ts_delta），识别风险收益特征正在边际改善的基金；通过group_scale进行行业内标准化，并引入流动性门槛（right_tail）确保可交易性，利用幂变换（power）强化改善幅度，构建动量增强型配置因子。",
+    "expression_list": [
+        "trade_when(right_tail(ts_backfill(fund_reported_asset_value, 63), 0.1), power(group_scale(subtract(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), ts_backfill(fund_reported_asset_value, 21)), std=4), add(ts_std_dev(returns, 21), 0.001)), divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 126), ts_backfill(fund_reported_asset_value, 126)), std=4), add(ts_std_dev(returns, 126), 0.001))), industry), 1.5), 0)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(group_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 0.75), multiply(1.5, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry))",
+    "idea": "使用if_else构建分层逻辑：仅当个股在行业内的利润转化率处于前25%（group_rank > 0.75）时，将其预期修订信号放大1.5倍；否则保持标准权重。这实现了'好公司的好消息'策略，避免在低质量公司中追逐预期调整。",
+    "expression_list": [
+        "if_else(greater(group_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.75), multiply(1.5, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry))",
+        "if_else(greater(group_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.75), multiply(1.5, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry))"
+    ]
+}

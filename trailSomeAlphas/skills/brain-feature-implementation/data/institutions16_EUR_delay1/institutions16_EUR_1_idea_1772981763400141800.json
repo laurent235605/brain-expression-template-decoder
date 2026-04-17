@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(group_rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0.8), group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), nan)",
+    "idea": "仅当风险调整后的信念强度处于行业内前20%极端分位时才保留信号（极端信念策略），其余中等强度信号设为NaN不予交易；结合行业内zscore确保所选标的不仅绝对强度高，且相对于 peers 具有显著比较优势，剔除 mediocre 的中间地带干扰。",
+    "expression_list": [
+        "trade_when(greater(group_rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0.8), group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), nan)"
+    ]
+}

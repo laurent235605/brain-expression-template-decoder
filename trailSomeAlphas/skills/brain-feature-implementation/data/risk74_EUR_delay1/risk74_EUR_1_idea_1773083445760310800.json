@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), group_mean(returns, log(ts_mean(cap,21)), sector), 252, rettype=0)",
+    "idea": "剥离区域价差因子的市场/sector贝塔影响，通过252日滚动回归提取残差（rettype=0），获得纯净的区域配置阿尔法，避免地缘政治事件驱动的系统性风险暴露，融合CAPM残差模板与跨区域价差逻辑。",
+    "expression_list": [
+        "ts_regression(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), group_mean(returns, log(ts_mean(cap,21)), sector), 252, rettype=0)"
+    ]
+}

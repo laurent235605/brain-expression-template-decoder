@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry)), 2.5), group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry), 0), 3)",
+    "idea": "行业内极端资金流捕捉与平滑处理。先将20日累积持仓变化在行业内标准化（group_zscore），仅保留绝对值大于2.5倍标准差的极端信号（过滤噪音），再通过3日线性衰减（ts_decay_linear）降低换手率，精准捕捉机构持续建仓或清仓的极端偏离行为，避免中等强度信号的干扰。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry)), 2.5), group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry), 0), 3)"
+    ]
+}

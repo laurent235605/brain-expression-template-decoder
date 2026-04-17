@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore({hfown_pctown}, sector), signed_power(reverse(ts_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), 60)), 0.5))",
+    "idea": "将模板1的持仓极端度与模板2的资金流方向进行非线性组合：在行业极值位置（group_zscore）基础上，反向（reverse）叠加资金流的signed_power衰减（y=0.5压缩尾部），构造“高位减仓/低位加仓”的均值回归逻辑，同时控制极端资金流的影响幅度。",
+    "expression_list": [
+        "multiply(group_zscore(rsk74_hfown_pctown, sector), signed_power(reverse(ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 60)), 0.5))"
+    ]
+}

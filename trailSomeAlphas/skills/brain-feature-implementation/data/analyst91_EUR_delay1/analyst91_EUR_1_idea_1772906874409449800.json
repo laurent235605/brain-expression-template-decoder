@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_std_dev(vec_median({exposure_value}), 20), 5)",
+    "idea": "使用vec_median替代vec_avg计算横截面暴露以降低极端地区异常值的扰动，计算20日波动率后，通过5日线性衰减(ts_decay_linear)赋予近期数据更高权重。此组合既保证了向量统计的稳健性，又通过时序平滑过滤短期噪音，更适合识别渐进式业务转型而非突发交易噪音。",
+    "expression_list": [
+        "ts_decay_linear(ts_std_dev(vec_median(anl91_exposure_value), 20), 5)"
+    ]
+}

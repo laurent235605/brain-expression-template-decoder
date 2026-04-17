@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), sector), 0.9), signed_power(subtract(group_rank(...), 0.9), 0.5), if_else(less(group_rank(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), sector), 0.1), negate(signed_power(subtract(0.1, group_rank(...)), 0.5)), 0))",
+    "idea": "行业分位数头尾策略：在行业内部对流动性效率进行排名，仅对前10%（最高效）赋予正向非线性权重（使用signed_power放大极端值），对后10%（最低效）赋予负向权重，中间80%视为噪音赋值为0，构建严格的非线性分段信号，强调只有极端效率差异才产生alpha。",
+    "expression_list": [
+        "if_else(greater(group_rank(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), sector), 0.9), signed_power(subtract(group_rank(...), 0.9), 0.5), if_else(less(group_rank(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), sector), 0.1), negate(signed_power(subtract(0.1, group_rank(...)), 0.5)), 0))"
+    ]
+}

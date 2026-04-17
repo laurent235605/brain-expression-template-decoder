@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(winsorize(ts_backfill({concentration}, 10), std=4), 20)",
+    "idea": "融合模板1的数据回填处理(ts_backfill解决季度报告滞后)与模板2的累计求和算子(ts_sum)，对低频的地理集中度数据进行20日滚动累加处理，平滑季度报告离散跳跃带来的信号断层，同时应用4倍标准差极值裁剪防止历史数据修正导致的异常跳变。",
+    "expression_list": [
+        "ts_sum(winsorize(ts_backfill(rsk74_concentration, 10), std=4), 20)",
+        "ts_sum(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), 20)"
+    ]
+}

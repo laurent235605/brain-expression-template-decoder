@@ -1,0 +1,7 @@
+{
+    "template": "{weight_net} * ({active_return_decile_rank_long} - {active_return_decile_rank_short})",
+    "idea": "**Concept**: Information Content of Holdings\n- **Sample Fields Used**: weight_net, active_return_decile_rank_long, active_return_decile_rank_short\n- **Definition**: Multiplicative interaction of net weight with the spread between long and short implied return deciles, capturing the \"informedness\" of the aggregate position\n- **Why This Feature**: Represents the core insight of the dataset: when insiders are net long AND expect longs to outperform shorts significantly, the signal is strongest\n- **is filling nan necessary**: Return deciles without corresponding weights should not be filled; the feature requires both holdings and return expectations.\n- **Directionality**: High positive values indicate strong net long position with high expected long-short spread (high conviction alpha); negative values indicate contradiction between position and expectations\n- **Boundary Conditions**: Extreme values occur during earnings announcements or guidance changes when positions are sticky but expectations adjust rapidly",
+    "expression_list": [
+        "insd8_weight_net * (insd8_black_litterman_implied_active_return_decile_rank_long - insd8_black_litterman_implied_active_return_decile_rank_short)"
+    ]
+}

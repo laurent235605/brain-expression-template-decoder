@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=4), 20), sector), inverse(add(1, ts_std_dev(ts_delta(ts_backfill({hfown_pctown}, 63), 1), 20))))",
+    "idea": "**波动率调整信噪比加权**: 引入波动率倒数加权，对近期持仓变动波动大的股票（可能伴随噪音交易或短期套利）进行信号衰减；先对原始流压进行行业中性化，再除以(1+20日波动率)，实现“信噪比”自适应；适用于识别那些持续稳定增持而非剧烈震荡建仓的标的。",
+    "expression_list": [
+        "multiply(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=4), 20), sector), inverse(add(1, ts_std_dev(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), 20))))"
+    ]
+}

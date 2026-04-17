@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(vec_ir({aily_delta_recon_value}), 20)",
+    "idea": "**信息比率加权修订路径**：使用vec_ir（Information Ratio，均值/标准差）替代简单平均，构建“一致性修订”信号。该结构自动惩罚日内修订波动大、噪音高的股票（低IR），奖励修订方向稳定、分析师意见一致的股票（高IR），实现模板2趋势概念的质量筛选。",
+    "expression_list": [
+        "ts_sum(vec_ir(ern10_aily_delta_recon_value), 20)"
+    ]
+}

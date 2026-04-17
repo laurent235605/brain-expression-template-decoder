@@ -1,0 +1,7 @@
+{
+    "template": "zscore( subtract( ts_std_dev( winsorize( ts_backfill( {overall_genderratio}, 63 ), std=4 ), 5 ), ts_std_dev( winsorize( ts_backfill( {overall_genderratio}, 63 ), std=4 ), 60 ) ) )",
+    "idea": "短长期稳定性背离检测。分别计算5日短期和60日长期滚动标准差，使用4倍标准差winsorize预处理消除极端异常值。计算两者差异（short - long），负值表示近期稳定性相对于长期趋势显著改善（做多信号），正值表示恶化（做空信号）。通过zscore标准化构建零均值多空组合，捕捉董事会性别构成从波动到稳定的拐点或反之。",
+    "expression_list": [
+        "zscore( subtract( ts_std_dev( winsorize( ts_backfill( anl40_overall_genderratio, 63 ), std=4 ), 5 ), ts_std_dev( winsorize( ts_backfill( anl40_overall_genderratio, 63 ), std=4 ), 60 ) ) )"
+    ]
+}

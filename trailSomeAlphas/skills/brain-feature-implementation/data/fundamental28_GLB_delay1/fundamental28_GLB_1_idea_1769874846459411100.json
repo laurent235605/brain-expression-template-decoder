@@ -1,0 +1,10 @@
+{
+    "template": "divide({value_04001q}, {value_02300q})",
+    "idea": "**Concept**: Cash-to-Assets Efficiency\n- **Sample Fields Used**: `value_04001q`, `value_02300q`\n- **Definition**: Ratio of net income starting line to total assets (ROA proxy using cash flow statement starting point)\n- **Why This Feature**: Measures fundamental asset efficiency independent of accrual accounting adjustments\n- **Logical Meaning**: Asset turnover intensity; how effectively the company converts its asset base into earnings\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Asset values are quarterly; income is flow-based. Ensure both are available for the same period.\n- **Directionality**: Higher values indicate more efficient asset utilization (positive for returns)\n- **Boundary Conditions**: Capital-intensive industries naturally have lower values; financials have different asset definitions",
+    "expression_list": [
+        "divide(fnd28_cfq_value_04001q, fnd28_bsassetq_value_02300q)",
+        "divide(fnd28_cfq_value_04001q, fnd28_nddq1_value_02300q)",
+        "divide(fnd28_nddq1_value_04001q, fnd28_nddq1_value_02300q)",
+        "divide(fnd28_nddq1_value_04001q, fnd28_bsassetq_value_02300q)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut({fundreportedequityassets}, {reported_asset_value})",
+    "idea": "**Concept**: Fundamental Equity Exposure\n- **Sample Fields Used**: `fundreportedequityassets`, `reported_asset_value`\n- **Definition**: Equity holdings purified of total fund size effects using vector neutralization\n- **Why This Feature**: Isolates the pure equity allocation decision independent of fund scale; reveals whether large equity positions reflect large fund size or genuine conviction\n- **Logical Meaning**: Residual equity exposure orthogonal to total assets; captures allocation intensity versus absolute scale\n- **is filling nan necessary**: Yes, use `ts_backfill()` on both fields to ensure contemporaneous values; critical for cross-sectional neutralization to work properly across the universe\n- **Directionality**: Positive values indicate larger equity allocation than size predicts (conviction), negative indicates smaller (defensive or cash-heavy)\n- **Boundary Conditions**: Zero indicates equity allocation proportional to size; extreme positive values suggest leveraged equity bets relative to capacity",
+    "expression_list": [
+        "vector_neut(inst16_ipreo_fundreportedequityassets, fund_reported_asset_value)"
+    ]
+}

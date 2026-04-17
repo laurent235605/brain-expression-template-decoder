@@ -1,0 +1,10 @@
+{
+    "template": "zscore(signed_power(subtract(vec_avg({x_dividend}), ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252)), 1.5))",
+    "idea": "将EPS惊喜的相对偏差概念迁移至股息分析：计算当前股息相对252日均值的偏离，使用signed_power(1.5)非线性放大极端尾部（显著增加或减少），再进行全局zscore标准化，有效识别出具有统计显著性的股息政策变动。",
+    "expression_list": [
+        "zscore(signed_power(subtract(vec_avg(ern6_x_dividend), ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)), 1.5))",
+        "zscore(signed_power(subtract(vec_avg(ern6_x_dividend_233), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)), 1.5))",
+        "zscore(signed_power(subtract(vec_avg(ern6_x_dividend_oc), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)), 1.5))",
+        "zscore(signed_power(subtract(vec_avg(ern6_x_dividend_oc_235), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)), 1.5))"
+    ]
+}

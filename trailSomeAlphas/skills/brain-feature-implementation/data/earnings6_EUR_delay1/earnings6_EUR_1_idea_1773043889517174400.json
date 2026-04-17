@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(quantile(ts_zscore(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), 126), driver=\"gaussian\"), 3)",
+    "idea": "行业中性化后的时间序列极端Surprise捕捉。先计算标准化盈利惊喜，在行业层面去中心化（group_zscore），再与自身历史126日比较（ts_zscore）识别历史极端事件，最后经高斯分位数拉伸（quantile）和线性衰减（ts_decay_linear）平滑，强化对\"行业内历史极端超预期\"事件的暴露。",
+    "expression_list": [
+        "ts_decay_linear(quantile(ts_zscore(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 126), driver=\"gaussian\"), 3)",
+        "ts_decay_linear(quantile(ts_zscore(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 126), driver=\"gaussian\"), 3)"
+    ]
+}

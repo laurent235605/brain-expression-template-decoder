@@ -1,0 +1,5 @@
+{
+    "template": "multiply(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),industry),signed_power(ts_zscore({returns},21),2))",
+    "idea": "提取行业中性空头残差后，与近期收益率的Zscore平方进行交互，捕捉'高特质性空头压力+极端价格变动'的轧空或崩盘风险场景，利用非线性耦合放大尾部事件的经济效应。",
+    "expression_list": []
+}

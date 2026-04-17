@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(bucket(rank(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20)), range=\"0,1,0.2\"), 0.6), ts_delta(vec_avg({version}), 5) * vec_range({version}), multiply(0.3, ts_delta(vec_avg({version}), 5)))",
+    "idea": "根据模板2的修订强度将股票分为5档（每档20%），仅在强度最高的两档（前40%，即分位数>0.6）使用完整模板1的动量-离散度乘积信号，其余档位仅保留30%的动量权重。实现根据分析师关注度动态调整仓位强度的分级暴露，中段关注度股票减少离散度噪音影响。",
+    "expression_list": [
+        "if_else(greater(bucket(rank(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20)), range=\"0,1,0.2\"), 0.6), ts_delta(vec_avg(anl85_version), 5) * vec_range(anl85_version), multiply(0.3, ts_delta(vec_avg(anl85_version), 5)))"
+    ]
+}

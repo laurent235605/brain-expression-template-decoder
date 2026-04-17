@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(add(multiply(0.6,ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),252)),multiply(0.4,ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),63))),industry),3)",
+    "idea": "多周期非线性加权共识。融合一年(权重0.6)与一季(权重0.4)的历史分位信息，经行业中性化后使用signed_power三次方非线性放大极端值、压缩中间段，构造凸性收益结构，增强对极端偏离的敏感性。",
+    "expression_list": [
+        "signed_power(group_zscore(add(multiply(0.6,ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),252)),multiply(0.4,ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),63))),industry),3)"
+    ]
+}

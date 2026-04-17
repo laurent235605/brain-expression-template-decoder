@@ -1,0 +1,8 @@
+{
+    "template": "abs(ts_delta(days_from_last_change({eps_expected_report_dt}), 1))",
+    "idea": "变更事件尖峰检测（Change Event Spike Detection）。对变更间隔序列应用一阶差分绝对值（ts_delta + abs），检测'days_from_last_change'计数器从N跳变到0的瞬时点（即报告日期刚刚被修订）。该尖峰信号用于精准定位事件发生时点，作为纯事件驱动Alpha，与输入2的滚动窗口信号形成互补。",
+    "expression_list": [
+        "abs(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 1))",
+        "abs(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 1))"
+    ]
+}

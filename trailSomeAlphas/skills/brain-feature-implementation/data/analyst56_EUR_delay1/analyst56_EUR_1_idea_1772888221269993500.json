@@ -1,0 +1,30 @@
+{
+    "template": "vec_avg({investment}) / (1 + vec_avg({timehorizon}))",
+    "idea": "**Concept**: Temporal Horizon Concentration\n- **Sample Fields Used**: `timehorizon`, `daily_timehorizon`, `investment`\n- **Definition**: Investment size weighted by inverse time horizon, identifying \"immediate\" high-conviction ideas vs. long-term holds\n- **Why This Feature**: Short-term high-investment ideas have immediate price impact; long-term ideas provide stable alpha but slower realization\n- **is filling nan necessary**: Time horizon often categorical (e.g., \"1 week\", \"1 month\"). If numeric, fill NaN with median horizon; if categorical, map to numeric days first.\n- **Directionality**: High values = short-term, high capital (immediate catalyst); Low values = long-term, patient capital\n- **Boundary Conditions**: Horizon >365 days treat as 365 for calculation; zero horizon invalid (treat as 1 day)",
+    "expression_list": [
+        "vec_avg(anl56_daily_investment) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(anl56_daily_investmentprice) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(anl56_investment) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(anl56_investmentprice) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(anl56_reduced_investment) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(anl56_reduced_investmentprice) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(daily_investment_denomination) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(investment_denomination) / (1 + vec_avg(anl56_daily_timehorizon))",
+        "vec_avg(anl56_reduced_investment) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(anl56_reduced_investmentprice) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(anl56_daily_investment) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(anl56_daily_investmentprice) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(anl56_investment) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(anl56_investmentprice) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(daily_investment_denomination) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(investment_denomination) / (1 + vec_avg(anl56_reduced_timehorizon))",
+        "vec_avg(anl56_daily_investment) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(anl56_daily_investmentprice) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(anl56_investment) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(anl56_investmentprice) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(anl56_reduced_investment) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(anl56_reduced_investmentprice) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(daily_investment_denomination) / (1 + vec_avg(anl56_timehorizon))",
+        "vec_avg(investment_denomination) / (1 + vec_avg(anl56_timehorizon))"
+    ]
+}

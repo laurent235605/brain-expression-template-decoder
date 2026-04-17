@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(group_zscore(vec_count({currency_code}), {country}), 1.5)",
+    "idea": "在国家层面组内标准化后的货币复杂度进行1.5次幂非线性放大。强化极端值：对于单币种主导市场（如日本）中的多币种公司给予更高正向权重，对于多币种常见市场（如欧元区）中的单币种公司给予更深负向权重，实现国家间的相对复杂度套利。",
+    "expression_list": []
+}

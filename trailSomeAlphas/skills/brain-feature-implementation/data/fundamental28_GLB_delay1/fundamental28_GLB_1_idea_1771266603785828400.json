@@ -1,0 +1,18 @@
+{
+    "template": "ts_mean(subtract(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), divide({value_03051q}, {value_03999q})), 20)",
+    "idea": "**概念**: 盈利改善与流动性压力利差（平滑）\n- **融合来源**: 模板2（营业利润率动量）+ 模板3（流动性风险水平）+ 时序平滑\n- **定义**: 营业利润率动量（变化率/历史均值）减去短期债务占比，差值经20日移动平均平滑\n- **为何有效**: 利润率改善若伴随流动性恶化（如应收账款增加导致现金紧张），质量存疑；通过利差（spread）剔除\"虚假改善\"，ts_mean降低财报发布日的跳跃噪音\n- **逻辑含义**: 正值表示运营效率提升且未被流动性风险抵消；负值表示要么盈利恶化，要么虽盈利改善但债务结构急剧短期化\n- **边界条件**: 252日均值作为分母标准化利润率变化；20日ts_mean等权处理，比ts_decay_linear更低的turnover适合基本面因子\n- **方向性**: 正向因子，高利差代表高质量的增长（盈利↑ + 流动性稳健）",
+    "expression_list": [
+        "ts_mean(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q)), 20)",
+        "ts_mean(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q)), 20)"
+    ]
+}

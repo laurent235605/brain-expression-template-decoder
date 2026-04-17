@@ -1,0 +1,8 @@
+{
+    "template": "multiply( subtract(vec_avg({stock_split_ratio_243}), 1.0), trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ) )",
+    "idea": "激进交叉重组：将模板1的分拆事件强度（距1的偏离度）与模板2的盈余 surprise 进行算术相乘，构建\"资本结构变化+基本面验证\"的复合信号，仅当两者同向（如正向分拆且业绩超预期）时产生显著正暴露，实现多维度增强。",
+    "expression_list": [
+        "multiply( subtract(vec_avg(ern6_stock_split_ratio_243), 1.0), trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ) )",
+        "multiply( subtract(vec_avg(ern6_stock_split_ratio_243), 1.0), trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ) )"
+    ]
+}

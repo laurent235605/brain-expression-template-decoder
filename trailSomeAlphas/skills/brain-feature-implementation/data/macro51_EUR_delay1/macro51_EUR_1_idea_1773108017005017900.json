@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(signed_power(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), industry), 2), 252)",
+    "idea": "**尾部强调型行业中性反转**：先进行行业中性化（group_zscore），然后使用signed_power（指数为2）非线性放大极端偏离值（无论正向或负向），同时压缩温和偏离，最后对经过尾部强调的序列计算历史分位数（ts_rank）。该结构增强了对极端异常值的区分度，使处于历史极端行业相对溢价状态的股票信号更加突出，强化均值回归的押注力度。",
+    "expression_list": [
+        "ts_rank(signed_power(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), industry), 2), 252)"
+    ]
+}

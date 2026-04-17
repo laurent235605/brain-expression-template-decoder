@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(add(multiply(0.7, ts_decay_linear(winsorize(ts_backfill({exp_usa}, 21), std=4), 20)), multiply(0.3, ts_mean(winsorize(ts_backfill({exp_usa}, 21), std=4), 126))), add(multiply(0.7, ts_decay_linear(winsorize(ts_backfill({exp_chn}, 21), std=4), 20)), multiply(0.3, ts_mean(winsorize(ts_backfill({exp_chn}, 21), std=4), 126)))), industry)",
+    "idea": "多时间尺度衰减加权因子。利用短期线性衰减（20日，高 turnover 敏感度）捕捉近期敞口快速变化，结合长期均值（126日）平滑基线，构建融合动量与稳态的中美敞口价差，识别正在加速向高美低中配置迁移且具备持续性的公司。",
+    "expression_list": [
+        "group_zscore(subtract(add(multiply(0.7, ts_decay_linear(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 20)), multiply(0.3, ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 126))), add(multiply(0.7, ts_decay_linear(winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4), 20)), multiply(0.3, ts_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4), 126)))), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), ts_mean(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), 126)), sector)",
+    "idea": "对模板2的幂变换结果进行时间序列去均值处理（减去126日均值），得到非线性偏离长期均衡的信号，再行业中性化。这种结构捕捉的是定价偏离的加速度而非水平值，避免长期结构性偏差导致的持续单向暴露，强化均值回复中的极端偏离机会。",
+    "expression_list": [
+        "group_zscore(subtract(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), ts_mean(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), 126)), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(ts_zscore(vec_count(vec_filter({currency_code}, value=\"nan\")), 252), std=4)",
+    "idea": "将币种复杂度经向量清洗后计算历史时序zscore，识别当前外币分红结构相对于自身252日历史的位置。处于历史高位可能预示近期新增跨境业务或ADR扩张，经过去极值处理防止极端统计误差影响信号稳定性。",
+    "expression_list": [
+        "winsorize(ts_zscore(vec_count(vec_filter(payment_currency_code, value=\"nan\")), 252), std=4)"
+    ]
+}

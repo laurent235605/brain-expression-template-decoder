@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract({cfroichg}, ts_delay({cfroichg}, 5)), industry), 10)",
+    "idea": "衰减加权行业中性加速度：对Input 1的加速度序列先进行行业zscore中性化，再应用ts_decay_linear(10日)赋予近期加速度更高权重。该模板借鉴Input 2的时间窗口概念，但改用线性衰减而非等权累积，牺牲部分换手率换取对最新基本面变化的快速响应，适用于激进的高频基本面交易。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5)), industry), 10)"
+    ]
+}

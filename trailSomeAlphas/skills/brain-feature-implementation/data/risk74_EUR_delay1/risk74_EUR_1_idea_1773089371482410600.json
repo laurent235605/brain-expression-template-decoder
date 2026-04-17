@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(ts_sum(ts_delta({hfown_pctown}, 1), 20), 5), 60)",
+    "idea": "资金流加速度动量检测。通过计算20日累积流量的5日变化（二阶导数概念），并将其与自身过去60日历史分布进行Z分数标准化，识别资金流入的加速或减速趋势。正值表示机构正在加速建仓，负值表示抛售加速，适用于捕捉趋势拐点与动量持续性。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 5), 60)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "multiply( subtract( vec_ir({actual_eps}), vec_ir({estimated_eps}) ), trade_when( greater( vec_count({actual_eps}), 5 ), signed_power( group_rank( subtract( vec_ir({actual_eps}), vec_ir({estimated_eps}) ), sector ), 1.5 ), 0 ) )",
+    "idea": "用信息比率(vec_ir = mean/std)替代简单均值，更稳健地衡量实际与预期EPS的'信噪比'差异；通过vec_count过滤掉数据点过少(少于5个)的样本；对组内排名进行signed_power(y=1.5)非线性放大，使行业内IR差异最大的头部和尾部股票获得显著更高的权重，中段股票权重压缩。",
+    "expression_list": [
+        "multiply( subtract( vec_ir(ern6_actual_eps), vec_ir(ern6_estimated_eps) ), trade_when( greater( vec_count(ern6_actual_eps), 5 ), signed_power( group_rank( subtract( vec_ir(ern6_actual_eps), vec_ir(ern6_estimated_eps) ), sector ), 1.5 ), 0 ) )",
+        "multiply( subtract( vec_ir(ern6_actual_eps_274), vec_ir(ern6_estimated_eps) ), trade_when( greater( vec_count(ern6_actual_eps_274), 5 ), signed_power( group_rank( subtract( vec_ir(ern6_actual_eps_274), vec_ir(ern6_estimated_eps) ), sector ), 1.5 ), 0 ) )"
+    ]
+}

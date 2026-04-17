@@ -1,0 +1,8 @@
+{
+    "template": "{momentum} / ({value_ts} + {earnyild} + 0.0001)",
+    "idea": "**Concept**: Factor Exposure Structure\n- **Sample Fields Used**: `momentum`, `value_ts`, `earnyild`, `valuearn`\n- **Definition**: Decomposition of style factor exposure to identify pure factor plays vs. mixed factor profiles\n- **Why This Feature**: Stocks with consistent single-factor exposure behave predictably; mixed exposures create noise; tariff risks correlate with specific factors (value in cyclicals, momentum in defensives)\n- **Logical Meaning**: High values indicate strong style tilt; balanced values indicate factor-neutral or confused profiles\n- **is filling nan necessary**: No, factor scores are typically complete daily\n- **Directionality**: Positive values indicate long tilt to numerator factor; Negative indicate inverse; Magnitude indicates strength\n- **Boundary Conditions**: Extreme values indicate pure factor exposure; near-zero indicates factor neutrality or conflicting signals",
+    "expression_list": [
+        "rsk74_momentum / (rsk74_value_ts + rsk74_earnyild + 0.0001)",
+        "rsk74_momentum_ts / (rsk74_value_ts + rsk74_earnyild + 0.0001)"
+    ]
+}

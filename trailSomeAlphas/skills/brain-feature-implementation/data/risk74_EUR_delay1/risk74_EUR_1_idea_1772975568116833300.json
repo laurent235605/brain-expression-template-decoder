@@ -1,0 +1,14 @@
+{
+    "template": "ts_regression(winsorize(add(add({factor_e}, {factor_s}), {factor_g}), 4), winsorize({crowding}, 4), 126, rettype=0)",
+    "idea": "**交叉增强逻辑**: 应用Input 1提到的CAPM残差模板逻辑到ESG因子：将ESG总分作为被解释变量，拥挤度作为市场因子（类比beta），取残差（rettype=0）。`ts_regression`跨度126天（半年数据），识别出那些ESG表现无法被市场拥挤度解释的\"纯ESG阿尔法\"。这剥离了因 popularity 驱动的ESG溢价，找到真正被忽视的ESG优质股。",
+    "expression_list": [
+        "ts_regression(winsorize(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), 4), winsorize(rsk74_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), 4), winsorize(rsk74_raw_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), 4), winsorize(liquidity_factor_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), 4), winsorize(liquidity_timeseries_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), 4), winsorize(rsk74_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), 4), winsorize(rsk74_raw_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), 4), winsorize(liquidity_factor_crowding, 4), 126, rettype=0)",
+        "ts_regression(winsorize(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), 4), winsorize(liquidity_timeseries_crowding, 4), 126, rettype=0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.7, ts_regression(winsorize(ts_mean(ts_backfill({fundportfolioturnover},63),21),std=4), winsorize(ts_mean(ts_backfill({reported_asset_value},63),21),std=4), 126, rettype=0)), multiply(0.3, ts_zscore(ts_delta({fundportfolioturnover},63), 126)))",
+    "idea": "**趋势调整型活动强度信号**：结合规模中性水平与换手率变化趋势。先对两个字段进行21日移动平均平滑（ts_mean）以降低日频噪音，再进行126日回归提取规模中性残差（权重0.7）。同时计算63日换手率变化率（ts_delta）并取其历史126日zscore（权重0.3），捕捉交易活动的加速度。两者加权相加，既反映基金相对于规模的异常活跃程度，又反映其近期是否在加速调仓，增强了对机构行为转变的敏感性。",
+    "expression_list": [
+        "add(multiply(0.7, ts_regression(winsorize(ts_mean(ts_backfill(inst16_ipreo_fundportfolioturnover,63),21),std=4), winsorize(ts_mean(ts_backfill(fund_reported_asset_value,63),21),std=4), 126, rettype=0)), multiply(0.3, ts_zscore(ts_delta(inst16_ipreo_fundportfolioturnover,63), 126)))"
+    ]
+}

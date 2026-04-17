@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(ts_delta(group_zscore({eps_best_eeps_cur_yr}, industry), 5)), 0.85), less(rank(ts_delta(group_zscore({eps_best_eeps_cur_yr}, industry), 5)), 0.15)), ts_delta(group_zscore({eps_best_eeps_cur_yr}, industry), 5), 0)",
+    "idea": "融合分组标准化与极端区间逻辑：先通过group_zscore在行业层面去除EPS修订的均值偏移，实现行业内可比性，再对标准化后的序列计算5日变化率并应用模板1的头尾15%分位筛选。该结构专注于捕捉行业内的相对预期调整速度，有效规避行业轮动带来的系统性噪音。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_delta(group_zscore(anl69_aeps_best_eeps_cur_yr, industry), 5)), 0.85), less(rank(ts_delta(group_zscore(anl69_aeps_best_eeps_cur_yr, industry), 5)), 0.15)), ts_delta(group_zscore(anl69_aeps_best_eeps_cur_yr, industry), 5), 0)",
+        "trade_when(or(greater(rank(ts_delta(group_zscore(anl69_eps_best_eeps_cur_yr, industry), 5)), 0.85), less(rank(ts_delta(group_zscore(anl69_eps_best_eeps_cur_yr, industry), 5)), 0.15)), ts_delta(group_zscore(anl69_eps_best_eeps_cur_yr, industry), 5), 0)"
+    ]
+}

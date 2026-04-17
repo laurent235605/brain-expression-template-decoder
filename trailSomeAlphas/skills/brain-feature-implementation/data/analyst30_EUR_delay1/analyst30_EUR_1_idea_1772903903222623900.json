@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(vec_range(vec_filter({fiscalyearend}, nan)), 252), industry)",
+    "idea": "行业中性时间序列Z-score模型：先使用vec_filter清洗NaN日期数据，计算财年末日期极差(vec_range)度量当期离散度；通过252日时间序列Z-score捕捉个股fiscal year结构相对于自身历史的异常变化，再进行行业内截面Z-score neutralization，最终识别相对于历史与同业均异常的财务报告期结构风险或稳定性。",
+    "expression_list": [
+        "group_zscore(ts_zscore(vec_range(vec_filter(anl30_fiscalyearend, nan)), 252), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(vec_avg({data_item_value}), 63)",
+    "idea": "**Concept**: Trailing Financial Accumulation\n- **Sample Fields Used**: data_item_value\n- **Definition**: Cumulative sum of financial values over recent fiscal periods (e.g., trailing 12-month equivalent)\n- **Why This Feature**: Aggregates financial performance over business cycles, smoothing seasonal effects; essential for metrics that accumulate over time (revenue, earnings TTM)\n- **Logical Meaning**: Total financial performance accumulated over the lookback window; represents the \"stock\" of recent financial achievement\n- **is filling nan necessary**: Yes, ensure no gaps in the accumulation window; use ts_backfill to maintain continuity, as gaps create artificial reductions in cumulative values\n- **Directionality**: Higher values indicate greater accumulated financial performance; sign depends on metric (revenue always positive, earnings may be negative)\n- **Boundary Conditions**: Values should generally increase with window length for positive metrics; declining cumulative sums indicate negative recent performance",
+    "expression_list": [
+        "ts_sum(vec_avg(anl89_data_item_value), 63)"
+    ]
+}

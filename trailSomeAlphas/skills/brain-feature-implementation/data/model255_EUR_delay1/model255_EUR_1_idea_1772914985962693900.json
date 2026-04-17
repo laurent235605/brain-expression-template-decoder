@@ -1,0 +1,7 @@
+{
+    "template": "({accounts_payable_score} + {accounts_rec_score} + {inventory_score}) / 3",
+    "idea": "**Concept**: Working Capital Quality Composite\n- **Sample Fields Used**: `accounts_payable_score`, `accounts_rec_score`, `inventory_score`\n- **Definition**: Average of working capital component scores to create a unified short-term operational quality metric\n- **Why This Feature**: Working capital management requires balancing payables, receivables, and inventory; isolating one misses the trade-offs (e.g., stretching payables to fund receivables)\n- **is filling nan necessary**: Yes, use ts_backfill for individual missing components, but require at least 2 of 3 components to calculate to avoid single-point bias\n- **Directionality**: High values indicate efficient, non-manipulative working capital management; Low values indicate liquidity stress or aggressive accrual management\n- **Boundary Conditions**: Extreme low values (<2) indicate working capital crisis; High values (>4) combined with low cash flow score indicates \"channel stuffing\" or vendor financing reliance",
+    "expression_list": [
+        "(mdl255_accounts_payable_score + mdl255_accounts_rec_score + mdl255_inventory_score) / 3"
+    ]
+}

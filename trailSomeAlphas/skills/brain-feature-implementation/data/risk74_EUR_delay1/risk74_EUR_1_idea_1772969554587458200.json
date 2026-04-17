@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(group_zscore(quantile(winsorize(({hfown_pctown} / {hfown_numown}), std=4), driver='gaussian'), industry), hump=0.01)",
+    "idea": "高斯分布映射与仓位温和调整：先将分散度指标通过分位数映射转换为类高斯分布（quantile with gaussian driver，将极端值推向两侧尾部），进行行业标准化后，使用hump_decay控制日间微小波动（忽略小于1%的变化），在不改变信号方向的前提下降低换手率，适合构建低频、稳健的风险预警信号。",
+    "expression_list": [
+        "hump_decay(group_zscore(quantile(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), driver='gaussian'), industry), hump=0.01)"
+    ]
+}

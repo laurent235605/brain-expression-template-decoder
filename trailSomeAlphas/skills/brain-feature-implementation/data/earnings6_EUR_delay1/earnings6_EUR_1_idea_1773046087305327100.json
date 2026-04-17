@@ -1,0 +1,8 @@
+{
+    "template": "scale( truncate( normalize( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ) ), maxPercent=0.01 ), scale=1, longscale=1, shortscale=1 )",
+    "idea": "在模板1与模板2融合基础上增加交易性约束层。对衰减后的Surprise先进行标准化(normalize)，再使用truncate限制单票最大权重不超过1%，最后通过scale控制多空总杠杆。此结构确保alpha信号可实际交易，避免权重过度集中风险。",
+    "expression_list": [
+        "scale( truncate( normalize( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ) ), maxPercent=0.01 ), scale=1, longscale=1, shortscale=1 )",
+        "scale( truncate( normalize( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ) ), maxPercent=0.01 ), scale=1, longscale=1, shortscale=1 )"
+    ]
+}

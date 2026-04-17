@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(subtract(multiply(bucket(group_rank(winsorize(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), std=4), sector), range=\"0,1,0.2\"), 0.5), 1.0), 5)",
+    "idea": "精细化分桶仓位管理：将组内排名离散化为5档（0-20%, 20-40%, ..., 80-100%），通过线性映射转换为-1.0, -0.5, 0, 0.5, 1.0的五档权重（替代原模板的-1/0/1），实现对极端稳定/不稳定股票的梯度暴露。配合5日衰减平滑，降低因每日排名微扰带来的换手率。",
+    "expression_list": [
+        "ts_decay_linear(subtract(multiply(bucket(group_rank(winsorize(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), std=4), sector), range=\"0,1,0.2\"), 0.5), 1.0), 5)",
+        "ts_decay_linear(subtract(multiply(bucket(group_rank(winsorize(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), std=4), sector), range=\"0,1,0.2\"), 0.5), 1.0), 5)",
+        "ts_decay_linear(subtract(multiply(bucket(group_rank(winsorize(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), std=4), sector), range=\"0,1,0.2\"), 0.5), 1.0), 5)",
+        "ts_decay_linear(subtract(multiply(bucket(group_rank(winsorize(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), std=4), sector), range=\"0,1,0.2\"), 0.5), 1.0), 5)"
+    ]
+}

@@ -1,0 +1,18 @@
+[
+    "(anl14_buy + anl14_outperform - anl14_sell - anl14_underperform) / (anl14_buy + anl14_sell + anl14_hold + anl14_outperform + anl14_underperform + 1.0)",
+    "(anl14_high_revenue_fp1 - anl14_low_revenue_fp1) / (anl14_stddev_revenue_fp1 + 0.01)",
+    "(anl14_mean_revenue_fp1 - anl14_median_revenue_fp1) / (anl14_stddev_revenue_fp1 + 0.01)",
+    "min(anl14_numofests_revenue_fp1, min(anl14_numofests_eps_fp1, anl14_numofests_ebitda_fp1))",
+    "ts_delta(anl14_mean_revenue_fp1, 5)",
+    "ts_delta(anl14_mean_revenue_fp2 / (anl14_mean_revenue_fp1 + 0.01), 10)",
+    "ts_delta(anl14_numofests_revenue_fp1, 20)",
+    "ts_mean(anl14_mean_revenue_fp2 / (anl14_mean_revenue_fp1 + 0.01), 20)",
+    "ts_sum(max(ts_delta(anl14_mean_revenue_fp1, 1), 0), 20)",
+    "anl14_actvalue_revenue_fp0 - ts_delay(anl14_mean_revenue_fp1, 90)",
+    "anl14_mean_ebit_fp1 / (anl14_mean_revenue_fp1 + 0.01)",
+    "anl14_mean_revenue_fp1 * (anl14_numofests_revenue_fp1 / (anl14_stddev_revenue_fp1 + 1.0))",
+    "anl14_mean_revenue_fp1 / (anl14_stddev_revenue_fp1 + 0.01)",
+    "rtk_ptg_mean / (anl14_mean_eps_fp1 * anl14_cursharesoutstanding + 0.01)",
+    "anl14_stddev_revenue_fp1 / abs(anl14_mean_revenue_fp1 + 0.01)",
+    "anl14_stddev_revenue_fp1 / sqrt(anl14_numofests_revenue_fp1 + 0.01)"
+]

@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({quintile}), 20)",
+    "idea": "**Concept**: Quintile Upgrade Velocity\n- **Sample Fields Used**: `mdl249_quintile`\n- **Definition**: The 20-day change in quintile ranking (positive indicates upgrade to higher likelihood quintile)\n- **Why This Feature**: Quintile changes represent discrete shifts in model confidence that may trigger institutional attention or algorithmic trading; upgrades from Q4 to Q5 particularly significant\n- **is filling nan necessary**: Yes, quintile is integer-valued and changes are significant. Use `ts_backfill(vec_avg({quintile}), 3)` to handle gaps without creating artificial jumps.\n- **Logical Meaning**: Discrete momentum indicator showing improving or deteriorating acquisition prospects relative to universe\n- **Directionality**: Positive values (upgrades) indicate strengthening acquisition narrative; negative values indicate weakening prospects\n- **Boundary Conditions**: +4 indicates jump from Q1 to Q5 (rare, extreme signal); -4 indicates fall from Q5 to Q1 (acquisition target no longer viable)",
+    "expression_list": [
+        "ts_delta(vec_avg(mdl249_quintile), 20)"
+    ]
+}

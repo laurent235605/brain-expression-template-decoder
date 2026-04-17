@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), 20)",
+    "idea": "将模板2的20日平滑技术应用于模板1的横截面高斯分位数，降低单日横截面噪音的同时保留相对排序的持续性，适用于降低换手率需求下的修正信号捕捉。",
+    "expression_list": [
+        "ts_mean(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), 20)",
+        "ts_mean(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), 20)"
+    ]
+}

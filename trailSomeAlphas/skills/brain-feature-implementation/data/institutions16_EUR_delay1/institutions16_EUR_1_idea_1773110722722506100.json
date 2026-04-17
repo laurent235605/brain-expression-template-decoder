@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater({volume}, ts_mean({volume}, 20)), group_zscore(multiply(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), ts_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 60)), divide(1, add(days_from_last_change(winsorize(ts_backfill({reported_asset_value}, 63), std=4)), 1))), {sector}), 0)",
+    "idea": "事件驱动加权异质流：利用days_from_last_change识别最近财报或数据披露时点，对越近发生的资产变动赋予越高权重（反比衰减），结合成交量过滤（仅在高流动性股票上交易，低流动性置零），并在行业内进行zscore标准化，旨在捕捉最新披露引发的即时资金异动而非陈旧信息，同时规避低流动性风险。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_sum(ts_delta({hfown_pctown},1),20), industry)), 2), group_zscore(ts_sum(ts_delta({hfown_pctown},1),20), industry), 0)",
+    "idea": "阈值触发的高确信度策略：先计算行业中性后的累积流zscore，然后使用trade_when配合绝对值阈值(>2个标准差)进行硬过滤。仅在信号强度显著超过噪音阈值时才保留原始方向性信号，中间区域(-2σ到+2σ)视为随机游走或弱信息，直接赋值为0不参与交易。该结构有效规避了微弱持仓变化带来的虚假信号和过度交易成本。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), industry)), 2), group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), industry), 0)"
+    ]
+}

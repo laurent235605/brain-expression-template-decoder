@@ -1,0 +1,8 @@
+{
+    "template": "add(if_else(greater(group_rank(winsorize(ts_backfill({factor_g},63),4), industry), 0.5), group_zscore(winsorize(ts_backfill({factor_e},63),4), industry), multiply(-1, abs(group_zscore(winsorize(ts_backfill({factor_e},63),4), industry)))), if_else(greater(group_rank(winsorize(ts_backfill({factor_g},63),4), industry), 0.5), group_zscore(winsorize(ts_backfill({factor_s},63),4), industry), multiply(-1, abs(group_zscore(winsorize(ts_backfill({factor_s},63),4), industry)))))",
+    "idea": "治理质量门控模型：以G（治理）作为门槛条件，仅当G因子处于行业前50%时，E和S因子才获得正向权重；若G低于中位数，则E和S转为负向惩罚（避免'漂绿'风险）。该模板体现了'治理不善则环境社会责任不可持续'的逻辑，通过if_else形成非线性门控机制，筛选出真正可持续的ESG领导者。",
+    "expression_list": [
+        "add(if_else(greater(group_rank(winsorize(ts_backfill(rsk74_factor_g,63),4), industry), 0.5), group_zscore(winsorize(ts_backfill(rsk74_factor_e,63),4), industry), multiply(-1, abs(group_zscore(winsorize(ts_backfill(rsk74_factor_e,63),4), industry)))), if_else(greater(group_rank(winsorize(ts_backfill(rsk74_factor_g,63),4), industry), 0.5), group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),4), industry), multiply(-1, abs(group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),4), industry)))))",
+        "add(if_else(greater(group_rank(winsorize(ts_backfill(rsk74_factor_g,63),4), industry), 0.5), group_zscore(winsorize(ts_backfill(rsk74_factor_esg,63),4), industry), multiply(-1, abs(group_zscore(winsorize(ts_backfill(rsk74_factor_esg,63),4), industry)))), if_else(greater(group_rank(winsorize(ts_backfill(rsk74_factor_g,63),4), industry), 0.5), group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),4), industry), multiply(-1, abs(group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),4), industry)))))"
+    ]
+}

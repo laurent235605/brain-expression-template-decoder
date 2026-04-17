@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian)",
+    "idea": "**Concept**: Cross-Sectional Revision Percentile\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: Gaussian quantile transform of 5-day EPS revision across EUR universe\n- **Why This Feature**: Relative ranking identifies extreme movers vs. peers; mean-reverting strategies benefit from cross-sectional z-scores\n- **Logical Meaning**: Relative analyst sentiment intensity; extreme percentiles indicate outliers worthy of attention\n- **is filling nan necessary**: Quantile operator handles NaNs by excluding from ranking; no filling necessary to preserve valid cross-sectional comparison.\n- **Directionality**: High percentiles (top decile) indicate strongest upgrades; low percentiles indicate strongest downgrades; zero crossings significant\n- **Boundary Conditions**: Uniform distribution expected; clustering near extremes indicates broad sector revisions",
+    "expression_list": [
+        "quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian)",
+        "quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian)"
+    ]
+}

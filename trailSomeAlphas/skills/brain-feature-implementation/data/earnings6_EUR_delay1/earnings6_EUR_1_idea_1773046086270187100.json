@@ -1,0 +1,8 @@
+{
+    "template": "quantile( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ), driver=\"gaussian\" )",
+    "idea": "融合模板2的衰减加权与分布变换逻辑，将衰减后的Surprise通过quantile映射到高斯分布。该操作压缩中间区间（视为噪音），同时将极端超预期/低于预期的股票向分布两端拉伸，增强因子对极端事件的区分能力。",
+    "expression_list": [
+        "quantile( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), driver=\"gaussian\" )",
+        "quantile( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), driver=\"gaussian\" )"
+    ]
+}

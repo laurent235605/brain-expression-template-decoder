@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_backfill({hfown_pctown}, 21), std=4), industry)",
+    "idea": "融合模板2的时序预处理（ts_backfill+winsorize）与行业中性化框架，对模板1的HF持仓比例进行21日回填、4倍标准差极值压缩与行业内标准化，识别真正的行业超配/低配标的，剥离行业Beta干扰，避免原始quantile方法对行业结构性差异的过度敏感。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "scale( truncate( group_normalize( trade_when( or( greater( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 0.85 ), less( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), 0.15 ) ), signed_power( ts_zscore( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 252 ), 2 ), 0 ), industry ), maxPercent=0.015 ), scale=1, longscale=1, shortscale=1 )",
+    "idea": "高斯分位极值截断与仓位控制版。将阈值收紧至15%/85%分位以聚焦更极端配置，使用signed_power(...,2)平方放大极端偏离强度；增加truncate限制个股权重上限(1.5%)防止过度集中，配合scale精确控制多空杠杆比例；利用trade_when替代嵌套if_else提升代码可读性，在保持行业中性化的同时实现组合层面的风险分散。",
+    "expression_list": [
+        "scale( truncate( group_normalize( trade_when( or( greater( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0.85 ), less( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), 0.15 ) ), signed_power( ts_zscore( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 252 ), 2 ), 0 ), industry ), maxPercent=0.015 ), scale=1, longscale=1, shortscale=1 )"
+    ]
+}

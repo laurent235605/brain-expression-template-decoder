@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(subtract(ts_std_dev(winsorize(vec_stddev({exposure_value}), std=4), 5), ts_std_dev(winsorize(vec_stddev({exposure_value}), std=4), 60)), industry), 2), 5)",
+    "idea": "将向量算子改为vec_stddev以捕捉地域敞口分布的离散度（集中度风险）而非简单均值；通过winsorize清洗极端向量值；利用group_zscore进行行业中性化，消除不同行业固有地域波动差异；最后使用signed_power(y=2)非线性放大极端加速/减速信号，突出业务地域结构转型的临界点。适用于捕捉尾部风险事件。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(subtract(ts_std_dev(winsorize(vec_stddev(anl91_exposure_value), std=4), 5), ts_std_dev(winsorize(vec_stddev(anl91_exposure_value), std=4), 60)), industry), 2), 5)"
+    ]
+}

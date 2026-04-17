@@ -1,0 +1,5 @@
+{
+    "template": "trade_when( and( or( greater( rank( divide( ts_std_dev( {weight_net}, 20 ), add( abs( ts_mean( {weight_net}, 20 ) ), 0.0001 ) ) ), 0.8 ), less( rank( divide( ts_std_dev( {weight_net}, 20 ), add( abs( ts_mean( {weight_net}, 20 ) ), 0.0001 ) ) ), 0.2 ) ), greater( ts_mean( {volume}, 20 ), ts_mean( {volume}, 252 ) ) ), multiply( rank( divide( ts_std_dev( {weight_net}, 20 ), add( abs( ts_mean( {weight_net}, 20 ) ), 0.0001 ) ) ), divide( ts_mean( {weight_net}, 20 ), add( abs( ts_mean( {weight_net}, 20 ) ), 0.0001 ) ) ), NaN )",
+    "idea": "流动性过滤下的极端稳定性择券（尾部信号）。仅当20日变异系数的截面排名处于前20%（极不稳定，疑似频繁交易或强制平仓）或后20%（极稳定，强烈信念）且近期成交量高于年度平均水平（确保数据非 stale、具备流动性）时产生信号。多头方向与净持仓方向一致（通过均值符号实现），中段噪音区间强制置NaN以降低换手率并避免模糊持仓区间的干扰。",
+    "expression_list": []
+}

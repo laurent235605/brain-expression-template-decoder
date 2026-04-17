@@ -1,0 +1,8 @@
+{
+    "template": "ts_backfill({concentration}, 10) - ts_mean(ts_backfill({concentration}, 10), 60)",
+    "idea": "地理集中度偏离趋势（滞后回填版）：利用input1建议的ts_backfill处理季度报告滞后，再计算60日趋势偏离，识别真实的地理布局战略转变信号，避免数据缺失导致的误判。",
+    "expression_list": [
+        "ts_backfill(rsk74_concentration, 10) - ts_mean(ts_backfill(rsk74_concentration, 10), 60)",
+        "ts_backfill(rsk74_raw_concentration, 10) - ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)"
+    ]
+}

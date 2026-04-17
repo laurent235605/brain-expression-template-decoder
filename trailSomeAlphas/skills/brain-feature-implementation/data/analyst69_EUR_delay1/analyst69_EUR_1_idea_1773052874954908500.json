@@ -1,0 +1,10 @@
+{
+    "template": "add(multiply(0.6, quantile(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), driver=\"gaussian\")), multiply(0.4, quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\")))",
+    "idea": "等权融合两种经高斯拉伸的极端信号：分析师EPS修订动量（60%权重）与财报披露时间稳定性（40%权重）。通过高斯映射将两个不同量纲的指标统一为尾部增强的分布形态，构建复合的“分析师行为异常”指标，捕捉预期修正与报告不确定性共振的极端状态，实现跨域信息互补。",
+    "expression_list": [
+        "add(multiply(0.6, quantile(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), driver=\"gaussian\")), multiply(0.4, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\")))",
+        "add(multiply(0.6, quantile(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), driver=\"gaussian\")), multiply(0.4, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\")))",
+        "add(multiply(0.6, quantile(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), driver=\"gaussian\")), multiply(0.4, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\")))",
+        "add(multiply(0.6, quantile(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), driver=\"gaussian\")), multiply(0.4, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\")))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_sum(vec_avg({aily_delta_recon_value}), 20), signed_power(add(1, ts_sum(signed_power(vec_avg({aily_delta_recon_value}), 2), 20)), 0.5))",
+    "idea": "**波动率加权修订趋势**：融合模板2的累积路径方向与模板1的波动率度量，构建“单位风险调整后的修订强度”。分母使用平方和波动率开根号（类似标准差），在整体信息流量高时自动降低信号幅度或进行风险调整，避免在高噪音时期过度暴露。",
+    "expression_list": [
+        "divide(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), signed_power(add(1, ts_sum(signed_power(vec_avg(ern10_aily_delta_recon_value), 2), 20)), 0.5))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "quantile(ts_delta({eps_best_eeps_cur_yr}, 5) * ts_decay_linear(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), driver=gaussian)",
+    "idea": "融合模板1的横截面分位数转换与模板2的日期变化追踪，使用线性衰减加权（ts_decay_linear）将报告日期变更的临近程度作为盈利修正的权重因子，强调临近事件日的修正信号强度。",
+    "expression_list": [
+        "quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5) * ts_decay_linear(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), driver=gaussian)",
+        "quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5) * ts_decay_linear(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), driver=gaussian)",
+        "quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5) * ts_decay_linear(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), driver=gaussian)",
+        "quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5) * ts_decay_linear(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), driver=gaussian)"
+    ]
+}

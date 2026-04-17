@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_delta(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 5), industry)), 1.0), winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), 0)",
+    "idea": "行业加速度条件触发：将模板2的加速度计算与行业中性化结合，形成\"行业内盈利预期加速度\"条件，触发模板1的效率比率交易，捕捉行业内预期调整正在加速且具备高效盈利转化能力的标的。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_delta(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 5), industry)), 1.0), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)",
+        "trade_when(greater(abs(group_zscore(ts_delta(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 5), industry)), 1.0), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)"
+    ]
+}

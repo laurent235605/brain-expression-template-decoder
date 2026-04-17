@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_avg({exposure_value}), std=4), 20), 20), 120), 0.9), less(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_avg({exposure_value}), std=4), 20), 20), 120), 0.1)), group_zscore(ts_std_dev(ts_backfill(winsorize(vec_avg({exposure_value}), std=4), 20), 20), industry), 0)",
+    "idea": "极端波动区间隔离策略：先对向量均值进行4倍标准差截尾清洗，计算20日波动率后，仅保留处于自身过去120日分位数前10%（极端高波动）或后10%（极端低波动）的标的，其余区间视为噪音并置零；随后在行业层面进行zscore标准化，捕捉极端状态下的结构性分化（如重组风险或护城河稳固信号），避免中间波动区间的无效交易。",
+    "expression_list": [
+        "trade_when(or(greater(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_avg(anl91_exposure_value), std=4), 20), 20), 120), 0.9), less(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_avg(anl91_exposure_value), std=4), 20), 20), 120), 0.1)), group_zscore(ts_std_dev(ts_backfill(winsorize(vec_avg(anl91_exposure_value), std=4), 20), 20), industry), 0)"
+    ]
+}

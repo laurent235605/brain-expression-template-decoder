@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(ts_backfill(vec_ir({exposure_value}), 63), 252), industry), 2)",
+    "idea": "采用向量信息比率vec_ir（均值/标准差）替代简单均值衡量暴露向量的风险调整稳定性，识别高收益风险比的业务结构；结合模板1的年度时间序列Z-Score与模板2的行业截面Z-Score双重标准化，平方放大极端值，优选具备高质量稳定暴露的公司。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(ts_backfill(vec_ir(anl91_exposure_value), 63), 252), industry), 2)"
+    ]
+}

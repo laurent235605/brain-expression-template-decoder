@@ -1,0 +1,7 @@
+{
+    "template": "multiply(subtract(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 63), ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252)), inverse(add(1, ts_std_dev(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 63))))",
+    "idea": "**多时间框架背离动量（风险调整）**：计算短期（63日）与长期（252日）历史分位数的差异，识别流动性溢价近期加速或减速的变化斜率。将该斜率除以（1+近期波动率），对高波动股票的信号进行衰减，构建经风险调整的均值回归强度指标。适用于捕捉配置比例的中期趋势衰竭或反转，而非单纯的静态极值。",
+    "expression_list": [
+        "multiply(subtract(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 63), ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252)), inverse(add(1, ts_std_dev(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 63))))"
+    ]
+}

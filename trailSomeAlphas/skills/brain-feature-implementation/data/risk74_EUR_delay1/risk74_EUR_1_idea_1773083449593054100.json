@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(group_zscore(subtract(ts_mean(ts_backfill({hfown_pctown}, 21), 20), ts_mean(ts_backfill({fund_pct_ownership_encr}, 21), 20)), sector), std=3), 5)",
+    "idea": "将区域价差因子的21日回填机制应用于机构持仓数据，计算20日滚动均值差异（ts_mean）替代累计和以平滑单日异常波动，配合sector中性化与5日衰减，构建低换手版的长期机构持仓偏好信号。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(group_zscore(subtract(ts_mean(ts_backfill(rsk74_hfown_pctown, 21), 20), ts_mean(ts_backfill(hedge_fund_pct_ownership_encr, 21), 20)), sector), std=3), 5)"
+    ]
+}

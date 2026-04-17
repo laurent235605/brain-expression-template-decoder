@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_mean(252 - ts_count_nans(vec_count({fiscal_period_end}), 21), 252), add(ts_std_dev(252 - ts_count_nans(vec_count({fiscal_period_end}), 21), 252), 0.01))",
+    "idea": "计算月度（21日）数据丰富度的长期均值与波动率之比（类似夏普比率）。高值代表披露节奏稳定可预测的公司，低值代表数据断断续续、波动剧烈的标的。通过惩罚波动性，此模板识别出不仅数据量大且质量稳定（consistent reporting）的alpha源。",
+    "expression_list": [
+        "divide(ts_mean(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 21), 252), add(ts_std_dev(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 21), 252), 0.01))"
+    ]
+}

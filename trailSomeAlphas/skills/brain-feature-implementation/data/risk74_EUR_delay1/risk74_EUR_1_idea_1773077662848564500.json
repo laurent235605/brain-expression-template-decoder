@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(signed_power(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), sector), 2), 4), 1.5, trade_when(less(signed_power(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), sector), 2), -4), -1.5, 0)), 5)",
+    "idea": "凸性放大尾部信号：使用signed_power（指数2）对行业标准化后的敞口进行非线性拉伸，使z=2变为4、z=-2变为-4，仅在拉伸后超过±4阈值（对应原zscore±2，即前/后约2.5%分位）时赋予±1.5倍权重，增强对极端纯出口/纯内销公司的暴露，配合5日线性衰减平滑。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), sector), 2), 4), 1.5, trade_when(less(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), sector), 2), -4), -1.5, 0)), 5)"
+    ]
+}

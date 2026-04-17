@@ -1,0 +1,14 @@
+{
+    "template": "quantile(multiply(group_zscore({value_ts}, industry), reverse(group_zscore({crowding}, industry))), \"gaussian\") * quantile(subtract(abs(subtract({factor_e}, {factor_s})), abs(subtract({factor_s}, {factor_g}))), \"cauchy\")",
+    "idea": "对非拥挤价值因子（价值减拥挤）进行高斯分位拉伸以强化极端尾部信号，同时用柯西分布拉伸ESG各组件间差异的非对称性（衡量E-S-G阶梯结构的不平整度），两者相乘识别极端非拥挤但ESG结构特殊的利基市场机会。",
+    "expression_list": [
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(rsk74_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_e, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(rsk74_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_esg, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(rsk74_raw_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_e, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(rsk74_raw_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_esg, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(liquidity_factor_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_e, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(liquidity_factor_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_esg, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(liquidity_timeseries_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_e, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")",
+        "quantile(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_zscore(liquidity_timeseries_crowding, industry))), \"gaussian\") * quantile(subtract(abs(subtract(rsk74_factor_esg, rsk74_factor_s)), abs(subtract(rsk74_factor_s, rsk74_factor_g))), \"cauchy\")"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_theilsen({ucits_weight}, ts_step(1), 20)",
+    "idea": "**Concept**: UCITS Weight Essence\n- **Sample Fields Used**: ucits_weight\n- **Definition**: The base form of the UCITS weight stripped of time-series noise through a Theil-Sen robust regression trend estimator, capturing the underlying allocation trend immune to daily volatility\n- **Why This Feature**: Theil-Sen estimator is resistant to outliers (unlike OLS), providing the \"essence\" of allocation direction—whether the fund is structurally moving toward or away from this constituent regardless of daily noise\n- **is filling nan necessary**: Yes, use ts_backfill() before regression to ensure sufficient data points for robust slope estimation; Theil-Sen requires continuous data to avoid bias\n- **Directionality**: Positive slope indicates structural accumulation; negative slope indicates structural distribution; zero slope indicates stable long-term holding\n- **Boundary Conditions**: Slope magnitude limited by maximum daily weight change constraints and fund tracking error limits",
+    "expression_list": [
+        "ts_theilsen(mcr51_ishares_stoxx_europe_600_ucits_weight, ts_step(1), 20)"
+    ]
+}

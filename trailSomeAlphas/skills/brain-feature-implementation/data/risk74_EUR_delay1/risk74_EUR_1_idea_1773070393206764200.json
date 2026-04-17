@@ -1,0 +1,8 @@
+{
+    "template": "add(multiply(0.7, ts_zscore(winsorize(ts_sum(if_else(greater(ts_delta({shortint},1),0),ts_delta({shortint},1),0),10),std=4),126)), multiply(-0.3, ts_zscore(winsorize(ts_sum(if_else(less(ts_delta({shortint},1),0),ts_delta({shortint},1),0),10),std=4),126)))",
+    "idea": "非对称分解空头建仓(buildup)与平仓(covering)行为：近10日空头累积增加(正变化)赋予+0.7权重，累积减少(负变化)赋予-0.3权重，捕捉空头挤压(covering)与恐慌建仓(buildup)对市场的不对称冲击，适应多头回补与空头加仓的不同市场逻辑。",
+    "expression_list": [
+        "add(multiply(0.7, ts_zscore(winsorize(ts_sum(if_else(greater(ts_delta(rsk74_shortint,1),0),ts_delta(rsk74_shortint,1),0),10),std=4),126)), multiply(-0.3, ts_zscore(winsorize(ts_sum(if_else(less(ts_delta(rsk74_shortint,1),0),ts_delta(rsk74_shortint,1),0),10),std=4),126)))",
+        "add(multiply(0.7, ts_zscore(winsorize(ts_sum(if_else(greater(ts_delta(rsk74_shortint_ts,1),0),ts_delta(rsk74_shortint_ts,1),0),10),std=4),126)), multiply(-0.3, ts_zscore(winsorize(ts_sum(if_else(less(ts_delta(rsk74_shortint_ts,1),0),ts_delta(rsk74_shortint_ts,1),0),10),std=4),126)))"
+    ]
+}

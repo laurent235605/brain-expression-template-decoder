@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_rank(abs(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 63), 0.9), signed_power(ts_decay_linear(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), 3), 1.5), 0)",
+    "idea": "历史分位条件触发式极端惊喜。仅当当前惊喜的绝对值处于自身历史63日top 10%分位（ts_rank>0.9）时才开仓（trade_when），信号强度经signed_power非线性放大（1.5次幂突出极端值），并配合3日衰减，专注于捕捉\"历史性惊喜\"带来的短期动量。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(abs(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 63), 0.9), signed_power(ts_decay_linear(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 3), 1.5), 0)",
+        "trade_when(greater(ts_rank(abs(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 63), 0.9), signed_power(ts_decay_linear(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 3), 1.5), 0)"
+    ]
+}

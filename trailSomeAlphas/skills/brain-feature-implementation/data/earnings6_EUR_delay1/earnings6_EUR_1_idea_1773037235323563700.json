@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(group_zscore(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20), industry)), 1.5), signed_power(group_zscore(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20), industry), 2), 0), industry)",
+    "idea": "行业中性极端惊喜非线性放大。先对20日线性衰减的EPS Surprise进行行业内Z-score标准化，仅保留|Z|>1.5的极端尾部（前7%与后7%），通过signed_power(...,2)平方放大极端值，中间噪音置零，最后再次行业中性化，构建高纯度事件驱动alpha。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(group_zscore(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry)), 1.5), signed_power(group_zscore(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry), 2), 0), industry)",
+        "group_zscore(trade_when(greater(abs(group_zscore(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry)), 1.5), signed_power(group_zscore(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry), 2), 0), industry)"
+    ]
+}

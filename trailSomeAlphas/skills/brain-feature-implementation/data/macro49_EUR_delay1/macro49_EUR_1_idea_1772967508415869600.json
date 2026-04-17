@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(if_else(greater(abs(ts_delta(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), 1)), ts_std_dev(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), 20)), sign(ts_delta(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), 1)), 0), d=5)",
+    "idea": "**增强逻辑：事件驱动 + 波动率标准化 + 线性衰减**\n- **改进点1（事件检测）**：计算价格代理的1日变化(ts_delta)，并与20日历史波动率(ts_std_dev)比较，识别统计上显著的'跳跃'事件（如指数调仓、大额申购赎回）。\n- **改进点2（方向提取）**：使用sign函数提取跳跃方向（正/负），忽略幅度以避免极端值影响，符合'方向比幅度更持久'的假设。\n- **改进点3（半衰期处理）**：对检测到的显著事件应用ts_decay_linear(5)，构造5日线性衰减信号，模拟'公告后信息缓慢渗入市场或迅速 fade'的过程，适用于捕捉短期套利窗口。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(abs(ts_delta(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), 1)), ts_std_dev(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), 20)), sign(ts_delta(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), 1)), 0), d=5)"
+    ]
+}

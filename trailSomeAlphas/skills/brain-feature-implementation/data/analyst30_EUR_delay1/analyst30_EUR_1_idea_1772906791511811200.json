@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(ts_delta(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 21), 30), -1, 0), 20)",
+    "idea": "事件驱动策略：当月度财年极差跳升超过30天（疑似发生财年变更或重大重组），立即触发做空信号并线性衰减20日。利用市场对会计期间结构性变化的延迟反应，捕捉事件后的价格漂移或反转。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(ts_delta(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 21), 30), -1, 0), 20)"
+    ]
+}

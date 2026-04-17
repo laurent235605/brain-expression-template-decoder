@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(winsorize(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), std=4), industry)",
+    "idea": "行业内部多空平衡配置：先清洗并计算财政年度变更次数，经winsorize处理后，在每个行业内进行权重归一化（group_normalize），使得每个行业内部多头和空头暴露相互抵消。适用于构建行业中性组合，纯粹捕捉行业内部相对会计稳定性排序，避免行业间的系统性偏差",
+    "expression_list": [
+        "group_normalize(winsorize(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4), industry)"
+    ]
+}

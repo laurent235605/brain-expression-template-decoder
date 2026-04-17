@@ -1,0 +1,7 @@
+{
+    "template": "let(avg_lik, vec_avg({likelihood_score}), conf, divide(1, add(1, vec_stddev({likelihood_score}))), skew, vec_skewness({likelihood_score}), price_sharpe, divide(subtract(divide(vec_avg({exit_price}), vec_avg({openprice})), ts_mean(divide(vec_avg({exit_price}), vec_avg({openprice})), 30)), max(ts_std_dev(divide(vec_avg({exit_price}), vec_avg({openprice})), 30), 0.001)), core, multiply(multiply(conf, signed_power(abs(skew), 0.3)), multiply(subtract(avg_lik, ts_mean(avg_lik, 30)), price_sharpe)), zscore(winsorize(core, std=4)))",
+    "idea": "利用向量标准差倒数作为置信度权重（概率分布越集中置信越高），引入偏度调整非线性方向，再将概率偏离与价格动量的时序夏普比率（超额收益/波动）相乘，构建经向量分布特征与价格风险双重调整后的复合信号。",
+    "expression_list": [
+        "let(avg_lik, vec_avg(success_likelihood_score), conf, divide(1, add(1, vec_stddev(success_likelihood_score))), skew, vec_skewness(success_likelihood_score), price_sharpe, divide(subtract(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), ts_mean(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), 30)), max(ts_std_dev(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), 30), 0.001)), core, multiply(multiply(conf, signed_power(abs(skew), 0.3)), multiply(subtract(avg_lik, ts_mean(avg_lik, 30)), price_sharpe)), zscore(winsorize(core, std=4)))"
+    ]
+}

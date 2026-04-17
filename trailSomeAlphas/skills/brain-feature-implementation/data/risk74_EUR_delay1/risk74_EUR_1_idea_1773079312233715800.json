@@ -1,0 +1,8 @@
+{
+    "template": "truncate(zscore(divide(subtract({concentration}, ts_mean(ts_backfill({concentration}, 10), 60)), add(ts_std_dev(ts_delta({concentration}, 1), 60), 0.0001))), maxPercent=0.015)",
+    "idea": "将模板2的'波动率调整信噪比'方法迁移到模板1的地理集中度上，构建'集中度变化信噪比'，识别统计显著的集中度异动而非单纯偏离趋势，同时结合模板2的极值裁剪与权重截断控制风险。该模板区分'高波动环境下的普通地理调整'与'低波动环境下的战略性地缘转移'，只押注统计意义上显著的集中度变化。",
+    "expression_list": [
+        "truncate(zscore(divide(subtract(rsk74_concentration, ts_mean(ts_backfill(rsk74_concentration, 10), 60)), add(ts_std_dev(ts_delta(rsk74_concentration, 1), 60), 0.0001))), maxPercent=0.015)",
+        "truncate(zscore(divide(subtract(rsk74_raw_concentration, ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), add(ts_std_dev(ts_delta(rsk74_raw_concentration, 1), 60), 0.0001))), maxPercent=0.015)"
+    ]
+}

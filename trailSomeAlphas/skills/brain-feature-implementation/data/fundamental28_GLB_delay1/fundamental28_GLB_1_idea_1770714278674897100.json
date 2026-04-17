@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(winsorize(ts_delta(ts_regression(winsorize(ts_backfill({value_08251q},63),std=4), log(winsorize(ts_backfill({value_02300q},63),std=4)),252,rettype=0), 63), std=4), 10)",
+    "idea": "规模调整覆盖率的效率动量：先计算规模中性化残差（运营效率），再取其63日变化率（ts_delta）以识别“运营效率正在改善”或“正在恶化”的企业，而非静态的效率高/低。对变化率进行截尾和10日线性衰减平滑（ts_decay_linear），捕捉效率提升的持续性动量，适用于困境反转或效率改善加速的策略场景。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(ts_delta(ts_regression(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4)),252,rettype=0), 63), std=4), 10)",
+        "ts_decay_linear(winsorize(ts_delta(ts_regression(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4)),252,rettype=0), 63), std=4), 10)",
+        "ts_decay_linear(winsorize(ts_delta(ts_regression(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4)),252,rettype=0), 63), std=4), 10)",
+        "ts_decay_linear(winsorize(ts_delta(ts_regression(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4)),252,rettype=0), 63), std=4), 10)"
+    ]
+}

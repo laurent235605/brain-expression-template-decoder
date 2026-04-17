@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(subtract(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)), if_else(is_nan({exp_nondomicile1}),0,ts_backfill({exp_nondomicile1},63))),std=4), industry)",
+    "idea": "美国vs非本土暴露相对价差因子（Relative Geographic Spread）。计算美国暴露与海外非本土暴露的差值，经行业中性化与极值处理，捕捉'美国倾斜'与'全球化分散'之间的相对配置观点。高值表示过度押注美国而忽视其他海外市场，低值表示回避美国侧重其他区域，适用于跨区域配对交易。",
+    "expression_list": [
+        "group_zscore(winsorize(subtract(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)), if_else(is_nan(rsk74_raw_exp_nondomicile1),0,ts_backfill(rsk74_raw_exp_nondomicile1,63))),std=4), industry)",
+        "group_zscore(winsorize(subtract(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)), if_else(is_nan(rsk74_std_exp_nondomicile1),0,ts_backfill(rsk74_std_exp_nondomicile1,63))),std=4), industry)"
+    ]
+}

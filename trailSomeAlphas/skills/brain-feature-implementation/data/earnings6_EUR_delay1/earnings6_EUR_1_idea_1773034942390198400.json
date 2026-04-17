@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.001)), std=4), industry), 1.5)",
+    "idea": "**行业中性化稳健惊喜（非线性增强版）**：首先计算原始惊喜百分比，使用0.001作为分母保护避免除零；通过winsorize（std=4）截断极端异常值（处理极小预期EPS导致的百分比爆炸）；在行业内进行z-score标准化消除行业间盈利规模差异；最后使用signed_power（power=1.5）对标准化后的惊喜进行非线性变换，放大极端业绩惊喜（大幅beat或miss）的权重，同时保持正负方向性，使得尾部信号更加突出，适合捕捉高conviction的业绩超预期机会。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001)), std=4), industry), 1.5)",
+        "signed_power(group_zscore(winsorize(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001)), std=4), industry), 1.5)"
+    ]
+}

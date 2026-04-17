@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(ts_sum(ts_delta(winsorize({shortint},4),1),15), industry), if_else(greater({volume}, ts_mean({volume},20)), 1.5, 0.5)), 5)",
+    "idea": "**成交量确认的空头动能（条件加权）**：基础空头流量经行业中性化后，根据成交量是否高于20日均值进行条件缩放（if_else）：当成交量放大时，将信号放大1.5倍（知情交易确认）；当成交量萎缩时，将信号压缩至0.5倍（流动性不足导致的噪音），最后进行5日线性衰减（ts_decay_linear）控制换手率。经济逻辑：空头持仓的重大变化若伴随放量，往往代表机构主导的有信息交易，信号可靠性高；若缩量变动，可能是指数再平衡或技术性调整，应降低权重。此模板通过成交量过滤增强信噪比。",
+    "expression_list": []
+}

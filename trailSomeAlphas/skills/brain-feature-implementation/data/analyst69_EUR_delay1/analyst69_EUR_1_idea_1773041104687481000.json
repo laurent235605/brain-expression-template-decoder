@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(ts_regression(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), group_mean(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 252, rettype=0), 90), 1, if_else(less(ts_regression(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), group_mean(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 252, rettype=0), 5), -1, 0)), industry)",
+    "idea": "引入CAPM残差模板思路，将days_from_last_change对行业均值做252日时序回归（rettype=0取残差），剥离行业共同趋势（如某一行业整体都提前披露），保留个股特异性稳定度。在残差层面上应用模板1的90/5天双阈值三状态逻辑，最后用group_normalize确保组合在行业层面无净暴露，增强纯Alpha属性。",
+    "expression_list": [
+        "group_normalize(if_else(greater(ts_regression(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), group_mean(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 252, rettype=0), 90), 1, if_else(less(ts_regression(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), group_mean(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 252, rettype=0), 5), -1, 0)), industry)",
+        "group_normalize(if_else(greater(ts_regression(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), group_mean(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 252, rettype=0), 90), 1, if_else(less(ts_regression(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), group_mean(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 252, rettype=0), 5), -1, 0)), industry)"
+    ]
+}

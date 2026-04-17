@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), add(1, multiply(0.5, signed_power(group_zscore(winsorize(ts_backfill({hfown_pctown}, 21), std=4), industry), 2))))",
+    "idea": "将模板2的中美敞口价差与模板1的HF持仓信号进行乘法增强。使用signed_power（指数2）放大极端持仓信号的权重，实现“高信心区域配置”的凸性放大效应：机构高持仓的美国敞口多头或中国敞口空头获得额外加成，低持仓则衰减。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), add(1, multiply(0.5, signed_power(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), industry), 2))))"
+    ]
+}

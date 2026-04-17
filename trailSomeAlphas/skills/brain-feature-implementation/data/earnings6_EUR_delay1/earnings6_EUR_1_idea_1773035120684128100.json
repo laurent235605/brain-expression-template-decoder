@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract(vec_skewness({actual_eps}), vec_skewness({estimated_eps})), add(abs(vec_skewness({estimated_eps})), 0.01))",
+    "idea": "向量分布形态惊喜：超越简单的均值比较，利用vec_skewness计算实际与预期EPS向量的偏度差异。该信号捕捉分析师预期分布与实际盈利分布的不对称性——正偏表示实际盈利存在超预期上行长尾，负偏表示下行风险集中，为传统均值惊喜提供高阶矩风险信息的补充。",
+    "expression_list": [
+        "divide(subtract(vec_skewness(ern6_actual_eps), vec_skewness(ern6_estimated_eps)), add(abs(vec_skewness(ern6_estimated_eps)), 0.01))",
+        "divide(subtract(vec_skewness(ern6_actual_eps_274), vec_skewness(ern6_estimated_eps)), add(abs(vec_skewness(ern6_estimated_eps)), 0.01))"
+    ]
+}

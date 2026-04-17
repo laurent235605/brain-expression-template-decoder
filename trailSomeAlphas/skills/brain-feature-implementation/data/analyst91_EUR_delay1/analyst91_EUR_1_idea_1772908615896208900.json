@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(0.6, ts_rank(ts_std_dev(ts_backfill(winsorize(vec_avg({exposure_value}), std=4), 20), 20), 120)), multiply(0.4, ts_zscore(ts_delta(ts_std_dev(ts_backfill(winsorize(vec_avg({exposure_value}), std=4), 20), 20), 20), 120))), industry)",
+    "idea": "波动率动量与水平复合信号：结合波动率当前的历史分位水平（60%权重）与近期变化率（40%权重，ts_delta），构建“高波动且加速上行”（业务结构质变）或“低波动且持续收敛”（趋于稳定）的复合信号；使用winsorize预处理防止极端值扭曲动量计算，提升对业务结构拐点的识别能力。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.6, ts_rank(ts_std_dev(ts_backfill(winsorize(vec_avg(anl91_exposure_value), std=4), 20), 20), 120)), multiply(0.4, ts_zscore(ts_delta(ts_std_dev(ts_backfill(winsorize(vec_avg(anl91_exposure_value), std=4), 20), 20), 20), 120))), industry)"
+    ]
+}

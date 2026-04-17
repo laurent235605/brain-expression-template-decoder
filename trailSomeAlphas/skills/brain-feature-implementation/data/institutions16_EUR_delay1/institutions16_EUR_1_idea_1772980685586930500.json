@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0), add(1, multiply(0.5, ts_decay_linear(trade_when(less(days_from_last_change({reported_asset_value}), 10), 1, 0), 10))))",
+    "idea": "事件驱动型时效加权（Recency-Weighted）：利用days_from_last_change检测报告资产值的更新时点，对近10日内有数据更新的标的给予额外0.5倍残差权重（总权重1.5倍）并随时间线性衰减，适用于捕捉财报或公告披露后的资金再配置短期alpha。",
+    "expression_list": [
+        "multiply(ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), sector), 252, rettype=0), add(1, multiply(0.5, ts_decay_linear(trade_when(less(days_from_last_change(fund_reported_asset_value), 10), 1, 0), 10))))"
+    ]
+}

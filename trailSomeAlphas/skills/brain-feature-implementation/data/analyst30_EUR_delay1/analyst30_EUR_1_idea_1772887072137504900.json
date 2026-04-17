@@ -1,0 +1,7 @@
+{
+    "template": "vec_range({fiscalyearend})",
+    "idea": "**Concept**: Fiscal Year Temporal Dispersion\n- **Sample Fields Used**: `fiscalyearend`\n- **Definition**: Range between maximum and minimum fiscal year end dates in the vector\n- **Why This Feature**: Detects fiscal year changes or multiple subsidiaries with different year-ends; measures accounting period structural stability\n- **Logical Meaning**: Temporal concentration of fiscal reporting; 0 indicates consistent fiscal year, >0 indicates changes or complexity\n- **is filling nan necessary**: NaN dates must be filtered using `vec_filter` before calculating range to avoid false extremes or errors\n- **Directionality**: 0 indicates perfect fiscal alignment; higher values (up to 365) indicate fiscal year changes or diverse subsidiaries\n- **Boundary Conditions**: 0 to 365 (days); 0 is optimal; >30 suggests fiscal year change or data inconsistency",
+    "expression_list": [
+        "vec_range(anl30_fiscalyearend)"
+    ]
+}

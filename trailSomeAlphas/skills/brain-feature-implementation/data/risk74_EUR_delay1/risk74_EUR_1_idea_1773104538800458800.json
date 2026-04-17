@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), ts_mean(winsorize(ts_backfill({exp_usa}, 126), std=4), 21)), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), group_cartesian_product(sector, country)), ts_zscore(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4), 252)), 63, rettype=0), driver='gaussian')",
+    "idea": "构建双重调整残差：输入变量使用21日变化量（ts_delta）捕捉近期动态，解释变量加入时序Z分数（ts_zscore）的非本土敞口，并使用板块与国家的笛卡尔积（group_cartesian_product）进行更精细的分组控制，最后通过高斯分位数（quantile）拉伸尾部以增强极端信号区分度。",
+    "expression_list": [
+        "quantile(ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 126), std=4), 21)), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), group_cartesian_product(sector, country)), ts_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4), 252)), 63, rettype=0), driver='gaussian')",
+        "quantile(ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 126), std=4), 21)), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), group_cartesian_product(sector, country)), ts_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4), 252)), 63, rettype=0), driver='gaussian')"
+    ]
+}

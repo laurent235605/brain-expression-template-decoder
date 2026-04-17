@@ -1,0 +1,7 @@
+{
+    "template": "quantile(multiply(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10))), driver='gaussian')",
+    "idea": "先对重建价值进行持续性平滑(ts_mean)和事件新鲜度加权(decay)，再通过高斯分位数映射将中间噪音压缩至零附近、拉伸两端尾部，专门识别具有持续性的温和修正且信息新鲜的股票，避免单次跳变干扰。",
+    "expression_list": [
+        "quantile(multiply(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10))), driver='gaussian')"
+    ]
+}

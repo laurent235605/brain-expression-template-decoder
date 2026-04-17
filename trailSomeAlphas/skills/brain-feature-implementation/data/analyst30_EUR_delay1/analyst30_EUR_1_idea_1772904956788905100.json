@@ -1,0 +1,7 @@
+{
+    "template": "v = vec_range(vec_filter({fiscalyearend}, value=\"nan\")); ts_pos = ts_rank(v, 252); cs_pos = group_rank(v, sector); z_cs = group_zscore(v, sector); cond = and(greater(ts_pos, 0.9), greater(cs_pos, 0.9)); trade_when(cond, signed_power(multiply(z_cs, add(1, multiply(0.3, ts_zscore(v, 252)))), 1.5), 0)",
+    "idea": "构建“双维度极端”过滤条件：要求标的当前会计年度分散度同时处于自身过去一年历史前10%与行业横截面前10%；信号强度叠加自身历史zscore放大系数，确保捕获的是“相对于自身历史罕见且相对于行业极端”的会计复杂性峰值，避免常态高波动标的干扰。",
+    "expression_list": [
+        "v = vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")); ts_pos = ts_rank(v, 252); cs_pos = group_rank(v, sector); z_cs = group_zscore(v, sector); cond = and(greater(ts_pos, 0.9), greater(cs_pos, 0.9)); trade_when(cond, signed_power(multiply(z_cs, add(1, multiply(0.3, ts_zscore(v, 252)))), 1.5), 0)"
+    ]
+}

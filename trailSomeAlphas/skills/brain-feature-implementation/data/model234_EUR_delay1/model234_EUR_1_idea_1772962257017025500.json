@@ -1,0 +1,7 @@
+{
+    "template": "subtract(quantile(ts_mean(pasteurize({volume}), 5), driver=\"uniform\"), quantile(ts_mean(pasteurize({volume}), 20), driver=\"uniform\"))",
+    "idea": "双周期动量差分：分别计算短期（5日）和长期（20日）pasteurize清洗后成交量的uniform分位数，通过subtract构造流动性趋势的加速度指标，正值代表流动性正在相对改善（短周期超越长周期），类似成交量版的MACD信号",
+    "expression_list": [
+        "subtract(quantile(ts_mean(pasteurize(mdl234_volume), 5), driver=\"uniform\"), quantile(ts_mean(pasteurize(mdl234_volume), 20), driver=\"uniform\"))"
+    ]
+}

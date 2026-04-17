@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( ts_zscore( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( abs(vec_avg({estimated_eps})), 0.01 ) ), 63 ), 5 )",
+    "idea": "惊喜动量+时序极端性+平滑降换手。先计算标准化惊喜，再用ts_zscore观察当前惊喜相对个股自身历史(63日)的位置，识别' earnings surprise是否创近期新高/新低'的加速/减速形态，最后通过ts_decay_linear进行5日线性衰减加权平滑，降低单次公告噪音和换手率，捕捉持续的惊喜动量而非单期脉冲。",
+    "expression_list": [
+        "ts_decay_linear( ts_zscore( divide( subtract( vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps) ), add( abs(vec_avg(ern6_estimated_eps)), 0.01 ) ), 63 ), 5 )",
+        "ts_decay_linear( ts_zscore( divide( subtract( vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps) ), add( abs(vec_avg(ern6_estimated_eps)), 0.01 ) ), 63 ), 5 )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "divide(group_zscore(winsorize(ts_backfill({hfown_pctown}, 63), std=4), sector), add(ts_std_dev(winsorize({hfown_pctown}, 60), 60), 0.01))",
+    "idea": "波动调整后的持仓稳定性（持仓IR）：将行业相对持仓水平除以过去60日持仓比例的时间序列标准差（加0.01防除零），得到'持仓信息比率'。高值代表HF稳定重仓（低波动高信念），低值代表频繁进出（高波动投机）。该指标能识别出HF真正长期看好vs短期博弈的标的，降低跟随高频调仓噪音的风险。",
+    "expression_list": [
+        "divide(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), sector), add(ts_std_dev(winsorize(rsk74_hfown_pctown, 60), 60), 0.01))"
+    ]
+}

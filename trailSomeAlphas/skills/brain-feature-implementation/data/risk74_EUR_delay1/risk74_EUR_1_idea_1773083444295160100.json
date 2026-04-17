@@ -1,0 +1,7 @@
+{
+    "template": "hump(winsorize(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), industry), std=4), hump=0.02)",
+    "idea": "将机构流分歧因子的行业中性化（由sector改为industry）与4倍标准差截尾结合，并使用hump算子控制日间微小权重变化（阈值0.02），显著降低换手率同时保留核心信号，实现稳健的机构偏好暴露。",
+    "expression_list": [
+        "hump(winsorize(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), industry), std=4), hump=0.02)"
+    ]
+}

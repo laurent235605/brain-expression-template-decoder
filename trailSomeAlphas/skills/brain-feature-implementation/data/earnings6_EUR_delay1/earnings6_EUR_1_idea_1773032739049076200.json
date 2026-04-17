@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(winsorize(group_zscore(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), industry), 4), 2)",
+    "idea": "极端事件聚集（尾部聚焦）信号。先计算行业中性事件密集度（group_zscore），随后应用signed_power(y=2)对zscore进行平方变换。此操作将中间区间（zscore接近0）压缩至接近0，同时放大两侧尾部（极高和极低事件密集度）。最后进行winsorize清洗。逻辑：只有极端的事件聚集（或极端的静默）才具有显著 alpha，中等水平的事件活动多为噪音。该变换实现了'只交易极端'的区间结构。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), industry), 4), 2)",
+        "signed_power(winsorize(group_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), industry), 4), 2)",
+        "signed_power(winsorize(group_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), industry), 4), 2)",
+        "signed_power(winsorize(group_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), industry), 4), 2)"
+    ]
+}

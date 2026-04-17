@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( quantile( ts_decay_linear( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01) ), 20 ), \"gaussian\" ), industry )",
+    "idea": "引入估计EPS的标准差（vec_stddev）作为分母替代绝对值，衡量Surprise相对于分析师预期分歧度的标准化意外程度；通过高斯分位（quantile）拉伸极端尾部差异，并进行行业中性化（group_zscore），确保捕捉的是跨行业可比的相对盈利惊喜而非行业系统性偏差。",
+    "expression_list": [
+        "group_zscore( quantile( ts_decay_linear( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01) ), 20 ), \"gaussian\" ), industry )",
+        "group_zscore( quantile( ts_decay_linear( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01) ), 20 ), \"gaussian\" ), industry )"
+    ]
+}

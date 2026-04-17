@@ -1,0 +1,7 @@
+{
+    "template": "let diff = winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4); group_zscore(diff - group_mean(diff, log(ts_mean(cap,21)), sector), sector)",
+    "idea": "先计算原始分歧，减去行业市值加权平均分歧以剔除行业因子暴露，再组内标准化，得到纯个股特异性定价偏离信号，解决不同行业间“正常分歧水平”差异不可比的问题。",
+    "expression_list": [
+        "let diff = winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4); group_zscore(diff - group_mean(diff, log(ts_mean(cap,21)), sector), sector)"
+    ]
+}

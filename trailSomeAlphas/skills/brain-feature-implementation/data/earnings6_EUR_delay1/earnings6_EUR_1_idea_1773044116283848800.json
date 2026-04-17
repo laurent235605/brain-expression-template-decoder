@@ -1,0 +1,10 @@
+{
+    "template": "divide( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), add(ts_mean(ts_backfill(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 5), 252), 0.001) )",
+    "idea": "将模板1的'当前值/历史均值'框架迁移应用于股息数据，构建股息持续性的加速度比率，识别那些当期分红不仅高于历史常态且该持续性比率本身也在加速提升的标的，捕捉分红趋势的拐点信号。",
+    "expression_list": [
+        "divide( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), add(ts_mean(ts_backfill(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 5), 252), 0.001) )",
+        "divide( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), add(ts_mean(ts_backfill(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 5), 252), 0.001) )",
+        "divide( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), add(ts_mean(ts_backfill(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 5), 252), 0.001) )",
+        "divide( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), add(ts_mean(ts_backfill(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 5), 252), 0.001) )"
+    ]
+}

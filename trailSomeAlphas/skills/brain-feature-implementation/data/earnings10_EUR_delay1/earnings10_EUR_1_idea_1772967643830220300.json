@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(winsorize(ts_zscore(ts_delta(vec_median({elta_value}), 5), 252), std=4), industry)",
+    "idea": "基于稳健统计与时序定位：使用分位数回归思想，以中位数vec_median替代均值抵抗极端估计扰动，计算5日动量后通过252日滚动Z分数评估其在自身历史中的分位水平（极端修正识别），最后进行行业内排序，捕捉历史罕见的预期调整事件。",
+    "expression_list": [
+        "group_rank(winsorize(ts_zscore(ts_delta(vec_median(ern10_elta_value), 5), 252), std=4), industry)"
+    ]
+}

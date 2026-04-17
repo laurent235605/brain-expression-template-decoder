@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(add(multiply(0.6, divide(ts_mean(vec_avg({rank}), 5), ts_std_dev(vec_avg({rank}), 10))), multiply(0.4, divide(ts_mean(vec_avg({rank}), 20), ts_std_dev(vec_avg({rank}), 60)))), std=4), 3)",
+    "idea": "多时间尺度融合信噪比：结合短期（5日均值/10日波动）高灵敏度信噪比与长期（20日均值/60日波动）高稳定性信噪比，按6:4权重加权融合，再进行去极值和3日线性衰减平滑。该结构平衡了信号及时性与噪声过滤，适应不同市场节奏下的 rank 持续性特征。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(add(multiply(0.6, divide(ts_mean(vec_avg(mdl245_rank), 5), ts_std_dev(vec_avg(mdl245_rank), 10))), multiply(0.4, divide(ts_mean(vec_avg(mdl245_rank), 20), ts_std_dev(vec_avg(mdl245_rank), 60)))), std=4), 3)"
+    ]
+}

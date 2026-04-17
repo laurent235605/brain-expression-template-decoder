@@ -1,0 +1,8 @@
+{
+    "template": "{bfl_surface} / {bfl_total}",
+    "idea": "**Concept**: Surface-to-Total Contribution Ratio\n- **Sample Fields Used**: `fscore_bfl_surface`, `fscore_bfl_total`, `fscore_surface`, `fscore_total`\n- **Definition**: Proportion of total score attributable to static pentagon surface area versus acceleration component, revealing whether a security's strength is structural (high surface) or momentum-based (high acceleration contribution)\n- **Why This Feature**: Decomposes total score into its constituent parts; high surface contribution indicates stable quality, high acceleration contribution indicates transitional states or trend exhaustion\n- **Logical Meaning**: Structural stability index; values near 1 indicate pure static quality, values near 0 indicate pure momentum/transition plays\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values indicate static factor dominance (established quality); lower values indicate acceleration dominance (transitional dynamics)\n- **Boundary Conditions**: Values outside [0,1] indicate calculation anomalies; 0.5 represents balanced contribution",
+    "expression_list": [
+        "fscore_bfl_surface / fscore_bfl_total",
+        "fscore_bfl_surface_accel / fscore_bfl_total"
+    ]
+}

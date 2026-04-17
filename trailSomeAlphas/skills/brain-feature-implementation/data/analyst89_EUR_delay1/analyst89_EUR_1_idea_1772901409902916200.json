@@ -1,0 +1,7 @@
+{
+    "template": "group_zscale((vec_percentage({data_item_value}, 0.75) + vec_percentage({data_item_value}, 0.25) - 2*vec_percentage({data_item_value}, 0.5)) / (vec_percentage({data_item_value}, 0.75) - vec_percentage({data_item_value}, 0.25) + 0.001), industry)",
+    "idea": "分位数稳健偏度（Bowley Skewness）：使用75分位数、25分位数和中位数（50分位数）构建基于四分位距的稳健偏度指标，替代传统的三阶矩计算。该指标对异常值和厚尾分布不敏感，能更稳定地度量收益分布的中心不对称性，分母添加小常数避免除零，最后进行行业内标准化以确保可比性。",
+    "expression_list": [
+        "group_zscale((vec_percentage(anl89_data_item_value, 0.75) + vec_percentage(anl89_data_item_value, 0.25) - 2*vec_percentage(anl89_data_item_value, 0.5)) / (vec_percentage(anl89_data_item_value, 0.75) - vec_percentage(anl89_data_item_value, 0.25) + 0.001), industry)"
+    ]
+}

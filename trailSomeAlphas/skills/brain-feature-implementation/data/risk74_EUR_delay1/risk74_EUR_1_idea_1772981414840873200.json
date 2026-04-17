@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression({hfown_pctown}, log(ts_mean(cap, 21)), 252, rettype=0), industry)",
+    "idea": "先对数市值中性化（剔除大市值天然吸引机构持仓的偏差），再在更细粒度的行业层面进行标准化。适用于识别同行业内剔除规模因素后的真实选股能力，而非被动配置大盘股。",
+    "expression_list": [
+        "group_zscore(ts_regression(rsk74_hfown_pctown, log(ts_mean(cap, 21)), 252, rettype=0), industry)"
+    ]
+}

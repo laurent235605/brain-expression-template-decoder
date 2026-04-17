@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_mean(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), ts_mean(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 5))",
+    "idea": "背离捕捉模板：对比20日平滑的长期盈利转换效率趋势（ts_mean低换手）与5日平滑的短期累积修正压力（高频情绪）。当差值为正，表明基本面结构稳健但近期情绪过度悲观；差值为负则可能预示情绪过热。适用于均值回归或趋势确认的双重逻辑。",
+    "expression_list": [
+        "subtract(ts_mean(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), ts_mean(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 5))",
+        "subtract(ts_mean(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), ts_mean(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 5))"
+    ]
+}

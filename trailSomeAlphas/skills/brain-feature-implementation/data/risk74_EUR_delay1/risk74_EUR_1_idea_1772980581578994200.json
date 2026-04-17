@@ -1,0 +1,16 @@
+{
+    "template": "trade_when( and( greater(ts_rank(winsorize({concentration},4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan({nondomicile}),0,{nondomicile}),4),60),0.9) ), winsorize({concentration},4) * winsorize({nondomicile},4), 0 )",
+    "idea": "历史分位择时的持续高危检测器：仅在集中度与非本土收益均处于各自历史窗口（60日）前10%分位且当前截面前10%时触发交易（trade_when），双重确认避免暂时性噪音，识别长期且当前的“把所有鸡蛋放一个外国篮子”风险。",
+    "expression_list": [
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),4),60),0.9) ), winsorize(rsk74_concentration,4) * winsorize(rsk74_nondomicile,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),4),60),0.9) ), winsorize(rsk74_concentration,4) * winsorize(rsk74_raw_exp_nondomicile1,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),4),60),0.9) ), winsorize(rsk74_concentration,4) * winsorize(rsk74_raw_exp_nondomicile2,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),4),60),0.9) ), winsorize(rsk74_concentration,4) * winsorize(rsk74_std_exp_nondomicile1,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),4),60),0.9) ), winsorize(rsk74_concentration,4) * winsorize(rsk74_std_exp_nondomicile2,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_raw_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),4),60),0.9) ), winsorize(rsk74_raw_concentration,4) * winsorize(rsk74_nondomicile,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_raw_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),4),60),0.9) ), winsorize(rsk74_raw_concentration,4) * winsorize(rsk74_raw_exp_nondomicile1,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_raw_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),4),60),0.9) ), winsorize(rsk74_raw_concentration,4) * winsorize(rsk74_raw_exp_nondomicile2,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_raw_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),4),60),0.9) ), winsorize(rsk74_raw_concentration,4) * winsorize(rsk74_std_exp_nondomicile1,4), 0 )",
+        "trade_when( and( greater(ts_rank(winsorize(rsk74_raw_concentration,4),60),0.9), greater(ts_rank(winsorize(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),4),60),0.9) ), winsorize(rsk74_raw_concentration,4) * winsorize(rsk74_std_exp_nondomicile2,4), 0 )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(ts_sum({cfroidrs}, 10), industry), signed_power(ts_zscore(ts_sum({cfroidrs}, 10), 252), 0.5))",
+    "idea": "结合横截面行业中性化与历史时序位置判断。计算10日CFROI漂移累加的行业zscore作为主信号，同时计算该累加值在过去252日中的时序zscore，并通过signed_power以0.5次幂压缩历史极端值权重。当累积趋势处于历史极端高位时自动降低暴露，以防范边界条件中提到的加速趋势均值回归风险。",
+    "expression_list": [
+        "multiply(group_zscore(ts_sum(mdl172_cfroidrs, 10), industry), signed_power(ts_zscore(ts_sum(mdl172_cfroidrs, 10), 252), 0.5))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), std=4), industry)",
+    "idea": "行业中性化数据成熟度评分：先将向量字段转为元素计数(vec_count)，计算252日非缺失数据丰富度，经winsorize处理极值后，进行行业内Z-Score标准化，识别相对于同业异常完整或异常稀疏的披露历史，控制行业间天然差异（如金融vs制造业披露频率不同）。",
+    "expression_list": [
+        "group_zscore(winsorize(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), std=4), industry)"
+    ]
+}

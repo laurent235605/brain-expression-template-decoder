@@ -1,0 +1,14 @@
+{
+    "template": "multiply(group_zscore(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), industry), signed_power(group_rank(divide({value_03501a}, {value_02300q}), industry), 0.5))",
+    "idea": "将盈利能力动量（模板1）与资本结构质量（模板3）相结合，通过行业中性化处理（group_zscore和group_rank）消除行业偏差，并使用signed_power对资本结构权重进行非线性调整，突出极端资本结构公司的动量信号。高权益比例放大正向动量，形成质量动量复合因子。",
+    "expression_list": [
+        "multiply(group_zscore(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), industry), 0.5))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), signed_power(group_rank(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), industry), 0.5))"
+    ]
+}

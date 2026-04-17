@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(rank(ts_backfill({600_ucits_weight}, 21)), 0.2), zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 21) / ts_backfill({600_ucits_weight}, 21), std=4)), 0), 10)",
+    "idea": "流动性门槛约束后的平滑溢价信号。首先筛选通用UCITS权重排名前80%的股票（排除流动性过差导致的权重计算噪音），对剩余股票计算标准化溢价z-score，对排名后20%的股票因子值置零，最后应用10日线性衰减平滑处理。这确保信号仅来自机构可大规模配置的流动性充裕标的，并有效降低换手率，适用于低频配置策略和减少交易摩擦成本。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(rank(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21)), 0.2), zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21), std=4)), 0), 10)"
+    ]
+}

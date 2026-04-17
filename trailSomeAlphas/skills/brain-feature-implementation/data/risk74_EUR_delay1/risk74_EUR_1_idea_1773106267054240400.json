@@ -1,0 +1,7 @@
+{
+    "template": "hump(group_zscore(subtract(ts_sum(ts_delta(ts_backfill({hfown_pctown}, 63), 1), 20), ts_sum(ts_delta(ts_backfill({fund_pct_ownership_encr}, 63), 1), 20)), sector), hump=0.01)",
+    "idea": "结合模板2的回溯填充处理缺失值与模板1的背离逻辑，引入hump算子（阈值0.01）忽略日间微小权重变化，仅在信号变动超过阈值时才调整仓位，在保留核心机构持仓趋势信号的同时强制降低换手率，适用于数据有噪音但信号慢变的场景。",
+    "expression_list": [
+        "hump(group_zscore(subtract(ts_sum(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), 20), ts_sum(ts_delta(ts_backfill(hedge_fund_pct_ownership_encr, 63), 1), 20)), sector), hump=0.01)"
+    ]
+}

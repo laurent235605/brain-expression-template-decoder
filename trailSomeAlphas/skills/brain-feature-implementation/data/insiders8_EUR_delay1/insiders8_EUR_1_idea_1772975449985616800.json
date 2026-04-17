@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), sector), 20)",
+    "idea": "将模板1的20日简单平均替换为线性衰减（ts_decay_linear），结合模板2的幂次变换，在保持对近期极端偏离敏感度的同时，通过非线性放大突出尾部信号。适用于需要更快反应速度但仍需抑制脉冲噪音的场景， turnover 较原版有所提升但信号更及时。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), sector), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_av_diff(vec_avg({rank}), 60), add(1, multiply(0.3, ts_corr(vec_avg({rank}), ts_delay(vec_avg({rank}), 1), 20))))",
+    "idea": "持续性安全缩放（从属信号调制）：将均值回归信号（主信号）与持续性相关系数（从属信号）安全组合。通过add(1, ...)将调制因子映射至[0.7,1.3]区间，利用持续性强度动态调节信号幅度：高持续性时保留更多偏离敞口，低持续性时压缩仓位，严格避免从属信号颠覆主信号方向。",
+    "expression_list": [
+        "multiply(ts_av_diff(vec_avg(mdl245_rank), 60), add(1, multiply(0.3, ts_corr(vec_avg(mdl245_rank), ts_delay(vec_avg(mdl245_rank), 1), 20))))"
+    ]
+}

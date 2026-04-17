@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean( group_rank( trade_when( and( greater( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), 0 ), greater( ts_delta( winsorize( ts_backfill( {fund_pct_ownership_encr}, 63 ), 4 ), 5 ), 0 ) ), add( ts_delta( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 5 ), multiply( 0.5, ts_delta( winsorize( ts_backfill( {fund_pct_ownership_encr}, 63 ), 4 ), 5 ) ) ), 0 ), industry ), 5 )",
+    "idea": "多资金共振确认模板：结合对冲基金与机构持仓变化，仅在两者同步增持(and条件)时生成复合信号(权重2:1加权)，避免单一资金类型噪音；通过5日移动平均(ts_mean)平滑日度数据波动，并在行业内排名获取相对暴露，增强信号的稳健性与可信度，符合'conviction buying需要多资金验证'的逻辑。",
+    "expression_list": [
+        "ts_mean( group_rank( trade_when( and( greater( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), 0 ), greater( ts_delta( winsorize( ts_backfill( hedge_fund_pct_ownership_encr, 63 ), 4 ), 5 ), 0 ) ), add( ts_delta( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 5 ), multiply( 0.5, ts_delta( winsorize( ts_backfill( hedge_fund_pct_ownership_encr, 63 ), 4 ), 5 ) ) ), 0 ), industry ), 5 )"
+    ]
+}

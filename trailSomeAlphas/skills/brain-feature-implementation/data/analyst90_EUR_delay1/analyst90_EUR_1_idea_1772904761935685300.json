@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), 60), sign(ts_delta(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4), 20)))",
+    "idea": "时序动量与波动率方向共振：计算背离度在过去60天中的时序分位（ts_rank），并乘以波动率变化的方向符号（sign）。当背离处于历史高位且不确定性下降时产生强多头信号，反之亦然。",
+    "expression_list": [
+        "multiply(ts_rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), 60), sign(ts_delta(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4), 20)))"
+    ]
+}

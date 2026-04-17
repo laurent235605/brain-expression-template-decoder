@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(ts_delta(winsorize({hfown_pctown}, std=3), 5), 252)",
+    "idea": "历史分位数异常：将当前5日持仓变化置于该股票过去一年(252日)的历史变化分布中计算分位数，识别相对于自身历史而言的极端流入/流出事件，适用于捕捉突发性的配置变化而非绝对水平的高低。",
+    "expression_list": [
+        "ts_rank(ts_delta(winsorize(rsk74_hfown_pctown, std=3), 5), 252)"
+    ]
+}

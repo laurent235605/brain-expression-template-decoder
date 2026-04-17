@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(ts_backfill(vec_avg({vda}), lookback=5, k=1), 60)",
+    "idea": "**Concept**: Baseline Liquidity Pressure Level\n- **Sample Fields Used**: vda\n- **Definition**: Rolling average of VDA to establish the typical liquidity impact baseline for a security across multiple rebalance events\n- **Why This Feature**: Identifies securities that consistently experience high rebalancing pressure vs. those with sporadic events; stable high VDA indicates permanently impaired liquidity during index events\n- **is filling nan necessary**: Yes, rebalance data is sparse and event-driven. Use ts_backfill(vec_avg({vda}), lookback=5) to maintain the signal between announcement and effective date, filling gaps with the most recent announcement value.\n- **Directionality**: High values indicate persistent liquidity stress during rebalances; low values indicate easy absorption of index flows\n- **Boundary Conditions**: Near-zero values suggest either liquid large-caps or minimal index weight changes; extremely stable high values (>2.0) suggest structural liquidity mismatches in small-cap index constituents",
+    "expression_list": [
+        "ts_mean(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 60)"
+    ]
+}

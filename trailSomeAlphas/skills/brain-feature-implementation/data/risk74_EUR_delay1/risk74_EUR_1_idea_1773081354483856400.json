@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_sum(ts_delta({hfown_pctown}, 1), 20), driver=\"gaussian\")",
+    "idea": "将模板A的分位数映射逻辑应用于模板B的资金流压力。使用高斯分布而非均匀分布来映射累积持仓变化，使得极端的建仓/清仓信号（尾部）获得更大的区分度，而中间区域被压缩至零附近，突出\"强烈conviction\"和\"恐慌抛售\"的极端状态，符合指南中\"分布拉伸强调头尾\"的逻辑。",
+    "expression_list": [
+        "quantile(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), driver=\"gaussian\")"
+    ]
+}

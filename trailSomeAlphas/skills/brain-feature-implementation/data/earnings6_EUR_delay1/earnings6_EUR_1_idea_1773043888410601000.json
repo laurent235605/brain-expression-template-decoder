@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_normalize(trade_when(greater(vec_count({estimated_eps}), 3), divide(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), add(vec_stddev({estimated_eps}), 0.01)), 0), industry), 5)",
+    "idea": "分析师分歧调整的信号噪声比。将盈利惊喜除以分析师预测分歧度（vec_stddev），当覆盖度足够（vec_count>3）时，高分歧下的惊喜被视为更强信号（信息比调整），经行业中性化（group_normalize）和5日指数衰减（ts_decay_linear）降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(trade_when(greater(vec_count(ern6_estimated_eps), 3), divide(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), add(vec_stddev(ern6_estimated_eps), 0.01)), 0), industry), 5)",
+        "ts_decay_linear(group_normalize(trade_when(greater(vec_count(ern6_estimated_eps), 3), divide(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), add(vec_stddev(ern6_estimated_eps), 0.01)), 0), industry), 5)"
+    ]
+}

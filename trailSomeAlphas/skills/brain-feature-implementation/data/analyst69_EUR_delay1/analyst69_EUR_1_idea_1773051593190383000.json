@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.15)), quantile(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), driver=\"gaussian\"), 0)",
+    "idea": "融合模板1的行业相对比较与模板2的尾部聚焦策略，采用分位数分布转换增强区分度。对清洗后的修订动量应用高斯分位数转换（quantile），将中间区间压缩、尾部拉伸，再经行业内排名筛选前15%/后15%极值位置输出信号。这种结构通过非线性分布变换，使行业内显著偏离均值的修订信号获得更强的数学区分度，适合捕捉极端预期修正带来的非对称收益。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.15)), quantile(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), driver=\"gaussian\"), 0)",
+        "trade_when(or(greater(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.15)), quantile(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), driver=\"gaussian\"), 0)"
+    ]
+}

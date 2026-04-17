@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(divide(winsorize(ts_backfill({value_03501a}, 63), std=4), winsorize({value_02300q}, std=4)), industry), 1.5)",
+    "idea": "非线性保守度强化：在行业中性资本结构比率基础上，应用1.5次幂的符号保持变换（signed_power）。该操作放大极端保守端（高权益比）与极端激进端（低权益比）的区分度，同时保持方向性（高值仍为好），使组合对财务结构最安全的公司给予超比例权重，增强因子在尾端的区分能力，适用于追求极致财务质量的策略。",
+    "expression_list": [
+        "signed_power(group_zscore(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(fnd28_bsassetq_value_02300q, std=4)), industry), 1.5)",
+        "signed_power(group_zscore(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(fnd28_nddq1_value_02300q, std=4)), industry), 1.5)",
+        "signed_power(group_zscore(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(fnd28_bsassetq_value_02300q, std=4)), industry), 1.5)",
+        "signed_power(group_zscore(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(fnd28_nddq1_value_02300q, std=4)), industry), 1.5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), subtract(1.5, abs(quantile(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), driver=gaussian)))), 5)",
+    "idea": "非线性衰减的温和极端修正策略。对行业中性Z分数进行高斯分位转换后，构造倒U型权重函数：过度极端（分位接近±1）的修正赋予较低权重，中等极端（分位±0.5附近）赋予最高权重，结合5日线性衰减平滑，捕捉那些尚未过度拥挤、仍有持续性的预测调整机会。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), subtract(1.5, abs(quantile(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), driver=gaussian)))), 5)",
+        "ts_decay_linear(multiply(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), subtract(1.5, abs(quantile(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), driver=gaussian)))), 5)"
+    ]
+}

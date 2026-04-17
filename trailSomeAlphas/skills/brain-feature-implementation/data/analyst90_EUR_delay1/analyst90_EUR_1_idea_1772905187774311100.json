@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(ts_std_dev(vec_avg({likelihood_score}), 20), ts_std_dev(vec_avg({likelihood_score}), 60)), vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20)), 0)",
+    "idea": "利用输入2的期限结构逻辑作为开关条件：仅当短期波动率显著低于长期波动率（收敛状态）时，才暴露输入1的信噪比信号；在发散期强制仓位为0，实现波动率制度敏感的风险控制。",
+    "expression_list": [
+        "trade_when(less(ts_std_dev(vec_avg(success_likelihood_score), 20), ts_std_dev(vec_avg(success_likelihood_score), 60)), vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20)), 0)"
+    ]
+}

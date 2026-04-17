@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry )",
+    "idea": "对原始EPS惊喜进行行业内标准化处理，聚焦行业内的相对盈利超预期表现，避免不同行业间盈利预测偏差系统性差异导致的误判，识别行业内的盈利动能领军者。",
+    "expression_list": [
+        "group_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry )",
+        "group_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry )"
+    ]
+}

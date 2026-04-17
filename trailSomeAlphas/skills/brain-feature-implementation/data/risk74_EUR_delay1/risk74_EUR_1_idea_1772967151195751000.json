@@ -1,0 +1,7 @@
+{
+    "template": "truncate(zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001))), maxPercent=0.015)",
+    "idea": "**波动率调整后的信噪比流压**: 将20日持仓变化累加和除以过去60日该指标的历史波动率（标准差），构建类似于信息比率的“持仓流强度”指标；分子进行4倍标准差极值裁剪防止单日本身噪音过大，分母加入极小常数避免除零；全局z-score标准化后截断单票最大权重至1.5%。该模板区分“高波动环境下的普通变化”与“低波动环境下的显著变化”，只押注统计意义上显著的持仓异动。",
+    "expression_list": [
+        "truncate(zscore(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001))), maxPercent=0.015)"
+    ]
+}

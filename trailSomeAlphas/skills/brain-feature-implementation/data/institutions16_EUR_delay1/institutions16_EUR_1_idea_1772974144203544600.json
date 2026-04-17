@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(zscore(vector_neut(ts_mean(ts_backfill({fundreportedequityassets},63),21), ts_mean(ts_backfill({reported_asset_value},63),21))), std=4)",
+    "idea": "使用63日回溯填充后，对权益资产与总资产分别进行21日移动平均平滑，再进行向量中性化以剔除规模影响，最后截面标准化并截尾。该模板捕捉基金长期稳定的权益配置决心，过滤短期战术调仓噪音，强调持续性的结构性超配或低配。",
+    "expression_list": [
+        "winsorize(zscore(vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets,63),21), ts_mean(ts_backfill(fund_reported_asset_value,63),21))), std=4)"
+    ]
+}

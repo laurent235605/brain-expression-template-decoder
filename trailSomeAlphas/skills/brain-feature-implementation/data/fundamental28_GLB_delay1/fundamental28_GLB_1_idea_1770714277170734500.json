@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(ts_backfill({value_08251q},63),std=4), bucket(rank(log(winsorize(ts_backfill({value_02300q},63),std=4))), range=\"0,1,0.1\"))",
+    "idea": "放弃线性回归假设，采用非参数化分桶方法：将规模按对数分位划分为10个桶（bucket），在每个规模桶内计算覆盖率的组内Z-score。该方法能捕捉“同等规模下的佼佼者”，避免极端规模（如巨型蓝筹或微型股）对回归系数的过度影响，更适合规模-覆盖率关系非线性的场景。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4), bucket(rank(log(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4))), range=\"0,1,0.1\"))",
+        "group_zscore(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4), bucket(rank(log(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4))), range=\"0,1,0.1\"))",
+        "group_zscore(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4), bucket(rank(log(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4))), range=\"0,1,0.1\"))",
+        "group_zscore(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4), bucket(rank(log(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4))), range=\"0,1,0.1\"))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_delta(group_zscore({eps_best_eeps_cur_yr}, industry), 5), driver=gaussian)",
+    "idea": "引入分组中性化（group_zscore）到模板1的EPS字段，先消除行业间的盈利水平差异，再计算5日变化并进行高斯分位数转换，确保捕捉的是行业内相对修正强度而非跨行业不可比的水平差异。",
+    "expression_list": [
+        "quantile(ts_delta(group_zscore(anl69_aeps_best_eeps_cur_yr, industry), 5), driver=gaussian)",
+        "quantile(ts_delta(group_zscore(anl69_eps_best_eeps_cur_yr, industry), 5), driver=gaussian)"
+    ]
+}

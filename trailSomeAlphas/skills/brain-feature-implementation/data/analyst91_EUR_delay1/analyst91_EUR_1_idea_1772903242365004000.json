@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(vec_skewness({exposure_value}), sector), 0.9), signed_power(group_zscore(vec_skewness({exposure_value}), sector), 2), if_else(less(group_rank(vec_skewness({exposure_value}), sector), 0.1), multiply(-1, signed_power(group_zscore(vec_skewness({exposure_value}), sector), 2)), 0))",
+    "idea": "极端分位数非对称多空：仅交易行业内地域集中度前10%（极度右偏/All-in）和后10%（极度左偏/全面分散）的股票，分别给予正向和反向二次幂放大权重，中间80%强制清零。构建纯头尾高Sharp组合，完全摒弃中段温和调整区间，最大化利用地理战略分布的极端非对称性。",
+    "expression_list": [
+        "if_else(greater(group_rank(vec_skewness(anl91_exposure_value), sector), 0.9), signed_power(group_zscore(vec_skewness(anl91_exposure_value), sector), 2), if_else(less(group_rank(vec_skewness(anl91_exposure_value), sector), 0.1), multiply(-1, signed_power(group_zscore(vec_skewness(anl91_exposure_value), sector), 2)), 0))"
+    ]
+}

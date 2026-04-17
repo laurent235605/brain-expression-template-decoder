@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_backfill({hfown_pctown}, 63), std=4), sector) - group_zscore(winsorize(s_log_1p(ts_backfill({fund_num_owners_encr}, 63)), std=4), sector)",
+    "idea": "持股集中度与广度的背离信号：结合持仓比例({hfown_pctown})与机构数量({fund_num_owners_encr})。两者分别行业标准化后相减，高正值表示'高持仓占比但机构数量少'（筹码集中，HF抱团），高负值表示'低持仓占比但机构数量多'（分散试水）。背离程度反映HF对该股的信息优势置信度差异。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), sector) - group_zscore(winsorize(s_log_1p(ts_backfill(hedge_fund_num_owners_encr, 63)), std=4), sector)"
+    ]
+}

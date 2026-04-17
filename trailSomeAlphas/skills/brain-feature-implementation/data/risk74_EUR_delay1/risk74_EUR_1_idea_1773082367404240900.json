@@ -1,0 +1,5 @@
+{
+    "template": "truncate(group_normalize(trade_when(greater(rank(ts_mean({volume},21)),0.8),signed_power(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),industry),1.5),0),industry),maxPercent=0.02)",
+    "idea": "引入成交量确认机制（trade_when），仅当近期成交量处于前20%（高流动性确认）时才开仓，对特质性残差进行1.5次幂非线性放大（signed_power）以突出极端值，经行业内归一化（group_normalize）确保板块多空平衡，最后截断（truncate）单票持仓不超过2%以控制个体风险暴露。",
+    "expression_list": []
+}

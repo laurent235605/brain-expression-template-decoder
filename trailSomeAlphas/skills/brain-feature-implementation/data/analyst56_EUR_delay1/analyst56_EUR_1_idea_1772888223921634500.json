@@ -1,0 +1,24 @@
+{
+    "template": "vector_neut(vec_avg({investment}), vec_avg({buy_weight}))",
+    "idea": "**Concept**: Broker-Neutral Positioning\n- **Sample Fields Used**: `investment`, `buy_weight`, `authorcompany`\n- **Definition**: Investment size neutralized against average broker positioning to identify idiosyncratic analyst calls vs. herd behavior\n- **Why This Feature**: Removes systematic broker bias (e.g., Goldman always bullish on tech); isolates stock-specific alpha\n- **is filling nan necessary**: Ensure no NaN in investment or weights before neutralization; fill with 0 if NaN to allow cross-sectional regression to function.\n- **Directionality**: Positive values = overweight vs. broker average (contrarian within firm); Negative = underweight (herding)\n- **Boundary Conditions**: Minimum 10 observations required for meaningful neutralization; otherwise return NaN",
+    "expression_list": [
+        "vector_neut(vec_avg(anl56_daily_investment), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(anl56_daily_investment), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(anl56_daily_investmentprice), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(anl56_daily_investmentprice), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(anl56_investment), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(anl56_investment), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(anl56_investmentprice), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(anl56_investmentprice), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(anl56_reduced_investment), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(anl56_reduced_investment), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(anl56_reduced_investmentprice), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(anl56_reduced_investmentprice), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(daily_investment_denomination), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(daily_investment_denomination), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(investment_denomination), vec_avg(daily_buy_weight))",
+        "vector_neut(vec_avg(investment_denomination), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(main_investment_currency), vec_avg(main_buy_weight))",
+        "vector_neut(vec_avg(main_investment_currency), vec_avg(daily_buy_weight))"
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "template": "if_else(greater(bucket(rank(multiply({concentration}, {nondomicile})), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta({shortint}, 1), 15), multiply(0.3, ts_sum(ts_delta({shortint}, 1), 15)))",
+    "idea": "将地理风险（集中度×非本土）通过bucket分桶处理，仅对前20%最高风险分桶（极端单一国家依赖）施加完整的空头累积信号，对其他分桶施加30%的衰减信号，实现'极端风险集中时才全力做空'的分层增强策略，中段风险视为噪音降权处理。",
+    "expression_list": [
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_nondomicile)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_nondomicile)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_nondomicile)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_nondomicile)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint, 1), 15)))",
+        "if_else(greater(bucket(rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2)), range=\"0,1,0.2\"), 0.8), ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), multiply(0.3, ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)))"
+    ]
+}

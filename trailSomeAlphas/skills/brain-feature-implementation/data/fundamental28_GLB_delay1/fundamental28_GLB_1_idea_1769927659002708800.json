@@ -1,0 +1,10 @@
+{
+    "template": "right_tail(group_rank(divide(winsorize(ts_backfill({value_03501a}, 63), std=4), winsorize({value_02300q}, std=4)), industry), minimum=0.8)",
+    "idea": "极端保守型尾端筛选：仅保留行业内资本结构最保守的前20%标的（权益占比行业分位>80%），将其余标的置为NaN（无信号）。通过right_tail运算符实现极端尾端切割，专注于财务最安全、债务风险最低的公司群体，构建纯多头防御型筛选器，避免中段及高杠杆标的的噪音干扰。",
+    "expression_list": [
+        "right_tail(group_rank(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(fnd28_bsassetq_value_02300q, std=4)), industry), minimum=0.8)",
+        "right_tail(group_rank(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(fnd28_nddq1_value_02300q, std=4)), industry), minimum=0.8)",
+        "right_tail(group_rank(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(fnd28_bsassetq_value_02300q, std=4)), industry), minimum=0.8)",
+        "right_tail(group_rank(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(fnd28_nddq1_value_02300q, std=4)), industry), minimum=0.8)"
+    ]
+}

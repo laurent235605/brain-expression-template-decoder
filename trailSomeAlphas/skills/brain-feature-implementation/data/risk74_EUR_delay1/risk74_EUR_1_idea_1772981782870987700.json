@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(abs(ts_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 252)), 1.5), less(ts_std_dev(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 63), 0.02)), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), NaN)",
+    "idea": "极端稳定型区域价差因子。仅当敞口价差处于自身历史极端分位（|时序Z-score|>1.5）且近期波动率较低（63日标准差<0.02）时保留信号，其余区间设为NaN。通过波动率过滤剔除噪音区间的虚假极端值，专注于高确信度的结构性区域偏离机会。",
+    "expression_list": [
+        "trade_when(and(greater(abs(ts_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 252)), 1.5), less(ts_std_dev(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 63), 0.02)), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), NaN)"
+    ]
+}

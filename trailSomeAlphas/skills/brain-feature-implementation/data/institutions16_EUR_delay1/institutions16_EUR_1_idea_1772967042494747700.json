@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(winsorize(group_normalize(signed_power(quantile(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), driver='cauchy'), 1.5), industry), std=4), 20, half_life=5)",
+    "idea": "柯西分布尾部强化与指数衰减：对向量中性化残差应用柯西驱动分位数映射（比高斯更强调极端尾），再通过1.5次幂放大；经行业内归一化确保各组多空平衡后，使用半衰期为5日的指数衰减窗口平滑，突出近期极端信念配置的持续性，同时快速衰减过时信号。",
+    "expression_list": [
+        "ts_decay_exp_window(winsorize(group_normalize(signed_power(quantile(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), driver='cauchy'), 1.5), industry), std=4), 20, half_life=5)"
+    ]
+}

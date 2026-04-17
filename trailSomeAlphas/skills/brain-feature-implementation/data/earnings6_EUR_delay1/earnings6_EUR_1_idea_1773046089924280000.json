@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), signed_power( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 1.5 ), 0 ), 20 )",
+    "idea": "融合模板1的条件过滤与非线性放大操作。对满足阈值条件的Surprise使用signed_power（指数1.5）放大极端值（无论正负），再进行线性衰减平滑。此结构强化尾部收益贡献，使极大超预期和极大低于预期的股票信号更加突出。",
+    "expression_list": [
+        "ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), signed_power( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 1.5 ), 0 ), 20 )",
+        "ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), signed_power( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 1.5 ), 0 ), 20 )"
+    ]
+}

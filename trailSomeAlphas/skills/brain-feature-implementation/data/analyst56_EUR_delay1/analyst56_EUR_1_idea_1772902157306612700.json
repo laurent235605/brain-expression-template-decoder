@@ -1,0 +1,9 @@
+{
+    "template": "ts_rank(quantile(vec_avg({probability}), driver=\"uniform\"), 20)",
+    "idea": "历史分位数的时序位置：计算当前横截面均匀分位数在过去20个交易日中的时序排名，识别\"创历史新高\"的极端持续信念",
+    "expression_list": [
+        "ts_rank(quantile(vec_avg(anl56_daily_probability), driver=\"uniform\"), 20)",
+        "ts_rank(quantile(vec_avg(anl56_probability), driver=\"uniform\"), 20)",
+        "ts_rank(quantile(vec_avg(conviction_probability_score), driver=\"uniform\"), 20)"
+    ]
+}

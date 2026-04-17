@@ -1,0 +1,7 @@
+{
+    "template": "{ptg_mean} / ({mean_eps_fp1} * {cursharesoutstanding} + 0.01)",
+    "idea": "**Concept**: Price Target to Earnings Valuation Gap\n- **Sample Fields Used**: ptg_mean, mean_eps_fp1, cursharesoutstanding\n- **Definition**: The implied forward P/E ratio derived from price target divided by estimated earnings, measuring valuation optimism relative to earnings power\n- **Why This Feature**: Combines valuation (price target) with fundamentals (earnings) to identify stocks where analysts expect multiple expansion vs earnings growth to drive returns.\n- **Logical Meaning**: High values indicate valuation-driven expectations; low values indicate earnings-recovery plays. Changes indicate shifting analyst valuation models.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values indicate rich valuation expectations; lower values indicate value expectations\n- **Boundary Conditions**: Extreme when earnings near zero; requires shares outstanding for total earnings calculation",
+    "expression_list": [
+        "rtk_ptg_mean / (anl14_mean_eps_fp1 * anl14_cursharesoutstanding + 0.01)"
+    ]
+}

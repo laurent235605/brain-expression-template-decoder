@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.0), quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), driver='gaussian'), 0)",
+    "idea": "以模板2的Z分数作为前置筛选器（阈值放宽至|Z|>1.0识别潜在显著信号），仅在通过初筛的标的上应用模板1的3日平滑分位数持续检验与高斯转换。该结构避免对噪音区间进行不必要的复杂运算，提升计算效率的同时保持对持续温和趋势的有效捕捉。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.0), quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), driver='gaussian'), 0)"
+    ]
+}

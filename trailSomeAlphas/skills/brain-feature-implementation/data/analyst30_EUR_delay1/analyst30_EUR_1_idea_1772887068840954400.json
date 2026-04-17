@@ -1,0 +1,8 @@
+{
+    "template": "vec_avg({adjustedgrossamt}) / vec_avg({unadjustedgrossamt})",
+    "idea": "**Concept**: Relative Adjustment Ratio\n- **Sample Fields Used**: `unadjustedgrossamt`, `adjustedgrossamt`\n- **Definition**: Proportional scaling factor applied by corporate actions to the original dividend\n- **Why This Feature**: Normalizes corporate action impact across different dividend scales; reveals the split ratio or consolidation factor implicitly\n- **Logical Meaning**: The retention rate of dividend value through capital structure changes; <1 indicates dilution, >1 indicates accretion\n- **is filling nan necessary**: Division requires protection against zero unadjusted amounts. Use `pasteurize` or `nan_out` to handle edge cases where `unadjustedgrossamt` is zero or NaN\n- **Directionality**: <1 indicates dilutionary corporate actions; =1 indicates no adjustment; >1 indicates reverse splits\n- **Boundary Conditions**: (0, infinity); approaches 0 for large splits, approaches infinity for large reverse splits",
+    "expression_list": [
+        "vec_avg(anl30_unadjustedgrossamt) / vec_avg(anl30_unadjustedgrossamt)",
+        "vec_avg(anl30_adjustedgrossamt) / vec_avg(anl30_unadjustedgrossamt)"
+    ]
+}

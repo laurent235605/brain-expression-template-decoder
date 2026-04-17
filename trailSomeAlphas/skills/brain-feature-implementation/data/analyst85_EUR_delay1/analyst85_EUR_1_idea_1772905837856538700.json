@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_zscore(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 252) * ts_zscore(vec_range({version}), 63), 5)",
+    "idea": "将模板2的累积强度进行年度（252日）zscore标准化，与模板1的离散度进行季度（63日）zscore标准化后相乘，再通过5日线性衰减平滑。捕捉修订活动与观点分歧同时处于各自历史极端水平的股票，通过时序标准化确保跨周期可比性，并降低短期波动干扰。",
+    "expression_list": [
+        "ts_decay_linear(ts_zscore(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 252) * ts_zscore(vec_range(anl85_version), 63), 5)"
+    ]
+}

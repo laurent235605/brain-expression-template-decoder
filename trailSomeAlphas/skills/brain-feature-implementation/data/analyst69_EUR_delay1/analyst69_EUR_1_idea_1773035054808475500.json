@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 2)",
+    "idea": "在行业中性基础上，通过非线性幂变换（平方）放大极端稳定与极端不稳定股票的收益差异。对原始天数进行4倍标准差缩尾处理剔除数据错误，再进行行业内Z-score标准化，最后通过signed_power强调尾部信号，适合捕捉'极端可预测'与'极端不确定'的横截面溢价。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 2)",
+        "signed_power(group_zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 2)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(if_else(and(greater(group_rank(vec_skewness({version}), industry), 0.9), greater(group_zscore(vec_kurtosis({version}), industry), 1.5)), signed_power(group_zscore(vec_skewness({version}), industry), 2), if_else(and(less(group_rank(vec_skewness({version}), industry), 0.1), greater(group_zscore(vec_kurtosis({version}), industry), 1.5)), reverse(signed_power(group_zscore(vec_skewness({version}), industry), 2)), 0)), industry)",
+    "idea": "构建高阶矩共振过滤器：仅当偏度处于行业前10%且峰度(vec_kurtosis)显著高于行业均值(>1.5σ)时，判定为“高偏度高厚尾”极端状态并赋予正向凸性权重；后10%偏度配高峰度时赋予负向权重；利用峰度验证偏度信号的有效性，过滤中等峰度下的假极端。",
+    "expression_list": [
+        "group_normalize(if_else(and(greater(group_rank(vec_skewness(anl85_version), industry), 0.9), greater(group_zscore(vec_kurtosis(anl85_version), industry), 1.5)), signed_power(group_zscore(vec_skewness(anl85_version), industry), 2), if_else(and(less(group_rank(vec_skewness(anl85_version), industry), 0.1), greater(group_zscore(vec_kurtosis(anl85_version), industry), 1.5)), reverse(signed_power(group_zscore(vec_skewness(anl85_version), industry), 2)), 0)), industry)"
+    ]
+}

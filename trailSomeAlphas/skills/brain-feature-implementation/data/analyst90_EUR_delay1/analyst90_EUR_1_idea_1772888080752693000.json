@@ -1,0 +1,10 @@
+{
+    "template": "(vec_sum({recommendation_weighting}) - vec_sum({weighting})) / (vec_sum({recommendation_weighting}) + vec_sum({weighting}) + 0.0001)",
+    "idea": "**Concept**: Net Sentiment Imbalance Score\n- **Sample Fields Used**: `recommendation_weighting`, `weighting`\n- **Definition**: Difference between aggregated buy and sell recommendation weightings normalized by total recommendations\n- **Why This Feature**: Captures the directional consensus net of conflicting views; raw buy signals may be misleading if sell weightings are also elevated\n- **is filling nan necessary**: Treat NaN as 0 for missing buy or sell sides to calculate net exposure accurately, as absence of one side implies zero weighting on that side.\n- **Logical Meaning**: Positive values indicate net bullish consensus; negative values indicate net bearish; magnitude indicates strength of imbalance\n- **Directionality**: Positive values bullish; negative values bearish; zero indicates balanced disagreement\n- **Boundary Conditions**: +1 indicates unanimous buys; -1 indicates unanimous sells; 0 indicates equal weighting or no data",
+    "expression_list": [
+        "(vec_sum(buy_recommendation_weighting) - vec_sum(buy_recommendation_weighting)) / (vec_sum(buy_recommendation_weighting) + vec_sum(buy_recommendation_weighting) + 0.0001)",
+        "(vec_sum(buy_recommendation_weighting) - vec_sum(sell_recommendation_weighting)) / (vec_sum(buy_recommendation_weighting) + vec_sum(sell_recommendation_weighting) + 0.0001)",
+        "(vec_sum(sell_recommendation_weighting) - vec_sum(buy_recommendation_weighting)) / (vec_sum(sell_recommendation_weighting) + vec_sum(buy_recommendation_weighting) + 0.0001)",
+        "(vec_sum(sell_recommendation_weighting) - vec_sum(sell_recommendation_weighting)) / (vec_sum(sell_recommendation_weighting) + vec_sum(sell_recommendation_weighting) + 0.0001)"
+    ]
+}

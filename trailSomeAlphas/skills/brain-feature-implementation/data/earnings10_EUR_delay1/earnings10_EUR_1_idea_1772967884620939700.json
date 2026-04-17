@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(winsorize(ts_mean(vec_stddev(vec_filter({aily_delta_recon_value}, value=\"nan\")), 20), std=4), industry), 2)",
+    "idea": "**概念**: 行业中性化的累积特异波动率\n- **改进逻辑**: 将原始均值替换为vec_stddev以捕捉日内修订分歧度（而非方向），通过20日均值平滑获得稳定波动率估计；经winsorize去除极值噪音后，在行业层面做group_zscore中性化，剥离行业beta波动，保留个股特质性信息不确定性；最后使用signed_power(...,2)非线性放大极端波动股票信号，强化对高不确定性环境的暴露。\n- **适用场景**: 识别持续处于分析师争议状态（而非短暂噪音）且相对同业异常的个股。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(ts_mean(vec_stddev(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), 20), std=4), industry), 2)"
+    ]
+}

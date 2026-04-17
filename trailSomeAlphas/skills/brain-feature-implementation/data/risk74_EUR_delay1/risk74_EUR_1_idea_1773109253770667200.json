@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(signed_power(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),21),std=4), industry), 2), 10), industry)",
+    "idea": "对空头字段应用 Input 1 的完整流程：将21日累积空头变动（流量概念来自 Input 2）替代原始水平值，经行业标准化、非线性放大（signed_power）、线性衰减及行业中性归一化，识别空头压力的趋势性积聚而非静态水平。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(signed_power(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),21),std=4), industry), 2), 10), industry)",
+        "group_normalize(ts_decay_linear(signed_power(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),21),std=4), industry), 2), 10), industry)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_zscore(winsorize({momentum},std=4),d=252), add(ts_zscore(winsorize(add({value_ts},{earnyild}),std=4),d=252), 0.01))",
+    "idea": "**历史分位偏离度比率**：将当前因子值与过去252天自身历史比较（ts_zscore），计算\"相对于自身历史常态\"的动量与价值综合偏离度比率；分子为动量的历史z-score，分母为价值因子的历史z-score；高值表示该股票当前动量处于历史高位而价值处于历史低位（纯动量极致偏离），适用于识别因市场风格切换或个股基本面突变导致的相对位置极端偏离，而非依赖绝对水平。",
+    "expression_list": [
+        "divide(ts_zscore(winsorize(rsk74_momentum,std=4),d=252), add(ts_zscore(winsorize(add(rsk74_value_ts,rsk74_earnyild),std=4),d=252), 0.01))",
+        "divide(ts_zscore(winsorize(rsk74_momentum_ts,std=4),d=252), add(ts_zscore(winsorize(add(rsk74_value_ts,rsk74_earnyild),std=4),d=252), 0.01))"
+    ]
+}

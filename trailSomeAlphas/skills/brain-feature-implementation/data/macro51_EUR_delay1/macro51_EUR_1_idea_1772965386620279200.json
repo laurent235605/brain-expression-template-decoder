@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev({stoxx_europe_600_ucits_weight}, 20) / abs(ts_mean({stoxx_europe_600_ucits_weight}, 20))",
+    "idea": "**Concept**: Weight Volatility Regime\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The coefficient of variation (standard deviation divided by mean) of weights over a rolling window, identifying periods of portfolio stability versus active rebalancing\n- **Why This Feature**: Low volatility suggests passive holding patterns; high volatility indicates either turbulent markets affecting weights or active tactical adjustments by the fund\n- **is filling nan necessary**: Yes, use ts_backfill() with lookback=5 to ensure continuous calculation, as gaps in weight data would artificially inflate volatility measures\n- **Directionality**: Low values indicate stable, buy-and-hold behavior; high values suggest active trading or market stress affecting relative weights\n- **Boundary Conditions**: Minimum near 0 (perfect stability), maximum unbounded but practically limited by daily trading constraints",
+    "expression_list": [
+        "ts_std_dev(mcr51_ishares_stoxx_europe_600_ucits_weight, 20) / abs(ts_mean(mcr51_ishares_stoxx_europe_600_ucits_weight, 20))"
+    ]
+}

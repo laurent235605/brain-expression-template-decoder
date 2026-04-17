@@ -1,0 +1,18 @@
+[
+    "(inst16_ipreo_fundreportedequityassets / fund_reported_asset_value) * (inst16_ipreo_fundreportedfixedincomeassets / fund_reported_asset_value)",
+    "quantile(fund_reported_asset_value)",
+    "regression_neut(inst16_ipreo_fundportfolioturnover, fund_reported_asset_value)",
+    "ts_av_diff(inst16_ipreo_fundreportedequityassets / fund_reported_asset_value, 20)",
+    "ts_av_diff(fund_reported_asset_value, 60)",
+    "ts_corr(fund_reported_asset_value, inst16_ipreo_companyreportedtotalassets, 60)",
+    "ts_delta(inst16_ipreo_fundportfolioturnover, 20)",
+    "ts_delta(fund_reported_asset_value, 20)",
+    "ts_std_dev(inst16_ipreo_fundreportedequityassets / fund_reported_asset_value, 20)",
+    "ts_sum(ts_delta(fund_reported_asset_value, 1), 20)",
+    "ts_sum(inst16_ipreo_fundportfolioturnover, 20)",
+    "vector_neut(inst16_ipreo_fundreportedequityassets, fund_reported_asset_value)",
+    "inst16_ipreo_fundportfolioturnover * log(fund_reported_asset_value)",
+    "inst16_ipreo_fundreportedequityassets / (inst16_ipreo_fundreportedequityassets + inst16_ipreo_fundreportedfixedincomeassets)",
+    "inst16_ipreo_fundreportedequityassets / fund_reported_asset_value",
+    "fund_reported_asset_value / inst16_ipreo_companyreportedtotalassets"
+]

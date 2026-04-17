@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_delta(ts_sum(ts_backfill(vec_sum({actual_eps}), 5), 252), 63), industry)",
+    "idea": "基于向量求和(vec_sum)构建精确的TTM总盈利(非平均)，计算其季度环比变化(ts_delta, 63日窗口)以捕捉盈利增长动量，并通过行业中性化(group_zscore)剔除行业景气周期带来的系统性偏差，得到纯粹反映个股相对同业基本面改善强度的横截面信号。",
+    "expression_list": [
+        "group_zscore(ts_delta(ts_sum(ts_backfill(vec_sum(ern6_actual_eps), 5), 252), 63), industry)",
+        "group_zscore(ts_delta(ts_sum(ts_backfill(vec_sum(ern6_actual_eps_274), 5), 252), 63), industry)"
+    ]
+}

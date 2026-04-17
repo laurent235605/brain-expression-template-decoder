@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_regression(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), ts_step(), 126, rettype=2), industry)",
+    "idea": "行业中性TTM盈利趋势模板。先计算滚动252天的TTM EPS累积值，再对该序列进行126天的时序回归取斜率（捕捉盈利增长加速度而非绝对水平），最后在同行业内进行zscore标准化。适用于识别盈利持续改善且超越行业趋势的个股，消除不同行业盈利基数差异带来的偏差。",
+    "expression_list": [
+        "group_zscore(ts_regression(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), ts_step(), 126, rettype=2), industry)",
+        "group_zscore(ts_regression(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), ts_step(), 126, rettype=2), industry)"
+    ]
+}

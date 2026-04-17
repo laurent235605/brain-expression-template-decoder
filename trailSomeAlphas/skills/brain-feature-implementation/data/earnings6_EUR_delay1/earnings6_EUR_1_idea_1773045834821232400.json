@@ -1,0 +1,8 @@
+{
+    "template": "quantile( multiply( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), add(1, multiply(0.2, winsorize(zscore(vec_skewness({estimated_eps})), std=2))) ), driver=\\\"gaussian\\\" )",
+    "idea": "偏度调整非对称加权。计算预测分布的vec_skewness，将其截面zscore作为调整系数，对基础惊喜进行非对称加权(1+0.2*skew_zscore)。当分析师预期右偏（乐观极端）时，正向惊喜获得额外权重，捕捉“非对称预期下的超预期”信号，最后高斯拉伸。",
+    "expression_list": [
+        "quantile( multiply( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), add(1, multiply(0.2, winsorize(zscore(vec_skewness(ern6_estimated_eps)), std=2))) ), driver=\\\"gaussian\\\" )",
+        "quantile( multiply( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), add(1, multiply(0.2, winsorize(zscore(vec_skewness(ern6_estimated_eps)), std=2))) ), driver=\\\"gaussian\\\" )"
+    ]
+}

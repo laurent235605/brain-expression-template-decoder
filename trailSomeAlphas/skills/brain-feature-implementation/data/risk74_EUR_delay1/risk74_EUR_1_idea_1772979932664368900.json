@@ -1,0 +1,5 @@
+{
+    "template": "multiply(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry), rank(ts_mean({adv}, 20)))",
+    "idea": "流动性加权资金流：将行业中性化后的累积流信号与20日平均成交金额的横截面排名(rank)相乘，在保持多空平衡的前提下，对高流动性股票赋予更高权重，降低低流动性股票持仓数据噪音与交易成本影响",
+    "expression_list": []
+}

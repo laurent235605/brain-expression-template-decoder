@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 0), multiply(zscore(winsorize(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 4)), 1.5), multiply(zscore(winsorize(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 4)), 0.5))",
+    "idea": "非对称响应函数：结合模板1的高斯分位状态识别与模板2的修正信号，构造状态依赖的仓位权重。当历史稳定性处于高斯分布右侧(高于均值，即异常稳定)时，放大1.5倍正向修正信号；当处于左侧(不稳定)时，压缩至0.5倍。利用if_else实现“稳定环境下高置信、不稳定环境下低置信”的非线性响应，避免在信息环境动荡期过度暴露。",
+    "expression_list": [
+        "if_else(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 4)), 1.5), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 4)), 0.5))",
+        "if_else(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 4)), 1.5), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 4)), 0.5))",
+        "if_else(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 4)), 1.5), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 4)), 0.5))",
+        "if_else(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 4)), 1.5), multiply(zscore(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 4)), 0.5))"
+    ]
+}

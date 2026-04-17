@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), 252)",
+    "idea": "将Input 2的20日累积流量与guidance中'相对自身历史位置'思路结合（第4.2.1步）。使用ts_zscore比较当前累积流量与过去252日（1年）历史分布，识别相对于该股票自身历史而言的'异常'资金流动强度，而非绝对数值，避免横截面不可比问题。",
+    "expression_list": [
+        "ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 252)"
+    ]
+}

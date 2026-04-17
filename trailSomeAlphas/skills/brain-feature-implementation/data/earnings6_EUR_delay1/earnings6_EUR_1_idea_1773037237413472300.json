@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_decay_linear(divide(multiply(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), ts_regression(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), ts_step(), 20, rettype=2)), add(vec_ir({estimated_eps}), 0.01)), 20), industry)",
+    "idea": "惊喜质量复合因子（幅度×持续性÷分歧）。融合三维度：盈利惊喜幅度、20日时间序列趋势斜率（持续性，rettype=2）及分析师预期信息比率vec_ir（分歧度倒数）。对持续性增强且共识度高的超预期股票赋予更高权重，经20日平滑与行业标准化，构建稳健的基本面动量信号。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(divide(multiply(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), ts_regression(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), ts_step(), 20, rettype=2)), add(vec_ir(ern6_estimated_eps), 0.01)), 20), industry)",
+        "group_zscore(ts_decay_linear(divide(multiply(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), ts_regression(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), ts_step(), 20, rettype=2)), add(vec_ir(ern6_estimated_eps), 0.01)), 20), industry)"
+    ]
+}

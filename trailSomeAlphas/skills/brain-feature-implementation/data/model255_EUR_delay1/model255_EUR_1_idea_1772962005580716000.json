@@ -1,0 +1,7 @@
+{
+    "template": "s1 = winsorize(ts_backfill({special_items_score}, 63), std=4)\ns2 = winsorize(ts_backfill({accrued_expenses_score}, 63), std=4)\ns3 = winsorize(ts_backfill({revenue_recognition_score}, 63), std=4)\ns4 = winsorize(ts_backfill({deferred_rev_score}, 63), std=4)\navg_score = divide(add(add(add(s1, s2), s3), s4), 4)\nind_z = group_zscore(avg_score, industry)\nbottom_tail = less(ind_z, -1.5)\ntop_tail = greater(ind_z, 1.8)\ncore = if_else(bottom_tail, multiply(2.0, ind_z), if_else(top_tail, multiply(-0.8, ind_z), multiply(0.3, ind_z)))\nsignal = core",
+    "idea": "行业相对极端风险分层：在行业内标准化后，使用逻辑运算符切分下尾（低分，高操纵风险）和上尾（高分，潜在的\"过度完美\" deception 风险）。对极端低分赋予强负向权重，对极端高分赋予 mild 负向权重（防范虚增），中段给予温和正向权重，实现非线性的分段风险定价。",
+    "expression_list": [
+        "s1 = winsorize(ts_backfill(mdl255_special_items_score, 63), std=4)\ns2 = winsorize(ts_backfill(mdl255_accrued_expenses_score, 63), std=4)\ns3 = winsorize(ts_backfill(mdl255_revenue_recognition_score, 63), std=4)\ns4 = winsorize(ts_backfill(mdl255_deferred_rev_score, 63), std=4)\navg_score = divide(add(add(add(s1, s2), s3), s4), 4)\nind_z = group_zscore(avg_score, industry)\nbottom_tail = less(ind_z, -1.5)\ntop_tail = greater(ind_z, 1.8)\ncore = if_else(bottom_tail, multiply(2.0, ind_z), if_else(top_tail, multiply(-0.8, ind_z), multiply(0.3, ind_z)))\nsignal = core"
+    ]
+}

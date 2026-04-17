@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut(add(if_else(greater(rank(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4))),0.8), signed_power(subtract(multiply(2,rank(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)))),1),1.5), 0), if_else(less(rank(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4))),0.2), signed_power(subtract(multiply(2,rank(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)))),1),1.5), 0)), {mark_cap})",
+    "idea": "分位点尾部非线性放大策略：对清洗后的CFROI利差进行横截面排名，仅保留前20%（显著优势）和后20%（显著劣势）的尾部样本，中间分位置零以消除噪音；通过signed_power(1.5)将排名映射至[-1,1]区间后进行幂变换，非线性放大极端值的边际效应，最后进行市值中性化，构建高置信度、高离散度的多空组合。",
+    "expression_list": [
+        "vector_neut(add(if_else(greater(rank(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4))),0.8), signed_power(subtract(multiply(2,rank(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)))),1),1.5), 0), if_else(less(rank(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4))),0.2), signed_power(subtract(multiply(2,rank(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)))),1),1.5), 0)), mdl172_mark_cap)"
+    ]
+}

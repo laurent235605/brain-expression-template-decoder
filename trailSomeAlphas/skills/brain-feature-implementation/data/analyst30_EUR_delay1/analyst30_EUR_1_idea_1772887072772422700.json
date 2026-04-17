@@ -1,0 +1,8 @@
+{
+    "template": "vec_skewness({adjustedgrossamt})",
+    "idea": "**Concept**: Dividend Distribution Skewness\n- **Sample Fields Used**: `adjustedgrossamt`\n- **Definition**: Skewness statistic of dividend amounts across the vector dimension\n- **Why This Feature**: Detects asymmetry indicating special dividends (positive skew) or dividend cuts (negative skew) within the observation window\n- **Logical Meaning**: Measures the tail risk of dividend distributions; identifies non-normal dividend patterns\n- **is filling nan necessary**: Skewness calculations are sensitive to missing data. Filter NaNs using `vec_filter` before computing to prevent distortion of the distribution shape\n- **Directionality**: Positive skew indicates occasional large special dividends; negative skew indicates consistent base with rare cuts; near 0 indicates normal distribution\n- **Boundary Conditions**: Theoretically (-infinity, infinity); practically (-3, 3) for most financial data; |skew| > 2 indicates significant anomaly",
+    "expression_list": [
+        "vec_skewness(anl30_adjustedgrossamt)",
+        "vec_skewness(anl30_unadjustedgrossamt)"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "template": "winsorize( multiply( group_zscore({crowding}, industry), group_zscore({value_ts}, industry), signed_power( ts_zscore( ts_backfill({concentration}, 63), 60 ), 2 ) ), std=4 )",
+    "idea": "将原始二元开关改进为连续加权形态：首先对拥挤度和价值因子进行行业中性化（group_zscore）消除板块偏差；其次使用地理集中度的60日时序Zscore（ts_zscore）量化风险积聚强度，并通过signed_power非线性放大极端偏离（>2σ部分权重急剧上升）；最终通过截面截断（winsorize）控制极端值影响，实现信号强度与风险积聚程度的连续匹配，而非简单的开/关。",
+    "expression_list": [
+        "winsorize( multiply( group_zscore(rsk74_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(rsk74_raw_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(liquidity_factor_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(liquidity_timeseries_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(rsk74_raw_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_raw_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(rsk74_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_raw_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(liquidity_factor_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_raw_concentration, 63), 60 ), 2 ) ), std=4 )",
+        "winsorize( multiply( group_zscore(liquidity_timeseries_crowding, industry), group_zscore(rsk74_value_ts, industry), signed_power( ts_zscore( ts_backfill(rsk74_raw_concentration, 63), 60 ), 2 ) ), std=4 )"
+    ]
+}

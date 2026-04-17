@@ -1,0 +1,8 @@
+{
+    "template": "winsorize(ts_decay_linear(trade_when(greater(ts_rank(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4),60), 0.9), 1.0, trade_when(less(ts_rank(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4),60), 0.1), -1.0, 0)), 3), std=4)",
+    "idea": "将输入2的加速度信号先进行60日历史分位定位（ts_rank），仅当其处于自身历史极值点（前10%或后10%）时触发输入1的极端交易逻辑，经3日衰减后二次去极值（winsorize），构建基于历史极端百分位的时序择时增强策略。",
+    "expression_list": [
+        "winsorize(ts_decay_linear(trade_when(greater(ts_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4),60), 0.9), 1.0, trade_when(less(ts_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4),60), 0.1), -1.0, 0)), 3), std=4)",
+        "winsorize(ts_decay_linear(trade_when(greater(ts_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4),60), 0.9), 1.0, trade_when(less(ts_rank(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4),60), 0.1), -1.0, 0)), 3), std=4)"
+    ]
+}

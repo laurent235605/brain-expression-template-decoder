@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(signed_power(ts_decay_linear(trade_when(greater(rank(ts_mean({volume},21)),0.5),ts_regression(winsorize(ts_sum(ts_delta(ts_backfill({shortint},63),1),15),std=4),group_mean(ts_sum(ts_delta(ts_backfill({shortint},63),1),15),log(ts_mean({market_cap},21)),industry),63,rettype=0),0),3),2),industry)",
+    "idea": "在基础回归剔除行业空头Beta后，引入成交量确认机制（仅在高成交量交易日放大信号），对残差进行指数衰减平滑以降低换手率，并通过组内zscore标准化，最终用signed_power非线性放大极端空头压力，构建“放量特质空头”信号。",
+    "expression_list": []
+}

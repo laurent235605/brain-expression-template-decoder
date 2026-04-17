@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(add(multiply(0.6, ts_sum(if_else(is_nan(signed_power(vec_ir({aily_delta_recon_value}), 2)), 0, signed_power(vec_ir({aily_delta_recon_value}), 2)), 5)), multiply(0.4, ts_sum(if_else(is_nan(signed_power(vec_ir({aily_delta_recon_value}), 2)), 0, signed_power(vec_ir({aily_delta_recon_value}), 2)), 20))), industry)",
+    "idea": "**概念**: 多尺度信息质量复合（信噪比加权）\n- **增强逻辑**: 使用vec_ir（信息比率=均值/标准差）替代简单均值，衡量修正信号的\"质量\"而非单纯幅度；构建5日短期（权重60%）与20日长期（权重40%）的加权复合指标，兼顾即时动能与持续性；最后通过group_normalize实现行业内多空平衡（每个行业净暴露为0）。此模板抑制了低质量（高噪音）的修正波动。\n- **NaN处理**: IR缺失时记为0。\n- **方向性**: 高值代表存在持续且一致的高质量信息流入，低值代表噪音主导或信息真空。",
+    "expression_list": [
+        "group_normalize(add(multiply(0.6, ts_sum(if_else(is_nan(signed_power(vec_ir(ern10_aily_delta_recon_value), 2)), 0, signed_power(vec_ir(ern10_aily_delta_recon_value), 2)), 5)), multiply(0.4, ts_sum(if_else(is_nan(signed_power(vec_ir(ern10_aily_delta_recon_value), 2)), 0, signed_power(vec_ir(ern10_aily_delta_recon_value), 2)), 20))), industry)"
+    ]
+}

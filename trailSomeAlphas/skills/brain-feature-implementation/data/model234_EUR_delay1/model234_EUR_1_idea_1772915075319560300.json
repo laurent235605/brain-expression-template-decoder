@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_std_dev({volume}, 12), ts_mean({volume}, 12))",
+    "idea": "**Concept**: Volume Stability Coefficient\n- **Sample Fields Used**: volume\n- **Definition**: Rolling coefficient of variation (standard deviation divided by mean) of trading volume over the past 12 months\n- **Why This Feature**: Distinguishes securities with predictable, stable liquidity from those with erratic, unpredictable trading patterns essential for risk management and position sizing\n- **Logical Meaning**: Measures the predictability of liquidity supply. Low values indicate institutional-grade liquidity with consistent market making; high values indicate event-driven or speculative trading with uncertain execution costs.\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 2) to handle thin trading gaps when calculating the mean and standard deviation, but preserve NaN in current value if no trade occurred to distinguish illiquidity from stability.\n- **Directionality**: Low values (0.1-0.3) indicate stable liquidity; high values (>1.0) indicate volatile, unpredictable liquidity\n- **Boundary Conditions**: Approaches 0 for perfectly constant volume (rare, suggests inactive or algorithmically traded securities); undefined (NaN) when mean is zero (no trading)",
+    "expression_list": [
+        "divide(ts_std_dev(mdl234_volume, 12), ts_mean(mdl234_volume, 12))"
+    ]
+}

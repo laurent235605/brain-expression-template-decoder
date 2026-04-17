@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(quantile(winsorize(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), std=3), driver=\"gaussian\"), sector)",
+    "idea": "在模板1的背离计算后引入高斯分位数变换（quantile with gaussian driver），将中间区间的股票压缩至零附近、将极端头尾拉伸至更远距离，再进行行业中性标准化，增强对极端机构行为分化的敏感度，同时削弱中等背离股票的权重。",
+    "expression_list": [
+        "group_zscore(quantile(winsorize(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), std=3), driver=\"gaussian\"), sector)"
+    ]
+}

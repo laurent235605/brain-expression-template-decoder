@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.7, ts_decay_linear(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), 10)), multiply(0.3, signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 5), industry), 1.5)))",
+    "idea": "组合两个信号分支：70%权重分配给\"20日平滑+10日衰减\"的慢速趋势捕捉器，30%权重给\"5日平滑+signed_power(1.5)\"的快速极端偏离放大器。通过加权融合低换手基准与高频凸性增强信号，实现\"稳健底仓+弹性增强\"的均衡配置，适应不同速度的市场 regime。",
+    "expression_list": [
+        "add(multiply(0.7, ts_decay_linear(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), 10)), multiply(0.3, signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 5), industry), 1.5)))"
+    ]
+}

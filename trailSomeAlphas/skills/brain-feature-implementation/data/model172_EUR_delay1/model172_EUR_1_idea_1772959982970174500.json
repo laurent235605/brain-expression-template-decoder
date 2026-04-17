@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(abs(group_zscore(ts_sum(winsorize({cfroidrs}, std=3), 10), industry)), 2.5), group_zscore(ts_sum(winsorize({cfroidrs}, std=3), 10), industry), reverse(group_zscore(ts_sum(winsorize({cfroidrs}, std=3), 10), industry)))",
+    "idea": "实施边界条件保护机制。对10日累加信号进行3倍标准差截尾和行业zscore标准化后，设定2.5倍标准差为阈值：当信号处于温和区间（|zscore|<2.5）时保持原方向，捕捉持续趋势；当信号进入极端区域（暗示加速趋势可能均值回归）时自动反转头寸，实现趋势跟踪与均值回归的智能切换逻辑。",
+    "expression_list": [
+        "trade_when(less(abs(group_zscore(ts_sum(winsorize(mdl172_cfroidrs, std=3), 10), industry)), 2.5), group_zscore(ts_sum(winsorize(mdl172_cfroidrs, std=3), 10), industry), reverse(group_zscore(ts_sum(winsorize(mdl172_cfroidrs, std=3), 10), industry)))"
+    ]
+}

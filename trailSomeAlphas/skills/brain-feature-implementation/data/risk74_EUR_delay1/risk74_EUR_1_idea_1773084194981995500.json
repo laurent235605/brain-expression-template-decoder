@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(trade_when(greater(ts_zscore(ts_std_dev({close},21),63),0),multiply(ts_regression(winsorize(ts_sum(ts_delta(ts_backfill({shortint},63),1),10),std=4),group_mean(ts_sum(ts_delta(ts_backfill({shortint},63),1),10),log(ts_mean({market_cap},21)),group_cartesian_product(industry,bucket(rank({market_cap}),\"0,1,0.2\"))),63,rettype=0),signed_power(zscore(ts_std_dev({close},21)),0.5)),0),industry)",
+    "idea": "通过行业与市值分组的笛卡尔积（Industry×Size Quintile）进行更精细的中性化回归，剔除行业及市值风格的影响；随后与个股特异性波动率（returns的滚动标准差）进行交互，仅在波动率高于中位数时放大信号，以捕捉高波动环境下的特质空头风险溢酬。",
+    "expression_list": []
+}

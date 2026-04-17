@@ -1,0 +1,8 @@
+{
+    "template": "subtract(trade_when(greater(quantile(winsorize({eps_best_eeps_cur_yr}, 4), driver=gaussian), 0.8), ts_delta({eps_best_eeps_cur_yr}, 5), 0), trade_when(less(quantile(winsorize({eps_best_eeps_cur_yr}, 4), driver=gaussian), 0.2), ts_delta({eps_best_eeps_cur_yr}, 5), 0))",
+    "idea": "仅在高斯分布的极端尾部(前20%看多/后20%看空)且伴随近期5日上调(下调)修正时开仓，利用trade_when过滤掉中间噪音区间；通过'极端分位+短期动量确认'的双重条件降低假信号",
+    "expression_list": [
+        "subtract(trade_when(greater(quantile(winsorize(anl69_aeps_best_eeps_cur_yr, 4), driver=gaussian), 0.8), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0), trade_when(less(quantile(winsorize(anl69_aeps_best_eeps_cur_yr, 4), driver=gaussian), 0.2), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0))",
+        "subtract(trade_when(greater(quantile(winsorize(anl69_eps_best_eeps_cur_yr, 4), driver=gaussian), 0.8), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0), trade_when(less(quantile(winsorize(anl69_eps_best_eeps_cur_yr, 4), driver=gaussian), 0.2), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0))"
+    ]
+}

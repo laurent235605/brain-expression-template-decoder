@@ -1,0 +1,14 @@
+{
+    "template": "subtract(vec_avg({eff_int_rate}), divide(vec_avg({int_expense}), ts_mean(vec_avg({tot_asset}), 126)))",
+    "idea": "**Concept**: Effective Interest Rate Spread\n- **Sample Fields Used**: eff_int_rate, int_expense, tot_asset\n- **Definition**: Effective interest rate minus implied rate (interest expense/average total assets), measuring debt cost efficiency\n- **Why This Feature**: Positive spread indicates efficient debt management vs industry; negative suggests high-cost borrowing or inefficient capital structure\n- **Logical Meaning**: Relative positioning of the firm's debt costs versus its asset scale and stated effective rates\n- **is filling nan necessary**: Ensure both rate and expense data align temporally before calculation\n- **Directionality**: Negative values indicate favorable borrowing costs relative to asset base; positive suggests expensive leverage\n- **Boundary Conditions**: Extreme deviations (>5%) indicate measurement errors or non-standard debt instruments",
+    "expression_list": [
+        "subtract(vec_avg(fnd72_pit_or_is_a_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_a_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_a_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_a_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_a_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_q_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_a_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_q_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_q_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_q_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_q_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_q_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_q_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_a_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 126)))",
+        "subtract(vec_avg(fnd72_pit_or_is_q_eff_int_rate), divide(vec_avg(fnd72_pit_or_is_a_is_int_expense), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 126)))"
+    ]
+}

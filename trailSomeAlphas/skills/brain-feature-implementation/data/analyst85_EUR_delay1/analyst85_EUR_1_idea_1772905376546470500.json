@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_decay_exp_window(vec_avg({version}), 10, factor=0.2), ts_decay_exp_window(vec_avg({version}), 40, factor=0.05))",
+    "idea": "构建双时间窗口版本均值衰减差（类似MACD），短周期（10天）高权重因子（0.2）捕捉近期版本突变，长周期（40天）低权重因子（0.05）捕捉长期趋势，二者差值反映版本均值加速上升（正值）或减速下降（负值），用于识别版本趋势的变化率和潜在拐点。",
+    "expression_list": [
+        "subtract(ts_decay_exp_window(vec_avg(anl85_version), 10, factor=0.2), ts_decay_exp_window(vec_avg(anl85_version), 40, factor=0.05))"
+    ]
+}

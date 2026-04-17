@@ -1,0 +1,7 @@
+{
+    "template": "multiply(rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), signed_power(zscore(vec_avg({likelihood_score})), 2))",
+    "idea": "幂变换非线性增强：将模板2的截面排名与模板1的信心zscore进行幂变换(signed_power)相乘，对高信心区域的价格偏离信号进行平方级放大，同时保留符号方向，构建凸性增强的复合信号。",
+    "expression_list": [
+        "multiply(rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), signed_power(zscore(vec_avg(success_likelihood_score)), 2))"
+    ]
+}

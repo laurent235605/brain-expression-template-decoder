@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(quantile(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=3), add(ts_median(ts_std_dev(returns, 21), 63), 0.001)), driver=\"cauchy\"), 10), industry)",
+    "idea": "使用63日波动率中位数替代瞬时波动率以增强稳健性，采用Cauchy分布分位数变换将中间区间压缩、极端风险调整配置信号拉伸，再通过10日线性衰减平滑，最终在同一行业内进行归一化，构建强调尾部极端信念且换手率可控的复合信号。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(quantile(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=3), add(ts_median(ts_std_dev(returns, 21), 63), 0.001)), driver=\"cauchy\"), 10), industry)"
+    ]
+}

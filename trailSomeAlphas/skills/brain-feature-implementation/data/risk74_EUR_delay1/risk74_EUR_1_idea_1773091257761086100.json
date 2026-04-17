@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_backfill({momentum},63),std=4), winsorize(ts_backfill({value_ts},63),std=4) + winsorize(ts_backfill({earnyild},63),std=4), 63, rettype=0), industry)",
+    "idea": "残差纯阿尔法提取模型：以63日滚动窗口将价值与盈利收益作为复合解释变量，对动量进行时序回归(ts_regression, rettype=0)，提取无法被价值因子解释残差项。该残差代表剔除风格因子干扰后的特异性动量阿尔法，避免了简单比率法中价值与动量线性叠加的假设偏差；经行业中性化(group_zscore)后，可识别出在同业中真正具备非价值驱动的独立趋势动能的个股，适用于 tariffs 环境下区分结构性机会与风格 Beta。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_momentum,63),std=4), winsorize(ts_backfill(rsk74_value_ts,63),std=4) + winsorize(ts_backfill(rsk74_earnyild,63),std=4), 63, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_momentum_ts,63),std=4), winsorize(ts_backfill(rsk74_value_ts,63),std=4) + winsorize(ts_backfill(rsk74_earnyild,63),std=4), 63, rettype=0), industry)"
+    ]
+}

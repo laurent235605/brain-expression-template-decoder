@@ -1,0 +1,7 @@
+{
+    "template": "zscore(subtract(1, vec_avg({lastcostingfailed})))",
+    "idea": "截面极端值标准化：将平均可靠性进行截面Z-score处理，识别相对于整个市场而言运营稳定性异常突出或极差的标的。将向量统计特征与截面标准化算子结合，生成相对排名信号。",
+    "expression_list": [
+        "zscore(subtract(1, vec_avg(mdl209_lastcostingfailed)))"
+    ]
+}

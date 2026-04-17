@@ -1,0 +1,8 @@
+{
+    "template": "add(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry), multiply(0.5, ts_delta(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry), 21)))",
+    "idea": "组内稳定性动量复合：在行业中性化基础上，加入21日稳定性变化率（ts_delta），构建'稳定且愈发稳定'或'不稳定但趋于稳定'的增强信号，通过高斯分位数映射后叠加动量项，强化趋势的持续性。",
+    "expression_list": [
+        "add(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), multiply(0.5, ts_delta(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), 21)))",
+        "add(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), multiply(0.5, ts_delta(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), 21)))"
+    ]
+}

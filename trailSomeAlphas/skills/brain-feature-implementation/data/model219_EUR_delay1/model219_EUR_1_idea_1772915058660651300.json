@@ -1,0 +1,14 @@
+{
+    "template": "multiply({skew90drtn}, add({fc_stdevfy1epsp}, {milliq}))",
+    "idea": "**Concept**: Information Asymmetry Index\n- **Sample Fields Used**: `skew90drtn`, `skew90cortn`, `fc_stdevfy1epsp`, `milliq`\n- **Definition**: Composite of return skewness, estimate dispersion, and illiquidity capturing information uncertainty\n- **Why This Feature**: Markets compensate investors for bearing information risk; this quantifies that risk\n- **Logical Meaning**: High values indicate high information asymmetry between insiders/institutions and public markets\n- **is filling nan necessary**: Yes, use `group_mean()` for missing skewness within size deciles\n- **Directionality**: Higher values indicate higher required risk premium (potential higher returns)\n- **Boundary Conditions**: Extreme asymmetry may indicate distress or fraud risk rather than opportunity",
+    "expression_list": [
+        "multiply(mdl219_1_skew90drtn, add(mdl219_1_fc_stdevfy1epsp, mdl219_1_milliq))",
+        "multiply(mdl219_1_skew90drtn, add(mdl219_1_fc_stdevfy1epsp, mdl219_2_milliq))",
+        "multiply(mdl219_2_skew90drtn, add(mdl219_1_fc_stdevfy1epsp, mdl219_1_milliq))",
+        "multiply(mdl219_2_skew90drtn, add(mdl219_1_fc_stdevfy1epsp, mdl219_2_milliq))",
+        "multiply(mdl219_2_skew90drtn, add(mdl219_2_fc_stdevfy1epsp, mdl219_2_milliq))",
+        "multiply(mdl219_2_skew90drtn, add(mdl219_2_fc_stdevfy1epsp, mdl219_1_milliq))",
+        "multiply(mdl219_1_skew90drtn, add(mdl219_2_fc_stdevfy1epsp, mdl219_2_milliq))",
+        "multiply(mdl219_1_skew90drtn, add(mdl219_2_fc_stdevfy1epsp, mdl219_1_milliq))"
+    ]
+}

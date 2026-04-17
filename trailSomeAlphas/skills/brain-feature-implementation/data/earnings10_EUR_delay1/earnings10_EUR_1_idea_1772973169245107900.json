@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else(is_nan(vec_avg({aily_delta_recon_value})), 0, add(signed_power(vec_avg({aily_delta_recon_value}), 2), signed_power(vec_stddev({aily_delta_recon_value}), 2))), 20)",
+    "idea": "构建多矩复合指标：同时纳入修正的均值能量（方向性）和分歧度（标准差），通过平方和形式将共识强度与分析师意见分化带来的额外不确定性结合，形成全面的信息流动度量，NaN填充为0确保连续性。",
+    "expression_list": [
+        "ts_sum(if_else(is_nan(vec_avg(ern10_aily_delta_recon_value)), 0, add(signed_power(vec_avg(ern10_aily_delta_recon_value), 2), signed_power(vec_stddev(ern10_aily_delta_recon_value), 2))), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), 5), divide(1, add(0.01, vec_stddev({elta_value})))), industry)",
+    "idea": "利用向量标准差(vec_stddev)衡量分析师预期修正的离散度(不确定性/共识度)，以信息比率(IR)思路加权：对高共识(低离散)的强修正赋予更高权重，低共识(高离散)的修正被压缩，经行业中性化后形成质量加权的高质量动量信号。",
+    "expression_list": [
+        "group_zscore(multiply(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), 5), divide(1, add(0.01, vec_stddev(ern10_elta_value)))), industry)"
+    ]
+}

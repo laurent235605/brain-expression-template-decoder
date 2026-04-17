@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(subtract(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 126), 0.001))), 3), industry)",
+    "idea": "计算21日短期与126日长期风险调整配置强度的差值（期限结构），并通过三次方放大显著偏离，捕捉基金在短期承担单位风险所获得的权益暴露相较于长期趋势的加速或减速变化，在行业截面进行Z分数标准化。",
+    "expression_list": [
+        "group_zscore(signed_power(subtract(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 126), 0.001))), 3), industry)"
+    ]
+}

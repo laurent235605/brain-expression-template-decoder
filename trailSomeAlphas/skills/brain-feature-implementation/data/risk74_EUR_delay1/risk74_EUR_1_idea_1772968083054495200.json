@@ -1,0 +1,14 @@
+{
+    "template": "( {concentration} * {crowding} ) - ts_mean( {concentration} * {crowding}, 60 )",
+    "idea": "交互项趋势偏离：先构建集中度与拥挤度的即时交互项，再计算该交互项相对于60日均值的偏离。捕捉两者协同运动的加速或减速阶段（动量变化），而非绝对水平。正值表示地理-因子风险正在快速积聚，负值表示风险消散。",
+    "expression_list": [
+        "( rsk74_concentration * rsk74_crowding ) - ts_mean( rsk74_concentration * rsk74_crowding, 60 )",
+        "( rsk74_concentration * rsk74_raw_crowding ) - ts_mean( rsk74_concentration * rsk74_raw_crowding, 60 )",
+        "( rsk74_concentration * liquidity_factor_crowding ) - ts_mean( rsk74_concentration * liquidity_factor_crowding, 60 )",
+        "( rsk74_concentration * liquidity_timeseries_crowding ) - ts_mean( rsk74_concentration * liquidity_timeseries_crowding, 60 )",
+        "( rsk74_raw_concentration * rsk74_crowding ) - ts_mean( rsk74_raw_concentration * rsk74_crowding, 60 )",
+        "( rsk74_raw_concentration * rsk74_raw_crowding ) - ts_mean( rsk74_raw_concentration * rsk74_raw_crowding, 60 )",
+        "( rsk74_raw_concentration * liquidity_factor_crowding ) - ts_mean( rsk74_raw_concentration * liquidity_factor_crowding, 60 )",
+        "( rsk74_raw_concentration * liquidity_timeseries_crowding ) - ts_mean( rsk74_raw_concentration * liquidity_timeseries_crowding, 60 )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_skewness(vec_skewness({data_item_value}), 60), sector)), 2), group_zscore(ts_skewness(vec_skewness({data_item_value}), 60), sector), 0)",
+    "idea": "极端区间截面偏度动量：直接计算向量数据截面偏度（vec_skewness）以获取当日分布形态，观察其60日时序偏度变化（偏度的偏度），仅当行业标准化后的偏度绝对值大于2（极端偏态）时保留信号，否则置零。用于捕捉分布形态发生极端扭曲的时点，过滤中间噪音区间，专注极端尾部风险事件。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_skewness(vec_skewness(anl89_data_item_value), 60), sector)), 2), group_zscore(ts_skewness(vec_skewness(anl89_data_item_value), 60), sector), 0)"
+    ]
+}

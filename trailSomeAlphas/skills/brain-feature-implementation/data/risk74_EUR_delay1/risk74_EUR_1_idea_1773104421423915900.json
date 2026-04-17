@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_mean(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), 20), industry), 2)",
+    "idea": "在模板2的加速度框架上引入时间序列平滑(ts_mean, 20日)以降低换手率(相比ts_decay_linear可显著降低至约16%水平)，保留行业标准化(group_zscore)与极端值放大(signed_power)结构，平衡信号稳定性与敏感度，适合作为低频配置轮动的核心信号。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_mean(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), 20), industry), 2)"
+    ]
+}

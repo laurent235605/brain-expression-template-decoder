@@ -1,0 +1,10 @@
+{
+    "template": "divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_stddev({x_dividend}), 5), 252), 0.001))",
+    "idea": "算子级创新替换：在模板1的比率框架内，将分母的历史均值激进替换为历史波动率（vec_stddev），构建股息稳定性比率（Dividend Stability Ratio）。当前分红水平相对于历史波动越高，代表分红政策越稳定可预测，适用于低波动红利策略的精细化表达。",
+    "expression_list": [
+        "divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_stddev(ern6_x_dividend), 5), 252), 0.001))",
+        "divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_stddev(ern6_x_dividend_233), 5), 252), 0.001))",
+        "divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_stddev(ern6_x_dividend_oc), 5), 252), 0.001))",
+        "divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_stddev(ern6_x_dividend_oc_235), 5), 252), 0.001))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(group_zscore(winsorize(ts_backfill({concentration}, 10), std=4), sector), 20)",
+    "idea": "交叉应用模板1的组内标准化思想与模板2的时间序列变化捕捉。先计算行业内Z分数（group_zscore）实现横截面可比，再通过20日差分（ts_delta）捕捉组内相对排名的动态变化，识别那些在行业内快速调整地理布局的公司，兼顾截面定位与时序动量。",
+    "expression_list": [
+        "ts_delta(group_zscore(winsorize(ts_backfill(rsk74_concentration, 10), std=4), sector), 20)",
+        "ts_delta(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), sector), 20)"
+    ]
+}

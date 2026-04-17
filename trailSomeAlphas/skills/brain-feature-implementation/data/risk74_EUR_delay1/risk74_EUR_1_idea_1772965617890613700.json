@@ -1,0 +1,8 @@
+{
+    "template": "{factor_e} + {factor_s} + {factor_g}",
+    "idea": "**Concept**: ESG Risk Integration\n- **Sample Fields Used**: `factor_e`, `factor_s`, `factor_g`, `factor_esg`\n- **Definition**: Non-linear combination of ESG components to identify companies with lopsided ESG profiles (e.g., high E but low G)\n- **Why This Feature**: ESG factors are not monolithic; tariff and regulatory risks often correlate with specific ESG components (e.g., Environmental for carbon tariffs, Governance for sanctions)\n- **Logical Meaning**: High values indicate balanced strong ESG; low/negative values indicate weak components or lopsided profiles\n- **is filling nan necessary**: Yes, ESG data has lower coverage; use `ts_backfill` or treat NaN as neutral (0) depending on interpretation\n- **Directionality**: High = strong balanced ESG; Low = weak or unbalanced ESG; Specific component analysis for targeted risks\n- **Boundary Conditions**: Extreme values indicate ESG leaders/laggards; component divergence indicates specific risk factors",
+    "expression_list": [
+        "rsk74_factor_e + rsk74_factor_s + rsk74_factor_g",
+        "rsk74_factor_esg + rsk74_factor_s + rsk74_factor_g"
+    ]
+}

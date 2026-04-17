@@ -1,0 +1,7 @@
+{
+    "template": "scale(truncate(winsorize(group_zscore(add(multiply(0.6, zscore(ts_delta(vec_avg({version}), 5))), multiply(0.4, zscore(ts_delta(vec_stddev({version}), 5)))), industry), std=4), maxPercent=0.02), scale=1, longscale=1, shortscale=1)",
+    "idea": "均衡复合信号：等风险加权（60/40）组合共识变化与分歧变化双信号，完整应用去极值（winsorize）、行业中性（group_zscore）、个股权重截断（truncate）和规模控制（scale），构建可实施的标准化Alpha。",
+    "expression_list": [
+        "scale(truncate(winsorize(group_zscore(add(multiply(0.6, zscore(ts_delta(vec_avg(anl85_version), 5))), multiply(0.4, zscore(ts_delta(vec_stddev(anl85_version), 5)))), industry), std=4), maxPercent=0.02), scale=1, longscale=1, shortscale=1)"
+    ]
+}

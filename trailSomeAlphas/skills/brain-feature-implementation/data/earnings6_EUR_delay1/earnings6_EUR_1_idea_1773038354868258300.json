@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( multiply( ts_delta( winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 4), 21 ), divide( vec_stddev({estimated_eps}), add(ts_mean(ts_backfill(vec_stddev({estimated_eps}), 5), 63), 0.001) ) ), industry )",
+    "idea": "通过盈利惊喜的短期变化率(ts_delta)衡量加速动能，并引入分析师预期分歧度(vec_stddev)作为置信权重，当惊喜加速且伴随高分析师分歧时信号更强，用于捕捉盈利拐点的信息扩散效应。",
+    "expression_list": [
+        "group_zscore( multiply( ts_delta( winsorize(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 4), 21 ), divide( vec_stddev(ern6_estimated_eps), add(ts_mean(ts_backfill(vec_stddev(ern6_estimated_eps), 5), 63), 0.001) ) ), industry )",
+        "group_zscore( multiply( ts_delta( winsorize(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 4), 21 ), divide( vec_stddev(ern6_estimated_eps), add(ts_mean(ts_backfill(vec_stddev(ern6_estimated_eps), 5), 63), 0.001) ) ), industry )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(vec_skewness({exposure_value}), 126)",
+    "idea": "地理集中度稳定性（偏度时序分析）。不关注平均敞口水平，而是使用向量偏度（vec_skewness）衡量公司对特定区域的依赖集中程度（右偏表示高度集中于少数区域），并计算该集中度指标在半年（126日）窗口内的时序Z-score。高Z-score表示地域集中度正在发生结构性变化（风险重塑期），低值表示维持既定的地域分散/集中战略。适用于捕捉\"All-in\"特定市场的风险演变过程。",
+    "expression_list": [
+        "ts_zscore(vec_skewness(anl91_exposure_value), 126)"
+    ]
+}

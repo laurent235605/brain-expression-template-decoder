@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(vec_avg({likelihood_score}), 60), 0.9), rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 0)",
+    "idea": "历史分位条件触发：用60日时间序列排名替代截面zscore，仅当当前信心处于历史顶部10%时激活信号，结合截面排名捕捉长期信心高位时的价格偏离机会，降低短期波动干扰。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(vec_avg(success_likelihood_score), 60), 0.9), rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 0)"
+    ]
+}

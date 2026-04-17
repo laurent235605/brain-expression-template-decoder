@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), 0.8), greater(rank(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63)), 0.8)), divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), trade_when(and(less(rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), 0.2), less(rank(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63)), 0.2)), reverse(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})), 0))",
+    "idea": "极端两端信号模板：仅当转换效率与累积修正压力同时处于市场前20%（头部共振）时开多；同时处于后20%（尾部共振）时开空（reverse）；中段视为噪音置零。通过双条件and逻辑与分位排名（rank）实现'只有头尾有信号'的非线性结构，强化高置信区间的暴露。",
+    "expression_list": [
+        "trade_when(and(greater(rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0.8), greater(rank(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63)), 0.8)), divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), trade_when(and(less(rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0.2), less(rank(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63)), 0.2)), reverse(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0))",
+        "trade_when(and(greater(rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0.8), greater(rank(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63)), 0.8)), divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), trade_when(and(less(rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0.2), less(rank(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63)), 0.2)), reverse(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)), 0))"
+    ]
+}

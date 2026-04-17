@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 126, rettype=0), 21), 63)",
+    "idea": "活跃度变化动量版。不关注基金绝对的交易强度，而是关注其\"规模净化后换手率\"的边际变化趋势。先计算残差序列，再取21日差分（delta）捕捉近期变化方向，最后进行63日时序zscore标准化。该信号擅长捕捉基金交易风格从保守转向激进（或相反）的拐点，属于动态行为动量因子。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 126, rettype=0), 21), 63)"
+    ]
+}

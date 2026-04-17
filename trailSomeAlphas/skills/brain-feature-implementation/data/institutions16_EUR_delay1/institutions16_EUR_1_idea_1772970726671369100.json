@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(add(multiply(0.7, ts_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), 252)), multiply(0.3, ts_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 5), std=4), 60))), industry)",
+    "idea": "构建复合信号：主信号为20日资产变化（长期趋势，252日历史zscore），辅助信号为5日资产变化（短期加速度，60日历史zscore），分别标准化后按7:3加权相加。最后进行行业归一化(group_normalize)。该模板基于“资产流入加速比单纯流入更具持续性”的逻辑，结合一阶与二阶导数提升预测力，捕捉资金流的趋势强化形态。",
+    "expression_list": [
+        "group_normalize(add(multiply(0.7, ts_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), 252)), multiply(0.3, ts_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 5), std=4), 60))), industry)"
+    ]
+}

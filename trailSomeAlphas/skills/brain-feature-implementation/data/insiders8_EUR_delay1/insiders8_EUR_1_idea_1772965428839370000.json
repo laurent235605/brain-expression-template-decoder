@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(max(ts_delta({weight_net}, 1), 0), 20) - ts_sum(abs(min(ts_delta({weight_net}, 1), 0)), 20)",
+    "idea": "**Concept**: Persistent Net Accumulation Signal\n- **Sample Fields Used**: weight_net\n- **Definition**: Cumulative sum of positive changes in net weight over 20 days, minus cumulative sum of negative changes, measuring sustained buying pressure\n- **Why This Feature**: Distinguishes between one-time position establishment (spike then flat) and sustained accumulation (consistent buying); the latter predicts better future returns\n- **is filling nan necessary**: Treat NaN as zero change (no trading) to avoid gaps in accumulation pattern.\n- **Directionality**: High positive values indicate sustained accumulation (bullish); high negative values indicate sustained distribution (bearish); near zero indicates churn or inactivity\n- **Boundary Conditions**: Saturation effects after prolonged accumulation; institutional capacity constraints limit indefinite buying",
+    "expression_list": [
+        "ts_sum(max(ts_delta(insd8_weight_net, 1), 0), 20) - ts_sum(abs(min(ts_delta(insd8_weight_net, 1), 0)), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(winsorize(ts_backfill({hfown_pctown}, 63), std=4), sector), 1.5), 5)",
+    "idea": "标准行业偏离的尾部放大与平滑：先对原始持仓数据进行63日回溯填充与4倍标准差去极值清洗，计算行业内的Z-Score以剥离行业Beta；使用signed_power(y=1.5)非线性放大极端偏离（强化HF极致超配或规避的信号），最后通过5日线性衰减降低组合换手率，使信号更稳健。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 63), std=4), sector), 1.5), 5)"
+    ]
+}

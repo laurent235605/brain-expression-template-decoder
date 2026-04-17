@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(trade_when(or(less(ts_rank(winsorize(vec_skewness(ts_backfill({exposure_value}, 63)), std=4), 252), 0.1), greater(ts_rank(winsorize(vec_skewness(ts_backfill({exposure_value}, 63)), std=4), 252), 0.9)), ts_zscore(winsorize(vec_skewness(ts_backfill({exposure_value}, 63)), std=4), 126), 0), {industry})",
+    "idea": "历史分位极值策略（行业中性截断）。计算偏度的252日历史分位（ts_rank），仅当集中度处于历史最高10%（极度集中）或最低10%（极度分散）时激活信号（or逻辑+trade_when），此时输出126日Z-score，否则归零。通过剔除中间80%的无效区间（噪音过滤），专注捕捉战略分布的历史极端转折点，并在行业内进行相对比较。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(ts_zscore(ts_sum(vec_avg({aily_delta_recon_value}), 20), 60), winsorize(zscore(vec_avg({aily_delta_recon_value})), 4)), 5)",
+    "idea": "**时序位置与截面共振**: 结合长期时序视角（当前20日累积和相对于自身60日历史的zscore位置）与截面强度（当日修正值的zscore），两者相乘得到'历史极值且当前强势'的共振信号；最后应用5日线性衰减平滑以降低换手率。该模板捕捉那些不仅当前修正强烈，且处于历史极端位置、可能引发持续趋势的预期重构事件。",
+    "expression_list": [
+        "ts_decay_linear(multiply(ts_zscore(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), 60), winsorize(zscore(vec_avg(ern10_aily_delta_recon_value)), 4)), 5)"
+    ]
+}

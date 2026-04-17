@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(group_zscore({hfown_pctown}, sector), 252)",
+    "idea": "**概念**: 历史极端偏离度（Historical Extremity）\\n- **核心逻辑**: 双重标准化策略：首先计算持仓比例相对于行业的偏离度（行业ZScore），再计算该偏离度相对于其自身252日历史波动的时间序列ZScore。识别当前配置处于历史极端分位（如2倍标准差外）的标的。\\n- **信号解释**: 极高值代表HF当前行业配置为历史罕见的高超配（潜在反转风险），极低值代表历史罕见的低配（潜在反弹机会），适用于关税敏感行业的均值回归策略。",
+    "expression_list": [
+        "ts_zscore(group_zscore(rsk74_hfown_pctown, sector), 252)"
+    ]
+}

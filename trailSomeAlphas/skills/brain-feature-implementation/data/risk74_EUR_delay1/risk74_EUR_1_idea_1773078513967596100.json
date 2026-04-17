@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_rank(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 126), group_rank(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 21), sector))",
+    "idea": "时序极端分位与截面动量共振。计算残差的126日时序分位数（ts_rank），识别当前残差处于历史极端位置的股票；同时计算美国敞口在行业内21日变化的分位数，将两者相乘，仅当时序残差极端且公司正在主动调整其美国敞口时产生强信号，实现\"异常偏离+调整动量\"的双重确认。",
+    "expression_list": [
+        "multiply(ts_rank(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), 126), group_rank(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 21), sector))",
+        "multiply(ts_rank(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), 126), group_rank(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 21), sector))"
+    ]
+}

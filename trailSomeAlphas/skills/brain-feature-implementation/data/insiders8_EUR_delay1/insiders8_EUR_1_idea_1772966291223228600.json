@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), industry), 21), 10)",
+    "idea": "捕捉机构持仓与收益排名分歧的变化速度（21日差分），并用10日线性衰减加权平滑，识别调仓趋势的加速或反转，适用于“时序变化比截面绝对水平更重要”的场景。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(group_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), industry), 21), 10)"
+    ]
+}

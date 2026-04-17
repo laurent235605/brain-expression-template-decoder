@@ -1,0 +1,7 @@
+{
+    "template": "abs(subtract({overall_genderratio}, 0.5))",
+    "idea": "**Concept**: Gender Parity Deviation\n- **Sample Fields Used**: overall_genderratio\n- **Definition**: Absolute distance of gender ratio from parity (0.5), measuring extremity of gender imbalance\n- **Why This Feature**: Extreme deviations from gender parity may indicate governance diversity deficiencies or alternatively, sector-specific norms; captures extremeness of composition\n- **Logical Meaning**: Degree of gender imbalance; zero indicates perfect parity, 0.5 indicates single-gender board\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Missing gender ratio should not be filled with arbitrary values before calculating deviation; use available data only.\n- **Directionality**: Higher values indicate greater gender imbalance (male-dominated if >0.5, female-dominated if <0.5); lower values indicate balanced board\n- **Boundary Conditions**: Value of 0 indicates perfect 50-50 split; value of 0.5 indicates all-male or all-female board; values above 0.4 indicate severe imbalance",
+    "expression_list": [
+        "abs(subtract(anl40_overall_genderratio, 0.5))"
+    ]
+}

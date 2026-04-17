@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(hump_decay(if_else(less(ts_delta(winsorize(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), std=4), 1), 0), -1, 0), hump=0.02), industry)",
+    "idea": "结合模板2的事件检测机制与模板1的行业归一化，引入winsorize（标准差=4）清洗极端异常值以避免错误触发。使用hump_decay替代线性衰减，通过设置hump阈值（0.02）忽略微小权重变动，显著降低换手率（相比ts_decay_linear），同时保留对报告日期变更（eps_expected_report_dt变化）的负面事件暴露。",
+    "expression_list": [
+        "group_normalize(hump_decay(if_else(less(ts_delta(winsorize(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), std=4), 1), 0), -1, 0), hump=0.02), industry)",
+        "group_normalize(hump_decay(if_else(less(ts_delta(winsorize(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), std=4), 1), 0), -1, 0), hump=0.02), industry)"
+    ]
+}

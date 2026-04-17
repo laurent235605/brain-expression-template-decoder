@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(group_zscore(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), industry), 60), 0.85), zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20)), trade_when(less(ts_rank(group_zscore(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), industry), 60), 0.15), reverse(zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20))), 0))",
+    "idea": "先对分歧度日度变化进行行业中性化(group_zscore)消除行业固有差异，再计算该指标在60日历史窗口中的分位点(ts_rank)。仅当处于历史极端高位(>85%，分歧急剧发散)或极端低位(<15%，分歧快速收敛)时才分别建立多空头寸，中段分位视为噪音置零，以捕捉极端不确定性变化带来的定价偏差。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(group_zscore(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), industry), 60), 0.85), zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20)), trade_when(less(ts_rank(group_zscore(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), industry), 60), 0.15), reverse(zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20))), 0))"
+    ]
+}

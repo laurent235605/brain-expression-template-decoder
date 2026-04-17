@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4)), industry), 2), 3)",
+    "idea": "先对原始数据进行21日回溯填充与4倍标准差截尾清洗，通过向量中性化剔除基金规模对权益持仓的线性影响，得到纯主动配置决策残差；进一步在基金行业内进行zscore标准化以消除行业间配置水平差异，识别相对同行的配置强度偏离；利用signed_power平方变换放大极端配置信号（增强尾部区分度），最后通过3日线性衰减平滑降低换手率，适用于捕捉大基金的持续超配或低配行为。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4)), industry), 2), 3)"
+    ]
+}

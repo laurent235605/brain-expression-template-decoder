@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(quantile(ts_delta(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 5), driver=gaussian)), 1.0), winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), 0)",
+    "idea": "盈利加速度条件触发估值交易：将模板2的加速度计算结构（平滑后的二阶差分）作为模板1的触发条件，仅当分析师预期调整呈现加速趋势（拐点确认）时，才介入效率比率交易，捕捉预期加速与估值效率的共振时机。",
+    "expression_list": [
+        "trade_when(greater(abs(quantile(ts_delta(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 5), driver=gaussian)), 1.0), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)",
+        "trade_when(greater(abs(quantile(ts_delta(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 5), driver=gaussian)), 1.0), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), 0)"
+    ]
+}

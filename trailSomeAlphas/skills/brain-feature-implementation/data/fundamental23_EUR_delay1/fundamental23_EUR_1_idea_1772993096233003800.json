@@ -1,0 +1,30 @@
+{
+    "template": "({expenditures} / {total_assets} - ts_mean({expenditures} / {total_assets}, 756)) / ts_std_dev({expenditures} / {total_assets}, 756)",
+    "idea": "**Concept**: Unusual Investment Intensity\n- **Sample Fields Used**: `expenditures`, `total_assets`\n- **Definition**: Current capex relative to historical firm-specific average, z-scored\n- **Why This Feature**: Extreme investment often signals over-investment (empire building) or strategic inflection points\n- **Logical Meaning**: Deviation from normal capital deployment patterns\n- **is filling nan necessary**: Capex often lumpy; `ts_backfill` for up to 2 years acceptable\n- **Directionality**: Extreme positive values often negative (over-investment); extreme negative values may signal under-investment or asset sales\n- **Boundary Conditions**: New public firms lack history; require minimum 3 years data",
+    "expression_list": [
+        "(capital_expenditures / current_total_assets - ts_mean(capital_expenditures / current_total_assets, 756)) / ts_std_dev(capital_expenditures / current_total_assets, 756)",
+        "(capital_expenditures / accumulated_depreciation_total_assets - ts_mean(capital_expenditures / accumulated_depreciation_total_assets, 756)) / ts_std_dev(capital_expenditures / accumulated_depreciation_total_assets, 756)",
+        "(capital_expenditures / accumulated_depreciation_total_assets_matrix - ts_mean(capital_expenditures / accumulated_depreciation_total_assets_matrix, 756)) / ts_std_dev(capital_expenditures / accumulated_depreciation_total_assets_matrix, 756)",
+        "(capital_expenditures / total_assets_4 - ts_mean(capital_expenditures / total_assets_4, 756)) / ts_std_dev(capital_expenditures / total_assets_4, 756)",
+        "(capital_expenditures / total_assets_6 - ts_mean(capital_expenditures / total_assets_6, 756)) / ts_std_dev(capital_expenditures / total_assets_6, 756)",
+        "(capital_expenditures / total_assets_7 - ts_mean(capital_expenditures / total_assets_7, 756)) / ts_std_dev(capital_expenditures / total_assets_7, 756)",
+        "(capital_expenditures / total_assets_annual_atot - ts_mean(capital_expenditures / total_assets_annual_atot, 756)) / ts_std_dev(capital_expenditures / total_assets_annual_atot, 756)",
+        "(capital_expenditures / total_assets_value_5 - ts_mean(capital_expenditures / total_assets_value_5, 756)) / ts_std_dev(capital_expenditures / total_assets_value_5, 756)",
+        "(investment_cash_expenditures / current_total_assets - ts_mean(investment_cash_expenditures / current_total_assets, 756)) / ts_std_dev(investment_cash_expenditures / current_total_assets, 756)",
+        "(investment_cash_expenditures / accumulated_depreciation_total_assets - ts_mean(investment_cash_expenditures / accumulated_depreciation_total_assets, 756)) / ts_std_dev(investment_cash_expenditures / accumulated_depreciation_total_assets, 756)",
+        "(investment_cash_expenditures / accumulated_depreciation_total_assets_matrix - ts_mean(investment_cash_expenditures / accumulated_depreciation_total_assets_matrix, 756)) / ts_std_dev(investment_cash_expenditures / accumulated_depreciation_total_assets_matrix, 756)",
+        "(investment_cash_expenditures / total_assets_4 - ts_mean(investment_cash_expenditures / total_assets_4, 756)) / ts_std_dev(investment_cash_expenditures / total_assets_4, 756)",
+        "(investment_cash_expenditures / total_assets_6 - ts_mean(investment_cash_expenditures / total_assets_6, 756)) / ts_std_dev(investment_cash_expenditures / total_assets_6, 756)",
+        "(investment_cash_expenditures / total_assets_7 - ts_mean(investment_cash_expenditures / total_assets_7, 756)) / ts_std_dev(investment_cash_expenditures / total_assets_7, 756)",
+        "(investment_cash_expenditures / total_assets_annual_atot - ts_mean(investment_cash_expenditures / total_assets_annual_atot, 756)) / ts_std_dev(investment_cash_expenditures / total_assets_annual_atot, 756)",
+        "(investment_cash_expenditures / total_assets_value_5 - ts_mean(investment_cash_expenditures / total_assets_value_5, 756)) / ts_std_dev(investment_cash_expenditures / total_assets_value_5, 756)",
+        "(value_investment_expenditures / current_total_assets - ts_mean(value_investment_expenditures / current_total_assets, 756)) / ts_std_dev(value_investment_expenditures / current_total_assets, 756)",
+        "(value_investment_expenditures / accumulated_depreciation_total_assets - ts_mean(value_investment_expenditures / accumulated_depreciation_total_assets, 756)) / ts_std_dev(value_investment_expenditures / accumulated_depreciation_total_assets, 756)",
+        "(value_investment_expenditures / accumulated_depreciation_total_assets_matrix - ts_mean(value_investment_expenditures / accumulated_depreciation_total_assets_matrix, 756)) / ts_std_dev(value_investment_expenditures / accumulated_depreciation_total_assets_matrix, 756)",
+        "(value_investment_expenditures / total_assets_4 - ts_mean(value_investment_expenditures / total_assets_4, 756)) / ts_std_dev(value_investment_expenditures / total_assets_4, 756)",
+        "(value_investment_expenditures / total_assets_6 - ts_mean(value_investment_expenditures / total_assets_6, 756)) / ts_std_dev(value_investment_expenditures / total_assets_6, 756)",
+        "(value_investment_expenditures / total_assets_7 - ts_mean(value_investment_expenditures / total_assets_7, 756)) / ts_std_dev(value_investment_expenditures / total_assets_7, 756)",
+        "(value_investment_expenditures / total_assets_annual_atot - ts_mean(value_investment_expenditures / total_assets_annual_atot, 756)) / ts_std_dev(value_investment_expenditures / total_assets_annual_atot, 756)",
+        "(value_investment_expenditures / total_assets_value_5 - ts_mean(value_investment_expenditures / total_assets_value_5, 756)) / ts_std_dev(value_investment_expenditures / total_assets_value_5, 756)"
+    ]
+}

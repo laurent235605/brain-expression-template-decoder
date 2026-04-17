@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs((vec_avg({score}) - ts_mean(ts_backfill(vec_avg({score}), 5), 60)) / ts_std_dev(ts_backfill(vec_avg({score}), 5), 60)), 2), signed_power(winsorize((vec_avg({score}) - ts_mean(ts_backfill(vec_avg({score}), 5), 60)) / ts_std_dev(ts_backfill(vec_avg({score}), 5), 60), 4), 2), 0)",
+    "idea": "极端异常值聚焦策略：先对向量分数进行5日回溯填充（ts_backfill）处理缺失值，计算60日Z-score后使用winsorize以4倍标准差裁剪极值噪音，仅当|Z|>2（统计显著异常区间）时通过signed_power(.,2)非线性放大尾部信号，中段噪音强制置零。符合“只在信号明显时交易”与“抑制中间区间噪音”的逻辑链。",
+    "expression_list": [
+        "trade_when(greater(abs((vec_avg(mdl249_score) - ts_mean(ts_backfill(vec_avg(mdl249_score), 5), 60)) / ts_std_dev(ts_backfill(vec_avg(mdl249_score), 5), 60)), 2), signed_power(winsorize((vec_avg(mdl249_score) - ts_mean(ts_backfill(vec_avg(mdl249_score), 5), 60)) / ts_std_dev(ts_backfill(vec_avg(mdl249_score), 5), 60), 4), 2), 0)"
+    ]
+}

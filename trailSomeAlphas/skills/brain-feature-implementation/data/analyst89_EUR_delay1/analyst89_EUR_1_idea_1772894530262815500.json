@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({data_item_value}) - ts_min(vec_avg({data_item_value}), 504)) / (ts_max(vec_avg({data_item_value}), 504) - ts_min(vec_avg({data_item_value}), 504))",
+    "idea": "**Concept**: Historical Percentile Position\n- **Sample Fields Used**: data_item_value\n- **Definition**: Current value's position within the historical range (min to max) over a 2-year window, normalized to 0-1 scale\n- **Why This Feature**: Contextualizes current performance relative to the company's own historical operating range; identifies extreme high or low fundamental periods\n- **Logical Meaning**: Relative standing of current financial metrics within historical distribution; indicates whether current performance is historically strong, weak, or average\n- **is filling nan necessary**: Yes, historical range calculation requires complete data; backfill missing values to avoid artificial range expansion\n- **Directionality**: Values near 1 indicate historically high performance (potential mean reversion risk or structural improvement); values near 0 indicate historically low performance (potential recovery or distress); 0.5 indicates median performance\n- **Boundary Conditions**: 0 = 2-year minimum, 1 = 2-year maximum; values persistently near extremes may indicate regime change rather than cyclicality",
+    "expression_list": [
+        "(vec_avg(anl89_data_item_value) - ts_min(vec_avg(anl89_data_item_value), 504)) / (ts_max(vec_avg(anl89_data_item_value), 504) - ts_min(vec_avg(anl89_data_item_value), 504))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 20), 4), 252), 3)",
+    "idea": "历史极端性增强：对20日累积持仓变化进行截尾处理后，计算其过去一年的时序Z分数，再通过三次方非线性放大极端配置行为，用于识别统计显著的机构建仓/减仓事件",
+    "expression_list": [
+        "signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 4), 252), 3)"
+    ]
+}

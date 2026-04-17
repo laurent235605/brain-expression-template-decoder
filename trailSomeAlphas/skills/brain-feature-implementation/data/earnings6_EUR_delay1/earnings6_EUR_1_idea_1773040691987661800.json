@@ -1,0 +1,14 @@
+{
+    "template": "multiply(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), group_zscore(divide(vec_avg({x_dividend}), add(ts_mean(vec_avg({x_dividend}), 252), 0.001)), industry))",
+    "idea": "将模板1的盈利惊喜与模板2的股息持续性信号相乘，两者均经过行业中性化处理，利用股息持续性对盈利惊喜进行强度确认，只保留基本面趋势一致的股票。",
+    "expression_list": [
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(vec_avg(ern6_x_dividend), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(vec_avg(ern6_x_dividend_233), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(vec_avg(ern6_x_dividend_oc), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(vec_avg(ern6_x_dividend), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(vec_avg(ern6_x_dividend_233), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(vec_avg(ern6_x_dividend_oc), 252), 0.001)), industry))",
+        "multiply(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), group_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252), 0.001)), industry))"
+    ]
+}

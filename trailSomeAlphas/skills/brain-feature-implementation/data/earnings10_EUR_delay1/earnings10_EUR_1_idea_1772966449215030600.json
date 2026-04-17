@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(add(multiply(0.6, ts_delta(vec_avg({elta_value}), 5)), multiply(0.4, ts_delta(vec_avg({elta_value}), 20))), industry), 10)",
+    "idea": "多时间尺度合成与衰减控制。结合短期（5日）与中期（20日）修正动量，以6:4权重合成复合信号，兼顾 immediacy 与 persistence；经行业中性化（group_zscore）后，应用10日线性时序衰减（ts_decay_linear），赋予近期数据更高权重的同时平滑噪声，显著降低换手率（Turnover），更适合大容量资金运作。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(add(multiply(0.6, ts_delta(vec_avg(ern10_elta_value), 5)), multiply(0.4, ts_delta(vec_avg(ern10_elta_value), 20))), industry), 10)"
+    ]
+}

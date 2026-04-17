@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(ts_sum(vec_avg({data_item_value}), 63), 21), 126)",
+    "idea": "计算财务累积和的21日变化（即积累的加速度），并相对于过去126日的历史分布进行标准化。该构造捕捉的是业绩积累速度的改善或恶化，而非绝对水平，适用于识别基本面动量的拐点（加速积累 vs 减速积累），并自动适应不同公司历史波动率的差异。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_sum(vec_avg(anl89_data_item_value), 63), 21), 126)"
+    ]
+}

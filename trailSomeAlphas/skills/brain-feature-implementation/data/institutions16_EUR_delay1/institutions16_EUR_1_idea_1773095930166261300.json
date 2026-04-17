@@ -1,0 +1,7 @@
+{
+    "template": "hump(truncate(scale(group_zscore(divide(ts_mean(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 20), add(ts_mean(abs(returns), 21), 0.001)), industry), maxPercent=0.015), 0.005)",
+    "idea": "多期平滑与绝对偏差风险：使用20日指数移动均值平滑权益配置数据以降低噪音，以21日平均绝对偏差（MAD）替代标准差作为风险分母增强稳健性，经行业zscore标准化后限制个股权重上限1.5%，并通过hump函数忽略日内微小权重变动（<0.5%）以控制交易成本。",
+    "expression_list": [
+        "hump(truncate(scale(group_zscore(divide(ts_mean(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 20), add(ts_mean(abs(returns), 21), 0.001)), industry), maxPercent=0.015), 0.005)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_std_dev(vec_avg({exposure_value}), 20), 60)",
+    "idea": "将当前20日暴露波动率与自身过去60日历史分布进行时序标准化(ts_zscore)，识别公司业务布局是否进入历史罕见的极端状态。该模板聚焦于波动率的时序偏离度而非绝对水平，适用于检测突发性重组(正zscore)或异常稳定化(负zscore)的转折时点。",
+    "expression_list": [
+        "ts_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), 60)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "hump(multiply(ts_regression(winsorize(ts_sum(if_else(greater(abs(ts_delta({shortint},1)),multiply(2,ts_std_dev(ts_delta({shortint},1),63))),ts_delta({shortint},1),0),20),std=4),group_mean(ts_sum(if_else(greater(abs(ts_delta({shortint},1)),multiply(2,ts_std_dev(ts_delta({shortint},1),63))),ts_delta({shortint},1),0),20),log(ts_mean({market_cap},21)),industry),63,rettype=0),signed_power(divide(1,add(1,days_from_last_change({shortint}))),0.5)),0.01)",
+    "idea": "识别空头持仓的显著跳跃事件（当日变动绝对值超过过去63日标准差的2倍），仅累积这些跳跃成分后进行行业中性回归；利用距离上次跳跃的天数构造衰减权重（越近期权重越高），结合hump函数控制日度权重变动，构建事件驱动型的空头压力追踪器。",
+    "expression_list": [
+        "hump(multiply(ts_regression(winsorize(ts_sum(if_else(greater(abs(ts_delta(rsk74_shortint,1)),multiply(2,ts_std_dev(ts_delta(rsk74_shortint,1),63))),ts_delta(rsk74_shortint,1),0),20),std=4),group_mean(ts_sum(if_else(greater(abs(ts_delta(rsk74_shortint,1)),multiply(2,ts_std_dev(ts_delta(rsk74_shortint,1),63))),ts_delta(rsk74_shortint,1),0),20),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),signed_power(divide(1,add(1,days_from_last_change(rsk74_shortint))),0.5)),0.01)",
+        "hump(multiply(ts_regression(winsorize(ts_sum(if_else(greater(abs(ts_delta(rsk74_shortint_ts,1)),multiply(2,ts_std_dev(ts_delta(rsk74_shortint_ts,1),63))),ts_delta(rsk74_shortint_ts,1),0),20),std=4),group_mean(ts_sum(if_else(greater(abs(ts_delta(rsk74_shortint_ts,1)),multiply(2,ts_std_dev(ts_delta(rsk74_shortint_ts,1),63))),ts_delta(rsk74_shortint_ts,1),0),20),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),signed_power(divide(1,add(1,days_from_last_change(rsk74_shortint_ts))),0.5)),0.01)"
+    ]
+}

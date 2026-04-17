@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_ir({exposure_value}), 63), std=4), 20), 252), 3)",
+    "idea": "业务构成信噪比极值策略：使用向量信息比率vec_ir（向量均值/向量标准差）替代简单均值，直接衡量公司各业务线构成的'清晰度'与'一致性'；高IR代表业务聚焦且稳定，低IR代表业务杂乱波动。后续通过立方变换构建做多高IR（业务清晰稳定）、做空低IR（业务混乱动荡）的哑铃组合。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_ir(anl91_exposure_value), 63), std=4), 20), 252), 3)"
+    ]
+}

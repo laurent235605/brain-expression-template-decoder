@@ -1,0 +1,5 @@
+{
+    "template": "ts_mean(ts_rank({return}-{asset},15), 3)",
+    "idea": "对15日时序排名再做3日移动平均平滑，进一步抑制单日异常波动，提升信号稳健性",
+    "expression_list": []
+}

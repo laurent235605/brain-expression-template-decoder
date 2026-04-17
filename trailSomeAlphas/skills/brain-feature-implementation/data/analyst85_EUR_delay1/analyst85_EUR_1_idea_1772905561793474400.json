@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_delta(vec_avg({version}), 5), 60)), 2), ts_zscore(ts_delta(vec_avg({version}), 5), 60), 0)",
+    "idea": "**极值事件捕捉（统计显著性过滤）**：仅在版本变化速度的60日Z分数绝对值超过2个标准差（统计显著）时保留信号，否则置零不持仓。该模板严格过滤日常微小波动，专门捕捉可能导致价格重大反应的分析师集中更新或评级体系切换事件（极端正值），以及共识最终形成后的版本冻结（极端负值），实现\"非显著不交易\"的择时逻辑。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_delta(vec_avg(anl85_version), 5), 60)), 2), ts_zscore(ts_delta(vec_avg(anl85_version), 5), 60), 0)"
+    ]
+}

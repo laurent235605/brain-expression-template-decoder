@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( ts_zscore( winsorize( divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) ), 4 ), 252 ), industry )",
+    "idea": "结合横截面行业中性(group_zscore)与时序历史极端性(ts_zscore)，识别那些在行业内不仅当期超预期且超预期幅度显著高于自身历史常态的标的，捕捉盈利质量的结构性突破。",
+    "expression_list": [
+        "group_zscore( ts_zscore( winsorize( divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), 4 ), 252 ), industry )",
+        "group_zscore( ts_zscore( winsorize( divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), 4 ), 252 ), industry )"
+    ]
+}

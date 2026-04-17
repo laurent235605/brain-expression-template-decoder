@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(signed_power(winsorize(trade_when(greater(ts_rank(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 63), 0.7), ts_decay_linear(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 10), multiply(0.5, ts_decay_linear(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 10))), std=4), 1.8), sector), 5)",
+    "idea": "在原始价差基础上引入时间序列持续性检验（ts_rank），确保信号处于历史极值区间（过去63天Top 30%）才施加高次幂（1.8）非线性放大，否则衰减至50%强度；通过双层衰减（ts_decay_linear）平滑噪声并降低换手率，形成“强趋势-强信号-低换手”的稳健定价偏离捕捉逻辑。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(signed_power(winsorize(trade_when(greater(ts_rank(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 63), 0.7), ts_decay_linear(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 10), multiply(0.5, ts_decay_linear(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 10))), std=4), 1.8), sector), 5)"
+    ]
+}

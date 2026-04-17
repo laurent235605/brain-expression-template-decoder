@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( ts_std_dev( ts_backfill( vec_avg({quintile}), 3 ), 60 ), 20 )",
+    "idea": "近期加权自适应稳定性因子。先对向量均值进行3日回溯填充确保连续性，计算60日滚动标准差后，应用20日线性衰减加权（近期权重高于远期）。相比等权重的ts_mean，此设计对最近的分位数变动更敏感，能更快捕捉结构稳定性变化，同时保留中长期历史信息，适用于收购目标筛选中\"近期稳定优先\"的逻辑。",
+    "expression_list": [
+        "ts_decay_linear( ts_std_dev( ts_backfill( vec_avg(mdl249_quintile), 3 ), 60 ), 20 )"
+    ]
+}

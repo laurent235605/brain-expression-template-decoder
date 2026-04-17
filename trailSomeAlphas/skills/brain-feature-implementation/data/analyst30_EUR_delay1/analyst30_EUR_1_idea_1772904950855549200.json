@@ -1,0 +1,7 @@
+{
+    "template": "composite = add(add(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), sector), group_zscore(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector)), group_zscore(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), sector)); trade_when(greater(group_rank(composite, sector), 0.9), signed_power(group_zscore(composite, sector), 1.5), 0)",
+    "idea": "融合会计年度分散度的多重统计特征（极差、标准差、有效样本数），构建更鲁棒的“集团架构复杂度”综合指标；仅当综合得分处于行业前10%极端区间时非线性放大信号，过滤单一维度噪音与温和分散区间。",
+    "expression_list": [
+        "composite = add(add(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), group_zscore(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector)), group_zscore(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector)); trade_when(greater(group_rank(composite, sector), 0.9), signed_power(group_zscore(composite, sector), 1.5), 0)"
+    ]
+}

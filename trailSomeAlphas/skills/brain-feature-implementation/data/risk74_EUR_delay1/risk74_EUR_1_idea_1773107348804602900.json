@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(signed_power(winsorize(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), std=3), 2), sector)",
+    "idea": "行业多空平衡非线性放大：对20日累计流偏离度先做行业中性zscore（group_zscore），3倍标准差截尾后做2次幂非线性变换（signed_power保留符号），最后进行行业组内多空归一化（group_normalize）。此模板确保每个行业内部多头与空头暴露严格平衡（净暴露为零），纯粹捕捉行业内机构博弈的相对强度，避免行业beta干扰，同时通过幂变换极度放大极端偏离股票的权重。",
+    "expression_list": [
+        "group_normalize(signed_power(winsorize(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), std=3), 2), sector)"
+    ]
+}

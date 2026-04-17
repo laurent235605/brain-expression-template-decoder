@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_std_dev(ts_backfill(vec_avg({notional}), lookback=5, k=1), 60), abs(ts_mean(ts_backfill(vec_avg({notional}), lookback=5, k=1), 60)))",
+    "idea": "**Concept**: Rebalance Size Consistency Ratio\n- **Sample Fields Used**: notional, shares\n- **Definition**: Coefficient of variation (std/mean) of notional values over rolling window to measure stability of rebalance magnitude\n- **Why This Feature**: Stable notional implies predictable index weight maintenance; high variation suggests volatile index membership or weight changes, indicating higher uncertainty and potential information asymmetry\n- **is filling nan necessary**: Yes, ts_backfill required for notional field to ensure continuity between sparse rebalance events before calculating time-series statistics.\n- **Directionality**: Low values (stable) suggest predictable passive flows; high values (volatile) suggest erratic index inclusion/exclusion or weight volatility\n- **Boundary Conditions**: Near-zero CV indicates mechanical, stable index weight adjustments; CV >1.0 indicates sporadic, event-driven inclusion (e.g., IPO additions) with unpredictable size",
+    "expression_list": [
+        "divide(ts_std_dev(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), 60), abs(ts_mean(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), 60)))"
+    ]
+}

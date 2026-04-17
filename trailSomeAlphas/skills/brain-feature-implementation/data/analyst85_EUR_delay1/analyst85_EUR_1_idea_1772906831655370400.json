@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(ts_regression(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), group_mean(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), log(ts_mean(cap,21)), market), 20, rettype=0), std=4), industry), 3)",
+    "idea": "通过市值加权市场均值回归剥离系统性调研波动（取残差），再经行业中性化，最后应用3日线性衰减平滑，在控制换手率的前提下，提纯个股特异性调研异常信号，避免市场整体调研周期干扰。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(ts_regression(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), group_mean(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), log(ts_mean(cap,21)), market), 20, rettype=0), std=4), industry), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(not(is_nan(ts_backfill({sustratfy1},60))), multiply(signed_power(zscore(winsorize(ts_backfill({cfroi_1},21),4)),1.5), multiply(zscore(winsorize(ts_backfill({fcg_in},21),4)), s_log_1p(zscore(winsorize(ts_backfill({sustratfy1},60),4))))),0),10)",
+    "idea": "非线性尾部放大平滑模型：针对边界条件（>15%为优，<5%为差），使用signed_power(y=1.5)对CFROI进行非线性放大以强调极端经济回报，结合s_log_1p对可持续性评分进行对称压缩防止极端值主导；通过trade_when过滤掉{sustratfy1}缺失的样本，最终使用ts_decay_linear(10)进行10日线性衰减加权以降低换手率，捕捉持续性的质量信号而非短期噪音。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(not(is_nan(ts_backfill(mdl172_sustratfy1,60))), multiply(signed_power(zscore(winsorize(ts_backfill(mdl172_cfroi_1,21),4)),1.5), multiply(zscore(winsorize(ts_backfill(mdl172_fcg_in,21),4)), s_log_1p(zscore(winsorize(ts_backfill(mdl172_sustratfy1,60),4))))),0),10)"
+    ]
+}

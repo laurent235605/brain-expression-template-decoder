@@ -1,0 +1,7 @@
+{
+    "template": "multiply( ts_decay_exp_window( days_from_last_change( vec_avg( {likelihood_score} ) ), 20 ), trade_when( greater( abs( ts_delta( group_zscore( vec_avg( {likelihood_score} ), industry ), 30 ) ), 1.5 ), ts_delta( group_zscore( vec_avg( {likelihood_score} ), industry ), 30 ), 0 ) )",
+    "idea": "事件驱动的显著变化捕捉：监测分析师预期均值上次更新的时间距离，赋予近期更新更高权重；仅在30日行业相对Zscore变化超过1.5个标准差（统计显著）时触发信号，其余时间赋零，构建高确信度的事件驱动阿尔法，避免微弱波动噪音。",
+    "expression_list": [
+        "multiply( ts_decay_exp_window( days_from_last_change( vec_avg( success_likelihood_score ) ), 20 ), trade_when( greater( abs( ts_delta( group_zscore( vec_avg( success_likelihood_score ), industry ), 30 ) ), 1.5 ), ts_delta( group_zscore( vec_avg( success_likelihood_score ), industry ), 30 ), 0 ) )"
+    ]
+}

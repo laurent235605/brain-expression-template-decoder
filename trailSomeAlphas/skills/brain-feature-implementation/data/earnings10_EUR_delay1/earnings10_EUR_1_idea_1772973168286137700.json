@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(ts_sum(if_else(is_nan(vec_range({aily_delta_recon_value})), 0, vec_range({aily_delta_recon_value})), 20), 60)",
+    "idea": "使用日内极差（range，最大最小差值）衡量当日修正波动幅度，累加20日后计算其在过去60日历史中的分位点（ts_rank），识别相对于自身历史而言的极端不确定性爆发期（如前10%分位），而非绝对水平，对截面不可比的行业自适应调整。",
+    "expression_list": [
+        "ts_rank(ts_sum(if_else(is_nan(vec_range(ern10_aily_delta_recon_value)), 0, vec_range(ern10_aily_delta_recon_value)), 20), 60)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "reverse(group_zscore(trade_when(greater(abs(ts_zscore(winsorize({volume}, std=4), 60)), 2), ts_zscore({volume}, 60), NaN), {sector}))",
+    "idea": "行业内成交量历史极端反转：先对成交量进行4倍标准差截尾清洗，计算60日时间序列Z分数识别历史极端值（±2σ），仅保留极端部分并在行业内标准化，最后取反向（高成交量看空），捕捉流动性冲击后的均值回复。",
+    "expression_list": []
+}

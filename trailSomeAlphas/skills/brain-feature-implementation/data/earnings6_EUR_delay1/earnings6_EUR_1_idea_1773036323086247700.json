@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(add(right_tail(winsorize(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {sector}), std=3), minimum=2.0), left_tail(winsorize(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {sector}), std=3), maximum=-2.0)), 5)",
+    "idea": "严格筛选极端尾端信号：仅保留行业内前2个标准差（right_tail）和后2个标准差（left_tail）的意外，对中段噪音置零（NaN），实现\"要么重大惊喜/惊吓，要么不交易\"的离散化策略；先进行winsorize预处理防止极值主导，再通过ts_decay_linear(5)平滑近期信号，降低单次公告的随机噪音；适用于事件驱动型alpha，强调只有突破极端阈值的盈利意外才值得承担换手率。",
+    "expression_list": []
+}

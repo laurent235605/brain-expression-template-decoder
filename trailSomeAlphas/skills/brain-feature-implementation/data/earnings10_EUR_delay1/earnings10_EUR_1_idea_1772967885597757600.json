@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_delta(ts_zscore(vec_norm(vec_filter({aily_delta_recon_value}, value=\"nan\")), 60), 5), industry)",
+    "idea": "**概念**: 不确定性加速动量（Volatility Acceleration）\n- **改进逻辑**: 采用vec_norm（L1范数，绝对值之和）度量每日修订总能量，无视方向；计算60日ts_zscore判断当前能量相对于自身历史的位置；取5日ts_delta捕捉\"加速\"趋势（能量是否在近期快速积聚）；最后做group_rank得到行业内相对排序。此结构识别的是\"不确定性正在恶化\"的动态过程，而非静态水平。\n- **适用场景**: 前瞻性地捕捉信息环境从稳定向不稳定跃迁的临界股。",
+    "expression_list": [
+        "group_rank(ts_delta(ts_zscore(vec_norm(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), 60), 5), industry)"
+    ]
+}

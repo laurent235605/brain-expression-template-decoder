@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 252)))",
+    "idea": "截面相对位置与时序历史分位的非线性复合。第一维是行业标准化后的当前敞口水平，第二维是当前敞口在其过去252天历史中的分位经s_log_1p对数压缩后的值。两者相乘得到'双高确认'信号：既高于同行平均水平又处于自身历史高位的公司获得最大正向权重，增强稳健性。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 252)))"
+    ]
+}

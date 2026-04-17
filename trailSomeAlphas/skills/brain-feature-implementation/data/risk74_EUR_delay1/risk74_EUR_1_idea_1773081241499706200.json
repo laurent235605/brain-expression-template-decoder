@@ -1,0 +1,5 @@
+{
+    "template": "winsorize(ts_regression(ts_backfill({exp_usa},63), group_mean(ts_backfill({exp_usa},63), log(ts_mean({cap},21)), {sector}), 252, rettype=0), std=4)",
+    "idea": "**行业中性地理贝塔残差（特质性暴露）**\n- **逻辑**：通过时序回归剥离行业层面的系统性地理暴露（用市值加权的行业平均暴露作为解释变量），提取残差作为纯个股特质性地理贝塔；识别出在同行业内相对 peers 具有极端地理集中度的纯玩法标的\n- **适用场景**：剔除行业属性（如科技行业天然高海外暴露）后，寻找真正的地理因子异常值；用于构建行业中性下的地理套利组合",
+    "expression_list": []
+}

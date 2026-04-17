@@ -1,0 +1,10 @@
+{
+    "template": "multiply(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), bucket(rank(days_from_last_change({eps_expected_report_dt})), \"0,1,0.25\"))",
+    "idea": "将报告日期稳定性分为四档（0-25%,25-50%,50-75%,75-100%）对预期修订加速度进行阶梯式非线性加权。对极度稳定（第四档）样本赋予完整权重，不稳定样本权重递减，构建分层的确定性-动量复合信号。",
+    "expression_list": [
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), bucket(rank(days_from_last_change(anl69_aeps_expected_report_dt)), \"0,1,0.25\"))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), bucket(rank(days_from_last_change(anl69_aeps_expected_report_dt)), \"0,1,0.25\"))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), bucket(rank(days_from_last_change(anl69_eps_expected_report_dt)), \"0,1,0.25\"))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), bucket(rank(days_from_last_change(anl69_eps_expected_report_dt)), \"0,1,0.25\"))"
+    ]
+}

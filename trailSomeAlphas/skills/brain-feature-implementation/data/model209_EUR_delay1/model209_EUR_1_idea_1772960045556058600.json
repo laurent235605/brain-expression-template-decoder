@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(subtract(vec_skewness({investment}), multiply(0.5, vec_kurtosis({investment}))), {sector})",
+    "idea": "风险调整偏度（峰度惩罚）：构建经峰度（尾部厚度）调整的偏度指标，通过减去0.5倍峰度来惩罚那些具有极端尾部风险（高偏度且伴随尖峰厚尾）的投资配置。在行业中性化后，该指标能更好地区分“健康的非对称性”（如基于研究的集中押注）与“危险的非对称性”（如追逐彩票型股票的病态集中），提供经风险校准的配置质量信号。",
+    "expression_list": []
+}

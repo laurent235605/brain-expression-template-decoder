@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_rank(ts_delta(vec_avg({version}), 5), industry) * group_rank(vec_range({version}), industry), 1.5) * greater(ts_rank(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 60), 0.7)",
+    "idea": "将模板1的动量和离散度在行业内部排名后相乘，通过signed_power放大尾部信号（y=1.5强调极端值），并仅保留模板2累积强度处于历史前30%（ts_rank>0.7）的时期。强调在行业相对趋势明确且分析师活动激增时的配置机会，中段区间自动归零。",
+    "expression_list": [
+        "signed_power(group_rank(ts_delta(vec_avg(anl85_version), 5), industry) * group_rank(vec_range(anl85_version), industry), 1.5) * greater(ts_rank(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 60), 0.7)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg(ts_backfill({actual_eps}, 63)), vec_avg(ts_backfill({estimated_eps}, 63))), abs(vec_avg(ts_backfill({estimated_eps}, 63)))), 0 )",
+    "idea": "将模板1关于NaN值含义敏感性的理念（不盲目填充）与模板2结合，采用时序回溯填充（ts_backfill）处理缺失的EPS数据，在保留数据空缺信息的同时，为有效数据提供更长历史窗口的稳定性，避免单点零值导致的计算中断。",
+    "expression_list": [
+        "trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ts_backfill(ern6_actual_eps, 63)), vec_avg(ts_backfill(ern6_estimated_eps, 63))), abs(vec_avg(ts_backfill(ern6_estimated_eps, 63)))), 0 )",
+        "trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ts_backfill(ern6_actual_eps_274, 63)), vec_avg(ts_backfill(ern6_estimated_eps, 63))), abs(vec_avg(ts_backfill(ern6_estimated_eps, 63)))), 0 )"
+    ]
+}

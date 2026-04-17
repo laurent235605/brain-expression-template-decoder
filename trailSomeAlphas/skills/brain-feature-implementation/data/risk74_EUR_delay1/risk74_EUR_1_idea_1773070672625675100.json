@@ -1,0 +1,7 @@
+{
+    "template": "bucket(rank(ts_sum(ts_delta({hfown_pctown}, 1), 20)), range=\"0,1,0.2\")",
+    "idea": "基于Input 2的累积流量，应用guidance中的'分桶'（bucket）算子（第2.3步）。将流量强度映射到5分位离散桶（0-0.2, 0.2-0.4...），转换为非参数排序信号，消除原始数值分布偏斜和极端异常值影响，提高稳健性和可解释性，避免连续数值的噪音干扰。",
+    "expression_list": [
+        "bucket(rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20)), range=\"0,1,0.2\")"
+    ]
+}

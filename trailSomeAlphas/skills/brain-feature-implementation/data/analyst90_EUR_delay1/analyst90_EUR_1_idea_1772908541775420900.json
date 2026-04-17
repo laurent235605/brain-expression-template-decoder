@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_delta(group_zscore(winsorize(vec_avg({likelihood_score}), std=4), industry), 30)), 1.5), multiply(ts_delta(group_zscore(winsorize(vec_avg({likelihood_score}), std=4), industry), 30), divide(30, add(30, days_from_last_change(vec_avg({likelihood_score}))))), 0)",
+    "idea": "事件驱动时效加权：仅当30日行业标准化得分变化超过1.5倍标准差时触发交易(abs>1.5)，利用days_from_last_change计算距离上次更新的天数，通过30/(30+天数)的衰减函数对近期发生的评级变化赋予更高权重，平衡信号强度与信息新鲜度，避免对过期信号过度反应。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_delta(group_zscore(winsorize(vec_avg(success_likelihood_score), std=4), industry), 30)), 1.5), multiply(ts_delta(group_zscore(winsorize(vec_avg(success_likelihood_score), std=4), industry), 30), divide(30, add(30, days_from_last_change(vec_avg(success_likelihood_score))))), 0)"
+    ]
+}

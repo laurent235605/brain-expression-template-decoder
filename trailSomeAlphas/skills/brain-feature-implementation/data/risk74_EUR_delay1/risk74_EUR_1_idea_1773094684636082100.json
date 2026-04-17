@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry)",
+    "idea": "将15日空头累积变化在行业内做截面Z-score标准化，识别行业内的相对极端值，相比回归方法更稳健地处理行业结构性差异，作为轻量级的快速行业中性化方案，保留原始时序特征的截面可比性。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry)",
+        "group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(add(group_zscore(multiply(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5)), industry), group_zscore(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), industry)), 5)",
+    "idea": "稳健复合共识：将模板1的分歧度加权动量（捕捉预期变化方向与质量）与模板2的修订惊喜Z-Score（捕捉变化统计显著性）等权合成后，进行5日移动平均平滑。融合两个维度的信息优势，并通过ts_mean时序平滑降低合成信号的换手率，构建稳健的多因子分析师预期信号。",
+    "expression_list": [
+        "ts_mean(add(group_zscore(multiply(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5)), industry), group_zscore(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), industry)), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore((winsorize(vec_avg({aily_delta_recon_value}), std=4) - ts_mean(winsorize(vec_avg(ts_backfill({aily_delta_recon_value}, 63)), std=4), 20)) / ts_std_dev(winsorize(vec_avg(ts_backfill({aily_delta_recon_value}, 63)), std=4), 20), sector)",
+    "idea": "行业中性化时间序列标准化惊喜值：先对原始修订值进行去极值处理，对历史数据（63日回溯填充）计算20日移动均值与标准差以确保统计稳定性，当前值若缺失则保持NaN（无信号），得到时间序列Z-Score后，在行业层面进行横截面中性化（group_zscore），消除行业间分析师覆盖密度和修订幅度的系统性差异，得到纯个股特异性信息冲击信号。",
+    "expression_list": [
+        "group_zscore((winsorize(vec_avg(ern10_aily_delta_recon_value), std=4) - ts_mean(winsorize(vec_avg(ts_backfill(ern10_aily_delta_recon_value, 63)), std=4), 20)) / ts_std_dev(winsorize(vec_avg(ts_backfill(ern10_aily_delta_recon_value, 63)), std=4), 20), sector)"
+    ]
+}

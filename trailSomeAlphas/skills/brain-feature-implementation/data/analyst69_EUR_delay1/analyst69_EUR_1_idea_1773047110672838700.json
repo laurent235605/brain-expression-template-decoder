@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(days_from_last_change({eps_expected_report_dt}), 10), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 0)",
+    "idea": "以模板2的报告日期变更作为交易条件（trade_when），对模板1的修订信号进行择时过滤。仅在预期报告日期过去10天内未发生变更时（即非财报调整窗口期），才计算并交易EPS修订加速度信号；若近期（<10天）刚调整过报告日期，则信号归零避免不确定性。这是一种典型的“清洁样本”处理，确保信号仅在信息环境稳定时生效。",
+    "expression_list": [
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)"
+    ]
+}

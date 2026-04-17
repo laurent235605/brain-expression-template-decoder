@@ -1,0 +1,10 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({x_dividend}), 5), 252)",
+    "idea": "将TTM累积逻辑从EPS迁移到股息数据，计算过去252个交易日（约12个月）的股息总和，识别具有持续派息能力的公司，平滑季度派息不规律性，替代单次股息波动。",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)"
+    ]
+}

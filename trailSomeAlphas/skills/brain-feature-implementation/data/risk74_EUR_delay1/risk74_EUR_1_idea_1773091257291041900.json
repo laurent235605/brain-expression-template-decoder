@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(rank(winsorize(ts_backfill({momentum},63),std=4) / (winsorize(ts_backfill({value_ts}+{earnyild},63),std=4) + 0.0001)), 0.8), 1.0, if_else(less(rank(winsorize(ts_backfill({momentum},63),std=4) / (winsorize(ts_backfill({value_ts}+{earnyild},63),std=4) + 0.0001)), 0.2), -1.0, 0.0)), industry)",
+    "idea": "杠铃纯策略极端分桶筛选：通过rank将动量/价值比率的全截面分布映射至[0,1]分位，采用if_else逻辑构建三元信号结构——仅保留排名前20%(pure momentum)赋权+1和排名后20%(pure value)赋权-1，中间60%混合暴露区间强制置零以消除噪音干扰；最后经group_normalize(industry)实现行业内多空资金平衡约束，构建行业中性化的双向极端暴露组合，避免混合风格带来的不确定性。",
+    "expression_list": [
+        "group_normalize(if_else(greater(rank(winsorize(ts_backfill(rsk74_momentum,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001)), 0.8), 1.0, if_else(less(rank(winsorize(ts_backfill(rsk74_momentum,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001)), 0.2), -1.0, 0.0)), industry)",
+        "group_normalize(if_else(greater(rank(winsorize(ts_backfill(rsk74_momentum_ts,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001)), 0.8), 1.0, if_else(less(rank(winsorize(ts_backfill(rsk74_momentum_ts,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001)), 0.2), -1.0, 0.0)), industry)"
+    ]
+}

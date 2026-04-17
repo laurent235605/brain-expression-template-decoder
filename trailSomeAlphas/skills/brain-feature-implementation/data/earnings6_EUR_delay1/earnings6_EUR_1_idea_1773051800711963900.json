@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), 1.5)",
+    "idea": "结合模板1的条件过滤与符号幂变换(signed_power)，对有效Surprise进行非线性放大(y=1.5)，使极端正负Surprise获得更高权重，同时保持符号方向，增强头部与尾部的区分度。",
+    "expression_list": [
+        "signed_power(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 1.5)",
+        "signed_power(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 1.5)"
+    ]
+}

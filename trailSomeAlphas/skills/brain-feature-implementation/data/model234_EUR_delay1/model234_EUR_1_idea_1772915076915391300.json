@@ -1,0 +1,7 @@
+{
+    "template": "log({volume})",
+    "idea": "**Concept**: Log Volume (Natural Transform)\n- **Sample Fields Used**: volume\n- **Definition**: Natural logarithm of trading volume to reduce right-skewness and emphasize proportional changes\n- **Why This Feature**: Volume follows log-normal distribution; log transform reveals that doubling volume from 100k to 200k shares is economically equivalent to doubling from 1M to 2M shares\n- **Logical Meaning**: The \"order of magnitude\" of liquidity; linearizes percentage changes and compresses extreme values\n- **is filling nan necessary**: Yes, ensure {volume} > 0 before transformation; use nan_out({volume}, lower=0.0001) to filter zeros or negative values (if any)\n- **Directionality**: Higher = more liquid; Lower = less liquid; linear in percentage terms rather than absolute\n- **Boundary Conditions**: Approaches -infinity as volume approaches 0; linear growth with exponential volume increases",
+    "expression_list": [
+        "log(mdl234_volume)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "truncate( add( multiply(0.6, group_zscore(vec_avg({stock_split_ratio_243}), industry)), multiply(0.4, trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 )) ), maxPercent=0.01 )",
+    "idea": "构建加权复合Alpha：60%权重赋予组内中性化的分拆信号，40%权重赋予稳健的盈余surprise，最后施加截断约束（truncate）控制个股最大权重不超过1%，实现跨模板的风险管理与信号融合，确保可交易性。",
+    "expression_list": [
+        "truncate( add( multiply(0.6, group_zscore(vec_avg(ern6_stock_split_ratio_243), industry)), multiply(0.4, trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 )) ), maxPercent=0.01 )",
+        "truncate( add( multiply(0.6, group_zscore(vec_avg(ern6_stock_split_ratio_243), industry)), multiply(0.4, trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 )) ), maxPercent=0.01 )"
+    ]
+}

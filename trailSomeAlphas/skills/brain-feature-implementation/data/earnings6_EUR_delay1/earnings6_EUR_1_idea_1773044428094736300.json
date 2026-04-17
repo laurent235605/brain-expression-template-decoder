@@ -1,0 +1,7 @@
+{
+    "template": "subtract( right_tail( rank( vec_avg( {stock_split_ratio_243} ) ), 0.9 ), left_tail( rank( vec_avg( {stock_split_ratio_243} ) ), 0.1 ) )",
+    "idea": "融合模板2的极端事件逻辑与截面排序运算符。仅保留排位前10%（高分拆如10:1）和后10%（低分拆如1:10）的极端尾端信号，中间视为噪音置为NaN。通过right_tail与left_tail的组合构建多空双向信号：多头极端正向分拆（流动性扩张/管理层信心），空头极端反向分拆（困境信号），实现'只交易极端事件'的稳健策略。",
+    "expression_list": [
+        "subtract( right_tail( rank( vec_avg( ern6_stock_split_ratio_243 ) ), 0.9 ), left_tail( rank( vec_avg( ern6_stock_split_ratio_243 ) ), 0.1 ) )"
+    ]
+}

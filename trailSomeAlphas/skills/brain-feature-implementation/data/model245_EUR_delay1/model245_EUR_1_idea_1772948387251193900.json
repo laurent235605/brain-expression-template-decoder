@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract(vec_avg({rank}), ts_min(vec_avg({rank}), 60)), subtract(ts_max(vec_avg({rank}), 60), ts_min(vec_avg({rank}), 60)))",
+    "idea": "**Concept**: Range Position\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Normalized position of current rank within the 60-day min-max range (0 = at 60-day minimum/best rank, 1 = at 60-day maximum/worst rank)\n- **Why This Feature**: Contextualizes current rank within its recent historical range, distinguishing between moderately bad ranks that are actually historical extremes versus those in the middle of the stock's typical range\n- **Logical Meaning**: Indicates whether the stock is at the extreme of its recent ranking history or within the normal band; structural breaks appear as movements toward 0 or 1\n- **is filling nan necessary**: Min/max calculations require sufficient data; filling NaNs with group means would artificially compress the range. Preserve NaNs to maintain accurate range boundaries.\n- **Directionality**: 0 = at best rank of last 60 days, 1 = at worst rank of last 60 days, 0.5 = middle of recent range\n- **Boundary Conditions**: Strictly 0 to 1; division by zero if max=min (perfectly stable rank for 60 days), which should return NaN or default value",
+    "expression_list": [
+        "divide(subtract(vec_avg(mdl245_rank), ts_min(vec_avg(mdl245_rank), 60)), subtract(ts_max(vec_avg(mdl245_rank), 60), ts_min(vec_avg(mdl245_rank), 60)))"
+    ]
+}

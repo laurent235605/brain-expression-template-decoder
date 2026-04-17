@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_backfill(vec_avg({estimated_eps}), 5), 20)",
+    "idea": "**Concept**: EPS Estimate Revision Momentum\n- **Sample Fields Used**: estimated_eps\n- **Definition**: Change in consensus EPS estimate over a 20-day window\n- **Why This Feature**: Captures the direction and velocity of analyst sentiment shifts ahead of earnings; positive momentum may indicate information leakage or improving fundamentals\n- **Logical Meaning**: Measures the slope of expectation formation; rising estimates suggest improving outlook, falling estimates suggest deterioration\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Estimates may have gaps between quarters; using ts_backfill preserves the last available estimate which remains the best guess until updated.\n- **Directionality**: Positive values indicate upward revisions (bullish); negative values indicate downward revisions (bearish)\n- **Boundary Conditions**: Large absolute values indicate significant news or guidance changes; zero indicates consensus stability",
+    "expression_list": [
+        "ts_delta(ts_backfill(vec_avg(ern6_estimated_eps), 5), 20)"
+    ]
+}

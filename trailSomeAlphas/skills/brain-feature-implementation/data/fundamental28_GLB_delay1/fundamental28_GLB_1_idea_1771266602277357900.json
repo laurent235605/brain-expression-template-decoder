@@ -1,0 +1,8 @@
+{
+    "template": "multiply(signed_power(divide(ts_delta({value_18191q}, 63), ts_mean({value_18191q}, 252)), 0.5), divide(subtract({value_18191q}, ts_mean({value_18191q}, 252)), ts_std_dev({value_18191q}, 252)))",
+    "idea": "**概念**: EBIT动量-水平双维度复合信号\n- **融合来源**: 模板1（EBIT Z-Score水平）+ 模板2（EBIT变化动量）+ 非线性运算符\n- **定义**: 将EBIT的短期动量（模板2结构）经平方根压缩后，与当前EBIT的历史Z-Score水平相乘\n- **为何有效**: 单一维度易产生假信号（如高位滞涨或低位反弹），同时满足\"趋势向上\"且\"处于历史相对高位\"的公司才是真强势；signed_power(0.5)防止动量项过度主导乘积\n- **逻辑含义**: 正值表示EBIT既处于历史高位区间（高分位）又在近期持续改善（双击效应）；负值可能预示拐点（高位回落或低位恶化）\n- **边界条件**: 两维度的交叉验证天然抑制极端值；如任一维度为0或接近中性，乘积自动衰减\n- **方向性**: 正向因子，双正组合预示盈利加速与历史突破共振",
+    "expression_list": [
+        "multiply(signed_power(divide(ts_delta(fnd28_ishtq_value_18191q, 63), ts_mean(fnd28_ishtq_value_18191q, 252)), 0.5), divide(subtract(fnd28_ishtq_value_18191q, ts_mean(fnd28_ishtq_value_18191q, 252)), ts_std_dev(fnd28_ishtq_value_18191q, 252)))",
+        "multiply(signed_power(divide(ts_delta(fnd28_newq_value_18191q, 63), ts_mean(fnd28_newq_value_18191q, 252)), 0.5), divide(subtract(fnd28_newq_value_18191q, ts_mean(fnd28_newq_value_18191q, 252)), ts_std_dev(fnd28_newq_value_18191q, 252)))"
+    ]
+}

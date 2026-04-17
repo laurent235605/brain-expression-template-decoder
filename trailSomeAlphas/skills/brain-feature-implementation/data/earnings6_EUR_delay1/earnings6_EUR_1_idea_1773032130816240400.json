@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252)",
+    "idea": "**Concept**: Trailing Twelve Month EPS Accumulation\n- **Sample Fields Used**: actual_eps\n- **Definition**: Rolling 252-day sum of actual EPS values to capture annual earnings power\n- **Why This Feature**: Quarterly EPS is noisy; annual accumulation smooths seasonality and reveals underlying earnings trajectory and TTM profitability\n- **Logical Meaning**: Measures the cumulative profitability over a full business cycle; less susceptible to quarterly timing artifacts\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Quarterly EPS releases create sparse data; ts_backfill necessary to carry last reported EPS forward in intervening periods to avoid summing mostly NaNs.\n- **Directionality**: Higher values indicate strong annual profitability; negative values indicate annual losses; trend direction indicates improving/declining fundamentals\n- **Boundary Conditions**: Zero crossing indicates break-even TTM; sustained negative values indicate distress",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)"
+    ]
+}

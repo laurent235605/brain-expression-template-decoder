@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(multiply(subtract(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), group_mean(winsorize(ts_backfill(vec_avg({elta_value}), 63), std=4), log(ts_mean(cap, 21)), sector)), sign(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4))), sector)",
+    "idea": "通过剔除行业均值（group_mean）获得特异性预期水平（类似CAPM残差），避免行业贝塔暴露；与修正方向相乘后，在行业层面进行归一化（group_normalize），确保每个行业内部多空平衡，构建市场中性、行业中性组合，适合作为多因子策略中的纯净阿尔法来源。",
+    "expression_list": [
+        "group_normalize(multiply(subtract(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), group_mean(winsorize(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), log(ts_mean(cap, 21)), sector)), sign(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4))), sector)"
+    ]
+}

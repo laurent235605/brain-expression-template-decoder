@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry), hump_decay(abs(ts_delta(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),1)),hump=0.02,decay=10))",
+    "idea": "结合行业中性化的空头累积水平与近期极端变化的'驼峰衰减'权重，当近期（如前1日）发生大幅空头变动时通过hump_decay放大信号并随时间推移逐渐衰减，专注于捕捉空头情绪的'新鲜'极端事件及其后续动量影响。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry), hump_decay(abs(ts_delta(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),1)),hump=0.02,decay=10))",
+        "multiply(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry), hump_decay(abs(ts_delta(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),1)),hump=0.02,decay=10))"
+    ]
+}

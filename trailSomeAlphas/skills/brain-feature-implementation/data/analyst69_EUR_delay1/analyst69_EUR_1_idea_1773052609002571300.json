@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(and(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.8), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.2)), or(greater(rank(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20)), 0.8), less(rank(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20)), 0.2))), add(multiply(0.6, ts_delta({eps_best_eeps_cur_yr}, 5)), multiply(0.4, ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20))), 0), 5)",
+    "idea": "多期动量共振与加权合成：同时考察短期（5日）与中期（20日均值）修订动量的截面极端性（前20%/后20%），当两者同向极端时，按0.6/0.4权重合成信号，并经线性衰减处理。旨在捕捉'短中长期预期一致向上/向下修正'的强趋势信号。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(and(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.8), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.2)), or(greater(rank(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20)), 0.8), less(rank(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20)), 0.2))), add(multiply(0.6, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), multiply(0.4, ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20))), 0), 5)",
+        "ts_decay_linear(trade_when(and(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.8), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.2)), or(greater(rank(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20)), 0.8), less(rank(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20)), 0.2))), add(multiply(0.6, ts_delta(anl69_eps_best_eeps_cur_yr, 5)), multiply(0.4, ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20))), 0), 5)"
+    ]
+}

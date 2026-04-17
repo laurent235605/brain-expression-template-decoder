@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(or(greater(group_rank(ts_delta(ts_mean(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.8), less(group_rank(ts_delta(ts_mean(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.2)), group_zscore(ts_delta(ts_mean(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 3)",
+    "idea": "整合模板1的数据预处理与行业中性化，模板2的极值筛选，并加入双重时序平滑。先对回溯数据做5日等权平滑（ts_mean）以降低日间噪音，再计算5日差分捕捉平滑趋势，经行业内排名筛选前20%/后20%极值后，输出行业标准化信号并进行3日线性衰减平滑（ts_decay_linear）。这种多重平滑结构显著降低换手率，同时通过行业内极值筛选保持信号纯度，适合资金容量较大的低频策略。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(or(greater(group_rank(ts_delta(ts_mean(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.8), less(group_rank(ts_delta(ts_mean(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.2)), group_zscore(ts_delta(ts_mean(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 3)",
+        "ts_decay_linear(trade_when(or(greater(group_rank(ts_delta(ts_mean(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.8), less(group_rank(ts_delta(ts_mean(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.2)), group_zscore(ts_delta(ts_mean(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 3)"
+    ]
+}

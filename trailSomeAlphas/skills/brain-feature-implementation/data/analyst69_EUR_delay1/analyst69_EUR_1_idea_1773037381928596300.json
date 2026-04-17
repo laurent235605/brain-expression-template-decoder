@@ -1,0 +1,8 @@
+{
+    "template": "multiply(quantile(winsorize({eps_best_eeps_cur_yr}, std=4), driver=gaussian), inverse(add(0.1, ts_std_dev(winsorize({eps_best_eeps_cur_yr}, std=4), 63))))",
+    "idea": "**概念**: 波动率稳定性加权预期\n**核心逻辑**: 原始盈利预期分位数乘以历史63日（季度）波动率的倒数（inverse），其中加0.1防止除零。该构造对预期数值高但波动剧烈（分析师分歧大、数据不稳定）的股票进行惩罚降权，对预期高且历史路径稳定的股票赋予更高权重。通过引入时序波动率信息，提升了截面预期信号的稳健性和可靠性。",
+    "expression_list": [
+        "multiply(quantile(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), driver=gaussian), inverse(add(0.1, ts_std_dev(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), 63))))",
+        "multiply(quantile(winsorize(anl69_eps_best_eeps_cur_yr, std=4), driver=gaussian), inverse(add(0.1, ts_std_dev(winsorize(anl69_eps_best_eeps_cur_yr, std=4), 63))))"
+    ]
+}

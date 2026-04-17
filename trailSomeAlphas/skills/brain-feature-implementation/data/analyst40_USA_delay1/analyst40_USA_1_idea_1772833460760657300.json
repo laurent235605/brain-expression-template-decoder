@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(signed_power(group_zscore(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), sector), 2), 5)",
+    "idea": "非线性尾部强调与平滑：先对行业标准化后的波动率差值进行平方处理（保留符号）以极度放大极端值、压缩中段噪音，再通过5日简单移动平均平滑信号路径，降低高频抖动带来的换手率。该模板适合捕捉“只有显著稳定性变化才应交易”的场景，同时通过平滑控制交易成本。",
+    "expression_list": [
+        "ts_mean(signed_power(group_zscore(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), sector), 2), 5)"
+    ]
+}

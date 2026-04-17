@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({score}) - ts_mean(vec_avg({score}), 60)) / ts_std_dev(vec_avg({score}), 60)",
+    "idea": "**Concept**: Score Z-Score Anomaly\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The number of standard deviations the current score deviates from its 60-day historical mean\n- **Why This Feature**: Extreme deviations from historical baselines often precede acquisition announcements or rumor spikes; identifies statistical outliers worth investigating\n- **is filling nan necessary**: Yes, for robust mean/std calculation, backfill up to 5 days using `ts_backfill(vec_avg({score}), 5)` to maintain sample size.\n- **Logical Meaning**: Measures how unusual current acquisition likelihood is relative to the stock's recent history; captures surprise events\n- **Directionality**: High positive values indicate unusually high likelihood (potential imminent deal); high negative values indicate unusual deterioration\n- **Boundary Conditions**: |z-score| > 3 indicates extreme anomaly; persistent z-scores > 2 suggest sustained elevated interest",
+    "expression_list": [
+        "(vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 60)) / ts_std_dev(vec_avg(mdl249_score), 60)"
+    ]
+}

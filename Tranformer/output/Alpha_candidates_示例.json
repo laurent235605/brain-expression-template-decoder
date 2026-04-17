@@ -1,0 +1,654 @@
+{
+    "group_rank(ts_mean(ts_delta(ts_backfill(<fundamental_field/>, <backfill_days/>), <delta_days/>), <mean_days/>) / ts_std_dev(ts_delta(ts_backfill(<fundamental_field/>, <backfill_days/>), <delta_days/>), <std_days/>), <group_field/>)": {
+        "template_explanation": "Generalized risk-adjusted fundamental momentum: replaces EPS with any quarterly fundamental, keeps the Sharpe-like score and intra-group ranking to isolate smooth, persistent trends while neutralizing structural differences across groups.",
+        "seed_alpha_settings": {
+            "instrumentType": "EQUITY",
+            "region": "GLB",
+            "universe": "TOPDIV3000",
+            "delay": 1,
+            "decay": 0,
+            "neutralization": "STATISTICAL",
+            "truncation": 0.01,
+            "pasteurization": "ON",
+            "unitHandling": "VERIFY",
+            "nanHandling": "ON",
+            "maxTrade": "OFF",
+            "language": "FASTEXPR",
+            "visualization": false,
+            "startDate": "2013-01-20",
+            "endDate": "2023-01-20"
+        },
+        "placeholder_candidates": {
+            "<fundamental_field/>": {
+                "type": "data_field",
+                "candidates": [
+                    {
+                        "id": "fnd23_icsm_m_vers",
+                        "description": "[Quarterly] Revenue"
+                    },
+                    {
+                        "id": "fnd72_s_pit_or_is_q_net_income",
+                        "description": "Net Income"
+                    },
+                    {
+                        "id": "mdl219_1_ocfmargin",
+                        "description": "Operating cash flow margin calculated as operating cash flow divided by sales."
+                    },
+                    {
+                        "id": "fnd23_tangible_bvps",
+                        "description": "tangible book value per share."
+                    },
+                    {
+                        "id": "ebitda_per_share_trailing_twelve_months",
+                        "description": "EBITDA per share for the trailing twelve months."
+                    }
+                ]
+            },
+            "<backfill_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 252
+                    },
+                    {
+                        "value": 504
+                    },
+                    {
+                        "value": 756
+                    },
+                    {
+                        "value": 1008
+                    },
+                    {
+                        "value": 1260
+                    }
+                ]
+            },
+            "<delta_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 42
+                    },
+                    {
+                        "value": 63
+                    },
+                    {
+                        "value": 84
+                    },
+                    {
+                        "value": 126
+                    },
+                    {
+                        "value": 252
+                    }
+                ]
+            },
+            "<mean_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 20
+                    },
+                    {
+                        "value": 40
+                    },
+                    {
+                        "value": 60
+                    },
+                    {
+                        "value": 80
+                    },
+                    {
+                        "value": 120
+                    }
+                ]
+            },
+            "<std_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 20
+                    },
+                    {
+                        "value": 40
+                    },
+                    {
+                        "value": 60
+                    },
+                    {
+                        "value": 120
+                    },
+                    {
+                        "value": 252
+                    }
+                ]
+            },
+            "<group_field/>": {
+                "type": "group_data_field",
+                "candidates": [
+                    {
+                        "name": "industry"
+                    },
+                    {
+                        "name": "sector"
+                    },
+                    {
+                        "name": "subindustry"
+                    }
+                ]
+            }
+        }
+    },
+    "group_rank(ts_mean(ts_delta(<price_field/>, <short_delta/>), <medium_mean/>) / ts_std_dev(ts_delta(<price_field/>, <short_delta/>), <medium_std/>), <group_field/>)": {
+        "template_explanation": "Price-momentum version of the seed: uses returns instead of EPS change, still rewards consistent momentum within each sector/industry, producing a cleaner trend signal that is not distorted by industry-wide volatility regimes.",
+        "seed_alpha_settings": {
+            "instrumentType": "EQUITY",
+            "region": "GLB",
+            "universe": "TOPDIV3000",
+            "delay": 1,
+            "decay": 0,
+            "neutralization": "STATISTICAL",
+            "truncation": 0.01,
+            "pasteurization": "ON",
+            "unitHandling": "VERIFY",
+            "nanHandling": "ON",
+            "maxTrade": "OFF",
+            "language": "FASTEXPR",
+            "visualization": false,
+            "startDate": "2013-01-20",
+            "endDate": "2023-01-20"
+        },
+        "placeholder_candidates": {
+            "<price_field/>": {
+                "type": "data_field",
+                "candidates": [
+                    {
+                        "id": "close",
+                        "description": "Daily close price"
+                    },
+                    {
+                        "id": "open",
+                        "description": "Daily open price"
+                    },
+                    {
+                        "id": "vwap",
+                        "description": "Daily volume weighted average price"
+                    },
+                    {
+                        "id": "oth463_adjust_close",
+                        "description": "Adjusted close price"
+                    },
+                    {
+                        "id": "high",
+                        "description": "Daily high price"
+                    }
+                ]
+            },
+            "<short_delta/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    },
+                    {
+                        "value": 42
+                    }
+                ]
+            },
+            "<medium_mean/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    },
+                    {
+                        "value": 42
+                    },
+                    {
+                        "value": 63
+                    },
+                    {
+                        "value": 126
+                    }
+                ]
+            },
+            "<medium_std/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 20
+                    },
+                    {
+                        "value": 40
+                    },
+                    {
+                        "value": 60
+                    },
+                    {
+                        "value": 80
+                    },
+                    {
+                        "value": 120
+                    }
+                ]
+            },
+            "<group_field/>": {
+                "type": "group_data_field",
+                "candidates": [
+                    {
+                        "name": "industry"
+                    },
+                    {
+                        "name": "subindustry"
+                    },
+                    {
+                        "name": "sector"
+                    }
+                ]
+            }
+        }
+    },
+    "group_rank((<fundamental_field/> - ts_delay(<fundamental_field/>, <lag_quarters/>)) / ts_std_dev(<fundamental_field/> - ts_delay(<fundamental_field/>, <lag_quarters/>), <std_quarters/>), <group_field/>)": {
+        "template_explanation": "SUE-style surprise on any quarterly metric: standardizes the YoY (or QoQ) jump by its own historical volatility, then ranks within peer groups to highlight genuine outliers while canceling systematic industry drift.",
+        "seed_alpha_settings": {
+            "instrumentType": "EQUITY",
+            "region": "GLB",
+            "universe": "TOPDIV3000",
+            "delay": 1,
+            "decay": 0,
+            "neutralization": "STATISTICAL",
+            "truncation": 0.01,
+            "pasteurization": "ON",
+            "unitHandling": "VERIFY",
+            "nanHandling": "ON",
+            "maxTrade": "OFF",
+            "language": "FASTEXPR",
+            "visualization": false,
+            "startDate": "2013-01-20",
+            "endDate": "2023-01-20"
+        },
+        "placeholder_candidates": {
+            "<fundamental_field/>": {
+                "type": "data_field",
+                "candidates": [
+                    {
+                        "id": "fnd72_s_pit_or_is_q_net_income",
+                        "description": "Net Income"
+                    },
+                    {
+                        "id": "star_rev_surprise_prediction_fy2",
+                        "description": "Revenue predicted surprise pct - forward 2 years"
+                    },
+                    {
+                        "id": "star_eps_smart_estimate_12m",
+                        "description": "SmartEstimate F12M EPS"
+                    },
+                    {
+                        "id": "ebitda_per_share_trailing_twelve_months",
+                        "description": "EBITDA per share for the trailing twelve months."
+                    },
+                    {
+                        "id": "mdl219_1_ocfmargin",
+                        "description": "Operating cash flow margin calculated as operating cash flow divided by sales."
+                    }
+                ]
+            },
+            "<lag_quarters/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 1
+                    },
+                    {
+                        "value": 4
+                    },
+                    {
+                        "value": 8
+                    }
+                ]
+            },
+            "<std_quarters/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 8
+                    },
+                    {
+                        "value": 12
+                    },
+                    {
+                        "value": 16
+                    },
+                    {
+                        "value": 20
+                    }
+                ]
+            },
+            "<group_field/>": {
+                "type": "group_data_field",
+                "candidates": [
+                    {
+                        "name": "industry"
+                    },
+                    {
+                        "name": "sector"
+                    },
+                    {
+                        "name": "subindustry"
+                    }
+                ]
+            }
+        }
+    },
+    "group_rank(ts_mean(ts_delta(ts_backfill(<alternative_field/>, <backfill_days/>), <delta_days/>), <mean_days/>) / ts_std_dev(ts_delta(ts_backfill(<alternative_field/>, <backfill_days/>), <delta_days/>), <std_days/>), <group_field/>)": {
+        "template_explanation": "Alternative-data momentum clone: applies the same risk-adjusted change logic to non-traditional data (web-traffic, sentiment, etc.), yielding a smooth, comparable signal that is industry-neutral and robust to data gaps.",
+        "seed_alpha_settings": {
+            "instrumentType": "EQUITY",
+            "region": "GLB",
+            "universe": "TOPDIV3000",
+            "delay": 1,
+            "decay": 0,
+            "neutralization": "STATISTICAL",
+            "truncation": 0.01,
+            "pasteurization": "ON",
+            "unitHandling": "VERIFY",
+            "nanHandling": "ON",
+            "maxTrade": "OFF",
+            "language": "FASTEXPR",
+            "visualization": false,
+            "startDate": "2013-01-20",
+            "endDate": "2023-01-20"
+        },
+        "placeholder_candidates": {
+            "<alternative_field/>": {
+                "type": "data_field",
+                "candidates": [
+                    {
+                        "id": "fnd23_intfvalld1_qkim",
+                        "description": "Traffic acquisition costs (TAC) represent the cost for a company to acquire traffic to their site."
+                    },
+                    {
+                        "id": "snt22pos_min_377",
+                        "description": "minimum positive sentiment score."
+                    },
+                    {
+                        "id": "mdl106_tre",
+                        "description": "earnings revenue trend"
+                    },
+                    {
+                        "id": "fnd23_intfvalld1_liim",
+                        "description": "Click Rate, Total - %. It shows the frequency an advertisement downloaded with a webpage is clicked on. This is obtained using the number of clicks on an ad on a webpage, divided by the total number of times that the ad was downloaded with a page."
+                    },
+                    {
+                        "id": "headline_sentiment_value",
+                        "description": "Aggregate sentiment value computed for the news headline."
+                    }
+                ]
+            },
+            "<backfill_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 14
+                    },
+                    {
+                        "value": 30
+                    },
+                    {
+                        "value": 60
+                    }
+                ]
+            },
+            "<delta_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    },
+                    {
+                        "value": 42
+                    },
+                    {
+                        "value": 63
+                    }
+                ]
+            },
+            "<mean_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    },
+                    {
+                        "value": 42
+                    },
+                    {
+                        "value": 63
+                    }
+                ]
+            },
+            "<std_days/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 20
+                    },
+                    {
+                        "value": 40
+                    },
+                    {
+                        "value": 60
+                    }
+                ]
+            },
+            "<group_field/>": {
+                "type": "group_data_field",
+                "candidates": [
+                    {
+                        "name": "industry"
+                    },
+                    {
+                        "name": "sector"
+                    },
+                    {
+                        "name": "subindustry"
+                    }
+                ]
+            }
+        }
+    },
+    "group_rank(ts_corr(ts_delta(ts_backfill(<fundamental_field/>, <bf/>), <d1/>), ts_delta(<price_field/>, <d2/>), <corr_win/>), <group_field/>)": {
+        "template_explanation": "Earnings-to-price alignment factor: measures how tightly fundamental momentum co-moves with price momentum; high correlation within group flags firms where the market promptly rewards improving fundamentals, suggesting continued follow-through.",
+        "seed_alpha_settings": {
+            "instrumentType": "EQUITY",
+            "region": "GLB",
+            "universe": "TOPDIV3000",
+            "delay": 1,
+            "decay": 0,
+            "neutralization": "STATISTICAL",
+            "truncation": 0.01,
+            "pasteurization": "ON",
+            "unitHandling": "VERIFY",
+            "nanHandling": "ON",
+            "maxTrade": "OFF",
+            "language": "FASTEXPR",
+            "visualization": false,
+            "startDate": "2013-01-20",
+            "endDate": "2023-01-20"
+        },
+        "placeholder_candidates": {
+            "<fundamental_field/>": {
+                "type": "data_field",
+                "candidates": [
+                    {
+                        "id": "ern3_all_delay_1_next_reptime",
+                        "description": "next report time"
+                    },
+                    {
+                        "id": "star_rev_surprise_prediction_fy2",
+                        "description": "Revenue predicted surprise pct - forward 2 years"
+                    },
+                    {
+                        "id": "fnd72_s_pit_or_is_q_net_income",
+                        "description": "Net Income"
+                    },
+                    {
+                        "id": "ebitda_per_share_trailing_twelve_months",
+                        "description": "EBITDA per share for the trailing twelve months."
+                    },
+                    {
+                        "id": "fnd7_ointfund_qfcnif",
+                        "description": "Quarterly Fundamental Item: Financing Activities -> Net Cash Flow (Statement of Cash Flows)"
+                    }
+                ]
+            },
+            "<bf/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 1
+                    },
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    }
+                ]
+            },
+            "<d1/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    },
+                    {
+                        "value": 63
+                    },
+                    {
+                        "value": 126
+                    }
+                ]
+            },
+            "<price_field/>": {
+                "type": "data_field",
+                "candidates": [
+                    {
+                        "id": "close",
+                        "description": "Daily close price"
+                    },
+                    {
+                        "id": "pv37_volume_13",
+                        "description": "Trading volume"
+                    },
+                    {
+                        "id": "srp_average_score",
+                        "description": "Average score"
+                    },
+                    {
+                        "id": "pv37_open_13",
+                        "description": "Open price"
+                    },
+                    {
+                        "id": "open",
+                        "description": "Daily open price"
+                    }
+                ]
+            },
+            "<d2/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 5
+                    },
+                    {
+                        "value": 10
+                    },
+                    {
+                        "value": 21
+                    },
+                    {
+                        "value": 42
+                    },
+                    {
+                        "value": 63
+                    }
+                ]
+            },
+            "<corr_win/>": {
+                "type": "integer_parameter",
+                "candidates": [
+                    {
+                        "value": 20
+                    },
+                    {
+                        "value": 40
+                    },
+                    {
+                        "value": 60
+                    },
+                    {
+                        "value": 120
+                    },
+                    {
+                        "value": 252
+                    }
+                ]
+            },
+            "<group_field/>": {
+                "type": "group_data_field",
+                "candidates": [
+                    {
+                        "name": "industry"
+                    },
+                    {
+                        "name": "subindustry"
+                    },
+                    {
+                        "name": "sector"
+                    }
+                ]
+            }
+        }
+    }
+}

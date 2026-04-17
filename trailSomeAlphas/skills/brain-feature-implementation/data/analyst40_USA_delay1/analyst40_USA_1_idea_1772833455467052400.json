@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), 252), sector)",
+    "idea": "历史自适应稳定性冲击：先计算短期与长期波动率差值，再通过252日滚动时序Z-score衡量该差值相对于个股自身历史分布的极端程度（捕捉“稳定性意外改善”），最后进行行业内标准化。相较于原始截面比较，该模板能识别出相对于自身历史而言治理结构出现显著拐点（由动荡回归稳定或反之）的公司，避免行业周期导致的误判。",
+    "expression_list": [
+        "group_zscore(ts_zscore(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), 252), sector)"
+    ]
+}

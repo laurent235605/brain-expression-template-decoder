@@ -1,0 +1,7 @@
+{
+    "template": "subtract(signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 5), sector), 3), signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 60), sector), 2))",
+    "idea": "非对称幂次期限对比策略。分别对短期波动率进行三次幂强调（强非线性）和对长期波动率进行二次幂强调（温和非线性）后再计算利差。创新性地结合两个模板的非线性处理逻辑，短期使用更强幂次以捕捉急剧的地域重组动荡，长期使用较弱幂次以保留趋势信息，通过非对称变换更敏感地识别\"短期极端动荡但长期趋势温和\"的突变拐点，避免对称变换可能掩盖的模式差异。",
+    "expression_list": [
+        "subtract(signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 5), sector), 3), signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 60), sector), 2))"
+    ]
+}

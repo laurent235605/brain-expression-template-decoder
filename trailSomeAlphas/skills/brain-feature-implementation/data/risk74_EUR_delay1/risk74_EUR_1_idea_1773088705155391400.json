@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(group_zscore(ts_delta({hfown_pctown}, 5), industry), group_zscore(ts_delta({fund_pct_ownership_encr}, 5), industry)), industry)",
+    "idea": "聪明钱分歧：通过对冲基金与长线机构({fund_pct_ownership_encr})持仓5日变化的差值，捕捉两类聪明资金的行为分歧；双重行业标准化确保比较的是相对流动速率而非行业配置水平差异，适用于发现主动管理型基金的独立判断。",
+    "expression_list": [
+        "group_zscore(subtract(group_zscore(ts_delta(rsk74_hfown_pctown, 5), industry), group_zscore(ts_delta(hedge_fund_pct_ownership_encr, 5), industry)), industry)"
+    ]
+}

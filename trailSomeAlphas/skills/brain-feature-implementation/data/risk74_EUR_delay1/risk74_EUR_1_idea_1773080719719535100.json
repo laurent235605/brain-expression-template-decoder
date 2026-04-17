@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_delta(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),5),industry)",
+    "idea": "不采用残差绝对水平，而是计算残差的5日变化率(加速度)，识别空头压力正在急剧累积或消退的特质性拐点；通过行业中性化确保信号反映的是相对同行的变化速度，而非行业系统性趋势，适用于捕捉短期情绪动量。",
+    "expression_list": [
+        "group_zscore(ts_delta(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),5),industry)",
+        "group_zscore(ts_delta(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),5),industry)"
+    ]
+}

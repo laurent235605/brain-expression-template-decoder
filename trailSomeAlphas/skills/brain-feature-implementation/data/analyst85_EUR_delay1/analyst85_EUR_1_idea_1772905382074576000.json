@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_decay_exp_window(vec_skewness({version}), 30, factor=0.1), driver=\"gaussian\")",
+    "idea": "计算版本向量的偏度（衡量版本分布的不对称性：右偏表示少数极端高版本主导），应用30天指数衰减后，使用高斯分位数转换将偏度映射到标准正态分布，将中间值压缩至0附近并拉伸尾部，增强极端偏态（极度乐观或悲观）的信号区分度，适合捕捉情绪极端化后的反转或动量。",
+    "expression_list": [
+        "quantile(ts_decay_exp_window(vec_skewness(anl85_version), 30, factor=0.1), driver=\"gaussian\")"
+    ]
+}

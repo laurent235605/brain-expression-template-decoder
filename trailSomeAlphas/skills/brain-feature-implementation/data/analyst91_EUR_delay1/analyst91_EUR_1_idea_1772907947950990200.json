@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_zscore(vec_skewness({exposure_value}), 126), group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector))",
+    "idea": "地理集中度与敞口波动的双重风险叠加（跨维度交互）。创新性地将模板1的长期地理集中度变化（126日偏度时序Z-score）与模板2的平均敞口短期波动性（20日标准差的行业Z-score）相乘：识别\"地理集中度正在发生结构性变化（高时序Z-score）且近期平均敞口波动异常（高行业相对波动）\"的叠加风险状态，捕捉高风险重构期的复合信号。",
+    "expression_list": [
+        "multiply(ts_zscore(vec_skewness(anl91_exposure_value), 126), group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector))"
+    ]
+}

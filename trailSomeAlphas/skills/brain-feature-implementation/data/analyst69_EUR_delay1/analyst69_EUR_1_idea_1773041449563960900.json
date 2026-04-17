@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), industry), 3)",
+    "idea": "先对5日EPS修正变化进行去极值处理，计算其在过去252日中的历史分位数排名，识别当前修正是否处于历史极端水平，再进行行业内标准化消除板块偏差，最后用signed_power三次方放大尾部差异，强调那些正经历历史性修正且行业相对突出的信号。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), industry), 3)",
+        "signed_power(group_zscore(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), industry), 3)"
+    ]
+}

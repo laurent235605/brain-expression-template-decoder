@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(winsorize((vec_ir({aily_delta_recon_value}) - ts_mean(vec_ir({aily_delta_recon_value}), 20)) / ts_std_dev(vec_ir({aily_delta_recon_value}), 20), std=4), 5), sector)",
+    "idea": "稳健组中性信息比率偏离度：将vec_avg替换为vec_ir（信息比率=均值/标准差）以捕捉修正信号的离散信噪比，对历史数据使用63日回溯填充确保20日标准差计算稳定性，进行4倍标准差截尾处理消除极端异常值，通过行业组内zscore中性化消除板块偏差，最后使用5日线性衰减降低换手率并平滑信号。突出具有高信息价值且统计显著的修正冲击，避免单一行业集中暴露。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(winsorize((vec_ir(ern10_aily_delta_recon_value) - ts_mean(vec_ir(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_ir(ern10_aily_delta_recon_value), 20), std=4), 5), sector)"
+    ]
+}

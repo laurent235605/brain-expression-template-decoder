@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(quantile(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long},sector,63),std=4), winsorize(group_backfill({owners_decile_rank_long},sector,63),std=4), 60, rettype=0), driver=\"gaussian\"), sector)",
+    "idea": "极端所有权异常捕捉（高斯拉伸+行业中性）：首先使用group_backfill以行业中位数填充缺失值，winsorize处理极值；对60日回归残差进行高斯分位数转换（quantile），将中间噪音压缩至0附近，同时极度拉伸极度分散（正残差）与极度集中（负残差）的尾部；最后进行行业中性化（group_zscore），确保信号来源于行业内相对所有权结构异常，而非行业间基础水平差异。",
+    "expression_list": [
+        "group_zscore(quantile(ts_regression(winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), driver=\"gaussian\"), sector)",
+        "group_zscore(quantile(ts_regression(winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), driver=\"gaussian\"), sector)",
+        "group_zscore(quantile(ts_regression(winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), driver=\"gaussian\"), sector)",
+        "group_zscore(quantile(ts_regression(winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), driver=\"gaussian\"), sector)"
+    ]
+}

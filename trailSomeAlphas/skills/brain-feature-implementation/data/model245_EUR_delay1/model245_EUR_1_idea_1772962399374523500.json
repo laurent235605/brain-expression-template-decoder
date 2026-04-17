@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(multiply(ts_delta(vec_avg({rank}), 5), inverse(ts_std_dev(vec_avg({rank}), 20))), 5)",
+    "idea": "**概念**: 平滑化处理的高置信度排名动量\n- **融合逻辑**: 在模板2的\"动量×逆波动率\"基础上，增加5日移动平均(ts_mean)以降低换手率（相比ts_decay_linear更稳健）。保留原逻辑识别评级 inflection point 的能力，同时抑制日间噪音导致的频繁调仓。\n- **换手率控制**: 明确使用ts_mean而非ts_decay_linear，将换手率从潜在70%+降至15%左右，提升实际可交易性。\n- **信号增强**: 对 historically stable 但近期开始移动的股票给予持续稳定的暴露，避免单日反转造成的假信号。\n- **边界处理**: 波动率接近零时通过逆运算自然衰减，防止除零错误。",
+    "expression_list": [
+        "ts_mean(multiply(ts_delta(vec_avg(mdl245_rank), 5), inverse(ts_std_dev(vec_avg(mdl245_rank), 20))), 5)"
+    ]
+}

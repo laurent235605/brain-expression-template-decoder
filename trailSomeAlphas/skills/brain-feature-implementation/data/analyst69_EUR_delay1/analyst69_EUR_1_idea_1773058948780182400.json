@@ -1,0 +1,8 @@
+{
+    "template": "quantile(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), driver='gaussian')",
+    "idea": "高斯分位数加速度映射：对模板1的原始加速度信号应用quantile高斯分布拉伸，将中间区间压缩至0附近，极端正负加速度映射至尾部。相比线性zscore，此变换增强极端修订动量信号的区分度，同时保持方向一致性，适合强调头尾贡献的场景。",
+    "expression_list": [
+        "quantile(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), driver='gaussian')",
+        "quantile(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), driver='gaussian')"
+    ]
+}

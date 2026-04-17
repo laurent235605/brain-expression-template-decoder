@@ -1,0 +1,5 @@
+{
+    "template": "hump_decay(trade_when(greater(ts_rank({volume}, 20), 0.3), multiply(group_zscore(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), industry), s_log_1p(abs(group_zscore(winsorize(ts_delta({analyst_num_est}, 5), std=4), industry)))), 0), hump=0.01)",
+    "idea": "分析师覆盖变化加权的自适应流动性过滤。将核心修订信号与分析师覆盖人数变化的绝对zscore经对数压缩后（s_log_1p）相乘作为信心度权重，仅在前20日成交量处于全市场前70%的标的中交易，并应用hump_decay控制日度权重波动，实现流动性安全垫下的高确信度交易。",
+    "expression_list": []
+}

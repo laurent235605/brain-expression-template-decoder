@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), 126)",
+    "idea": "数据丰富度的历史分位数定位，计算当前数据可得性在过去126个交易日中的相对位置，识别数据积累的关键转折点（如从稀疏到充足的临界状态），优于简单水平值比较",
+    "expression_list": [
+        "ts_rank(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), 126)"
+    ]
+}

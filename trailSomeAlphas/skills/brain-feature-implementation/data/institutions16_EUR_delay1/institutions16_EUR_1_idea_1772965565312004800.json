@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff({fundreportedequityassets} / {reported_asset_value}, 20)",
+    "idea": "**Concept**: Allocation Deviation Score\n- **Sample Fields Used**: `fundreportedequityassets`, `reported_asset_value`\n- **Definition**: Deviation of current equity allocation percentage from 20-day trailing average\n- **Why This Feature**: Sudden shifts in asset allocation suggest macro views, risk-off/risk-on positioning, or liquidity needs; persistent deviation indicates strategy change\n- **Logical Meaning**: Captures tactical allocation shifts versus strategic benchmark; large deviations indicate active timing or rebalancing activity\n- **is filling nan necessary**: Yes, allocation ratios require both numerator and denominator; if either is NaN, the ratio is NaN. Use `ts_backfill()` on underlying fields before division to maintain continuity\n- **Directionality**: Positive values indicate above-average equity exposure (risk-on), negative values indicate below-average (risk-off)\n- **Boundary Conditions**: Extreme values suggest de-risking or leveraging events; zero indicates allocation at historical mean",
+    "expression_list": [
+        "ts_av_diff(inst16_ipreo_fundreportedequityassets / fund_reported_asset_value, 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(rank(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0)), driver=\"gaussian\"), 5)",
+    "idea": "**高斯分位分布拉伸与半衰平滑**：在标准规模中性残差基础上，先进行截面排名（rank），再通过高斯驱动（gaussian）的quantile变换将中间区间的基金压缩至零附近，同时将两端的极端活跃/被动基金显著拉伸远离中心，强化尾部信号的区分度。最后应用5日线性衰减平均（ts_decay_linear），赋予近期数据更高权重，降低组合换手率，同时保持对规模净化后异常交易风格的持续跟踪。",
+    "expression_list": [
+        "ts_decay_linear(quantile(rank(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0)), driver=\"gaussian\"), 5)"
+    ]
+}

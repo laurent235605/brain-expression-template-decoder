@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(ts_rank(days_from_last_change({eps_expected_report_dt}), 252), 0.8), ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), if_else(less(ts_rank(days_from_last_change({eps_expected_report_dt}), 252), 0.2), reverse(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63)), 0))",
+    "idea": "应用“仅极端区间有信号”的逻辑（来自通用头尾模板）于双因子交叉：仅当日期稳定性处于历史极端分位（前20%极稳定或后20%极不稳定）时，才交易累积盈利调整压力。极稳定时直接做多压力方向，极不稳定时反向做空，中间80%区间视为噪音并归零。融合Template A的历史分位概念与Template B的累积逻辑，实现非对称押注。",
+    "expression_list": [
+        "if_else(greater(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), 0.8), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), if_else(less(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), 0.2), reverse(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63)), 0))",
+        "if_else(greater(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), 0.8), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), if_else(less(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), 0.2), reverse(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63)), 0))",
+        "if_else(greater(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), 0.8), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), if_else(less(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), 0.2), reverse(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63)), 0))",
+        "if_else(greater(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), 0.8), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), if_else(less(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), 0.2), reverse(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63)), 0))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); has_data = less(ts_count_nans(b, 63), 5); is_stable = greater(vol_clean, 0); core = trade_when(and(has_data, is_stable), level_score, trade_when(has_data, multiply(level_score, 0.3), 0)); scale(core, scale=1)",
+    "idea": "引入数据质量检验（ts_count_nans）与逻辑组合（and），仅对近期数据缺失少于5天且短期波动低于长期的股票给予全额或折扣权重，缺失严重者直接置零。最后通过scale控制整体booksize，确保可交易性。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); has_data = less(ts_count_nans(b, 63), 5); is_stable = greater(vol_clean, 0); core = trade_when(and(has_data, is_stable), level_score, trade_when(has_data, multiply(level_score, 0.3), 0)); scale(core, scale=1)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(winsorize(group_zscore(divide(subtract(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), ts_mean(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), ts_std_dev(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), {industry}), std=3), 1.5)",
+    "idea": "先对向量均值进行63日回溯填充与4倍标准差截尾，计算20日时序Z分数以识别修正冲击；通过行业中性化(group_zscore)消除板块动量混淆，再使用signed_power(y=1.5)非线性放大|z|>2的极端值同时保持多空方向，最后再次截尾确保稳健性，适用于捕捉跨行业的极端预期修正。",
+    "expression_list": []
+}

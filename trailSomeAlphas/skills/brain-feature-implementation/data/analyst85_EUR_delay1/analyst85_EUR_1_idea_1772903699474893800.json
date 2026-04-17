@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta( ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 5 ) * vec_range({version})",
+    "idea": "计算累积修正强度的5日变化量(ts_delta)作为'关注度冲击'指标，衡量分析师活动加速度，再乘以当前版本离散度，专门捕捉分析师关注度突然爆发且内部存在分歧的潜在突破或转折时点",
+    "expression_list": [
+        "ts_delta( ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 5 ) * vec_range(anl85_version)"
+    ]
+}

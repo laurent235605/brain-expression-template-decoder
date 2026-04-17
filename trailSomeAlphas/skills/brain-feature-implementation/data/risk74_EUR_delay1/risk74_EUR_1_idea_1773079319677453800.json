@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_decay_linear(winsorize(ts_backfill({concentration}, 10), std=4), 10), ts_mean(winsorize(ts_backfill({concentration}, 10), std=4), 60))",
+    "idea": "构建双窗口验证机制：短期线性衰减窗口(ts_decay_linear, 10日)捕捉即时的地理集中度冲击，长期均值窗口(ts_mean, 60日)定义结构性基准，结合模板1的回填处理与模板2的winsorize异常值清洗。该结构兼顾了对近期地缘战略变化的敏感度与对长期趋势的稳健参照，避免单一窗口带来的信号滞后或过度反应。",
+    "expression_list": [
+        "subtract(ts_decay_linear(winsorize(ts_backfill(rsk74_concentration, 10), std=4), 10), ts_mean(winsorize(ts_backfill(rsk74_concentration, 10), std=4), 60))",
+        "subtract(ts_decay_linear(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), 10), ts_mean(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), 60))"
+    ]
+}

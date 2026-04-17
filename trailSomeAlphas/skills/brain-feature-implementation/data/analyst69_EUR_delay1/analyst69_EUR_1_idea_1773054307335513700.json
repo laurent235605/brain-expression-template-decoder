@@ -1,0 +1,5 @@
+{
+    "template": "ts_rank(winsorize(subtract(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), group_zscore(ts_delta({eps_best_eeps_next_yr}, 5), industry)), std=4), 252)",
+    "idea": "跨期修订背离策略。比较本年度与下一年度预期修订动量的行业中性化差异，捕捉短期业绩焦虑（当前年度大幅上修）与长期信心（次年度相对滞后）之间的分歧；将该背离程度映射到252日历史分位数，识别历史上极端的期限结构扭曲事件，适用于捕捉业绩拐点或指引突变带来的跨期套利机会。",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), industry)), 1.5), group_zscore(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), industry), 0)",
+    "idea": "极值区间择时（Tail-focused）。仅在利润率动量偏离行业均值超过1.5个标准差时产生信号，中段区间视为噪音并置零。通过trade_when实现\"强信号开仓，弱信号观望\"的机制，降低无效交易。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), industry)), 1.5), group_zscore(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), industry), 0)",
+        "trade_when(greater(abs(group_zscore(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), industry)), 1.5), group_zscore(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), industry), 0)"
+    ]
+}

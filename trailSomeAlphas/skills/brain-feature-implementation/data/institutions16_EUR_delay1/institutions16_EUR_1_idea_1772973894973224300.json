@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(multiply(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), inverse(winsorize(ts_std_dev(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 60), std=4))), std=4), industry)",
+    "idea": "**风险调整资产流速（Volatility-Adjusted Flow）**：计算资产流量与其近期60日波动率之比（信息比率概念），识别“高确定性”资金流入（波动小但趋势强）与“恐慌性”流出（波动大且趋势急）。对波动率取逆（inverse）实现除法效果，经截断与行业标准化后，该因子奖励那些资产稳步增长而非剧烈波动膨胀的标的，惩罚资产断崖式下跌且波动失控的标的。",
+    "expression_list": [
+        "group_zscore(winsorize(multiply(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), inverse(winsorize(ts_std_dev(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 60), std=4))), std=4), industry)"
+    ]
+}

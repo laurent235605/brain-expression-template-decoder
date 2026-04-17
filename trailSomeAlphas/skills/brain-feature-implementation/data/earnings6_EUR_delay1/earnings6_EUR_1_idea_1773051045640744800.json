@@ -1,0 +1,5 @@
+{
+    "template": "winsorize( rank( multiply( group_zscore( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( vec_stddev({estimated_eps}), 0.01 ) ), {industry} ), add( 1.0, abs( vec_skewness({estimated_eps}) ) ) ) ), std=4 )",
+    "idea": "分布偏度增强+行业中性。利用vec_skewness捕捉分析师估计分布的偏度(乐观或悲观的一致倾向)，将行业中性后的标准化惊喜乘以(1+|偏度|)来放大'在高度一致预期(偏度极端)下出现超预期'的信号强度(羊群效应被打破时弹性更大)，最后通过rank转为均匀分位并winsorize去极值，形成对'预期结构非对称'的差异化暴露。",
+    "expression_list": []
+}

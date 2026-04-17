@@ -1,0 +1,10 @@
+{
+    "template": "multiply(quantile(ts_rank(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 252), driver=\"gaussian\"), group_zscore(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry))",
+    "idea": "时序截面共振型：将个股当前的股息持续性比率在其自身历史中的分位点（ts_rank，经quantile高斯拉伸）与在行业内的相对位置（group_zscore）进行交互（相乘），只有当两者都处于极端区间（如均处于高位或低位）时才产生强信号，识别兼具历史突破和行业领先的标的。",
+    "expression_list": [
+        "multiply(quantile(ts_rank(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 252), driver=\"gaussian\"), group_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry))",
+        "multiply(quantile(ts_rank(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 252), driver=\"gaussian\"), group_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry))",
+        "multiply(quantile(ts_rank(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 252), driver=\"gaussian\"), group_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry))",
+        "multiply(quantile(ts_rank(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 252), driver=\"gaussian\"), group_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry))"
+    ]
+}

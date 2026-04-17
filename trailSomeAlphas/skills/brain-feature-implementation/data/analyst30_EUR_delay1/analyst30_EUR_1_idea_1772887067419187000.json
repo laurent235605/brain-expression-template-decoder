@@ -1,0 +1,8 @@
+{
+    "template": "greater(abs(vec_avg({unadjustedgrossamt}) - vec_avg({adjustedgrossamt})), multiply(2, vec_stddev({unadjustedgrossamt})))",
+    "idea": "**Concept**: Extreme Adjustment Outlier Flag\n- **Sample Fields Used**: `unadjustedgrossamt`, `adjustedgrossamt`\n- **Definition**: Binary indicator when the absolute adjustment exceeds 2 standard deviations of the unadjusted amount distribution\n- **Why This Feature**: Identifies unusual corporate actions or potential data errors that create extreme discrepancies between declared and adjusted values\n- **Logical Meaning**: Statistical anomaly detection for corporate action impacts; flags events requiring manual review\n- **is filling nan necessary**: Requires complete data for valid statistical comparison. Fill short gaps with `ts_backfill` or `group_mean` if temporary, otherwise exclude from calculation\n- **Directionality**: 1 (true) indicates extreme outlier event; 0 (false) indicates normal adjustment range\n- **Boundary Conditions**: Binary 0 or 1; threshold at 2-sigma (configurable)",
+    "expression_list": [
+        "greater(abs(vec_avg(anl30_unadjustedgrossamt) - vec_avg(anl30_unadjustedgrossamt)), multiply(2, vec_stddev(anl30_unadjustedgrossamt)))",
+        "greater(abs(vec_avg(anl30_unadjustedgrossamt) - vec_avg(anl30_adjustedgrossamt)), multiply(2, vec_stddev(anl30_unadjustedgrossamt)))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), divide(1, add(0.1, ts_std_dev(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 63))))",
+    "idea": "引入“信息比率”逻辑，用敞口价差的时序稳定性（波动率倒数）作为置信度权重。对于中美敞口切换稳定、持续性强的公司赋予更高权重，对敞口反复震荡的公司降低配置，并结合常数0.1防止除零，提升因子的风险调整收益与夏普比率。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), divide(1, add(0.1, ts_std_dev(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 63))))"
+    ]
+}

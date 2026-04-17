@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(ts_zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 126), 2), greater(ts_delta(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 22), 0)), group_zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), industry), 0)",
+    "idea": "分歧极值动量确认信号。结合时序Z-score（ts_zscore）判断当前分歧是否处于历史极端水平（126日窗口，约半年），同时要求分歧在短期（22日，约一个月）内持续扩大（ts_delta>0），确保趋势性偏离而非随机波动。仅在双条件满足时暴露行业中性化分歧，否则置零（trade_when），适合抓取持续扩大的机构定价错误并过滤震荡噪音。",
+    "expression_list": [
+        "trade_when(and(greater(ts_zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 126), 2), greater(ts_delta(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 22), 0)), group_zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), industry), 0)"
+    ]
+}

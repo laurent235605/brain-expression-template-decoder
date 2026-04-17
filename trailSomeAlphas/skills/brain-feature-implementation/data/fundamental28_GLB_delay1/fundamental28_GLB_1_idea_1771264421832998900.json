@@ -1,0 +1,12 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), industry), ts_zscore(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), 504)), 5)",
+    "idea": "**双重极端性流动性预警 (Dual-Extremity Liquidity Alert)**：结合横截面与时间序列双重极端性检测。首先计算行业相对z-score (`group_zscore`)，其次计算相对于自身两年历史（504交易日）的时序z-score (`ts_zscore`)。将两者相乘：只有当公司**同时**处于行业高短期债务分位**且**处于自身历史高位时，才产生强烈的负向信号（异常高的再融资压力）；反之，若仅处于行业高位但处于自身历史低位（对该司而言已属改善），则信号被削弱。此设计过滤了那些 historically 一直高短期债务、已为其业务模式所适应的公司（如特定零售业），真正捕捉**突发**的流动性结构恶化。最后通过5日线性衰减降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), ts_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 504)), 5)",
+        "ts_decay_linear(multiply(group_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), ts_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 504)), 5)",
+        "ts_decay_linear(multiply(group_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), ts_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 504)), 5)",
+        "ts_decay_linear(multiply(group_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), ts_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 504)), 5)",
+        "ts_decay_linear(multiply(group_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), ts_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 504)), 5)",
+        "ts_decay_linear(multiply(group_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), ts_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 504)), 5)"
+    ]
+}

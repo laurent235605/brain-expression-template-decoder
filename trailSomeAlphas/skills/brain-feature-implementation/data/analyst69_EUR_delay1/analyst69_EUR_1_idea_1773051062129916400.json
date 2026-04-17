@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(multiply(group_zscore(divide(winsorize(ts_backfill({eps_best_eeps_cur_yr},63),std=4), winsorize(ts_backfill({ebitda_best_eeps_cur_yr},63),std=4)), sector), add(1, multiply(0.3, signed_power(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr},10),std=4), sector), 1.5)))), 5)",
+    "idea": "行业中性化稳健增强。对原始效率比率和修正幅度均进行63日回溯填充与4倍标准差去极值，确保数据干净；通过group_zscore实现行业中性化，消除行业间不可比性；使用signed_power对修正信号进行1.5次幂变换以强化极端修正的放大效应；最后用ts_mean进行5日平滑以降低换手率，符合\"从属信号不改变方向只改变力度\"的安全范式。",
+    "expression_list": [
+        "ts_mean(multiply(group_zscore(divide(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), add(1, multiply(0.3, signed_power(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr,10),std=4), sector), 1.5)))), 5)",
+        "ts_mean(multiply(group_zscore(divide(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), add(1, multiply(0.3, signed_power(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr,10),std=4), sector), 1.5)))), 5)"
+    ]
+}

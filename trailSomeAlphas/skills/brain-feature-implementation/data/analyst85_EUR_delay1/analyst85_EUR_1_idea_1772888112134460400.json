@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({version}), 5) * vec_range({version})",
+    "idea": "**Concept**: Version Range Momentum\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Product of version momentum and version range (max-min), combining direction of change with internal vector dispersion\n- **Why This Feature**: Captures situations where the overall version is trending while internal contributor views span a wide range - indicating directional opportunity with high uncertainty\n- **is filling nan necessary**: Apply `ts_backfill` to handle temporary gaps in the time series component, but preserve structural NaNs in the vector calculation\n- **Directionality**: Positive values with high magnitude indicate strong trending revisions with wide disagreement (potential breakouts); negative values indicate converging views\n- **Boundary Conditions**: Zero values indicate either no trend or no dispersion; extreme values indicate volatile revision environments",
+    "expression_list": [
+        "ts_delta(vec_avg(anl85_version), 5) * vec_range(anl85_version)"
+    ]
+}

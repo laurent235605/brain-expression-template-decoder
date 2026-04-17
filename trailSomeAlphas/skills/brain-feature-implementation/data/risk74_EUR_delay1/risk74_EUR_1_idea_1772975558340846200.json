@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(less(group_rank({crowding}, industry), 0.8), multiply(group_zscore(add(add(winsorize({factor_e},4), winsorize({factor_s},4)), winsorize({factor_g},4)), industry), ts_rank({value_ts}, 63)), 0)",
+    "idea": "**交叉增强逻辑**: 将ESG三因子的加法结构（源于Input 2）与价值因子的时序排名（源于Input 1的value_ts）结合，并用拥挤度作为交易开关（源于Input 1的风险概念）。使用`group_zscore`进行行业内标准化以消除行业偏差（遵循第3步组内比较逻辑），`ts_rank`捕捉价值因子的历史分位（第4.2.1步时序视角），`trade_when`实现\"仅当拥挤度低于行业前80%时才交易\"的条件逻辑（第5步信号强度控制），避免拥挤价值陷阱。",
+    "expression_list": [
+        "trade_when(less(group_rank(liquidity_factor_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_e,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(liquidity_factor_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_esg,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(liquidity_timeseries_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_e,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(liquidity_timeseries_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_esg,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(rsk74_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_e,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(rsk74_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_esg,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(rsk74_raw_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_e,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)",
+        "trade_when(less(group_rank(rsk74_raw_crowding, industry), 0.8), multiply(group_zscore(add(add(winsorize(rsk74_factor_esg,4), winsorize(rsk74_factor_s,4)), winsorize(rsk74_factor_g,4)), industry), ts_rank(rsk74_value_ts, 63)), 0)"
+    ]
+}

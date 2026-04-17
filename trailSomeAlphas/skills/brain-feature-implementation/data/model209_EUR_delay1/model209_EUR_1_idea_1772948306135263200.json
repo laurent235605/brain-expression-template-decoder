@@ -1,0 +1,7 @@
+{
+    "template": "1 / (1 + vec_stddev({investment}) / abs(vec_avg({investment})))",
+    "idea": "**Concept**: Investment Stability Score\n- **Sample Fields Used**: investment\n- **Definition**: Inverse coefficient of variation measuring consistency of investment allocations across the vector (1 / (1 + std/mean))\n- **Why This Feature**: Stable portfolios exhibit consistent position sizing; high volatility in allocation sizes may indicate erratic strategy behavior or forced liquidations\n- **Logical Meaning**: Quantifies structural consistency of the portfolio construction process\n- **is filling nan necessary**: NaN values likely represent inactive positions; filter via vec_filter before aggregation to avoid biasing statistics toward zero\n- **Directionality**: Higher values (approaching 1) indicate highly stable, uniform allocations; lower values indicate high dispersion or volatility in position sizes\n- **Boundary Conditions**: Approaches 1 when all investments equal; approaches 0 when standard deviation dominates the mean",
+    "expression_list": [
+        "1 / (1 + vec_stddev(mdl209_investment) / abs(vec_avg(mdl209_investment)))"
+    ]
+}

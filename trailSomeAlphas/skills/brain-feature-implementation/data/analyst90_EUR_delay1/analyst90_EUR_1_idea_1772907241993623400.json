@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_rank = rank(vol_clean); buckets = bucket(stab_rank, \"0,1,0.2\"); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); weight = if_else(equal(buckets, 0), 1.5, if_else(equal(buckets, 1), 1.2, if_else(equal(buckets, 2), 1.0, if_else(equal(buckets, 3), 0.7, 0.5)))); core = multiply(level_score, weight); group_normalize(core, industry)",
+    "idea": "使用bucket算子将稳定性分为五档（每20%一档），构建比原模板更细腻的阶梯式权重体系（1.5x至0.5x）。相比单一阈值，此结构对稳定性边际变化更不敏感，提升策略稳健性。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_rank = rank(vol_clean); buckets = bucket(stab_rank, \"0,1,0.2\"); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); weight = if_else(equal(buckets, 0), 1.5, if_else(equal(buckets, 1), 1.2, if_else(equal(buckets, 2), 1.0, if_else(equal(buckets, 3), 0.7, 0.5)))); core = multiply(level_score, weight); group_normalize(core, industry)"
+    ]
+}

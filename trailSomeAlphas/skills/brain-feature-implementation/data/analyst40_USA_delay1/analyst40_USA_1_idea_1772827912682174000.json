@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(reverse(multiply(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), add(1, multiply(0.1, ts_count_nans({overall_genderratio}, 63)))), sector), 5)",
+    "idea": "数据质量加权平滑信号：对原始字段统计63日窗口内缺失值数量（ts_count_nans），构建惩罚因子（1 + 0.1×缺失天数）乘以波动率，对数据稀疏的公司人为放大其“不稳定性”以示惩罚。经反转和组内标准化后，应用5日线性衰减（ts_decay_linear）降低换手率，最终优选数据完整且性别构成持续稳定的公司，同时平滑日间信号 jitter。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(reverse(multiply(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), add(1, multiply(0.1, ts_count_nans(anl40_overall_genderratio, 63)))), sector), 5)"
+    ]
+}

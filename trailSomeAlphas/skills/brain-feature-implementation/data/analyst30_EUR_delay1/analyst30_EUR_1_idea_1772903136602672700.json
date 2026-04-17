@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_backfill(vec_avg({adjustedgrossamt}), 21), 0), signed_power(ts_zscore(vec_avg({adjustedgrossamt}), 126), 1.5), 0)",
+    "idea": "非零股息趋势强化：首先过滤掉零股息（非派息）标的，对存在经济分红的股票计算其当前股息水平相对自身半年历史（126日）的zscore，使用1.5次幂 signed_power 放大极端高分位的信号强度（抑制中等水平噪音），仅对持续派息且当前处于历史高位的标的建立多头暴露。",
+    "expression_list": [
+        "trade_when(greater(ts_backfill(vec_avg(anl30_adjustedgrossamt), 21), 0), signed_power(ts_zscore(vec_avg(anl30_adjustedgrossamt), 126), 1.5), 0)",
+        "trade_when(greater(ts_backfill(vec_avg(anl30_unadjustedgrossamt), 21), 0), signed_power(ts_zscore(vec_avg(anl30_unadjustedgrossamt), 126), 1.5), 0)"
+    ]
+}

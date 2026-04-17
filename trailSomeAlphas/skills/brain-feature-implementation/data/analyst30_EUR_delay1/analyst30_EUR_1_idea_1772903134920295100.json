@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(divide(winsorize(vec_avg({adjustedgrossamt}), std=4), add(winsorize(vec_stddev({adjustedgrossamt}), std=4), 0.0001)), industry)",
+    "idea": "风险调整股息质量：同时提取向量均值（收益水平）与向量标准差（发放波动性），构建股息“夏普比率”——以波动率作为风险惩罚，分子分母均经极值截断并添加微小常数防止除零，最终行业内排序，筛选出高股息且低波动（现金流稳定）的防御性标的。",
+    "expression_list": [
+        "group_rank(divide(winsorize(vec_avg(anl30_adjustedgrossamt), std=4), add(winsorize(vec_stddev(anl30_adjustedgrossamt), std=4), 0.0001)), industry)",
+        "group_rank(divide(winsorize(vec_avg(anl30_unadjustedgrossamt), std=4), add(winsorize(vec_stddev(anl30_unadjustedgrossamt), std=4), 0.0001)), industry)"
+    ]
+}

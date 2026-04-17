@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(group_zscore(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), industry)), 1.0), multiply(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), signed_power(abs(group_zscore(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), industry)), 0.5)), 0), industry)",
+    "idea": "行业中性分层响应模板：将原始二元阈值扩展为连续分层结构，对修正强度进行行业中性化后，使用signed_power构建非线性放大系数（|zscore|越大，效率因子权重越高），最终再次行业标准化确保组内可比，避免单一阈值造成的信息损失。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(group_zscore(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), industry)), 1.0), multiply(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), signed_power(abs(group_zscore(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), industry)), 0.5)), 0), industry)",
+        "group_zscore(trade_when(greater(abs(group_zscore(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), industry)), 1.0), multiply(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), signed_power(abs(group_zscore(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), industry)), 0.5)), 0), industry)"
+    ]
+}

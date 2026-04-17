@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_normalize(trade_when(or(greater(bucket(group_rank(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), \"0,1,0.2\"), 0.8), less(bucket(group_rank(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), \"0,1,0.2\"), 0.2)), group_zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), 0), industry), maxPercent=0.015)",
+    "idea": "组内双尾Bifurcation策略：仅在组内前20%与后20%分位建立多空头寸，中间分位视为噪音通过trade_when置零；利用group_rank与bucket精确划分极端区间，结合group_normalize确保每个行业多空净额平衡，纯粹捕捉截面异常流压alpha，避免中等信号干扰。",
+    "expression_list": [
+        "truncate(group_normalize(trade_when(or(greater(bucket(group_rank(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), industry), \"0,1,0.2\"), 0.8), less(bucket(group_rank(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), industry), \"0,1,0.2\"), 0.2)), group_zscore(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), industry), 0), industry), maxPercent=0.015)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), industry), driver=\"gaussian\")",
+    "idea": "分位数转换的行业中性配置：使用63日回溯填充确保数据稳定性，计算规模中性残差后在行业内标准化，再通过高斯分位数转换将中间区间的股票压缩至零附近，同时放大极端高配（右尾）和低配（左尾）股票的信号强度。适用于需要突出尾部极端配置、增强对极端偏离股票区分度的策略。",
+    "expression_list": [
+        "quantile(group_zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), industry), driver=\"gaussian\")"
+    ]
+}

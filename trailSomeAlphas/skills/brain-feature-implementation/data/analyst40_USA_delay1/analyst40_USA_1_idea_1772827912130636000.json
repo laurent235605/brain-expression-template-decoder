@@ -1,0 +1,7 @@
+{
+    "template": "reverse(signed_power(ts_zscore(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), 252), 2))",
+    "idea": "历史分位点异常反转信号：观察当前稳定性相对于自身一年历史（252日）的时序zscore位置，使用signed_power(..., 2)放大极端偏离程度（保留符号），再反转方向使历史极端不稳定（高zscore）转为做空信号，历史极端稳定（低zscore）转为做多信号。捕捉稳定性波动率的均值回归特性，适用于识别治理结构异常变动后的修复机会。",
+    "expression_list": [
+        "reverse(signed_power(ts_zscore(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), 252), 2))"
+    ]
+}

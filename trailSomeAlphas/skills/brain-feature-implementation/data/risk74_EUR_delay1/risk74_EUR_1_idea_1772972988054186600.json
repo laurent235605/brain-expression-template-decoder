@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(and(greater(abs(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry)), 1.2), greater(abs(s_log_1p(ts_zscore(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 252))), 0.3)), multiply(signed_power(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), 1.5), quantile(ts_zscore(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 252), driver='gaussian')), 0), 5)",
+    "idea": "双重阈值激活机制：仅在行业zscore绝对值超过1.2且历史分位对数压缩值超过0.3时激活信号，使用signed_power放大极端截面偏离，高斯分位数拉伸时序维度以突出历史极值，最后经5日线性衰减降低换手，避免弱信号区间的无效交易。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(and(greater(abs(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry)), 1.2), greater(abs(s_log_1p(ts_zscore(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 252))), 0.3)), multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), 1.5), quantile(ts_zscore(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 252), driver='gaussian')), 0), 5)"
+    ]
+}

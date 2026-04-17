@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(bucket(group_rank(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry), range=\"0,1,0.2\"), 0.8), signed_power(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry), 1.5), multiply(0.2, group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry)))",
+    "idea": "整合模板2的trade_when分段逻辑与模板1的group_zscore标准化，采用分桶技术将行业内的会计分散度分为五档：对前20%极端档使用signed_power非线性放大，对后80%赋予0.2倍权重而非直接归零，平衡极端alpha捕捉与组合分散度。",
+    "expression_list": [
+        "trade_when(greater(bucket(group_rank(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), range=\"0,1,0.2\"), 0.8), signed_power(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), 1.5), multiply(0.2, group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry)))"
+    ]
+}

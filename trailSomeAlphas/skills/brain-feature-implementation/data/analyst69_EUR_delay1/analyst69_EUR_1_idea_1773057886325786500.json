@@ -1,0 +1,8 @@
+{
+    "template": "if_else(equal(bucket(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), range=\"0,1,0.2\"), 4), group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), if_else(equal(bucket(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), range=\"0,1,0.2\"), 0), reverse(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry)), 0))",
+    "idea": "分桶多空对称策略：使用bucket将行业内的修正强度分为五分位，仅在最高五分位（前20%）做多效率因子，最低五分位（后20%）做空效率因子，中间60%严格零仓位，实现更清洁的头尾暴露与对称的极端情绪捕捉。",
+    "expression_list": [
+        "if_else(equal(bucket(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), range=\"0,1,0.2\"), 4), group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), if_else(equal(bucket(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), range=\"0,1,0.2\"), 0), reverse(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry)), 0))",
+        "if_else(equal(bucket(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), range=\"0,1,0.2\"), 4), group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), if_else(equal(bucket(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), range=\"0,1,0.2\"), 0), reverse(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry)), 0))"
+    ]
+}

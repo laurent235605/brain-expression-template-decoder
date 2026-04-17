@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_delta(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 20), 252)",
+    "idea": "不仅关注披露间隔的绝对水平，更关注其“变化速度”或二阶导数。通过20日平滑后计算20日差分（ts_delta），捕捉公司正在变得“更规律披露”（差分负向）或“更不规律”（差分正向）的拐点。252日Z-score用于标准化该加速度的历史罕见程度，适合捕捉信息披露节奏突变的事件驱动型alpha。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 20), 252)",
+        "ts_zscore(ts_delta(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 20), 252)"
+    ]
+}

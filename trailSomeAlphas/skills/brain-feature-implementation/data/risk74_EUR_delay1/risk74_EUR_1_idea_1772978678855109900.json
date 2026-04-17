@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(if_else(is_nan({exp_usa}), 0, ts_backfill({exp_usa},63)),std=4), industry)",
+    "idea": "行业中性美国暴露Z-score因子。先将NaN视为0（纯国内业务假设）并进行63日回溯填充与极值裁剪，计算个股在其所属行业内的相对美国暴露位置。高值表示行业内美国纯业务标的（高区域β），低值表示行业内本土防御型标的，剔除行业β后捕捉个股特异性地理风险，适用于行业配对交易。",
+    "expression_list": [
+        "group_zscore(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, ts_backfill(rsk74_raw_exp_usa,63)),std=4), industry)"
+    ]
+}

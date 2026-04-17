@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(zscore(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 21)), industry)",
+    "idea": "**行业中性动量变化信号**：在清洗后的比率基础上，计算21日变化率（ts_delta）以捕捉基金对STOXX特定份额配置偏好的动态增强或减弱趋势，而非静态水平。先进行全局Z-score标准化以统一量级，再进行行业中性化，确保信号反映的是“相较于同行业其他股票，该股票正在获得更快的权重溢价扩张”，适用于动量型策略且避免了行业beta干扰。",
+    "expression_list": [
+        "group_zscore(zscore(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 21)), industry)"
+    ]
+}

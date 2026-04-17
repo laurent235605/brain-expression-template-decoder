@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(winsorize(ts_rank({return}-{asset},15), std=4), 1.5)",
+    "idea": "对时序排名进行4倍标准差截尾(winsorize)后，应用1.5次幂(signed_power)非线性放大极端值，强调尾部信号而压缩中部噪音",
+    "expression_list": []
+}

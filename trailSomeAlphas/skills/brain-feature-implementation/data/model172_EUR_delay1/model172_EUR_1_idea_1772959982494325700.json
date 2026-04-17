@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(signed_power(rank(ts_sum({cfroidrs}, 5)), 2), 0.7), multiply(signed_power(rank(ts_sum({cfroidrs}, 20)), 2), 0.3)), industry)",
+    "idea": "构建多时间尺度复合动量信号。将5日短周期累加与20日长周期累加分别转换为横截面排名，使用signed_power以2次幂放大尾部差异（强调极端改善/恶化），按0.7:0.3权重叠加后，进行行业标准化。该结构兼顾短期动量确认与长期趋势稳定性，同时通过非线性变换强化对极端分位股票的区分能力。",
+    "expression_list": [
+        "group_zscore(add(multiply(signed_power(rank(ts_sum(mdl172_cfroidrs, 5)), 2), 0.7), multiply(signed_power(rank(ts_sum(mdl172_cfroidrs, 20)), 2), 0.3)), industry)"
+    ]
+}

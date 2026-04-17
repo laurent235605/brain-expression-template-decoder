@@ -1,0 +1,7 @@
+{
+    "template": "hump(ts_decay_linear(group_normalize(subtract(ts_mean(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 5), ts_mean(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), 60)), industry), 3), 0.01)",
+    "idea": "分歧均值回归速率信号。比较短期（5日）与长期（60日）分歧均值的偏离程度（subtract(ts_mean, ts_mean)），捕捉分歧的加速或收敛状态，经行业中性化（group_normalize）后，通过hump算子（阈值0.01）过滤微小日间波动，再经3日衰减平滑。适用于利用分歧的均值回复特性，在趋势早期介入并控制交易成本。",
+    "expression_list": [
+        "hump(ts_decay_linear(group_normalize(subtract(ts_mean(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 5), ts_mean(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), 60)), industry), 3), 0.01)"
+    ]
+}

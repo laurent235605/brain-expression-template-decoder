@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(divide(ts_delta(vec_avg({rank}), 5), ts_std_dev(vec_avg({rank}), 20)), std=4))",
+    "idea": "趋势动量信噪比（信息比率形式）：使用5日排名变化率（近期趋势）替代绝对排名水平，除以20日滚动波动率，构造类似信息比率的动量稳定性指标。该因子捕捉排名改善的确定性，高值代表趋势明确且波动可控，低值代表方向不明或震荡剧烈。",
+    "expression_list": [
+        "zscore(winsorize(divide(ts_delta(vec_avg(mdl245_rank), 5), ts_std_dev(vec_avg(mdl245_rank), 20)), std=4))"
+    ]
+}

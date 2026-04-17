@@ -1,0 +1,14 @@
+{
+    "template": "divide({astcomp}, add({capexast}, {fixastto}))",
+    "idea": "**Concept**: Asset Intensity Profile\n- **Sample Fields Used**: `astcomp`, `capexast`, `fixastto`, `invast`\n- **Definition**: Decomposition of asset base into working capital, fixed assets, and intangibles to identify business model type\n- **Why This Feature**: Different asset structures have different economic sensitivities and capital requirements\n- **Logical Meaning**: High fixed asset intensity indicates operating leverage; high working capital indicates inventory/credit risk\n- **is filling nan necessary**: Yes, use `ts_backfill()` for asset composition data\n- **Directionality**: High values indicate capital-light models (service/tech); low values indicate heavy industry\n- **Boundary Conditions**: Extreme compositions indicate either platform companies or distressed asset sales",
+    "expression_list": [
+        "divide(mdl219_1_astcomp, add(mdl219_1_capexast, mdl219_1_fixastto))",
+        "divide(mdl219_2_astcomp, add(mdl219_1_capexast, mdl219_1_fixastto))",
+        "divide(mdl219_1_astcomp, add(mdl219_1_capexast, mdl219_2_fixastto))",
+        "divide(mdl219_2_astcomp, add(mdl219_1_capexast, mdl219_2_fixastto))",
+        "divide(mdl219_2_astcomp, add(mdl219_2_capexast, mdl219_2_fixastto))",
+        "divide(mdl219_1_astcomp, add(mdl219_2_capexast, mdl219_2_fixastto))",
+        "divide(mdl219_2_astcomp, add(mdl219_2_capexast, mdl219_1_fixastto))",
+        "divide(mdl219_1_astcomp, add(mdl219_2_capexast, mdl219_1_fixastto))"
+    ]
+}

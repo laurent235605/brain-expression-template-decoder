@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(quantile(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), driver=\"gaussian\"), 2)",
+    "idea": "尾部极化非线性变换：将数据丰富度通过高斯分位映射拉伸尾部，再取平方(signed_power)极度放大极端值（极丰富或极稀缺），压缩中间区间噪音，构建U型信号——仅对数据极度完备（高置信）或极度稀疏（高风险）的股票赋予显著权重。",
+    "expression_list": [
+        "signed_power(quantile(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), driver=\"gaussian\"), 2)"
+    ]
+}

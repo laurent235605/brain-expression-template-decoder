@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(multiply(divide(subtract(vec_sum({actual_eps}), vec_sum({estimated_eps})), add(abs(vec_sum({estimated_eps})), 0.01)), ts_mean(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 5)), std=3)",
+    "idea": "将向量均值改为向量求和（vec_sum）以保留量级信息，结合事件指标的5日移动平均（ts_mean）平滑短期噪音，最后进行winsorize处理。适用于捕捉持续的事件活跃期和累积盈利偏差，减少单日异常事件的干扰。",
+    "expression_list": [
+        "winsorize(multiply(divide(subtract(vec_sum(ern6_actual_eps), vec_sum(ern6_estimated_eps)), add(abs(vec_sum(ern6_estimated_eps)), 0.01)), ts_mean(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 5)), std=3)",
+        "winsorize(multiply(divide(subtract(vec_sum(ern6_actual_eps_274), vec_sum(ern6_estimated_eps)), add(abs(vec_sum(ern6_estimated_eps)), 0.01)), ts_mean(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 5)), std=3)",
+        "winsorize(multiply(divide(subtract(vec_sum(ern6_actual_eps), vec_sum(ern6_estimated_eps)), add(abs(vec_sum(ern6_estimated_eps)), 0.01)), ts_mean(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 5)), std=3)",
+        "winsorize(multiply(divide(subtract(vec_sum(ern6_actual_eps_274), vec_sum(ern6_estimated_eps)), add(abs(vec_sum(ern6_estimated_eps)), 0.01)), ts_mean(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 5)), std=3)"
+    ]
+}

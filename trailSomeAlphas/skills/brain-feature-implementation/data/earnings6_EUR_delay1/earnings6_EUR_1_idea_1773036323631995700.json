@@ -1,0 +1,8 @@
+{
+    "template": "quantile(multiply(ts_rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 252), vec_ir({estimated_eps})), driver=\"gaussian\")",
+    "idea": "构建复合时间序列指标：当前意外在自身历史中的分位（ts_rank, 252日）识别\"历史性\"的惊喜程度，避免静态阈值的局限性；乘以预测的信息比率（vec_ir = 均值/标准差）作为质量筛选，剔除高分歧、低质量的预测噪音；最后通过高斯分位数拉伸（quantile gaussian）将中间区间压缩至0附近，显著突出极端值权重；融合截面（IR）和时间序列（历史分位）信息，适用于识别具有长期持续影响的盈利拐点。",
+    "expression_list": [
+        "quantile(multiply(ts_rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 252), vec_ir(ern6_estimated_eps)), driver=\"gaussian\")",
+        "quantile(multiply(ts_rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 252), vec_ir(ern6_estimated_eps)), driver=\"gaussian\")"
+    ]
+}

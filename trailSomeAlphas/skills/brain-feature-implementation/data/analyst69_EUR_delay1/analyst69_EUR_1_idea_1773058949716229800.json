@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_decay_linear(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), 5), ts_decay_linear(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60), 20))",
+    "idea": "双速衰减动量合成：分别对短期(5日)与长期(20日)修订动量应用不同半衰期的线性衰减(5日vs20日)，再求差异。短期成分快速响应最新变化，长期成分缓慢遗忘历史，通过衰减参数差异自然形成加速度概念，避免显式差分带来的噪声放大，融合了两模板的时间尺度处理逻辑。",
+    "expression_list": [
+        "subtract(ts_decay_linear(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), 5), ts_decay_linear(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60), 20))",
+        "subtract(ts_decay_linear(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), 5), ts_decay_linear(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60), 20))"
+    ]
+}

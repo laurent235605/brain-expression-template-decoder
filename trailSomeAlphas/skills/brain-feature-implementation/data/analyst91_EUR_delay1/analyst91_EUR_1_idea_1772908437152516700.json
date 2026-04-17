@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_stddev({exposure_value}), 63), std=4), 20), 60), 0.9), signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_stddev({exposure_value}), 63), std=4), 20), industry), 2), 0)",
+    "idea": "引入时序维度，通过60日滚动分位(ts_rank)识别当前业务结构波动率是否处于历史极端高位，仅当波动率位于历史前10%时保留信号并平方放大，其余情况置零；旨在精准捕捉'业务结构正经历历史性动荡'的尾部风险事件，避免对常态波动过度反应，增强信号的稀缺性与极端性。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_stddev(anl91_exposure_value), 63), std=4), 20), 60), 0.9), signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_stddev(anl91_exposure_value), 63), std=4), 20), industry), 2), 0)"
+    ]
+}

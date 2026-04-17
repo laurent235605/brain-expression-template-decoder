@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60))), 2), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 0)",
+    "idea": "极端分位数交易触发：基于模板1的zscore加速度信号，引入绝对值阈值与trade_when逻辑，仅在加速度超过2个标准差时开仓，中段噪音置零。此结构放大尾部信号权重，压缩中间区间干扰，实现强趋势跟随与弱信号过滤的均衡策略。",
+    "expression_list": [
+        "trade_when(greater(abs(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60))), 2), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(greater(abs(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60))), 2), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)"
+    ]
+}

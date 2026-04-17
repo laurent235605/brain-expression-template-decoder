@@ -1,0 +1,8 @@
+{
+    "template": "quantile(if_else(greater(days_from_last_change({eps_expected_report_dt}), 90), 1, if_else(less(days_from_last_change({eps_expected_report_dt}), 5), -1, 0)), 'gaussian')",
+    "idea": "对模板1的三态离散输出（-1, 0, 1）应用高斯分布拉伸(quantile)。将离散的三值映射到连续的高斯分布形态，显著放大极端值（极度稳定或极度不稳定）与中间值的差距，增强尾部信号在后续多因子组合中的权重贡献。",
+    "expression_list": [
+        "quantile(if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), -1, 0)), 'gaussian')",
+        "quantile(if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_eps_expected_report_dt), 5), -1, 0)), 'gaussian')"
+    ]
+}

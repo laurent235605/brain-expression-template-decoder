@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(winsorize(group_zscore(subtract({exp_usa}, ts_mean(add({exp_chn},{exp_nondomicile1}),63)), {sector}), std=4), 10)",
+    "idea": "**地理集中度复合指数（单一市场纯度）**\n- **逻辑**：构建美国暴露相对于其他主要区域（中国+非本土市场）平均暴露的差值，经行业中性化与去极值后，应用10日线性衰减平滑；数值越高代表地理集中度越高（纯美国本土防御型或纯美国出口导向型），用于博弈全球化逆转或区域化主题\n- **适用场景**：地缘政治风险加剧时的避险或主题投资；区分真·全球化企业 vs 本土纯玩企业",
+    "expression_list": []
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 20), 5) - ts_decay_linear(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 126), 5), sector)",
+    "idea": "多时间框架背离与自适应平滑：分别计算短期（20日）和长期（126日）滚动相关性，并对两者分别应用5日线性衰减平滑以降低噪音，然后求价差。最后进行行业中性化处理。该信号识别短期持仓结构变化与长期趋势之间的背离——当短期相关性显著低于长期时，暗示所有权结构正在发生结构性突变（如机构调仓），而平滑处理确保信号持续性而非单日脉冲。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 20), 5) - ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 126), 5), sector)",
+        "group_zscore(ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 20), 5) - ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 126), 5), sector)",
+        "group_zscore(ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 20), 5) - ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 126), 5), sector)",
+        "group_zscore(ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 20), 5) - ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 126), 5), sector)"
+    ]
+}

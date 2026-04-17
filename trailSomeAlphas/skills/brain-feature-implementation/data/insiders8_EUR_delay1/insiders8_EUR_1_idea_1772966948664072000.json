@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore( group_rank( ts_corr( winsorize( ts_backfill( {of_owners_decile_rank_long}, 63 ), std=4 ), winsorize( ts_backfill( {owners_decile_rank_long}, 63 ), std=4 ), 60 ), sector ), 126 )",
+    "idea": "历史相对位置双维度定位。首先在行业内对60日相关性进行横向分位排名（消除不同行业间ownership结构基差），随后计算该行业相对排名在自身过去126日中的时序zscore。该模板识别那些当前ownership稳定性处于历史极端位置（无论极高或极低）的股票，结合了截面 peers 比较与纵向历史比较，降低静态相关性水平带来的偏差。",
+    "expression_list": [
+        "ts_zscore( group_rank( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 63 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 63 ), std=4 ), 60 ), sector ), 126 )",
+        "ts_zscore( group_rank( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 63 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 63 ), std=4 ), 60 ), sector ), 126 )",
+        "ts_zscore( group_rank( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 63 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 63 ), std=4 ), 60 ), sector ), 126 )",
+        "ts_zscore( group_rank( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 63 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 63 ), std=4 ), 60 ), sector ), 126 )"
+    ]
+}

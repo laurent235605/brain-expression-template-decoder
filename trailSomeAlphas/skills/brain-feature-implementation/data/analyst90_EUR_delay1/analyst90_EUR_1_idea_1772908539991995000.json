@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_delta(group_rank(winsorize(vec_avg({likelihood_score}), std=4), industry), 30), driver=\"gaussian\")",
+    "idea": "行业中性极值动量捕获：先将向量型likelihood_score通过vec_avg转为标量并做winsorize清洗，使用group_rank实现行业中性化消除行业间水平差异，计算30日行业排名变化后，利用gaussian分位数拉伸极端变动（放大尾部、压缩中间），仅保留显著改善/恶化的信号，适合捕捉分析师置信度的极端修正。",
+    "expression_list": [
+        "quantile(ts_delta(group_rank(winsorize(vec_avg(success_likelihood_score), std=4), industry), 30), driver=\"gaussian\")"
+    ]
+}

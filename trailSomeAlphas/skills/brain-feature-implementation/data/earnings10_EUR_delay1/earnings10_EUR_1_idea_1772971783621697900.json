@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(multiply(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5)), signed_power(add(1, multiply(0.01, multiply(days_from_last_change(winsorize(vec_avg({elta_value}), std=4)), vec_range({elta_value})))), -0.3)), industry)",
+    "idea": "事件 freshness 与离散范围协同：结合 vec_range（预测区间宽度）与 days_from_last_change（距上次修正天数）构建“信息时效-离散度”双维度权重。近期修正且预测区间窄的股票赋予最高置信，久未更新或区间宽泛者置信衰减，强化事件驱动逻辑。",
+    "expression_list": [
+        "group_zscore(multiply(multiply(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5)), signed_power(add(1, multiply(0.01, multiply(days_from_last_change(winsorize(vec_avg(ern10_elta_value), std=4)), vec_range(ern10_elta_value)))), -0.3)), industry)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(quantile(group_zscore(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), ts_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 60)), {sector}), driver=\"gaussian\")), 1.5), quantile(group_zscore(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), ts_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 60)), {sector}), driver=\"gaussian\"), 0), 10)",
+    "idea": "行业中性化后的资金加速流极值捕捉：先对原始资产值进行63日回溯填补与4倍标准差截尾处理，计算20日变动相对60日均值的偏离（加速度），在行业板块内部进行标准化（消除行业间资金流量级差异），利用高斯分位数拉伸将极端加速/减速信号放大，最后通过10日线性衰减平滑并仅保留绝对值大于1.5的极端尾部（中间噪音置零），适用于捕捉行业内的资金流向拐点与动量突变信号。",
+    "expression_list": []
+}

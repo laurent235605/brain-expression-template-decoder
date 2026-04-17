@@ -1,0 +1,10 @@
+{
+    "template": "subtract(ts_delta(vec_avg({chng_non_cash_work_cap}), 126), ts_delta(vec_avg({sales_rev_turn}), 126))",
+    "idea": "**Concept**: Working Capital Velocity Shift\n- **Sample Fields Used**: chng_non_cash_work_cap, sales_rev_turn\n- **Definition**: Rate of change in non-cash working capital relative to revenue growth over trailing 126 days\n- **Why This Feature**: Divergence between working capital needs and revenue growth indicates efficiency gains or deterioration in receivables/payables management\n- **Logical Meaning**: Measures whether the company is monetizing its working capital (positive divergence) or consuming cash to fund growth (negative)\n- **is filling nan necessary**: Working capital changes can be legitimately zero; fill only true missing values\n- **Directionality**: Positive divergence (working capital decreasing while revenue growing) indicates efficiency; negative suggests cash consumption\n- **Boundary Conditions**: Extreme values indicate one-time working capital events or seasonal distortions",
+    "expression_list": [
+        "subtract(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_chng_non_cash_work_cap), 126), ts_delta(vec_avg(fnd72_pit_or_is_a_sales_rev_turn), 126))",
+        "subtract(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_chng_non_cash_work_cap), 126), ts_delta(vec_avg(fnd72_pit_or_is_q_sales_rev_turn), 126))",
+        "subtract(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_chng_non_cash_work_cap), 126), ts_delta(vec_avg(fnd72_pit_or_is_a_sales_rev_turn), 126))",
+        "subtract(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_chng_non_cash_work_cap), 126), ts_delta(vec_avg(fnd72_pit_or_is_q_sales_rev_turn), 126))"
+    ]
+}

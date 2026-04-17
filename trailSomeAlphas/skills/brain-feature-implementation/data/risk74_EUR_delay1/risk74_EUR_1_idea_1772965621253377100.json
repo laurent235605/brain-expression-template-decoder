@@ -1,0 +1,8 @@
+{
+    "template": "{risk_score_specialized} - {risk_score}",
+    "idea": "**Concept**: Tariff Risk Composition\n- **Sample Fields Used**: `risk_score`, `risk_score_specialized`, `score_specialized`\n- **Definition**: Discrepancy between general and specialized tariff risk scores to identify companies with hidden tariff vulnerabilities\n- **Why This Feature**: General scores may miss sector-specific tariff risks (e.g., semiconductor-specific tariffs not captured in broad metrics)\n- **Logical Meaning**: Large spread indicates specialized risk not captured in general score; convergence indicates generalist tariff exposure\n- **is filling nan necessary**: Yes, specialized scores have lower coverage; fill with general score where missing to avoid bias\n- **Directionality**: High = high specialized risk above general risk; Low = general risk dominates; Zero = aligned\n- **Boundary Conditions**: Extreme values indicate niche tariff vulnerabilities; negative values indicate lower specialized vs. general risk",
+    "expression_list": [
+        "tariff_risk_score_specialized - tariff_risk_score_specialized",
+        "tariff_risk_score_specialized - tariff_risk_score"
+    ]
+}

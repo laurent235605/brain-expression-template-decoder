@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0.15)), group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), 0)",
+    "idea": "融合行业中性化与头尾区间提纯逻辑，将模板2的极端分位筛选（前15%与后15%）应用于模板1的行业内排序（group_rank），避免跨行业比较偏差，仅保留行业内预期修订最剧烈的多空两端，中段70%噪音严格置零，实现行业beta剥离与信号纯度的双重优化。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0.15)), group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), 0)",
+        "trade_when(or(greater(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.85), less(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0.15)), group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), 0)"
+    ]
+}

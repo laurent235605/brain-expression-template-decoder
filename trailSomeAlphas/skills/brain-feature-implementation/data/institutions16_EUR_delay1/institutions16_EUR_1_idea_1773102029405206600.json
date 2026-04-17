@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(if_else(greater(abs(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry)), 1.5), signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5), group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry)), 5)",
+    "idea": "分段式非线性增强：对行业内标准化残差进行条件判断(if_else)，当绝对偏离超过1.5倍标准差时使用signed_power(1.5)放大，否则保持线性信号。这种“极端信号凸性化、普通信号线性化”的处理，在保持模板一稳定框架的同时，仅对高置信度区域施加模板二的放大效应，最后经5日短衰减适应中频交易，实现创新与稳定的平衡。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(abs(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry)), 1.5), signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5), group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry)), 5)"
+    ]
+}

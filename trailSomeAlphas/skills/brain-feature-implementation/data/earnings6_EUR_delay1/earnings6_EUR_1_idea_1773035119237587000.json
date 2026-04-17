@@ -1,0 +1,8 @@
+{
+    "template": "divide(vec_avg({actual_eps}), add(ts_mean(ts_backfill(vec_avg({actual_eps}), 5), 252), 0.001))",
+    "idea": "EPS持续性比率：逆向融合股息持续性模板至盈利数据。计算当前实际EPS相对于其252日历史均值的比率，衡量盈利能力的稳定性与趋势变化。数值大于1表示盈利超预期增长（类似股息增加），小于1表示盈利下滑，为传统EPS惊喜提供历史趋势维度的补充验证。",
+    "expression_list": [
+        "divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001))",
+        "divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001))"
+    ]
+}

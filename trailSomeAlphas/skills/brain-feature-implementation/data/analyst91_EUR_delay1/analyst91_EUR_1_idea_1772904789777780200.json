@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(scale(truncate(ts_mean(winsorize(subtract(ts_std_dev(vec_avg(ts_backfill({exposure_value}, 63)), 10), ts_std_dev(vec_avg(ts_backfill({exposure_value}, 63)), 60)), std=3), 5), maxPercent=0.02), industry)",
+    "idea": "稳健可交易版本：首先用ts_backfill(63日)处理向量数据缺失；调整窗口为10日与60日平衡灵敏度；在计算前进行winsorize(std=3) robust处理；采用ts_mean(5日等权平滑)替代高换手的线性衰减；通过truncate限制个股权重不超过2%防止极端暴露；最后使用group_normalize实现行业内多空中性。强调数据质量、换手控制与组合可实施性。",
+    "expression_list": [
+        "group_normalize(scale(truncate(ts_mean(winsorize(subtract(ts_std_dev(vec_avg(ts_backfill(anl91_exposure_value, 63)), 10), ts_std_dev(vec_avg(ts_backfill(anl91_exposure_value, 63)), 60)), std=3), 5), maxPercent=0.02), industry)"
+    ]
+}

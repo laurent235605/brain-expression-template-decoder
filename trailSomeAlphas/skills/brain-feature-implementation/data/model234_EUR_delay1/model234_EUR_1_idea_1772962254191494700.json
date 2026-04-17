@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_zscore(pasteurize({volume}), 20), 2), quantile({volume}, driver=\"uniform\"), 0)",
+    "idea": "阈值触发机制：计算pasteurize清洗后成交量的20日时序zscore，仅当zscore大于2（即显著高于近期平均水平）时触发uniform分位数信号，否则归零，构建事件驱动型的流动性激增捕捉策略",
+    "expression_list": [
+        "if_else(greater(ts_zscore(pasteurize(mdl234_volume), 20), 2), quantile(mdl234_volume, driver=\"uniform\"), 0)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( quantile( ts_corr( winsorize( ts_backfill( {of_owners_decile_rank_long}, 21 ), std=4 ), winsorize( ts_backfill( {owners_decile_rank_long}, 21 ), std=4 ), 60 ), driver=\"cauchy\" ), sector )",
+    "idea": "【极值拉伸型】预处理(21日回填+4倍标准差去极值)→变换(60日滚动相关)→分布拉伸(Cauchy quantile将中间区间压至0附近，极端值拉远)→行业中性化。迁移逻辑：将原始线性相关通过柯西分布进行非线性映射，使处于极端分位(结构极度稳定或极度分化)的股票获得更大权重，有效压缩中段噪音区的干扰，增强因子对尾部Alpha的捕捉能力。",
+    "expression_list": [
+        "group_zscore( quantile( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), driver=\"cauchy\" ), sector )",
+        "group_zscore( quantile( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), driver=\"cauchy\" ), sector )",
+        "group_zscore( quantile( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), driver=\"cauchy\" ), sector )",
+        "group_zscore( quantile( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), driver=\"cauchy\" ), sector )"
+    ]
+}

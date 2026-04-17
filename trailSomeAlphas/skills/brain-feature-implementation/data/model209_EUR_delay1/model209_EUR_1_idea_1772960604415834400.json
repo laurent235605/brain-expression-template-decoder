@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(signed_power(winsorize(vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp}), std=3), 0.7) / (vec_stddev({opentimestamp}) + 1), industry)",
+    "idea": "波动率调整凹函数排序：对延迟进行0.7次幂变换压缩极端值影响，除以开盘时间波动率进行风险调整，在行业层面分组排序，识别经波动率调整后的相对执行效率异常，适合高波动市场环境",
+    "expression_list": [
+        "group_rank(signed_power(winsorize(vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp), std=3), 0.7) / (vec_stddev(mdl209_opentimestamp) + 1), industry)"
+    ]
+}

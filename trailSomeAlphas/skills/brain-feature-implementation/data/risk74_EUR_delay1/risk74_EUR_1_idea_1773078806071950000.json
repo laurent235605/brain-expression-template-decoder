@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(winsorize(multiply(ts_sum(ts_delta({crowding},1),20), ts_sum(ts_delta({value_ts},1),20)), std=3), 3)",
+    "idea": "将20日累积流量变化动量结构（ts_sum(ts_delta(...,1),20)）分别应用于拥挤度与价值因子，计算两者的短期累积变化率后相乘，再进行平滑与截尾，捕捉'价值修复且关注度加速'或'价值陷阱且拥挤度激增'的动量增强信号。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(multiply(ts_sum(ts_delta(liquidity_factor_crowding,1),20), ts_sum(ts_delta(rsk74_value_ts,1),20)), std=3), 3)",
+        "ts_decay_linear(winsorize(multiply(ts_sum(ts_delta(liquidity_timeseries_crowding,1),20), ts_sum(ts_delta(rsk74_value_ts,1),20)), std=3), 3)",
+        "ts_decay_linear(winsorize(multiply(ts_sum(ts_delta(rsk74_crowding,1),20), ts_sum(ts_delta(rsk74_value_ts,1),20)), std=3), 3)",
+        "ts_decay_linear(winsorize(multiply(ts_sum(ts_delta(rsk74_raw_crowding,1),20), ts_sum(ts_delta(rsk74_value_ts,1),20)), std=3), 3)"
+    ]
+}

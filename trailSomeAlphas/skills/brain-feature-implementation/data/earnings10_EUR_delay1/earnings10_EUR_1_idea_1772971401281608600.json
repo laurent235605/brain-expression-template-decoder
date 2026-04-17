@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(winsorize(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), std=4), 60), 0.8), group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), std=4), 3), industry), multiply(0.1, group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(vec_avg({elta_value}), 63), std=4), 3), industry)))",
+    "idea": "构建条件触发机制：仅在60日时序排名位于前20%的极端修正时点满仓交易(trade_when)，此时应用3日线性衰减平滑；对于非极端区间(中段噪音)仅保留10%轻仓或基准暴露，实现'极端事件驱动+持续确认'的高信噪比非线性策略，显著降低无效交易与换手率。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(winsorize(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), std=4), 60), 0.8), group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), std=4), 3), industry), multiply(0.1, group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), std=4), 3), industry)))"
+    ]
+}

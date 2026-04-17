@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(signed_power(winsorize(ts_sum(ts_delta({shortint},1),15),std=4), 2),252)",
+    "idea": "对空头累积变化施加输入2的signed_power非线性放大(平方)，突出极端空头buildup或covering行为，再计算时序Z-score，使历史罕见的极端异动信号在分布尾部更加显著，增强区分度。",
+    "expression_list": [
+        "ts_zscore(signed_power(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4), 2),252)",
+        "ts_zscore(signed_power(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4), 2),252)"
+    ]
+}

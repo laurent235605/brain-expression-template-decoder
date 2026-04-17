@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 20)",
+    "idea": "稳健衰减偏度：对原始数据进行4倍标准差截尾处理以消除极端异常值对偏度计算的杠杆影响，计算252日长期偏度后，应用20日线性衰减加权（ts_decay_linear）。相比等权平均，该结构赋予近期偏度变化更高权重，同时保持对历史分布的记忆，适用于捕捉偏度因子的持续趋势和缓慢衰减特征。",
+    "expression_list": [
+        "ts_decay_linear(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 20)"
+    ]
+}

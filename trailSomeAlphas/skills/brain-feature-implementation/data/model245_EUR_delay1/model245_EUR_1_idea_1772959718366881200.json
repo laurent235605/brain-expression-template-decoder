@@ -1,0 +1,7 @@
+{
+    "template": "rank(subtract(vec_skewness({rank}), ts_decay_exp_window(vec_skewness({rank}), 40, 0.3)))",
+    "idea": "**增强概念**: 分布偏度动量分歧\n- **核心改进**: 从使用vec_avg（平均水平）升级为vec_skewness（分布偏度），捕捉排名分布的不对称性变化；延长衰减半衰期至40天并降低因子至0.3以平滑长期趋势，与当前偏度对比识别\"肥尾迁移\"信号。\n- **逻辑含义**: 当模型对某股票的排名分布从右偏（保守）突变为左偏（激进）时，预示市场情绪或模型置信度的结构性转变；相比简单均值偏差，偏度变化更能预警极端风险或机会的非对称积累。\n- **数据特征**: 利用向量统计的高阶矩特征，识别原始均值无法捕捉的分布形态突变。",
+    "expression_list": [
+        "rank(subtract(vec_skewness(mdl245_rank), ts_decay_exp_window(vec_skewness(mdl245_rank), 40, 0.3)))"
+    ]
+}

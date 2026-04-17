@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_std_dev(vec_avg({int_expense}), 252), abs(ts_mean(vec_avg({int_expense}), 252)))",
+    "idea": "**Concept**: Interest Expense Stability Coefficient\n- **Sample Fields Used**: int_expense\n- **Definition**: Coefficient of variation (standard deviation divided by mean) of interest expense over trailing 252 days\n- **Why This Feature**: Stable interest expenses indicate predictable debt service obligations and conservative capital structure management; high volatility suggests refinancing risk or variable rate exposure\n- **Logical Meaning**: Measures the consistency of financing costs over time; invariant firms have predictable capital structures\n- **is filling nan necessary**: Backfilling may be appropriate for quarterly reporting gaps, but zero values should not be filled as they indicate no interest expense\n- **Directionality**: Lower values indicate stability (desirable); higher values indicate financial stress or variable rate exposure\n- **Boundary Conditions**: Values approaching zero indicate either no debt or perfectly fixed rates; extreme spikes indicate distressed refinancing",
+    "expression_list": [
+        "divide(ts_std_dev(vec_avg(fnd72_pit_or_is_a_is_int_expense), 252), abs(ts_mean(vec_avg(fnd72_pit_or_is_a_is_int_expense), 252)))",
+        "divide(ts_std_dev(vec_avg(fnd72_pit_or_is_q_is_int_expense), 252), abs(ts_mean(vec_avg(fnd72_pit_or_is_q_is_int_expense), 252)))"
+    ]
+}

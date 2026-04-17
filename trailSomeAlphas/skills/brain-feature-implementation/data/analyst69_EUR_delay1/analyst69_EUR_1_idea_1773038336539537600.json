@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_delta(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 1), 63)",
+    "idea": "反向级联：先计算披露日期稳定性的高斯分位数（模板1核心输出），再应用模板2的'差分-累积'逻辑，对该分位数进行63日累积差分计算，捕捉披露时间确定性的趋势性改善或恶化动量。",
+    "expression_list": [
+        "ts_sum(ts_delta(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 1), 63)",
+        "ts_sum(ts_delta(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 1), 63)"
+    ]
+}

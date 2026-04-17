@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_delta(vec_avg({rank}), 5), ts_delta(vec_avg({rank}), 10))",
+    "idea": "**Concept**: Rank Acceleration\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Difference between 5-day rank momentum and 10-day rank momentum to detect whether rank changes are speeding up or slowing down\n- **Why This Feature**: Accelerating rank changes may indicate strengthening model conviction or emerging catalysts not yet fully priced; deceleration may signal trend exhaustion\n- **Logical Meaning**: Captures the second derivative of rank movement; positive values indicate the rate of change is increasing (momentum building)\n- **is filling nan necessary**: Ensure consistent NaN handling across both delta calculations; if ts_delta encounters NaN it returns NaN, which propagates appropriately.\n- **Directionality**: Positive values indicate accelerating trend (in whichever direction); negative values indicate decelerating trend; zero indicates steady linear change\n- **Boundary Conditions**: Symmetric around zero; magnitude depends on volatility of underlying rank changes",
+    "expression_list": [
+        "subtract(ts_delta(vec_avg(mdl245_rank), 5), ts_delta(vec_avg(mdl245_rank), 10))"
+    ]
+}

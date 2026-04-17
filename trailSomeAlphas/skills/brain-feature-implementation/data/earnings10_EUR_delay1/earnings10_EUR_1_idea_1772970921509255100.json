@@ -1,0 +1,7 @@
+{
+    "template": "multiply(if_else(greater(ts_zscore(winsorize(ts_backfill(vec_percentage({aily_delta_recon_value}, percentage=0.9), 63), std=4), 20), 1.5), signed_power(ts_zscore(winsorize(ts_backfill(vec_percentage({aily_delta_recon_value}, percentage=0.9), 63), std=4), 20), 1.2), if_else(less(ts_zscore(winsorize(ts_backfill(vec_percentage({aily_delta_recon_value}, percentage=0.1), 63), std=4), 20), -1.5), signed_power(ts_zscore(winsorize(ts_backfill(vec_percentage({aily_delta_recon_value}, percentage=0.1), 63), std=4), 20), 1.2), 0)), add(0.5, multiply(0.5, bucket(rank(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10)), range=\"0,1,0.2\"))))",
+    "idea": "非对称极值分桶策略：分别使用90th和10th分位数捕捉极端正向和负向修正（忽略中等修正），并通过signed_power放大极端值的非线性影响；将10天新鲜期分为5个离散桶（bucket），赋予0.5-1.0的阶梯式权重，避免线性衰减的单调性，更适合事件驱动的间断性交易。",
+    "expression_list": [
+        "multiply(if_else(greater(ts_zscore(winsorize(ts_backfill(vec_percentage(ern10_aily_delta_recon_value, percentage=0.9), 63), std=4), 20), 1.5), signed_power(ts_zscore(winsorize(ts_backfill(vec_percentage(ern10_aily_delta_recon_value, percentage=0.9), 63), std=4), 20), 1.2), if_else(less(ts_zscore(winsorize(ts_backfill(vec_percentage(ern10_aily_delta_recon_value, percentage=0.1), 63), std=4), 20), -1.5), signed_power(ts_zscore(winsorize(ts_backfill(vec_percentage(ern10_aily_delta_recon_value, percentage=0.1), 63), std=4), 20), 1.2), 0)), add(0.5, multiply(0.5, bucket(rank(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10)), range=\"0,1,0.2\"))))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_mean(winsorize(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), std=3), 20), 252)",
+    "idea": "将Template A的“平滑-标准化”流程应用于Template B的累积压力指标：先对63日累积盈利调整进行3倍标准差缩尾（抑制极端季度干扰），再经20日移动平均平滑，最后计算252日时序Z-score。此举既保留了累积压力的方向性，又通过长期历史分位识别当前压力是否显著偏离个股常态，提升稳定性。",
+    "expression_list": [
+        "ts_zscore(ts_mean(winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), std=3), 20), 252)",
+        "ts_zscore(ts_mean(winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), std=3), 20), 252)"
+    ]
+}

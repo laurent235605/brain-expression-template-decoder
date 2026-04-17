@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(trade_when(greater(group_rank(ts_mean(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 63), industry), 0.8), group_zscore(ts_mean(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 63), industry), 0), hump=0.02, decay=0.1)",
+    "idea": "采用\"右尾精选+换手控制\"策略，仅保留行业内分散度排名前20%的高复杂性标的，结合hump_decay算子过滤微小权重波动(2%阈值)并设置每日10%的衰减，大幅降低换手率的同时保持对持续性业务架构风险的暴露。",
+    "expression_list": [
+        "hump_decay(trade_when(greater(group_rank(ts_mean(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 63), industry), 0.8), group_zscore(ts_mean(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 63), industry), 0), hump=0.02, decay=0.1)"
+    ]
+}

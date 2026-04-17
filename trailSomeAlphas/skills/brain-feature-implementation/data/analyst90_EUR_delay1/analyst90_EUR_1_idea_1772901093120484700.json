@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(zscore(vec_avg({likelihood_score})), 1.5), winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), 0)",
+    "idea": "高置信条件触发：仅在分析师信心处于极端高位（zscore>1.5）时启用价格偏离信号，低置信区间直接置零。实现\"强信号才交易\"的区间筛选逻辑，避免中等信心区间的噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(zscore(vec_avg(success_likelihood_score)), 1.5), winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), 0)"
+    ]
+}

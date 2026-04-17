@@ -1,0 +1,12 @@
+{
+    "template": "if_else(greater(group_rank(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), industry), 0.1), 1, 0))",
+    "idea": "**条件化双尾极值交易策略 (Conditional Two-Tailed Extreme Value Strategy)**：通过 `group_rank` 识别行业内短期债务结构的极端分位。仅对前10%（最高短期债务，最大再融资风险）赋予-1的空头权重，对后10%（最低/零短期债务，融资结构最稳健）赋予+1的多头权重，中间80%区间赋值为0（不交易）。这种 `if_else` 嵌套结构实现了对\"中间噪音\"的硬截断，避免了在温和流动性风险区域的无效交易。该模板特别适合捕捉行业内的\"劣币驱逐良币\"或\"安全港溢价\"效应，且通过 `ts_backfill` 确保季度数据的零值含义不被破坏。",
+    "expression_list": [
+        "if_else(greater(group_rank(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), 0.1), 1, 0))",
+        "if_else(greater(group_rank(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), 0.1), 1, 0))",
+        "if_else(greater(group_rank(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), 0.1), 1, 0))",
+        "if_else(greater(group_rank(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), 0.1), 1, 0))",
+        "if_else(greater(group_rank(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), 0.1), 1, 0))",
+        "if_else(greater(group_rank(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), 0.9), -1, if_else(less(group_rank(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), 0.1), 1, 0))"
+    ]
+}

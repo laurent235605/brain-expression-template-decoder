@@ -1,0 +1,10 @@
+{
+    "template": "{crowding} * {value_ts}",
+    "idea": "**Concept**: Crowded Value Trap\n- **Sample Fields Used**: `crowding`, `value_ts`, `factor_crowding`\n- **Definition**: Interaction between crowding scores and value factor to identify crowded value trades (value stocks that are too popular)\n- **Why This Feature**: Value factors work best when uncrowded; crowded value trades underperform due to liquidation risk during drawdowns\n- **Logical Meaning**: High values indicate value stocks that are crowded (likely to underperform); low values indicate uncrowded value (potential alpha)\n- **is filling nan necessary**: No, value and crowding typically available together; NaN should propagate to avoid signals on illiquid names\n- **Directionality**: High = crowded value (avoid); Low = uncrowded value (attractive); Negative = growth stocks with low crowding\n- **Boundary Conditions**: Extreme values indicate consensus value trades (dangerous); near-zero indicates neutral positioning",
+    "expression_list": [
+        "liquidity_factor_crowding * rsk74_value_ts",
+        "liquidity_timeseries_crowding * rsk74_value_ts",
+        "rsk74_crowding * rsk74_value_ts",
+        "rsk74_raw_crowding * rsk74_value_ts"
+    ]
+}

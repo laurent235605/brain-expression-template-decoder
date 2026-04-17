@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(vec_avg({aily_delta_recon_value}), 20)",
+    "idea": "**低换手平滑修订趋势**：将模板2的ts_sum改为ts_mean等权平均，保持20日观察窗口但大幅降低换手率（根据指导，ts_mean比ts_decay_linear换手率显著更低）。适用于追求稳定、低交易成本配置的均衡模式，保持方向性信号但降低对单日极端值的敏感度。",
+    "expression_list": [
+        "ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)"
+    ]
+}

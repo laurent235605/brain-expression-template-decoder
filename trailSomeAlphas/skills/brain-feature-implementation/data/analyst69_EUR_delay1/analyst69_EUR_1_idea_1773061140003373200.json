@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(group_zscore(if_else(less(ts_delta(ts_corr(ts_backfill({eps_best_eeps_cur_yr}, 63), ts_backfill({eps_best_eeps_nxt_yr}, 63), 60), 1), -0.05), -1, 0), industry), 20)",
+    "idea": "对回溯填充后的预期相关性（融合输入1的backfill与输入2的corr）检测日内骤降，先进行行业中性化（group_zscore），再应用20日衰减（输入1），构建行业相对意义上的预期一致性崩塌信号。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(if_else(less(ts_delta(ts_corr(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), ts_backfill(anl69_aeps_best_eeps_nxt_yr, 63), 60), 1), -0.05), -1, 0), industry), 20)",
+        "ts_decay_linear(group_zscore(if_else(less(ts_delta(ts_corr(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), ts_backfill(anl69_eps_best_eeps_nxt_yr, 63), 60), 1), -0.05), -1, 0), industry), 20)",
+        "ts_decay_linear(group_zscore(if_else(less(ts_delta(ts_corr(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), ts_backfill(anl69_eps_best_eeps_nxt_yr, 63), 60), 1), -0.05), -1, 0), industry), 20)",
+        "ts_decay_linear(group_zscore(if_else(less(ts_delta(ts_corr(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), ts_backfill(anl69_aeps_best_eeps_nxt_yr, 63), 60), 1), -0.05), -1, 0), industry), 20)"
+    ]
+}

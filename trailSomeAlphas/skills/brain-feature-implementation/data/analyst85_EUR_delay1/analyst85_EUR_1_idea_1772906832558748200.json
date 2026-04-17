@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(multiply(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), signed_power(inverse(add(1, days_from_last_change(abs(ts_delta(vec_avg({version}), 1)))), 0.5)), std=4), industry)",
+    "idea": "构建时效性加权修订强度，利用距上次修订变动天数的倒数平方根作为衰减权重，对长期无更新的股票进行历史累计值惩罚，突出近期持续有调研活动更新的热点标的，并通过行业Z-Score标准化实现组内可比。",
+    "expression_list": [
+        "group_zscore(winsorize(multiply(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), signed_power(inverse(add(1, days_from_last_change(abs(ts_delta(vec_avg(anl85_version), 1)))), 0.5)), std=4), industry)"
+    ]
+}

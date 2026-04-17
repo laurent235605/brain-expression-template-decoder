@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({data_item_value}), 252) / abs(ts_delay(vec_avg({data_item_value}), 252))",
+    "idea": "**Concept**: Fiscal Growth Trajectory\n- **Sample Fields Used**: data_item_value\n- **Definition**: Year-over-year percentage change in average financial values, capturing the momentum of fundamental performance\n- **Why This Feature**: Growth in financial metrics (earnings, revenue) is a primary driver of equity returns; this feature quantifies the direction and magnitude of fundamental momentum\n- **Logical Meaning**: The rate of change in corporate financial performance, indicating expansion, contraction, or stagnation\n- **is filling nan necessary**: Yes, ensure continuous series using ts_backfill to calculate accurate year-over-year changes; missing data would create spurious growth rates\n- **Directionality**: Positive values indicate growing financial performance (bullish fundamental signal); negative values indicate decline (bearish); magnitude indicates speed of change\n- **Boundary Conditions**: Extreme positive values may indicate recovery from depressed base or acquisition-driven growth; extreme negative values may indicate write-downs, recessions, or business deterioration",
+    "expression_list": [
+        "ts_delta(vec_avg(anl89_data_item_value), 252) / abs(ts_delay(vec_avg(anl89_data_item_value), 252))"
+    ]
+}

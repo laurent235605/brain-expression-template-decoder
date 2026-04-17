@@ -1,0 +1,14 @@
+{
+    "template": "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg({actual_eps}),252),max(abs(ts_mean(vec_avg({actual_eps}),252)),0.001)),divide(ts_std_dev(vec_avg({x_dividend}),252),max(abs(ts_mean(vec_avg({x_dividend}),252)),0.001))),21),63)",
+    "idea": "价差变化动量版本：监测盈利-股息稳定性价差的21日变化率，并评估该变化在其63天历史中的分位水平，捕捉政策分歧正在加速恶化的动态风险。",
+    "expression_list": [
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend),252),max(abs(ts_mean(vec_avg(ern6_x_dividend),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_233),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_233),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc_235),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend),252),max(abs(ts_mean(vec_avg(ern6_x_dividend),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_233),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_233),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc),252)),0.001))),21),63)",
+        "ts_zscore(ts_delta(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc_235),252)),0.001))),21),63)"
+    ]
+}

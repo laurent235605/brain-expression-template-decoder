@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(quantile(group_rank(winsorize(divide(subtract(ts_backfill(vec_avg({actual_eps}), 21), ts_backfill(vec_avg({estimated_eps}), 21)), add(abs(vec_avg({estimated_eps})), 0.001)), std=4), industry), driver=\"gaussian\"), 5)",
+    "idea": "**质量调整综合信号（高斯分位+衰减平滑）**：首先使用时序回填（ts_backfill, 21天）处理可能的数据缺失（保持数据连续性但不过度外推），计算惊喜百分比并winsorize处理离群值；在行业内排名后，使用高斯分位转换（quantile with gaussian driver）将均匀分布的排名映射到正态分布形状，压缩中间区间（0附近）、拉长尾部距离，使得极端惊喜的区分度更强；最后通过5天线性衰减（ts_decay_linear）降低最终信号的换手率，平衡及时性与稳定性，适合作为稳健的基础alpha配置。",
+    "expression_list": [
+        "ts_decay_linear(quantile(group_rank(winsorize(divide(subtract(ts_backfill(vec_avg(ern6_actual_eps), 21), ts_backfill(vec_avg(ern6_estimated_eps), 21)), add(abs(vec_avg(ern6_estimated_eps)), 0.001)), std=4), industry), driver=\"gaussian\"), 5)",
+        "ts_decay_linear(quantile(group_rank(winsorize(divide(subtract(ts_backfill(vec_avg(ern6_actual_eps_274), 21), ts_backfill(vec_avg(ern6_estimated_eps), 21)), add(abs(vec_avg(ern6_estimated_eps)), 0.001)), std=4), industry), driver=\"gaussian\"), 5)"
+    ]
+}

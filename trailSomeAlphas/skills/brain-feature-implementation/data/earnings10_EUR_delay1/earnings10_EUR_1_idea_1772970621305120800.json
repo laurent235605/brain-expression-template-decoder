@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(multiply(signed_power(winsorize(vec_avg({elta_value}), std=4), 0.5), sign(ts_mean(winsorize(vec_avg({aily_delta_recon_value}), std=4), 10))), industry), 3)",
+    "idea": "先对预期水平取0.5次幂（signed_power）压缩右尾极端值，防止少数极高预期股票过度主导组合权重；与10日平滑修订方向相乘后，进行行业中性化(group_zscore)消除行业暴露；最后施加3日线性衰减(ts_decay_linear)降低因子换手率。该结构旨在稳健捕捉\"温和高预期+持续一致修订\"的中长期趋势，而非追逐短期极端跳变。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(multiply(signed_power(winsorize(vec_avg(ern10_elta_value), std=4), 0.5), sign(ts_mean(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 10))), industry), 3)"
+    ]
+}

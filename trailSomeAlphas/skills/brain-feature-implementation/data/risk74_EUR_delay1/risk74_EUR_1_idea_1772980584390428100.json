@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear( group_zscore( winsorize(ts_backfill({concentration},63),std=4) * winsorize(ts_backfill(if_else(is_nan({nondomicile}),0,{nondomicile}),63),std=4), industry ), 5)",
+    "idea": "行业中性后的平滑地理集中度信号：处理缺失值（非本土收益缺省填0），对极端值进行 winsorize 截尾，并在行业内进行标准化（group_zscore），最后使用线性衰减（ts_decay_linear）确保信号持续性，降低换手率。捕捉在同行中相对危险的单一国家集中暴露。",
+    "expression_list": [
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),std=4), industry ), 5)",
+        "ts_decay_linear( group_zscore( winsorize(ts_backfill(rsk74_raw_concentration,63),std=4) * winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),std=4), industry ), 5)"
+    ]
+}

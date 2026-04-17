@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_delta(ts_regression(ts_backfill({hfown_pctown}, 63), log(ts_mean(ts_backfill({market_cap}, 21), 21)), 252, rettype=0), 1), 20)",
+    "idea": "**市值中性化特质性调仓流**：先对原始数据进行63日回溯填充确保回归稳定性；通过252日回归剥离市值因子的系统性影响（剔除“因为市值大所以被低配”的机械性持仓），提取残差项代表真正的主动超配/低配意愿；计算该特质性持仓的20日累积变化，识别不受市值风格驱动的纯阿尔法调仓行为，适用于区分“被动配置”与“主动选股”带来的资金流。",
+    "expression_list": [
+        "ts_sum(ts_delta(ts_regression(ts_backfill(rsk74_hfown_pctown, 63), log(ts_mean(ts_backfill(market_cap_usd, 21), 21)), 252, rettype=0), 1), 20)"
+    ]
+}

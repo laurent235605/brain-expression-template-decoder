@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_std_dev({eps_best_eeps_cur_yr}, 20), ts_mean(ts_std_dev({eps_best_eeps_cur_yr}, 60), 60)), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 10))",
+    "idea": "条件切换复合信号：基于波动率状态动态切换模板1与模板2。当20日滚动标准差高于60日均值时，采用短周期加速度捕捉高波动期的快速拐点；反之采用累积平滑信号跟随低波动期的趋势，实现Regime Switching的均衡配置，兼顾灵活性与稳定性。",
+    "expression_list": [
+        "trade_when(greater(ts_std_dev(anl69_aeps_best_eeps_cur_yr, 20), ts_mean(ts_std_dev(anl69_aeps_best_eeps_cur_yr, 60), 60)), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 10))",
+        "trade_when(greater(ts_std_dev(anl69_eps_best_eeps_cur_yr, 20), ts_mean(ts_std_dev(anl69_eps_best_eeps_cur_yr, 60), 60)), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 10))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), trade_when(less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05), subtract(0.05, abs(subtract({exp_nondomicile1}, {exp_nondomicile2}))), 0))",
+    "idea": "将输入2的双字段差异绝对值转化为动态置信度权重：差异越小（数据质量越高），赋予越接近0.05的权重系数；差异超过5%则权重归零。该权重与输入1的美国敞口行业标准化值相乘，实现'数据一致性调节信号强度'的自适应机制，避免低质量数据干扰主信号。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), subtract(0.05, abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2))), 0))",
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), subtract(0.05, abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2))), 0))",
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), subtract(0.05, abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2))), 0))",
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), subtract(0.05, abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2))), 0))"
+    ]
+}

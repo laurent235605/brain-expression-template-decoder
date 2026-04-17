@@ -1,0 +1,7 @@
+{
+    "template": "quantile(subtract(group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 20), industry), group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry)), driver=\"gaussian\")",
+    "idea": "构建会计年度分散度的\"期限结构\"，比较短期(20日)与长期(126日)平滑后的行业相对水平差异，使用高斯分位数变换将中间值压缩、极端值拉伸，识别业务复杂性正在加速分化(短期>长期)或趋于统一的公司。",
+    "expression_list": [
+        "quantile(subtract(group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 20), industry), group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry)), driver=\"gaussian\")"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(quantile(winsorize(vec_avg({elta_value}), std=4), driver='gaussian')), 0.4), multiply(quantile(winsorize(vec_avg({elta_value}), std=4), driver='gaussian'), multiply(sign(winsorize(vec_avg({aily_delta_recon_value}), std=4)), winsorize(abs(zscore(winsorize(vec_avg({aily_delta_recon_value}), std=4))), std=2))), 0)",
+    "idea": "将预期水平通过高斯分位（quantile）拉伸映射，放大极端高估/低估股票的头寸贡献；使用修正幅度的标准化绝对值（限制在2倍标准差内）替代简单符号函数，赋予强修正更高权重，并仅在预期水平处于极端分位（前/后40%）时开仓，过滤中间区间的噪音。",
+    "expression_list": [
+        "trade_when(greater(abs(quantile(winsorize(vec_avg(ern10_elta_value), std=4), driver='gaussian')), 0.4), multiply(quantile(winsorize(vec_avg(ern10_elta_value), std=4), driver='gaussian'), multiply(sign(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4)), winsorize(abs(zscore(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4))), std=2))), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), sector), 10)",
+    "idea": "行业中性化的收益-权重分位数偏离经10日线性衰减加权，降低短期噪音与换手率，捕捉持续性的机构配置错配而非单日扰动。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), sector), 10)"
+    ]
+}

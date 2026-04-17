@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(quantile(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),driver=\"gaussian\"),252)",
+    "idea": "先进行行业中性回归剥离，再对残差做高斯分位数转换（拉伸尾部压缩中部），最后进行时序Z-score标准化，强化极端空头异动信号的辨识度，同时保持历史可比性，适用于只关注极端 buildup/covering 的场景。",
+    "expression_list": [
+        "ts_zscore(quantile(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),driver=\"gaussian\"),252)",
+        "ts_zscore(quantile(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),driver=\"gaussian\"),252)"
+    ]
+}

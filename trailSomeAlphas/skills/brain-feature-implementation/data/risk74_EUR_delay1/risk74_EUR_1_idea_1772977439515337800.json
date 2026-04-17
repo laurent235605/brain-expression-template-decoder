@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), group_mean(winsorize(ts_backfill({exp_usa}, 21), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)",
+    "idea": "区域价差残差提纯版：将中美敞口原始价差对市值加权的行业均值进行时间序列回归，提取残差项作为信号。此举在Input1的行业中性基础上进一步剥离了行业共同趋势，仅保留无法被行业Beta解释的区域特质性偏离，构建更纯净的地缘政治轮动Alpha。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(quantile(group_zscore(winsorize(vec_avg({elta_value}),std=4),industry), driver=\"gaussian\"), sign(winsorize(vec_avg({aily_delta_recon_value}),std=4))), 5)",
+    "idea": "高斯分位数尾部 emphasis：将行业标准化后的预期水平通过高斯分位数转换（quantile）将分布拉伸，使极端预期值（极高/极低）映射到更远的尾部，中间区间压缩至零附近。与修正方向符号相乘后，极端预期状态下的修正获得非线性放大，专门用于识别泡沫动态（极端高预期+上调）或极端 capitulation（极端低预期+下调）的尾部风险与机会。",
+    "expression_list": [
+        "ts_decay_linear(multiply(quantile(group_zscore(winsorize(vec_avg(ern10_elta_value),std=4),industry), driver=\"gaussian\"), sign(winsorize(vec_avg(ern10_aily_delta_recon_value),std=4))), 5)"
+    ]
+}

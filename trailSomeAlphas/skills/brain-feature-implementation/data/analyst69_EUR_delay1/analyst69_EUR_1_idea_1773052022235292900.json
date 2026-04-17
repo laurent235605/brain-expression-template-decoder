@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 252)), 2), ts_delta({eps_best_eeps_cur_yr}, 5), 0)",
+    "idea": "借鉴Input 2的‘极端状态识别’逻辑（高斯拉伸尾部）应用于Input 1：仅当短期修正动量处于自身历史分布的极端尾部（|zscore|>2）时才保留原始信号，中段噪音_strictly_置零，构建‘尾值交易’版本的盈利修正策略，仅交易历史罕见的分析师共识剧烈变动。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 252)), 2), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0)",
+        "trade_when(greater(abs(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 252)), 2), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0)"
+    ]
+}

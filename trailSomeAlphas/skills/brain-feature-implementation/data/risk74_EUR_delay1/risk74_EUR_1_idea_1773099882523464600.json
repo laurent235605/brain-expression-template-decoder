@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(divide(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), multiply(0.33, winsorize(ts_backfill({exp_nondomicile1}, 21), std=4))), add(abs(winsorize(ts_backfill({exp_usa}, 21), std=4)), abs(multiply(0.33, winsorize(ts_backfill({exp_nondomicile1}, 21), std=4))), 0.001)), industry), 2)",
+    "idea": "地理集中度纯度指标。假设{exp_nondomicile1}代表总体非本土敞口，将其乘以1/3后与{exp_usa}比较，计算美国敞口在总海外敞口中的纯度比率（经分母绝对值和正则化防止除零）。行业中性后对结果进行平方非线性变换，高值代表敞口高度集中于美国单一区域（高风险纯β），低值代表地理分散化防御，中段为噪音区域。",
+    "expression_list": [
+        "signed_power(group_zscore(divide(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), multiply(0.33, winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 21), std=4))), add(abs(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), abs(multiply(0.33, winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 21), std=4))), 0.001)), industry), 2)",
+        "signed_power(group_zscore(divide(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), multiply(0.33, winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 21), std=4))), add(abs(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), abs(multiply(0.33, winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 21), std=4))), 0.001)), industry), 2)"
+    ]
+}

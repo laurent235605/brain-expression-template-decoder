@@ -1,0 +1,10 @@
+{
+    "template": "({crowding} - ts_mean({crowding}, 120)) / ts_std_dev({crowding}, 120)",
+    "idea": "**Concept**: Crowding Z-Score Anomaly\n- **Sample Fields Used**: `crowding`, `raw_crowding`\n- **Definition**: Deviation of current crowding from 120-day historical mean, normalized by historical volatility\n- **Why This Feature**: Identifies when crowding reaches extreme levels relative to a stock's own history, signaling crowded trade risk or contrarian opportunity\n- **Logical Meaning**: High positive values indicate unusually high crowding (crowded long); high negative values indicate unusual emptiness (potential contrarian long)\n- **is filling nan necessary**: No, calculation uses `ts_mean` and `ts_std_dev` which handle NaNs appropriately in the lookback window\n- **Directionality**: High positive = anomalously crowded (avoid or short); High negative = anomalously under-owned (potential buy); Near zero = normal\n- **Boundary Conditions**: Values > 2.0 indicate statistical extremes (potential reversal); values < -2.0 indicate extreme neglect",
+    "expression_list": [
+        "(liquidity_factor_crowding - ts_mean(liquidity_factor_crowding, 120)) / ts_std_dev(liquidity_factor_crowding, 120)",
+        "(liquidity_timeseries_crowding - ts_mean(liquidity_timeseries_crowding, 120)) / ts_std_dev(liquidity_timeseries_crowding, 120)",
+        "(rsk74_crowding - ts_mean(rsk74_crowding, 120)) / ts_std_dev(rsk74_crowding, 120)",
+        "(rsk74_raw_crowding - ts_mean(rsk74_raw_crowding, 120)) / ts_std_dev(rsk74_raw_crowding, 120)"
+    ]
+}

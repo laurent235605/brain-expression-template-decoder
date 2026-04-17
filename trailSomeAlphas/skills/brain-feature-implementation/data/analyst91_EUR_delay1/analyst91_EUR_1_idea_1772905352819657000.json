@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_std_dev(vec_avg({exposure_value}), 126), sector)",
+    "idea": "长期地理敞口波动率行业比较。采用模板2的group_zscore+ts_std_dev+vec_avg结构，但引入模板1的126日长窗口替代20日，识别地理敞口在半年期内的长期波动异常，经行业标准化后用于区分“地理战略稳定”与“地理布局动荡”的公司。",
+    "expression_list": [
+        "group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 126), sector)"
+    ]
+}

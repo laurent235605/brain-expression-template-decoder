@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252)",
+    "idea": "通过20日移动平均平滑原始天数的每日波动，降低换手率并捕捉稳定性的持续趋势；再计算该平滑值在过去252日的时序Z-score，识别个股当前稳定性是否显著偏离其长期常态。3倍标准差缩尾处理用于抑制单日极端值对趋势计算的干扰。",
+    "expression_list": [
+        "ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252)",
+        "ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252)"
+    ]
+}

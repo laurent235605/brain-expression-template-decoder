@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(divide(ts_delta(divide({value_03501a}, {value_02300q}), 63), ts_mean(divide({value_03501a}, {value_02300q}), 252)), 10)",
+    "idea": "**概念**: 资本结构变化动量（平滑版）\n- **融合来源**: 模板2（变化率标准化）+ 模板4（权益资本比率）+ 时序平滑运算符\n- **定义**: 权益资产比率的季度变化量（63天）相对于年度均值的比率，经10日线性衰减加权\n- **为何有效**: 原始权益比率是静态快照，加入动量维度可识别去杠杆化或加杠杆趋势；线性衰减降低 turnover 同时保留趋势方向\n- **逻辑含义**: 正值表示公司正在提升权益占比（去杠杆/增发），负值表示杠杆加速；相对历史均值的归一化处理过滤了行业周期噪音\n- **边界条件**: 年度均值作为分母防止低基数效应导致的虚假高增速；ts_decay_linear权重递减（10,9,...,1）确保近期变化权重更高但不过度反应单日波动\n- **方向性**: 正向因子，改善的资本结构（权益增加）通常预示财务稳健性提升",
+    "expression_list": [
+        "ts_decay_linear(divide(ts_delta(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), 63), ts_mean(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), 252)), 10)",
+        "ts_decay_linear(divide(ts_delta(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), 63), ts_mean(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), 252)), 10)",
+        "ts_decay_linear(divide(ts_delta(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), 63), ts_mean(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), 252)), 10)",
+        "ts_decay_linear(divide(ts_delta(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), 63), ts_mean(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), 252)), 10)"
+    ]
+}

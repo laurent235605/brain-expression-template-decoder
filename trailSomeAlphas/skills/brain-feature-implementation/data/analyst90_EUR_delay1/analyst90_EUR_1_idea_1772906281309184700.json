@@ -1,0 +1,7 @@
+{
+    "template": "let(lik_change, subtract(vec_avg({likelihood_score}), last_diff_value(vec_avg({likelihood_score}), 60)), time_w, hump_decay(days_from_last_change(vec_avg({likelihood_score})), hump=3, decay=10), price_dev, subtract(divide(vec_avg({exit_price}), vec_avg({openprice})), ts_mean(divide(vec_avg({exit_price}), vec_avg({openprice})), 30)), core, multiply(multiply(lik_change, time_w), price_dev), trade_when(greater(abs(core), 0.0001), zscore(winsorize(core, std=4)), 0))",
+    "idea": "事件驱动架构：聚焦概率评分最近一次变化的幅度（与60日前不同值之差），利用距上次变化天数构造驼峰衰减权重（变化后前3天权重最高，随后10天指数衰减），并与价格标准化偏离度相乘，仅对显著非零信号开仓，捕捉评级变动后的价格漂移效应。",
+    "expression_list": [
+        "let(lik_change, subtract(vec_avg(success_likelihood_score), last_diff_value(vec_avg(success_likelihood_score), 60)), time_w, hump_decay(days_from_last_change(vec_avg(success_likelihood_score)), hump=3, decay=10), price_dev, subtract(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), ts_mean(divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), 30)), core, multiply(multiply(lik_change, time_w), price_dev), trade_when(greater(abs(core), 0.0001), zscore(winsorize(core, std=4)), 0))"
+    ]
+}

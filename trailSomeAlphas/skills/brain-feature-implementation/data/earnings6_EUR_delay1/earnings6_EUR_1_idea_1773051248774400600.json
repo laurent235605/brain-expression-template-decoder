@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( group_zscore( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), industry ), 20 )",
+    "idea": "组内时序复合。先进行行业中性化（group_zscore）再进行时间衰减（ts_decay_linear），确保每日的Surprise信号既在同行业内可比（去除行业beta），又在时间序列上突出近期信息，避免行业轮动对时序加权的干扰，实现截面与截面的双重稳健。",
+    "expression_list": [
+        "ts_decay_linear( group_zscore( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), industry ), 20 )",
+        "ts_decay_linear( group_zscore( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), industry ), 20 )"
+    ]
+}

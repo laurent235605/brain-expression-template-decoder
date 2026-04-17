@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(trade_when(less(abs(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1)), 3), 0, ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1)), industry)",
+    "idea": "改进模板2的二元事件检测（仅判断变化方向），引入trade_when与abs(ts_delta)量化变化幅度：仅当单日天数变化绝对值超过3天（显著调整）时才保留信号，微幅波动视为噪音置0。对过滤后的变化幅度进行group_rank组内排名，形成相对强度信号，避免固定阈值带来的截面偏误。",
+    "expression_list": [
+        "group_rank(trade_when(less(abs(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1)), 3), 0, ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1)), industry)",
+        "group_rank(trade_when(less(abs(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1)), 3), 0, ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1)), industry)"
+    ]
+}

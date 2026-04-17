@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(subtract(1, vec_avg({lastcostingfailed})), 5)",
+    "idea": "时序动量增强：将原始平均可靠性指标进行时序一阶差分（5日），捕捉运营效率的边际改善趋势，而非仅关注静态水平。当可靠性持续提升时产生正向信号，结合了两个输入的“可靠性”概念并加入时间维度变化率。",
+    "expression_list": [
+        "ts_delta(subtract(1, vec_avg(mdl209_lastcostingfailed)), 5)"
+    ]
+}

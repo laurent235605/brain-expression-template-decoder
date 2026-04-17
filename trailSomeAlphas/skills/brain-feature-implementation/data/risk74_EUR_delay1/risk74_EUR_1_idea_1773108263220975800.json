@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry),252)",
+    "idea": "横截面-时间序列交叉验证：先计算空头累积变化的行业内Z-score（当日相对行业偏离），再观察该相对强度指标在过去252天历史中的时序Z-score，捕捉'行业相对地位的历史性极端偏离'，融合横向比较与纵向历史视角。",
+    "expression_list": [
+        "ts_zscore(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry),252)",
+        "ts_zscore(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry),252)"
+    ]
+}

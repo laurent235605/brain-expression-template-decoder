@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 63), industry)",
+    "idea": "中美敞口价差的时序动量信号：计算63天内区域敞口价差的变化趋势（ts_delta），识别正在积极调整区域配置（增加美国敞口同时减少中国敞口）的公司，相比静态价差更能前瞻性地捕捉管理层的动态战略转向与地缘预期变化。",
+    "expression_list": [
+        "group_zscore(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 63), industry)"
+    ]
+}

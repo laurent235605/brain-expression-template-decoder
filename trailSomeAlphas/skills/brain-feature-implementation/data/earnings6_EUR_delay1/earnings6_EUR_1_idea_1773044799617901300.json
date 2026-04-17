@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear( group_zscore( trade_when( greater( vec_avg({x_dividend}), 0.001 ), divide( vec_avg({x_dividend}), add( ts_mean( ts_backfill( vec_avg({x_dividend}), 10), 252), 0.0001 ) ), 0 ), industry ), 15 )",
+    "idea": "对模板1的股息持续性实施激进重构：先应用模板2的显式阈值条件过滤（>0.001），进行行业标准化后，再叠加15日线性衰减平滑（ts_decay_linear）。这种\"条件-分层-平滑\"的三层架构既保证了信号纯净度，又通过时序加权显著降低了组合换手率。",
+    "expression_list": [
+        "ts_decay_linear( group_zscore( trade_when( greater( vec_avg(ern6_x_dividend), 0.001 ), divide( vec_avg(ern6_x_dividend), add( ts_mean( ts_backfill( vec_avg(ern6_x_dividend), 10), 252), 0.0001 ) ), 0 ), industry ), 15 )",
+        "ts_decay_linear( group_zscore( trade_when( greater( vec_avg(ern6_x_dividend_233), 0.001 ), divide( vec_avg(ern6_x_dividend_233), add( ts_mean( ts_backfill( vec_avg(ern6_x_dividend_233), 10), 252), 0.0001 ) ), 0 ), industry ), 15 )",
+        "ts_decay_linear( group_zscore( trade_when( greater( vec_avg(ern6_x_dividend_oc), 0.001 ), divide( vec_avg(ern6_x_dividend_oc), add( ts_mean( ts_backfill( vec_avg(ern6_x_dividend_oc), 10), 252), 0.0001 ) ), 0 ), industry ), 15 )",
+        "ts_decay_linear( group_zscore( trade_when( greater( vec_avg(ern6_x_dividend_oc_235), 0.001 ), divide( vec_avg(ern6_x_dividend_oc_235), add( ts_mean( ts_backfill( vec_avg(ern6_x_dividend_oc_235), 10), 252), 0.0001 ) ), 0 ), industry ), 15 )"
+    ]
+}

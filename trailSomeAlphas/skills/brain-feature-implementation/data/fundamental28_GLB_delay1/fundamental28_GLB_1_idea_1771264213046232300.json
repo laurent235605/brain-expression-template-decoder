@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), industry), ts_rank(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), 504))",
+    "idea": "横截面与纵截面的双重动量筛选（\"双击\"效应）。左侧为行业中性zscore，衡量公司相对同行的运营改善程度；右侧为过去2年（504日）该动量指标的历史分位数（ts_rank），衡量公司当前是否处于自身历史改善的高位。两者相乘使得信号强度同时取决于\"比同行好\"和\"比历史好\"，仅当公司既优于行业平均又处于自身运营改善周期高点时才产生最大权重，有效过滤掉行业周期Beta带来的伪动量。",
+    "expression_list": [
+        "multiply(group_zscore(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), ts_rank(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), 504))",
+        "multiply(group_zscore(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), ts_rank(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), 504))"
+    ]
+}

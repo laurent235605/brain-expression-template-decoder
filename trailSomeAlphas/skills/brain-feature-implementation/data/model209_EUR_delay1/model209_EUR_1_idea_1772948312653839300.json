@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum({lastcostingfailed})",
+    "idea": "**Concept**: Total Operational Incidents\n- **Sample Fields Used**: lastcostingfailed\n- **Definition**: Count of costing failures across the entire vector\n- **Why This Feature**: Absolute measure of operational workload or system stress; cumulative error count for monitoring\n- **Logical Meaning**: Raw number of entities requiring costing attention or manual intervention\n- **is filling nan necessary**: Treat NaN as 0 (no incident recorded)\n- **Directionality**: Higher values indicate more widespread operational issues; zero indicates clean run\n- **Boundary Conditions**: 0 to total entity count",
+    "expression_list": [
+        "vec_sum(mdl209_lastcostingfailed)"
+    ]
+}

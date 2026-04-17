@@ -1,0 +1,8 @@
+{
+    "template": "hump(trade_when(and(greater(ts_rank(winsorize(ts_backfill(ts_delta({eps_best_eeps_cur_yr}, 5), 63), std=4), 252), 0.85), greater(group_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), industry), 0.9)), group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), industry), 0), hump=0.01)",
+    "idea": "采用'双极端'过滤机制：要求修订动量同时处于自身历史85%分位以上和行业内90%分位以上(and逻辑)，确保信号既是个股历史极端又是相对于同行的极端偏离。通过hump函数控制日度权重变化幅度以进一步降低换手率(hump=0.01)，适用于捕捉高确信度的突发业绩预期调整事件，避免中等强度的噪音交易。",
+    "expression_list": [
+        "hump(trade_when(and(greater(ts_rank(winsorize(ts_backfill(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63), std=4), 252), 0.85), greater(group_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), 0.9)), group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), industry), 0), hump=0.01)",
+        "hump(trade_when(and(greater(ts_rank(winsorize(ts_backfill(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63), std=4), 252), 0.85), greater(group_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), 0.9)), group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), industry), 0), hump=0.01)"
+    ]
+}

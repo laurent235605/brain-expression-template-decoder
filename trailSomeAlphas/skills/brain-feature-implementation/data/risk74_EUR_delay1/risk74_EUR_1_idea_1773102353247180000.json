@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(and(less(group_rank({crowding}, industry), 0.2), less(abs(subtract({factor_e}, {factor_g})), 0.5)), group_zscore({value_ts}, industry), nan)",
+    "idea": "激进版条件筛选：仅当拥挤度处于行业最低20%分位（极端非拥挤）且E与G评分差异小于0.5（ESG结构均衡）时，才暴露价值因子敞口；其余情况视为噪音并置为NaN，实现精准打击型价值陷阱规避。",
+    "expression_list": [
+        "trade_when(and(less(group_rank(liquidity_factor_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_e, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(liquidity_factor_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_esg, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(liquidity_timeseries_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_e, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(liquidity_timeseries_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_esg, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(rsk74_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_e, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(rsk74_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_esg, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(rsk74_raw_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_e, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)",
+        "trade_when(and(less(group_rank(rsk74_raw_crowding, industry), 0.2), less(abs(subtract(rsk74_factor_esg, rsk74_factor_g)), 0.5)), group_zscore(rsk74_value_ts, industry), nan)"
+    ]
+}

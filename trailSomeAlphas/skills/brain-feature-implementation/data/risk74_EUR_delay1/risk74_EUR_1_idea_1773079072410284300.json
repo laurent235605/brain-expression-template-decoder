@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),63,rettype=2),std=4),252)",
+    "idea": "对15日空头累积变化序列进行63日时序线性回归，提取斜率（slope）作为空头增仓的加速度指标，再对该斜率进行252日Z-score标准化。相比简单的累积变化值，斜率能捕捉空头压力的“二阶导”信息，更早识别空头建仓从减速到加速的拐点点或快速平仓的趋势惯性，适用于捕捉动量延续或反转的早期信号。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),63,rettype=2),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),63,rettype=2),std=4),252)"
+    ]
+}

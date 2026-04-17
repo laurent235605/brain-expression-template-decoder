@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry), driver=\"gaussian\")",
+    "idea": "融合模板1的长期平滑与行业zscore处理，通过高斯分位数转换将中间区间的会计分散度压缩至零附近，同时将极端值拉向分布两端，增强对极端复杂公司的区分度，抑制中等水平公司的噪音干扰。",
+    "expression_list": [
+        "quantile(group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry), driver=\"gaussian\")"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change(ts_backfill(vec_avg({actual_eps}), 5)), 30), multiply(subtract(vec_avg({actual_eps}), last_diff_value(vec_avg({actual_eps}), 5)), ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252)), nan)",
+    "idea": "财报公告后动量（PEAD）增强模板。仅在最近30天内发生EPS更新的股票上交易，信号强度为最新季报惊喜（当前值与上次不同值之差）与TTM累积盈利的乘积。通过`trade_when`将非财报期股票置为NaN，专注捕捉盈余公告后的价格漂移效应。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(ts_backfill(vec_avg(ern6_actual_eps), 5)), 30), multiply(subtract(vec_avg(ern6_actual_eps), last_diff_value(vec_avg(ern6_actual_eps), 5)), ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)), nan)",
+        "trade_when(less(days_from_last_change(ts_backfill(vec_avg(ern6_actual_eps_274), 5)), 30), multiply(subtract(vec_avg(ern6_actual_eps_274), last_diff_value(vec_avg(ern6_actual_eps_274), 5)), ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)), nan)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile({volume}, driver=\"uniform\")",
+    "idea": "**Concept**: Cross-Sectional Volume Distribution\n- **Sample Fields Used**: volume\n- **Definition**: Uniform quantile transformation of volume across the universe (centered rank)\n- **Why This Feature**: Enables comparison of liquidity across different market cap and sector groups by normalizing distribution\n- **Logical Meaning**: Relative positioning within the universe—how liquid is this security compared to all others today?\n- **is filling nan necessary**: No, quantile handles NaN naturally by excluding from distribution\n- **Directionality**: Negative = below average liquidity; Positive = above average liquidity; Zero = median liquidity\n- **Boundary Conditions**: Approximately bounded by [-3,3] for uniform driver; 0 represents cross-sectional median",
+    "expression_list": [
+        "quantile(mdl234_volume, driver=\"uniform\")"
+    ]
+}

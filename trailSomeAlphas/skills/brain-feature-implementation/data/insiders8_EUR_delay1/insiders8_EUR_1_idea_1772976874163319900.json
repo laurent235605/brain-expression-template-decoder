@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, industry) * (1 - abs(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)))",
+    "idea": "行业内标准化后的持仓收益背离（模板2）乘以股权结构不稳定性（1-|corr|，来自模板1）。该构造专门捕捉\"所有权结构剧烈变化+机构持仓严重错位\"的叠加场景：当股东基础动荡且机构超配低收益股票时，信号极值暗示即将发生的剧烈再平衡。",
+    "expression_list": [
+        "group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, industry) * (1 - abs(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)))",
+        "group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, industry) * (1 - abs(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)))",
+        "group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, industry) * (1 - abs(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)))",
+        "group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, industry) * (1 - abs(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)))"
+    ]
+}

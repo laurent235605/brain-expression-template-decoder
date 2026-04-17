@@ -1,0 +1,12 @@
+{
+    "template": "ts_mean({sales_gr}, 504)",
+    "idea": "**Concept**: Compounded Growth Persistence\n- **Sample Fields Used**: sales_gr, net_inc_bef_xord_gr\n- **Definition**: Multi-period geometric mean of growth rates capturing sustained expansion rather than one-year spikes\n- **Why This Feature**: Single-year growth is noisy; cumulative persistence indicates secular trends, market share gains, or terminal decline phases\n- **Logical Meaning**: Trajectory of business expansion; cumulative shareholder value creation potential\n- **is filling nan necessary**: Growth rates can be missing for delisted or suspended names; use ts_backfill only for short gaps but preserve NaNs for permanent cessation of reporting to avoid look-back bias\n- **Directionality**: Higher values indicate sustained expansion; negative values sustained over 2+ years indicate secular decline\n- **Boundary Conditions**: Extreme values (>100% annualized) indicate small base effects or turnaround situations; <-50% indicates distress",
+    "expression_list": [
+        "ts_mean(fnd8_advanceder_1qf_matrix_ff_sales_gr_nugget, 504)",
+        "ts_mean(fnd8_advanceder_1qf_matrix_ff_sales_gr_rav, 504)",
+        "ts_mean(fnd8_er_1af_matrix_ff_sales_gr, 504)",
+        "ts_mean(fnd8_er_1qf_matrix_ff_sales_gr, 504)",
+        "ts_mean(fnd8_eraf_matrix_ff_sales_gr, 504)",
+        "ts_mean(fnd8_erqf_matrix_ff_sales_gr, 504)"
+    ]
+}

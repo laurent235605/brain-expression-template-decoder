@@ -1,0 +1,5 @@
+{
+    "template": "hump_decay(group_normalize(multiply(trade_when(greater(abs(ts_delta(vec_skewness({version}), 5)), ts_std_dev(vec_skewness({version}), 20)), ts_delta(vec_skewness({version}), 5), 0), add(1, s_log_1p(vec_avg(ts_zscore({volume}, 20))))), industry), 0.015)",
+    "idea": "监测5日偏度变化率(ts_delta)相对于20日历史波动率的异常跳跃，仅当变化幅度超过历史波动率时确认为有效形态突变信号，乘以经对数压缩的成交量zscore(vec_avg)作为流动性置信度加权，最后通过hump_decay限制单日权重变动不超过1.5%，实现事件驱动型的平滑建仓。",
+    "expression_list": []
+}

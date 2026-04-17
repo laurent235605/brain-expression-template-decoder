@@ -1,0 +1,5 @@
+{
+    "template": "subtract(group_zscore(trade_when(greater(days_from_last_change({sector_percentile} - {corr_weighted_sector_percentile}), 5), 0, {sector_percentile} - {corr_weighted_sector_percentile}), industry), group_mean({sector_percentile} - {corr_weighted_sector_percentile}, log(ts_mean({market_cap}, 21)), sector))",
+    "idea": "事件新鲜度过滤与市值加权市场中性化。首先，使用days_from_last_change识别差距指标近期是否发生变动，若超过5天无变化，则视信号为陈旧并置零（trade_when），仅交易近期有更新的股票。然后将此过滤后的信号在行业内标准化（group_zscore）。最后，减去以平滑市值对数加权的行业均值（group_mean），实现行业内的市值中性化，避免信号被行业中的大盘股主导。",
+    "expression_list": []
+}

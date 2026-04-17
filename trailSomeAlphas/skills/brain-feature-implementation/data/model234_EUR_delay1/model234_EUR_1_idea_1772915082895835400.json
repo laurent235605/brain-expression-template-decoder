@@ -1,0 +1,7 @@
+{
+    "template": "ts_returns({volume}, 1, mode=1)",
+    "idea": "**Concept**: Volume Momentum\n- **Sample Fields Used**: volume\n- **Definition**: Month-over-month percentage change in trading volume\n- **Why This Feature**: Captures acceleration or deceleration in market interest and participation\n- **Logical Meaning**: Positive values indicate increasing attention, potential news flow, or index inclusion effects; negative values indicate declining interest, potential delisting risk, or post-event quiet periods\n- **is filling nan necessary**: No, preserve NaN for missing volume to indicate true gaps in trading rather than zero change\n- **Directionality**: Positive = increasing liquidity/attention; Negative = decreasing liquidity/attention; Zero = unchanged\n- **Boundary Conditions**: Theoretically unbounded; values >100% indicate volume doubling (catalyst events); values <-80% suggest liquidity evaporation",
+    "expression_list": [
+        "ts_returns(mdl234_volume, 1, mode=1)"
+    ]
+}

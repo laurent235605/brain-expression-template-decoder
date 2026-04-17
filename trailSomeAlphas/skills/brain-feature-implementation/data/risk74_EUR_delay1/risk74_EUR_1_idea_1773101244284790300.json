@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_mean(ts_delta(ts_sum(ts_delta(winsorize({shortint},4),1),15),5),3), industry)",
+    "idea": "**空头流量加速度（二阶动量）**：不仅关注空头存量的一阶变化，更关注变化速度是否在加快。先计算15日累积空头流量，再取该流量在过去5日的变化量（ts_delta），这相当于衡量近期空头建仓/回补的加速度，并用3日均值（ts_mean）平滑去噪，最后进行行业中性化（group_zscore）。经济逻辑：空头持仓的加速积累（acceleration）比匀速积累更能反映机构强烈看空共识或恐慌性抛盘，信号强度更高；反之，空头持仓的加速减少往往伴随逼空行情的开始。",
+    "expression_list": [
+        "group_zscore(ts_mean(ts_delta(ts_sum(ts_delta(winsorize(rsk74_shortint,4),1),15),5),3), industry)",
+        "group_zscore(ts_mean(ts_delta(ts_sum(ts_delta(winsorize(rsk74_shortint_ts,4),1),15),5),3), industry)"
+    ]
+}

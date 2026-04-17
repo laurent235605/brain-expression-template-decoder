@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), log(winsorize(ts_backfill({reported_asset_value},63),std=4)), 252, rettype=0))",
+    "idea": "经典稳健规模中性残差：对原始数据进行63日回溯填充与4倍标准差截尾处理，对规模取自然对数处理非线性关系，进行252日滚动回归提取残差，最后标准化为Z-Score。该模板提供最纯净的规模调整后的交易活跃度度量，适用于识别长期偏离规模预测模式的基金。",
+    "expression_list": [
+        "zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), log(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 252, rettype=0))"
+    ]
+}

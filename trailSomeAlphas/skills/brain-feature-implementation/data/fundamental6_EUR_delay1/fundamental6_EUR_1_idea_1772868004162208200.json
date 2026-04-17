@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(subtract({newa2_oancf}, {newa1_capx}), 252)",
+    "idea": "**Concept**: Cumulative Free Cash Flow Generation\n- **Sample Fields Used**: `newa2_oancf`, `newa1_capx`\n- **Definition**: The trailing 1-year sum of operating cash flows minus capital expenditures, representing the firm's self-funding capacity.\n- **Why This Feature**: Sustained positive cumulative FCF enables dividend growth, buybacks, and deleveraging; persistent deficits require external financing.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Annual cash flow items; missing quarters should be backfilled to maintain annual aggregation integrity.\n- **Directionality**: Positive values indicate value creation (cash available for investors); negative values indicate growth investment phase or operational cash consumption.\n- **Boundary Conditions**: Lumpy capex creates negative spikes in investment years; working capital releases create temporary positive spikes.",
+    "expression_list": [
+        "ts_sum(subtract(fnd6_newa2_oancf, fnd6_newa1_capx), 252)"
+    ]
+}

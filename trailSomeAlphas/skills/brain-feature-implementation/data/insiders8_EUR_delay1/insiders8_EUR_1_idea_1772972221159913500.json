@@ -1,0 +1,7 @@
+{
+    "template": "raw = winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4); level = ts_rank(raw, 126); change = ts_delta(raw, 10); momentum_aligned = greater(multiply(raw, change), 0); cond = and(or(greater(level, 0.85), less(level, 0.15)), momentum_aligned); core = signed_power(raw, 1.5); weight = add(1, multiply(0.4, rank(change))); final = trade_when(cond, multiply(core, weight), 0); final = group_zscore(final, sector)",
+    "idea": "引入偏离度动量确认机制：不仅看当前定价偏离水平（6个月ts_rank极值），更要求近期偏离度在持续扩大（10日变化与原始偏离同向），避免均值回复陷阱。信号强度由动量大小加权（排名映射至[1,1.4]区间），并在非极端或非动量确认区间直接空仓，实现事件驱动型择时增强。",
+    "expression_list": [
+        "raw = winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4); level = ts_rank(raw, 126); change = ts_delta(raw, 10); momentum_aligned = greater(multiply(raw, change), 0); cond = and(or(greater(level, 0.85), less(level, 0.15)), momentum_aligned); core = signed_power(raw, 1.5); weight = add(1, multiply(0.4, rank(change))); final = trade_when(cond, multiply(core, weight), 0); final = group_zscore(final, sector)"
+    ]
+}

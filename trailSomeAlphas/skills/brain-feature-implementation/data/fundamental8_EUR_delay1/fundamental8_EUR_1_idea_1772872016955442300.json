@@ -1,0 +1,22 @@
+{
+    "template": "ts_std_dev({ebitda_oper}, 252) / abs(ts_mean({ebitda_oper}, 252))",
+    "idea": "**Concept**: EBITDA Generation Stability\n- **Sample Fields Used**: ebitda_oper\n- **Definition**: Coefficient of variation (standard deviation/mean) of operating EBITDA measured over a 3-year rolling window\n- **Why This Feature**: Stable core operations indicate sustainable competitive advantages and predictable cash generation; high volatility suggests cyclical exposure or operational fragility\n- **Logical Meaning**: Measures the consistency of fundamental business model execution independent of capital structure\n- **is filling nan necessary**: Quarterly reporting creates NaN gaps for non-reporting days; ts_backfill is appropriate to carry last known quarterly value forward, but true NaNs (delistings, suspensions) should not be filled to avoid survival bias\n- **Directionality**: Lower values indicate higher quality stable operations; values approaching zero indicate exceptional consistency\n- **Boundary Conditions**: Values >1.0 indicate highly volatile/cyclical operations; negative means (loss-making periods) require absolute value handling",
+    "expression_list": [
+        "ts_std_dev(fnd8_1af_matrix_ff_debt_ebitda_oper, 252) / abs(ts_mean(fnd8_1af_matrix_ff_debt_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_1af_matrix_ff_ebitda_oper, 252) / abs(ts_mean(fnd8_1af_matrix_ff_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_1qf_matrix_ff_debt_ebitda_oper, 252) / abs(ts_mean(fnd8_1qf_matrix_ff_debt_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_1qf_matrix_ff_ebitda_oper, 252) / abs(ts_mean(fnd8_1qf_matrix_ff_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_af_matrix_ff_debt_ebitda_oper, 252) / abs(ts_mean(fnd8_af_matrix_ff_debt_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_af_matrix_ff_ebitda_oper, 252) / abs(ts_mean(fnd8_af_matrix_ff_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_er_1af_matrix_ff_ebitda_oper_mgn, 252) / abs(ts_mean(fnd8_er_1af_matrix_ff_ebitda_oper_mgn, 252))",
+        "ts_std_dev(fnd8_er_1af_matrix_ff_entrpr_val_ebitda_oper, 252) / abs(ts_mean(fnd8_er_1af_matrix_ff_entrpr_val_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_er_1qf_matrix_ff_ebitda_oper_mgn, 252) / abs(ts_mean(fnd8_er_1qf_matrix_ff_ebitda_oper_mgn, 252))",
+        "ts_std_dev(fnd8_er_1qf_matrix_ff_entrpr_val_ebitda_oper, 252) / abs(ts_mean(fnd8_er_1qf_matrix_ff_entrpr_val_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_eraf_matrix_ff_ebitda_oper_mgn, 252) / abs(ts_mean(fnd8_eraf_matrix_ff_ebitda_oper_mgn, 252))",
+        "ts_std_dev(fnd8_eraf_matrix_ff_entrpr_val_ebitda_oper, 252) / abs(ts_mean(fnd8_eraf_matrix_ff_entrpr_val_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_erqf_matrix_ff_ebitda_oper_mgn, 252) / abs(ts_mean(fnd8_erqf_matrix_ff_ebitda_oper_mgn, 252))",
+        "ts_std_dev(fnd8_erqf_matrix_ff_entrpr_val_ebitda_oper, 252) / abs(ts_mean(fnd8_erqf_matrix_ff_entrpr_val_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_qf_matrix_ff_debt_ebitda_oper, 252) / abs(ts_mean(fnd8_qf_matrix_ff_debt_ebitda_oper, 252))",
+        "ts_std_dev(fnd8_qf_matrix_ff_ebitda_oper, 252) / abs(ts_mean(fnd8_qf_matrix_ff_ebitda_oper, 252))"
+    ]
+}

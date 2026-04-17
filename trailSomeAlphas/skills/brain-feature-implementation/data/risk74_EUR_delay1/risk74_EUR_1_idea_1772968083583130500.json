@@ -1,0 +1,14 @@
+{
+    "template": "right_tail( {concentration} - ts_mean({concentration}, 60), 0 ) * left_tail( rank({crowding}), 0.3 )",
+    "idea": "极端尾部猎取：使用right_tail隔离集中度飙升的右尾信号（>0），同时使用left_tail隔离拥挤度极低的左尾信号（<30%分位），两者交叉寻找'市场忽视的高地理风险'标的。这是一种逆向策略，在冷门（低拥挤）股票中寻找地理结构恶化的预警。",
+    "expression_list": [
+        "right_tail( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ) * left_tail( rank(rsk74_crowding), 0.3 )",
+        "right_tail( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ) * left_tail( rank(rsk74_raw_crowding), 0.3 )",
+        "right_tail( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ) * left_tail( rank(liquidity_factor_crowding), 0.3 )",
+        "right_tail( rsk74_concentration - ts_mean(rsk74_concentration, 60), 0 ) * left_tail( rank(liquidity_timeseries_crowding), 0.3 )",
+        "right_tail( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ) * left_tail( rank(rsk74_crowding), 0.3 )",
+        "right_tail( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ) * left_tail( rank(rsk74_raw_crowding), 0.3 )",
+        "right_tail( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ) * left_tail( rank(liquidity_factor_crowding), 0.3 )",
+        "right_tail( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 0 ) * left_tail( rank(liquidity_timeseries_crowding), 0.3 )"
+    ]
+}

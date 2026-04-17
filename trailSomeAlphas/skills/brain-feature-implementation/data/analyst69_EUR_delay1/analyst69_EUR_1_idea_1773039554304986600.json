@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), 20)",
+    "idea": "将模板A的5日差分动量经过模板B的20日移动平均平滑处理。先对短期修正信号进行3倍标准差缩尾，再通过均值过滤消除高频噪音，构建'快速信号慢速化'的均衡结构。相比原始5日delta，该模板显著降低换手率，更适合捕捉分析师预期调整的趋势性成分而非单日脉冲。",
+    "expression_list": [
+        "ts_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), 20)",
+        "ts_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), 20)"
+    ]
+}

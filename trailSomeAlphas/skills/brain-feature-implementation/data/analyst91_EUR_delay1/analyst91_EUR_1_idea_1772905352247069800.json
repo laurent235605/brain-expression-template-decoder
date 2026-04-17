@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(vec_skewness({exposure_value}), 126), 3)",
+    "idea": "极端地理集中度非线性增强。将模板2的signed_power（3次幂尾部增强）应用于模板1的时序Z-score结果，大幅放大高度集中或高度分散的极端偏离信号，同时将接近均值（噪音区间）的地理集中度变化压缩至接近零，实现“中间地带无信号，尾部极端才有预测力”。",
+    "expression_list": [
+        "signed_power(ts_zscore(vec_skewness(anl91_exposure_value), 126), 3)"
+    ]
+}

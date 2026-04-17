@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20))), 2), ts_sum(ts_delta({hfown_pctown}, 1), 20), 0)",
+    "idea": "基于Input 2的累积压力概念，结合guidance中'仅部分区间有信号'的头尾策略（第2步）。仅当累积流量zscore绝对值超过2（极端头尾区间）时才保留原始信号，中段噪音区间强制置零（trade_when）。专门捕捉'显著建仓'（>2σ）或'恐慌清仓'（<-2σ）的尾部alpha，忽略温和调整。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20))), 2), ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 0)"
+    ]
+}

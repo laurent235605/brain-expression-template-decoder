@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(0.6, subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4))), multiply(0.4, subtract(ts_regression(winsorize(ts_backfill({exp_usa}, 21), std=4), ts_step(), 63, rettype=2), ts_regression(winsorize(ts_backfill({exp_chn}, 21), std=4), ts_step(), 63, rettype=2)))), industry)",
+    "idea": "结合当前中美敞口价差与其63日趋势斜率（动量），构建动量增强型区域价差因子。当高美国敞口且趋势扩大（或低中国敞口且趋势缩小）时强化信号，捕捉持续性的区域配置轮动而非短暂偏离，通过加权融合提升因子的趋势跟踪能力。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.6, subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4))), multiply(0.4, subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), ts_step(), 63, rettype=2), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4), ts_step(), 63, rettype=2)))), industry)"
+    ]
+}

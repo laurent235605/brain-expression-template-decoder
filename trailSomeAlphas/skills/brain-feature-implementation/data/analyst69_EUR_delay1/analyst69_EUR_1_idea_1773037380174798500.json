@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 21), std=4), 21), industry), 5)",
+    "idea": "**概念**: 行业相对预期修正动量（平滑版）\n**核心逻辑**: 计算EPS预期在过去21个交易日（月度）的变化量（ts_delta），经清洗后在行业内标准化（group_zscore），捕捉分析师向上或向下修正的趋势。进一步应用5日线性衰减平均（ts_decay_linear）平滑单日跳跃噪音，强调修正趋势的持续性而非单次脉冲。该信号对早期预期转向更为敏感， turnover 适中。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), std=4), 21), industry), 5)",
+        "ts_decay_linear(group_zscore(ts_delta(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), std=4), 21), industry), 5)"
+    ]
+}

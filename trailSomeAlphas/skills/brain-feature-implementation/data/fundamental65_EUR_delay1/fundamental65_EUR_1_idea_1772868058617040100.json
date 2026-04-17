@@ -1,0 +1,10 @@
+{
+    "template": "subtract({sedol_beta}, ts_mean({sedol_beta}, 252))",
+    "idea": "**Concept**: Beta Regime Divergence\n- **Sample Fields Used**: {sedol_beta}, {sedol_sigma}, {sedol_alpha60m}, {sedol_rerror60m}\n- **Definition**: Current beta relative to historical average to identify stocks changing their systematic risk characteristics (defensive rotation or speculative acceleration)\n- **Why This Feature**: Beta instability affects portfolio risk management; stocks with declining beta during high volatility indicate flight-to-quality or idiosyncratic drivers\n- **Logical Meaning**: Increasing beta indicates increasing market sensitivity (cyclicality); decreasing beta indicates decoupling or defensive transition\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Beta expansion predicts higher volatility participation; beta contraction predicts defensive characteristics\n- **Boundary Conditions**: Estimation error in beta (`rerror60m`) must be considered; low R-squared betas are unreliable",
+    "expression_list": [
+        "subtract(fnd65_allcap_sedol_beta, ts_mean(fnd65_allcap_sedol_beta, 252))",
+        "subtract(fnd65_allcap_sedol_betasigma, ts_mean(fnd65_allcap_sedol_betasigma, 252))",
+        "subtract(fnd65_dev_sedol_beta, ts_mean(fnd65_dev_sedol_beta, 252))",
+        "subtract(fnd65_dev_sedol_betasigma, ts_mean(fnd65_dev_sedol_betasigma, 252))"
+    ]
+}

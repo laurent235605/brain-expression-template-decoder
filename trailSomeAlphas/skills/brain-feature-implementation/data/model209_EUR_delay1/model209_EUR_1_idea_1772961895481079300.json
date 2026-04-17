@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(vec_avg({investment}), std=4) / (1 + s_log_1p(winsorize(vec_sum({lastcostingfailed}), std=4)))",
+    "idea": "**概念**: 极端值稳健风险比率\n- **逻辑**: 对投资均值和失败次数均进行4倍标准差截断(winsorize)处理极端噪音，并对失败次数使用s_log_1p压缩右尾。符合\"极值是噪音\"的处理逻辑，避免个别极端失败记录或巨额投资扭曲整体风险度量。\n- **边界**: s_log_1p确保即使失败次数极大，分母增长也趋缓，保护比率不趋近于0。",
+    "expression_list": [
+        "winsorize(vec_avg(mdl209_investment), std=4) / (1 + s_log_1p(winsorize(vec_sum(mdl209_lastcostingfailed), std=4)))"
+    ]
+}

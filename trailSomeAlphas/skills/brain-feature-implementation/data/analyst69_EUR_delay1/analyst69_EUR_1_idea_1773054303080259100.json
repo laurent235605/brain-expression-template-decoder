@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(trade_when(greater(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), 0.85), winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), NaN), industry), 10)",
+    "idea": "在行业中性框架下捕捉历史极端修订事件。仅当5日修订动量处于自身252日历史分位数的前15%（极度异常）时才激活信号，剔除温和波动噪音；随后进行行业zscore标准化以消除行业Beta差异，并应用10日线性衰减降低换手率，使组合更稳定地持有极端预期修正带来的 alpha。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(trade_when(greater(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), 0.85), winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), NaN), industry), 10)",
+        "ts_decay_linear(group_zscore(trade_when(greater(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), 0.85), winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), NaN), industry), 10)"
+    ]
+}

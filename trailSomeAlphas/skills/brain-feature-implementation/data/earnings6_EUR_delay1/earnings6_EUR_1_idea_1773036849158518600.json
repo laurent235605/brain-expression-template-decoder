@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(ts_backfill(vec_skewness({actual_eps}), 5), 252), 63)",
+    "idea": "盈利分布偏度累积模板。不同于简单的均值累积，该模板先计算每季度EPS的偏度（vec_skewness），累积过去一年的偏度指标，并用63天线性衰减加权。用于识别盈利分布右偏（存在超预期惊喜潜力）的公司，且通过衰减函数更重视近期的盈利结构变化。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(ts_backfill(vec_skewness(ern6_actual_eps), 5), 252), 63)",
+        "ts_decay_linear(ts_sum(ts_backfill(vec_skewness(ern6_actual_eps_274), 5), 252), 63)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "if_else( less( group_rank( ts_mean( ts_std_dev( ts_backfill( {overall_genderratio}, 63 ), 20 ), 20 ), industry ), 0.2 ), multiply( -1, group_zscore( ts_std_dev( ts_backfill( {overall_genderratio}, 63 ), 20 ), industry ) ), 0 )",
+    "idea": "持续极端稳定性精选。计算20日滚动标准差后再做20日均值平滑，确保持续性稳定而非短期偶然。仅在行业内部排名（group_rank）处于前20%（即波动率最低）的标的中配置仓位，其余设为0。对这20%标的赋予其行业标准化得分的负值（即越稳定分值越高），实现优中选优的集中持仓策略，过滤掉中等稳定性的噪音。",
+    "expression_list": [
+        "if_else( less( group_rank( ts_mean( ts_std_dev( ts_backfill( anl40_overall_genderratio, 63 ), 20 ), 20 ), industry ), 0.2 ), multiply( -1, group_zscore( ts_std_dev( ts_backfill( anl40_overall_genderratio, 63 ), 20 ), industry ) ), 0 )"
+    ]
+}

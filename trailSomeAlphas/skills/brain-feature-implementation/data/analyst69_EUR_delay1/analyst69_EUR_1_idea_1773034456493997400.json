@@ -1,0 +1,8 @@
+{
+    "template": "quantile({eps_best_eeps_cur_yr}, driver=gaussian)",
+    "idea": "**Concept**: Core Earnings Expectation (Normalized)\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: Gaussian quantile of raw EPS estimate level cross-sectionally\n- **Why This Feature**: The essential information is the relative positioning of earnings expectations; normalization enables cross-sector comparison\n- **Logical Meaning**: Pure expectation level independent of share price; captures the central thesis of analyst coverage\n- **is filling nan necessary**: NaN indicates no coverage; quantile operator handles this naturally by exclusion; filling would distort distribution.\n- **Directionality**: High values indicate high earnings expectations (growth or mature); low values indicate low/negative earnings expectations\n- **Boundary Conditions**: Fat tails indicate bimodal market (growth vs. value); center clustering indicates consensus on normalized earnings",
+    "expression_list": [
+        "quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian)",
+        "quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian)"
+    ]
+}

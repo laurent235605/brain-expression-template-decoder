@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract({volume}, ts_min({volume}, 12)), subtract(ts_max({volume}, 12), ts_min({volume}, 12)))",
+    "idea": "**Concept**: Relative Volume Position\n- **Sample Fields Used**: volume\n- **Definition**: Current volume's position within the 12-month min-max range (0 = at 12-month low, 1 = at 12-month high)\n- **Why This Feature**: Contextualizes current liquidity relative to historical extremes independent of absolute share count\n- **Logical Meaning**: Measures relative liquidity enthusiasm—are we at maximum historical interest or minimum?\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 3) for min/max calculations to avoid range distortion from missing data\n- **Directionality**: 0 = at 12-month minimum liquidity; 1 = at 12-month maximum liquidity; 0.5 = midpoint\n- **Boundary Conditions**: Bounded [0,1]; values >0.9 indicate near-maximum historical liquidity; <0.1 indicate near-minimum",
+    "expression_list": [
+        "divide(subtract(mdl234_volume, ts_min(mdl234_volume, 12)), subtract(ts_max(mdl234_volume, 12), ts_min(mdl234_volume, 12)))"
+    ]
+}

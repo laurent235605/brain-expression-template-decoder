@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(trade_when(greater(abs(group_zscore(ts_delta({hfown_pctown}, 5), industry)), 2), group_zscore(ts_delta({hfown_pctown}, 5), industry), NaN), 5)",
+    "idea": "极端流持续性：仅当行业中性化的持仓变化超过2个标准差(极端流入或流出)时才生成非NaN信号，并应用指数衰减窗口平滑持仓以降低换手，捕捉机构资金极端配置行为的持续性，避免对温和波动过度反应。",
+    "expression_list": [
+        "ts_decay_exp_window(trade_when(greater(abs(group_zscore(ts_delta(rsk74_hfown_pctown, 5), industry)), 2), group_zscore(ts_delta(rsk74_hfown_pctown, 5), industry), NaN), 5)"
+    ]
+}

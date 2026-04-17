@@ -1,0 +1,10 @@
+{
+    "template": "group_normalize(multiply(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), if_else(greater(days_from_last_change({eps_expected_report_dt}), 30), 1, 0.5)), industry)",
+    "idea": "融合两者的核心字段，构建“稳定预期下的修订加速度”信号。先计算EPS修订的短长周期背离，再乘以基于报告日期变更稳定性的条件权重（>30天未变更则权重为1，否则0.5），最后进行行业归一化。该结构确保仅在盈利披露时间框架相对确定时，才加大对预期修订动量的暴露，避免财报窗口期的噪音干扰。",
+    "expression_list": [
+        "group_normalize(multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 30), 1, 0.5)), industry)",
+        "group_normalize(multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 30), 1, 0.5)), industry)",
+        "group_normalize(multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 30), 1, 0.5)), industry)",
+        "group_normalize(multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 30), 1, 0.5)), industry)"
+    ]
+}

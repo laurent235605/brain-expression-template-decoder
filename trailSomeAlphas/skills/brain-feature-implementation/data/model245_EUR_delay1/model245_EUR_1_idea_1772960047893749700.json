@@ -1,0 +1,7 @@
+{
+    "template": "subtract(vec_avg({rank}), ts_decay_linear(vec_avg({rank}), 60))",
+    "idea": "衰减加权历史基准（时序形状控制）：用线性衰减均值(ts_decay_linear)替代简单均值作为历史基准，赋予近期排名更高权重（最近期权重60，最远期为1）。相比等权平均，该基准对排名趋势变化反应更敏感，减少简单均值的滞后性，更快捕捉排名的阶段性拐点。",
+    "expression_list": [
+        "subtract(vec_avg(mdl245_rank), ts_decay_linear(vec_avg(mdl245_rank), 60))"
+    ]
+}

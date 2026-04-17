@@ -1,0 +1,7 @@
+{
+    "template": "asset_clean = winsorize(ts_backfill({reported_asset_value}, 5), std=4); delta = ts_delta(asset_clean, 20); ranked = group_rank(delta, sector); extreme_mask = or(greater(ranked, 0.85), less(ranked, 0.15)); zscore_sig = group_zscore(delta, sector); core = trade_when(extreme_mask, zscore_sig, 0); enhanced = ts_decay_linear(core, 10)",
+    "idea": "极端分位聚焦与衰减：仅保留行业内资产变动处于前15%或后15%极端区间的信号，中间分位视为噪音置零，配合10日线性衰减降低换手率，精准捕捉行业内的极端资产_gathering或流失事件，避免温和变动带来的伪信号干扰。",
+    "expression_list": [
+        "asset_clean = winsorize(ts_backfill(fund_reported_asset_value, 5), std=4); delta = ts_delta(asset_clean, 20); ranked = group_rank(delta, sector); extreme_mask = or(greater(ranked, 0.85), less(ranked, 0.15)); zscore_sig = group_zscore(delta, sector); core = trade_when(extreme_mask, zscore_sig, 0); enhanced = ts_decay_linear(core, 10)"
+    ]
+}

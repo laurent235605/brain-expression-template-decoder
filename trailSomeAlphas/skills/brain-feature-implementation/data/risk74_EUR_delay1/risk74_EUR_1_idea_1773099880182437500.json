@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(add(multiply(0.6, group_zscore(ts_decay_linear(winsorize(ts_backfill({exp_usa}, 21, 0), std=4), 10), industry)), multiply(0.4, group_zscore(ts_delta(winsorize(ts_backfill({exp_usa}, 21, 0), std=4), 63), industry))), industry)",
+    "idea": "复合地理质量因子。将美国敞口信号分解为60%权重的中期水平（经10日线性衰减平滑的敞口水平，Z分数标准化）与40%权重的季度变化动量（63日变化率），分别进行行业中性化后相加，最后整体行业再平衡。高值代表既具有高美国敞口基础又处于加速增持趋势的双重确认，低值代表敞口低且加速撤离，中段为混合信号。",
+    "expression_list": [
+        "group_normalize(add(multiply(0.6, group_zscore(ts_decay_linear(winsorize(ts_backfill(rsk74_raw_exp_usa, 21, 0), std=4), 10), industry)), multiply(0.4, group_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 21, 0), std=4), 63), industry))), industry)"
+    ]
+}

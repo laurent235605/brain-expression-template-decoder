@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(ts_delta(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4), 20), 0), zscore(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), multiply(0.5, zscore(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4))))",
+    "idea": "波动率趋势条件化的概率-价格背离信号：在原始背离信号基础上，引入分析师置信度波动率变化率作为条件开关。当不确定性加速下降（波动率负向变动）时保持完整信号强度，反之则衰减，实现“信息明朗化”时的精准择时。",
+    "expression_list": [
+        "trade_when(less(ts_delta(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4), 20), 0), zscore(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), multiply(0.5, zscore(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4))))"
+    ]
+}

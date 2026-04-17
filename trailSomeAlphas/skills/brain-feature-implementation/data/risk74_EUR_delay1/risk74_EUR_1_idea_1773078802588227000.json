@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(winsorize(multiply(rank({crowding}), rank({value_ts})), std=3), 3)",
+    "idea": "采用纯截面排序方法替代原始值：将拥挤度与价值分别进行全局排名（rank）后相乘，再进行3日平滑与截尾，降低极值影响，强调相对排序而非原始数值，适用于仅相信分位相对位置的场景。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(multiply(rank(liquidity_factor_crowding), rank(rsk74_value_ts)), std=3), 3)",
+        "ts_decay_linear(winsorize(multiply(rank(liquidity_timeseries_crowding), rank(rsk74_value_ts)), std=3), 3)",
+        "ts_decay_linear(winsorize(multiply(rank(rsk74_crowding), rank(rsk74_value_ts)), std=3), 3)",
+        "ts_decay_linear(winsorize(multiply(rank(rsk74_raw_crowding), rank(rsk74_value_ts)), std=3), 3)"
+    ]
+}

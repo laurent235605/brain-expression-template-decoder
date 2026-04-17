@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({cost_exposure_range_end}) - vec_avg({cost_exposure_range_begin})) / abs(vec_avg({exposure_value}))",
+    "idea": "**Concept**: Relative Cost Uncertainty Ratio\n- **Sample Fields Used**: exposure_value, cost_exposure_range_begin, cost_exposure_range_end\n- **Definition**: Cost range width normalized by the absolute exposure value, measuring estimation uncertainty relative to exposure magnitude\n- **Why This Feature**: Large companies naturally have wide absolute ranges; normalizing by exposure magnitude enables comparison of estimation efficiency across different company sizes\n- **Logical Meaning**: Unit cost of uncertainty per dollar of exposure; measures analyst efficiency in forecasting costs for given exposure levels\n- **is filling nan necessary**: When exposure_value is NaN, the ratio is undefined. Use ts_backfill(5) for exposure_value to maintain continuity, as exposure changes gradually.\n- **Directionality**: Lower values indicate efficient estimation (low uncertainty relative to exposure); higher values indicate disproportionate uncertainty\n- **Boundary Conditions**: Approaches infinity as exposure approaches zero; should be truncated at reasonable thresholds (e.g., 5.0)",
+    "expression_list": [
+        "(vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin)) / abs(vec_avg(anl91_exposure_value))"
+    ]
+}

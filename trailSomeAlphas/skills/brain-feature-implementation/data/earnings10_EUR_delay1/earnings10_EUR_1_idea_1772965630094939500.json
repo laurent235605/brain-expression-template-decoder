@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(signed_power(vec_avg({aily_delta_recon_value}), 2), 20)",
+    "idea": "**Concept**: Accumulated Revision Volatility\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: Sum of squared daily revisions over 20 days\n- **Why This Feature**: Captures total revision \"energy\" regardless of direction. High values indicate periods of intense analyst debate and uncertainty; low values indicate consensus stability.\n- **is filling nan necessary**: NaN should be treated as 0 (no volatility contribution) to avoid understating volatility when data is missing.\n- **Directionality**: High values indicate high uncertainty/information flux; low values indicate stable information environment\n- **Boundary Conditions**: Values in top decile historically indicate unusual uncertainty (often precedes volatility expansion)",
+    "expression_list": [
+        "ts_sum(signed_power(vec_avg(ern10_aily_delta_recon_value), 2), 20)"
+    ]
+}

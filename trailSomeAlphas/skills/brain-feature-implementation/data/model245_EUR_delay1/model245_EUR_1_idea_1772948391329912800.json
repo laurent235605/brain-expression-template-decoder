@@ -1,0 +1,7 @@
+{
+    "template": "subtract(vec_avg({rank}), ts_decay_exp_window(vec_avg({rank}), 20, factor=0.5))",
+    "idea": "**Concept**: Rank Deviation from Trend\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Difference between current rank and exponentially smoothed rank (20-day half-life) to identify deviations from recent trend\n- **Why This Feature**: Distinguishes between rank changes that follow the recent trend (small deviation) versus those that break the trend (large deviation)\n- **Logical Meaning**: Measures the \"surprise\" element of the current rank relative to the recent trajectory; large deviations indicate potential inflection points or model view changes\n- **is filling nan necessary**: Exponential decay handles NaN by design, but ensure the decay window doesn't look back through long NaN sequences that would stale the trend.\n- **Directionality**: Positive = above trend (worse than expected trajectory); Negative = below trend (better than expected)\n- **Boundary Conditions**: Unbounded but practically limited by universe size; zero indicates on-trend",
+    "expression_list": [
+        "subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, factor=0.5))"
+    ]
+}

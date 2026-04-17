@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(group_normalize(right_tail(zscore(ts_delta({momentum}, 21) / (ts_mean({value_ts} + {earnyild}, 63) + 0.0001)), minimum=0), industry), hump=0.02, decay=5)",
+    "idea": "关注21日动量变化率相对于稳定价值暴露（63日均值）的\"动态纯度\"，仅保留右尾（正变化）捕捉动量加速且不受价值因素阻碍的股票。通过hump_decay控制日间微小波动带来的换手率，在行业内部归一化确保平衡暴露，专门用于捕捉因子动量启动初期的纯净alpha。",
+    "expression_list": [
+        "hump_decay(group_normalize(right_tail(zscore(ts_delta(rsk74_momentum, 21) / (ts_mean(rsk74_value_ts + rsk74_earnyild, 63) + 0.0001)), minimum=0), industry), hump=0.02, decay=5)",
+        "hump_decay(group_normalize(right_tail(zscore(ts_delta(rsk74_momentum_ts, 21) / (ts_mean(rsk74_value_ts + rsk74_earnyild, 63) + 0.0001)), minimum=0), industry), hump=0.02, decay=5)"
+    ]
+}

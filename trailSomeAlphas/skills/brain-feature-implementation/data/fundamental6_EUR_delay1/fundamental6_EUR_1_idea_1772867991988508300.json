@@ -1,0 +1,7 @@
+{
+    "template": "divide({cptnewq_actq}, {newq_lctq})",
+    "idea": "**Concept**: Current Liquidity Ratio\n- **Sample Fields Used**: `cptnewq_actq`, `newq_lctq`\n- **Definition**: The ratio of current assets to current liabilities, measuring short-term solvency and liquidity buffer adequacy.\n- **Why This Feature**: Critical distress predictor; values below 1.0 indicate technical insolvency risk; trends indicate working capital management efficiency.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Current liabilities are rarely missing for operating companies; missing values suggest data collection issues, not zero liabilities.\n- **Directionality**: Values > 1 indicate liquidity surplus (safety but possible inefficiency); values < 1 indicate liquidity stress (refinancing risk).\n- **Boundary Conditions**: Extremely high values suggest excessive cash holdings or poor capital allocation; negative equity situations create negative values.",
+    "expression_list": [
+        "divide(fnd6_cptnewq_actq, fnd6_newq_lctq)"
+    ]
+}

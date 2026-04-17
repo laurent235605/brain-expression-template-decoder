@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(vec_skewness({exposure_value}) - vec_range({exposure_value}), sector), 3)",
+    "idea": "交叉向量背离策略：用偏度（集中度形态）减去极差（最大-最小敞口绝对差距），识别\"表面数据集中但实则区域分散\"或\"表面均衡但实则依赖单一巨头市场\"的结构性错配。经行业标准化后三次幂放大尾部，专门捕捉地理敞口分布形态的极端非线性风险错配，强化异常值权重。",
+    "expression_list": [
+        "signed_power(group_zscore(vec_skewness(anl91_exposure_value) - vec_range(anl91_exposure_value), sector), 3)"
+    ]
+}

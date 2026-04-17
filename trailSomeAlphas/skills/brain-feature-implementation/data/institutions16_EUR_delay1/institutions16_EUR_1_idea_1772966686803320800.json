@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0)",
+    "idea": "特质性资产流残差（CAPM风格）：将个股资产流动量对行业市值加权均值做252日时序回归，提取残差项作为alpha，剥离行业层面的资金轮动和规模效应，专注于公司特异性的资金流动，适用于控制行业集中度风险。",
+    "expression_list": [
+        "ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), sector), 252, rettype=0)"
+    ]
+}

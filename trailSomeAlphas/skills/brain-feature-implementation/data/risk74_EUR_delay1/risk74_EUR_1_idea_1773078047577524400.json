@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry), 10)",
+    "idea": "提取输入2的累积求和逻辑（ts_sum(ts_delta)）并独立使用，计算15日空头变化量的行业中性累积值，结合输入1的平滑思想但延长至10日线性衰减窗口，构建更保守的低换手率空头压力累积信号。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry), 10)",
+        "ts_decay_linear(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry), 10)"
+    ]
+}

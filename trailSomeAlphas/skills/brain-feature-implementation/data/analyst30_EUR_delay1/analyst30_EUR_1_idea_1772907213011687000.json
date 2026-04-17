@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 21), sector), 5)",
+    "idea": "捕捉会计年度分散度的“动量”而非静态水平；使用vec_stddev替代range以更稳健地度量分布离散性，通过21日变化率(ts_delta)检测子公司架构的近期重组或扩张事件，配合5日线性衰减(ts_decay_linear)降低换手率，专注财务复杂度正在加速恶化的标的。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 21), sector), 5)"
+    ]
+}

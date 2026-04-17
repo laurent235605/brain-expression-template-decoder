@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize({momentum}, std=4) / (ts_mean(winsorize({value_ts}, std=4) + winsorize({earnyild}, std=4), 63) + 0.0001), 5), industry), 0.5)",
+    "idea": "对分子分母分别进行去极值处理，分母采用63日移动平均以降低短期因子暴露波动带来的噪音，使用5日线性衰减平滑结果，在行业内部进行zscore标准化消除行业固有因子偏差，最后通过0.5次幂符号幂变换压缩极端值同时保留方向，识别稳定的跨行业纯净动量暴露。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(rsk74_momentum, std=4) / (ts_mean(winsorize(rsk74_value_ts, std=4) + winsorize(rsk74_earnyild, std=4), 63) + 0.0001), 5), industry), 0.5)",
+        "signed_power(group_zscore(ts_decay_linear(winsorize(rsk74_momentum_ts, std=4) / (ts_mean(winsorize(rsk74_value_ts, std=4) + winsorize(rsk74_earnyild, std=4), 63) + 0.0001), 5), industry), 0.5)"
+    ]
+}

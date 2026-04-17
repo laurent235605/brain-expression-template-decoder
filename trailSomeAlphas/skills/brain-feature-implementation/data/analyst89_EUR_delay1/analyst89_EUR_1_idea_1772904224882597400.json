@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(winsorize(group_backfill(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), {industry}, 63), std=3), 10)",
+    "idea": "稳健回填与截尾处理：针对IPO初期或并购重组导致的历史数据缺失，先使用行业均值回填（group_backfill）提供临时基准，避免新上市公司因子值极端异常；再通过3倍标准差截尾（winsorize）剔除极个别因数据错误或退市导致的历史数据突变；最后施加10日衰减平滑，构建适用于风险模型的低换手率数据质量基准因子，确保信号稳定收敛至真实水平。",
+    "expression_list": []
+}

@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(group_zscore(quantile(winsorize({eps_best_eeps_cur_yr}, std=4), driver=gaussian) - quantile(winsorize({eps_best_eeps_next_yr}, std=4), driver=gaussian), sector), 1.5)",
+    "idea": "期限结构利差：当前财年与次财年盈利预期的行业中性差值（远期曲线斜率），经幂变换放大尾部差异，捕捉盈利增速预期的边际变化（加速/减速拐点），识别业绩动能切换",
+    "expression_list": []
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), industry)",
+    "idea": "将模板2的条件化稳健计算逻辑与模板1的行业中性化方法结合，对盈余惊喜进行行业标准化，消除行业间预期差异带来的偏差，同时保留零值保护机制。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), industry)",
+        "group_zscore(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), industry)"
+    ]
+}

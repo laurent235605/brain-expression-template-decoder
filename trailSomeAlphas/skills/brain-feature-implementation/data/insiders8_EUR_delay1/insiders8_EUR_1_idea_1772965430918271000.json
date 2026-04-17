@@ -1,0 +1,10 @@
+{
+    "template": "{of_owners_decile_rank_long} / {owners_decile_rank_long}",
+    "idea": "**Concept**: Ownership Concentration Efficiency\n- **Sample Fields Used**: of_owners_decile_rank_long, owners_decile_rank_long\n- **Definition**: Effective owners as a proportion of total owners (inverse Herfindahl approximation), capturing the \"signal-to-noise\" ratio in the shareholder base\n- **Why This Feature**: High efficiency (few effective relative to total) suggests coordinated informed trading; low efficiency suggests noise trader dominance\n- **is filling nan necessary**: Use sector median imputation if missing, as ownership structure varies by industry (utilities vs tech).\n- **Directionality**: Low values (decile 1-3) indicate high concentration/information; high values (decile 8-10) indicate dispersed ownership/consensus\n- **Boundary Conditions**: Near-zero effective owners suggests potential control situations; equal effective/total suggests completely atomistic ownership",
+    "expression_list": [
+        "insd8_effective_number_of_owners_decile_rank_long / insd8_effective_number_of_owners_decile_rank_long",
+        "insd8_effective_number_of_owners_decile_rank_long / insd8_total_number_of_owners_decile_rank_long",
+        "insd8_total_number_of_owners_decile_rank_long / insd8_total_number_of_owners_decile_rank_long",
+        "insd8_total_number_of_owners_decile_rank_long / insd8_effective_number_of_owners_decile_rank_long"
+    ]
+}

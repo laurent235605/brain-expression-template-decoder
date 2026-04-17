@@ -1,0 +1,7 @@
+{
+    "template": "hump(signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5), hump=0.02)",
+    "idea": "结合模板2的幂变换（捕捉极端偏离）与hump算子（换手率控制）。对幂变换后的信号应用hump过滤（阈值0.02），忽略日内微小变动，仅在偏离变化超过阈值时才调整仓位。这既保留了幂变换对高偏离股票的放大暴露，又通过hump机制避免了因小幅波动导致的频繁调仓，实现凸性收益与交易成本的优化平衡。",
+    "expression_list": [
+        "hump(signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5), hump=0.02)"
+    ]
+}

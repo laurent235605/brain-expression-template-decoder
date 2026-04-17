@@ -1,0 +1,7 @@
+{
+    "template": "multiply(0.5, subtract(quantile(vec_avg({investment}), driver='gaussian'), quantile(vec_sum({lastcostingfailed}), driver='gaussian')))",
+    "idea": "**概念**: 高斯分位数正态化利差\n- **逻辑**: 将投资均值和失败次数分别映射到高斯分位数(quantile, driver='gaussian')，将中间区间压缩在0附近，极端值拉远，再求差值。符合\"分布拉伸（强调头尾）\"逻辑，增强极端差异的区分度，适用于\"只有两端有信号\"场景。\n- **边界**: 结果近似正态分布，0为中性，正负分别表示风险调整后的相对优劣。",
+    "expression_list": [
+        "multiply(0.5, subtract(quantile(vec_avg(mdl209_investment), driver='gaussian'), quantile(vec_sum(mdl209_lastcostingfailed), driver='gaussian')))"
+    ]
+}

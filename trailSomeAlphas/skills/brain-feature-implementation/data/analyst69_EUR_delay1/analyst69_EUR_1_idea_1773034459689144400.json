@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({ebitda_best_eeps_cur_yr}, 20)",
+    "idea": "**Concept**: EBITDA Estimate Trajectory\n- **Sample Fields Used**: ebitda_best_eeps_cur_yr\n- **Definition**: 20-day change in EBITDA estimates capturing operating profit expectation shifts\n- **Why This Feature**: EBITDA is less affected by financial engineering than EPS; changes indicate core operational sentiment shifts\n- **Logical Meaning**: Top-line profitability momentum independent of capital structure changes; often leads EPS revisions for companies with stable leverage\n- **is filling nan necessary**: EBITDA coverage may be sparser than EPS for some EUR names; ts_backfill(20) recommended before applying ts_delta to ensure valid prior values.\n- **Directionality**: Positive indicates operating momentum; negative indicates margin compression or revenue challenges\n- **Boundary Conditions**: Large changes often coincide with management guidance or industry conferences; seasonal businesses show cyclical patterns",
+    "expression_list": [
+        "ts_delta(anl69_ebitda_best_eeps_cur_yr, 20)"
+    ]
+}

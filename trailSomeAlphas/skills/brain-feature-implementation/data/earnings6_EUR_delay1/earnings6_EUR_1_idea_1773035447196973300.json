@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252) * (1 + s_log_1p(abs(vec_avg({stock_split_ratio_243}) - 1)))",
+    "idea": "管道重排：融合EPS累积值与拆股幅度作为\"质量 convexity\"调整。核心假设是：无论是正向拆股（流动性改善）还是反向拆股（困境重整），只要发生显著资本结构变动，都应给予EPS信号更高关注度（因可能伴随基本面重置）。使用s_log_1p对拆股偏离度（|ratio-1|）进行对称压缩，既保留无拆股时的中性权重(1)，又为极端拆股事件提供有限的上行调整空间，避免线性放大导致的过拟合。",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252) * (1 + s_log_1p(abs(vec_avg(ern6_stock_split_ratio_243) - 1)))",
+        "ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252) * (1 + s_log_1p(abs(vec_avg(ern6_stock_split_ratio_243) - 1)))"
+    ]
+}

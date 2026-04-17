@@ -1,0 +1,7 @@
+{
+    "template": "hump(reverse(if_else(greater(ts_zscore(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), 252), 0), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), 252), 3), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), 252), 0.5))), 0.01)",
+    "idea": "非对称幂次转换与摩擦控制：对历史高位波动率（Z-Score>0）使用3次幂放大惩罚，对低位（Z-Score<0）使用0.5次幂压缩奖励，形成非对称反转曲线，最后通过`hump`算子忽略微小波动，控制组合换手率。",
+    "expression_list": [
+        "hump(reverse(if_else(greater(ts_zscore(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), 252), 0), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), 252), 3), signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), 252), 0.5))), 0.01)"
+    ]
+}

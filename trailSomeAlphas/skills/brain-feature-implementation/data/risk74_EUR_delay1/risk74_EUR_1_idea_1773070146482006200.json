@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(bucket(group_rank(ts_sum(ts_delta({shortint},1),15),industry),\"0,1,0.1\"),0.9),less(bucket(group_rank(ts_sum(ts_delta({shortint},1),15),industry),\"0,1,0.1\"),0.1)),ts_decay_linear(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),3),NaN)",
+    "idea": "采用极端分桶择时策略：仅保留行业内空头变化处于前10%或后10%分位的股票，对中间80%区间视为噪音并置NaN；对保留的极端样本应用3日线性衰减平滑，构建高置信度、低换手率的特质性空头压力择时因子。",
+    "expression_list": [
+        "trade_when(or(greater(bucket(group_rank(ts_sum(ts_delta(rsk74_shortint,1),15),industry),\"0,1,0.1\"),0.9),less(bucket(group_rank(ts_sum(ts_delta(rsk74_shortint,1),15),industry),\"0,1,0.1\"),0.1)),ts_decay_linear(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),3),NaN)",
+        "trade_when(or(greater(bucket(group_rank(ts_sum(ts_delta(rsk74_shortint_ts,1),15),industry),\"0,1,0.1\"),0.9),less(bucket(group_rank(ts_sum(ts_delta(rsk74_shortint_ts,1),15),industry),\"0,1,0.1\"),0.1)),ts_decay_linear(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),3),NaN)"
+    ]
+}

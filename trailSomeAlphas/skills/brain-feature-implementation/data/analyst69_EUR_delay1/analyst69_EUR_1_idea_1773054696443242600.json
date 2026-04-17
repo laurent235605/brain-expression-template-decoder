@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(ts_std_dev(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), 63), 0.05), multiply(0.7, ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 1), 63), 10)), multiply(0.7, divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5))))",
+    "idea": "创新性地融合双模板的时间维度特征，构建'自适应权重'结构。计算63日滚动波动率，当预期环境高波动（>5%）时，降低长期累积权重，转而采用输入1的短期速度信号（响应更快）；低波动环境则沿用输入2的长期累积趋势（更稳定）。这种条件切换逻辑结合了时序波动率调节与双时间尺度信息，实现了策略在不同市场状态下的动态平衡。",
+    "expression_list": [
+        "if_else(greater(ts_std_dev(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), 63), 0.05), multiply(0.7, ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 1), 63), 10)), multiply(0.7, divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5))))",
+        "if_else(greater(ts_std_dev(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), 63), 0.05), multiply(0.7, ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 1), 63), 10)), multiply(0.7, divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5))))"
+    ]
+}

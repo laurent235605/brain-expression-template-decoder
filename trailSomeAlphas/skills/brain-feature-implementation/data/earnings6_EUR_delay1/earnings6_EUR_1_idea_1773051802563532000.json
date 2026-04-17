@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), 10)",
+    "idea": "检测Surprise的边际变化(ts_delta, d=10)，关注'预期修正加速度'，即当期Surprise相较10日前是否进一步改善或恶化，捕捉盈利预期的动量效应而非静态水平。",
+    "expression_list": [
+        "ts_delta(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 10)",
+        "ts_delta(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 10)"
+    ]
+}

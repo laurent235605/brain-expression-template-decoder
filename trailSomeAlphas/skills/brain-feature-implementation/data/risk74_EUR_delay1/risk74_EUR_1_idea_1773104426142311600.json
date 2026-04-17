@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(0.6, ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 126)), multiply(0.4, ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 21))), industry)",
+    "idea": "将模板1的地理价差概念与模板2的动量思想交叉融合，构建中美敞口价差的双时间尺度动量因子：长期(126日)捕捉战略转向趋势，短期(21日)捕捉近期加速信号，通过加权组合(0.6/0.4)实现不同频率信号的互补增强。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.6, ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 126)), multiply(0.4, ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 21))), industry)"
+    ]
+}

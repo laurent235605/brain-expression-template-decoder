@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(or(greater(ts_rank({return}-{asset},15), 0.8), less(ts_rank({return}-{asset},15), 0.2)), ts_rank({return}-{asset},15), 0)",
+    "idea": "仅保留时序排名前20%或后20%的极端分位信号，中间区间视为噪音置零，构建头尾择时策略",
+    "expression_list": []
+}

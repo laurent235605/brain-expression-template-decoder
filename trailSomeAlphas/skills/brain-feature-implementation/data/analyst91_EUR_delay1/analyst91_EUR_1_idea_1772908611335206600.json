@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_ir({exposure_value}), std=4), 20), 20), 120), industry), 3)",
+    "idea": "向量内部稳定性-波动性双因子：改用vec_ir（信息比率，均值/标准差）衡量底层exposure的内部一致性而非简单均值，再对其计算20日波动率以捕捉“内部结构稳定性本身的波动”；通过3日线性衰减平滑（ts_decay_linear）降低突发噪音导致的换手率，识别出“共识强但近期动摇”或“分歧大但趋于一致”的状态变化。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_ir(anl91_exposure_value), std=4), 20), 20), 120), industry), 3)"
+    ]
+}

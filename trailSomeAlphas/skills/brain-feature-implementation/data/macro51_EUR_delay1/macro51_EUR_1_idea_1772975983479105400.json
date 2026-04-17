@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( subtract( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ), group_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), sector ) ), sector )",
+    "idea": "时间分位与截面分位的背离信号。通过计算个股流动性溢价比率在过去一年的历史百分位（ts_rank）与其行业内当前截面分位（group_rank）的差异，并再次进行行业标准化，捕捉“相对自身历史处于极端但相对同行业处于中性”（或反之）的定价偏差，识别历史极值中的相对估值错位机会。",
+    "expression_list": [
+        "group_zscore( subtract( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ), group_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), sector ) ), sector )"
+    ]
+}

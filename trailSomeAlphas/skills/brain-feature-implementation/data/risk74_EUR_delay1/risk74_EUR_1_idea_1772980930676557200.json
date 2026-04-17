@@ -1,0 +1,8 @@
+{
+    "template": "truncate(group_zscore(winsorize(divide(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), ts_std_dev(ts_backfill({concentration}, 10), 60)), std=4), industry), maxPercent=0.01)",
+    "idea": "波动率调整集中度冲击：将集中度偏离除以过去60日的滚动标准差（实现波动率），构造类似'夏普比率'的集中度冲击指标，区分'小幅但稳定的趋势变化'和'剧烈的结构性突变'。对极端冲击进行截尾处理，组内标准化后，通过truncate限制单股票最大权重不超过1%，以严格控制单一供应链事件带来的集中风险。",
+    "expression_list": [
+        "truncate(group_zscore(winsorize(divide(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), ts_std_dev(ts_backfill(rsk74_concentration, 10), 60)), std=4), industry), maxPercent=0.01)",
+        "truncate(group_zscore(winsorize(divide(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), ts_std_dev(ts_backfill(rsk74_raw_concentration, 10), 60)), std=4), industry), maxPercent=0.01)"
+    ]
+}

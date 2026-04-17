@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 10), industry)",
+    "idea": "将模板B的累积平滑修订压力进行行业内标准化（group_zscore），识别相对于同业而言预期调整更剧烈或更温和的股票。这种结构剥离了行业层面的系统性预期调整（如行业景气度变化），专注于挖掘个股相对于同业的超预期/低预期表现。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 10), industry)",
+        "group_zscore(ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 10), industry)"
+    ]
+}

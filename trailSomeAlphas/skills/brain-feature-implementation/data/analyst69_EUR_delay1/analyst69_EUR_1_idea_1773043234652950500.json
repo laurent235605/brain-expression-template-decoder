@@ -1,0 +1,8 @@
+{
+    "template": "hump(quantile(ts_rank(days_from_last_change({eps_expected_report_dt}), 252), driver=\"gaussian\"), hump=0.01)",
+    "idea": "换手率控制的事件距离指标：融合模板A的完整时间稳定性计算链条（days_from_last_change+ts_backfill+ts_rank+quantile高斯拉伸）与运算符指南推荐的hump操作（控制日间微小变化）。对高斯拉伸后的时间稳定性指标应用1%的hump阈值，忽略微小的日间波动（<1%），仅当变化超过阈值时才调整持仓。在保留对极端状态（长期静默或频繁变更）识别能力的同时，显著降低因子换手率，提升实施可行性。",
+    "expression_list": [
+        "hump(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), driver=\"gaussian\"), hump=0.01)",
+        "hump(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), driver=\"gaussian\"), hump=0.01)"
+    ]
+}

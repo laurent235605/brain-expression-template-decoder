@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_rank(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 63), 252), 0.001)), industry), 3)",
+    "idea": "在行业内部对股息持续性比率进行group_rank排名（0-1标准化），并使用signed_power（幂次3）非线性放大头部（持续高分红）和尾部（持续低分红或停发）的差异，压缩中间区域的权重。该方法强调行业内股息政策最稳定与最不稳定的极端股票，适用于构建基于股息政策分化的多空策略。",
+    "expression_list": [
+        "signed_power(group_rank(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 63), 252), 0.001)), industry), 3)",
+        "signed_power(group_rank(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 63), 252), 0.001)), industry), 3)",
+        "signed_power(group_rank(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 63), 252), 0.001)), industry), 3)",
+        "signed_power(group_rank(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 63), 252), 0.001)), industry), 3)"
+    ]
+}

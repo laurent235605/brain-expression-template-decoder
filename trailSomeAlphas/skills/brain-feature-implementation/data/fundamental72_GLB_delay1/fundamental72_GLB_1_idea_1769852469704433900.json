@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_delta(vec_avg({cap_expend_prpty_add}), 252), ts_mean(vec_avg({tot_asset}), 252))",
+    "idea": "**Concept**: Capital Expenditure Acceleration\n- **Sample Fields Used**: cap_expend_prpty_add\n- **Definition**: Year-over-year change in capital expenditures normalized by trailing average total assets\n- **Why This Feature**: Accelerating capex signals management confidence in growth prospects; deceleration suggests caution or capacity saturation\n- **Logical Meaning**: Captures investment momentum relative to firm size, indicating strategic inflection points\n- **is filling nan necessary**: Zero values represent actual lack of investment and should not be filled; missing data requires backfilling\n- **Directionality**: Positive values indicate expansion; negative values indicate contraction or maintenance mode\n- **Boundary Conditions**: Extreme positive values (>50% of assets) suggest aggressive growth or acquisition activity; sustained negative values indicate asset-light transitions",
+    "expression_list": [
+        "divide(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 252))",
+        "divide(ts_delta(vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 252))",
+        "divide(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 252))",
+        "divide(ts_delta(vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add), 252), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 252))"
+    ]
+}

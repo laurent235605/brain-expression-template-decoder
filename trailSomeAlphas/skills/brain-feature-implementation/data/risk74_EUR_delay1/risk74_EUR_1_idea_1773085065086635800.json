@@ -1,0 +1,8 @@
+{
+    "template": "e = group_zscore(winsorize(ts_backfill({factor_e}, 63), 4), industry); s = group_zscore(winsorize(ts_backfill({factor_s}, 63), 4), industry); g = group_zscore(winsorize(ts_backfill({factor_g}, 63), 4), industry); min_esg = min(min(e, s), g); max_esg = max(max(e, s), g); spread = subtract(max_esg, min_esg); core = subtract(min_esg, multiply(0.5, spread))",
+    "idea": "基于“最短木板”理论与极差惩罚的非线性整合。首先对E/S/G进行组内Zscore标准化以消除行业偏差，然后取三者的最小值作为基础分，并减去0.5倍极差（max-min）。该模板惩罚内部结构极度失衡的公司（如高E低G），即使某一维度极高，只要存在明显短板或内部差异过大，最终得分会显著降低，符合ESG风险非对称传导逻辑。",
+    "expression_list": [
+        "e = group_zscore(winsorize(ts_backfill(rsk74_factor_e, 63), 4), industry); s = group_zscore(winsorize(ts_backfill(rsk74_factor_s, 63), 4), industry); g = group_zscore(winsorize(ts_backfill(rsk74_factor_g, 63), 4), industry); min_esg = min(min(e, s), g); max_esg = max(max(e, s), g); spread = subtract(max_esg, min_esg); core = subtract(min_esg, multiply(0.5, spread))",
+        "e = group_zscore(winsorize(ts_backfill(rsk74_factor_esg, 63), 4), industry); s = group_zscore(winsorize(ts_backfill(rsk74_factor_s, 63), 4), industry); g = group_zscore(winsorize(ts_backfill(rsk74_factor_g, 63), 4), industry); min_esg = min(min(e, s), g); max_esg = max(max(e, s), g); spread = subtract(max_esg, min_esg); core = subtract(min_esg, multiply(0.5, spread))"
+    ]
+}

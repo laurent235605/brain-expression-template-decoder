@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_zscore(ts_mean(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 5), industry), group_zscore(ts_mean(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 60), industry))",
+    "idea": "构建跨期价差收敛（Divergence Convergence）因子：分别计算短期（5日）与长期（60日）中美敞口差异，并经行业标准化后相减。正值代表短期过度向美倾斜而长期尚未跟进（均值回归机会），负值则相反。该策略捕捉区域配置趋势的短期过度反应与长期均衡水平的套利空间。",
+    "expression_list": [
+        "subtract(group_zscore(ts_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 5), industry), group_zscore(ts_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 60), industry))"
+    ]
+}

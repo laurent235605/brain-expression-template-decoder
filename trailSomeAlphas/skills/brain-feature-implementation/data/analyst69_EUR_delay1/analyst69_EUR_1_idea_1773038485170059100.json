@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 1), 0), -1, 0), 252), 252), driver=\"gaussian\")",
+    "idea": "激进重组：将Template2的事件衰减逻辑（20日扩展为252日长周期）嵌入Template1的高斯分位数映射框架。对报告日期变更事件进行全年窗口的时序排名后，通过高斯分布拉伸尾部，识别历史上极端罕见的事件密集期，将短期事件冲击转化为长期风险分位信号。",
+    "expression_list": [
+        "quantile(ts_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 1), 0), -1, 0), 252), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 1), 0), -1, 0), 252), 252), driver=\"gaussian\")"
+    ]
+}

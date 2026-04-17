@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(group_zscore(signed_power(ts_zscore(ts_corr(ts_mean(winsorize(ts_backfill({of_owners_decile_rank_long},63),std=4),20),ts_mean(winsorize(ts_backfill({owners_decile_rank_long},63),std=4),20),60),252),2),sector),5)",
+    "idea": "多时间尺度清洗与非线性增强：对原始数据进行63日回溯填充与4倍标准差极值截断，使用20日移动平均平滑以降低高频噪音，计算60日滚动相关性后，进一步计算该相关性在过去252日内的时序zscore以捕捉极端偏离历史常态的程度，通过signed_power(2)非线性放大尾部信号，最后经5日线性衰减降低换手率，构建更稳健的极端状态捕捉机制。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(signed_power(ts_zscore(ts_corr(ts_mean(winsorize(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63),std=4),20),ts_mean(winsorize(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63),std=4),20),60),252),2),sector),5)",
+        "ts_decay_linear(group_zscore(signed_power(ts_zscore(ts_corr(ts_mean(winsorize(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63),std=4),20),ts_mean(winsorize(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63),std=4),20),60),252),2),sector),5)",
+        "ts_decay_linear(group_zscore(signed_power(ts_zscore(ts_corr(ts_mean(winsorize(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63),std=4),20),ts_mean(winsorize(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63),std=4),20),60),252),2),sector),5)",
+        "ts_decay_linear(group_zscore(signed_power(ts_zscore(ts_corr(ts_mean(winsorize(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63),std=4),20),ts_mean(winsorize(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63),std=4),20),60),252),2),sector),5)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore(winsorize(ts_sum(ts_delta({crowding}, 1), 15) * {value_ts}, std=4), 252)",
+    "idea": "对源1的拥挤度指标应用源2的15日累积变化逻辑（类似空头利息的累积计算），先计算拥挤度的短期动量堆积，再与价值因子相乘，形成'拥挤度正在加速恶化'的动态价值陷阱信号，比静态拥挤度更具前瞻性。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_sum(ts_delta(liquidity_factor_crowding, 1), 15) * rsk74_value_ts, std=4), 252)",
+        "ts_zscore(winsorize(ts_sum(ts_delta(liquidity_timeseries_crowding, 1), 15) * rsk74_value_ts, std=4), 252)",
+        "ts_zscore(winsorize(ts_sum(ts_delta(rsk74_crowding, 1), 15) * rsk74_value_ts, std=4), 252)",
+        "ts_zscore(winsorize(ts_sum(ts_delta(rsk74_raw_crowding, 1), 15) * rsk74_value_ts, std=4), 252)"
+    ]
+}

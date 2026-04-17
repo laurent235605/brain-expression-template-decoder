@@ -1,0 +1,5 @@
+{
+    "template": "ts_rank(0.6*ts_mean({return}-{asset},15) + 0.4*ts_mean({return}-{asset},90), 20)",
+    "idea": "将短期与长期的收益差先做时序平滑(均值)，按6:4加权融合双周期信息后，再进行20日时序排名，平衡响应速度与稳定性",
+    "expression_list": []
+}

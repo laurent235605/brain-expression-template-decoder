@@ -1,0 +1,16 @@
+{
+    "template": "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill({nondomicile},63),std=4), industry), 2))",
+    "idea": "对空头历史Z-score与海外收入行业Z-score同时施加signed_power平方放大，再相乘，极端突出双高或双低的尾部组合信号，中间区间因平方效应被极度压缩，适合激进多空策略中的极端值捕捉。",
+    "expression_list": [
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry), 2))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), 2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry), 2))"
+    ]
+}

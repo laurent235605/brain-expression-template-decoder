@@ -1,0 +1,7 @@
+{
+    "template": "ts_skewness(vec_avg({data_item_value}), 252)",
+    "idea": "**Concept**: Vector Value Distribution Skew\n- **Sample Fields Used**: data_item_value\n- **Definition**: Skewness of the vector elements measuring asymmetry in the distribution of financial metrics (frequency of extreme positive vs negative values)\n- **Why This Feature**: Positive skew suggests occasional large gains (option-like payoff structure); negative skew suggests risk of large losses (left-tail risk); important for risk management and valuation\n- **Logical Meaning**: Asymmetry in financial performance distribution; indicates whether extreme outcomes are more likely to be positive or negative\n- **is filling nan necessary**: Yes, filter NaN values to ensure accurate skewness calculation\n- **Directionality**: Positive skew indicates right-tail heavy distribution (occasional large positive outcomes); negative skew indicates left-tail heavy (occasional large losses); near zero indicates symmetric distribution\n- **Boundary Conditions**: Skewness >1 or <-1 indicates significant asymmetry; extreme values (>3) suggest non-normal distribution requiring careful interpretation",
+    "expression_list": [
+        "ts_skewness(vec_avg(anl89_data_item_value), 252)"
+    ]
+}

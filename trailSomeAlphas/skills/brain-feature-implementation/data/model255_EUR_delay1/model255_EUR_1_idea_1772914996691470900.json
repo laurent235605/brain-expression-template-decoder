@@ -1,0 +1,7 @@
+{
+    "template": "{cacfroi50co2e} * ({overall_score} + {cash_flow_score}) / 2",
+    "idea": "**Concept**: Carbon-Adjusted Quality Premium\n- **Sample Fields Used**: `cacfroi50co2e`, `overall_score`, `cash_flow_score`\n- **Definition**: Interaction between carbon-adjusted returns and accounting quality to identify \"true green\" economic moats vs. \"greenwashing\" with poor accounting\n- **Why This Feature**: High carbon-adjusted returns with high accounting quality indicate sustainable competitive advantages; High returns with low quality indicate carbon-intensive accounting distortions\n- **is filling nan necessary**: Yes for cacfroi (use ts_backfill limited to 3 days due to quarterly reporting frequency), no for quality scores\n- **Directionality**: High values (quality * carbon returns) indicate sustainable alpha; Low values indicate stranded assets with manipulated earnings\n- **Boundary Conditions**: Negative values indicate carbon costs exceed returns (non-viable); Extreme positive values indicate best-in-class sustainable compounders",
+    "expression_list": [
+        "mdl255_cacfroi50co2e * (mdl255_overall_score + mdl255_cash_flow_score) / 2"
+    ]
+}

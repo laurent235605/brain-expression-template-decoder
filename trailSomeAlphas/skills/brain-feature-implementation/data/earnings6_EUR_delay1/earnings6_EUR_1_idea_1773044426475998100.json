@@ -1,0 +1,8 @@
+{
+    "template": "winsorize( subtract( zscore( divide( subtract( vec_avg( {actual_eps} ), vec_avg( {estimated_eps} ) ), add( abs( vec_avg( {estimated_eps} ) ), 0.01 ) ) ), zscore( if_else( is_nan( vec_avg( {stock_split_ratio_243} ) ), 1, vec_avg( {stock_split_ratio_243} ) ) ) ), std = 4 )",
+    "idea": "截面背离信号：将盈利惊喜（模板1）与分拆比例（模板2）分别zscore标准化后相减，寻找'高盈利惊喜但无分拆动作'（可能低估）或'高分拆但盈利平平'（可能过度乐观）的背离标的。winsorize处理极端离群值，构建基于两者偏离度的均值回归或趋势确认策略。",
+    "expression_list": [
+        "winsorize( subtract( zscore( divide( subtract( vec_avg( ern6_actual_eps ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ) ), zscore( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ) ) ), std = 4 )",
+        "winsorize( subtract( zscore( divide( subtract( vec_avg( ern6_actual_eps_274 ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ) ), zscore( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ) ) ), std = 4 )"
+    ]
+}

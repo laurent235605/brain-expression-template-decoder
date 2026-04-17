@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({rank}), 20)",
+    "idea": "**Concept**: Rank Persistence\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Rolling standard deviation of stock rank over 20 days to measure the stability of the model's view\n- **Why This Feature**: Stable ranks indicate persistent model conviction and may signal higher-quality predictions, while volatile ranks suggest noisy inputs or unstable model logic\n- **Logical Meaning**: Quantifies the consistency of the model's opinion on a stock over a one-month trading period; persistent rankings suggest the model has high confidence in its assessment\n- **is filling nan necessary**: If NaN indicates the stock was temporarily excluded from the universe, filling with group_mean would be inappropriate as it assumes the stock was present. Use ts_backfill only for temporary data collection gaps (k=1), otherwise preserve NaN to indicate true absence from ranking.\n- **Directionality**: Lower values indicate more stable/persistent rankings (potentially higher model confidence); higher values indicate uncertainty or rapidly changing conditions\n- **Boundary Conditions**: 0 indicates perfectly stable rank (no change for 20 days); very high values (approaching universe size) indicate extreme volatility or entry/exit events",
+    "expression_list": [
+        "ts_std_dev(vec_avg(mdl245_rank), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(vec_avg({score}), 5)",
+    "idea": "**Concept**: Pure Likelihood Signal\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The underlying continuous acquisition likelihood score, purified of time-series noise through 5-day smoothing\n- **Why This Feature**: The core predictive output of the ALERT model; all other features derive from this essence; smoothing removes daily noise while preserving signal\n- **is filling nan necessary**: Yes, use `ts_backfill(vec_avg({score}), 3)` to handle brief gaps in model output without introducing zeros or distortions.\n- **Logical Meaning**: The fundamental probability estimate of tender offer occurrence; the purest form of the model's prediction\n- **Directionality**: Higher values indicate higher probability of acquisition; lower values indicate lower probability\n- **Boundary Conditions**: Theoretical range depends on model calibration; typically positive values with upper bound determined by model constraints",
+    "expression_list": [
+        "ts_mean(vec_avg(mdl249_score), 5)"
+    ]
+}

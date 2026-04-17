@@ -1,0 +1,7 @@
+{
+    "template": "current = vec_range(vec_filter({fiscalyearend}, value=\"nan\")); delta = ts_delta(current, 63); z_level = group_zscore(current, sector); z_delta = group_zscore(delta, sector); cond = and(greater(group_rank(z_level, sector), 0.85), greater(z_delta, 0)); trade_when(cond, signed_power(add(z_level, multiply(0.5, z_delta)), 1.5), 0)",
+    "idea": "引入时序动量过滤，仅当会计年度分散度不仅处于行业前15%高位，且相较63天前呈扩大趋势（子公司报告周期进一步分化）时才建仓；将水平与变化率加权合成，强化“复杂性加速恶化”的动态风险信号。",
+    "expression_list": [
+        "current = vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")); delta = ts_delta(current, 63); z_level = group_zscore(current, sector); z_delta = group_zscore(delta, sector); cond = and(greater(group_rank(z_level, sector), 0.85), greater(z_delta, 0)); trade_when(cond, signed_power(add(z_level, multiply(0.5, z_delta)), 1.5), 0)"
+    ]
+}

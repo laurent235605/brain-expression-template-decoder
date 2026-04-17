@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(rank(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4))),5)",
+    "idea": "**概念**：稳健化权益配置强度信号（Robust Equity Allocation Intensity）\n**逻辑**：先对基金权益资产和总资产进行63日回溯填充（ts_backfill）和4倍标准差极值裁剪（winsorize），消除数据缺失和极端异常值影响；通过向量中性化（vector_neut）剔除基金规模效应，得到 purified 配置决策；将残差转换为横截面排名（rank）以降低噪音并标准化分布；最后应用5日线性衰减（ts_decay_linear）控制换手率，避免信号高频抖动。\n**为什么**：原始数据存在缺失和极端值（如巨额赎回或申购导致的异常），直接中性化不稳定；排名转换使信号对微小误差更稳健；衰减处理平衡反应速度与交易成本。\n**方向性**：高分位（接近1）表示权益配置强度显著高于同规模基金预期（高确信度超配），低分位（接近0）表示显著低配或现金防御。\n**边界条件**：中间分位（0.4-0.6）信号被压缩，强调极端配置机会；极值经过双重 winsorize 和 rank 处理，对单点异常不敏感。",
+    "expression_list": [
+        "ts_decay_linear(rank(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4))),5)"
+    ]
+}

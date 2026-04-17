@@ -1,0 +1,5 @@
+{
+    "template": "multiply( ts_decay_linear( inverse( add( 1, days_from_last_change( greater( {concentration}, ts_mean( {concentration}, 60 ) ) ) ) ), 10 ), multiply( signed_power( group_zscore( {crowding}, {sector} ), 2 ), group_zscore( {value_ts}, {sector} ) ) )",
+    "idea": "事件驱动型衰减信号：以集中度突破60日均线作为事件起点，使用距今天数倒数进行10日线性衰减加权，对行业内极端拥挤股票（Zscore平方放大）与价值信号进行动态叠加，捕捉风险积聚初期的最强陷阱效应并随时间降低暴露。",
+    "expression_list": []
+}

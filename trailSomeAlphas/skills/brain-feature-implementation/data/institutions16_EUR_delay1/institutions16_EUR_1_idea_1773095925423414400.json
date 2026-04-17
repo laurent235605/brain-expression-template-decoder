@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 10), add(ts_rank(ts_std_dev(returns, 21), 60), 0.01)), industry)), 2.0), group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 10), add(ts_rank(ts_std_dev(returns, 21), 60), 0.01)), industry), 0), 5)",
+    "idea": "动量增强与尾部聚焦：通过计算残差变化的10日动量捕捉配置趋势，使用波动率的历史60日分位数进行风险调整以避免极端值干扰，并仅保留行业内绝对zscore大于2的极端信号，配合5日线性衰减降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 10), add(ts_rank(ts_std_dev(returns, 21), 60), 0.01)), industry)), 2.0), group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 10), add(ts_rank(ts_std_dev(returns, 21), 60), 0.01)), industry), 0), 5)"
+    ]
+}

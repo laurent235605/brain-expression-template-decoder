@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vector_neut(ts_mean(ts_backfill({fundreportedequityassets},5),20), ts_mean(ts_backfill({reported_asset_value},5),20)),20)",
+    "idea": "**概念**：配置强度的边际变化（Allocation Change Surprise）\n**逻辑**：对回溯填充后的数据分别计算20日移动平均（ts_mean）以平滑单日噪音，进行向量中性化，然后计算当前值与20日前值的一阶差分（ts_delta）。\n**为什么**：关注相对于基金自身历史规模均值的近期偏离，识别\"刚刚启动增配\"或\"开始减持\"的行为，比存量水平更具前瞻性；移动平均减少偶发调仓噪音。\n**方向性**：正差分表示近期相对于基金规模的主动增配行为，负差分表示减配或防御性调仓。\n**边界条件**：差分接近零表示配置 stable；极端值可能对应季末窗口 dressing 或大规模申赎导致的被动调仓，需结合换手率字段进一步过滤（此处未展示）。",
+    "expression_list": [
+        "ts_delta(vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets,5),20), ts_mean(ts_backfill(fund_reported_asset_value,5),20)),20)"
+    ]
+}

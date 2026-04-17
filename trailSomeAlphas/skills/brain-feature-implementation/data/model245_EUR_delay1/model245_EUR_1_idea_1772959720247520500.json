@@ -1,0 +1,7 @@
+{
+    "template": "hump(signed_power(group_zscore(winsorize(subtract(vec_avg({rank}), ts_decay_exp_window(vec_avg({rank}), 20, 0.5)), std=4), industry), 2), 0.01)",
+    "idea": "**增强概念**: 稳健的行业中性化拐点识别\n- **核心改进**: 原始偏差信号经过winsorize处理极端值后，在行业内部进行zscore标准化（消除行业间排名基差差异），再通过signed_power(2)非线性放大极端偏离（强调统计显著的趋势突破），最后用hump控制日度权重变化降低换手率。\n- **逻辑含义**: 不仅捕捉当前排名与历史趋势的偏离，还确保该偏离在行业内具有统计显著性；正向代表显著优于近期趋势轨迹（潜在上调），负向代表显著恶化；适用于识别模型观点的结构性转变而非噪声波动。\n- **数据清洗**: winsorize处理向量均值极值，group_zscore确保跨行业可比，hump=0.01抑制过度交易。",
+    "expression_list": [
+        "hump(signed_power(group_zscore(winsorize(subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, 0.5)), std=4), industry), 2), 0.01)"
+    ]
+}

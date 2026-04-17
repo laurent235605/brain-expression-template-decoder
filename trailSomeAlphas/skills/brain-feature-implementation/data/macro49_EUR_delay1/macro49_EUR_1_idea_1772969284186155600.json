@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), std=4), 20), industry)",
+    "idea": "行业中性流动性效率值：对原始比率进行截尾平滑处理后，在行业内部进行zscore标准化，得到相对于同行业的流动性利用效率排名，避免行业偏差（如金融股天然比科技股流动性高），高值表示该股票在其行业内具有机构级的流动性利用效率。",
+    "expression_list": [
+        "group_zscore(ts_mean(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), std=4), 20), industry)"
+    ]
+}

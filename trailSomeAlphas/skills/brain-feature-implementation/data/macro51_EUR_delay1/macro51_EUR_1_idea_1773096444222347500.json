@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(multiply(if_else(greater(rank(ts_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),21)),0.8),1,if_else(less(rank(ts_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),21)),0.2),-1,0)),ts_zscore(divide(ts_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),21),ts_median(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),126)),63)),industry),10)",
+    "idea": "动量调节与线性衰减模板。在原始头尾20%分档基础上，引入63日滚动Z-score衡量偏离幅度作为信号强度权重，同时仅对头部/尾部阵营赋予±1的方向标签，二者相乘实现“方向由分档决定、幅度由标准化偏离决定”的杠杆结构；为避免高频抖动，对最终行业中性化后的信号应用10日线性衰减(ts_decay_linear)，给予近期数据更高权重的同时平滑每日波动，降低换手率并捕捉权重配置的持续趋势。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(multiply(if_else(greater(rank(ts_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),21)),0.8),1,if_else(less(rank(ts_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),21)),0.2),-1,0)),ts_zscore(divide(ts_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),21),ts_median(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),126)),63)),industry),10)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(vec_skewness({exposure_value}), 21), 126)",
+    "idea": "计算21日偏度变化（地域集中度的加速度），并做126日时序标准化。识别正在快速推进地域集中化或分散化的公司，捕捉战略拐点与\"All-in\"行为的启动/退出时机。",
+    "expression_list": [
+        "ts_zscore(ts_delta(vec_skewness(anl91_exposure_value), 21), 126)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else({active_return_decile_rank_long} == 10, 1, 0), 20)",
+    "idea": "**Concept**: Decile Rank Persistence Score\n- **Sample Fields Used**: active_return_decile_rank_long\n- **Definition**: Count of days in the last month where the stock remained in the top decile (10) or bottom decile (1) for implied returns, measuring extreme conviction persistence\n- **Why This Feature**: Stocks persistently in top decile for implied returns represent \"strong buy\" consensus among insiders; persistence matters more than current level\n- **is filling nan necessary**: Forward fill short gaps (1-2 days) to avoid breaking persistence counts during reporting delays.\n- **Directionality**: High counts in top decile indicate sustained high conviction; high counts in bottom decile indicate sustained negative outlook\n- **Boundary Conditions**: Regime changes cause rapid drops in persistence; new listings start with zero persistence",
+    "expression_list": [
+        "ts_sum(if_else(insd8_black_litterman_implied_active_return_decile_rank_long == 10, 1, 0), 20)"
+    ]
+}

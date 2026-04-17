@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), industry), add(1, multiply(0.3, quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"))))",
+    "idea": "融合模板2的累积修正动量与模板1的历史稳定性高斯映射：首先对63日累积盈利修正进行行业中性化(group_zscore)，消除行业间可比性差异；随后将个股报告日期历史稳定性的高斯分位(quantile)作为非线性放大器，当稳定性处于历史极端区间(尾部)时增强信号强度，实现“行业相对修正压力”与“个体历史异常状态”的交叉验证。",
+    "expression_list": [
+        "multiply(group_zscore(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), industry), add(1, multiply(0.3, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"))))",
+        "multiply(group_zscore(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), industry), add(1, multiply(0.3, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"))))",
+        "multiply(group_zscore(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), industry), add(1, multiply(0.3, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"))))",
+        "multiply(group_zscore(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), industry), add(1, multiply(0.3, quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"))))"
+    ]
+}

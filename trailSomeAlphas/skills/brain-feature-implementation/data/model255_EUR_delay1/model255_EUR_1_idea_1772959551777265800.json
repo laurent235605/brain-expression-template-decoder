@@ -1,0 +1,7 @@
+{
+    "template": "if_else(or(less(rank(subtract(winsorize(ts_backfill({overall_score},2),std=4), winsorize(ts_backfill({intangible_exposure_score},2),std=4))), 0.1), greater(rank(subtract(winsorize(ts_backfill({overall_score},2),std=4), winsorize(ts_backfill({intangible_exposure_score},2),std=4))), 0.9)), subtract(winsorize(ts_backfill({overall_score},2),std=4), winsorize(ts_backfill({intangible_exposure_score},2),std=4)), 0)",
+    "idea": "极端值隔离交易模板：通过分位数阈值过滤，仅保留spread位于市场前10%（优质无形资产 compounders）和后10%（高风险价值陷阱）的标的，将中间80%的模糊地带置零处理。这种去中间化策略专注于概念定义中最具区分度的边界条件，避免温和差异带来的噪音交易。",
+    "expression_list": [
+        "if_else(or(less(rank(subtract(winsorize(ts_backfill(mdl255_overall_score,2),std=4), winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4))), 0.1), greater(rank(subtract(winsorize(ts_backfill(mdl255_overall_score,2),std=4), winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4))), 0.9)), subtract(winsorize(ts_backfill(mdl255_overall_score,2),std=4), winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4)), 0)"
+    ]
+}

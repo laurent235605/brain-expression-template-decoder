@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 20), sector), 0.5)",
+    "idea": "**行业中性指数加权流压**: 先对原始持仓数据进行63日回溯填充处理缺失值，对每日变化进行3倍标准差截尾以剔除因股改、定增等导致的异常跳变；采用20日线性衰减加权（近期变化权重更高）替代简单累加，更好捕捉持续建仓趋势；按行业进行z-score标准化消除板块间固有持仓差异；最后使用0.5次幂符号函数压缩中段噪音、放大极端累积压力信号，适用于识别行业内的极端增持/减持标的。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5)"
+    ]
+}

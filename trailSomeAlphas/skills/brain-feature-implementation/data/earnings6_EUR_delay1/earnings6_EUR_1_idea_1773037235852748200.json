@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(subtract(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01)), 5), ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01)), 20)), industry)",
+    "idea": "加速度调整的一致预期偏离。利用vec_stddev计算分析师预期离散度作为分母（共识越紧权重越高），分别构建5日短期与20日长期衰减窗口，二者差值捕捉盈利惊喜的加速度（二阶导），在行业内排名，偏好近期惊喜加速且预期分歧小的标的。",
+    "expression_list": [
+        "group_rank(subtract(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), 5), ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), 20)), industry)",
+        "group_rank(subtract(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), 5), ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), 20)), industry)"
+    ]
+}

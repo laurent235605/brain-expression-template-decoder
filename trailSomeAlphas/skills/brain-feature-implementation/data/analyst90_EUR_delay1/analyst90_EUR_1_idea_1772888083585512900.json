@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta((vec_avg({exit_price}) - vec_avg({openprice})) / vec_avg({openprice}), 10)",
+    "idea": "**Concept**: Target Price Revision Velocity\n- **Sample Fields Used**: `exit_price`, `openprice`\n- **Definition**: 10-day rate of change in the expected return spread (exit vs. open price ratio)\n- **Why This Feature**: Analysts revising target prices upward indicate new information or changing fundamentals; velocity measures the urgency of these revisions\n- **is filling nan necessary**: Price targets are sticky; use ts_backfill with 10-day window to carry forward last valid target, marking revisions explicitly.\n- **Logical Meaning**: Positive values indicate upward price target revisions (bullish); negative indicate downgrades\n- **Directionality**: Positive revisions bullish; negative bearish\n- **Boundary Conditions**: Large positive changes may signal catalyst discovery; large negative changes may indicate thesis breaks",
+    "expression_list": [
+        "ts_delta((vec_avg(expected_exit_price) - vec_avg(anl90_openprice)) / vec_avg(anl90_openprice), 10)"
+    ]
+}

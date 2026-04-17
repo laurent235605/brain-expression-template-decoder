@@ -1,0 +1,7 @@
+{
+    "template": "scale( group_normalize( trade_when( or( greater( bucket( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), range=\"0,1,0.1\" ), 8 ), less( bucket( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), range=\"0,1,0.1\" ), 2 ) ), s_log_1p( winsorize( ( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) - ts_median( {stoxx_europe_600_ucits_weight}, 126 ) ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), std=4 ) ), 0 ), industry ), scale=1, longscale=1.2, shortscale=0.8 )",
+    "idea": "分桶对数压缩与不对称杠杆模板。将股票按权重分位数分为10档(bucket)，仅激活第1-2档(底部20%)和第9-10档(顶部20%)，计算相对于126日中位数的百分比偏离并进行4σ截断(winsorize)和对称对数压缩(s_log_1p)以处理极端离群值，最后进行行业中性强平并通过scale设置多头1.2倍、空头0.8倍的不对称杠杆。该结构对原始信号进行鲁棒性处理并表达非对称收益预期。",
+    "expression_list": [
+        "scale( group_normalize( trade_when( or( greater( bucket( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), range=\"0,1,0.1\" ), 8 ), less( bucket( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), range=\"0,1,0.1\" ), 2 ) ), s_log_1p( winsorize( ( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) - ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ) ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), std=4 ) ), 0 ), industry ), scale=1, longscale=1.2, shortscale=0.8 )"
+    ]
+}

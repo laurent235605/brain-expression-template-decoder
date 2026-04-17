@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 3), driver='gaussian')",
+    "idea": "采用时序分位数(ts_rank)替代标准Z分数以降低肥尾极端值影响，要求信号在过去3日均处于历史高位/低位(ts_mean平滑)，最后通过高斯分位数映射(quantile)将中间区间压缩至零附近、两端尾部拉伸，专门识别具有持续性的温和修正趋势而非单次噪音跳变。",
+    "expression_list": [
+        "quantile(ts_mean(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 3), driver='gaussian')"
+    ]
+}

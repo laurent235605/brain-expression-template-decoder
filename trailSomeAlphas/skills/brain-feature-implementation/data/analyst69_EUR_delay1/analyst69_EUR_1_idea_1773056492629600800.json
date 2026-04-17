@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(rank(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20)), 0.8), ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), 5), 0)",
+    "idea": "结合逻辑运算符与截面排序，只在盈利效率比率处于市场前20%分位（right_tail）时才交易其5日趋势变化（模板A的delta结构），其余区间视为噪音并赋0权重。实现'头部集中+趋势确认'的激进多头策略，避免在中低效率区间承担无效风险。",
+    "expression_list": [
+        "trade_when(greater(rank(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20)), 0.8), ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0)",
+        "trade_when(greater(rank(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20)), 0.8), ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0)"
+    ]
+}

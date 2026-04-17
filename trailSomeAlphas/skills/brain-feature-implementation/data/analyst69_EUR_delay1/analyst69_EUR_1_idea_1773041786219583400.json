@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), industry), add(1, multiply(0.5, group_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry))))",
+    "idea": "将EPS/EBITDA转化率作为从属信号，通过group_rank映射到[0,1]区间并变换为[1,1.5]的放大系数，对行业中性化的EPS修订动量进行加权。高利润转化效率的股票其预期调整信号被强化，实现只在'优质商业模式'中交易预期调整。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), add(1, multiply(0.5, group_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry))))",
+        "multiply(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), add(1, multiply(0.5, group_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry))))"
+    ]
+}

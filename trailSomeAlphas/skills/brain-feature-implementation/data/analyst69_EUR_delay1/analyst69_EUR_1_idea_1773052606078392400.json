@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.85), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.15)), or(greater(ts_rank(ts_delta({eps_best_eeps_cur_yr}, 5), 126), 0.9), less(ts_rank(ts_delta({eps_best_eeps_cur_yr}, 5), 126), 0.1))), winsorize(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=\"gaussian\"), 4), 0)",
+    "idea": "截面与自身历史分位双重确认机制：要求当前5日修订动量既处于全市场前15%/后15%的截面极端，又处于自身过去126日（半年）历史分位的前10%/后10%，通过高斯分位映射调整分布形态后截断极值。捕捉'突破历史区间的强势预期调整'，避免短期噪音。",
+    "expression_list": [
+        "trade_when(and(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.85), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.15)), or(greater(ts_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 126), 0.9), less(ts_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 126), 0.1))), winsorize(quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=\"gaussian\"), 4), 0)",
+        "trade_when(and(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.85), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.15)), or(greater(ts_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 126), 0.9), less(ts_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 126), 0.1))), winsorize(quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=\"gaussian\"), 4), 0)"
+    ]
+}

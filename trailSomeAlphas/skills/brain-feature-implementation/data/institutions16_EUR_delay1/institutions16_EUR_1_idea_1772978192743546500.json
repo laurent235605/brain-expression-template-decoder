@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(zscore(subtract(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 63, rettype=0), ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0))), 5)",
+    "idea": "短长期偏离版。分别使用短窗口（63日）和长窗口（252日）计算规模净化残差，取两者差值。若短期残差显著高于长期残差，表明基金近期出现了超越其历史常态的规模调整后的交易行为（如突发调仓）；反之则为异常沉寂。最后进行标准化与5日衰减平滑，捕捉基金活跃度的\"异常偏离\"信号。",
+    "expression_list": [
+        "ts_decay_linear(zscore(subtract(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 63, rettype=0), ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0))), 5)"
+    ]
+}

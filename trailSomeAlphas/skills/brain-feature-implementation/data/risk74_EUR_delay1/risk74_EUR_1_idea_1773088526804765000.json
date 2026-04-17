@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(group_rank(if_else(is_nan({exp_usa}),0,{exp_usa}),industry),0.9),less(group_rank(if_else(is_nan({exp_usa}),0,{exp_usa}),industry),0.1)),group_zscore(if_else(is_nan({exp_usa}),0,{exp_usa}),industry),multiply(group_zscore(if_else(is_nan({exp_usa}),0,{exp_usa}),industry),0.3))",
+    "idea": "极端纯玩者择时策略：仅在行业内美国暴露排名前10%（极端出口导向）或后10%（极端本土防御）时进行全额交易，对于中间80%的暴露水平视为噪音并压缩至30%权重；通过逻辑判断与条件交易(trade_when)实现分段仓位控制，强化对极端地理贝塔因子的暴露，同时降低中等暴露水平的干扰。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),industry),0.9),less(group_rank(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),industry),0.1)),group_zscore(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),industry),multiply(group_zscore(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),industry),0.3))"
+    ]
+}

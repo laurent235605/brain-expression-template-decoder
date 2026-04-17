@@ -1,0 +1,8 @@
+{
+    "template": "truncate(multiply(right_tail(group_zscore(divide(winsorize(ts_backfill({eps_best_eeps_cur_yr},63),std=4), winsorize(ts_backfill({ebitda_best_eeps_cur_yr},63),std=4)), sector), minimum=0), add(1, multiply(0.3, ts_decay_linear(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr},5),std=4), sector), 10))), maxPercent=0.02)",
+    "idea": "右尾效率聚焦增强。仅对效率比率处于行业前50%（right_tail筛选zscore>0）的股票应用修正增强，避免低质量基本面股票受情绪噪音干扰；使用ts_decay_linear对修正信号进行10日线性加权平滑，捕捉持续修正趋势；最终通过truncate限制个股最大权重2%，防止极端值过度集中。",
+    "expression_list": [
+        "truncate(multiply(right_tail(group_zscore(divide(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), minimum=0), add(1, multiply(0.3, ts_decay_linear(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr,5),std=4), sector), 10))), maxPercent=0.02)",
+        "truncate(multiply(right_tail(group_zscore(divide(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), minimum=0), add(1, multiply(0.3, ts_decay_linear(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr,5),std=4), sector), 10))), maxPercent=0.02)"
+    ]
+}

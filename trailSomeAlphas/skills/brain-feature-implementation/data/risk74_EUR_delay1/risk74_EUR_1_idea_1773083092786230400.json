@@ -1,0 +1,5 @@
+{
+    "template": "normalize(add(multiply(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean({cap}, 21)), {sector}), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 126, rettype=0), 0.7), multiply(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean({cap}, 21)), {sector}), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=2), 0.3)))",
+    "idea": "融合短期（126天）特质性残差水平（权重0.7）与长期（252天）对美国敞口敏感度的回归斜率（权重0.3），既捕捉当前定价偏离幅度，又反映公司对行业趋势的敏感性差异，通过归一化构建多空平衡的组合权重。",
+    "expression_list": []
+}

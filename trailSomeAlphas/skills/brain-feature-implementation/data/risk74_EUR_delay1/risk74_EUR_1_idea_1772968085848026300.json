@@ -1,0 +1,14 @@
+{
+    "template": "group_zscore( {concentration}, industry ) * group_zscore( {crowding}, industry )",
+    "idea": "行业内相对风险叠加：通过行业中性化（group_zscore）剥离行业固有属性后，将个股在行业内的相对集中度与相对拥挤度相乘。高正值表示'行业内高集中且高拥挤'的危险组合，负值则表示分散化且无人问津的潜在Alpha，避免行业间不可比性导致的误判。",
+    "expression_list": [
+        "group_zscore( rsk74_concentration, industry ) * group_zscore( rsk74_crowding, industry )",
+        "group_zscore( rsk74_concentration, industry ) * group_zscore( rsk74_raw_crowding, industry )",
+        "group_zscore( rsk74_concentration, industry ) * group_zscore( liquidity_factor_crowding, industry )",
+        "group_zscore( rsk74_concentration, industry ) * group_zscore( liquidity_timeseries_crowding, industry )",
+        "group_zscore( rsk74_raw_concentration, industry ) * group_zscore( rsk74_raw_crowding, industry )",
+        "group_zscore( rsk74_raw_concentration, industry ) * group_zscore( rsk74_crowding, industry )",
+        "group_zscore( rsk74_raw_concentration, industry ) * group_zscore( liquidity_factor_crowding, industry )",
+        "group_zscore( rsk74_raw_concentration, industry ) * group_zscore( liquidity_timeseries_crowding, industry )"
+    ]
+}

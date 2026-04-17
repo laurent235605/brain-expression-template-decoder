@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 3)",
+    "idea": "在原始20日平滑与252日时序Z-score的基础上，引入符号保持的三次幂变换（signed_power）。该非线性处理显著放大极端Z-score（极好或极差的稳定性）的尾部权重，同时将接近均值的中间区间压缩至零附近，有效抑制噪音干扰，强化对“极度确定”与“极度不确定”两类极端状态的区分度。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 3)",
+        "signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 3)"
+    ]
+}

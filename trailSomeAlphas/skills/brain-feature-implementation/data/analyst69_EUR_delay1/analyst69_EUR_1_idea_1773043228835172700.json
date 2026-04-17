@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(quantile(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 126), 5), driver=\"gaussian\")), 1.0), {ebitda_best_eeps_cur_yr}, 0)",
+    "idea": "长周期回溯的条件动量：融合模板A的ts_backfill长周期填充机制（126日）与模板B的ts_delta变化检测及条件交易逻辑。先使用长周期回溯填充确保EPS数据完整性（处理低覆盖股票的数据缺失），再检测近期5日修正幅度是否处于历史极端分位，仅在极端时交易EBITDA预期。适用于处理新兴或低流动性股票的数据稀疏场景，同时保持对极端修正事件的敏感性。",
+    "expression_list": [
+        "trade_when(greater(abs(quantile(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 126), 5), driver=\"gaussian\")), 1.0), anl69_ebitda_best_eeps_cur_yr, 0)",
+        "trade_when(greater(abs(quantile(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 126), 5), driver=\"gaussian\")), 1.0), anl69_ebitda_best_eeps_cur_yr, 0)"
+    ]
+}

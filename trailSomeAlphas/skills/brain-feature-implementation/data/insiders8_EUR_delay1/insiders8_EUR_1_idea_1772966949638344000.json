@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear( signed_power( group_zscore( ts_corr( winsorize( {of_owners_decile_rank_long}, 4 ), winsorize( {owners_decile_rank_long}, 4 ), 60 ), sector ), 3 ), 5 )",
+    "idea": "非线性稳定性放大与平滑。先计算行业中性化的相关性zscore，通过signed_power（幂次3）非线性放大极端值（强化头部高稳定性和尾部高不稳定的信号区分度，压缩中段噪音），最后应用5日线性衰减加权(ts_decay_linear)降低换手率。该模板适用于捕捉ownership结构极稳或极不稳的状态，同时控制因每日数据微扰带来的交易摩擦。",
+    "expression_list": [
+        "ts_decay_linear( signed_power( group_zscore( ts_corr( winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), 60 ), sector ), 3 ), 5 )",
+        "ts_decay_linear( signed_power( group_zscore( ts_corr( winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), 60 ), sector ), 3 ), 5 )",
+        "ts_decay_linear( signed_power( group_zscore( ts_corr( winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), 60 ), sector ), 3 ), 5 )",
+        "ts_decay_linear( signed_power( group_zscore( ts_corr( winsorize( insd8_total_number_of_owners_decile_rank_long, 4 ), winsorize( insd8_effective_number_of_owners_decile_rank_long, 4 ), 60 ), sector ), 3 ), 5 )"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 0.9), multiply(1.5, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), if_else(less(group_rank(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 0.1), multiply(1.5, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), multiply(0.2, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry))))",
+    "idea": "分区间非对称响应的杠铃结构。对行业分位前10%与后10%的股票给予1.5倍信号放大，中间80%仅保留0.2倍信号，构造“头部做多、尾部做空、中部忽略”的尖锐暴露。通过嵌套if_else实现条件分支，适用于修正信号在极端分位具有单调性而中段噪音较大、无明显方向的场景。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 0.9), multiply(1.5, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), if_else(less(group_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 0.1), multiply(1.5, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), multiply(0.2, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry))))",
+        "if_else(greater(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 0.9), multiply(1.5, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), if_else(less(group_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 0.1), multiply(1.5, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), multiply(0.2, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry))))"
+    ]
+}

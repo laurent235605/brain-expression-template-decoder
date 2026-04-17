@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), quantile(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), driver=\"gaussian\"), 0)",
+    "idea": "融合模板1的显式条件过滤与模板2的高斯分位数拉伸，仅在|estimate|>0.01时计算Surprise并进行高斯分位数变换，将中间噪音压缩至0附近，同时消除除零风险，强化对极端超预期/低于预期事件的暴露。",
+    "expression_list": [
+        "trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), quantile(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), driver=\"gaussian\"), 0)",
+        "trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), quantile(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), driver=\"gaussian\"), 0)"
+    ]
+}

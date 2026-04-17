@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 3)",
+    "idea": "极端偏离强调策略（非线性增强）。先计算地域敞口波动率的行业标准化Z-score，再应用3次幂非线性变换（signed_power）。该变换大幅放大远离行业均值（极稳定或极动荡）的尾部信号，同时压缩接近平均水平的噪音区间至接近零。适用于\"中间地带无信号，只有极端的地理稳定性或极端的动荡重组才具有预测力\"的场景，构建行业中性多空组合。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 3)"
+    ]
+}

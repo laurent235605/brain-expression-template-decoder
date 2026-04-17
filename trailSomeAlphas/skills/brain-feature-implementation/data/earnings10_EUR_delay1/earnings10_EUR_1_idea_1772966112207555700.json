@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20)), 1.5), ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "仅当Z分数绝对值超过1.5阈值时开仓(trade_when)，过滤掉微弱信号；并根据距离上次数据变更的天数(days_from_last_change)进行线性衰减，即信息越新鲜权重越高(10天后归零)，避免持有过时修正信号，实现事件驱动的动态权重调整。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5), ts_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

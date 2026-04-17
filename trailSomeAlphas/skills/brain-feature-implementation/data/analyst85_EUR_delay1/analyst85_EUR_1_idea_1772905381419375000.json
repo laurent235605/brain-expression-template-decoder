@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(trade_when(greater(ts_decay_exp_window(vec_max({version}), 20, factor=0.1), ts_mean(ts_decay_exp_window(vec_max({version}), 20, factor=0.1), 60)), ts_decay_exp_window(vec_avg({version}), 20, factor=0.1), nan), industry)",
+    "idea": "仅当近期最大版本值（vec_max）的衰减序列超过其60日历史均值时（识别显著的版本升级事件窗口），才保留该股票的平均版本衰减信号，否则置为NaN不参与排名，然后在行业内进行横截面排名，捕捉行业内相对的、伴随版本跳升事件的持续alpha。",
+    "expression_list": [
+        "group_rank(trade_when(greater(ts_decay_exp_window(vec_max(anl85_version), 20, factor=0.1), ts_mean(ts_decay_exp_window(vec_max(anl85_version), 20, factor=0.1), 60)), ts_decay_exp_window(vec_avg(anl85_version), 20, factor=0.1), nan), industry)"
+    ]
+}

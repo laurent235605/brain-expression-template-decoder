@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(winsorize(divide(last_diff_value(winsorize(vec_skewness({exposure_value}), std=4), 126), add(days_from_last_change(winsorize(vec_skewness({exposure_value}), std=4)), 0.1)), std=4), {industry})",
+    "idea": "结构化突破事件衰减信号（事件驱动）。利用last_diff_value捕捉最近一次集中度变化的幅度，除以days_from_last_change（距今天数+0.1避免除零）实现时间衰减加权：新近且幅度大的变化获得高权重，陈旧信号快速衰减。经winsorize去极值和行业内标准化后，精准捕捉\"刚刚发生\"的地域战略重组事件，适用于事件后动量捕捉。",
+    "expression_list": []
+}

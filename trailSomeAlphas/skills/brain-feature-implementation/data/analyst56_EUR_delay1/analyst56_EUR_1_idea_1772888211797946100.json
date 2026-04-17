@@ -1,0 +1,18 @@
+{
+    "template": "(vec_avg({buy_weight}) - vec_avg({sell_weight})) * vec_avg({probability})",
+    "idea": "**Concept**: Conviction-Weighted Net Positioning\n- **Sample Fields Used**: `buy_weight`, `sell_weight`, `probability`\n- **Definition**: Net directional exposure (buy - sell) scaled by conviction probability to create a confidence-adjusted sentiment score\n- **Why This Feature**: Raw positioning ignores analyst confidence; this synthesizes both direction and certainty into a single tradable signal\n- **is filling nan necessary**: If probability is missing but weights exist, default probability to 50 (neutral) via if_else(is_nan(vec_avg({probability})), 0.5, vec_avg({probability})) to preserve directional signal while reducing confidence weight.\n- **Directionality**: Positive = high-confidence long; Negative = high-confidence short; Near-zero = uncertainty or neutral\n- **Boundary Conditions**: Ensure weights sum to 1.0 if normalized; handle cases where both weights are zero (no position)",
+    "expression_list": [
+        "(vec_avg(daily_buy_weight) - vec_avg(daily_sell_weight)) * vec_avg(anl56_daily_probability)",
+        "(vec_avg(main_buy_weight) - vec_avg(daily_sell_weight)) * vec_avg(anl56_daily_probability)",
+        "(vec_avg(daily_buy_weight) - vec_avg(daily_sell_weight)) * vec_avg(anl56_probability)",
+        "(vec_avg(main_buy_weight) - vec_avg(daily_sell_weight)) * vec_avg(anl56_probability)",
+        "(vec_avg(daily_buy_weight) - vec_avg(daily_sell_weight)) * vec_avg(conviction_probability_score)",
+        "(vec_avg(main_buy_weight) - vec_avg(daily_sell_weight)) * vec_avg(conviction_probability_score)",
+        "(vec_avg(main_buy_weight) - vec_avg(main_sell_weight)) * vec_avg(anl56_daily_probability)",
+        "(vec_avg(daily_buy_weight) - vec_avg(main_sell_weight)) * vec_avg(anl56_daily_probability)",
+        "(vec_avg(main_buy_weight) - vec_avg(main_sell_weight)) * vec_avg(anl56_probability)",
+        "(vec_avg(daily_buy_weight) - vec_avg(main_sell_weight)) * vec_avg(anl56_probability)",
+        "(vec_avg(main_buy_weight) - vec_avg(main_sell_weight)) * vec_avg(conviction_probability_score)",
+        "(vec_avg(daily_buy_weight) - vec_avg(main_sell_weight)) * vec_avg(conviction_probability_score)"
+    ]
+}

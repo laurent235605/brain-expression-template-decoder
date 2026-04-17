@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(group_zscore(vec_stddev({exposure_value}), industry), 20)",
+    "idea": "将向量算子从均值改为截面标准差(vec_stddev)，先衡量公司在各维度暴露的“内部离散度”（地理分散程度），再计算该离散度指标的20日滚动标准差。信号逻辑转变为：考察企业地理布局“多样性本身”的时序稳定性，而非单一平均暴露的波动；高波动意味着公司正在快速调整地域战略（集中化或分散化）。",
+    "expression_list": [
+        "ts_std_dev(group_zscore(vec_stddev(anl91_exposure_value), industry), 20)"
+    ]
+}

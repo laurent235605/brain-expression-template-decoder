@@ -1,0 +1,8 @@
+{
+    "template": "multiply( divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) ), add(1, s_log_1p(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 0, subtract(vec_avg({stock_split_ratio_243}), 1)))) )",
+    "idea": "正向拆分事件增强的EPS Surprise：融合拆分事件的方向性信息（正向拆分为利好信号）作为EPS Surprise的放大器。当公司发生正向拆分时（ratio>1），通过s_log_1p温和放大其盈利超预期信号；无拆分时乘数趋近1保持中性，实现事件信号与盈利质量的非线性叠加。",
+    "expression_list": [
+        "multiply( divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), add(1, s_log_1p(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, subtract(vec_avg(ern6_stock_split_ratio_243), 1)))) )",
+        "multiply( divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), add(1, s_log_1p(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, subtract(vec_avg(ern6_stock_split_ratio_243), 1)))) )"
+    ]
+}

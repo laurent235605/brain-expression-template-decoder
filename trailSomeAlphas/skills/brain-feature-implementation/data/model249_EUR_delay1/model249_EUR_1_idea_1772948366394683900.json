@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(vec_avg({score}), 60)",
+    "idea": "**Concept**: Cumulative Acquisition Pressure\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The sum of acquisition likelihood scores over 60 days, measuring accumulated \"event pressure\"\n- **Why This Feature**: Sustained elevated scores accumulate predictive power; sum captures both magnitude and duration of high-likelihood periods\n- **is filling nan necessary**: Yes, cumulative sums require gap handling. Use `ts_backfill(vec_avg({score}), 3)` to treat short gaps as continuation of last score.\n- **Logical Meaning**: Total exposure to high acquisition likelihood over time; captures duration-weighted probability\n- **Directionality**: Higher values indicate sustained target status; zero indicates no high-likelihood days\n- **Boundary Conditions**: Linear increase with days in high score; plateaus when score drops to zero; extreme values indicate long-duration high probability",
+    "expression_list": [
+        "ts_sum(vec_avg(mdl249_score), 60)"
+    ]
+}

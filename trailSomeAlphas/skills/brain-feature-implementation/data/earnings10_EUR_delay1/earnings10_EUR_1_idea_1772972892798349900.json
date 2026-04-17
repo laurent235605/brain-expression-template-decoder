@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), industry)), 2), group_zscore(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), industry), 0), 10)",
+    "idea": "极端显著性信号捕捉与平滑模板。在行业中性化基础上，仅保留绝对值大于2倍标准差的极端修正信号（将中间区间视为噪音并置零），并应用10日线性衰减加权降低换手率。该模板强调事件的显著性而非连续性，只在分析师预期发生剧烈调整时产生非零信号，配合平滑处理减少短期抖动带来的假突破。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), industry)), 2), group_zscore(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), industry), 0), 10)"
+    ]
+}

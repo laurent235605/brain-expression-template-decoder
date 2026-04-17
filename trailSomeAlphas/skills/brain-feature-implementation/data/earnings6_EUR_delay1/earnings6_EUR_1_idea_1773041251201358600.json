@@ -1,0 +1,14 @@
+{
+    "template": "group_rank(subtract(divide(ts_std_dev(vec_avg({actual_eps}),252),max(abs(ts_mean(vec_avg({actual_eps}),252)),0.001)),divide(ts_std_dev(vec_avg({x_dividend}),252),max(abs(ts_mean(vec_avg({x_dividend}),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+    "idea": "精细分组相对排序：在行业与市值规模（5分位）的笛卡尔积分组内进行排名，控制规模-行业联合暴露，识别在同等规模-行业条件下政策平滑行为的异常个体。",
+    "expression_list": [
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend),252),max(abs(ts_mean(vec_avg(ern6_x_dividend),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_233),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_233),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps),252),max(abs(ts_mean(vec_avg(ern6_actual_eps),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc_235),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend),252),max(abs(ts_mean(vec_avg(ern6_x_dividend),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_233),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_233),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))",
+        "group_rank(subtract(divide(ts_std_dev(vec_avg(ern6_actual_eps_274),252),max(abs(ts_mean(vec_avg(ern6_actual_eps_274),252)),0.001)),divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235),252),max(abs(ts_mean(vec_avg(ern6_x_dividend_oc_235),252)),0.001))),group_cartesian_product(industry,bucket(ts_mean(cap,21),5)))"
+    ]
+}

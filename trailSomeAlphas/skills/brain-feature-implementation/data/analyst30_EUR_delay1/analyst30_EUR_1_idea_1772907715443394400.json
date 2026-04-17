@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_mean(vec_range(vec_filter({fiscalyearend}, \"nan\")), 21), ts_mean(vec_range(vec_filter({fiscalyearend}, \"nan\")), 252)), industry)",
+    "idea": "期限利差动量：对比短期（21日）与长期（252日）财政复杂度的均值差异，捕捉业务架构的近期边际变化方向，正值表示复杂化趋势（可能面临整合风险），负值表示简化趋势。",
+    "expression_list": [
+        "group_zscore(subtract(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), 21), ts_mean(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), 252)), industry)"
+    ]
+}

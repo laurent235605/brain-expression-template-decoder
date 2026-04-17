@@ -1,0 +1,8 @@
+{
+    "template": "vec_avg({adjustedgrossamt})",
+    "idea": "**Concept**: Pure Economic Dividend Signal\n- **Sample Fields Used**: `adjustedgrossamt`\n- **Definition**: The mean adjusted dividend amount representing the true economic cash flow stripped of nominal artifacts\n- **Why This Feature**: Captures the first-principles cash flow that investors actually receive, adjusted for all capital structure changes\n- **Logical Meaning**: Ground truth purchasing power of dividend distributions; the \"real\" value after all adjustments\n- **is filling nan necessary**: For essential signal extraction, temporary NaNs may be filled using `ts_backfill` if assuming dividend policy continuity, but permanent NaNs (no dividend) should be preserved to avoid false positive income signals\n- **Directionality**: Higher values indicate superior income generation; zero indicates no economic dividend\n- **Boundary Conditions**: >= 0; 0 indicates non-payer; higher is better for income investors",
+    "expression_list": [
+        "vec_avg(anl30_adjustedgrossamt)",
+        "vec_avg(anl30_unadjustedgrossamt)"
+    ]
+}

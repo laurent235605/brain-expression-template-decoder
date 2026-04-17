@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(equal(days_from_last_change({eps_best_eeps_cur_yr}), 0), multiply(hump_decay(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), hump=0.01), add(1, multiply(0.5, quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian)))), hump_decay(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), hump=0.01))",
+    "idea": "事件驱动时效增强：利用days_from_last_change捕捉分析师最新修正时点，仅在新近发生修正当日(equal(...,0))施加高倍数量化放大(0.5系数)，并使用hump_decay控制核心信号换手率，实现事件触发式的动态暴露，无事件时保持基础效率因子暴露。",
+    "expression_list": [
+        "trade_when(equal(days_from_last_change(anl69_eps_best_eeps_cur_yr), 0), multiply(hump_decay(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), hump=0.01), add(1, multiply(0.5, quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian)))), hump_decay(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), hump=0.01))",
+        "trade_when(equal(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 0), multiply(hump_decay(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), hump=0.01), add(1, multiply(0.5, quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian)))), hump_decay(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), hump=0.01))"
+    ]
+}

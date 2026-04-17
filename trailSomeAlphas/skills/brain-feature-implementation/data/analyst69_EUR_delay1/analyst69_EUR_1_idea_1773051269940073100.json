@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(subtract(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 5), 252), ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 60), 252)), industry)",
+    "idea": "构建短期(5日)与中期(60日)稳定性水平的期限结构价差，经行业中性化后，识别“近期相对于中期趋势的急剧收敛或发散”，用于捕捉预期披露日修正的动量或反转。",
+    "expression_list": [
+        "group_zscore(subtract(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 5), 252), ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 60), 252)), industry)",
+        "group_zscore(subtract(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 5), 252), ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 60), 252)), industry)"
+    ]
+}

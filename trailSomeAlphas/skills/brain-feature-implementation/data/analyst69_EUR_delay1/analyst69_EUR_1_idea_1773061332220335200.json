@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_exp_window(group_zscore(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), signed_power(abs(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1)), 0.5), 0), industry), 20)",
+    "idea": "不仅检测日期变更事件，更根据变更幅度（abs(ts_delta)）进行非线性加权（signed_power压缩极端值），并通过group_zscore在行业内部标准化剥离板块效应，最后采用指数衰减（ts_decay_exp_window）替代线性衰减以更快响应近期事件，同时保留历史记忆。",
+    "expression_list": [
+        "ts_decay_exp_window(group_zscore(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), signed_power(abs(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1)), 0.5), 0), industry), 20)",
+        "ts_decay_exp_window(group_zscore(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), signed_power(abs(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1)), 0.5), 0), industry), 20)"
+    ]
+}

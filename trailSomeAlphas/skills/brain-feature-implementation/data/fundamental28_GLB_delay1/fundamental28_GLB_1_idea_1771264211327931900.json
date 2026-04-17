@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(ts_std_dev({value_08316q}, 252), ts_mean(ts_std_dev({value_08316q}, 252), 63)), divide(subtract(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), divide(ts_delta({value_08316q}, 126), ts_mean({value_08316q}, 252))), ts_std_dev({value_08316q}, 252)), 0)",
+    "idea": "基于运营稳定性的动量加速度（二阶导数）择时策略。首先判断当前运营利润率的历史波动率是否低于过去63日平均水平（识别经营稳定期，避开剧烈波动期），仅在稳定期开放交易。信号本身为当前季度动量减去年前季度动量（即动量的变化率，反映改善/恶化是否在加速），并除以历史波动率标准化。该因子旨在捕捉经营拐点的\"加速度\"而非绝对水平，避免在财报噪音期产生虚假信号。",
+    "expression_list": [
+        "trade_when(less(ts_std_dev(fnd28_newq_value_08316q, 252), ts_mean(ts_std_dev(fnd28_newq_value_08316q, 252), 63)), divide(subtract(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), divide(ts_delta(fnd28_newq_value_08316q, 126), ts_mean(fnd28_newq_value_08316q, 252))), ts_std_dev(fnd28_newq_value_08316q, 252)), 0)",
+        "trade_when(less(ts_std_dev(fnd28_ratesq_value_08316q, 252), ts_mean(ts_std_dev(fnd28_ratesq_value_08316q, 252), 63)), divide(subtract(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), divide(ts_delta(fnd28_ratesq_value_08316q, 126), ts_mean(fnd28_ratesq_value_08316q, 252))), ts_std_dev(fnd28_ratesq_value_08316q, 252)), 0)"
+    ]
+}

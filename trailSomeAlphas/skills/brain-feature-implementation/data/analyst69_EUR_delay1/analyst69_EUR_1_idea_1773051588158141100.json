@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), industry), add(0.5, multiply(0.5, bucket(group_rank(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), industry), range=\"0,1,0.2\"))))",
+    "idea": "融合模板1的行业内标准化与模板2的区间分层思想，构建渐进式仓位结构。将行业内排名分桶（20分位），基础权重设为0.5倍，向行业头部/尾部线性递增至1.0倍，再乘以行业标准化后的信号值。相比二元的\"交易/不交易\"（trade_when置零），这种分段线性暴露（bucket+multiply）在保持尾部聚焦的同时，通过组内分桶实现仓位的平滑过渡，显著降低换手率并避免阈值附近的剧烈调仓。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), industry), add(0.5, multiply(0.5, bucket(group_rank(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), industry), range=\"0,1,0.2\"))))",
+        "multiply(group_zscore(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), industry), add(0.5, multiply(0.5, bucket(group_rank(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), industry), range=\"0,1,0.2\"))))"
+    ]
+}

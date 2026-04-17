@@ -1,0 +1,7 @@
+{
+    "template": "quantile(if_else(greater(vec_count({fiscalyearend}), 1), vec_count({currency_code}), 0), driver=\"gaussian\")",
+    "idea": "对处于财务重组期（财务年度变更>1）的公司，将其货币复杂度映射至高斯分布分位。利用高斯驱动将中间区间压缩至零附近，仅保留极端多币种（>2σ）或极端单一币种（<-2σ）的尾部信号，强化重组期外汇风险暴露的极端值交易逻辑。",
+    "expression_list": [
+        "quantile(if_else(greater(vec_count(anl30_fiscalyearend), 1), vec_count(payment_currency_code), 0), driver=\"gaussian\")"
+    ]
+}

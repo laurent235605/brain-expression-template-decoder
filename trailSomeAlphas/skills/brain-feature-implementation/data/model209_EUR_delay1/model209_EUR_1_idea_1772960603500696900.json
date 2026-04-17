@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(right_tail(vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp}), minimum=0), 63) / (ts_std_dev(vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp}), 63) + 0.01)",
+    "idea": "时序异常延迟检测器：通过right_tail筛选正延迟区间，计算63日滚动Z分数识别当前延迟是否处于历史极端水平，分母加入平滑项防止低波动期信号失真，专门捕捉执行效率显著恶化的异常事件",
+    "expression_list": [
+        "ts_zscore(right_tail(vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp), minimum=0), 63) / (ts_std_dev(vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp), 63) + 0.01)"
+    ]
+}

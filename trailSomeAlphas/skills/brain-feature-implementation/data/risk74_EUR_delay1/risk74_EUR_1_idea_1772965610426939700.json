@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta({risk_score}, 5)",
+    "idea": "**Concept**: Tariff Risk Acceleration\n- **Sample Fields Used**: `risk_score`, `raw_exp_usa`, `raw_exp_chn`\n- **Definition**: Short-term change in tariff risk scores combined with changes in underlying geographic exposure to distinguish policy shocks from business model shifts\n- **Why This Feature**: Distinguishes between companies actively increasing risky exposures vs. those suffering external policy deteriorations\n- **Logical Meaning**: High values indicate rapidly deteriorating tariff environment or increasing vulnerability; negative values indicate improving conditions or risk reduction\n- **is filling nan necessary**: Yes, tariff scores may have irregular updates; use `ts_backfill({risk_score}, 3)` to ensure continuity\n- **Directionality**: Positive = increasing tariff risk; Negative = decreasing tariff risk; Zero = stable environment\n- **Boundary Conditions**: Extreme spikes may indicate trade war escalations or supply chain disruptions; large negative moves suggest trade deal benefits",
+    "expression_list": [
+        "ts_delta(tariff_risk_score, 5)",
+        "ts_delta(tariff_risk_score_specialized, 5)"
+    ]
+}

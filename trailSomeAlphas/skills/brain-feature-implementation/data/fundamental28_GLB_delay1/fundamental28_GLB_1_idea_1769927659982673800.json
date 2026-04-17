@@ -1,0 +1,10 @@
+{
+    "template": "ts_mean(bucket(group_rank(divide(ts_backfill({value_03501a}, 63), {value_02300q}), industry), range=\"0,1,0.1\"), 126)",
+    "idea": "资本结构稳定性评分：先将行业相对杠杆水平按十分位数分桶（bucket），将连续值离散化为0-9的保守等级，再对过去126个交易日（半年）的等级进行平滑（ts_mean）。该模板识别那些长期稳定维持在特定保守分位区间的标的，惩罚因单期财报噪音或季节性资产波动导致的暂时性比率异常，筛选出资本结构政策一贯稳健的公司。",
+    "expression_list": [
+        "ts_mean(bucket(group_rank(divide(ts_backfill(fnd28_bdea_value_03501a, 63), fnd28_bsassetq_value_02300q), industry), range=\"0,1,0.1\"), 126)",
+        "ts_mean(bucket(group_rank(divide(ts_backfill(fnd28_bdea_value_03501a, 63), fnd28_nddq1_value_02300q), industry), range=\"0,1,0.1\"), 126)",
+        "ts_mean(bucket(group_rank(divide(ts_backfill(fnd28_fsa1_value_03501a, 63), fnd28_bsassetq_value_02300q), industry), range=\"0,1,0.1\"), 126)",
+        "ts_mean(bucket(group_rank(divide(ts_backfill(fnd28_fsa1_value_03501a, 63), fnd28_nddq1_value_02300q), industry), range=\"0,1,0.1\"), 126)"
+    ]
+}

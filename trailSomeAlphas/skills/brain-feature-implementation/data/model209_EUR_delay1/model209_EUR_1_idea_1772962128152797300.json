@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(subtract(1, ts_backfill(vec_avg({lastcostingfailed}), 10)), std=4), industry)), 2), group_zscore(winsorize(subtract(1, ts_backfill(vec_avg({lastcostingfailed}), 10)), std=4), industry), 0)",
+    "idea": "行业中性极端值策略：先对向量均值进行时序回填确保数据连续性，截面去极值后，在行业内部进行Z-score标准化，仅保留绝对值大于2个标准差的极端异常值（运营稳定性极好或极差），中段噪音置零，强化截面多空对冲的纯粹性。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(subtract(1, ts_backfill(vec_avg(mdl209_lastcostingfailed), 10)), std=4), industry)), 2), group_zscore(winsorize(subtract(1, ts_backfill(vec_avg(mdl209_lastcostingfailed), 10)), std=4), industry), 0)"
+    ]
+}

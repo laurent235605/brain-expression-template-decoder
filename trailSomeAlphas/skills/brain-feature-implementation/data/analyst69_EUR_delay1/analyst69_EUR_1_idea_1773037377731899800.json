@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(quantile(winsorize({eps_best_eeps_cur_yr}, std=4), driver=gaussian), 0.8), greater(ts_rank(winsorize({eps_best_eeps_cur_yr}, std=4), 126), 0.8)), quantile(winsorize({eps_best_eeps_cur_yr}, std=4), driver=gaussian), 0)",
+    "idea": "**概念**: 截面与历史分位数双重确认（Breakout模式）\n**核心逻辑**: 要求EPS预期同时满足两个条件才产生信号：1) 在截面上处于全市场前20%高分位（高斯分位数>0.8）；2) 在自身过去126个交易日（半年）历史中亦处于前20%高位（ts_rank>0.8）。未满足条件时信号置零。该模板过滤掉仅因行业轮动或整体市场抬升导致的伪高位，专注于真正创历史新高的盈利预期突破行情。",
+    "expression_list": [
+        "trade_when(and(greater(quantile(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), driver=gaussian), 0.8), greater(ts_rank(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), 126), 0.8)), quantile(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), driver=gaussian), 0)",
+        "trade_when(and(greater(quantile(winsorize(anl69_eps_best_eeps_cur_yr, std=4), driver=gaussian), 0.8), greater(ts_rank(winsorize(anl69_eps_best_eeps_cur_yr, std=4), 126), 0.8)), quantile(winsorize(anl69_eps_best_eeps_cur_yr, std=4), driver=gaussian), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_z = zscore(vol_clean); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); weight = add(1, multiply(0.4, signed_power(winsorize(stab_z, 3), 2))); core = multiply(level_score, weight); core = trade_when(greater(abs(stab_z), 0.5), core, multiply(core, 0.2)); ts_decay_linear(core, 3)",
+    "idea": "利用signed_power对稳定性zscore进行凸性变换，使极端稳定（高z）与极端不稳定（低z）股票的权重差异呈指数级拉开。仅对偏离均值0.5个标准差以上的股票保留有效敞口，中间噪音区间大幅压缩至20%，并附加短期线性衰减平滑信号。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_z = zscore(vol_clean); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); weight = add(1, multiply(0.4, signed_power(winsorize(stab_z, 3), 2))); core = multiply(level_score, weight); core = trade_when(greater(abs(stab_z), 0.5), core, multiply(core, 0.2)); ts_decay_linear(core, 3)"
+    ]
+}

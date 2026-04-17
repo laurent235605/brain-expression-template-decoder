@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(quantile(ts_rank(winsorize(subtract(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delta({eps_best_eeps_cur_yr}, 21)), std=4), 252), driver='gaussian'), industry)",
+    "idea": "构建修订期限结构，比较短期(5日)与中期(21日)修订动量的差异，捕捉预期变化的陡峭化或平坦化。通过高斯分位数拉伸(quantile)将极端值映射到更宽区间并经行业中性化，识别那些短期突然加速而中期趋势未跟上的'预期断裂'机会，或短期过度反应后的均值回复。",
+    "expression_list": [
+        "group_zscore(quantile(ts_rank(winsorize(subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 21)), std=4), 252), driver='gaussian'), industry)",
+        "group_zscore(quantile(ts_rank(winsorize(subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delta(anl69_eps_best_eeps_cur_yr, 21)), std=4), 252), driver='gaussian'), industry)"
+    ]
+}

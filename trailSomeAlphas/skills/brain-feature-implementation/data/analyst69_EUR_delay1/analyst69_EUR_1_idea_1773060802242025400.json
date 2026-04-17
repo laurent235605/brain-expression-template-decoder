@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(less(ts_delta(days_from_last_change({eps_expected_report_dt}), 1), 0), group_zscore(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 0), industry)",
+    "idea": "事件驱动的组内偏离放大策略：当检测到日期变更事件(ts_delta<0)时，采用group_zscore度量该股票在行业内的相对偏离程度作为信号强度，无事件时归零。将Input 1的事件触发机制与截面相对位置结合，增强行业内的区分度和信号的经济解释性。",
+    "expression_list": [
+        "group_normalize(if_else(less(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 1), 0), group_zscore(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 0), industry)",
+        "group_normalize(if_else(less(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 1), 0), group_zscore(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 0), industry)"
+    ]
+}

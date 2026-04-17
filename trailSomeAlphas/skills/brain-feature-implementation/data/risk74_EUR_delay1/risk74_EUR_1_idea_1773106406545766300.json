@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(less(days_from_last_change({hfown_pctown}),30),multiply(group_rank(winsorize(divide(ts_sum(ts_delta({hfown_pctown},1),20),add(ts_std_dev(ts_delta({hfown_pctown},1),60),0.0001)),std=4),industry),if_else(greater(group_rank({volume},industry),0.7),1.5,0.5)),0)",
+    "idea": "事件驱动型流动性加权策略：利用days_from_last_change捕捉持仓数据最新变更时点，仅对30日内有数据更新的股票开仓（避免stale数据），并根据行业内的成交量分位（group_rank）进行流动性加权——高流动性标的（前30%）放大至1.5倍，低流动性压缩至0.5倍，优化执行成本与信号时效性。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "subtract(vec_max({lastcostingfailed}), vec_avg({lastcostingfailed}))",
+    "idea": "失败离散度信号：计算最大失败与平均失败的差值，衡量“尾部风险”或极端操作失误的强度。差值越大表明存在偶发性严重故障（单点极大值）而非系统性问题，可作为风险预警或事件驱动因子。",
+    "expression_list": [
+        "subtract(vec_max(mdl209_lastcostingfailed), vec_avg(mdl209_lastcostingfailed))"
+    ]
+}

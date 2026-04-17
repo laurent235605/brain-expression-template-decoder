@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), group_cartesian_product(sector, bucket(log(ts_mean(cap,21)), \"0,1,0.25\")))",
+    "idea": "在原始行业中性残差基础上，进一步在“行业×市值四分位”的二维细分群组（group_cartesian_product）内进行标准化，剔除市值风格带来的资金流动差异，精确捕捉同规模同行业 peers 中的相对异质性资金行为，实现双重中性化。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), group_cartesian_product(sector, bucket(log(ts_mean(cap,21)), \"0,1,0.25\")))"
+    ]
+}

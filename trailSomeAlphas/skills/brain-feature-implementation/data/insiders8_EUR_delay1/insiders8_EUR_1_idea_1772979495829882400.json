@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change({active_return_decile_rank_long} - {active_weight_decile_rank_long}), 5), group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.8), sector), multiply(0.5, group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), sector)))",
+    "idea": "引入事件驱动 freshness 机制：利用days_from_last_change捕捉收益或权重分位在5天内刚发生显著变化（如机构调仓或收益跃迁）的事件窗口，此时提高幂次至1.8捕捉短期动量；对 stale 信号（>5天无变化）降低至50%仓位，平衡信号新鲜度与长期配置稳定性。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long), 5), group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.8), sector), multiply(0.5, group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), sector)))"
+    ]
+}

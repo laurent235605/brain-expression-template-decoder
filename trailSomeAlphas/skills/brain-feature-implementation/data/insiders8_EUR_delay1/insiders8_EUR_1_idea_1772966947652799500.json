@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( ts_corr( winsorize( ts_backfill( {of_owners_decile_rank_long}, 21 ), std=4 ), winsorize( ts_backfill( {owners_decile_rank_long}, 21 ), std=4 ), 60 ), sector )",
+    "idea": "行业中性化Ownership结构惯性因子。先对两个持有人分位秩字段进行21日回溯填充与4倍标准差去极值清洗，计算60日滚动相关性后，在行业层面进行中性化(zscore)。该模板剥离了行业层面的共性持有人结构趋势（如全行业机构化浪潮），仅保留个股特有的持有人结构稳定性特征，高值表示该股票ownership结构一致性显著强于同业，低值则暗示内部持有人类型分化加剧。",
+    "expression_list": [
+        "group_zscore( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), sector )",
+        "group_zscore( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), sector )",
+        "group_zscore( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), sector )",
+        "group_zscore( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), sector )"
+    ]
+}

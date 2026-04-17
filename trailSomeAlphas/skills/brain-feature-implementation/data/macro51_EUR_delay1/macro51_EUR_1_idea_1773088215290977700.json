@@ -1,0 +1,7 @@
+{
+    "template": "truncate(ts_decay_linear(quantile(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 63), std=4), industry), driver=\"gaussian\"), 5), maxPercent=0.015)",
+    "idea": "在行业标准化（group_zscore）与数据清洗后，通过高斯分位数转换（quantile with gaussian driver）将中间区间压缩、尾部拉伸以强调极端偏离，经5日平滑后使用truncate限制个股权重上限（1.5%），构建尾部风险可控、分布形态优化的相对配置信号。",
+    "expression_list": [
+        "truncate(ts_decay_linear(quantile(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 63), std=4), industry), driver=\"gaussian\"), 5), maxPercent=0.015)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(signed_power(ts_zscore(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean({cap}, 21)), {sector}), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 252), 3), {sector})",
+    "idea": "对特质性残差进行长期（252日）zscore标准化后应用三次方非线性变换（signed_power），极度放大极端偏离的头尾差异，同时压缩中间噪音，最后通过行业中性化（group_normalize）严格控制行业暴露，构建高区分度的行业中性Alpha。",
+    "expression_list": []
+}

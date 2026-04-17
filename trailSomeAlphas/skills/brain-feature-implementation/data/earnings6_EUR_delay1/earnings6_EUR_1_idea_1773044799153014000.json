@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( divide( subtract( vec_avg({actual_eps}), ts_backfill(vec_avg({estimated_eps}), 5) ), add( abs(ts_backfill(vec_avg({estimated_eps}), 5)), 0.001 ) ), industry )",
+    "idea": "将模板1的时间序列回填技术（ts_backfill）交叉应用于模板2的EPS数据，计算实际盈利相对于5日前预测水平的历史偏离度，替代即时估计值作为基准，并进行行业标准化，以捕捉盈利趋势相对于近期共识的持续性变化。",
+    "expression_list": [
+        "group_zscore( divide( subtract( vec_avg(ern6_actual_eps), ts_backfill(vec_avg(ern6_estimated_eps), 5) ), add( abs(ts_backfill(vec_avg(ern6_estimated_eps), 5)), 0.001 ) ), industry )",
+        "group_zscore( divide( subtract( vec_avg(ern6_actual_eps_274), ts_backfill(vec_avg(ern6_estimated_eps), 5) ), add( abs(ts_backfill(vec_avg(ern6_estimated_eps), 5)), 0.001 ) ), industry )"
+    ]
+}

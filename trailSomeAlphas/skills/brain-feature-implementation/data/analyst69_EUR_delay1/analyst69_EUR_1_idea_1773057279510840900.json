@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(subtract(ts_delta(ts_decay_linear({eps_best_eeps_cur_yr}, 10), 5), ts_delta(ts_decay_linear({eps_best_eeps_cur_yr}, 10), 20)), industry)",
+    "idea": "融合模板1的加速度背离逻辑与模板2的线性衰减平滑技术，先对原始EPS预期进行10日线性衰减平滑以降低单期噪音，再分别计算短期(5日)与中期(20日)的变化率差分，最后进行行业中性化(group_zscore)处理。此举既保留了捕捉预期修订拐点的敏感性，又通过前置平滑过滤了脉冲式波动，适用于识别行业内的相对预期动量加速。",
+    "expression_list": [
+        "group_zscore(subtract(ts_delta(ts_decay_linear(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delta(ts_decay_linear(anl69_aeps_best_eeps_cur_yr, 10), 20)), industry)",
+        "group_zscore(subtract(ts_delta(ts_decay_linear(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delta(ts_decay_linear(anl69_eps_best_eeps_cur_yr, 10), 20)), industry)"
+    ]
+}

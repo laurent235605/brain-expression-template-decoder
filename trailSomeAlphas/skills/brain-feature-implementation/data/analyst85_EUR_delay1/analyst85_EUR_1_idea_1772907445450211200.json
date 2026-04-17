@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(ts_decay_linear(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20), hump=0.02)",
+    "idea": "将简单求和(ts_sum)替换为线性衰减加权(ts_decay_linear)，赋予近期数据更高权重但平滑过渡，避免窗口截断效应；并叠加hump_decay控制仓位日间最小变化阈值，仅当信号变化超过2%时才调整持仓，在保留分歧度变化趋势敏感性的同时显著降低换手率。",
+    "expression_list": [
+        "hump_decay(ts_decay_linear(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20), hump=0.02)"
+    ]
+}

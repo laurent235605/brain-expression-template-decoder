@@ -1,0 +1,7 @@
+{
+    "template": "days_from_last_change({elta_run_timestamp})",
+    "idea": "**Concept**: Estimate Staleness Structure\n- **Sample Fields Used**: `{elta_run_timestamp}`\n- **Definition**: Days since the last estimate file was generated\n- **Why This Feature**: Identifies how fresh the estimate data is. Stale estimates (high days) may no longer reflect current analyst views, creating potential alpha from stale information arbitrage.\n- **is filling nan necessary**: Timestamp NaN indicates missing data; should remain NaN as staleness is undefined.\n- **Directionality**: Low values indicate fresh data (reliable); high values indicate stale estimates (potential mispricing opportunity)\n- **Boundary Conditions**: Zero indicates today's data; values > 5 indicate potentially stale estimates in fast-moving markets",
+    "expression_list": [
+        "days_from_last_change(ern10_elta_run_timestamp)"
+    ]
+}

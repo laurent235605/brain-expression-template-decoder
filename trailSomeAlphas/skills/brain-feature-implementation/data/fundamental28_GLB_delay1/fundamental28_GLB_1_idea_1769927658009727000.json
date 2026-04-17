@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(divide(ts_backfill({value_03501a}, 63), {value_02300q}), std=4), industry)",
+    "idea": "行业中性资本结构保守度：针对年度权益与季度资产的频率错配，使用ts_backfill对年度权益数据进行前向填充（最长63个交易日），确保数据 point-in-time；对分子分母分别进行4倍标准差去极值处理，避免极端负权益或极小规模资产导致的异常值；最后进行行业内标准化（group_zscore），消除金融、公用事业等不同行业天然杠杆差异的影响，得到可跨行业比较的相对资本结构安全性指标。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(ts_backfill(fnd28_bdea_value_03501a, 63), fnd28_bsassetq_value_02300q), std=4), industry)",
+        "group_zscore(winsorize(divide(ts_backfill(fnd28_bdea_value_03501a, 63), fnd28_nddq1_value_02300q), std=4), industry)",
+        "group_zscore(winsorize(divide(ts_backfill(fnd28_fsa1_value_03501a, 63), fnd28_bsassetq_value_02300q), std=4), industry)",
+        "group_zscore(winsorize(divide(ts_backfill(fnd28_fsa1_value_03501a, 63), fnd28_nddq1_value_02300q), std=4), industry)"
+    ]
+}

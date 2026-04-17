@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(winsorize({active_return_decile_rank_long}, std=4), winsorize({active_weight_decile_rank_long}, std=4)), industry)), 1.5), signed_power(group_zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), industry), 2), 0)",
+    "idea": "极端偏离放大模板：仅当分位偏离度的绝对值超过1.5个标准差（极端区域）时才生成信号，使用幂变换（平方）放大极端偏离的权重，中间区域视为噪音置零，专门捕捉机构配置与收益表现最显著的错配机会，避免平庸信号干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long, std=4), winsorize(insd8_active_weight_decile_rank_long, std=4)), industry)), 1.5), signed_power(group_zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), industry), 2), 0)"
+    ]
+}

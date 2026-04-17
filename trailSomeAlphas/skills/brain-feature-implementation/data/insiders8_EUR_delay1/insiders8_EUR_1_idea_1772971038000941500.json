@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(ts_decay_linear(signed_power(quantile(group_zscore(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), \"gaussian\"), 3), 5), std=4)",
+    "idea": "将行业内的60日所有权相关性先进行组内Z分数标准化，再通过高斯分位数映射将分布形态标准化，接着使用三次幂非线性放大极端尾部（强调极稳定与极不稳定的股票），随后应用5日线性衰减平滑以降低换手率，最后进行4倍标准差截断处理。相比原始模板的硬阈值（0.9/0.1）离散切换，此模板通过连续非线性变换保留细微差异，同时利用时序衰减避免状态突变带来的高换手率。",
+    "expression_list": [
+        "winsorize(ts_decay_linear(signed_power(quantile(group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), \"gaussian\"), 3), 5), std=4)",
+        "winsorize(ts_decay_linear(signed_power(quantile(group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), \"gaussian\"), 3), 5), std=4)",
+        "winsorize(ts_decay_linear(signed_power(quantile(group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), \"gaussian\"), 3), 5), std=4)",
+        "winsorize(ts_decay_linear(signed_power(quantile(group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), \"gaussian\"), 3), 5), std=4)"
+    ]
+}

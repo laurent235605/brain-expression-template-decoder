@@ -1,0 +1,7 @@
+{
+    "template": "divide({newa2_oiadp}, {newa2_revt})",
+    "idea": "**Concept**: Operating Income Purity\n- **Sample Fields Used**: `newa2_oiadp`, `newa2_revt`\n- **Definition**: Operating income after depreciation as a percentage of revenue, representing the core economic profitability of the business model.\n- **Why This Feature**: Strips away financing decisions (leverage), tax jurisdictions, and non-core activities to reveal operational essence.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Essential profitability metrics require complete data; missing components compromise the essence calculation.\n- **Directionality**: Higher values indicate scalable, high-margin business models; lower values indicate high fixed costs or commodity competition.\n- **Boundary Conditions**: Negative values indicate operational losses; capital-light models show high margins with minimal depreciation.",
+    "expression_list": [
+        "divide(fnd6_newa2_oiadp, fnd6_newa2_revt)"
+    ]
+}

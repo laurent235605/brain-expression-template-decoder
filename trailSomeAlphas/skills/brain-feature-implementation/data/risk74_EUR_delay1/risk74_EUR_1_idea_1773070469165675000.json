@@ -1,0 +1,7 @@
+{
+    "template": "multiply( group_zscore( winsorize(ts_backfill({exp_usa},63),std=4), industry ), signed_power( ts_zscore( ts_rank( winsorize(ts_backfill({exp_usa},63),std=4), 252 ), 63 ), 0.5 ) )",
+    "idea": "历史极值增强的行业相对暴露：结合截面行业相对排名与个股自身历史分位（ts_rank），通过signed_power压缩中间区间、放大历史极值。仅当某股票当前美国暴露既高于行业平均又处于自身历史高位时赋予强信号，避免对常态高暴露行业的重复下注。",
+    "expression_list": [
+        "multiply( group_zscore( winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), industry ), signed_power( ts_zscore( ts_rank( winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), 252 ), 63 ), 0.5 ) )"
+    ]
+}

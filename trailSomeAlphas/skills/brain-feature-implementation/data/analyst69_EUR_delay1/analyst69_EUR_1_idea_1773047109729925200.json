@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater(days_from_last_change({eps_expected_report_dt}), 90), 1, if_else(less(days_from_last_change({eps_expected_report_dt}), 5), -1, 0)), industry), 10)",
+    "idea": "对模板2的离散三态信号施加时序平滑处理。使用线性衰减加权（ts_decay_linear）对行业归一化后的极端状态信号进行10日滚动平滑，将瞬时跳变的±1信号转化为渐进式仓位调整。这种处理既保留了极端状态的识别能力，又显著降低换手率（相比原始离散信号的硬切换），适用于机构规模资金的低频调仓需求。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), -1, 0)), industry), 10)",
+        "ts_decay_linear(group_normalize(if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_eps_expected_report_dt), 5), -1, 0)), industry), 10)"
+    ]
+}

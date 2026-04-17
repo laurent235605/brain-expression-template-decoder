@@ -1,0 +1,14 @@
+{
+    "template": "( {concentration} - ts_mean({concentration}, 60) ) * ( {crowding} - ts_mean({crowding}, 60) )",
+    "idea": "双重偏离动量交叉：将地理集中度的时序偏离（战略转型信号）与因子拥挤度的时序偏离（资金流变化信号）相乘，捕捉'地理风险积聚且市场过度拥挤'的共振效应。当两者同时偏离历史均值时，信号强度呈非线性放大，适用于识别结构性风险拐点。",
+    "expression_list": [
+        "( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( rsk74_crowding - ts_mean(rsk74_crowding, 60) )",
+        "( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( rsk74_raw_crowding - ts_mean(rsk74_raw_crowding, 60) )",
+        "( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( liquidity_factor_crowding - ts_mean(liquidity_factor_crowding, 60) )",
+        "( rsk74_concentration - ts_mean(rsk74_concentration, 60) ) * ( liquidity_timeseries_crowding - ts_mean(liquidity_timeseries_crowding, 60) )",
+        "( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( rsk74_crowding - ts_mean(rsk74_crowding, 60) )",
+        "( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( rsk74_raw_crowding - ts_mean(rsk74_raw_crowding, 60) )",
+        "( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( liquidity_factor_crowding - ts_mean(liquidity_factor_crowding, 60) )",
+        "( rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60) ) * ( liquidity_timeseries_crowding - ts_mean(liquidity_timeseries_crowding, 60) )"
+    ]
+}

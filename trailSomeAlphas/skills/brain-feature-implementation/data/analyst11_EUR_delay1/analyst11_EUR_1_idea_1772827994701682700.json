@@ -1,0 +1,12 @@
+{
+    "template": "{correlation} / {correlation}",
+    "idea": "**Concept**: ESG Correlation Structure Ratio\n- **Sample Fields Used**: `positive_correlation`, `total_correlation`\n- **Definition**: Proportion of total ESG correlation attributable to positive correlations only\n- **Why This Feature**: Reveals the structural composition of ESG value—whether a company's ESG profile is constructed primarily of \"good\" ESG factors (positive correlation) or includes significant \"risk\" ESG factors (negative correlation). Values near 1.0 indicate pure positive-correlation structure.\n- **is filling nan necessary**: Division by zero risk if total_correlation is 0; use safe division or if_else. NaN handling preserves undefined ratios.\n- **Directionality**: 1.0 = entirely positive-correlation ESG profile; < 0.5 = majority negative-correlation factors (structural ESG risk)\n- **Boundary Conditions**: 1.0 = all ESG factors positively correlated with returns; 0 = balanced positive/negative; Negative = more negative than positive correlation weight",
+    "expression_list": [
+        "environmental_max_correlation_weighted_score / environmental_max_correlation_weighted_score",
+        "governance_max_correlation_weighted_score / governance_max_correlation_weighted_score",
+        "social_max_correlation_weighted_score / social_max_correlation_weighted_score",
+        "social_score_positive_correlation / social_score_positive_correlation",
+        "social_score_total_correlation / social_score_total_correlation",
+        "sustainability_max_correlation_weighted_score / sustainability_max_correlation_weighted_score"
+    ]
+}

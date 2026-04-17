@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(add(multiply(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),inverse(ts_std_dev(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),20))),multiply(ts_regression(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),ts_step(),20,rettype=2),inverse(ts_std_dev(ts_regression(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),ts_step(),20,rettype=2),60)))),industry),5)",
+    "idea": "融合5日短期动量与20日回归斜率（趋势强度），并分别经20日与60日实现波动率倒数加权，形成风险调整后的复合动量信号；最后通过5日线性衰减(ts_decay_linear)降低高换手，行业中性化(group_zscore)确保剥离行业Beta，仅保留特质性Alpha。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(add(multiply(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),inverse(ts_std_dev(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),20))),multiply(ts_regression(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),ts_step(),20,rettype=2),inverse(ts_std_dev(ts_regression(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),ts_step(),20,rettype=2),60)))),industry),5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(vec_skewness({exposure_value}), sector) * inverse(s_log_1p(ts_mean(vec_stddev({exposure_value}), 60)))",
+    "idea": "风险调整集中度加权：地域集中度信号经行业中性化后，按60日历史波动率的逆函数加权（低波动赋予高权重）。使用s_log_1p压缩逆波动率尾部避免极端小波动导致权重爆炸。策略激进地超配\"地理战略高度集中且执行极其稳定\"的公司，做空\"看似集中但反复摇摆\"的伪战略者，强化质量因子的稳定性维度。",
+    "expression_list": [
+        "group_normalize(vec_skewness(anl91_exposure_value), sector) * inverse(s_log_1p(ts_mean(vec_stddev(anl91_exposure_value), 60)))"
+    ]
+}

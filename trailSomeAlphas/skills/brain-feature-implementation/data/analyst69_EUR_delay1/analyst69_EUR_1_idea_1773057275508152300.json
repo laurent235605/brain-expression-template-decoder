@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change({eps_best_eeps_cur_yr}), 10), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 0)",
+    "idea": "结合模板1的加速度信号与事件驱动逻辑，利用days_from_last_change算子识别近期(10日内)有分析师修订更新的股票，仅对数据新鲜度达标的标的激活交易，其余置零。此设计避免了 stale 数据导致的虚假动量信号，确保捕捉到的加速度基于最新信息，提升信号的时效性与可靠性。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 10), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0)",
+        "trade_when(less(days_from_last_change(anl69_eps_best_eeps_cur_yr), 10), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_delta(vec_stddev(winsorize(ts_backfill({exposure_value}, 63), std=4)), 20), group_cartesian_product(industry, sector)), 2)",
+    "idea": "将向量地理暴露的标准差（vec_stddev）而非均值作为业务分散度的代理，捕捉内部结构离散程度；通过20日变化率（ts_delta）识别“分散度动量”，即业务布局正在快速集中或分散的拐点；利用行业-板块交叉分组（group_cartesian_product）进行更细粒度的中性化，消除大行业内的结构性偏差；最后以平方运算放大尾部，强化对业务结构剧烈变异公司的识别。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_delta(vec_stddev(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 20), group_cartesian_product(industry, sector)), 2)"
+    ]
+}

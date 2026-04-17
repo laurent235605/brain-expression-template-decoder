@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(ts_rank(ts_delta({eps_best_eeps_cur_yr}, 5), 252), 0.8), greater(abs(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)), 2)), signed_power(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 1.5), multiply(0.2, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry)))",
+    "idea": "双极端条件触发的非线性放大策略。仅当个股修正变化同时处于历史高位（过去252日分位>80%）且行业偏离绝对值大于2个标准差时，使用signed_power放大信号；否则大幅衰减至0.2倍。通过and逻辑与trade_when实现“强信号重仓、弱信号轻仓”的状态依赖配置，捕捉极端情绪下的错误定价并规避中段噪音。",
+    "expression_list": [
+        "trade_when(and(greater(ts_rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 252), 0.8), greater(abs(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)), 2)), signed_power(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 1.5), multiply(0.2, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry)))",
+        "trade_when(and(greater(ts_rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 252), 0.8), greater(abs(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)), 2)), signed_power(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 1.5), multiply(0.2, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry)))"
+    ]
+}

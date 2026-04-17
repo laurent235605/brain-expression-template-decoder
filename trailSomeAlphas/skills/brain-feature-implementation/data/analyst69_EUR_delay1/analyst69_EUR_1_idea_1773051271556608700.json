@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_exp_window(signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 3), 10)",
+    "idea": "对时序偏离度进行三次幂非线性变换以放大极端尾部（极好/极差稳定性），并叠加指数衰减窗口赋予近期数据更高权重，构建“持续性极端异常”信号，增强对缓慢积累的预期变化的敏感度。",
+    "expression_list": [
+        "ts_decay_exp_window(signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 3), 10)",
+        "ts_decay_exp_window(signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 3), 10)"
+    ]
+}

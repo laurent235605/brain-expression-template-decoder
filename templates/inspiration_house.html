@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration House - BRAIN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .inspiration-house-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+        }
+
+        .config-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .config-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-input[type="select"] {
+            cursor: pointer;
+        }
+
+        .form-input option {
+            padding: 8px;
+        }
+
+        .config-section .form-group {
+            margin-bottom: 20px;
+        }
+
+        .config-section .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .config-section small {
+            display: block;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .target-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .target-header {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .target-content {
+            padding: 20px;
+        }
+
+        .target-display {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .target-display h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+
+        .target-text {
+            color: #495057;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .expression-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .expression-header {
+            background: #9b59b6;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .expression-content {
+            padding: 20px;
+        }
+
+        .expression-editor {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            background: white;
+            color: #333;
+        }
+
+        .expression-editor:focus {
+            outline: none;
+            border-color: #9b59b6;
+            box-shadow: 0 0 5px rgba(155, 89, 182, 0.3);
+        }
+
+        .expression-editor::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .evaluation-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .evaluation-header {
+            background: #f39c12;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .evaluation-content {
+            padding: 20px;
+        }
+
+        .evaluation-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-controls label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: normal;
+        }
+
+        .filter-controls input[type="range"] {
+            width: 100px;
+        }
+
+        .filter-controls span {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .evaluation-table-container {
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .evaluation-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .evaluation-table th {
+            background: #f8f9fa;
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 2px solid #dee2e6;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .evaluation-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: top;
+        }
+
+        .evaluation-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .score-cell {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .score-high {
+            color: #27ae60;
+        }
+
+        .score-medium {
+            color: #f39c12;
+        }
+
+        .score-low {
+            color: #e74c3c;
+        }
+
+        .operator-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .operator-category {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .operator-description {
+            font-size: 13px;
+            color: #495057;
+            margin-top: 8px;
+            line-height: 1.4;
+            max-width: 300px;
+        }
+
+        .operator-definition {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 6px;
+            line-height: 1.3;
+            max-width: 300px;
+            font-style: italic;
+        }
+
+        .reason-text {
+            max-width: 300px;
+            line-height: 1.4;
+            font-size: 13px;
+        }
+
+        .progress-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-header {
+            background: #27ae60;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .progress-content {
+            padding: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification.success {
+            background: #27ae60;
+        }
+
+        .notification.error {
+            background: #e74c3c;
+        }
+
+        .notification.warning {
+            background: #f39c12;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-message {
+            color: white;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .export-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .export-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .export-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .stat-high .stat-number {
+            color: #27ae60;
+        }
+
+        .stat-medium .stat-number {
+            color: #f39c12;
+        }
+
+        .stat-low .stat-number {
+            color: #e74c3c;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background: #3498db;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-outline:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .login-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .login-spinner {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="inspiration-house-container">
+        <a href="{{ url_for('index') }}" class="back-button">← 返回主页</a>
+        
+        <div class="header-section">
+            <h1>🎯 灵感屋 (Inspiration House)</h1>
+            <p>AI 驱动的运算符建议，增强您当前的表达式</p>
+        </div>
+
+        <!-- API Configuration Section -->
+        <div class="config-section" id="apiConfigSection">
+            <h3>API 配置</h3>
+            <div class="form-group">
+                <label for="modelProvider">AI 模型提供商:</label>
+                <select id="modelProvider" class="form-input">
+                    <option value="deepseek">Deepseek</option>
+                    <option value="kimi">Kimi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="apiKey">API 密钥:</label>
+                <input type="password" id="apiKey" class="form-input secret-toggle-target" placeholder="请输入您的 API 密钥">
+            </div>
+            <div class="form-group">
+                <label for="modelName">模型名称:</label>
+                <input type="text" id="modelName" class="form-input" placeholder="例如: deepseek-chat, kimi-k2.5">
+                <small style="color: #7f8c8d; font-size: 12px;">输入所选提供商的具体模型名称</small>
+            </div>
+            <div class="form-group">
+                <label for="batchSize">Worker 配置:</label>
+                <input type="number" id="batchSize" class="form-input" min="1" max="500" value="100" placeholder="100">
+                <small style="color: #7f8c8d; font-size: 12px;">注意: Worker 数量将设置为运算符数量以实现最大并行化</small>
+            </div>
+            <button id="saveApiKey" class="btn">测试并保存配置</button>
+        </div>
+
+        <!-- Show API Config Button (hidden by default) -->
+        <div class="config-section" id="showApiConfigSection" style="display: none;">
+            <h3>API 配置</h3>
+            <p style="color: #27ae60; margin-bottom: 15px;">✅ API 配置保存成功</p>
+            <button id="showApiConfig" class="btn btn-secondary">显示 API 配置</button>
+        </div>
+
+        <!-- Target Section -->
+        <div class="target-section">
+            <div class="target-header">
+                <h3>🎯 量化研究目标</h3>
+                <button id="editTarget" class="btn btn-secondary">编辑目标</button>
+            </div>
+            <div class="target-content">
+                <div class="target-display" id="targetDisplay">
+                    <h4>当前目标:</h4>
+                    <div class="target-text" id="targetText">未设置目标。点击 "编辑目标" 设定您的研究目标。</div>
+                </div>
+                <div class="form-group" id="targetInputGroup" style="display: none;">
+                    <label for="researchTarget">描述您的量化研究目标:</label>
+                    <textarea id="researchTarget" class="form-input" rows="4" placeholder="例如: 降低换手率，提高夏普比率，减少回撤等"></textarea>
+                    <div style="margin-top: 10px;">
+                        <button id="saveTarget" class="btn btn-success">保存目标</button>
+                        <button id="cancelTarget" class="btn btn-secondary">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expression Section -->
+        <div class="expression-section">
+            <div class="expression-header">
+                <h3>📝 当前表达式</h3>
+                <button id="loadFromBRAIN" class="btn btn-secondary">从 BRAIN 加载</button>
+            </div>
+            <div class="expression-content">
+                <div class="form-group">
+                    <label for="currentExpression">您的当前表达式:</label>
+                    <textarea id="currentExpression" class="expression-editor" placeholder="在此输入您的当前表达式... (例如: ts_mean(close, 20) 或 rank(volume))"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="expressionContext">表达式上下文 (可选):</label>
+                    <textarea id="expressionContext" class="form-input" rows="3" placeholder="描述此表达式的作用、目的或其他特定背景..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluation Section -->
+        <div class="evaluation-section">
+            <div class="evaluation-header">
+                <h3>🔍 运算符添加建议</h3>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 14px; color: rgba(255,255,255,0.8);">运算符数: <span id="currentBatchSize">0</span></span>
+                    <button id="startEvaluation" class="btn" style="background-color: #e74c3c; color: white; font-size: 16px; font-weight: bold; padding: 12px 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.3);">🚀 开始 AI 评估</button>
+                </div>
+            </div>
+            <div class="evaluation-content">
+                <div class="evaluation-controls">
+                    <button id="refreshEvaluation" class="btn btn-secondary">刷新结果</button>
+                    <button id="exportResults" class="btn">导出结果</button>
+                    <button id="clearResults" class="btn btn-secondary">清除结果</button>
+                </div>
+
+                <div class="filter-controls">
+                    <label>
+                        最低分:
+                        <input type="range" id="minScoreFilter" min="0" max="10" value="0">
+                        <span id="minScoreValue">0</span>
+                    </label>
+                    <label>
+                        最高分:
+                        <input type="range" id="maxScoreFilter" min="0" max="10" value="10">
+                        <span id="maxScoreValue">10</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showHighScores" checked> 显示高分 (8-10)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showMediumScores" checked> 显示中等分 (4-7)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="showLowScores" checked> 显示低分 (0-3)
+                    </label>
+                </div>
+
+                <div class="summary-stats" id="summaryStats" style="display: none;">
+                    <div class="stat-card stat-high">
+                        <div class="stat-number" id="highScoreCount">0</div>
+                        <div class="stat-label">高分 (8-10)</div>
+                    </div>
+                    <div class="stat-card stat-medium">
+                        <div class="stat-number" id="mediumScoreCount">0</div>
+                        <div class="stat-label">中等分 (4-7)</div>
+                    </div>
+                    <div class="stat-card stat-low">
+                        <div class="stat-number" id="lowScoreCount">0</div>
+                        <div class="stat-label">低分 (0-3)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalEvaluated">0</div>
+                        <div class="stat-label">总评估数</div>
+                    </div>
+                </div>
+
+                <div class="evaluation-table-container">
+                    <table class="evaluation-table" id="evaluationTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 300px;">运算符</th>
+                                <th style="width: 120px;">类别</th>
+                                <th style="width: 80px;">分数</th>
+                                <th style="width: 350px;">理由</th>
+                                <th style="width: 100px;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="evaluationTableBody">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: #7f8c8d; font-style: italic; padding: 40px;">
+                                    暂无评估结果。请设置目标和表达式，然后点击"开始 AI 评估"。
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section" id="progressSection" style="display: none;">
+            <div class="progress-header">
+                <h3>🔄 评估进度</h3>
+            </div>
+            <div class="progress-content">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+                </div>
+                <div class="progress-stats">
+                    <span id="progressText">正在评估运算符...</span>
+                    <span id="progressCount">0 / 0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>📊 关于本工具</h3>
+            <p>本工具评估所有可用的 BRAIN 运算符，作为您当前表达式的潜在**补充**。每个运算符将获得 0-10 的评分，评估其与当前表达式结合后实现研究目标的潜力。</p>
+            <div class="export-actions">
+                <button id="exportHighScores" class="btn btn-success">导出高分结果</button>
+                <button id="exportAllResults" class="btn">导出所有结果</button>
+                <button id="exportCSV" class="btn btn-secondary">导出为 CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRAIN Login Modal -->
+    <div id="brainLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>连接 WorldQuant BRAIN</h3>
+                <span class="close" onclick="closeBrainLoginModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="brainLoginForm" onsubmit="event.preventDefault(); authenticateBrain();">
+                    <div class="form-group">
+                        <label for="brainUsername">用户名:</label>
+                        <input type="email" id="brainUsername" class="form-input" placeholder="your.email@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="brainPassword">密码:</label>
+                        <input type="password" id="brainPassword" class="form-input" placeholder="输入密码" required>
+                    </div>
+                    <div id="brainLoginStatus" class="login-status"></div>
+                    <div id="loginSpinner" class="login-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeBrainLoginModal()" class="btn btn-outline" id="cancelBtn">取消</button>
+                <button onclick="authenticateBrain()" class="btn btn-primary" id="loginBtn">连接</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='brain.js') }}"></script>
+    <script src="{{ url_for('static', filename='inspiration_house.js') }}"></script>
+    <script src="{{ url_for('static', filename='secret_toggle.js') }}"></script>
+    <script src="{{ url_for('static', filename='usage_widget.js') }}"></script>
+</body>
+</html> 

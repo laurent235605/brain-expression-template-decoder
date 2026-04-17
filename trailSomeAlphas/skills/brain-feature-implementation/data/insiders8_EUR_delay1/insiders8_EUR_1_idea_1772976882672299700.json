@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 20) * ts_delta(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20)",
+    "idea": "平滑后的持仓背离（模板2的线性衰减平均）乘以股权结构相关性的变化率（模板1的差分）。该构造识别\"稳定结构开始松动\"或\"混乱结构趋于有序\"的临界点：当长期背离遭遇结构突变时，往往预示着急剧的持仓调整或收益回归。",
+    "expression_list": [
+        "ts_decay_linear(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20)",
+        "ts_decay_linear(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20)",
+        "ts_decay_linear(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20)",
+        "ts_decay_linear(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 20) * ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20)"
+    ]
+}

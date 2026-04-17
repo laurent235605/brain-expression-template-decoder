@@ -1,0 +1,8 @@
+{
+    "template": "zscore(winsorize(if_else(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), std=4))",
+    "idea": "融合EPS惊喜百分比的计算逻辑与稳健统计处理方法：使用if_else替代简单的加常数进行除零保护，结合winsorize裁剪极端值防止异常点主导，最后通过zscore全局标准化，使不同市值公司的惊喜幅度具备可比性，提升信号的统计稳健性。",
+    "expression_list": [
+        "zscore(winsorize(if_else(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), std=4))",
+        "zscore(winsorize(if_else(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), std=4))"
+    ]
+}

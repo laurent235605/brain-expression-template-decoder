@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_delta(ts_backfill({hfown_pctown}, 63), 1), 1), std=4), 12), group_cartesian_product(sector, bucket(ts_mean(cap,21), \"0,1,0.2\"))), 0.6)",
+    "idea": "**双维中性加速度流压**: 通过二阶差分(ts_delta嵌套)捕捉持仓变化的加速度而非简单速度，更早识别趋势拐点；使用行业与市值五档分位的笛卡尔积进行双重中性化，消除大块头公司持仓变动对因子的主导；12日线性衰减平衡信号时效性与噪音；0.6次幂适度压缩中段，突出持续加速建仓/减仓的极端标的。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), 1), std=4), 12), group_cartesian_product(sector, bucket(ts_mean(cap,21), \"0,1,0.2\"))), 0.6)"
+    ]
+}

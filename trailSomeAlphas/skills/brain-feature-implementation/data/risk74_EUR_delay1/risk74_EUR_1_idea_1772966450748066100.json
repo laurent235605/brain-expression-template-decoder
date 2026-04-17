@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), industry), 2)",
+    "idea": "捕捉行业内地理敞口的加速度而非静态水平。通过计算美国敞口在过去两个季度（126天）的变化量，经行业标准化后使用signed_power(2)放大极端值，识别正在激进扩张或快速收缩美国业务的公司，利用敞口动量效应获取Alpha。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), industry), 2)"
+    ]
+}

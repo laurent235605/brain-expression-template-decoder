@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_regression(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), ts_mean(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 252), 252, rettype=0), sector)",
+    "idea": "特质性稳定性模板：通过回归剔除市场系统性所有权相关趋势（以252日长期平均相关性作为市场代理变量，rettype=0取残差），得到剔除市场beta后的个股特质性所有权结构变化，最后进行行业中性化。该模板分离出公司特有的所有权动态，排除宏观流动性或市场情绪驱动的共同变动，专注于公司个体层面的治理结构或股东策略变化。",
+    "expression_list": [
+        "group_zscore(ts_regression(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), ts_mean(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 252), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), ts_mean(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 252), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), ts_mean(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 252), 252, rettype=0), sector)",
+        "group_zscore(ts_regression(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), ts_mean(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 252), 252, rettype=0), sector)"
+    ]
+}

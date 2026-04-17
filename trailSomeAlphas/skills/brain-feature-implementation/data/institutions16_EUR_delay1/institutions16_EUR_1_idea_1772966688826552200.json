@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20))), 2), zscore(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20)), 0)",
+    "idea": "极值区间非线性信号：仅当资产流动量处于截面的极端尾部（|Z-score|>2）时才保留信号，中间区间视为噪音并强制置零，构建'极端扩张做多、极端收缩做空'的双向阈值策略，避免中等波动区间的无效交易。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20))), 2), zscore(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20)), 0)"
+    ]
+}

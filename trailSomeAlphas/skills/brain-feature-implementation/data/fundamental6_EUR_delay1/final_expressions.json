@@ -1,0 +1,19 @@
+[
+    "divide(add(fnd6_newq_gdwlq, fnd6_ewq_intanq), fnd6_cptnewq_atq)",
+    "divide(subtract(fnd6_cptnewq_atq, ts_delay(fnd6_cptnewq_atq, 63)), ts_delay(fnd6_cptnewq_atq, 63))",
+    "divide(subtract(fnd6_newa1_ib, fnd6_newa2_oancf), fnd6_cptnewq_atq)",
+    "divide(subtract(fnd6_newa1_ibc, fnd6_newa2_oancf), fnd6_cptnewq_atq)",
+    "divide(ts_std_dev(fnd6_cptnewq_ibq, 63), abs(ts_mean(fnd6_cptnewq_ibq, 63)))",
+    "divide(fnd6_cptnewq_actq, fnd6_newq_lctq)",
+    "divide(fnd6_cptnewq_ibq, fnd6_cptnewq_ceqq)",
+    "divide(fnd6_ewq_gpq, fnd6_cptnewq_revtq)",
+    "divide(fnd6_newa2_oancf, fnd6_newa2_revt)",
+    "divide(fnd6_newa2_oiadp, fnd6_newa2_revt)",
+    "divide(fnd6_newa2_ppent, fnd6_cptnewq_dlttq)",
+    "subtract(divide(ts_delta(fnd6_newq_invtq, 63), ts_delay(fnd6_newq_invtq, 63)), divide(ts_delta(fnd6_newq_saleq, 63), ts_delay(fnd6_newq_saleq, 63)))",
+    "subtract(divide(ts_delta(fnd6_newq_rectq, 63), ts_delay(fnd6_newq_rectq, 63)), divide(ts_delta(fnd6_cptnewq_revtq, 63), ts_delay(fnd6_cptnewq_revtq, 63)))",
+    "ts_delta(fnd6_newa2_oiadp, 63)",
+    "ts_regression(fnd6_newq_req, ts_step(1), 504, rettype=1)",
+    "ts_std_dev(divide(fnd6_cptnewq_dlttq, fnd6_cptnewq_ceqq), 126)",
+    "ts_sum(subtract(fnd6_newa2_oancf, fnd6_newa1_capx), 252)"
+]

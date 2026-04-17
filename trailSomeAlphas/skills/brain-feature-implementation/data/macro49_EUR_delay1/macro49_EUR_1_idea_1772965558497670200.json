@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_sum(ts_backfill(vec_avg({notional}), lookback=5, k=1), 1))",
+    "idea": "**Concept**: Daily Rebalance Concentration\n- **Sample Fields Used**: notional\n- **Definition**: Share of total daily rebalance notional represented by this security (cross-sectional normalization)\n- **Why This Feature**: Identifies securities bearing disproportionate burden of daily rebalancing activity; high concentration suggests idiosyncratic risk\n- **is filling nan necessary**: Yes, backfill required to ensure participation in cross-sectional sum.\n- **Directionality**: High values indicate dominant position in rebalance activity; low values indicate minor contributor\n- **Boundary Conditions**: Values >0.5 indicate majority of daily rebalance flow; near-zero indicates negligible impact",
+    "expression_list": [
+        "divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_sum(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), 1))"
+    ]
+}

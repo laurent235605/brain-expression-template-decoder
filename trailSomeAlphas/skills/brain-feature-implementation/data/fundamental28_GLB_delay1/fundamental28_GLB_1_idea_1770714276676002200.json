@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(ts_regression(winsorize(ts_backfill({value_08251q},63),std=4), log(winsorize(ts_backfill({value_02300q},63),std=4)), 252, rettype=0), std=4), industry)",
+    "idea": "对规模变量取对数以修正右偏，对覆盖率和规模均进行63日回溯填充及4倍标准差截尾处理，进行252日滚动回归提取残差（实现规模中性化），随后在行业层面进行中性化（group_zscore），最终得到行业与规模双重调整后的运营效率Alpha。适用于识别不同行业内的“轻资产高覆盖”优质企业。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_regression(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4)), 252, rettype=0), std=4), industry)",
+        "group_zscore(winsorize(ts_regression(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4)), 252, rettype=0), std=4), industry)",
+        "group_zscore(winsorize(ts_regression(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4)), 252, rettype=0), std=4), industry)",
+        "group_zscore(winsorize(ts_regression(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4), log(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4)), 252, rettype=0), std=4), industry)"
+    ]
+}

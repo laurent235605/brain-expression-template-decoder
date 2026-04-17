@@ -1,0 +1,22 @@
+[
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_ttmpr2rev, subindustry), 3), 504) / (1 + ts_std_dev(group_zscore(fnd17_ttmpr2rev, subindustry), 504)))",
+    "-1*(ts_rank(ts_delta(group_zscore(normalized_earnings_yield_composite, subindustry), 3), 60) / (1 + ts_std_dev(group_zscore(normalized_earnings_yield_composite, subindustry), 60)))",
+    "-1*(ts_rank(ts_delta(group_zscore(mdl31_pb_current, subindustry), 21), 60) / (1 + ts_std_dev(group_zscore(mdl31_pb_current, subindustry), 60)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_gvay5dly, subindustry), 10), 252) / (1 + ts_std_dev(group_zscore(fnd17_gvay5dly, subindustry), 252)))",
+    "-1*(ts_rank(ts_delta(group_zscore(mdl31_pricesales_last_y, subindustry), 63), 504) / (1 + ts_std_dev(group_zscore(mdl31_pricesales_last_y, subindustry), 504)))",
+    "-1*(ts_rank(ts_delta(group_zscore(mdl31_pricesales_prior_y, subindustry), 5), 126) / (1 + ts_std_dev(group_zscore(mdl31_pricesales_prior_y, subindustry), 126)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_yield, subindustry), 3), 20) / (1 + ts_std_dev(group_zscore(fnd17_yield, subindustry), 20)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_ebitda2ev, subindustry), 10), 252) / (1 + ts_std_dev(group_zscore(fnd17_ebitda2ev, subindustry), 252)))",
+    "-1*(ts_rank(ts_delta(group_zscore(mdl31_pricesales_last_y, subindustry), 10), 252) / (1 + ts_std_dev(group_zscore(mdl31_pricesales_last_y, subindustry), 252)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_gvay5dly, subindustry), 3), 126) / (1 + ts_std_dev(group_zscore(fnd17_gvay5dly, subindustry), 126)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_yield, subindustry), 63), 60) / (1 + ts_std_dev(group_zscore(fnd17_yield, subindustry), 60)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_ttmpr2rev, subindustry), 21), 20) / (1 + ts_std_dev(group_zscore(fnd17_ttmpr2rev, subindustry), 20)))",
+    "-1*(ts_rank(ts_delta(group_zscore(mdl31_pb_prior_y, subindustry), 10), 252) / (1 + ts_std_dev(group_zscore(mdl31_pb_prior_y, subindustry), 252)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_price2bk, subindustry), 63), 60) / (1 + ts_std_dev(group_zscore(fnd17_price2bk, subindustry), 60)))",
+    "-1*(ts_rank(ts_delta(group_zscore(dividend_yield_relative_score, subindustry), 5), 126) / (1 + ts_std_dev(group_zscore(dividend_yield_relative_score, subindustry), 126)))",
+    "-1*(ts_rank(ts_delta(group_zscore(normalized_earnings_yield_composite, subindustry), 3), 126) / (1 + ts_std_dev(group_zscore(normalized_earnings_yield_composite, subindustry), 126)))",
+    "-1*(ts_rank(ts_delta(group_zscore(earnings_valuation_score, subindustry), 63), 504) / (1 + ts_std_dev(group_zscore(earnings_valuation_score, subindustry), 504)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_gvay5dly, subindustry), 5), 126) / (1 + ts_std_dev(group_zscore(fnd17_gvay5dly, subindustry), 126)))",
+    "-1*(ts_rank(ts_delta(group_zscore(fnd17_ebitda2ev_ttm, subindustry), 21), 504) / (1 + ts_std_dev(group_zscore(fnd17_ebitda2ev_ttm, subindustry), 504)))",
+    "-1*(ts_rank(ts_delta(group_zscore(mdl31_pricesales_last_y, subindustry), 5), 60) / (1 + ts_std_dev(group_zscore(mdl31_pricesales_last_y, subindustry), 60)))"
+]

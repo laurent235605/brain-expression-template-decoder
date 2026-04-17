@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_delta(ts_corr({bmpo}, {pctchgqtrsales}, 12), 6), industry)",
+    "idea": "经营杠杆动量拐点探测器。计算12期滚动相关系数在6个月内的变化率（ts_delta），识别经营杠杆与营收增长关系正在加强或恶化的动态拐点，进行行业中性化处理。相比静态相关水平，该模板更关注成本结构改善的加速度而非存量水平，适用于捕捉经营效率提升或恶化的早期转换信号。",
+    "expression_list": [
+        "group_zscore(ts_delta(ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 12), 6), industry)",
+        "group_zscore(ts_delta(ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 12), 6), industry)",
+        "group_zscore(ts_delta(ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 12), 6), industry)",
+        "group_zscore(ts_delta(ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 12), 6), industry)"
+    ]
+}

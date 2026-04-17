@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr(vec_avg({data_item_value}), ts_delay(vec_avg({data_item_value}), 63), 252)",
+    "idea": "**Concept**: Fundamental Persistence\n- **Sample Fields Used**: data_item_value\n- **Definition**: Time-series autocorrelation (correlation between current values and lagged values from one quarter prior), measuring the persistence of financial performance\n- **Why This Feature**: High persistence indicates sustainable competitive advantages or sticky business models (quality factor); low persistence indicates mean-reverting or cyclical businesses; essential for distinguishing temporary vs permanent earnings\n- **Logical Meaning**: Serial correlation of fundamental metrics; the degree to which past financial performance predicts future performance\n- **is filling nan necessary**: Yes, continuous series required for autocorrelation calculation; gaps break the temporal dependency structure\n- **Directionality**: High positive values (near 1) indicate persistent fundamentals (quality, momentum in earnings); near 0 indicates unpredictable fundamentals; negative values indicate mean-reverting fundamentals (contrarian signal)\n- **Boundary Conditions**: 1 = perfectly persistent (random walk with drift); 0 = no persistence (white noise); negative = reversal pattern; values >0.7 suggest high-quality stable business",
+    "expression_list": [
+        "ts_corr(vec_avg(anl89_data_item_value), ts_delay(vec_avg(anl89_data_item_value), 63), 252)"
+    ]
+}

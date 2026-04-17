@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(greater(winsorize({concentration},std=4), 0), ts_delta(trade_when(and(not(is_nan({exp_nondomicile1})), less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05)), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), NaN), 20), 0)",
+    "idea": "双源均值的动量追踪：将输入1的双源均值计算与输入2的Delta算子交叉应用，对通过一致性检验的{exp_nondomicile1}和{exp_nondomicile2}均值序列计算20日变化，再以{concentration}水平作为交易条件。识别海外业务扩张或收缩的加速趋势，而非静态水平。",
+    "expression_list": [
+        "trade_when(greater(winsorize(rsk74_raw_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_raw_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_raw_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_raw_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), NaN), 20), 0)",
+        "trade_when(greater(winsorize(rsk74_concentration,std=4), 0), ts_delta(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), NaN), 20), 0)"
+    ]
+}

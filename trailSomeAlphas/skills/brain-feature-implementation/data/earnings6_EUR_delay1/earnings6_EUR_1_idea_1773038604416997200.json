@@ -1,0 +1,8 @@
+{
+    "template": "divide( ts_decay_linear( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20 ), add( ts_std_dev( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 60 ), 0.01 ) )",
+    "idea": "将20日线性衰减的盈利惊喜除以其60日时序波动率（ts_std_dev）进行标准化，得到风险调整后的预期修正强度（类似信息比率），避免高波动股票因基数效应产生的假信号干扰，使信号更具跨股票可比性。",
+    "expression_list": [
+        "divide( ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), add( ts_std_dev( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 60 ), 0.01 ) )",
+        "divide( ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), add( ts_std_dev( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 60 ), 0.01 ) )"
+    ]
+}

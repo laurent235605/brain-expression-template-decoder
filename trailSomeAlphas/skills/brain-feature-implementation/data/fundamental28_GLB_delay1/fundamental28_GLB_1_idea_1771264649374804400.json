@@ -1,0 +1,10 @@
+{
+    "template": "ts_mean(group_zscore(divide(winsorize(group_backfill({value_03501a}, industry, 63), std=4), winsorize(ts_backfill({value_02300q}, 21), std=4)), industry), 63)",
+    "idea": "行业中性杠杆水平平滑信号：使用group_backfill处理年度权益数据在行业内的前向填充（避免跨期插值偏差），对权益和资产分别进行3倍标准差极值裁剪后计算权益资产比，进行行业中性化消除不同行业资本结构基差异，最后应用63日时间序列均值平滑以降低季度资产波动和年度权益滞后的影响，得到稳健的相对杠杆水平。",
+    "expression_list": [
+        "ts_mean(group_zscore(divide(winsorize(group_backfill(fnd28_bdea_value_03501a, industry, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), industry), 63)",
+        "ts_mean(group_zscore(divide(winsorize(group_backfill(fnd28_bdea_value_03501a, industry, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), industry), 63)",
+        "ts_mean(group_zscore(divide(winsorize(group_backfill(fnd28_fsa1_value_03501a, industry, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), industry), 63)",
+        "ts_mean(group_zscore(divide(winsorize(group_backfill(fnd28_fsa1_value_03501a, industry, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), industry), 63)"
+    ]
+}

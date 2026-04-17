@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(abs(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.02), ts_delta({eps_best_eeps_cur_yr}, 5) * (1 + 0.5 * zscore(winsorize(days_from_last_change({eps_expected_report_dt}), 4))), 0)",
+    "idea": "**显著修正稳定性增强器**：结合trade_when与算术缩放。仅在修正幅度超过2%时触发交易(abs(ts_delta)>0.02)，此时引入日期稳定性作为放大器——稳定性越高(zscore越大)，信号权重越高。该设计避免了对微小修正(噪音)的过度反应，同时确保在显著调整发生时，通过稳定性指标进一步确认信号质量。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.02), ts_delta(anl69_aeps_best_eeps_cur_yr, 5) * (1 + 0.5 * zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), 4))), 0)",
+        "trade_when(greater(abs(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.02), ts_delta(anl69_eps_best_eeps_cur_yr, 5) * (1 + 0.5 * zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), 4))), 0)",
+        "trade_when(greater(abs(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.02), ts_delta(anl69_eps_best_eeps_cur_yr, 5) * (1 + 0.5 * zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), 4))), 0)",
+        "trade_when(greater(abs(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.02), ts_delta(anl69_aeps_best_eeps_cur_yr, 5) * (1 + 0.5 * zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), 4))), 0)"
+    ]
+}

@@ -1,0 +1,17 @@
+[
+    "(vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 60)) / ts_std_dev(vec_avg(mdl249_score), 60)",
+    "and(greater_equal(vec_avg(mdl249_quintile), 4), less(ts_delay(vec_avg(mdl249_quintile), 5), 4))",
+    "rank(vec_avg(mdl249_score))",
+    "ts_delta(vec_avg(mdl249_quintile), 20)",
+    "ts_delta(vec_avg(mdl249_score), 20) / abs(ts_delay(vec_avg(mdl249_score), 20))",
+    "ts_kurtosis(vec_avg(mdl249_score), 120)",
+    "ts_mean(if_else(greater_equal(vec_avg(mdl249_quintile), 4), 1, 0), 60)",
+    "ts_mean(vec_avg(mdl249_score), 5)",
+    "ts_mean(vec_avg(mdl249_score), 60)",
+    "ts_std_dev(vec_avg(mdl249_quintile), 60)",
+    "ts_sum(if_else(greater_equal(vec_avg(mdl249_quintile), 3), 1, 0), 60) * (vec_avg(mdl249_quintile) / vec_avg(mdl249_quintile))",
+    "ts_sum(vec_avg(mdl249_score), 60)",
+    "vec_avg(mdl249_score) * ts_delta(vec_avg(mdl249_score), 20)",
+    "vec_avg(mdl249_score) - ts_mean(vec_avg(mdl249_score), 20) * (vec_avg(mdl249_quintile) / 3)",
+    "vec_avg(mdl249_score) / (1 + ts_std_dev(vec_avg(mdl249_score), 20))"
+]

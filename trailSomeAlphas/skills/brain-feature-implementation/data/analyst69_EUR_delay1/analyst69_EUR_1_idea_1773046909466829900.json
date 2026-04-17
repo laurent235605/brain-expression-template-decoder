@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(ts_delta(ts_decay_linear({eps_best_eeps_cur_yr}, 20), 5)), 0.85), less(rank(ts_delta(ts_decay_linear({eps_best_eeps_cur_yr}, 20), 5)), 0.15)), ts_delta(ts_decay_linear({eps_best_eeps_cur_yr}, 20), 5), 0)",
+    "idea": "融合模板1的头尾区间逻辑与模板2的时序平滑结构：先将EPS修订通过20日线性衰减(ts_decay_linear)进行平滑以降低换手率并过滤脉冲噪音，再计算5日变化率(delta)，最后仅保留横截面分布前15%与后15%的极端信号。此结构兼顾了趋势稳定性与信号纯度，避免了对短期异常修订的过度反应。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_delta(ts_decay_linear(anl69_aeps_best_eeps_cur_yr, 20), 5)), 0.85), less(rank(ts_delta(ts_decay_linear(anl69_aeps_best_eeps_cur_yr, 20), 5)), 0.15)), ts_delta(ts_decay_linear(anl69_aeps_best_eeps_cur_yr, 20), 5), 0)",
+        "trade_when(or(greater(rank(ts_delta(ts_decay_linear(anl69_eps_best_eeps_cur_yr, 20), 5)), 0.85), less(rank(ts_delta(ts_decay_linear(anl69_eps_best_eeps_cur_yr, 20), 5)), 0.15)), ts_delta(ts_decay_linear(anl69_eps_best_eeps_cur_yr, 20), 5), 0)"
+    ]
+}

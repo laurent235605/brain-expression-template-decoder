@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)), industry), 20)",
+    "idea": "对中美敞口行业价差施加线性衰减平滑（Linear Decay），在保持信号方向的同时降低日间噪音导致的换手率。相比简单移动平均，赋予近期数据更高权重，平衡信号滞后性与交易频率。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)), industry), 20)"
+    ]
+}

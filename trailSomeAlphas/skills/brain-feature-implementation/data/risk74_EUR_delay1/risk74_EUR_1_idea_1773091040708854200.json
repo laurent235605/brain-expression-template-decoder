@@ -1,0 +1,8 @@
+{
+    "template": "ts_backfill(group_rank({factor_e}, industry) + group_rank({factor_s}, industry) + group_rank({factor_g}, industry), 63) - ts_mean(ts_backfill(group_rank({factor_e}, industry) + group_rank({factor_s}, industry) + group_rank({factor_g}, industry), 63), 20)",
+    "idea": "整合模板1的多因子叠加与模板2的横截面分位比较（使用group_rank实现组内可比），加入时间序列处理（ts_backfill处理ESG数据缺失，ts_mean计算趋势）。通过计算ESG综合行业排名与其20日均值的偏离，识别ESG评级在行业内相对改善的动量信号，而非关注绝对水平。",
+    "expression_list": [
+        "ts_backfill(group_rank(rsk74_factor_e, industry) + group_rank(rsk74_factor_s, industry) + group_rank(rsk74_factor_g, industry), 63) - ts_mean(ts_backfill(group_rank(rsk74_factor_e, industry) + group_rank(rsk74_factor_s, industry) + group_rank(rsk74_factor_g, industry), 63), 20)",
+        "ts_backfill(group_rank(rsk74_factor_esg, industry) + group_rank(rsk74_factor_s, industry) + group_rank(rsk74_factor_g, industry), 63) - ts_mean(ts_backfill(group_rank(rsk74_factor_esg, industry) + group_rank(rsk74_factor_s, industry) + group_rank(rsk74_factor_g, industry), 63), 20)"
+    ]
+}

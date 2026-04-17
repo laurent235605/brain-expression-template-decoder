@@ -1,0 +1,16 @@
+{
+    "template": "group_zscore(ts_regression(winsorize(ts_backfill({concentration},63),std=4), winsorize(ts_backfill(if_else(is_nan({nondomicile}),0,{nondomicile}),63),std=4), 252, rettype=0), industry)",
+    "idea": "通过时间序列回归剥离总海外营收敞口对地理集中度的系统性解释，提取残差作为\"无法被国际化程度解释的集中风险\"，并在行业内标准化以识别相对极端的单国依赖风险。高残差代表在同类海外敞口水平下异常集中的危险押注，低残差代表分散度优于预期。",
+    "expression_list": [
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),std=4), 252, rettype=0), industry)",
+        "group_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),std=4), 252, rettype=0), industry)"
+    ]
+}

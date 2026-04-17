@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 1), 63)",
+    "idea": "将模板1的盈利转换效率比率（EPS/EBITDA）视为新的单因子，应用模板2的累积修正压力逻辑，计算该比率在过去63天的累积变化动量。捕捉分析师对隐含杠杆、税率及折旧预期结构性调整的季度级趋势，而非单次修正噪音。需先对两个字段做ts_backfill(5)避免除零或虚假零值。",
+    "expression_list": [
+        "ts_sum(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 1), 63)",
+        "ts_sum(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 1), 63)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "rank(add(multiply(0.6, vec_range(vec_filter({fiscalyearend}, nan))), multiply(0.4, vec_stddev(vec_filter({fiscalyearend}, nan)))))",
+    "idea": "多维度离散度复合因子：融合日期极差(range)与标准差(stddev)构建综合fiscal complexity指标，采用6:4加权平衡极端值波动与整体分散程度，经截面rank转换后形成可比信号，更全面地度量会计报告期结构的分散性与波动性风险。",
+    "expression_list": [
+        "rank(add(multiply(0.6, vec_range(vec_filter(anl30_fiscalyearend, nan))), multiply(0.4, vec_stddev(vec_filter(anl30_fiscalyearend, nan)))))"
+    ]
+}

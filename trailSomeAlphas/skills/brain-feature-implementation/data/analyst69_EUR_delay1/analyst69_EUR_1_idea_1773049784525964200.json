@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), add(1, multiply(0.5, winsorize(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), std=4))))",
+    "idea": "以行业中性化（group_zscore）的盈利转换效率为主信号A，确保跨行业可比性；将累积EPS修正压力作为从属信号B，经winsorize(std=4)和线性缩放映射到[0.5,1.5]区间作为放大器。该结构遵循'B只调力度不转方向'的安全范式，强化在同业中兼具高转换效率与强分析师上调动量的标的。",
+    "expression_list": [
+        "multiply(group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), add(1, multiply(0.5, winsorize(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), std=4))))",
+        "multiply(group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), add(1, multiply(0.5, winsorize(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), std=4))))"
+    ]
+}

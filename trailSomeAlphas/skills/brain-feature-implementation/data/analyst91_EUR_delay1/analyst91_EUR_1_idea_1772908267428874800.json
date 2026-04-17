@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 3), 5)",
+    "idea": "行业中性化长期稳定性极值策略：将全局比较改为行业内比较（group_zscore），消除不同行业固有波动率差异（如科技股vs公用事业）；保留立方变换以极度拉伸尾部，但添加5日线性衰减（ts_decay_linear）以降低换手率和微结构噪音，更适合机构级容量。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 3), 5)"
+    ]
+}

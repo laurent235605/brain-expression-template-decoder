@@ -1,0 +1,10 @@
+{
+    "template": "add(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), quantile(ts_rank(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 252), driver=\"gaussian\"))",
+    "idea": "双维度极端性叠加：将披露日期稳定性和累积修正压力分别通过模板1的秩次-高斯映射标准化后相加，构建综合信息极端性指标。该模板识别同时在时间确定性和信息内容上均处于历史极端的股票。",
+    "expression_list": [
+        "add(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), quantile(ts_rank(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 252), driver=\"gaussian\"))",
+        "add(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), quantile(ts_rank(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 252), driver=\"gaussian\"))",
+        "add(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), quantile(ts_rank(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 252), driver=\"gaussian\"))",
+        "add(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), quantile(ts_rank(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 252), driver=\"gaussian\"))"
+    ]
+}

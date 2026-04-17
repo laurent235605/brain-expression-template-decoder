@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0), 5), 3)",
+    "idea": "特质性残差动量加速：在提取252日特质性资产流动残差后，计算其5日变化率（加速度/改善趋势），捕捉资金异质流动从平稳到加速的拐点信号，并经3日线性衰减平滑以降低高频噪音带来的换手率。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), sector), 252, rettype=0), 5), 3)"
+    ]
+}

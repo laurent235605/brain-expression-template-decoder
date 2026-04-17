@@ -1,0 +1,2 @@
+id,description,dataset,category,subcategory,region,delay,universe,type,dateCoverage,coverage,userCount,alphaCount,pyramidMultiplier,themes,dataset_id,dataset_name,category_id,category_name,subcategory_id,subcategory_name
+mdl245_rank,The rank of the stock for the universe and the strategy,"{'id': 'model245', 'name': 'Ranking model dataset'}","{'id': 'model', 'name': 'Model'}","{'id': 'model-valuation-models', 'name': 'Valuation Models'}",EUR,1,TOPCS1600,VECTOR,1.0,0.4352,0,0,1.4,[],model245,Ranking model dataset,model,Model,model-valuation-models,Valuation Models

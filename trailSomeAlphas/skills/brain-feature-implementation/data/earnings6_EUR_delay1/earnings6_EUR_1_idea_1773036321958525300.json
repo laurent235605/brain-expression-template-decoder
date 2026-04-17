@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {sector})), 2.0), ts_delta(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 63), 0)",
+    "idea": "关注盈利意外的\"加速度\"而非仅绝对水平，通过ts_delta(63)捕捉连续季度的预期修正趋势（动量效应）；利用trade_when构造条件逻辑，仅在当前意外处于行业极端区间（|zscore|>2）时才交易，中段噪音视为零；适用于\"惊喜持续发酵\"的场景，避免对一次性意外过度反应，逻辑是极端意外的延续性往往比温和意外更具alpha预测能力。",
+    "expression_list": []
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_regression(winsorize(ts_backfill({surp},21),4), winsorize({ttmaccu},4), 126, rettype=0), reverse(group_zscore(winsorize({ttmaccu},4),sector)))",
+    "idea": "回归剥离与质量残差提取：通过126日滚动回归将盈余惊喜{surp}对{ttmaccu}进行正交化处理，提取出不被应计项目解释的特异性残差（rettype=0），这部分代表剔除会计操控后的'纯净'惊喜；再将该残差与行业中性化的反向应计质量相乘，形成双重质量控制——既排除了应计对惊喜的系统性影响，又额外惩罚高应计公司，强化策略的财务真实性筛选能力。",
+    "expression_list": [
+        "multiply(ts_regression(winsorize(ts_backfill(mdl219_1_surp,21),4), winsorize(mdl219_1_ttmaccu,4), 126, rettype=0), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector)))",
+        "multiply(ts_regression(winsorize(ts_backfill(mdl219_2_surp,21),4), winsorize(mdl219_1_ttmaccu,4), 126, rettype=0), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector)))",
+        "multiply(ts_regression(winsorize(ts_backfill(mdl219_1_surp,21),4), winsorize(mdl219_2_ttmaccu,4), 126, rettype=0), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector)))",
+        "multiply(ts_regression(winsorize(ts_backfill(mdl219_2_surp,21),4), winsorize(mdl219_2_ttmaccu,4), 126, rettype=0), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector)))"
+    ]
+}

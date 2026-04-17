@@ -1,0 +1,8 @@
+{
+    "template": "multiply(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), if_else(greater(bucket(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), range=\"0,1,0.2\"), 0.8), 1.5, if_else(less(bucket(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), range=\"0,1,0.2\"), 0.2), 0.5, 1.0)))",
+    "idea": "**分桶非线性增强（Bucket离散化）**：将模板B的线性连续增强改造为分桶(bucket)离散结构，仅对修正动量前20%股票给予1.5倍放大，后20%降至0.5倍，中段保持中性，实现激进的尾部重点押注与中段噪音过滤。",
+    "expression_list": [
+        "multiply(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), if_else(greater(bucket(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), 0.8), 1.5, if_else(less(bucket(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), 0.2), 0.5, 1.0)))",
+        "multiply(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), if_else(greater(bucket(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), 0.8), 1.5, if_else(less(bucket(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), range=\"0,1,0.2\"), 0.2), 0.5, 1.0)))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "truncate(ts_decay_linear(signed_power(group_zscore(ts_rank(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), 126), industry), 2), 3), maxPercent=0.015)",
+    "idea": "时序分位点增强版：先计算原始信噪比(SNR)，通过126日(ts_rank)观察当前流压处于自身历史的极端分位，避免高波动个股长期主导信号；随后在行业层面中性化(group_zscore)剔除行业轮动干扰；使用平方变换(signed_power)非线性放大极端值，最后配合3日线性衰减(ts_decay_linear)在保留信号强度的同时显著降低换手率。",
+    "expression_list": [
+        "truncate(ts_decay_linear(signed_power(group_zscore(ts_rank(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), 126), industry), 2), 3), maxPercent=0.015)"
+    ]
+}

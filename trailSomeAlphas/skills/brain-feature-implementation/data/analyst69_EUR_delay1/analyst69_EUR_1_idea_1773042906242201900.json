@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry), 0), 3)",
+    "idea": "极端值提取与平滑：仅保留行业标准化后绝对值大于1.5个标准差的极端稳定/极不稳定状态，其余置零，并通过3日线性衰减降低组合换手率，专注于历史罕见状态的持续影响而非日常噪音。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), 0), 3)",
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), 0), 3)"
+    ]
+}

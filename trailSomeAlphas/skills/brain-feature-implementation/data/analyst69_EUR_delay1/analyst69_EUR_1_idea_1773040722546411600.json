@@ -1,0 +1,5 @@
+{
+    "template": "truncate(ts_decay_exp_window(trade_when(and(greater(abs(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), {industry})), 2), greater({volume}, ts_mean({volume}, 20))), quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 0), 10), maxPercent=0.02)",
+    "idea": "极端稳定性事件的量能确认与衰减模板。仅当个股稳定性指标在行业内的zscore绝对值超过2（极端罕见状态）且当日成交量突破20日均量（流动性确认）时开仓，采用指数衰减窗口（10日）动态降低事件后仓位，并截断单票权重上限2%。适用于捕捉财报披露延期/提前等重大事件冲击后的均值回归。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater( rank(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20)), 0.7 ), ts_delta(vec_avg({version}), 5) * vec_range({version}), 0 )",
+    "idea": "使用trade_when构建条件逻辑，仅在累积修正强度处于市场前30%分位时交易动量-离散度信号，相当于在'高关注度'股票池中应用趋势-分歧策略，有效过滤低活跃期的噪音干扰，提升信号信噪比",
+    "expression_list": [
+        "trade_when( greater( rank(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20)), 0.7 ), ts_delta(vec_avg(anl85_version), 5) * vec_range(anl85_version), 0 )"
+    ]
+}

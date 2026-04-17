@@ -1,0 +1,14 @@
+{
+    "template": "signed_power({concentration} - ts_mean({concentration}, 60), 2) * rank({crowding})",
+    "idea": "非线性地理集中度Spike与排名拥挤度：对集中度偏离使用signed_power放大极端值（y=2），同时用rank将拥挤度映射为0-1分位数，强化极端地理变化情境下的拥挤风险识别，抑制温和波动的干扰。",
+    "expression_list": [
+        "signed_power(rsk74_concentration - ts_mean(rsk74_concentration, 60), 2) * rank(rsk74_crowding)",
+        "signed_power(rsk74_concentration - ts_mean(rsk74_concentration, 60), 2) * rank(rsk74_raw_crowding)",
+        "signed_power(rsk74_concentration - ts_mean(rsk74_concentration, 60), 2) * rank(liquidity_factor_crowding)",
+        "signed_power(rsk74_concentration - ts_mean(rsk74_concentration, 60), 2) * rank(liquidity_timeseries_crowding)",
+        "signed_power(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 2) * rank(rsk74_crowding)",
+        "signed_power(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 2) * rank(rsk74_raw_crowding)",
+        "signed_power(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 2) * rank(liquidity_factor_crowding)",
+        "signed_power(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60), 2) * rank(liquidity_timeseries_crowding)"
+    ]
+}

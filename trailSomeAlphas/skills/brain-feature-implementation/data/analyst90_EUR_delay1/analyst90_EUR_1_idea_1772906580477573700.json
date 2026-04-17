@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(vec_avg({likelihood_score}), 90), 0.9), group_scale(winsorize(vec_avg({likelihood_score}) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), industry), 0)",
+    "idea": "结合历史分位确认（ts_rank>0.9）与行业缩放（group_scale），仅在分析师信心创90日新高时触发交易，并确保行业内权重平衡，构建“历史新高+行业中性”的右侧增强策略。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(vec_avg(success_likelihood_score), 90), 0.9), group_scale(winsorize(vec_avg(success_likelihood_score) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), industry), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(group_zscore(subtract(ts_mean({active_return_decile_rank_long}, 20), ts_mean({active_weight_decile_rank_long}, 20)), sector), 10), 5)",
+    "idea": "偏离度动量模板：先对分位数据进行20日均值平滑，计算偏离度在行业中性后的变化率（10日delta），再应用5日衰减，识别机构持仓正在快速向高收益股票迁移或加速逃离低收益股票的动态趋势，适用于捕捉配置动量而非静态错配。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(group_zscore(subtract(ts_mean(insd8_black_litterman_implied_active_return_decile_rank_long, 20), ts_mean(insd8_active_weight_decile_rank_long, 20)), sector), 10), 5)"
+    ]
+}

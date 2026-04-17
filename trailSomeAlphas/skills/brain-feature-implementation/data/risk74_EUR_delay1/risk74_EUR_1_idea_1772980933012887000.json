@@ -1,0 +1,8 @@
+{
+    "template": "multiply(sign(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60))), group_zscore(winsorize(ts_delta(subtract(ts_backfill({concentration}, 10), ts_mean(ts_backfill({concentration}, 10), 60)), 20), std=4), industry))",
+    "idea": "集中度变化加速度因子：不仅关注当前偏离趋势的程度，更关注该偏离本身的变化速度（二阶导数）。先计算相对于60日均值的偏离，再求其在20日内的变化量（delta），捕捉正在加速集中或加速分散的企业。通过符号函数确保仅当加速度方向与偏离方向一致时才产生信号（避免反向回归的噪音），最后进行组内zscore标准化。",
+    "expression_list": [
+        "multiply(sign(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60))), group_zscore(winsorize(ts_delta(subtract(ts_backfill(rsk74_concentration, 10), ts_mean(ts_backfill(rsk74_concentration, 10), 60)), 20), std=4), industry))",
+        "multiply(sign(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60))), group_zscore(winsorize(ts_delta(subtract(ts_backfill(rsk74_raw_concentration, 10), ts_mean(ts_backfill(rsk74_raw_concentration, 10), 60)), 20), std=4), industry))"
+    ]
+}

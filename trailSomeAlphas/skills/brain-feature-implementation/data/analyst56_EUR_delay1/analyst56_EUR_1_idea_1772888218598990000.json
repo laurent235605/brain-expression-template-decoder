@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else(is_nan(vec_avg({daily_probability})), 0, vec_avg({daily_probability})), 20)",
+    "idea": "**Concept**: Cumulative Conviction Build-up\n- **Sample Fields Used**: `daily_probability`, `probability`\n- **Definition**: Sum of conviction scores over 20-day window measuring persistent bullish/bearish pressure\n- **Why This Feature**: Single-day high conviction may be noise; sustained high conviction over weeks indicates durable sentiment shift\n- **is filling nan necessary**: NaN days represent no update. Treat as zero in sum to avoid biasing toward active updaters, but use if_else to distinguish zero conviction from missing data if zero is valid.\n- **Directionality**: High positive values = sustained bullish pressure; High negative values = sustained bearish pressure (if probability signed)\n- **Boundary Conditions**: Cap maximum at 2000 (20 days * 100 max) to handle data errors",
+    "expression_list": [
+        "ts_sum(if_else(is_nan(vec_avg(anl56_daily_probability)), 0, vec_avg(anl56_daily_probability)), 20)"
+    ]
+}

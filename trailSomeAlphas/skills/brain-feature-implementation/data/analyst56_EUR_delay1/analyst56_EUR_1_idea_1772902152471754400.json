@@ -1,0 +1,9 @@
+{
+    "template": "multiply(quantile(vec_avg({probability}), driver=\"gaussian\"), add(1, multiply(0.5, ts_zscore(ts_delta(vec_avg({daily_probability}), 5), 60))))",
+    "idea": "动量非线性增强信念：用经时序标准化的动量信号（60日窗口）作为放大系数，对高斯化信念水平进行非线性增强，正向动量提升信号强度",
+    "expression_list": [
+        "multiply(quantile(vec_avg(anl56_daily_probability), driver=\"gaussian\"), add(1, multiply(0.5, ts_zscore(ts_delta(vec_avg(anl56_daily_probability), 5), 60))))",
+        "multiply(quantile(vec_avg(anl56_probability), driver=\"gaussian\"), add(1, multiply(0.5, ts_zscore(ts_delta(vec_avg(anl56_daily_probability), 5), 60))))",
+        "multiply(quantile(vec_avg(conviction_probability_score), driver=\"gaussian\"), add(1, multiply(0.5, ts_zscore(ts_delta(vec_avg(anl56_daily_probability), 5), 60))))"
+    ]
+}

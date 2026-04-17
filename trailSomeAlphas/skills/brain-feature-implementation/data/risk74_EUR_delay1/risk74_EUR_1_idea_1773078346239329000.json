@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(ts_rank(winsorize({hfown_pctown}, std=4), 252), {sector})",
+    "idea": "历史极值与板块偏离共振因子：先计算个股持仓比例在过去一年（252日）中的历史分位（ts_rank），识别其是否处于自身历史持仓的极端高位或低位，再进行板块内标准化（group_zscore）。该因子捕捉\"双重极端\"信号：既处于自身历史持仓高位，又相对板块显著超配（或双重低配），用于发现机构长期建仓或清仓的极致偏离。",
+    "expression_list": []
+}

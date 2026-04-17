@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_rank(quantile(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 63), std=4), driver=gaussian), 252), sector)",
+    "idea": "历史分位偏离：衡量当前盈利预期在其自身历史（252日）中的相对位置，经行业中性化后识别极端乐观（历史高位）或悲观（历史低位）预期，捕捉均值回复或趋势延续信号",
+    "expression_list": [
+        "group_zscore(ts_rank(quantile(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), std=4), driver=gaussian), 252), sector)",
+        "group_zscore(ts_rank(quantile(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), std=4), driver=gaussian), 252), sector)"
+    ]
+}

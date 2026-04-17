@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_backfill(vec_avg({vda}), lookback=5, k=1), driver=\"gaussian\", sigma=1.0)",
+    "idea": "**Concept**: Cross-Sectional Liquidity Rank\n- **Sample Fields Used**: vda\n- **Definition**: Gaussian quantile ranking of VDA across universe to identify relative liquidity stress vs. peers\n- **Why This Feature**: Normalizes for market-wide rebalance activity; identifies outliers even in busy rebalance periods; ranks severity relative to opportunity set\n- **is filling nan necessary**: Yes, backfill to ensure cross-sectional comparability on each date.\n- **Directionality**: High values indicate most stressed liquidity in universe; low values indicate easiest absorption\n- **Boundary Conditions**: Extreme tails (>2 sigma) indicate significant relative dislocation; median values indicate normal conditions",
+    "expression_list": [
+        "quantile(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), driver=\"gaussian\", sigma=1.0)"
+    ]
+}

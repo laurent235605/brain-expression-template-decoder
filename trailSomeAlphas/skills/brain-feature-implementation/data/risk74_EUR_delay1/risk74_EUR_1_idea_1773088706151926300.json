@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_delta({hfown_pctown}, 5), industry), 3)",
+    "idea": "非线性尾部放大：对行业中性化后的持仓变化应用三次幂变换(signed_power)，非线性放大极端值(头尾)同时压缩中间区间，强化对显著资金流入(多头)和流出(空头)的暴露，抑制温和变化的噪音，适用于动量加速场景。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_delta(rsk74_hfown_pctown, 5), industry), 3)"
+    ]
+}

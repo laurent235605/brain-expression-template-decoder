@@ -1,0 +1,8 @@
+{
+    "template": "left_tail(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 0) * (2 - right_tail(vec_avg({stock_split_ratio_243}), 1.0))",
+    "idea": "distress 确认策略：激进地仅关注亏损股票（left_tail保留<=0的TTM EPS），并用反向拆股信号（right_tail保留>=1的比率，即正常或正向拆股，此处用2减去该值，实际意图是当ratio<1时放大）进行权重调整。实际上，当ratio<1（反向拆股）时，(2 - ratio) > 1，放大亏损信号；当ratio>=1时，权重<=1。这实现了\"仅在资本结构恶化确认时，加重对亏损股票的空头押注\"的交叉逻辑，将两个独立的负面信号进行乘法叠加。",
+    "expression_list": [
+        "left_tail(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0) * (2 - right_tail(vec_avg(ern6_stock_split_ratio_243), 1.0))",
+        "left_tail(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0) * (2 - right_tail(vec_avg(ern6_stock_split_ratio_243), 1.0))"
+    ]
+}

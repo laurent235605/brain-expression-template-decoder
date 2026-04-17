@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 2), 1, if_else(less(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), -2), -1, 0)), industry)",
+    "idea": "将模板2的“极端状态离散化”逻辑应用于模板1的连续修订动量信号。仅当EPS修订加速度突破±2倍标准差阈值时才产生±1的极端信号，中间状态视为噪音归零，并经行业归一化确保中性。这种处理将连续动量转化为事件驱动型开关，适用于仅在分析师预期出现极端情绪拐点时进行押注，降低频繁小额交易的成本。",
+    "expression_list": [
+        "group_normalize(if_else(greater(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 2), 1, if_else(less(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), -2), -1, 0)), industry)",
+        "group_normalize(if_else(greater(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 2), 1, if_else(less(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), -2), -1, 0)), industry)"
+    ]
+}

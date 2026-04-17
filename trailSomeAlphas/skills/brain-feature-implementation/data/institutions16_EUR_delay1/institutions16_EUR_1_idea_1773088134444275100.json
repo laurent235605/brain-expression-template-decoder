@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(group_rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0.85), less(ts_zscore(ts_std_dev(returns, 21), 63), 1.5)), group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0)",
+    "idea": "实施条件交易策略：仅在风险调整后配置处于行业前15%（或后15%反向）分位，且近期波动率处于历史正常区间（非极端高波动噪音期）时建仓；利用`trade_when`与`and`逻辑过滤，构建高确信度的极端配置信号，其余时间零仓位规避弱信号时段。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0.85), less(ts_zscore(ts_std_dev(returns, 21), 63), 1.5)), group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0)"
+    ]
+}

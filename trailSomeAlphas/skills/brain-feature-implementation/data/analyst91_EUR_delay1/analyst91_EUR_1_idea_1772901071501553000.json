@@ -1,0 +1,7 @@
+{
+    "template": "zscore(divide(ts_delta(vec_avg({exposure_value}), 20), add(ts_std_dev(vec_avg({exposure_value}), 20), 0.001)))",
+    "idea": "地理敞口动量波动率比率（变化显著性）。计算20日地理敞口均值的变化量（动量），除以同期波动率作为风险调整系数，得到标准化后的\"地域战略调整强度\"信号。高值表明公司正在进行统计显著的地域扩张或收缩（信号强于噪音），低值表明仅为随机波动。截面Z-score标准化后用于比较不同公司的战略调整决心与执行力度。",
+    "expression_list": [
+        "zscore(divide(ts_delta(vec_avg(anl91_exposure_value), 20), add(ts_std_dev(vec_avg(anl91_exposure_value), 20), 0.001)))"
+    ]
+}

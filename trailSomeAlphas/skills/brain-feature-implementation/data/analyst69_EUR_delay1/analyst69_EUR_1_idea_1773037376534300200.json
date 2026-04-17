@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(quantile(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 21), std=4), driver=gaussian), industry)), 2), group_zscore(quantile(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 21), std=4), driver=gaussian), industry), 0)",
+    "idea": "**概念**: 行业中性极端预期筛选\n**核心逻辑**: 先对原始EPS预期进行21日回溯填充与4倍标准差截尾清洗，转换为高斯分位数后，在行业内部做zscore标准化，仅保留偏离行业均值超过2个标准差的极端值（|zscore|>2），中间噪音区域强制置零。该模板剥离了行业间不可比的绝对水平差异，专注于捕捉行业内盈利预期的极端异常偏离，适用于行业轮动或中性化策略。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(quantile(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), std=4), driver=gaussian), industry)), 2), group_zscore(quantile(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), std=4), driver=gaussian), industry), 0)",
+        "trade_when(greater(abs(group_zscore(quantile(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), std=4), driver=gaussian), industry)), 2), group_zscore(quantile(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), std=4), driver=gaussian), industry), 0)"
+    ]
+}

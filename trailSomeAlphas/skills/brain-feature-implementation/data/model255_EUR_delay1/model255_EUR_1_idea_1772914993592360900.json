@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(({cacfroi275co2e} - {cacfroi5co2e}), 60)",
+    "idea": "**Concept**: Cumulative Carbon Cost Impact\n- **Sample Fields Used**: `cacfroi5co2e`, `cacfroi275co2e`\n- **Definition**: Accumulating difference between high and low carbon price scenarios to measure total transition risk exposure over time\n- **Why This Feature**: Carbon risk compounds over time through regulatory tightening and asset stranding; cumulative measure captures the growing economic drag\n- **is filling nan necessary**: No, NaN indicates missing data which should pause accumulation (use available data points only via ts_sum ignoring NaN, or treat as zero change)\n- **Directionality**: Increasing cumulative gap indicates accelerating transition risk exposure; Stable values indicate carbon hedging or decarbonization success\n- **Boundary Conditions**: Exponentially increasing values indicate \"carbon bomb\" trajectory; Flat or declining cumulative values indicate resilience",
+    "expression_list": [
+        "ts_sum((mdl255_cacfroi275co2e - mdl255_cacfroi5co2e), 60)"
+    ]
+}

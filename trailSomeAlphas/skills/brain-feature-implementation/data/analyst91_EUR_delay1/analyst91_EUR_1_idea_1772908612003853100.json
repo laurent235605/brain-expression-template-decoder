@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_skewness({exposure_value}), std=4), 20), 20), 120), industry)",
+    "idea": "高阶矩偏度预警：使用vec_skewness替代vec_avg，捕捉exposure分布的尾部不对称性（左偏/右偏），再计算其20日波动率及120日历史分位数；高偏度波动往往预示极端风险事件临近，在行业层面横向比较可筛选出尾部风险显著异于同业的标的。",
+    "expression_list": [
+        "group_zscore(ts_rank(ts_std_dev(ts_backfill(winsorize(vec_skewness(anl91_exposure_value), std=4), 20), 20), 120), industry)"
+    ]
+}

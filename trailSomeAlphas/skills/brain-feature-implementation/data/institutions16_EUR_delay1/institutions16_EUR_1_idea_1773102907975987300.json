@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), \"gaussian\"), 10)",
+    "idea": "在行业标准化后，使用高斯分位数变换(quantile)将中间区间压缩至0附近、头尾拉伸，再施加10日线性衰减。相比signed_power的幂律压缩，高斯分位数更强调统计意义上的\"异常值\"分布，与衰减结合后形成\"统计异常+时间持续\"的复合筛选器，增强对尾部风险的识别稳定性。",
+    "expression_list": [
+        "ts_decay_linear(quantile(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), \"gaussian\"), 10)"
+    ]
+}

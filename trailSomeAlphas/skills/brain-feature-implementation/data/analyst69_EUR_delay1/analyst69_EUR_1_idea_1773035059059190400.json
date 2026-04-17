@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\")",
+    "idea": "构建基于个股自身历史分布的稳定性分位数指标。首先进行126日回溯填充保证数据完整性，计算当前稳定天数在过去252个交易日（一年）中的时序分位（ts_rank），再通过高斯分布映射（quantile）将历史极端稳定/不稳定状态拉伸至尾部，增强对'历史罕见'状态的风险提示或机会识别。",
+    "expression_list": [
+        "quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\")"
+    ]
+}

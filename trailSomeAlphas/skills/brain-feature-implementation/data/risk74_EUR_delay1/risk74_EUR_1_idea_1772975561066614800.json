@@ -1,0 +1,14 @@
+{
+    "template": "if_else(greater(group_zscore(add(add({factor_e}, {factor_s}), {factor_g}), industry), 0), multiply({crowding}, reverse({value_ts})), multiply({crowding}, {value_ts}))",
+    "idea": "**交叉增强逻辑**: 基于ESG分组的条件逻辑（第2步区间结构）。对于ESG强的股票（行业zscore>0），使用`reverse({value_ts})`构建反向价值暴露（即高估买入，源于Input 1的拥挤价值陷阱的逆向思维）；对于ESG弱的股票，保持正向价值。拥挤度作为放大器。这捕捉了\"高质量ESG股票可以承受更高估值\"的激进假设，而低ESG股票必须严格价值筛选。",
+    "expression_list": [
+        "if_else(greater(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(rsk74_crowding, reverse(rsk74_value_ts)), multiply(rsk74_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(rsk74_raw_crowding, reverse(rsk74_value_ts)), multiply(rsk74_raw_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(liquidity_factor_crowding, reverse(rsk74_value_ts)), multiply(liquidity_factor_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(liquidity_timeseries_crowding, reverse(rsk74_value_ts)), multiply(liquidity_timeseries_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(rsk74_crowding, reverse(rsk74_value_ts)), multiply(rsk74_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(rsk74_raw_crowding, reverse(rsk74_value_ts)), multiply(rsk74_raw_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(liquidity_factor_crowding, reverse(rsk74_value_ts)), multiply(liquidity_factor_crowding, rsk74_value_ts))",
+        "if_else(greater(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry), 0), multiply(liquidity_timeseries_crowding, reverse(rsk74_value_ts)), multiply(liquidity_timeseries_crowding, rsk74_value_ts))"
+    ]
+}

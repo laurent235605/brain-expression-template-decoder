@@ -1,0 +1,10 @@
+{
+    "template": "subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta(days_from_last_change({eps_expected_report_dt}), 5), 60))",
+    "idea": "预期修订短期动量与报告日期稳定性变化率的背离信号。当分析师上调预期的同时计划不确定性加速上升（稳定性下降），或预期下调但日程趋于稳定时，捕捉潜在的风险预警或触底反弹机会。",
+    "expression_list": [
+        "subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 5), 60))",
+        "subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 5), 60))",
+        "subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 5), 60))",
+        "subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 5), 60))"
+    ]
+}

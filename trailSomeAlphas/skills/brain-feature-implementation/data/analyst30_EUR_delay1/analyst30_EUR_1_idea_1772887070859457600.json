@@ -1,0 +1,7 @@
+{
+    "template": "vec_count({fiscalyearend})",
+    "idea": "**Concept**: Fiscal Calendar Persistence\n- **Sample Fields Used**: `fiscalyearend`\n- **Definition**: Count of distinct fiscal year end dates present in the vector\n- **Why This Feature**: Detects changes in fiscal year end dates which signal mergers, acquisitions, or accounting policy changes that may affect dividend timing\n- **Logical Meaning**: Structural stability of the company's accounting calendar\n- **is filling nan necessary**: NaN values represent missing fiscal data and should be excluded using `vec_filter` with value=\"nan\" to avoid counting nulls as distinct dates\n- **Directionality**: Value of 1 indicates perfect fiscal stability; >1 indicates fiscal year changes during the observation period\n- **Boundary Conditions**: Integer >= 0; 0 indicates all missing data; 1 is optimal for stable enterprises",
+    "expression_list": [
+        "vec_count(anl30_fiscalyearend)"
+    ]
+}

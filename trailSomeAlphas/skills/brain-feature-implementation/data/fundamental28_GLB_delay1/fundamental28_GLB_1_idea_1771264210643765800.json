@@ -1,0 +1,8 @@
+{
+    "template": "divide(group_zscore(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), 4), industry), ts_std_dev(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), 252))",
+    "idea": "行业中性化与波动率调整相结合的稳健动量因子。首先对原始运营利润率动量进行4倍标准差截尾处理以消除一次性非经常性损益导致的极端尖峰，随后在行业内部进行zscore标准化以剥离行业beta差异，最后除以该动量指标过去1年的时序标准差，构建类似\"信息比率\"的统计量。该做法使得处于稳定经营环境（低波动）下的运营改善信号获得更高置信度权重，同时确保跨行业可比性。",
+    "expression_list": [
+        "divide(group_zscore(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), 4), industry), ts_std_dev(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), 252))",
+        "divide(group_zscore(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), 4), industry), ts_std_dev(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), 252))"
+    ]
+}

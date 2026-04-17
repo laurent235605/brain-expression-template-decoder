@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(ts_backfill({hfown_pctown}, 21), std=4), industry)), 2), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry))))",
+    "idea": "仅在HF持仓偏离行业均值2个标准差以上（极端超配/低配）时全额交易中美敞口价差，否则仅保留30%仓位。融合模板1的边界极端值概念与模板2的区域轮动逻辑，通过trade_when实现“信号强度分层”，避免中等持仓区间的噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), industry)), 2), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry))))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply({reinrate}, {roe})",
+    "idea": "**Concept**: Reinvestment Accumulation Efficiency\n- **Sample Fields Used**: `reinrate`, `roe`, `susgrowth`, `ttmcapexp`\n- **Definition**: Cumulative retained earnings converted into sustainable growth, measuring reinvestment ROI\n- **Why This Feature**: Sustainable value creation requires reinvestment at rates exceeding cost of capital\n- **Logical Meaning**: High values indicate effective plowback of earnings into value-creating projects\n- **is filling nan necessary**: Yes, use `group_mean()` for missing reinvestment rates within industries\n- **Directionality**: Higher values indicate superior capital allocation discipline\n- **Boundary Conditions**: Negative values indicate value destruction through growth investments",
+    "expression_list": [
+        "multiply(mdl219_1_reinrate, mdl219_1_roe)",
+        "multiply(mdl219_1_reinrate, mdl219_2_roe)",
+        "multiply(mdl219_2_reinrate, mdl219_2_roe)",
+        "multiply(mdl219_2_reinrate, mdl219_1_roe)"
+    ]
+}

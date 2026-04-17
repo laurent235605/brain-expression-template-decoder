@@ -1,0 +1,7 @@
+{
+    "template": "truncate(ts_decay_linear(quantile(group_zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), subindustry), driver=\"gaussian\"), 20), maxPercent=0.015)",
+    "idea": "尾部高斯变换模板：在子行业层面进行中性化处理后，应用高斯分位数变换将偏离度的中间区间压缩至零附近，同时拉伸尾部极端值，配合20日线性衰减窗口赋予近期数据更高权重，最后截断单票权重至1.5%以内，强调极端错配机会并严格控制风险集中度。",
+    "expression_list": [
+        "truncate(ts_decay_linear(quantile(group_zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), subindustry), driver=\"gaussian\"), 20), maxPercent=0.015)"
+    ]
+}

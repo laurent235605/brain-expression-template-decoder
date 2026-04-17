@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(greater(abs(group_zscore(divide(ts_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),21),ts_median(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),126)),industry)),1.5),signed_power(group_zscore(divide(ts_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),21),ts_median(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),126)),industry),2),0),industry)",
+    "idea": "自适应波动率阈值与尾部放大模板。先对原始权重进行21日回填补全与4倍标准差截尾(winsorize)清洗，计算近期(21日)均值相对半年(126日)中位数的偏离比率，并在行业内进行zscore标准化；摒弃固定分位数阈值，改用动态标准差阈值(1.5σ)，仅当偏离幅度超过该阈值时才视为有效信号，同时利用signed_power(2)对极端Z-score进行平方非线性放大，强化高确信度尾部的权重，中间温和区域置零，最后执行行业中性归一化(group_normalize)。",
+    "expression_list": [
+        "group_normalize(trade_when(greater(abs(group_zscore(divide(ts_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),21),ts_median(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),126)),industry)),1.5),signed_power(group_zscore(divide(ts_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),21),ts_median(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),126)),industry),2),0),industry)"
+    ]
+}

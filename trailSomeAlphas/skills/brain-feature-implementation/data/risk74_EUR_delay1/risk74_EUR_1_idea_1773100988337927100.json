@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_sum(ts_delta({hfown_pctown},1),20), std=4), industry)",
+    "idea": "行业中性极端流捕捉：先对20日累积持仓变化进行winsorize处理(标准差=4)，剔除并购重组等事件导致的极端异常跳变；再进行行业内zscore标准化，消除不同行业间资金流动基线差异的干扰。该模板专注于识别相对于同业 peers 的异常资金流向，高正值表示相对行业显著增持(潜在超额需求)，高负值表示相对行业显著减持(潜在抛压)。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), std=4), industry)"
+    ]
+}

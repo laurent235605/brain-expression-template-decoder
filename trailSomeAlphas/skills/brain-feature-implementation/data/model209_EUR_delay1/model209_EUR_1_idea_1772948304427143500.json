@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp})) / (vec_stddev({opentimestamp}) + 1)",
+    "idea": "**Concept**: Normalized Execution Lag\n- **Sample Fields Used**: opentimestamp, loadedidstimestamp\n- **Definition**: Average latency between load and open normalized by standard deviation of open times (z-score of latency relative to execution dispersion)\n- **Why This Feature**: Relative measure of delay accounting for varying market timing patterns; identifies if current latency is unusual relative to typical execution variance\n- **Logical Meaning**: Standardized operational efficiency score\n- **is filling nan necessary**: Filter invalid timestamps; add small constant to denominator to prevent division by zero in low-variance scenarios\n- **Directionality**: Near zero indicates typical latency; high positive indicates unusual delays; negative indicates faster than typical processing\n- **Boundary Conditions**: Unbounded but practically centered around zero",
+    "expression_list": [
+        "(vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp)) / (vec_stddev(mdl209_opentimestamp) + 1)"
+    ]
+}

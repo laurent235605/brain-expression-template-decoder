@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(hump(ts_decay_linear(ts_delta(ts_backfill({reported_asset_value}, 63), 20) - ts_mean(ts_delta(ts_backfill({reported_asset_value}, 63), 20), 60), 10), hump=0.02), 252)",
+    "idea": "历史分位时序标准化：先对回溯填充63日的数据计算资产流加速度，经10日平滑后应用hump算子过滤日间微小波动（0.02阈值），再计算其在过去252日历史窗口中的时序zscore，识别当前资金动能相对于自身长期历史的极端程度，适用于捕捉资金流向的长期周期性拐点而非短期横截面偏离。",
+    "expression_list": [
+        "ts_zscore(hump(ts_decay_linear(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20) - ts_mean(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20), 60), 10), hump=0.02), 252)"
+    ]
+}

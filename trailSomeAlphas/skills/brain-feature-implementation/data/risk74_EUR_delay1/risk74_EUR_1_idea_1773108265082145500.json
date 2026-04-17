@@ -1,0 +1,8 @@
+{
+    "template": "bucket(winsorize(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),range=\"-4,4,0.5\")",
+    "idea": "特质空头分级离散化：将行业回归残差（连续值）按0.5个标准差宽度分桶（-4σ至+4σ），将空头压力映射为离散等级，避免连续值微小波动干扰，构建'特质空头压力分级'的非线性信号，适配分档调仓策略。",
+    "expression_list": [
+        "bucket(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),range=\"-4,4,0.5\")",
+        "bucket(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),range=\"-4,4,0.5\")"
+    ]
+}

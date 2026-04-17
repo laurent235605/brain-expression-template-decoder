@@ -1,0 +1,7 @@
+{
+    "template": "scale(group_normalize(trade_when(greater(abs(group_zscore(divide(vec_skewness({version}), add(ts_std_dev(vec_avg({version}), 63), 0.0001)), industry)), 2), signed_power(winsorize(group_zscore(divide(vec_skewness({version}), add(ts_std_dev(vec_avg({version}), 63), 0.0001)), industry), 3), 1.5), 0), industry), scale=1)",
+    "idea": "使用63日标准差对原始偏度进行波动率标准化（类似Sharpe比率化），消除高波动行业固有的偏度测量偏差，在行业层面提取zscore后通过winsorize截断±3sigma极值，再应用signed_power放大有效信号，最终scale确保多空市值中性。",
+    "expression_list": [
+        "scale(group_normalize(trade_when(greater(abs(group_zscore(divide(vec_skewness(anl85_version), add(ts_std_dev(vec_avg(anl85_version), 63), 0.0001)), industry)), 2), signed_power(winsorize(group_zscore(divide(vec_skewness(anl85_version), add(ts_std_dev(vec_avg(anl85_version), 63), 0.0001)), industry), 3), 1.5), 0), industry), scale=1)"
+    ]
+}

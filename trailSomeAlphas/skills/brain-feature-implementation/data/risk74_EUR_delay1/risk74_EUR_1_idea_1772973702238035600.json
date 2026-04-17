@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(s_log_1p(divide(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4), add(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4), winsorize(if_else(is_nan({exp_chn}), 0, {exp_chn}), std=4), winsorize(if_else(is_nan({exp_nondomicile1}), 0, {exp_nondomicile1}), std=4), 0.0001))), industry)",
+    "idea": "多区域集中度偏离指数。计算美国敞口占总体海外敞口（美+中+其他非本土）的比例，经对数变换压缩尺度后行业标准化，识别相对于同行过度集中于美国单一市场的'地理集中风险'或'纯暴露机会'。",
+    "expression_list": [
+        "group_zscore(s_log_1p(divide(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), add(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), winsorize(if_else(is_nan(rsk74_raw_exp_chn), 0, rsk74_raw_exp_chn), std=4), winsorize(if_else(is_nan(rsk74_raw_exp_nondomicile1), 0, rsk74_raw_exp_nondomicile1), std=4), 0.0001))), industry)",
+        "group_zscore(s_log_1p(divide(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), add(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), winsorize(if_else(is_nan(rsk74_raw_exp_chn), 0, rsk74_raw_exp_chn), std=4), winsorize(if_else(is_nan(rsk74_std_exp_nondomicile1), 0, rsk74_std_exp_nondomicile1), std=4), 0.0001))), industry)"
+    ]
+}

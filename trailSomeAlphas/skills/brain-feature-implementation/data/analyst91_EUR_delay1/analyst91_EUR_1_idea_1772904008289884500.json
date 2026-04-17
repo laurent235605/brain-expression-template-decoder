@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(quantile(group_rank(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), driver=\"gaussian\"), 2)",
+    "idea": "先将期限利差做行业内排名，再通过高斯分布映射（quantile）将两端极端值拉远，最后平方增强。这种方法比直接zscore更能强调尾部极端偏离，同时严格保证行业中性。",
+    "expression_list": [
+        "signed_power(quantile(group_rank(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), driver=\"gaussian\"), 2)"
+    ]
+}

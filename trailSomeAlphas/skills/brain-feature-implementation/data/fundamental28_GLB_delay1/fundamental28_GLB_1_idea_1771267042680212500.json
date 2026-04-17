@@ -1,0 +1,12 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), std=4), 126), sector)",
+    "idea": "关注流动性压力的**变化速度**而非静态水平，适用于捕捉债务期限结构恶化的早期预警。通过ts_delta计算126日（半年窗口）的变化率，识别短期债务占比正在快速攀升的公司。在行业内部进行标准化(group_zscore)，确保信号反映的是相对于同行的边际恶化，而非行业共性的宏观波动。此模板强调'恶化即风险'的动态逻辑。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), 126), sector)",
+        "group_zscore(ts_delta(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), 126), sector)",
+        "group_zscore(ts_delta(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), 126), sector)",
+        "group_zscore(ts_delta(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), 126), sector)",
+        "group_zscore(ts_delta(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), 126), sector)",
+        "group_zscore(ts_delta(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), 126), sector)"
+    ]
+}

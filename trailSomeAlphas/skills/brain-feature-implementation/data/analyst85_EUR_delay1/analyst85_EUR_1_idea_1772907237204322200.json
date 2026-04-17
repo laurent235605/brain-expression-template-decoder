@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(trade_when(greater(abs(zscore(ts_delta(vec_stddev({version}), 5))), 1.5), multiply(zscore(ts_delta(vec_avg({version}), 5)), abs(zscore(vec_stddev({version})))), 0), hump=0.02)",
+    "idea": "动量交叉衰减：以分歧度变化（Input 1）为触发条件，共识变化幅度（Input 2）按分歧强度加权放大，应用hump_decay控制日间权重波动（忽略小于2%的变化），实现信号强度与换手率的平衡。",
+    "expression_list": [
+        "hump_decay(trade_when(greater(abs(zscore(ts_delta(vec_stddev(anl85_version), 5))), 1.5), multiply(zscore(ts_delta(vec_avg(anl85_version), 5)), abs(zscore(vec_stddev(anl85_version)))), 0), hump=0.02)"
+    ]
+}

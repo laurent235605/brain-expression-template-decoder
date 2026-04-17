@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_backfill({value_ts},63),std=4),industry),signed_power(group_zscore(winsorize(ts_backfill({crowding},63),std=4),industry),1.5))",
+    "idea": "非线性行业中性拥挤价值陷阱：对价值因子与拥挤度分别进行63日回溯填充、截尾处理后，在行业内标准化，随后对拥挤度施加1.5次幂非线性变换以放大极端拥挤股票的权重，与价值因子相乘后，能更敏锐地识别行业内极度拥挤的价值陷阱，同时保持对中等拥挤度的区分度。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_value_ts,63),std=4),industry),signed_power(group_zscore(winsorize(ts_backfill(rsk74_crowding,63),std=4),industry),1.5))",
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_value_ts,63),std=4),industry),signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_crowding,63),std=4),industry),1.5))",
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_value_ts,63),std=4),industry),signed_power(group_zscore(winsorize(ts_backfill(liquidity_factor_crowding,63),std=4),industry),1.5))",
+        "multiply(group_zscore(winsorize(ts_backfill(rsk74_value_ts,63),std=4),industry),signed_power(group_zscore(winsorize(ts_backfill(liquidity_timeseries_crowding,63),std=4),industry),1.5))"
+    ]
+}

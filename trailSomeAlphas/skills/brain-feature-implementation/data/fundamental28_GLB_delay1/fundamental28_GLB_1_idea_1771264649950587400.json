@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(group_zscore(ts_delta(divide(winsorize(ts_backfill({value_03501a}, 63), std=4), winsorize(ts_backfill({value_02300q}, 21), std=4)), 252), industry), std=4)",
+    "idea": "去杠杆化动量信号：捕捉权益资产比的年度变化（252日差分），识别相对于自身历史资本结构的改善或恶化趋势，通过行业中性化处理剔除行业周期对杠杆调整的影响，最后进行截面极值裁剪，专注于识别那些独立于行业趋势、正在主动调整资本结构的公司。",
+    "expression_list": [
+        "winsorize(group_zscore(ts_delta(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), 252), industry), std=4)",
+        "winsorize(group_zscore(ts_delta(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), 252), industry), std=4)",
+        "winsorize(group_zscore(ts_delta(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), 252), industry), std=4)",
+        "winsorize(group_zscore(ts_delta(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), 252), industry), std=4)"
+    ]
+}

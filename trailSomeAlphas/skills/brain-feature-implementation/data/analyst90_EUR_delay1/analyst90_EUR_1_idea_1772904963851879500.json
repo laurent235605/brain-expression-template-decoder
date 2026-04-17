@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(zscore(vec_avg({likelihood_score})), 1.5), multiply(rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 1.5), if_else(less(zscore(vec_avg({likelihood_score})), -1.5), multiply(reverse(rank(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4))), 1.5), 0))",
+    "idea": "非对称分档加权：对信心zscore进行双边阈值判断，极高信心区间(>1.5)赋予1.5倍多头权重，极低信心区间(<-1.5)赋予1.5倍空头权重(通过reverse反转)，中间区间置零，实现激进的极端双向押注。",
+    "expression_list": [
+        "if_else(greater(zscore(vec_avg(success_likelihood_score)), 1.5), multiply(rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 1.5), if_else(less(zscore(vec_avg(success_likelihood_score)), -1.5), multiply(reverse(rank(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4))), 1.5), 0))"
+    ]
+}

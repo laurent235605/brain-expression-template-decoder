@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(group_zscore(vec_skewness({exposure_value}), sector), std=4), 20)",
+    "idea": "融合模板1的偏度集中度指标与模板2的组内标准化逻辑，加入winsorize（标准差=4）处理极端异常值避免噪音主导，并使用ts_decay_linear（线性衰减）对20日窗口进行平滑以降低换手率。在保持行业可比性的同时，捕捉地理集中度趋势的持续性而非单日脉冲，平衡信号稳定性与及时性。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(group_zscore(vec_skewness(anl91_exposure_value), sector), std=4), 20)"
+    ]
+}

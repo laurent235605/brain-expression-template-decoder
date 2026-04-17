@@ -1,0 +1,10 @@
+{
+    "template": "subtract(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), sector), group_zscore(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), sector))",
+    "idea": "行业内背离构造：计算行业标准化后的短期修正动量（Input 1）与行业标准化后的预期日期稳定性排名（Input 2）之差，理论上两者应正相关（稳定公司更易获得持续上调），若出现高修正+低稳定性的背离，可能预示信息泄露或模型错误定价，构建激进的行业中性套利信号。",
+    "expression_list": [
+        "subtract(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), sector), group_zscore(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), sector))",
+        "subtract(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), sector), group_zscore(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), sector))",
+        "subtract(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), sector), group_zscore(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), sector))",
+        "subtract(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), sector), group_zscore(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), sector))"
+    ]
+}

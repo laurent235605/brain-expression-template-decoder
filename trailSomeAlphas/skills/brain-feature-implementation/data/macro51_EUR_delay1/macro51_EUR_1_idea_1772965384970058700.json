@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff({stoxx_europe_600_ucits_weight}, 20) / ts_std_dev({stoxx_europe_600_ucits_weight}, 20)",
+    "idea": "**Concept**: Weight Z-Score Deviation\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The number of standard deviations the current weight deviates from its historical rolling mean, identifying statistical outliers in allocation\n- **Why This Feature**: ETF weights follow relatively stable distributions; extreme Z-scores indicate either corporate actions, index rebalancing events, or liquidity crises affecting specific constituents disproportionately\n- **is filling nan necessary**: Yes, use ts_backfill() before calculating mean and standard deviation to maintain consistent statistical moments; missing data should not create artificial outliers\n- **Directionality**: High positive values indicate unusual overweight positions (potential mean reversion candidates); high negative values indicate unusual underweights\n- **Boundary Conditions**: Typically within [-3, 3] under normal conditions; outside this range suggests significant events",
+    "expression_list": [
+        "ts_av_diff(mcr51_ishares_stoxx_europe_600_ucits_weight, 20) / ts_std_dev(mcr51_ishares_stoxx_europe_600_ucits_weight, 20)"
+    ]
+}

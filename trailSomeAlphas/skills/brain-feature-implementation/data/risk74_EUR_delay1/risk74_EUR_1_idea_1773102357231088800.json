@@ -1,0 +1,14 @@
+{
+    "template": "signed_power(subtract(group_zscore({value_ts}, industry), group_zscore({crowding}, industry)), 2) * group_zscore(add(add({factor_e}, {factor_s}), {factor_g}), industry)",
+    "idea": "融合概念1的拥挤度与价值因子交互，以及概念2的ESG不均衡检测逻辑。通过行业内zscore计算价值与拥挤度的背离（平方放大极端背离），再乘以ESG总分作为质量过滤，捕捉行业内部被错误定价且基本面稳健的价值标的。",
+    "expression_list": [
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(rsk74_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(rsk74_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(rsk74_raw_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(rsk74_raw_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(liquidity_factor_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(liquidity_factor_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(liquidity_timeseries_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry)",
+        "signed_power(subtract(group_zscore(rsk74_value_ts, industry), group_zscore(liquidity_timeseries_crowding, industry)), 2) * group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry)"
+    ]
+}

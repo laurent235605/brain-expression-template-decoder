@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract({value_18191q}, ts_mean({value_18191q}, 252)), ts_std_dev({value_18191q}, 252))",
+    "idea": "**Concept**: EBIT Z-Score Deviation\n- **Sample Fields Used**: `value_18191q`\n- **Definition**: Standardized deviation of current EBIT from its 1-year historical mean\n- **Why This Feature**: Identifies earnings surprises or shocks that deviate significantly from the company's normal operating range\n- **Logical Meaning**: Statistical measure of earnings unusualness; extreme values suggest non-recurring items or inflection points\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. NaN handling should preserve the distinction between missing data and zero earnings.\n- **Directionality**: High absolute values indicate anomalies (potential mean reversion candidates)\n- **Boundary Conditions**: Values beyond 2-3 standard deviations indicate significant outliers",
+    "expression_list": [
+        "divide(subtract(fnd28_ishtq_value_18191q, ts_mean(fnd28_ishtq_value_18191q, 252)), ts_std_dev(fnd28_ishtq_value_18191q, 252))",
+        "divide(subtract(fnd28_newq_value_18191q, ts_mean(fnd28_newq_value_18191q, 252)), ts_std_dev(fnd28_newq_value_18191q, 252))"
+    ]
+}

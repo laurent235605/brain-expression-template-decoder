@@ -1,0 +1,8 @@
+{
+    "template": "multiply(ts_zscore({momentum} / (winsorize({value_ts}, std=3) + winsorize({earnyild}, std=3) + 0.0001), 63), signed_power(group_zscore({valuearn}, industry), 0.5))",
+    "idea": "计算动量相对于价值与盈利收益的时序纯度（63日zscore），识别当前是否处于历史极端的因子偏离状态。同时引入盈利质量({valuearn})作为交互项，通过符号幂变换后的组内zscore对信号进行加权：高盈利质量放大纯净动量信号，低盈利质量抑制信号，从而在因子纯度基础上叠加基本面质量过滤，降低纯因子策略的噪音。",
+    "expression_list": [
+        "multiply(ts_zscore(rsk74_momentum / (winsorize(rsk74_value_ts, std=3) + winsorize(rsk74_earnyild, std=3) + 0.0001), 63), signed_power(group_zscore(rsk74_valuearn, industry), 0.5))",
+        "multiply(ts_zscore(rsk74_momentum_ts / (winsorize(rsk74_value_ts, std=3) + winsorize(rsk74_earnyild, std=3) + 0.0001), 63), signed_power(group_zscore(rsk74_valuearn, industry), 0.5))"
+    ]
+}

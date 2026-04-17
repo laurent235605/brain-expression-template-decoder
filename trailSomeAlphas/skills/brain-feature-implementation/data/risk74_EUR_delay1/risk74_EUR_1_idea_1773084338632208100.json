@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(winsorize(trade_when(and(not(is_nan({exp_nondomicile1})), not(is_nan({exp_nondomicile2}))), ts_backfill({exp_usa}, 21), NaN), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(trade_when(and(not(is_nan({exp_nondomicile1})), not(is_nan({exp_nondomicile2}))), ts_backfill({exp_usa}, 21), NaN), std=4)), 252)))",
+    "idea": "利用输入2的缺失值检查逻辑（not(is_nan)）为输入1的美国敞口信号设置数据完整性前提，仅当两个海外收入字段均非缺失（暗示财报数据整体可用）时才计算美国敞口的行业相对位置与历史分位复合信号，增强主信号的数据可靠性过滤。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), not(is_nan(rsk74_raw_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), not(is_nan(rsk74_raw_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4)), 252)))",
+        "multiply(group_zscore(winsorize(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), not(is_nan(rsk74_std_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), not(is_nan(rsk74_std_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4)), 252)))",
+        "multiply(group_zscore(winsorize(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), not(is_nan(rsk74_raw_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), not(is_nan(rsk74_raw_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4)), 252)))",
+        "multiply(group_zscore(winsorize(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), not(is_nan(rsk74_std_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4), industry), s_log_1p(ts_zscore(rank(winsorize(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), not(is_nan(rsk74_std_exp_nondomicile2))), ts_backfill(rsk74_raw_exp_usa, 21), NaN), std=4)), 252)))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({exposure_value}) / (vec_avg({cost_exposure_range_end}) - vec_avg({cost_exposure_range_begin}))",
+    "idea": "**Concept**: Exposure-to-Uncertainty Efficiency Ratio\n- **Sample Fields Used**: exposure_value, cost_exposure_range_begin, cost_exposure_range_end\n- **Definition**: Revenue exposure normalized by the width of cost uncertainty, measuring return per unit of estimation risk\n- **Why This Feature**: High exposure with low cost uncertainty represents quality revenue streams; low exposure with high uncertainty suggests inefficient geographic operations\n- **Logical Meaning**: Efficiency metric evaluating whether geographic revenue justifies the associated cost estimation risk; higher values indicate favorable risk-adjusted exposure\n- **is filling nan necessary**: The denominator (range width) being NaN makes the ratio undefined. These should not be filled with arbitrary values as zero uncertainty (filled as 0) would artificially inflate the ratio to infinity. Only fill if the range is known to be stable from prior periods using ts_backfill(5).\n- **Directionality**: Higher values indicate efficient exposure (high revenue, low cost uncertainty); lower values indicate risky exposure (high uncertainty relative to revenue)\n- **Boundary Conditions**: Approaches infinity as cost uncertainty approaches zero; negative or zero values suggest data errors",
+    "expression_list": [
+        "vec_avg(anl91_exposure_value) / (vec_avg(anl91_cost_exposure_range_end) - vec_avg(anl91_cost_exposure_range_begin))"
+    ]
+}

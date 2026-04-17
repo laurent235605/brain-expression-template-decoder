@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), industry)), 1.2), multiply(group_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), industry), add(1, multiply(0.3, winsorize(group_zscore(winsorize(ts_backfill(vec_skewness({aily_delta_recon_value}), 63), std=4), industry), std=2)))), 0), power(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 15), 15)), 2))",
+    "idea": "行业中性化结合偏度调整的修正信号：先将均值修正值进行行业zscore标准化，再用vec_skewness提取分布偏度特征进行信号强度微调（正偏度增强多头，负偏度增强空头）；新鲜度权重采用凸衰减（平方函数），使信息时效性在初期衰减更快，同时延长15天窗口以捕捉更长期的修正趋势。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), industry)), 1.2), multiply(group_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), industry), add(1, multiply(0.3, winsorize(group_zscore(winsorize(ts_backfill(vec_skewness(ern10_aily_delta_recon_value), 63), std=4), industry), std=2)))), 0), power(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 15), 15)), 2))"
+    ]
+}

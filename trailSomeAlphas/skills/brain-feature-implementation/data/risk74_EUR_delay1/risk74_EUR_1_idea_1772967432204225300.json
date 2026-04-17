@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),ts_step(),5,rettype=2),std=4),industry)",
+    "idea": "使用5日线性回归斜率捕捉15日空头累积量的变化加速度（二阶导），识别空头压力加速积聚（正斜率）或快速撤退（负斜率）的拐点，经行业中性化处理后，专注于个股特质性的空头趋势变化而非行业beta驱动。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),ts_step(),5,rettype=2),std=4),industry)",
+        "group_zscore(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),ts_step(),5,rettype=2),std=4),industry)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_regression(signed_power(group_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 2), log(ts_mean({market_cap}, 21)), 63, rettype=0)",
+    "idea": "对市值因子进行中性化处理：通过63日时序回归提取残差（rettype=0），剥离'大市值公司通常预告日期更稳定'的系统性混淆效应，得到纯粹反映公司预期管理质量与信息透明度的异质性信号，有效减少规模因子的共线性暴露，提升alpha的纯净度。",
+    "expression_list": []
+}

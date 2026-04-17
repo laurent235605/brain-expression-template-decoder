@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( winsorize( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 4 ), 20 )",
+    "idea": "稳健性三重保障。先通过trade_when进行条件筛选剔除无效估计，再使用winsorize截断极端Surprise值（4倍标准差）抑制数据错误，最后经ts_decay_linear平滑，构建对异常值和噪声具有强鲁棒性的盈利惊喜因子。",
+    "expression_list": [
+        "ts_decay_linear( winsorize( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 4 ), 20 )",
+        "ts_decay_linear( winsorize( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 4 ), 20 )"
+    ]
+}

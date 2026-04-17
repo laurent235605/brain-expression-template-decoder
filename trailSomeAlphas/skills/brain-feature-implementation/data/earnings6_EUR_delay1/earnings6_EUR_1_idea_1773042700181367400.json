@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_delta(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 63), ts_delta(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 126))",
+    "idea": "通过计算TTM盈利在短期(63日)与中期(126日)两个时间维度上变化率的差异，构建盈利增长的加速度指标(二阶导数)。正值表明盈利改善正在加速(动能增强)，负值表明改善减速或恶化加速，用于捕捉传统一阶导数无法识别的基本面拐点与动能衰竭信号。",
+    "expression_list": [
+        "subtract(ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 63), ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 126))",
+        "subtract(ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 63), ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 126))"
+    ]
+}

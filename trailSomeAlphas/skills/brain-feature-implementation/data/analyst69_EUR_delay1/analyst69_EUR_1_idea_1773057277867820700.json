@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(signed_power(subtract(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 10), 5), ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 10), 20)), 1.2), industry)",
+    "idea": "将模板1的双期差分架构应用于模板2的效率比率，并引入signed_power非线性变换(幂次1.2)与行业中性化。通过signed_power温和放大尾部极端值(显著加速或减速)，同时保留正负方向信息，再经group_zscore去除行业暴露。该结构旨在识别盈利转化效率出现非线性跳变的极端alpha机会，对温和变化保持中性，突出重大基本面转折信号。",
+    "expression_list": [
+        "group_zscore(signed_power(subtract(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 5), ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 20)), 1.2), industry)",
+        "group_zscore(signed_power(subtract(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 5), ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 20)), 1.2), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(group_rank(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry), 0.85), signed_power(group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry), 1.5), 0), 5)",
+    "idea": "融合模板1的126日长期平滑与模板2的极端尾部分析逻辑，仅当会计年度分散度处于行业前15%时才触发非线性放大，同时引入5日线性衰减控制换手率，在捕捉持续性业务架构复杂性的同时兼顾交易成本控制。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(group_rank(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry), 0.85), signed_power(group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry), 1.5), 0), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight}, 21) / ts_backfill({600_ucits_weight}, 21), std=4), 5), 60)",
+    "idea": "时间序列动量加速信号。使用21日回溯填充数据计算稳健的比值，截尾处理后取5日差分（近期变化速度），再计算该变化率在60日历史窗口中的z-score。高值表明近期资金正在加速流入STOXX特定上市渠道，可能反映流动性改善或税收优势认知的突变，具有短期动量特征，适用于捕捉资金流向的加速拐点。",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight, 21), std=4), 5), 60)"
+    ]
+}

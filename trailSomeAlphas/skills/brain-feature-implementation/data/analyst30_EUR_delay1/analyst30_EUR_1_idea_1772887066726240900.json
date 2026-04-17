@@ -1,0 +1,8 @@
+{
+    "template": "divide(vec_sum({adjustedgrossamt}), vec_sum({unadjustedgrossamt}))",
+    "idea": "**Concept**: Adjusted Value Retention Ratio\n- **Sample Fields Used**: `adjustedgrossamt`, `unadjustedgrossamt`\n- **Definition**: Proportion of total unadjusted dividend value that remains after corporate action adjustments\n- **Why This Feature**: Measures value erosion or accretion from capital structure changes; indicates how much of declared value survives adjustments\n- **Logical Meaning**: The structural retention rate of dividend value through corporate actions\n- **is filling nan necessary**: Division by zero risk when `unadjustedgrossamt` is zero. Use `nan_out` or `pasteurize` to handle zero denominators and ensure numerical stability\n- **Directionality**: 1 = 100% retention (no adjustment); <1 indicates value dilution; >1 indicates value accretion (reverse splits)\n- **Boundary Conditions**: [0, infinity); 0 = total value loss; 1 = no change",
+    "expression_list": [
+        "divide(vec_sum(anl30_unadjustedgrossamt), vec_sum(anl30_unadjustedgrossamt))",
+        "divide(vec_sum(anl30_adjustedgrossamt), vec_sum(anl30_unadjustedgrossamt))"
+    ]
+}

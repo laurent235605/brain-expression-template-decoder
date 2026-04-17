@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(group_rank(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), industry), 0.8), ts_delta(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), 126), 0)",
+    "idea": "双因子分层筛选模板。第一层筛选：仅保留行业内TTM EPS排名前20%的股票（高盈利分位）；第二层筛选：计算这些股票过去6个月（126天）的TTM EPS变化量。最终信号为符合条件的增长值，不符合则归零。实现“高盈利基数+增长加速”的复合选股逻辑。",
+    "expression_list": [
+        "trade_when(greater(group_rank(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), industry), 0.8), ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 126), 0)",
+        "trade_when(greater(group_rank(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), industry), 0.8), ts_delta(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 126), 0)"
+    ]
+}

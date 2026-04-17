@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), std=4), industry)",
+    "idea": "行业中性相对稳定性：在行业内部进行标准化处理，控制不同行业固有的会计年度调整频率差异（如金融、零售行业可能因季节性有更灵活的会计年度安排）。通过group_zscore识别行业内会计日历最稳定的公司，剔除行业暴露后得到纯粹的个体公司会计政策持续性信号",
+    "expression_list": [
+        "group_zscore(winsorize(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4), industry)"
+    ]
+}

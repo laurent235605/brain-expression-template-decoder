@@ -1,0 +1,10 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({x_dividend}), 5), 252)",
+    "idea": "**Concept**: Cumulative Dividend Yield Accrual\n- **Sample Fields Used**: x_dividend\n- **Definition**: Rolling 252-day sum of dividends declared to capture total annual income distributed\n- **Why This Feature**: Individual dividend announcements are lumpy; annual sum reveals true yield and payout consistency; identifies stable income generators\n- **Logical Meaning**: Total cash returned to shareholders over annual period; fundamental input for dividend yield calculations and income strategies\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Zero dividends are meaningful (no payment); should be treated as 0 not NaN. Use fill 0 for true accumulation.\n- **Directionality**: Higher values indicate high dividend payout; zero indicates non-dividend payer; declining sums indicate dividend cuts\n- **Boundary Conditions**: Spike indicates special dividend year; smooth accumulation indicates regular quarterly payer",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)"
+    ]
+}

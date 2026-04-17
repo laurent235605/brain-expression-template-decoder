@@ -1,0 +1,7 @@
+{
+    "template": "if_else(or(greater(rank(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21))),0.9),less(rank(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21))),0.1)),vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21)),0)",
+    "idea": "仅保留极端配置信号作为有效alpha，对向量中性化后的残差进行全市场分位数排名，通过逻辑运算符筛选出前10%（显著高配权益的多头）和后10%（显著低配权益的空头）的基金，将中间80%的温和配置视为噪音并赋值为零，构建非多即空的集中型择时策略，强化头部与尾部的收益区分度。",
+    "expression_list": [
+        "if_else(or(greater(rank(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21))),0.9),less(rank(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21))),0.1)),vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21)),0)"
+    ]
+}

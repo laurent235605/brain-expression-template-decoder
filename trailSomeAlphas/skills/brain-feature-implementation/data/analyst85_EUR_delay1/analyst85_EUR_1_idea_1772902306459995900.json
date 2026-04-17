@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_exp_window(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 20, factor=0.1), sector)",
+    "idea": "分组相对版本持续性信号。先对向量数据取均值并回填缺失值（ts_backfill），截断极值（winsorize）后进行20日指数衰减，最后在各行业内进行Z-Score标准化（group_zscore）。通过组内相对比较消除不同行业间版本基数差异，捕捉相对行业的版本活跃度偏离。",
+    "expression_list": [
+        "group_zscore(ts_decay_exp_window(winsorize(ts_backfill(vec_avg(anl85_version), 63), std=4), 20, factor=0.1), sector)"
+    ]
+}

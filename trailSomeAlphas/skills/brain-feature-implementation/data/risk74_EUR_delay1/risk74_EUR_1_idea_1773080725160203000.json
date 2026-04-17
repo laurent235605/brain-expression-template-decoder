@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),252),industry)",
+    "idea": "将当前特质残差与其过去252日历史分布进行时间序列zscore标准化，识别那些相对于自身历史常态出现极端偏离的个股；叠加行业中性化确保比较基准一致，最终得到'历史分位极端偏离'信号，适合发现结构性空头异动事件。",
+    "expression_list": [
+        "group_zscore(ts_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),252),industry)",
+        "group_zscore(ts_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),252),industry)"
+    ]
+}

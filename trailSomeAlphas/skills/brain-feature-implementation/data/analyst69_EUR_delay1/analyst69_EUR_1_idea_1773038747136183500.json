@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(days_from_last_change({eps_best_eeps_cur_yr}), 10), group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, days_from_last_change({eps_best_eeps_cur_yr})), std=4), sector), 0)",
+    "idea": "事件驱动修正：仅在近期（10日内）发生预期调整时触发交易，使用自上次变更以来的调整幅度经行业标准化，捕获信息冲击后的市场定价滞后效应，中段无调整时保持中性",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 10), group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, days_from_last_change(anl69_aeps_best_eeps_cur_yr)), std=4), sector), 0)",
+        "trade_when(less(days_from_last_change(anl69_eps_best_eeps_cur_yr), 10), group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, days_from_last_change(anl69_eps_best_eeps_cur_yr)), std=4), sector), 0)"
+    ]
+}

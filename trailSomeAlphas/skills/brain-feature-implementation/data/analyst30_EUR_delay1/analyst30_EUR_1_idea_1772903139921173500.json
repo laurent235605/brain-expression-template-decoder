@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(add(multiply(0.7, zscore(winsorize(vec_avg({adjustedgrossamt}), std=4))), multiply(0.3, reverse(zscore(winsorize(vec_skewness({adjustedgrossamt}), std=4))))), industry)",
+    "idea": "水平与稳定性复合信号：综合考量股息水平（向量均值zscore）与分布形态（向量偏度zscore）。给予高股息且负偏度（分布集中在高端，极少低股息或零股息记录，代表发放稳定性强）的标的更高权重，通过0.7/0.3权重叠加后行业内标准化，构建兼顾收益与质量的复合alpha。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.7, zscore(winsorize(vec_avg(anl30_adjustedgrossamt), std=4))), multiply(0.3, reverse(zscore(winsorize(vec_skewness(anl30_adjustedgrossamt), std=4))))), industry)",
+        "group_zscore(add(multiply(0.7, zscore(winsorize(vec_avg(anl30_unadjustedgrossamt), std=4))), multiply(0.3, reverse(zscore(winsorize(vec_skewness(anl30_unadjustedgrossamt), std=4))))), industry)"
+    ]
+}

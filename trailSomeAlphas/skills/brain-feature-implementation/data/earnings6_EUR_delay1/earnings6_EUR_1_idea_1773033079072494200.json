@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( ts_mean( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20 ), industry )",
+    "idea": "行业中性化平滑Surprise。融合模板1的Surprise计算逻辑与模板2的时间序列平滑思想，通过ts_mean计算近期平均Surprise以降低单期噪音，再利用group_zscore进行行业内标准化，消除行业间的系统性偏差，使不同行业的超预期程度可比。",
+    "expression_list": [
+        "group_zscore( ts_mean( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), industry )",
+        "group_zscore( ts_mean( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), industry )"
+    ]
+}

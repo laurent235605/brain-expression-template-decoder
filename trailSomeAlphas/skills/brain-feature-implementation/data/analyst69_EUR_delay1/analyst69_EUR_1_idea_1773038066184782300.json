@@ -1,0 +1,8 @@
+{
+    "template": "quantile(multiply(group_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), industry), inverse(add(1, ts_std_dev(ts_delta({eps_best_eeps_cur_yr}, 63), 252)))), driver=gaussian)",
+    "idea": "信噪比优化的修正强度信号，将行业标准化后的5日EPS修正幅度除以（1+过去一年63日修正波动率），对历史波动剧烈的股票信号进行惩罚，突出那些修正信号稳定且显著的公司，经高斯分位后形成更稳健的预期调整因子。",
+    "expression_list": [
+        "quantile(multiply(group_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), inverse(add(1, ts_std_dev(ts_delta(anl69_aeps_best_eeps_cur_yr, 63), 252)))), driver=gaussian)",
+        "quantile(multiply(group_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), inverse(add(1, ts_std_dev(ts_delta(anl69_eps_best_eeps_cur_yr, 63), 252)))), driver=gaussian)"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "template": "multiply(group_zscore(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), industry), sign(ts_delta(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), 63)))",
+    "idea": "**动态再融资压力趋势增强 (Dynamic Refinancing Pressure with Trend Enhancement)**：在计算短期债务比率后，先进行行业中性化得到横截面相对位置。同时计算该比率的63日（约一季度）变化率 `ts_delta`，并使用 `sign` 函数提取变化方向。将行业相对水平与变化方向相乘：若公司本就处于行业高短期债务分位（高风险）且比率仍在上升（`sign=1`），则信号负向增强（强烈看空）；若高债务但比率下降（`sign=-1`），则负向减弱（风险改善）。反之，对于低债务公司，下降（变得更保守）产生正向增强。此模板捕捉了再融资风险的动量效应，避免在风险已见顶回落时过早做空。",
+    "expression_list": [
+        "multiply(group_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 63)))",
+        "multiply(group_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 63)))",
+        "multiply(group_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 63)))",
+        "multiply(group_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 63)))",
+        "multiply(group_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 63)))",
+        "multiply(group_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 63)))"
+    ]
+}

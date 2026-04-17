@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(vec_avg({likelihood_score}), std=4), (vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30), 60, rettype=0)",
+    "idea": "借鉴CAPM残差模板，将价格趋势作为解释变量，通过时序回归（ts_regression）提取分析师信心的特质性残差，剥离价格因素干扰，获取纯alpha成分。",
+    "expression_list": [
+        "ts_regression(winsorize(vec_avg(success_likelihood_score), std=4), (vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30), 60, rettype=0)"
+    ]
+}

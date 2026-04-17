@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(greater(abs(ts_zscore(vec_avg({version}), 21)), 2), signed_power(ts_zscore(vec_avg({version}), 21), 2), multiply(0.5, zscore(ts_delta(vec_stddev({version}), 5))), industry)",
+    "idea": "历史分位极端共识：使用21日时序zscore识别极端共识水平（相对自身历史），结合分歧度变化作为辅助信号，通过行业归一化控制组内多空平衡，适用于捕捉评级突破历史区间的股票。",
+    "expression_list": [
+        "group_normalize(trade_when(greater(abs(ts_zscore(vec_avg(anl85_version), 21)), 2), signed_power(ts_zscore(vec_avg(anl85_version), 21), 2), multiply(0.5, zscore(ts_delta(vec_stddev(anl85_version), 5))), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "{stoxx_europe_600_ucits_weight} / ts_median({stoxx_europe_600_ucits_weight}, 1)",
+    "idea": "**Concept**: Relative Weight to Median\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The ratio of the instrument's weight to the cross-sectional median weight of all constituents, measuring overweight/underweight relative to the \"typical\" holding size\n- **Why This Feature**: Median is robust to outliers (unlike mean); this ratio identifies whether a position is large-cap core (ratio > 1) or small-cap satellite (ratio < 1) within the European universe\n- **is filling nan necessary**: Yes, use group_mean() or median imputation for missing values to ensure the median denominator is stable and not biased by missing data patterns\n- **Directionality**: Values above 1 indicate above-median allocation (large cap bias); values below 1 indicate below-median allocation (small cap bias); trending values indicate migration between market cap tiers\n- **Boundary Conditions**: Minimum approaches 0 (tiny position); maximum unbounded but practically limited by single-stock concentration limits in UCITS regulations",
+    "expression_list": [
+        "mcr51_ishares_stoxx_europe_600_ucits_weight / ts_median(mcr51_ishares_stoxx_europe_600_ucits_weight, 1)"
+    ]
+}

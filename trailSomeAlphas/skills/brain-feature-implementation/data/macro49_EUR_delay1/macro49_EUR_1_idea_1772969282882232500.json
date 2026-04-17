@@ -1,0 +1,7 @@
+{
+    "template": "divide(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), std=4), add(1.0, ts_std_dev(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), 60)))",
+    "idea": "风险调整后的效率比率：将流动性效率比率除以其自身的60日滚动波动率（加1避免除零），得到“夏普式”风险调整效率指标，惩罚那些虽然绝对效率高但波动剧烈（不稳定）的标的，奖励稳定高效的流动性利用，适合作为从属信号放大器与主信号结合使用。",
+    "expression_list": [
+        "divide(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), std=4), add(1.0, ts_std_dev(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), 60)))"
+    ]
+}

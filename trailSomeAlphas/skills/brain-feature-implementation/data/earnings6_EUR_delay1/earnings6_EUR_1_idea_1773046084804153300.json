@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 60 )",
+    "idea": "将模板1的条件计算逻辑与时序历史视角相结合。计算当前Surprise相对其自身60日历史均值的zscore位置，识别超预期程度是否处于近期极端高位或低位，捕捉盈利惊喜的时序动量而非绝对水平。",
+    "expression_list": [
+        "ts_zscore( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 60 )",
+        "ts_zscore( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 60 )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "scale(trade_when(greater(abs(ts_delta(group_zscore(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), industry), 63)), 0.5), ts_delta(group_zscore(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), industry), 63), 0), longscale=1, shortscale=1)",
+    "idea": "专注于分散度的\"变化率\"而非绝对水平，通过计算行业标准化后的63日变化量，并设置0.5个标准差的激活阈值，仅当业务架构发生显著重构(分散度急剧扩大或收敛)时产生信号，适用于捕捉并购重组或业务整合带来的动态alpha。",
+    "expression_list": [
+        "scale(trade_when(greater(abs(ts_delta(group_zscore(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), 63)), 0.5), ts_delta(group_zscore(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), 63), 0), longscale=1, shortscale=1)"
+    ]
+}

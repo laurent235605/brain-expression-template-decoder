@@ -1,0 +1,7 @@
+{
+    "template": "multiply({prc_book}, divide(add(1, {entwdrat}), add({cfroi_1}, 0.01)))",
+    "idea": "**Concept**: Quality-Adjusted Value Score\n- **Sample Fields Used**: prc_book, cfroi_1, entwdrat\n- **Definition**: Valuation multiple adjusted by CFROI quality and leverage risk, creating a \"price per unit of economic return\" metric\n- **Why This Feature**: Avoids value traps by ensuring low P/B stocks actually generate cash flows, while penalizing highly leveraged \"cheap\" stocks\n- **Logical Meaning**: Low values = cheap quality (high CFROI, low P/B, low debt); High values = expensive or risky (low CFROI, high P/B, high debt)\n- **is filling nan necessary**: No, entwdrat NaN likely indicates zero debt (good); handle via conditional or preserve NaN as neutral.\n- **Directionality**: Low = undervalued quality; High = overvalued or distressed\n- **Boundary Conditions**: Near-zero indicates extreme value; >10 indicates glamour/speculative stocks",
+    "expression_list": [
+        "multiply(mdl172_prc_book, divide(add(1, mdl172_entwdrat), add(mdl172_cfroi_1, 0.01)))"
+    ]
+}

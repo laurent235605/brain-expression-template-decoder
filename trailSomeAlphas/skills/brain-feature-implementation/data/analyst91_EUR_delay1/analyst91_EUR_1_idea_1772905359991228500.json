@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_skewness({exposure_value}), 20)",
+    "idea": "地理集中度变化波动率。交叉应用模板2的短期波动率计算（ts_std_dev, 20日）到模板1的偏度指标（vec_skewness），衡量公司地理集中度在短期内的不稳定程度（即集中战略是否反复摇摆），捕捉“地理布局剧烈重构”的风险事件。",
+    "expression_list": [
+        "ts_std_dev(vec_skewness(anl91_exposure_value), 20)"
+    ]
+}

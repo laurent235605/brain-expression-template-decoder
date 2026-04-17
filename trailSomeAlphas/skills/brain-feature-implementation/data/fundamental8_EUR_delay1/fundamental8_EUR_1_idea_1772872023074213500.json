@@ -1,0 +1,30 @@
+{
+    "template": "{roic} - {eff_int_rate}",
+    "idea": "**Concept**: Economic Profit Spread\n- **Sample Fields Used**: roic, eff_int_rate\n- **Definition**: Return on invested capital less estimated average interest rate; approximates economic profit spread over debt cost of capital\n- **Why This Feature**: Captures essence of value creation - generating returns above financing costs; positive spread indicates wealth creation, negative indicates destruction\n- **Logical Meaning**: Operating advantage over capital providers; true economic margin\n- **is filling nan necessary**: eff_int_rate may be stale for infrequent debt issuers; ts_backfill acceptable but use 252-day lookback for stability\n- **Directionality**: Positive = value creation (competitive advantage), Negative = value destruction (commodity business or distress)\n- **Boundary Conditions**: >0.10 indicates wide moat; <-0.05 indicates unsustainable operations without restructuring",
+    "expression_list": [
+        "fnd8_er_1af_matrix_ff_roic - fnd8_er_1af_matrix_ff_eff_int_rate",
+        "fnd8_er_1qf_matrix_ff_roic - fnd8_er_1af_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_cf_roic - fnd8_er_1af_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_roic - fnd8_er_1af_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_cf_roic - fnd8_er_1af_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_roic - fnd8_er_1af_matrix_ff_eff_int_rate",
+        "fnd8_er_1qf_matrix_ff_roic - fnd8_er_1qf_matrix_ff_eff_int_rate",
+        "fnd8_er_1af_matrix_ff_roic - fnd8_er_1qf_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_cf_roic - fnd8_er_1qf_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_roic - fnd8_er_1qf_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_cf_roic - fnd8_er_1qf_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_roic - fnd8_er_1qf_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_cf_roic - fnd8_eraf_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_roic - fnd8_eraf_matrix_ff_eff_int_rate",
+        "fnd8_er_1af_matrix_ff_roic - fnd8_eraf_matrix_ff_eff_int_rate",
+        "fnd8_er_1qf_matrix_ff_roic - fnd8_eraf_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_cf_roic - fnd8_eraf_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_roic - fnd8_eraf_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_cf_roic - fnd8_erqf_matrix_ff_eff_int_rate",
+        "fnd8_erqf_matrix_ff_roic - fnd8_erqf_matrix_ff_eff_int_rate",
+        "fnd8_er_1af_matrix_ff_roic - fnd8_erqf_matrix_ff_eff_int_rate",
+        "fnd8_er_1qf_matrix_ff_roic - fnd8_erqf_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_cf_roic - fnd8_erqf_matrix_ff_eff_int_rate",
+        "fnd8_eraf_matrix_ff_roic - fnd8_erqf_matrix_ff_eff_int_rate"
+    ]
+}

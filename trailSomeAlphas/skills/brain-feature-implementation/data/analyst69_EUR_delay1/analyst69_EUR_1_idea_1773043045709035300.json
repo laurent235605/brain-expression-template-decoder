@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 0.5))",
+    "idea": "交叉应用Template A的稳定性Z-score作为Template B累积压力的动态权重：通过`signed_power`（0.5次幂）压缩稳定性极端值，使其成为非线性放大器。当财报日期异常稳定或频繁变更时（Z-score绝对值大），盈利调整压力的权重被差异化放大；常态时权重趋近中性，实现“事件稳定性”对“修正强度”的调制。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 0.5))",
+        "multiply(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 0.5))",
+        "multiply(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 0.5))",
+        "multiply(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), signed_power(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 0.5))"
+    ]
+}

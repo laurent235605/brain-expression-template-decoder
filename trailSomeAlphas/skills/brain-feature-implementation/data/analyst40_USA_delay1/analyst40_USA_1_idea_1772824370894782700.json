@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum({employmentrate}, 60)",
+    "idea": "**Concept**: Cumulative Employment Intensity\n- **Sample Fields Used**: employmentrate\n- **Definition**: 60-day rolling sum of employment rates, measuring total board refreshment intensity independent of departures\n- **Why This Feature**: Distinguishes between replacement turnover (balanced) and expansion/growth; high cumulative employment with low net turnover indicates pure replacement, high employment with high net indicates growth\n- **Logical Meaning**: Total addition intensity over time; captures hiring momentum separate from net position changes\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Similar to net turnover, respect data availability boundaries.\n- **Directionality**: Higher values indicate aggressive hiring/expansion; lower values indicate limited new appointments; zero indicates freeze on new directors\n- **Boundary Conditions**: Maximum theoretical value constrained by 1.0 daily rate (complete board replacement); sustained high values indicate rapid board expansion strategy",
+    "expression_list": [
+        "ts_sum(anl40_employmentrate, 60)"
+    ]
+}

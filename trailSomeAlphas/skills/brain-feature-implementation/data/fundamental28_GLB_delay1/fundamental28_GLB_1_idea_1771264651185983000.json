@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(divide(winsorize(ts_backfill({value_03501a}, 63), std=4), winsorize(ts_backfill({value_02300q}, 21), std=4)), 504), industry), 1.5)",
+    "idea": "历史相对位置增强信号：将当前权益资产比与自身2年（504日）历史比较得到时序Z分数，再进行行业中性化，最后应用1.5次幂变换非线性放大极端偏离历史常态的信号。该模板旨在捕捉资本结构发生趋势性突破或结构性变化的股票，强调历史分位极值区域的预测能力。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), 504), industry), 1.5)",
+        "signed_power(group_zscore(ts_zscore(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), 504), industry), 1.5)",
+        "signed_power(group_zscore(ts_zscore(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), 504), industry), 1.5)",
+        "signed_power(group_zscore(ts_zscore(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), 504), industry), 1.5)"
+    ]
+}

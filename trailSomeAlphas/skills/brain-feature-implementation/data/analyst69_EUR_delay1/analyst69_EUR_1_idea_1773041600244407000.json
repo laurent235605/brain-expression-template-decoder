@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_decay_linear(ts_delta(quantile({eps_best_eeps_cur_yr}, driver=gaussian), 63), 5), industry)",
+    "idea": "**行业相对动量增强 (Industry-Relative Momentum Enhancement)**\n- **逻辑**：捕捉盈利预期在行业内的改善趋势，通过5日线性衰减平滑短期噪音，63日窗口捕捉季度级别的预期调整，去除行业beta以聚焦个股特异性改善。\n- **关键操作**：ts_delta捕捉趋势变化，ts_decay_linear降低高频抖动，group_zscore实现行业中性化。\n- **适用场景**：适用于预期修正具有持续性但易受行业轮动干扰的市场环境。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(ts_delta(quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian), 63), 5), industry)",
+        "group_zscore(ts_decay_linear(ts_delta(quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian), 63), 5), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "core = vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)); factor_vol = ts_std_dev(core, 63); adj = multiply(0.03, zscore(factor_vol)); thresh_high = min(add(0.9, adj), 0.95); thresh_low = max(subtract(0.1, adj), 0.05); rank_now = group_rank(core, industry); is_extreme = or(greater(rank_now, thresh_high), less(rank_now, thresh_low)); raw_signal = group_zscore(core, industry); signal = if_else(is_extreme, signed_power(raw_signal, 1.5), 0); final = truncate(scale(signal, scale=1), maxPercent=0.02)",
+    "idea": "动态阈值与非线性尾部放大：根据因子近期波动率自适应调整90%/10%的极端阈值（高波动时收紧），并对保留的极端信号应用1.5次幂signed_power非线性放大，增强对显著偏离的惩罚/奖励力度，同时通过truncate控制个股上限。",
+    "expression_list": [
+        "core = vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)); factor_vol = ts_std_dev(core, 63); adj = multiply(0.03, zscore(factor_vol)); thresh_high = min(add(0.9, adj), 0.95); thresh_low = max(subtract(0.1, adj), 0.05); rank_now = group_rank(core, industry); is_extreme = or(greater(rank_now, thresh_high), less(rank_now, thresh_low)); raw_signal = group_zscore(core, industry); signal = if_else(is_extreme, signed_power(raw_signal, 1.5), 0); final = truncate(scale(signal, scale=1), maxPercent=0.02)"
+    ]
+}

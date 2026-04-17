@@ -1,0 +1,5 @@
+{
+    "template": "multiply(ts_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), subtract(1, group_rank(vec_stddev({aily_delta_recon_value}), {industry})))",
+    "idea": "利用向量标准差(vec_stddev)衡量日内组分数据的分歧度，将传统修正幅度Z分数乘以(1-行业组内分歧排名)，即当分析师修正高度一致（低分歧）时增强信号权重，高分歧时视为噪音并降低权重，实现仅交易'共识性修正惊喜'，避免分歧巨大的不确定信号。",
+    "expression_list": []
+}

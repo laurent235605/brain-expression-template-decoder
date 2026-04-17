@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(quantile(divide(group_zscore(add(multiply(0.7, ts_delta({eps_best_eeps_cur_yr}, 5)), multiply(0.3, ts_delta({eps_best_eeps_cur_yr}, 21))), industry), add(0.01, ts_std_dev(ts_delta({eps_best_eeps_cur_yr}, 5), 63))), driver=gaussian), hump=0.015)",
+    "idea": "风险调整后的行业中性修正动量。融合5日与21日预期修正变化，通过行业zscore剥离板块Beta，并以63日滚动波动率调整信号强度（类似信息比率），最后经高斯分位强化尾部区分度并应用hump_decay控制换手率。核心逻辑：在单位风险下的修正动量更能预测未来收益，且极端值更具Alpha。",
+    "expression_list": [
+        "hump_decay(quantile(divide(group_zscore(add(multiply(0.7, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), multiply(0.3, ts_delta(anl69_aeps_best_eeps_cur_yr, 21))), industry), add(0.01, ts_std_dev(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63))), driver=gaussian), hump=0.015)",
+        "hump_decay(quantile(divide(group_zscore(add(multiply(0.7, ts_delta(anl69_eps_best_eeps_cur_yr, 5)), multiply(0.3, ts_delta(anl69_eps_best_eeps_cur_yr, 21))), industry), add(0.01, ts_std_dev(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63))), driver=gaussian), hump=0.015)"
+    ]
+}

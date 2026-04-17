@@ -1,0 +1,7 @@
+{
+    "template": "if_else({management_incentive_score} < 0, ts_delta({overall_score}, 5), 0)",
+    "idea": "**Concept**: Management Incentive-Quality Misalignment\n- **Sample Fields Used**: `management_incentive_score`, `overall_score`\n- **Definition**: Detection of anomalous negative incentive scores coinciding with declining quality scores (governance failure pattern)\n- **Why This Feature**: The combination of misaligned management incentives and deteriorating accounting quality is a strong predictor of future restatements or fraud; either alone is less predictive\n- **is filling nan necessary**: No, NaN in incentive score indicates missing governance data which is meaningful (lack of transparency), should not be filled\n- **Directionality**: Negative values (incentive_score < 0 AND quality declining) extreme anomaly (red flag); Positive values indicate alignment\n- **Boundary Conditions**: Values < -3 (extreme misalignment) with concurrent quality drops indicate high fraud probability; Values > 0 suggest governance quality buffer",
+    "expression_list": [
+        "if_else(mdl255_management_incentive_score < 0, ts_delta(mdl255_overall_score, 5), 0)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "subtract(group_zscore(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), industry), group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry))",
+    "idea": "行业内长期累积压力与短期动量的背离策略。对63日累积修订和5日短期修订分别进行行业内标准化后求差，识别季度趋势与短期情绪的错配。当长期趋势向上但短期出现过度回调（或反之）时产生信号，捕捉市场过度反应后的修复机会。此结构实现了跨时间维度的交叉增强，兼具长期基本面与短期情绪面的双重验证。",
+    "expression_list": [
+        "subtract(group_zscore(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), industry), group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry))",
+        "subtract(group_zscore(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), industry), group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry))"
+    ]
+}

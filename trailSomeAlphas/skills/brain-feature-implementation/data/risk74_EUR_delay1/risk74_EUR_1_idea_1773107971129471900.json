@@ -1,0 +1,5 @@
+{
+    "template": "ts_zscore(winsorize(divide(ts_sum(ts_delta({shortint},1),15), ts_mean({volume},20)),std=4),252)",
+    "idea": "将15日空头累积流量标准化为日均交易量(ADV)的倍数，识别相对于个股流动性异常集中的空头攻击或回补强度，过滤高成交量股票自然伴随的高空头流量噪音，捕捉流动性调整后的极端空头异动。",
+    "expression_list": []
+}

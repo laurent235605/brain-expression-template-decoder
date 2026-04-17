@@ -1,0 +1,22 @@
+{
+    "template": "ts_sum({score_fy1}, 15)",
+    "idea": "**Concept**: Cumulative Innovation Bias\n- **Sample Fields Used**: score_fy1\n- **Definition**: Rolling sum of innovation scores over 15 days, measuring persistent directional conviction among top analysts\n- **Why This Feature**: Single-day innovation scores are noisy; accumulation reveals sustained analyst campaigns\n- **Logical Meaning**: Large positive values indicate persistent accumulation of bullish revisions from high-quality analysts\n- **is filling nan necessary**: Yes, use ts_backfill to carry scores through no-change days\n- **Directionality**: Strongly positive predicts earnings beat; strongly negative predicts miss\n- **Boundary Conditions**: Scores bounded by analyst count; normalize by max possible score for cross-sectional comparability",
+    "expression_list": [
+        "ts_sum(anl10_cpxinnovation_score_fy1, 15)",
+        "ts_sum(anl10_cshinnovation_score_fy1, 15)",
+        "ts_sum(anl10_dpsinnovation_score_fy1, 15)",
+        "ts_sum(anl10_ebiinnovation_score_fy1, 15)",
+        "ts_sum(anl10_ebtinnovation_score_fy1, 15)",
+        "ts_sum(anl10_gpsinnovation_score_fy1, 15)",
+        "ts_sum(anl10_grminnovation_score_fy1, 15)",
+        "ts_sum(anl10_navinnovation_score_fy1, 15)",
+        "ts_sum(anl10_ndtinnovation_score_fy1, 15)",
+        "ts_sum(anl10_nerinnovation_score_fy1, 15)",
+        "ts_sum(anl10_netinnovation_score_fy1, 15)",
+        "ts_sum(anl10_oprinnovation_score_fy1, 15)",
+        "ts_sum(anl10_preinnovation_score_fy1, 15)",
+        "ts_sum(anl10_prrinnovation_score_fy1, 15)",
+        "ts_sum(anl10_salinnovation_score_fy1, 15)",
+        "ts_sum(anl10_tbvinnovation_score_fy1, 15)"
+    ]
+}

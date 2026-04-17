@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(or(greater(group_rank(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 0.9), less(group_rank(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 0.1)), signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 252), 3), 0), industry)",
+    "idea": "行业内相对业务结构稳定性，仅保留行业内的极端稳定与极端动荡两端（前10%与后10%），通过group_normalize实现行业中性，构建哑铃型多空组合。",
+    "expression_list": [
+        "group_normalize(trade_when(or(greater(group_rank(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 0.9), less(group_rank(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 0.1)), signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 252), 3), 0), industry)"
+    ]
+}

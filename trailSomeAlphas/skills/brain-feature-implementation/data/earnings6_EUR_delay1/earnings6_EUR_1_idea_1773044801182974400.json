@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ), industry )",
+    "idea": "将模板2的条件化稳健Surprise计算与模板1的行业标准化方法相结合，并叠加时间序列线性衰减平滑（ts_decay_linear）。仅对满足|估计值|>0.01条件的有效Surprise进行20日线性加权平滑以降低换手率，最终在行业内部进行Z-score标准化，捕捉同行业内的相对盈利惊喜强度趋势。",
+    "expression_list": [
+        "group_zscore( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), industry )",
+        "group_zscore( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), industry )"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply({sedol_roic}, {sedol_susgrowth})",
+    "idea": "**Concept**: Economic Moat Sustainability Score\n- **Sample Fields Used**: {sedol_roic}, {sedol_cg3yroic}, {sedol_susgrowth}, {sedol_nopatmargin}\n- **Definition**: Return on invested capital interacted with sustainable growth rate to identify companies generating excess returns with reinvestment opportunities (Buffett-style moats)\n- **Why This Feature**: ROIC alone is static; combining with sustainable growth captures the magnitude and duration of competitive advantage\n- **Logical Meaning**: High values indicate wide moats with profitable reinvestment; low values indicate no-moat or declining advantage businesses\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: High values predict long-term wealth creation; declining values predict commoditization\n- **Boundary Conditions**: High ROIC with zero growth indicates cash cows; negative values indicate value destruction",
+    "expression_list": [
+        "multiply(fnd65_allcap_sedol_roic, fnd65_allcap_sedol_susgrowth)",
+        "multiply(fnd65_dev_sedol_roic, fnd65_allcap_sedol_susgrowth)",
+        "multiply(fnd65_dev_sedol_roic, fnd65_dev_sedol_susgrowth)",
+        "multiply(fnd65_allcap_sedol_roic, fnd65_dev_sedol_susgrowth)"
+    ]
+}

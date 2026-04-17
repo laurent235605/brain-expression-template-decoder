@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(add(multiply(0.6, signed_power(subtract(vec_avg({rank}), ts_decay_exp_window(vec_avg({rank}), 20, 0.5)), 1.5)), multiply(0.4, signed_power(subtract(vec_ir({rank}), ts_decay_exp_window(vec_ir({rank}), 20, 0.5)), 1.5))), industry), 3)",
+    "idea": "**增强概念**: 复合向量特征的趋势分歧动量\n- **核心改进**: 融合vec_avg（平均水平）与vec_ir（信息比率=均值/标准差）两个维度的偏差信号，按6:4加权；对两者分别进行非线性变换（signed_power 1.5）并行业中性化后，用3日线性衰减平滑。\n- **逻辑含义**: 不仅考虑排名水平的偏离，还考虑排名稳定性的变化（IR反映信号质量）；当水平与质量同时恶化/改善时产生强信号；通过复合特征降低单一统计量的测量误差，ts_decay_linear平衡反应速度与换手率。\n- **优势**: IR维度的引入能区分\"波动中的趋势突破\"与\"稳定状态下的趋势延续\"，提供更精细的风险调整视角。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(add(multiply(0.6, signed_power(subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, 0.5)), 1.5)), multiply(0.4, signed_power(subtract(vec_ir(mdl245_rank), ts_decay_exp_window(vec_ir(mdl245_rank), 20, 0.5)), 1.5))), industry), 3)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(ts_rank({return}-{asset},15), 5)",
+    "idea": "对15日时序排名应用5日线性衰减平滑(ts_decay_linear)，赋予近期数据更高权重，在保持短期敏感性的同时降低换手率",
+    "expression_list": []
+}

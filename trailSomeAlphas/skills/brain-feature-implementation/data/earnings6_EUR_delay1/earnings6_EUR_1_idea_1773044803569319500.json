@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize( ts_decay_linear( winsorize( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), std=4 ), 10 ), industry )",
+    "idea": "使用winsorize替代trade_when处理模板2中的极端值边界问题，结合ts_decay_linear进行10日线性衰减平滑以控制换手率，最后通过group_normalize实现行业内的多空平衡归一化，构建兼顾极端值稳健性与交易可行性的盈利意外因子。",
+    "expression_list": [
+        "group_normalize( ts_decay_linear( winsorize( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), std=4 ), 10 ), industry )",
+        "group_normalize( ts_decay_linear( winsorize( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), std=4 ), 10 ), industry )"
+    ]
+}

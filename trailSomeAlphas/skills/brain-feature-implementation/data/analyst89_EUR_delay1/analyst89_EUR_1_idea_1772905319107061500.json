@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(ts_sum(vec_avg({data_item_value}), 21), 5)",
+    "idea": "先计算21日短期财务累积和，再应用5日移动平均平滑。此构造通过降低对最新单日数据的敏感度来减少换手率，同时保留财务趋势的方向性信息，适用于希望降低调仓频率、控制交易成本的低频基本面策略。",
+    "expression_list": [
+        "ts_mean(ts_sum(vec_avg(anl89_data_item_value), 21), 5)"
+    ]
+}

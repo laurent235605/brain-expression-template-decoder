@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill({of_owners_decile_rank_long},63), ts_backfill({owners_decile_rank_long},63), 60), sector), 0.1), -1, 0)), 5)",
+    "idea": "平滑离散状态切换：对T2的硬阈值切换信号引入5日线性衰减平滑(ts_decay_linear)，将瞬时跳跃转化为渐进式仓位调整，显著降低换手率(对比T2的硬切换)，同时保留极端头尾的非黑即白逻辑。",
+    "expression_list": [
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 5)",
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 5)",
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 5)",
+        "ts_decay_linear(if_else(greater(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), ts_backfill(insd8_total_number_of_owners_decile_rank_long,63), 60), sector), 0.1), -1, 0)), 5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_rank(winsorize(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_std_dev(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 126)), std=4), industry), 20)",
+    "idea": "波动率调整后的夏普动量：将短期（5日）修订幅度除以自身126日滚动标准差，得到风险调整后的修订效率（类似夏普比率），经行业分组排名和20日指数衰减平滑，识别那些“高确信度、低噪音”的分析师修订事件，降低高波动股票的虚假信号干扰。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(winsorize(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_std_dev(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 126)), std=4), industry), 20)",
+        "ts_decay_linear(group_rank(winsorize(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_std_dev(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 126)), std=4), industry), 20)"
+    ]
+}

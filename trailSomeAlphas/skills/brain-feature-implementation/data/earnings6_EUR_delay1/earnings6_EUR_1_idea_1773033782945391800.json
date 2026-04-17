@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(multiply(subtract(vec_count(vec_filter({stock_split_ratio_243}, value=\"nan\")), 1), subtract(vec_avg({stock_split_ratio_243}), 1)), 4)",
+    "idea": "**概念**: 拆分频率加权强度（事件密度×幅度）\n**逻辑**: 使用vec_filter过滤NaN后通过vec_count统计243天窗口内的拆分事件次数（频率），乘以平均拆分幅度（vec_avg - 1），得到\"拆分强度=频率×幅度\"的复合指标，最后进行4倍标准差winsorize处理异常值。该模板捕捉持续进行股票拆分（多次正向拆分）或连续合股的激进资本管理行为，认为政策持续性比单次事件更具信息含量。",
+    "expression_list": [
+        "winsorize(multiply(subtract(vec_count(vec_filter(ern6_stock_split_ratio_243, value=\"nan\")), 1), subtract(vec_avg(ern6_stock_split_ratio_243), 1)), 4)"
+    ]
+}

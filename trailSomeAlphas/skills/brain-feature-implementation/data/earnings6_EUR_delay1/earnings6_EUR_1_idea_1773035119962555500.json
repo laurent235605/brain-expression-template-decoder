@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 0.02), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), multiply(0.5, divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)))))",
+    "idea": "阈值分段的惊喜信号：结合逻辑运算符与EPS惊喜计算，仅当惊喜幅度超过2%阈值时启用全额信号，低于阈值时仅保留半仓信号（或设为0）。这种处理方式基于\"只有显著偏离预期的盈利公告才包含有效alpha，微小偏差多为噪音\"的经济直觉，同时避免完全丢弃边界数据导致的样本损失。",
+    "expression_list": [
+        "trade_when(greater(abs(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 0.02), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), multiply(0.5, divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)))))",
+        "trade_when(greater(abs(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01))), 0.02), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), multiply(0.5, divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)))))"
+    ]
+}

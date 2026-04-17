@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 20), industry), 3)",
+    "idea": "捕捉中美敞口价差的20日趋势变化（ts_delta），而非静态水平，结合行业中性化与3日线性衰减，识别区域配置轮动的加速或减速阶段，属于动量增强型区域因子，融合时序差分与截面价差双重逻辑。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 20), industry), 3)"
+    ]
+}

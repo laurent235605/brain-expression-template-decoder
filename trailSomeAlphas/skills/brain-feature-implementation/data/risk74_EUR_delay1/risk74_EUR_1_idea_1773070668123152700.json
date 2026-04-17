@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 20), std=4), 5)",
+    "idea": "融合Input 2的累积流量概念与时序平滑算子（guidance第4.2.2步）。将20日累积持仓变化进行winsorize截断（防范极端数值主导）后，使用ts_mean进行5日移动平均平滑，降低单日申报噪音与跳变，保留持续建仓或清仓的趋势性压力信号，平衡创新性与稳定性。",
+    "expression_list": [
+        "ts_mean(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), std=4), 5)"
+    ]
+}

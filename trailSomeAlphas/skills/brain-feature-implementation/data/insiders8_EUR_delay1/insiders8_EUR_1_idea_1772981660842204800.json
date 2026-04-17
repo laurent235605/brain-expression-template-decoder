@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), add(1, days_from_last_change(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}))))",
+    "idea": "事件驱动半衰期：利用days_from_last_change捕捉收益-权重分位差的最新变化，信号强度随时间衰减（divide by 1+days）。适用于捕捉刚出现的机构持仓与价格回报错配，避免stale signal，符合\"事件后衰减\"的时序逻辑。",
+    "expression_list": [
+        "divide(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), add(1, days_from_last_change(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long))))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), ts_std_dev(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 126), 252)), industry)",
+    "idea": "在模板2的敞口变化量基础上引入波动率调整：将126日敞口变化除以其252日历史标准差，识别统计意义上显著的'异动'而非正常波动，通过group_zscore实现行业中性，构建风险调整后的地理敞口动量信号。",
+    "expression_list": [
+        "group_zscore(divide(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), ts_std_dev(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 126), 252)), industry)"
+    ]
+}

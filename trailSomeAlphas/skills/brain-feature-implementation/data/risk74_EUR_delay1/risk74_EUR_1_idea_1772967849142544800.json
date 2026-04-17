@@ -1,0 +1,16 @@
+{
+    "template": "trade_when(greater(bucket(rank(winsorize({nondomicile},std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize({concentration},std=4), industry), winsorize({nondomicile},std=4)), 0)",
+    "idea": "海外收入分层尾部风险：通过分桶操作排除纯国内公司（海外收入占比最低的桶置零），仅对具有显著海外敞口的股票计算行业内地理集中度排名，并缩放以海外收入绝对水平。实现只押注国际化公司中的地理集中风险，避免国内公司干扰信号分布。",
+    "expression_list": [
+        "trade_when(greater(bucket(rank(winsorize(rsk74_nondomicile,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_concentration,std=4), industry), winsorize(rsk74_nondomicile,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_raw_exp_nondomicile1,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_concentration,std=4), industry), winsorize(rsk74_raw_exp_nondomicile1,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_raw_exp_nondomicile2,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_concentration,std=4), industry), winsorize(rsk74_raw_exp_nondomicile2,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_std_exp_nondomicile1,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_concentration,std=4), industry), winsorize(rsk74_std_exp_nondomicile1,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_std_exp_nondomicile2,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_concentration,std=4), industry), winsorize(rsk74_std_exp_nondomicile2,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_raw_exp_nondomicile1,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), winsorize(rsk74_raw_exp_nondomicile1,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_raw_exp_nondomicile2,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), winsorize(rsk74_raw_exp_nondomicile2,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_nondomicile,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), winsorize(rsk74_nondomicile,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_std_exp_nondomicile1,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), winsorize(rsk74_std_exp_nondomicile1,std=4)), 0)",
+        "trade_when(greater(bucket(rank(winsorize(rsk74_std_exp_nondomicile2,std=4)), range=\"0,1,0.2\"), 0), multiply(group_rank(winsorize(rsk74_raw_concentration,std=4), industry), winsorize(rsk74_std_exp_nondomicile2,std=4)), 0)"
+    ]
+}

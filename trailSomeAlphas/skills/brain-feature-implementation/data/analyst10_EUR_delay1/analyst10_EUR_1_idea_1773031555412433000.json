@@ -1,0 +1,22 @@
+{
+    "template": "ts_std_dev({consensus_fy1}, 60) / abs({consensus_fy1})",
+    "idea": "**Concept**: Consensus Volatility Ratio\n- **Sample Fields Used**: consensus_fy1\n- **Definition**: Coefficient of variation of consensus estimates over time, measuring stability of crowd expectations\n- **Why This Feature**: Stable consensus suggests information efficiency; volatile consensus suggests uncertainty or information arrival\n- **Logical Meaning**: Low values indicate steady expectations; high values indicate disagreement or changing conditions\n- **is filling nan necessary**: Yes, use ts_backfill to handle missing trading days\n- **Directionality**: Lower values (stability) may predict lower volatility; high values may predict uncertainty\n- **Boundary Conditions**: Near-zero consensus values create extreme ratios; winsorize at 99th percentile",
+    "expression_list": [
+        "ts_std_dev(anl10_cpxrevise_ratio_to_consensus_fy1, 60) / abs(anl10_cpxrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_cshrevise_ratio_to_consensus_fy1, 60) / abs(anl10_cshrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_dpsrevise_ratio_to_consensus_fy1, 60) / abs(anl10_dpsrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_ebirevise_ratio_to_consensus_fy1, 60) / abs(anl10_ebirevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_ebtrevise_ratio_to_consensus_fy1, 60) / abs(anl10_ebtrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_gpsrevise_ratio_to_consensus_fy1, 60) / abs(anl10_gpsrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_grmrevise_ratio_to_consensus_fy1, 60) / abs(anl10_grmrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_navrevise_ratio_to_consensus_fy1, 60) / abs(anl10_navrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_ndtrevise_ratio_to_consensus_fy1, 60) / abs(anl10_ndtrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_nerrevise_ratio_to_consensus_fy1, 60) / abs(anl10_nerrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_netrevise_ratio_to_consensus_fy1, 60) / abs(anl10_netrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_oprrevise_ratio_to_consensus_fy1, 60) / abs(anl10_oprrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_prerevise_ratio_to_consensus_fy1, 60) / abs(anl10_prerevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_prrrevise_ratio_to_consensus_fy1, 60) / abs(anl10_prrrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_salrevise_ratio_to_consensus_fy1, 60) / abs(anl10_salrevise_ratio_to_consensus_fy1)",
+        "ts_std_dev(anl10_tbvrevise_ratio_to_consensus_fy1, 60) / abs(anl10_tbvrevise_ratio_to_consensus_fy1)"
+    ]
+}

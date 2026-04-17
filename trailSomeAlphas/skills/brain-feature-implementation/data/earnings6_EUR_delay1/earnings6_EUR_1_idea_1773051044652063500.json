@@ -1,0 +1,5 @@
+{
+    "template": "trade_when( or( greater( group_rank( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( abs(vec_avg({estimated_eps})), 0.01 ) ), {industry} ), 0.85 ), less( group_rank( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( abs(vec_avg({estimated_eps})), 0.01 ) ), {industry} ), 0.15 ) ), group_zscore( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( abs(vec_avg({estimated_eps})), 0.01 ) ), {industry} ), 0 )",
+    "idea": "非对称尾部截断+区间择时。仅在行业内惊喜分位处于前15%(极端beat)或后15%(极端miss)时保留信号，中间70%区间视为噪音通过trade_when置零，实现'两端有信号，中段无暴露'的结构；同时通过group_zscore确保多头空头在行业内部相对强度可比，避免跨行业不可比问题。",
+    "expression_list": []
+}

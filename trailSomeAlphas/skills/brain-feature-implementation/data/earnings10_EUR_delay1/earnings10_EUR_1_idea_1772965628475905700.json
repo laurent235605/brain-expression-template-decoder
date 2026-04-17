@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({elta_value}), 5)",
+    "idea": "**Concept**: Estimate Revision Momentum\n- **Sample Fields Used**: `{elta_value}`\n- **Definition**: 5-day rate of change in average KEI estimates\n- **Why This Feature**: Captures the direction and velocity of analyst sentiment shifts. Sustained momentum often precedes price moves as analysts incorporate new information before the broader market.\n- **is filling nan necessary**: If estimate is missing for a day, ts_backfill is preferred to avoid treating missing data as zero change, which would create artificial momentum spikes.\n- **Directionality**: Positive values indicate upgrading expectations (bullish); negative values indicate downgrades (bearish)\n- **Boundary Conditions**: Large positive/negative values indicate rapid re-rating; values near zero indicate consensus stability",
+    "expression_list": [
+        "ts_delta(vec_avg(ern10_elta_value), 5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(subtract(ts_rank(winsorize({eps_best_eeps_cur_yr}, std=4), 252), quantile({eps_best_eeps_cur_yr}, driver=gaussian)), industry)",
+    "idea": "**历史分位与当前水平背离 (Historical Percentile Dissonance)**\n- **逻辑**：识别盈利预期处于历史高位（252日ts_rank）但当前截面分位较低的被低估股票，或反之，捕捉均值回归或趋势延续的背离信号，经行业中性化。\n- **关键操作**：ts_rank看时序位置，quantile看截面位置，winsorize处理极值，两者相减产生背离信号。\n- **适用场景**：适用于捕捉预期从极端水平回归常态，或突破历史区间的动量延续。",
+    "expression_list": [
+        "group_zscore(subtract(ts_rank(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), 252), quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian)), industry)",
+        "group_zscore(subtract(ts_rank(winsorize(anl69_eps_best_eeps_cur_yr, std=4), 252), quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian)), industry)"
+    ]
+}

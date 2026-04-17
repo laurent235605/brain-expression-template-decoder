@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(multiply(winsorize({concentration},std=4), trade_when(and(not(is_nan({exp_nondomicile1})), less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05)), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), 0)), 20)",
+    "idea": "验证后信号时序平滑：对经过双源验证（差异<5%且非缺失）的地理集中度与海外敞口乘积应用20日线性衰减平均。降低高频噪音同时保持风险信号的持续性，适用于质量筛选后的慢变风险因子。",
+    "expression_list": [
+        "ts_decay_linear(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_raw_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)",
+        "ts_decay_linear(multiply(winsorize(rsk74_concentration,std=4), trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), 0)), 20)"
+    ]
+}

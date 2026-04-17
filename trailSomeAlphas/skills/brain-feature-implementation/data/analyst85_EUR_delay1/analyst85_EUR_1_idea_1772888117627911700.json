@@ -1,0 +1,7 @@
+{
+    "template": "vec_stddev({version}) / vec_avg({version})",
+    "idea": "**Concept**: Version Consistency Ratio\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Ratio of vector standard deviation to vector mean (coefficient of variation) of versions, measuring relative dispersion\n- **Why This Feature**: Combines central tendency and dispersion to identify stocks where versions are both high (many revisions) and dispersed (disagreement) - indicating contested high-activity ideas\n- **is filling nan necessary**: Filter NaN values within vector using `vec_filter` before computing statistics to ensure robust ratio calculation\n- **Directionality**: High values indicate high revision activity with high disagreement (risky/contraian opportunities); low values indicate consensus regardless of version level\n- **Boundary Conditions**: Near-zero values indicate perfect consensus; undefined values (mean near zero) indicate new ideas with minimal history",
+    "expression_list": [
+        "vec_stddev(anl85_version) / vec_avg(anl85_version)"
+    ]
+}

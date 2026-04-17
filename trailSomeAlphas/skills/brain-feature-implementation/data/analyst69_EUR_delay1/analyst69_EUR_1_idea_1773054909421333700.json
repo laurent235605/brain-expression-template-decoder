@@ -1,0 +1,8 @@
+{
+    "template": "multiply(quantile(group_zscore(ts_delta(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 5), industry), driver=gaussian), winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4))",
+    "idea": "效率调整后的行业动量：将模板1的效率比率作为模板2加速度信号的缩放因子，使盈利预测动量信号根据公司的盈利转化效率（EPS/EBITDA）进行加权放大，高效率公司获得动量敞口加成，低效率公司信号衰减，实现质量与动量的交叉增强。",
+    "expression_list": [
+        "multiply(quantile(group_zscore(ts_delta(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 5), industry), driver=gaussian), winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4))",
+        "multiply(quantile(group_zscore(ts_delta(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 5), industry), driver=gaussian), winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4))"
+    ]
+}

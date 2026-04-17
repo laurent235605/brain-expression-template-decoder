@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(group_rank(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),industry),5)",
+    "idea": "追踪个股在行业内部空头变化排名的5日变动（delta），识别空头压力相对同行业正在快速恶化（排名上升=相对更多做空）或改善（排名下降=相对空头回补）的股票，捕捉行业内的相对动能与资金轮动。",
+    "expression_list": [
+        "ts_delta(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),industry),5)",
+        "ts_delta(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),industry),5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "bucket(ts_percentage({volume}, 12, 0.5), range=\"0,1,0.2\")",
+    "idea": "**Concept**: Volume Regime Classification\n- **Sample Fields Used**: volume\n- **Definition**: Discrete quintile bucketing based on time-series percentile (0-20%, 20-40%, etc. of 12-month history)\n- **Why This Feature**: Converts continuous volume into categorical liquidity regimes for portfolio construction constraints or regime-switching models\n- **Logical Meaning**: Structural categorization of liquidity state—quintile 5 represents \"high liquidity regime\" vs quintile 1 \"distressed liquidity regime\"\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 2) to ensure sufficient historical data for percentile calculation\n- **Directionality**: 0.0-0.2 = very low volume regime; 0.8-1.0 = very high volume regime\n- **Boundary Conditions**: Discrete step function at quintile boundaries; values cluster at 0.1, 0.3, 0.5, 0.7, 0.9 representing quintile centers",
+    "expression_list": [
+        "bucket(ts_percentage(mdl234_volume, 12, 0.5), range=\"0,1,0.2\")"
+    ]
+}

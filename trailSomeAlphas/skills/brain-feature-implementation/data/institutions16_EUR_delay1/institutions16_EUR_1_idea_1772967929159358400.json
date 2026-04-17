@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), log(winsorize(ts_backfill({reported_asset_value},63),std=4)), 252, rettype=0))), 2), zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), log(winsorize(ts_backfill({reported_asset_value},63),std=4)), 252, rettype=0)), 0)",
+    "idea": "极端残差择时信号：先计算基础残差并标准化，仅当残差绝对值大于2倍标准差（极端高活跃或极端低活跃）时保留信号，中段噪音置零。利用`trade_when`实现分段处理，强化尾部alpha，适合只在显著异常时建仓的策略。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), log(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 252, rettype=0))), 2), zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), log(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 252, rettype=0)), 0)"
+    ]
+}

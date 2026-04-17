@@ -1,0 +1,16 @@
+{
+    "template": "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill({concentration},63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill({nondomicile},63),std=4), industry), 2)), 10), industry)",
+    "idea": "复合时序-截面分位拉伸：对地域集中度进行126日时序分位数计算（ts_rank）并经高斯分位数拉伸（quantile），强调历史极端水平；与海外收入的行业内非线性排名（signed_power+group_rank）交互，构建“历史极端集中度+行业相对海外暴露”的双维度择时信号。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry), 2)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(ts_rank(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 126), driver=\"gaussian\"), signed_power(group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry), 2)), 10), industry)"
+    ]
+}

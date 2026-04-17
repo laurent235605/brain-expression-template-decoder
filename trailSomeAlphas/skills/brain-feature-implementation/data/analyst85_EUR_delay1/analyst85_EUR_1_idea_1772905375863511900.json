@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(ts_decay_exp_window(vec_count({version}), 60, factor=0.05), 126)",
+    "idea": "使用vec_count统计每日版本条目数量（反映分析师跟踪活跃度），采用长周期（60天）慢衰减（因子0.05）以维持长期记忆，捕捉持续的研究覆盖模式而非单日脉冲，再计算该信号在过去126天中的时序排名（0-1），识别当前版本活跃度是否处于历史极端分位，适合发现持续受到关注的标的。",
+    "expression_list": [
+        "ts_rank(ts_decay_exp_window(vec_count(anl85_version), 60, factor=0.05), 126)"
+    ]
+}

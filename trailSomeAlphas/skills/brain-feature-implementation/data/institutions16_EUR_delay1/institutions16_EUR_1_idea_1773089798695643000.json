@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_decay_linear(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 5), sector)), 2.0), group_zscore(ts_delta({reported_asset_value}, 20), sector), 0)",
+    "idea": "极值条件触发策略：仅当5日平滑后的资产流加速度偏离行业均值超过2个标准差时（极端头尾20%区间），使用原始20日资产变化信号进行交易，中段噪音区域通过trade_when置零仓位，避免微弱加速信号带来的交易成本和均值回归噪音，实现“强信号重仓、弱信号空仓”的非线性暴露。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_decay_linear(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 5), sector)), 2.0), group_zscore(ts_delta(fund_reported_asset_value, 20), sector), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "hump(group_zscore(divide(ts_rank(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 126), add(ts_decay_linear(ts_std_dev(returns, 21), 5), 0.001)), industry), hump=0.01)",
+    "idea": "将原始配置数据转化为126日时间序列分位数（ts_rank），识别当前剥离规模后的权益暴露处于自身历史极值位置；分母采用线性衰减加权波动率（强调近5日风险变化而非简单均值）；通过hump算子忽略日间微小变动（<1%），显著降低换手率；最终行业zscore捕捉“历史极端高配+近期风险可控”的复合信号，避免静态截面的噪音干扰。",
+    "expression_list": [
+        "hump(group_zscore(divide(ts_rank(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 126), add(ts_decay_linear(ts_std_dev(returns, 21), 5), 0.001)), industry), hump=0.01)"
+    ]
+}

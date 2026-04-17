@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(winsorize(ts_backfill({hfown_pctown}, 21), std=4), winsorize(ts_backfill({fund_num_owners_encr}, 21), std=4)), industry)",
+    "idea": "借鉴模板2的“价差”构建逻辑，将HF持仓比例与持仓机构数量进行行业内相减。高持仓比例但低机构数量代表集中持仓（高conviction），反之代表分散持仓，通过group_zscore捕捉这种“持仓集中度”信号，识别机构抱团与分歧。",
+    "expression_list": [
+        "group_zscore(subtract(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), winsorize(ts_backfill(hedge_fund_num_owners_encr, 21), std=4)), industry)"
+    ]
+}

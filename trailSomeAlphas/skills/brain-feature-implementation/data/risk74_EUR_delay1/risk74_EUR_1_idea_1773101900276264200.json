@@ -1,0 +1,16 @@
+{
+    "template": "subtract(group_zscore(ts_backfill(if_else(is_nan({nondomicile}),0,{nondomicile}),63),industry), group_zscore(signed_power(winsorize(ts_backfill({concentration},63),std=4), 2),industry))",
+    "idea": "构建\"国际化质量\"得分：用行业内的海外敞口水平Z-score减去经signed_power放大的集中度Z-score（对极端集中进行非线性惩罚）。高得分代表高海外敞口且低集中度（优质分散化），低得分代表高敞口高集中（危险押注），实现了对\"盲目出海\"与\"精准分散\"的量化区分。",
+    "expression_list": [
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 2),industry))",
+        "subtract(group_zscore(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),industry), group_zscore(signed_power(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 2),industry))"
+    ]
+}

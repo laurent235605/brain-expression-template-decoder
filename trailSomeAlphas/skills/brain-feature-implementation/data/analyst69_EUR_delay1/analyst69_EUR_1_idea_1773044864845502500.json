@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(ts_regression(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), group_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), std=4), 252)",
+    "idea": "剥离行业系统Beta后的历史分位数捕捉：通过252日滚动回归剔除行业一致预期变动的影响，提取特质性修订动量残差，再评估其历史时间序列中的极端分位水平，避免行业景气周期干扰，专注捕捉个股特有的分析师预期异动。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_regression(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), group_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), std=4), 252)",
+        "ts_rank(winsorize(ts_regression(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), group_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), log(ts_mean(cap,21)), industry), 252, rettype=0), std=4), 252)"
+    ]
+}

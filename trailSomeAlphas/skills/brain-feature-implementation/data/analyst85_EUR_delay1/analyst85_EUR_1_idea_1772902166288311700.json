@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_zscore(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 252), 5)",
+    "idea": "将当前20日累积修订强度与自身过去一年（252日）历史水平进行时序Z分数比较，识别是否处于历史罕见的活跃极端；再通过5日线性衰减加权（近期权重更高）平滑信号路径。该模板强调\"历史极端状态\"而非绝对水平，降低短期噪音并控制换手率。",
+    "expression_list": [
+        "ts_decay_linear(ts_zscore(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 252), 5)"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "template": "{correlation} + {correlation}",
+    "idea": "**Concept**: ESG Score Accumulation Depth\n- **Sample Fields Used**: `score_total_correlation`, `score_positive_correlation`\n- **Definition**: Cumulative sum of absolute correlation-weighted scores across different weighting methodologies\n- **Why This Feature**: Measures total ESG \"signal\" accumulated through multiple correlation lenses. High accumulation suggests robust ESG quality recognized under various correlation assumptions; low accumulation suggests ESG profile is fragile to methodological choice.\n- **is filling nan necessary**: NaN in either score component indicates missing correlation data; accumulation should reflect available data only or be NaN.\n- **Directionality**: High positive values indicate strong cumulative ESG signal across methodologies; Near zero indicates neutral or conflicting signals\n- **Boundary Conditions**: Minimum = sum of minimum possible scores; Maximum = sum of maximum possible scores",
+    "expression_list": [
+        "environmental_max_correlation_weighted_score + environmental_max_correlation_weighted_score",
+        "governance_max_correlation_weighted_score + governance_max_correlation_weighted_score",
+        "social_max_correlation_weighted_score + social_max_correlation_weighted_score",
+        "social_score_positive_correlation + social_score_positive_correlation",
+        "social_score_total_correlation + social_score_total_correlation",
+        "sustainability_max_correlation_weighted_score + sustainability_max_correlation_weighted_score"
+    ]
+}

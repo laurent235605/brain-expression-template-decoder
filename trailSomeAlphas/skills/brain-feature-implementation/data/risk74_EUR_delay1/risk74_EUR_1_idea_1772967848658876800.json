@@ -1,0 +1,16 @@
+{
+    "template": "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill({concentration},63),std=4), industry), 2), group_zscore(winsorize(ts_backfill({nondomicile},63),std=4), industry)), 10), industry)",
+    "idea": "行业中性残差地理集中因子：先对原始数据进行清洗（回溯填充63天+4倍标准差截尾），在行业内标准化以剔除行业基准差异，使用signed_power非线性放大极端值，与海外收入占比交互后施加10天线性衰减平滑，最后进行行业中性归一化。旨在捕捉相对于同行的异常地理集中风险，强调极端单国依赖。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry)), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), industry), 2), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry)), 10), industry)"
+    ]
+}

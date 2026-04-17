@@ -1,0 +1,14 @@
+{
+    "template": "trade_when(greater(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 0.8), days_from_last_change({eps_expected_report_dt}), ts_mean(days_from_last_change({eps_expected_report_dt}), 60))",
+    "idea": "相干Regime下的择时开关（Coherence-Conditional Timing）。以预期相关系数作为状态判断（高相干>0.8 vs 低相干），在高相干期使用原始报告日期稳定性信号（捕捉事件不确定性），在低相干期切换为60日平滑版本（过滤噪音）。实现'只有预期稳定时才对日程变化敏感'的条件逻辑，避免在盈利混乱期过度交易。",
+    "expression_list": [
+        "trade_when(greater(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_aeps_expected_report_dt), ts_mean(days_from_last_change(anl69_aeps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_aeps_expected_report_dt), ts_mean(days_from_last_change(anl69_aeps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_aeps_expected_report_dt), ts_mean(days_from_last_change(anl69_aeps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_aeps_expected_report_dt), ts_mean(days_from_last_change(anl69_aeps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_eps_expected_report_dt), ts_mean(days_from_last_change(anl69_eps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_eps_expected_report_dt), ts_mean(days_from_last_change(anl69_eps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_eps_expected_report_dt), ts_mean(days_from_last_change(anl69_eps_expected_report_dt), 60))",
+        "trade_when(greater(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0.8), days_from_last_change(anl69_eps_expected_report_dt), ts_mean(days_from_last_change(anl69_eps_expected_report_dt), 60))"
+    ]
+}

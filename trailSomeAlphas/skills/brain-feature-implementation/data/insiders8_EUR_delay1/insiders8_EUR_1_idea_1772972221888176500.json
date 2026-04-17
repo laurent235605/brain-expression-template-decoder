@@ -1,0 +1,7 @@
+{
+    "template": "raw = winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4); size_grp = bucket(rank(ts_mean(cap,21)), range=\"0,1,0.5\"); fine_grp = group_cartesian_product(sector, size_grp); signal = group_zscore(raw, fine_grp); liquid = greater(adv, ts_median(adv,20)); filtered = trade_when(liquid, signal, 0); final = hump(ts_decay_linear(filtered, 3), 0.005)",
+    "idea": "精细化分组与流动性过滤：通过行业×市值规模（大盘/小盘）的笛卡尔积实现双层中性化，消除规模风格在行业内的干扰。加入成交量阈值过滤（高于全市场中位数），剔除流动性枯竭导致的虚假定价偏离。最后结合3日线性衰减与hump（0.005阈值）双重平滑，仅在信号方向确认且变化足够大时调仓，兼顾信号稳定性与执行成本。",
+    "expression_list": [
+        "raw = winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4); size_grp = bucket(rank(ts_mean(cap,21)), range=\"0,1,0.5\"); fine_grp = group_cartesian_product(sector, size_grp); signal = group_zscore(raw, fine_grp); liquid = greater(adv, ts_median(adv,20)); filtered = trade_when(liquid, signal, 0); final = hump(ts_decay_linear(filtered, 3), 0.005)"
+    ]
+}

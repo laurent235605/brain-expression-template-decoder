@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), 126)), 2), ts_sum(ts_delta({hfown_pctown}, 1), 20), 0), 10)",
+    "idea": "极端事件衰减持有：仅在累积流向偏离历史均值2个标准差以上时触发信号，并应用10日线性衰减平滑，降低常规噪音交易频率，专注于高置信度的持续性配置行为",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 126)), 2), ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 0), 10)"
+    ]
+}

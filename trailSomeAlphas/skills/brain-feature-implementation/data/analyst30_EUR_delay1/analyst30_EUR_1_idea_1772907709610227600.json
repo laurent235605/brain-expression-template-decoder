@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(add(add(vec_range(vec_filter({fiscalyearend}, \"nan\")), vec_stddev(vec_filter({fiscalyearend}, \"nan\"))), multiply(0.3, vec_skewness(vec_filter({fiscalyearend}, \"nan\")))), 63), industry)",
+    "idea": "构建多阶矩复合指标：整合极差（一阶离散度）、标准差（二阶波动）和偏度（三阶不对称性）共同刻画财政年度结构的复杂性，使用63日线性衰减加权强化近期模式，识别具有非对称长尾分布的异常财政架构公司。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(add(add(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), vec_stddev(vec_filter(anl30_fiscalyearend, \"nan\"))), multiply(0.3, vec_skewness(vec_filter(anl30_fiscalyearend, \"nan\")))), 63), industry)"
+    ]
+}

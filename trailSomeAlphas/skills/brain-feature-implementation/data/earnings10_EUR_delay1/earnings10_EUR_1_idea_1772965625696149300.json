@@ -1,0 +1,7 @@
+{
+    "template": "(vec_avg({aily_delta_recon_value}) - ts_mean(vec_avg({aily_delta_recon_value}), 20)) / ts_std_dev(vec_avg({aily_delta_recon_value}), 20)",
+    "idea": "**Concept**: Revision Surprise Z-Score\n- **Sample Fields Used**: `{aily_delta_recon_value}`\n- **Definition**: Standardized unexpected revision measuring how many standard deviations today's revision differs from the 20-day historical mean\n- **Why This Feature**: Identifies information shocks. Large z-scores indicate analyst updates that break from recent trends, potentially signaling material new information not yet reflected in prices.\n- **is filling nan necessary**: Historical NaNs should be backfilled to maintain stable std_dev calculation, but current day NaN should result in NaN output (no signal).\n- **Directionality**: High positive values indicate surprise upgrades; high negative values indicate surprise downgrades; both extremes predictive of volatility\n- **Boundary Conditions**: |z| > 2 indicates statistically significant surprise; |z| > 3 extreme outlier requiring attention",
+    "expression_list": [
+        "(vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)"
+    ]
+}

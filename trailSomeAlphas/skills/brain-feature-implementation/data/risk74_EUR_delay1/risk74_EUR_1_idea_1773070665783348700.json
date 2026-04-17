@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(winsorize(ts_delta({hfown_pctown}, 5), std=3)), 2)",
+    "idea": "基于Input 1的速度信号，应用guidance中的'非线性放大'（第1.1步signed_power）。对清洗后的zscore进行幂次变换（power=2），凸性放大极端值（高conviction建仓/清仓），压缩中间区间（-1,1）的噪音权重，强调尾部贡献，适合'只有极端流动才有信号'的假设。",
+    "expression_list": [
+        "signed_power(zscore(winsorize(ts_delta(rsk74_hfown_pctown, 5), std=3)), 2)"
+    ]
+}

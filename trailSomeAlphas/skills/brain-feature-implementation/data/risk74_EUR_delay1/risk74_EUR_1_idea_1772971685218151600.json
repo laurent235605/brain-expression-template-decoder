@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_decay_linear(group_zscore(ts_delta(ts_backfill({factor_esg},63), 21), sector), 5), ts_decay_linear(ts_delta({hfown_pctown}, 21), 5))",
+    "idea": "变化率背离捕捉（平滑版）：比较ESG评分与HF持仓的21日变化率，两者均先经行业中性化处理，再使用ts_decay_linear进行线性衰减平滑以降低换手率。该设计融合了输入1的时序变化视角与输入2的截面偏离逻辑，旨在识别ESG改善但聪明钱减持（或反之）的背离机会，同时通过decay控制交易频率。",
+    "expression_list": [
+        "subtract(ts_decay_linear(group_zscore(ts_delta(ts_backfill(rsk74_factor_esg,63), 21), sector), 5), ts_decay_linear(ts_delta(rsk74_hfown_pctown, 21), 5))"
+    ]
+}

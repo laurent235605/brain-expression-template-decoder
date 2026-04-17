@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), group_mean(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), log(ts_mean(cap, 21)), sector), 252, rettype=0)",
+    "idea": "将中美敞口价差作为被解释变量，对行业内市值加权平均价差进行时间序列回归，取残差作为信号，剥离行业层面的地缘政治Beta，保留公司特异性区域配置偏离，比简单价差更纯净。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), log(ts_mean(cap, 21)), sector), 252, rettype=0)"
+    ]
+}

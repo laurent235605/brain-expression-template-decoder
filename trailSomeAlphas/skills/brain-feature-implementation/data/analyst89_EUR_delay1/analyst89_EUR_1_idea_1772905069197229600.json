@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(ts_skewness(winsorize(vec_avg({data_item_value}), 4), 252), sector), signed_power(group_zscore(ts_mean(vec_stddev({data_item_value}), 20), sector), 0.5))",
+    "idea": "波动率加权偏度：将传统偏度信号与近期20日波动率水平（通过vec_stddev计算截面波动后时序平滑）进行非线性组合，使用signed_power(..., 0.5)对波动率zscore进行压缩，在整体波动较高时放大偏度信号权重，在低波动时衰减，构建\"高波动环境下的尾部风险\"增强指标，强调不确定性时期的分布不对称性。",
+    "expression_list": [
+        "multiply(group_zscore(ts_skewness(winsorize(vec_avg(anl89_data_item_value), 4), 252), sector), signed_power(group_zscore(ts_mean(vec_stddev(anl89_data_item_value), 20), sector), 0.5))"
+    ]
+}

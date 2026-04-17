@@ -1,0 +1,8 @@
+{
+    "template": "bucket(rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20)), range=\"0,1,0.2\")",
+    "idea": "离散化重组：将Template2的连续事件衰减信号通过分桶算子离散化为五档（0.2间隔）。将连续型冲击转化为分类信号，便于实施分档仓位管理或提取极端头尾（如仅交易第一和第五分位），增强信号的可解释性和分段风险控制能力。",
+    "expression_list": [
+        "bucket(rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20)), range=\"0,1,0.2\")",
+        "bucket(rank(ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20)), range=\"0,1,0.2\")"
+    ]
+}

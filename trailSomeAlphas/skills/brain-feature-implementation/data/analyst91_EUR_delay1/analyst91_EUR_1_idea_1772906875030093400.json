@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_mean(ts_std_dev(vec_avg({exposure_value}), 20), 60))",
+    "idea": "构建双时间维度对比：短期(5日)暴露波动减去长期(20日波动率的60日移动平均)，捕捉公司地理布局动荡的加速度变化。正值表示近期重组节奏急剧加快，负值表示业务趋于稳态，适用于识别重组周期的拐点而非静态波动水平。",
+    "expression_list": [
+        "subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_mean(ts_std_dev(vec_avg(anl91_exposure_value), 20), 60))"
+    ]
+}

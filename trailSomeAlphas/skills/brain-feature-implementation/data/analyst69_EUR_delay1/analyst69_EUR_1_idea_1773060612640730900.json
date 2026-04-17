@@ -1,0 +1,14 @@
+{
+    "template": "group_normalize(if_else(greater(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 0.8), ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 0), industry)",
+    "idea": "仅在模板1定义的'极度稳定'子集（行业内报告日期变更天数排名前20%，即最稳定）中计算模板2的盈利预期相关性，其他股票强制赋权0。通过group_rank筛选稳定子集后再应用一致性检验，实现'先选稳定信息环境，再验盈利预期结构'的层级过滤逻辑。",
+    "expression_list": [
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.8), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.8), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.8), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.8), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.8), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.8), ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.8), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 0), industry)",
+        "group_normalize(if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.8), ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 0), industry)"
+    ]
+}

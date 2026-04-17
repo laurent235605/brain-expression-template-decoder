@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(ts_delta(vec_avg({version}), 5), std=4), 10)",
+    "idea": "**平滑趋势跟踪（换手率控制）**：对5日版本变化率进行极值裁剪后，应用10日线性衰减加权平均（近期数据权重线性递减）。相比原始delta，该处理显著降低单日批量更新或数据补录造成的脉冲式噪音与换手率，专注于捕捉持续性的、渐进式的分析师预期调整趋势，适合低频调仓策略。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(ts_delta(vec_avg(anl85_version), 5), std=4), 10)"
+    ]
+}

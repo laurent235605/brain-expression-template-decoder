@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_mean({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 5), std=4), 1.5), sector)",
+    "idea": "引入5日移动平均平滑日度噪音，对持续性的收益-权重偏离进行非线性放大，过滤短暂定价扰动，强调稳定的极端错误定价机会。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_mean(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 5), std=4), 1.5), sector)"
+    ]
+}

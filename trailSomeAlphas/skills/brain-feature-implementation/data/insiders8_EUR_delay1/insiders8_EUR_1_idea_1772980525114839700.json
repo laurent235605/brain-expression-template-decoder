@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( ts_rank( ts_corr( winsorize( ts_backfill( {of_owners_decile_rank_long}, 21 ), std=4 ), winsorize( ts_backfill( {owners_decile_rank_long}, 21 ), std=4 ), 60 ), 120 ), sector )",
+    "idea": "【历史分位型】预处理→变换→历史定位(ts_rank计算当前值在120日历史窗口中的分位)→行业中性化。迁移逻辑：将当前相关性置于个股自身历史时序中的相对位置进行评估，识别\"创历史新高相关(结构极度稳定)\"或\"创历史新低(结构剧变)\"的极端状态，而非仅看截面对比。",
+    "expression_list": [
+        "group_zscore( ts_rank( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 120 ), sector )",
+        "group_zscore( ts_rank( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 120 ), sector )",
+        "group_zscore( ts_rank( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 120 ), sector )",
+        "group_zscore( ts_rank( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 120 ), sector )"
+    ]
+}

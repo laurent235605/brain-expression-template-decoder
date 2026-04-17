@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(trade_when(greater(quantile(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), sector), \"gaussian\"), 1.28), 1.0, trade_when(less(quantile(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), sector), \"gaussian\"), -1.28), -1.0, 0)), sector), 5)",
+    "idea": "高斯分位数行业中性：先将行业标准化后的敞口通过高斯driver映射到标准正态分布，利用±1.28阈值精确捕捉前/后10%极端值，再通过group_normalize实现每日行业多空净额为零，消除行业beta暴露，最后用5日衰减平滑，适合纯因子剥离。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(trade_when(greater(quantile(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), sector), \"gaussian\"), 1.28), 1.0, trade_when(less(quantile(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), sector), \"gaussian\"), -1.28), -1.0, 0)), sector), 5)"
+    ]
+}

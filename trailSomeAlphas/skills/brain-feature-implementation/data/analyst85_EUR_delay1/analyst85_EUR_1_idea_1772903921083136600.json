@@ -1,0 +1,7 @@
+{
+    "template": "subtract(zscore(winsorize(vec_skewness(vec_filter({version}, value=\\\"nan\\\")), std=4)), zscore(winsorize(vec_kurtosis(vec_filter({version}, value=\\\"nan\\\")), std=4)))",
+    "idea": "分布形态价差（偏度-峰度）：同时计算版本分布的偏度和峰度，经清洗标准化后作差，构建复合分布形态指标，识别\"尖峰厚尾且偏斜\"的极端聚集状态，提供比单一偏度更全面的风险刻画。",
+    "expression_list": [
+        "subtract(zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\\\"nan\\\")), std=4)), zscore(winsorize(vec_kurtosis(vec_filter(anl85_version, value=\\\"nan\\\")), std=4)))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "divide(vec_avg({actual_eps}), add(ts_mean(ts_backfill(vec_avg({actual_eps}), 5), 252), 0.001))",
+    "idea": "跨模板逻辑迁移：将模板1的“股息持续率”概念激进应用于模板2的EPS字段，构建盈利持续率（Earnings Persistence Ratio）。通过对比当前盈利与252日历史均值的偏离，捕捉盈利加速或减速的结构性信号，而非绝对盈利水平。",
+    "expression_list": [
+        "divide(vec_avg(ern6_actual_eps), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), 0.001))",
+        "divide(vec_avg(ern6_actual_eps_274), add(ts_mean(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), 0.001))"
+    ]
+}

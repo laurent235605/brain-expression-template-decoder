@@ -1,0 +1,7 @@
+{
+    "template": "subtract({cfroichg}, ts_delay({cfroichg}, 5))",
+    "idea": "**Concept**: Fundamental Momentum Acceleration\n- **Sample Fields Used**: cfroichg, cfroi_1, cfroi_2\n- **Definition**: Rate of change in CFROI acceleration, measuring whether cash flow improvements are gaining or losing steam\n- **Why This Feature**: Captures inflection points in business performance earlier than traditional earnings momentum; second derivative of profitability\n- **Logical Meaning**: Positive values indicate improving rate of improvement (accelerating); negative values indicate decelerating improvements or worsening declines\n- **is filling nan necessary**: No, preserve NaN for cfroichg as missing change data is informative (indicates insufficient history). Do not fill.\n- **Directionality**: Positive = accelerating fundamentals (buy); Negative = decelerating fundamentals (sell/avoid)\n- **Boundary Conditions**: Extreme positive values may signal unsustainable spikes; extreme negative may indicate cyclical troughs",
+    "expression_list": [
+        "subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5))"
+    ]
+}

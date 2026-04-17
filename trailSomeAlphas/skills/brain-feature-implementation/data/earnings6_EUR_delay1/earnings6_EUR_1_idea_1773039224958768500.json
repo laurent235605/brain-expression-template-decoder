@@ -1,0 +1,8 @@
+{
+    "template": "quantile( winsorize( divide( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( abs( vec_avg({estimated_eps})), 0.01 ) ), add( ts_std_dev( divide( subtract( vec_avg({actual_eps}), vec_avg({estimated_eps}) ), add( abs( vec_avg({estimated_eps})), 0.01 ) ), 63 ), 0.001 ) ), std=3 ), driver=\"uniform\" )",
+    "idea": "构建'Surprise的夏普比率'：分子为标准化Surprise，分母为该Surprise过去63天的时序波动率(ts_std_dev)，高波动时期的 Surprise 被降权，低波动时期的 Surprise 被放大；经winsorize后使用uniform分位数(等间距映射)，使所有有效信号在最终分布上均匀分布，避免极端值过度主导组合。",
+    "expression_list": [
+        "quantile( winsorize( divide( divide( subtract( vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps) ), add( abs( vec_avg(ern6_estimated_eps)), 0.01 ) ), add( ts_std_dev( divide( subtract( vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps) ), add( abs( vec_avg(ern6_estimated_eps)), 0.01 ) ), 63 ), 0.001 ) ), std=3 ), driver=\"uniform\" )",
+        "quantile( winsorize( divide( divide( subtract( vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps) ), add( abs( vec_avg(ern6_estimated_eps)), 0.01 ) ), add( ts_std_dev( divide( subtract( vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps) ), add( abs( vec_avg(ern6_estimated_eps)), 0.01 ) ), 63 ), 0.001 ) ), std=3 ), driver=\"uniform\" )"
+    ]
+}

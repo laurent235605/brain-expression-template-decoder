@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry), ts_decay_linear(inverse(add(days_from_last_change(vec_avg({x_dividend})), 1)), 20))",
+    "idea": "结合模板1的股息持续性逻辑与事件驱动算子days_from_last_change，构建基于'距上次分红变化天数'的衰减权重函数，对近期发生分红政策变化的公司赋予更高权重，并使用ts_decay_linear平滑，捕捉分红行为变化后的短期持续性alpha。",
+    "expression_list": [
+        "multiply(group_zscore(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry), ts_decay_linear(inverse(add(days_from_last_change(vec_avg(ern6_x_dividend)), 1)), 20))",
+        "multiply(group_zscore(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry), ts_decay_linear(inverse(add(days_from_last_change(vec_avg(ern6_x_dividend_233)), 1)), 20))",
+        "multiply(group_zscore(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry), ts_decay_linear(inverse(add(days_from_last_change(vec_avg(ern6_x_dividend_oc)), 1)), 20))",
+        "multiply(group_zscore(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry), ts_decay_linear(inverse(add(days_from_last_change(vec_avg(ern6_x_dividend_oc_235)), 1)), 20))"
+    ]
+}

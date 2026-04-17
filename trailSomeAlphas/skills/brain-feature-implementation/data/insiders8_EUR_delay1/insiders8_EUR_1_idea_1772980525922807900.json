@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( hump_decay( ts_decay_linear( ts_corr( winsorize( ts_backfill( {of_owners_decile_rank_long}, 21 ), std=4 ), winsorize( ts_backfill( {owners_decile_rank_long}, 21 ), std=4 ), 60 ), 3 ), 0.01 ), sector )",
+    "idea": "【双重复合平滑型】预处理→变换→双重平滑(ts_decay_linear 3日线性衰减+hump_decay 0.01忽略微小波动)→行业中性化。迁移逻辑：在标准化之前引入显式的换手率控制层，通过时序加权平均与驼峰衰减双重降低因子高频抖动，显著降低策略 turnover，提升规模容量与可交易性。",
+    "expression_list": [
+        "group_zscore( hump_decay( ts_decay_linear( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 3 ), 0.01 ), sector )",
+        "group_zscore( hump_decay( ts_decay_linear( ts_corr( winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 3 ), 0.01 ), sector )",
+        "group_zscore( hump_decay( ts_decay_linear( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 3 ), 0.01 ), sector )",
+        "group_zscore( hump_decay( ts_decay_linear( ts_corr( winsorize( ts_backfill( insd8_total_number_of_owners_decile_rank_long, 21 ), std=4 ), winsorize( ts_backfill( insd8_effective_number_of_owners_decile_rank_long, 21 ), std=4 ), 60 ), 3 ), 0.01 ), sector )"
+    ]
+}

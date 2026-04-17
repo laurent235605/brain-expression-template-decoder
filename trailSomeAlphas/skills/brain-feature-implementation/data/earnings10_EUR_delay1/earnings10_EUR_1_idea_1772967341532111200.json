@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(not(is_nan({aily_delta_recon_value})), group_zscore(signed_power(multiply(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), add(1, multiply(0.5, winsorize(vec_skewness({aily_delta_recon_value}), std=2)))), 2), sector), NaN)",
+    "idea": "偏度加权非线性冲击因子：同时使用vec_avg和vec_skewness，基础zscore计算后，用偏度系数加权（偏度越大表明日内修正分布越不对称，信息含量越高），使用signed_power(..., 2)进行非线性放大使极端值更加突出，进行行业组内标准化，并利用trade_when配合is_nan检查过滤缺失值确保数据质量。适用于识别具有方向性偏斜的修正惊喜，当分析师共识出现严重左偏或右偏时产生强信号。",
+    "expression_list": [
+        "trade_when(not(is_nan(ern10_aily_delta_recon_value)), group_zscore(signed_power(multiply(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), add(1, multiply(0.5, winsorize(vec_skewness(ern10_aily_delta_recon_value), std=2)))), 2), sector), NaN)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(quantile(ts_decay_linear(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 15), driver=\"gaussian\"), sector)",
+    "idea": "分位数高斯变换与行业中性：将15日平滑后的资产流加速度通过quantile映射至高斯分布（driver=gaussian），将原始分布的中间区间压缩至0附近、尾部拉伸以强化极端事件权重，经行业标准化后，更敏感地捕捉具有肥尾特性的资金流向极端拐点，同时消除原始分布的偏度影响。",
+    "expression_list": [
+        "group_zscore(quantile(ts_decay_linear(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 15), driver=\"gaussian\"), sector)"
+    ]
+}

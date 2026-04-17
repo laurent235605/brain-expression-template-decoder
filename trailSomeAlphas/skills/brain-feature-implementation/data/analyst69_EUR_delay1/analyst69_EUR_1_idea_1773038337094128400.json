@@ -1,0 +1,10 @@
+{
+    "template": "multiply(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63))",
+    "idea": "交叉增强（乘性）：将模板1的披露日期稳定性分位数作为质量权重乘子，与模板2的累积修正压力相乘，构建'高置信度信息冲击'指标。逻辑是仅在披露时间处于历史稳定区间时，才放大累积修正压力的信号强度。",
+    "expression_list": [
+        "multiply(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63))",
+        "multiply(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63))",
+        "multiply(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63))",
+        "multiply(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63))"
+    ]
+}

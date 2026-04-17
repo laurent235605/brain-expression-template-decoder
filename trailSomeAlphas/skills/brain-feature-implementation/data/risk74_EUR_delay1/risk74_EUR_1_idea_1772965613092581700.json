@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_delta({hfown_pctown}, 1), 20)",
+    "idea": "**Concept**: Cumulative Hedge Fund Flow Pressure\n- **Sample Fields Used**: `hfown_pctown`, `fund_pct_ownership_encr`\n- **Definition**: Accumulated change in hedge fund ownership over 20 days to identify persistent buying or selling pressure\n- **Why This Feature**: Single-period changes may be noise; cumulative flows indicate sustained conviction or capitulation\n- **Logical Meaning**: Positive values indicate sustained accumulation (building position); negative values indicate sustained distribution (exiting)\n- **is filling nan necessary**: No, treat each day's change as independent; cumulative sum naturally handles gaps\n- **Directionality**: Highly positive = strong accumulation (future pressure potential); Highly negative = strong distribution; Near zero = no net flow\n- **Boundary Conditions**: Values > 5% indicate significant position building; values < -5% indicate major exits; bounded by 100% ownership theoretically",
+    "expression_list": [
+        "ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20)"
+    ]
+}

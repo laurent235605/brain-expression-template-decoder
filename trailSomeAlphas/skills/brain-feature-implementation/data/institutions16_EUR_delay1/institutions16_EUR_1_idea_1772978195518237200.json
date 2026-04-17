@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 126, rettype=0))), 2), ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 126, rettype=0), 0)",
+    "idea": "极端尾部事件捕捉版。基于\"中间区间多为噪音，仅极端值蕴含真实风格信息\"的假设，仅当规模净化后的活跃度偏离均值超过2个标准差（|zscore|>2）时才保留信号，否则归零（不交易）。这种\"开关式\"处理有效过滤了中等活跃度区域的随机波动，专注于捕捉极度主动或极度被动的风格偏离事件。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 126, rettype=0))), 2), ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 126, rettype=0), 0)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(quantile(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), driver=\"gaussian\"), industry)",
+    "idea": "结合模板1的行业中性化框架与模板2的高斯分位数拉伸技术，将股息持续性比率经行业标准化后，通过quantile函数将中间区间的噪音压缩至0附近，同时将极端分红行为（显著高于或低于历史常态）拉伸放大，强化对行业内分红异常持续公司的识别能力。",
+    "expression_list": [
+        "group_zscore(quantile(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), driver=\"gaussian\"), industry)"
+    ]
+}

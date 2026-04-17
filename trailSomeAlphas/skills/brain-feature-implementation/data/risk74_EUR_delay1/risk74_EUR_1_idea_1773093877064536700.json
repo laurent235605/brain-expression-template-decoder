@@ -1,0 +1,5 @@
+{
+    "template": "truncate(group_normalize(trade_when(or(greater(bucket(rank(multiply(group_zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), add(0.8, multiply(0.4, rank({adv20}))))), \"0,1,0.1\"), 0.9), less(bucket(rank(multiply(group_zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), add(0.8, multiply(0.4, rank({adv20}))))), \"0,1,0.1\"), 0.1)), multiply(group_zscore(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), industry), add(0.8, multiply(0.4, rank({adv20})))), 0), industry), maxPercent=0.015)",
+    "idea": "流动性加权极端分位策略：以20日ADV排名作为流动性权重(0.8-1.2倍)对组内标准化信号进行加权，提升高流动性个股信号强度；随后通过十等分(bucket)仅保留最极端的10%头部与尾部进行交易，配合group_normalize实现行业内多空平衡，兼顾信号质量与可交易性。",
+    "expression_list": []
+}

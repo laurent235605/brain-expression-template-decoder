@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_zscore(ts_delta(days_from_last_change({eps_expected_report_dt}), 5), 60), ts_zscore(ts_delta(days_from_last_change({eps_expected_report_dt}), 20), 60))",
+    "idea": "将模板1的“短长周期背离”逻辑迁移至模板2的报告日期变更字段，构建“预期报告日期调整加速度”信号。通过计算5日与20日报告日期变更天数的差分z-score差异，捕捉公司盈利披露时间不确定性的收敛或发散速度。短周期加速调整往往预示业绩提前泄露或重大变化迫近，而长周期稳定则代表确定性增强，二者背离提供事件驱动型alpha。",
+    "expression_list": [
+        "subtract(ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 20), 60))",
+        "subtract(ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 5), 60), ts_zscore(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 20), 60))"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), std=4), industry), 2), 10)",
+    "idea": "**行业中性化极端流动性风险暴露 (Industry-Neutralized Extreme Liquidity Risk)**：首先使用 `ts_backfill` 将季度数据前向填充至日频，保持零值（无短期债务）与缺失数据的区分，避免将真实的零债务结构误判为数据缺失。通过 `winsorize` 处理极端离群值（如分母过小的壳公司），防止比率失真。利用 `group_zscore` 在行业内部进行中性化，消除不同行业资本结构差异带来的基准偏差（如银行业天然短期负债高）。采用 `signed_power(..., 2)` 对行业z-score进行非线性放大，使极端高短期债务（高再融资风险）和极端低短期债务（保守融资结构）的尾部信号更加显著，形成自然的双向对冲。最后通过 `ts_decay_linear` 进行10日线性衰减平滑，降低季度报告披露带来的换手率冲击，同时保留趋势方向。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), industry), 2), 10)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), industry), 2), 10)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), industry), 2), 10)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), industry), 2), 10)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), industry), 2), 10)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), industry), 2), 10)"
+    ]
+}

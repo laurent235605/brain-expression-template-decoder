@@ -1,0 +1,10 @@
+{
+    "template": "ts_corr({bmpo}, {pctchgqtrsales}, 12)",
+    "idea": "**Concept**: Operating Leverage Consistency\n- **Sample Fields Used**: `oplev`, `pctchgqtrsales`, `bmpo`\n- **Definition**: Stability of operating margin expansion relative to sales growth\n- **Why This Feature**: Consistent operating leverage indicates scalable business models\n- **Logical Meaning**: Measures whether margin improvements are sustainable or one-time adjustments\n- **is filling nan necessary**: No, NaN indicates missing cost structure data which is meaningful (avoid imputation)\n- **Directionality**: High values suggest stable cost structure; low values indicate volatile margins\n- **Boundary Conditions**: Extreme positive values may indicate unsustainable margin expansion",
+    "expression_list": [
+        "ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 12)",
+        "ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 12)",
+        "ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 12)",
+        "ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 12)"
+    ]
+}

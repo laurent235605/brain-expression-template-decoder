@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(zscore(vector_neut(ts_mean(winsorize(ts_backfill({fundreportedequityassets}, 21), std=4), 20), ts_mean(winsorize(ts_backfill({reported_asset_value}, 21), std=4), 20))), 5)",
+    "idea": "先对原始数据进行20日移动平均平滑以消除短期波动和报告时点的随机扰动，再进行向量中性化提取长期稳定的配置倾向，最后应用5日线性衰减加权处理最终信号，显著降低换手率，适合捕捉基金的中长期战略配置决策。",
+    "expression_list": [
+        "ts_decay_linear(zscore(vector_neut(ts_mean(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), std=4), 20), ts_mean(winsorize(ts_backfill(fund_reported_asset_value, 21), std=4), 20))), 5)"
+    ]
+}

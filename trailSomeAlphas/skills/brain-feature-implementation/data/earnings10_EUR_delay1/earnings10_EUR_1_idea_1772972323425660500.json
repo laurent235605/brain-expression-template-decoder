@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(rank(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20))), subtract(1, rank(winsorize(vec_stddev({elta_value}), std=4)))), industry)",
+    "idea": "分位数双重排序：将模板2的修订惊喜与模板1的分歧度进行截面排名转换后交互。使用rank算子将两者映射到[0,1] uniform分布，构建“惊喜排名×(1-分歧度排名)”的复合信号。高分歧（低置信）的股票即使惊喜排名高也会被压缩，降低极端原始值影响，强调相对位置而非绝对数值。",
+    "expression_list": [
+        "group_zscore(multiply(rank(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20))), subtract(1, rank(winsorize(vec_stddev(ern10_elta_value), std=4)))), industry)"
+    ]
+}

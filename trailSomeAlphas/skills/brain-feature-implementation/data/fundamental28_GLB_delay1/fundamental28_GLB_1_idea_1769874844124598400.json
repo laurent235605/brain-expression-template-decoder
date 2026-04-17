@@ -1,0 +1,7 @@
+{
+    "template": "divide(abs({cfsourceusea_value_04840a}), ts_mean(abs({cfsourceusea_value_04840a}), 252))",
+    "idea": "**Concept**: FX Impact Anomaly\n- **Sample Fields Used**: `cfsourceusea_value_04840a`\n- **Definition**: Magnitude of current FX effect relative to historical average absolute impact\n- **Why This Feature**: Flags unusual currency translation effects that may distort underlying operational performance\n- **Logical Meaning**: Identifies when currency headwinds/tailwinds are unusually severe compared to the company's historical FX exposure\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. FX effects are often zero for domestic companies; NaN vs zero distinction matters for international exposure identification.\n- **Directionality**: High values indicate unusual FX impact (may require operational adjustment)\n- **Boundary Conditions**: Values near 1 indicate normal FX impact; high values indicate currency crises or extreme rate movements",
+    "expression_list": [
+        "divide(abs(fnd28_cfsourceusea_value_04840a), ts_mean(abs(fnd28_cfsourceusea_value_04840a), 252))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "multiply(right_tail(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), minimum=0), add(1, multiply(0.3, signed_power(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 1.5))))",
+    "idea": "**右尾隔离+幂次放大（Tail+Power结构）**：结合right_tail仅保留高效率股票(>行业均值)，并对模板B的修正信号应用signed_power进行1.5次幂非线性放大，使极端修正获得超比例权重，符合激进风格的杠杆叠加与右尾聚焦。",
+    "expression_list": [
+        "multiply(right_tail(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), minimum=0), add(1, multiply(0.3, signed_power(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 1.5))))",
+        "multiply(right_tail(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), minimum=0), add(1, multiply(0.3, signed_power(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 1.5))))"
+    ]
+}

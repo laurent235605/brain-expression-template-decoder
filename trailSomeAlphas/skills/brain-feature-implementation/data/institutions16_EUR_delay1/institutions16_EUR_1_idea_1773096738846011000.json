@@ -1,0 +1,7 @@
+{
+    "template": "hump(signed_power(group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 1.5), hump=0.02)",
+    "idea": "对行业中性化后的风险调整暴露应用1.5次幂非线性放大极端值（同时保留符号），再通过hump算子忽略日内权重小于2%的微小变动，在保留对极端配置偏好高敏感度的同时，显著降低换手率与交易成本。",
+    "expression_list": [
+        "hump(signed_power(group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 1.5), hump=0.02)"
+    ]
+}

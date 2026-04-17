@@ -1,0 +1,9 @@
+{
+    "template": "ts_decay_exp_window(ts_delta(vec_avg({daily_investment}), 1), 10, factor=0.5)",
+    "idea": "**Concept**: Capital Flow Acceleration\n- **Sample Fields Used**: `daily_investment`, `investment`\n- **Definition**: Exponentially weighted change in investment size revealing accumulation or distribution patterns\n- **Why This Feature**: Analysts scaling into positions signal building conviction; rapid reductions indicate profit-taking or stop-losses\n- **is filling nan necessary**: Investment changes occur on trade execution days only; fill gaps with last observation using ts_backfill(vec_avg({daily_investment}), lookback=10) to distinguish between no change and missing data.\n- **Directionality**: Positive = capital deployment (accumulation); negative = withdrawal (distribution)\n- **Boundary Conditions**: Zero investment (closed ideas) should persist as zero, not backfilled indefinitely; limit lookback to 5 days",
+    "expression_list": [
+        "ts_decay_exp_window(ts_delta(vec_avg(anl56_daily_investment), 1), 10, factor=0.5)",
+        "ts_decay_exp_window(ts_delta(vec_avg(anl56_daily_investmentprice), 1), 10, factor=0.5)",
+        "ts_decay_exp_window(ts_delta(vec_avg(daily_investment_denomination), 1), 10, factor=0.5)"
+    ]
+}

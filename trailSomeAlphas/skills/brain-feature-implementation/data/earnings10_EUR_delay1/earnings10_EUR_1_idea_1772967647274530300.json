@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(divide(ts_delta(vec_avg({elta_value}), 5), add(ts_std_dev(vec_avg({elta_value}), 63), 0.001)), std=4), industry)",
+    "idea": "风险调整后的信息比率风格：将5日预期动量除以63日滚动波动率（附加极小值防除零），得到单位风险下的修正强度，类似于信息比率，有助于区分基本面驱动的持续修正与随机噪音，经去极值后行业内标准化。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(ts_delta(vec_avg(ern10_elta_value), 5), add(ts_std_dev(vec_avg(ern10_elta_value), 63), 0.001)), std=4), industry)"
+    ]
+}

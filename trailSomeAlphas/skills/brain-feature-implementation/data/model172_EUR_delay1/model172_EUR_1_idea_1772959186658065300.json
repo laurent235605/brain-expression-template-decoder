@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(multiply(group_zscore(winsorize(ts_backfill({sustratfy1},60),4),sector), multiply(group_zscore(winsorize(ts_backfill({cfroi_1},21),4),sector), group_zscore(winsorize(ts_backfill({fcg_in},21),4),sector))),sector)",
+    "idea": "行业中性化多因子质量模型：首先对{sustratfy1}进行60日回溯填充以处理其缓慢更新的特性，对{cfroi_1}和{fcg_in}进行21日回溯填充，随后对所有字段进行4倍标准差winsorize去极值；分别在行业内进行zscore标准化以消除行业偏差，将可持续性评分作为质量乘数与经行业中性化后的盈利和现金流指标相乘，最后进行group_normalize行业中性化归一化，确保因子暴露纯粹反映个体经济护城河而非行业beta。",
+    "expression_list": [
+        "group_normalize(multiply(group_zscore(winsorize(ts_backfill(mdl172_sustratfy1,60),4),sector), multiply(group_zscore(winsorize(ts_backfill(mdl172_cfroi_1,21),4),sector), group_zscore(winsorize(ts_backfill(mdl172_fcg_in,21),4),sector))),sector)"
+    ]
+}

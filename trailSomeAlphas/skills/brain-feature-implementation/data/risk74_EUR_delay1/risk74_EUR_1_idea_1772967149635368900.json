@@ -1,0 +1,7 @@
+{
+    "template": "scale(group_normalize(hump(winsorize(ts_sum(ts_delta(ts_backfill({hfown_pctown}, 21), 1), 20), std=3), hump=0.02), industry), scale=1, longscale=1, shortscale=1)",
+    "idea": "**低换手持续性压力因子**: 对缺失数据进行21日回溯填充，累加20日变化后进行3倍标准差截尾；引入hump算子（阈值0.02）忽略微小的日间权重波动，仅当累积变化超过该阈值时才更新信号，显著降低换手率；通过group_normalize确保每日各行业多空净暴露为零，实现纯行业内选股；最后scale调整整体booksize。适用于捕捉机构持续调仓而非短期交易的慢变量。",
+    "expression_list": [
+        "scale(group_normalize(hump(winsorize(ts_sum(ts_delta(ts_backfill(rsk74_hfown_pctown, 21), 1), 20), std=3), hump=0.02), industry), scale=1, longscale=1, shortscale=1)"
+    ]
+}

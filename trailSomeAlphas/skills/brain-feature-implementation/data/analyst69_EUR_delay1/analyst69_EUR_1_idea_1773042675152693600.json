@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(signed_power(ts_delta(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 20), 2), industry)",
+    "idea": "在原始20日平滑基础上，引入一阶差分（ts_delta）捕捉报告日程稳定性的边际变化趋势，利用signed_power非线性放大极端变化幅度，最后进行行业内标准化（group_zscore），识别相对于同行业公司而言，其报告规律性发生显著加速或减速的异常个股，剥离行业整体季节性干扰。",
+    "expression_list": [
+        "group_zscore(signed_power(ts_delta(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 20), 2), industry)",
+        "group_zscore(signed_power(ts_delta(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 20), 2), industry)"
+    ]
+}

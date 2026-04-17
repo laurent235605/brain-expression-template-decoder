@@ -1,0 +1,9 @@
+{
+    "template": "ts_sum(ts_max(vec_avg({daily_investment}) - ts_delay(vec_avg({daily_investment}), 1), 0), 20)",
+    "idea": "**Concept**: Accumulated Capital Deployment\n- **Sample Fields Used**: `daily_investment`, `reduced_investment`\n- **Definition**: Rolling sum of daily investment changes identifying periods of intense capital flow into ideas\n- **Why This Feature**: Cumulative flow identifies \"crowded\" ideas where multiple analysts are deploying capital simultaneously (momentum) or fleeing (capitulation)\n- **is filling nan necessary**: Use ts_backfill to ensure daily continuity, then calculate ts_sum of positive changes only (if_else(delta > 0, delta, 0)) to isolate accumulation.\n- **Directionality**: High values = heavy accumulation (crowded long/short); Low/negative = net withdrawal\n- **Boundary Conditions**: Reset sum when idea moves to reduced status (closed)",
+    "expression_list": [
+        "ts_sum(ts_max(vec_avg(anl56_daily_investment) - ts_delay(vec_avg(anl56_daily_investment), 1), 0), 20)",
+        "ts_sum(ts_max(vec_avg(anl56_daily_investmentprice) - ts_delay(vec_avg(anl56_daily_investmentprice), 1), 0), 20)",
+        "ts_sum(ts_max(vec_avg(daily_investment_denomination) - ts_delay(vec_avg(daily_investment_denomination), 1), 0), 20)"
+    ]
+}

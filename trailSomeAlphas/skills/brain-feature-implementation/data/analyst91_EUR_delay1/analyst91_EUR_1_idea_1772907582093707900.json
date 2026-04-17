@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(ts_zscore(ts_delta(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), 21), 126)), 1.5), ts_zscore(ts_delta(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), 21), 126), 0), {industry})",
+    "idea": "地理集中度变化加速度（行业中性）。先对向量敞口进行21日回溯填充，计算偏度后截断极值；取21日一阶差分（ts_delta）捕捉集中度变化速度，再计算126日时序Z-score识别极端加速/减速时刻。仅当|Z-score|>1.5时保留信号（trade_when），其余视为噪音归零，最后进行行业内标准化（group_zscore）。该模板专注于\"正在发生剧烈重构\"的地域风险，忽略缓慢漂移状态。",
+    "expression_list": []
+}

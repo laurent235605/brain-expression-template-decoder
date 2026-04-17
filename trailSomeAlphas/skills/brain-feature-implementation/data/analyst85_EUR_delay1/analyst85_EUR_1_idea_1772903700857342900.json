@@ -1,0 +1,7 @@
+{
+    "template": "quantile( ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), driver=\"gaussian\" ) * ts_delta(vec_avg({version}), 5)",
+    "idea": "将累积修正强度通过高斯分位映射(quantile)进行分布拉伸，使极端活跃与极端不活跃的状态更加突出，再与版本动量相乘，强化对'极端关注度变化'的尾部暴露，适合捕捉非线性的情绪极值",
+    "expression_list": [
+        "quantile( ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), driver=\"gaussian\" ) * ts_delta(vec_avg(anl85_version), 5)"
+    ]
+}

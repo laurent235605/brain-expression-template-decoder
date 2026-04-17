@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_normalize(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), add(abs(vec_skewness({estimated_eps})), abs(vec_kurtosis({estimated_eps}))))), std=4), {industry}), 5)",
+    "idea": "高阶矩风险调整惊喜：利用分析师预测分布的偏度（vec_skewness）和峰度（vec_kurtosis）之和作为动态分母调整项，惩罚存在极端乐观预期（右偏）或肥尾风险（高峰度）的股票，实现经预测质量风险调整的惊喜计算；结合5日线性衰减（ts_decay_linear）平滑日度噪音，最后通过行业内归一化（group_normalize）确保每日行业内多空平衡，降低行业暴露风险。",
+    "expression_list": []
+}

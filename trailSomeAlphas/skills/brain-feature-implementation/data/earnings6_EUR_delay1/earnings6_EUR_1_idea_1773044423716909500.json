@@ -1,0 +1,7 @@
+{
+    "template": "divide( subtract( if_else( is_nan( vec_avg( {stock_split_ratio_243} ) ), 1, vec_avg( {stock_split_ratio_243} ) ), 1 ), add( ts_mean( ts_backfill( abs( subtract( if_else( is_nan( vec_avg( {stock_split_ratio_243} ) ), 1, vec_avg( {stock_split_ratio_243} ) ), 1 ) ), 63 ), 252 ), 0.001 ) )",
+    "idea": "将模板1的'当前/历史均值'持续性比率结构迁移到模板2的分拆数据。通过if_else将NaN（无分拆）视为基准值1，计算当前分拆比例偏离1的程度，并除以其历史平均绝对偏离，识别那些当前分拆行为（正向或反向）显著异于自身历史常态的标的，捕捉资本结构变化的'加速度'信号。",
+    "expression_list": [
+        "divide( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ), add( ts_mean( ts_backfill( abs( subtract( if_else( is_nan( vec_avg( ern6_stock_split_ratio_243 ) ), 1, vec_avg( ern6_stock_split_ratio_243 ) ), 1 ) ), 63 ), 252 ), 0.001 ) )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(subtract(zscore(winsorize({active_return_decile_rank_long},4)), zscore(winsorize({active_weight_decile_rank_long},4))),2), 2)",
+    "idea": "激进尾部放大策略：对收益-权重分位差进行双重去极值（winsorize）和标准化（zscore），仅对绝对值大于2个标准差的极端偏离进行平方放大（signed_power），中间噪音归零。此模板融合了\"数据清洗→区间选择→非线性增强\"的全链条逻辑，强调极端错配。",
+    "expression_list": [
+        "signed_power(winsorize(subtract(zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long,4)), zscore(winsorize(insd8_active_weight_decile_rank_long,4))),2), 2)"
+    ]
+}

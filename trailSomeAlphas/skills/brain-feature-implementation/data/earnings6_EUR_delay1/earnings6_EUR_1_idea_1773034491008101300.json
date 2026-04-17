@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(add(if_else(is_nan(vec_count({board_of_directors_meeting})), 0, vec_count({board_of_directors_meeting})), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 2))), 10)",
+    "idea": "**事件密度持续期与拆分溢价加权**：使用vec_count统计董事会会议频次（而非简单二元存在），对股票拆分赋予更高权重（2倍，因其资本结构影响更持久），EPS保持单位权重。通过ts_decay_linear进行10日线性衰减平滑，构造事件后的持续性持仓信号，适用于捕捉事件后价格发现或流动性冲击的延续效应，相比单日脉冲信号具有更低的换手率。",
+    "expression_list": [
+        "ts_decay_linear(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, vec_count(ern6_board_of_directors_meeting)), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 2))), 10)",
+        "ts_decay_linear(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, vec_count(ern6_board_of_directors_meeting)), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 2))), 10)",
+        "ts_decay_linear(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, vec_count(ern6_board_of_directors_meeting_247)), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 2))), 10)",
+        "ts_decay_linear(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, vec_count(ern6_board_of_directors_meeting_247)), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 2))), 10)"
+    ]
+}

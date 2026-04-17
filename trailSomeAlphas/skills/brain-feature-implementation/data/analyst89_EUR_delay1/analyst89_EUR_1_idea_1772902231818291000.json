@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), 63), 252)",
+    "idea": "数据丰富度动量信号：计算数据丰富度在63日窗口的变化量(ts_delta)，再计算该变化量在252日历史中的Z-Score位置，捕捉IPO后数据积累加速（正值）或退市前数据断档风险（负值）的边际变化，而非绝对水平。",
+    "expression_list": [
+        "ts_zscore(ts_delta(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), 63), 252)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(abs(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)), 0.9), group_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, sector), 0)",
+    "idea": "分状态信号：仅在股权结构极度稳定（|corr|>0.9，模板1的极端值）时启用行业内标准化的收益-权重背离信号（模板2）。这种\"清洁室\"构造排除了并购重组、指数调整等导致股东结构剧变的事件噪音，专注于静态所有权环境下的机构行为偏差。",
+    "expression_list": [
+        "if_else(greater(abs(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)), 0.9), group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector), 0)",
+        "if_else(greater(abs(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)), 0.9), group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector), 0)",
+        "if_else(greater(abs(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)), 0.9), group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector), 0)",
+        "if_else(greater(abs(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)), 0.9), group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector), 0)"
+    ]
+}

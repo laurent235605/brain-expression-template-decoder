@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(trade_when(greater(abs(vec_avg({aily_delta_recon_value})), ts_mean(abs(vec_avg({aily_delta_recon_value})), 60)), vec_avg({aily_delta_recon_value}), 0), 20)",
+    "idea": "显著性过滤的极端修订捕获。仅当单日平均修订幅度的绝对值超过其60日历史平均水平（视为有效信息冲击阈值）时才纳入累计，否则视为噪音置零。该条件逻辑过滤掉日常随机波动与微量修正，专注捕捉由 conviction 驱动的实质性预期调整，累积值代表重大信息事件带来的净预期迁移。",
+    "expression_list": [
+        "ts_sum(trade_when(greater(abs(vec_avg(ern10_aily_delta_recon_value)), ts_mean(abs(vec_avg(ern10_aily_delta_recon_value)), 60)), vec_avg(ern10_aily_delta_recon_value), 0), 20)"
+    ]
+}

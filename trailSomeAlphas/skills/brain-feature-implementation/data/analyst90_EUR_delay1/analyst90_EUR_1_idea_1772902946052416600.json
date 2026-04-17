@@ -1,0 +1,7 @@
+{
+    "template": "subtract( ts_decay_linear( group_normalize( quantile( subtract( vec_avg( winsorize( vec_filter( {likelihood_score}, value=\"nan\" ), std=4 ) ), multiply( 0.3, vec_stddev( {likelihood_score} ) ) ), driver=\"uniform\" ), industry ), 10 ), ts_delay( ts_decay_linear( group_normalize( quantile( subtract( vec_avg( winsorize( vec_filter( {likelihood_score}, value=\"nan\" ), std=4 ) ), multiply( 0.3, vec_stddev( {likelihood_score} ) ) ), driver=\"uniform\" ), industry ), 10 ), 30 ) )",
+    "idea": "风险调整后的行业中性动量：先清洗向量数据并剔除NaN，计算风险调整得分（均值-0.3倍标准差），经分位数标准化和行业中性化后，使用10日线性衰减平滑，最终与30天前水平求差，捕捉质量改善的加速信号，同时惩罚高波动的不确定性标的。",
+    "expression_list": [
+        "subtract( ts_decay_linear( group_normalize( quantile( subtract( vec_avg( winsorize( vec_filter( success_likelihood_score, value=\"nan\" ), std=4 ) ), multiply( 0.3, vec_stddev( success_likelihood_score ) ) ), driver=\"uniform\" ), industry ), 10 ), ts_delay( ts_decay_linear( group_normalize( quantile( subtract( vec_avg( winsorize( vec_filter( success_likelihood_score, value=\"nan\" ), std=4 ) ), multiply( 0.3, vec_stddev( success_likelihood_score ) ) ), driver=\"uniform\" ), industry ), 10 ), 30 ) )"
+    ]
+}

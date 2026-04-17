@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut(trade_when(less(ts_count_nans(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)),21),5), ts_decay_linear(ts_zscore(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)),252),10), 0), {mark_cap})",
+    "idea": "历史自适应分位数策略：计算CFROI利差在过去252个交易日中的时序Z-score（衡量当前优势相对历史均值的偏离程度），经10日线性衰减平滑以降低短期噪音，并剔除近期数据缺失过多（21日内缺失值≥5）的样本以确保信号质量，最后进行市值中性化，捕捉均值回复或趋势动量的非对称机会。",
+    "expression_list": [
+        "vector_neut(trade_when(less(ts_count_nans(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)),21),5), ts_decay_linear(ts_zscore(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)),252),10), 0), mdl172_mark_cap)"
+    ]
+}

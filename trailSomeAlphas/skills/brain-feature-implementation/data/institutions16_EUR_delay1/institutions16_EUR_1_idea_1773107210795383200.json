@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr_20(trade_when(greater(abs(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 5)), multiply(0.5, ts_std_dev(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 63))), group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 5), add(ts_std_dev(returns, 21), 0.001)), industry), 0))",
+    "idea": "仅当5日配置变化绝对值超过自身63日波动率的一半时（显著调仓事件），才交易经风险调整后的变化信号，其余时间强制空仓（0）；通过ts_target_tvr_20自动优化衰减参数以严格控制目标换手率；捕捉基金在风险调整基础上的重大调仓行为与信念突变，过滤日常持仓波动的噪音。",
+    "expression_list": [
+        "ts_target_tvr_20(trade_when(greater(abs(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 5)), multiply(0.5, ts_std_dev(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 63))), group_zscore(divide(ts_delta(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 5), add(ts_std_dev(returns, 21), 0.001)), industry), 0))"
+    ]
+}

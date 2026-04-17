@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), driver=\"cauchy\"), 5)",
+    "idea": "使用Cauchy分布映射（quantile driver=cauchy）替代平方运算，更激进地将极端尾部（无论极低或极高波动）拉向正负无穷，同时压缩中间区间至接近零，强化对“显著偏离常态”公司的识别；配合5日线性衰减(ts_decay_linear)降低换手率，平衡信号时效性与交易成本。",
+    "expression_list": [
+        "ts_decay_linear(quantile(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), driver=\"cauchy\"), 5)"
+    ]
+}

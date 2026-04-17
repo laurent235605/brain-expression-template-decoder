@@ -1,0 +1,16 @@
+{
+    "template": "ts_mean(multiply(group_zscore(winsorize(ts_backfill({concentration},63),std=4),sector), group_zscore(if_else(is_nan({nondomicile}),0,winsorize(ts_backfill({nondomicile},63),std=4)),sector)),20)",
+    "idea": "行业中性地理集中风险：先将两个字段进行63日回溯填充与4倍标准差去极值处理，缺失的非国内收入记为0；分别计算行业内的Z-score以剔除行业固有差异（如科技业天然比公用事业更集中），相乘得到相对风险得分；最后取20日时序均值平滑季度报告带来的突变，高值代表相对于同行业 peers 具有异常高的'单一海外篮子'风险。",
+    "expression_list": [
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_nondomicile),0,winsorize(ts_backfill(rsk74_nondomicile,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_std_exp_nondomicile1),0,winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_std_exp_nondomicile2),0,winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_nondomicile),0,winsorize(ts_backfill(rsk74_nondomicile,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_std_exp_nondomicile1),0,winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)),sector)),20)",
+        "ts_mean(multiply(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector), group_zscore(if_else(is_nan(rsk74_std_exp_nondomicile2),0,winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4)),sector)),20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_decay_linear(group_zscore(ts_delta({hfown_pctown}, 1), sector), 20), 252)",
+    "idea": "交叉应用模板2的日内变化（ts_delta）与模板1的行业中性化（group_zscore），引入线性衰减（ts_decay_linear）替代简单求和以降低换手率，最后进行历史ZScore标准化，识别行业相对资金流的长期极端状态，平衡了响应速度与稳定性。",
+    "expression_list": [
+        "ts_zscore(ts_decay_linear(group_zscore(ts_delta(rsk74_hfown_pctown, 1), sector), 20), 252)"
+    ]
+}

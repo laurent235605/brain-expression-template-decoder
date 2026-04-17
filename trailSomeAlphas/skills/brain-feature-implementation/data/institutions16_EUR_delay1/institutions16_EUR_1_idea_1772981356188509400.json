@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(quantile(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), driver='gaussian'), group_cartesian_product(industry, bucket(rank(ts_backfill({reported_asset_value}, 63)), range='0,1,0.25')))",
+    "idea": "采用高斯分位数变换（quantile）将风险调整后的配置强度映射至标准正态分布以强化尾部区分度；通过行业-市值交叉分组（group_cartesian_product）实现更精细的同业比较，消除规模分层带来的混淆效应，捕捉在特定规模-行业细分中具有极端风险效率的基金。",
+    "expression_list": [
+        "group_zscore(quantile(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), driver='gaussian'), group_cartesian_product(industry, bucket(rank(ts_backfill(fund_reported_asset_value, 63)), range='0,1,0.25')))"
+    ]
+}

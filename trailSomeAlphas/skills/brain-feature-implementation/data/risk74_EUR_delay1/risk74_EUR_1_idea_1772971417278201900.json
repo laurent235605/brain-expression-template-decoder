@@ -1,0 +1,14 @@
+{
+    "template": "less(rank({concentration} - ts_mean({concentration}, 60)), 0.2) * {crowding} * {value_ts}",
+    "idea": "地理分散化趋势中的逆向拥挤价值：识别地理集中度排名处于底部20%（正在快速分散化/国际化）的股票，叠加其拥挤度和价值属性，捕捉“去风险化”过程中可能被过度抛售的价值机会，与input1的正向Spike形成对冲逻辑。",
+    "expression_list": [
+        "less(rank(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2) * rsk74_crowding * rsk74_value_ts",
+        "less(rank(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2) * rsk74_raw_crowding * rsk74_value_ts",
+        "less(rank(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2) * liquidity_factor_crowding * rsk74_value_ts",
+        "less(rank(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2) * liquidity_timeseries_crowding * rsk74_value_ts",
+        "less(rank(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2) * rsk74_crowding * rsk74_value_ts",
+        "less(rank(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2) * rsk74_raw_crowding * rsk74_value_ts",
+        "less(rank(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2) * liquidity_factor_crowding * rsk74_value_ts",
+        "less(rank(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2) * liquidity_timeseries_crowding * rsk74_value_ts"
+    ]
+}

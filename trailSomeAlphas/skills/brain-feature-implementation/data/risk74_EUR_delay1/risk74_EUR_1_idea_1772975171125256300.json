@@ -1,0 +1,16 @@
+{
+    "template": "multiply(ts_zscore(ts_delta(winsorize(ts_backfill({concentration},63),std=4),63),252), ts_zscore(if_else(is_nan({nondomicile}),0,ts_mean({nondomicile},20)),252))",
+    "idea": "地理集中度动量风险：捕捉风险正在加速积聚的情形。计算集中度在过去63日变化的Z-score（相对其历史波动标准化），乘以非国内收入20日均值的Z-score；当股票处于历史最高的海外敞口水平，且集中度正在快速上升时（如刚进入单一新兴市场），信号值最大，识别动态形成的'全押单一海外'风险，而非静态的已知风险。",
+    "expression_list": [
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_nondomicile),0,ts_mean(rsk74_nondomicile,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,ts_mean(rsk74_raw_exp_nondomicile1,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,ts_mean(rsk74_raw_exp_nondomicile2,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_std_exp_nondomicile1),0,ts_mean(rsk74_std_exp_nondomicile1,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_std_exp_nondomicile2),0,ts_mean(rsk74_std_exp_nondomicile2,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,ts_mean(rsk74_raw_exp_nondomicile1,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,ts_mean(rsk74_raw_exp_nondomicile2,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_nondomicile),0,ts_mean(rsk74_nondomicile,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_std_exp_nondomicile1),0,ts_mean(rsk74_std_exp_nondomicile1,20)),252))",
+        "multiply(ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63),252), ts_zscore(if_else(is_nan(rsk74_std_exp_nondomicile2),0,ts_mean(rsk74_std_exp_nondomicile2,20)),252))"
+    ]
+}

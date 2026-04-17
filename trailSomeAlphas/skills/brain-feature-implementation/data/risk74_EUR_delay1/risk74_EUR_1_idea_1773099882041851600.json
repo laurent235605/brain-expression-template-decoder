@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(winsorize(ts_backfill({exp_usa}, 21, 0), std=3), 63), industry), 5)",
+    "idea": "美国敞口战略转向动量模板。以0填充缺失值假设为国内防御，经3倍标准差截尾后计算63日（季度）敞口变化率，捕捉企业战略加速布局或撤离美国市场的信号。行业中性化后经5日线性衰减平滑（降低换手率），高值代表近期正在快速增加美国敞口（追涨战略趋势），低值代表快速撤离（地缘政治避险）。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 21, 0), std=3), 63), industry), 5)"
+    ]
+}

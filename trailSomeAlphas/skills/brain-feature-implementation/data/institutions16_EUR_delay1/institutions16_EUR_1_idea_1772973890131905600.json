@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(add(add(multiply(0.5, ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20)), multiply(0.3, ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 5))), multiply(0.2, ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 60))), 10), industry)",
+    "idea": "**多周期复合衰减动量（Multi-Horizon Composite）**：融合5日（短期脉冲）、20日（中期趋势）、60日（长期结构）三阶资产流速，按0.3/0.5/0.2权重加权合成，捕捉不同时间尺度的资金行为；再通过10日线性衰减（ts_decay_linear）平滑日频噪音、降低换手率；最后行业中性化（group_zscore），得到稳健的资金流共识信号。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(add(add(multiply(0.5, ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20)), multiply(0.3, ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 5))), multiply(0.2, ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 60))), 10), industry)"
+    ]
+}

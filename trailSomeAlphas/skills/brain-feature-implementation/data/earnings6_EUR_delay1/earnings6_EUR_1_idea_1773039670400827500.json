@@ -1,0 +1,10 @@
+{
+    "template": "divide(subtract(vec_avg({x_dividend}), ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001))",
+    "idea": "借鉴EPS惊喜的标准化思想进行风险调整：将股息变动除以其252日历史波动率(ts_std_dev)，识别出经波动率调整后的显著股息变化，区分真实的政策转变与正常随机波动，提升信号的噪音比。",
+    "expression_list": [
+        "divide(subtract(vec_avg(ern6_x_dividend), ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001))",
+        "divide(subtract(vec_avg(ern6_x_dividend_233), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001))",
+        "divide(subtract(vec_avg(ern6_x_dividend_oc), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001))",
+        "divide(subtract(vec_avg(ern6_x_dividend_oc_235), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(vec_count(winsorize(ts_backfill({exposure_value}, 63), std=4)), 3), less(days_from_last_change(vec_kurtosis(winsorize(ts_backfill({exposure_value}, 63), std=4))), 20)), signed_power(group_zscore(vec_kurtosis(winsorize(ts_backfill({exposure_value}, 63), std=4)), industry), 2))",
+    "idea": "采用向量峰度（vec_kurtosis）衡量地理暴露分布的肥尾程度，识别对单一区域存在极端依赖的风险；通过 vec_count 过滤数据元素不足3个的无效样本，确保统计意义；结合 days_from_last_change 仅当峰度指标在20天内发生过结构性变化时才触发交易，捕捉业务布局‘极端化’或‘再平衡’的事件驱动alpha；最后行业标准化并平方放大。",
+    "expression_list": [
+        "trade_when(and(greater(vec_count(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 3), less(days_from_last_change(vec_kurtosis(winsorize(ts_backfill(anl91_exposure_value, 63), std=4))), 20)), signed_power(group_zscore(vec_kurtosis(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), industry), 2))"
+    ]
+}

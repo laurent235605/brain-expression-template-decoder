@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_decay_linear(ts_sum(ts_delta({hfown_pctown}, 1), 5), 3), ts_decay_linear(ts_sum(ts_delta({hfown_pctown}, 1), 20), 3)), industry)",
+    "idea": "多空期限结构背离（行业中性）。比较短期（5日）与长期（20日）的平滑累积流量差异，经行业中性化（group_zscore）后，捕捉资金流向的短期加速或相对于长期趋势的背离信号。正值表示近期资金流入加速（短期超买），负值表示资金流入放缓或逆转，适用于均值回归或趋势转折场景。",
+    "expression_list": [
+        "group_zscore(subtract(ts_decay_linear(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 5), 3), ts_decay_linear(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 3)), industry)"
+    ]
+}

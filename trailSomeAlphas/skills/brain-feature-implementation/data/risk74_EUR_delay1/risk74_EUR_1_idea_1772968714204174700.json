@@ -1,0 +1,7 @@
+{
+    "template": "add(group_zscore(ts_mean({hfown_pctown}, 21), sector), multiply(0.5, signed_power(group_zscore(ts_delta({hfown_pctown}, 63), sector), 1.5)))",
+    "idea": "**概念**: 持仓动量加速效应（Ownership Acceleration）\\n- **核心逻辑**: 结合当前持仓水平的行业ZScore与持仓变化的非线性行业ZScore（使用signed_power放大极端变化），捕捉HF在行业内部\"持续加仓且已处于高位\"的动量强化信号。持仓变化使用63日窗口捕捉季度调仓趋势。\\n- **信号解释**: 高值代表HF近期正在加速超配该行业标的，低值代表加速减持，用于捕捉行业内的配置动量与反转拐点。",
+    "expression_list": [
+        "add(group_zscore(ts_mean(rsk74_hfown_pctown, 21), sector), multiply(0.5, signed_power(group_zscore(ts_delta(rsk74_hfown_pctown, 63), sector), 1.5)))"
+    ]
+}

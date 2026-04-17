@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(if_else(greater(group_rank(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry), 0.8), -1, if_else(less(group_rank(vec_filter({fiscalyearend}, value=\"nan\")), 0.2), 1, 0)), industry)",
+    "idea": "行业内分位数分层策略：仅做多财年离散度最低的20%（结构最稳定），做空最高的20%（存在财年变更或复杂子公司结构），中间60%仓位置零。通过行业中性化确保多空平衡，剥离行业基准暴露。",
+    "expression_list": [
+        "group_normalize(if_else(greater(group_rank(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), 0.8), -1, if_else(less(group_rank(vec_filter(anl30_fiscalyearend, value=\"nan\")), 0.2), 1, 0)), industry)"
+    ]
+}

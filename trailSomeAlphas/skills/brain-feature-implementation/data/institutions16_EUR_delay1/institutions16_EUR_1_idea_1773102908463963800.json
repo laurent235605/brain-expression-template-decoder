@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(signed_power(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 1.5), industry), 10)",
+    "idea": "先对残差进行signed_power(1.5)非线性放大，再使用group_normalize进行行业内权重归一化（控制每个行业的多空总暴露相等），最后施加衰减。相比zscore的标准化，normalize更注重行业内资金分配的再平衡约束，结合非线性放大后，既突出极端配置又严格控制行业偏离风险。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(signed_power(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 1.5), industry), 10)"
+    ]
+}

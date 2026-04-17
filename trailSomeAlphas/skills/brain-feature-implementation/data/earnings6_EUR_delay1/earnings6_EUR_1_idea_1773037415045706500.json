@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( ts_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 252 ), industry )",
+    "idea": "盈利惊喜历史位置：在模板2基础上引入时序维度，计算当前盈利惊喜在其自身历史窗口中的Z-Score位置(ts_zscore)，再进行行业中性化，捕捉'惊喜创历史极端值'的拐点信号。",
+    "expression_list": [
+        "group_zscore( ts_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 252 ), industry )",
+        "group_zscore( ts_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 252 ), industry )"
+    ]
+}

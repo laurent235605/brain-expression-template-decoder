@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(group_rank(ts_delta(winsorize(ts_backfill(vec_sum({elta_value}),63),std=4),5),industry),0.9),less(group_rank(ts_delta(winsorize(ts_backfill(vec_sum({elta_value}),63),std=4),5),industry),0.1)),multiply(signed_power(group_zscore(ts_delta(winsorize(ts_backfill(vec_sum({elta_value}),63),std=4),5),industry),2),less(days_from_last_change(winsorize(ts_backfill(vec_sum({elta_value}),63),std=4)),20)),0)",
+    "idea": "采用vec_sum捕获整体修订力度，仅交易行业内动量排名前10%或后10%的极值股票（双向择时），并通过signed_power对Z-Score进行非线性放大以强化尾部收益；叠加距离上次数据变更不足20日的 freshness 滤波器，确保只捕捉最新鲜的分析师预期调整，中段股票仓位归零以规避噪音。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(ts_delta(winsorize(ts_backfill(vec_sum(ern10_elta_value),63),std=4),5),industry),0.9),less(group_rank(ts_delta(winsorize(ts_backfill(vec_sum(ern10_elta_value),63),std=4),5),industry),0.1)),multiply(signed_power(group_zscore(ts_delta(winsorize(ts_backfill(vec_sum(ern10_elta_value),63),std=4),5),industry),2),less(days_from_last_change(winsorize(ts_backfill(vec_sum(ern10_elta_value),63),std=4)),20)),0)"
+    ]
+}

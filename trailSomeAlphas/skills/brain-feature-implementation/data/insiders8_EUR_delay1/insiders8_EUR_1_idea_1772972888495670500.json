@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression({active_return_decile_rank_long}, {active_weight_decile_rank_long}, 126, rettype=0)",
+    "idea": "将收益分位数对权重分位数进行半年期滚动回归取残差，剥离线性配置依赖后得到纯定价偏离alpha，识别非对称的错配机会。",
+    "expression_list": [
+        "ts_regression(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long, 126, rettype=0)"
+    ]
+}

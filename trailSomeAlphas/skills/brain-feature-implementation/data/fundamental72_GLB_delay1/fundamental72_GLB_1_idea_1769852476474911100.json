@@ -1,0 +1,10 @@
+{
+    "template": "ts_sum(subtract(vec_avg({cash_from_oper}), vec_avg({cap_expend_prpty_add})), 504)",
+    "idea": "**Concept**: Cumulative Free Cash Generation\n- **Sample Fields Used**: cash_from_oper, cap_expend_prpty_add\n- **Definition**: Rolling 504-day sum of operating cash flow minus capital expenditures\n- **Why This Feature**: Cumulative free cash flow indicates long-term value creation capacity; negative accumulation signals unsustainable business model\n- **Logical Meaning**: Accumulated net cash available for shareholders after maintaining and expanding asset base\n- **is filling nan necessary**: Quarterly data requires backfilling to ensure continuous accumulation\n- **Directionality**: Positive and growing values indicate value creation; negative values indicate cash consumption\n- **Boundary Conditions**: Sustained negative accumulation over 2+ years indicates structural cash burn; extreme positive indicates cash hoarding",
+    "expression_list": [
+        "ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 504)",
+        "ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 504)",
+        "ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 504)",
+        "ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 504)"
+    ]
+}

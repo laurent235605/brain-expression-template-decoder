@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), industry), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5))",
+    "idea": "跨字段共识验证增强：利用模板1中{elta_value}的分析师分歧度作为置信权重，对模板2中{aily_delta_recon_value}的修订惊喜信号进行加权调制。当原始字段的分歧度低时（分析师达成共识，高置信度），给予修订惊喜更高权重；分歧大时（信息混乱）自动抑制信号强度，实现跨数据源的交叉验证与风险过滤。",
+    "expression_list": [
+        "multiply(group_zscore(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), industry), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5))"
+    ]
+}

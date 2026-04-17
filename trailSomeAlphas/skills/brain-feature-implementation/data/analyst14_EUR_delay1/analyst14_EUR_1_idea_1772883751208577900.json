@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(max(ts_delta({mean_revenue_fp1}, 1), 0), 20)",
+    "idea": "**Concept**: Cumulative Positive Revision Pressure\n- **Sample Fields Used**: mean_revenue_fp1\n- **Definition**: The sum of all positive daily changes in estimates over a lookback period, ignoring negative revisions, measuring accumulated upward pressure\n- **Why This Feature**: Isolates the asymmetry of information flow - persistent small upgrades may indicate gradual improvement recognition. Cumulative metrics capture persistence better than point-in-time changes.\n- **Logical Meaning**: Large values indicate sustained positive news flow; near-zero values indicate stability or mixed revisions; distinguishes trend from noise.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values indicate strong accumulation of positive sentiment; zero indicates no positive momentum\n- **Boundary Conditions**: Bounded below by zero; upper bound determined by magnitude and frequency of revisions",
+    "expression_list": [
+        "ts_sum(max(ts_delta(anl14_mean_revenue_fp1, 1), 0), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa},63),std=4), winsorize(ts_backfill({exp_chn},63),std=4)), group_mean(subtract(winsorize(ts_backfill({exp_usa},63),std=4), winsorize(ts_backfill({exp_chn},63),std=4)), log(ts_mean(cap,21)), sector), 252, rettype=0)",
+    "idea": "将中美敞口价差（Region Spread）本身作为被解释变量，对其剥离行业市值加权均值趋势，得到剔除行业共同轮动后的特质性跨境配置偏离Alpha。结合了模板一的价差逻辑与模板二的残差剥离方法，捕捉纯净的地缘政治轮动信号。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4)), group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4)), log(ts_mean(cap,21)), sector), 252, rettype=0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "subtract({cfroi_1}, ts_mean({cfroitrn}, 20))",
+    "idea": "**Concept**: CFROI Deviation from Structural Trend\n- **Sample Fields Used**: cfroi_1, cfroitrn, cfroival\n- **Definition**: Magnitude of current CFROI deviation from its model-implied trend line and theoretical valuation-implied level\n- **Why This Feature**: Identifies when current profitability is unsustainably high or depressed relative to historical trajectory and asset valuation\n- **Logical Meaning**: Large positive deviations suggest cyclical peaks or one-time gains; large negative deviations suggest temporary distress or inflection opportunities\n- **is filling nan necessary**: No, cfroitrn and cfroival are model outputs where NaN indicates model failure to converge; preserving NaN avoids false signals.\n- **Directionality**: High deviation = mean-reversion candidate (contrarian signal); Low deviation = trend continuation\n- **Boundary Conditions**: Deviations >2 standard deviations historically indicate extreme anomalies",
+    "expression_list": [
+        "subtract(mdl172_cfroi_1, ts_mean(mdl172_cfroitrn, 20))"
+    ]
+}

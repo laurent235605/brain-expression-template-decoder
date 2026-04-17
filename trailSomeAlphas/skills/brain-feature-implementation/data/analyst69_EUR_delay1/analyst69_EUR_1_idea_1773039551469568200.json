@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(less(days_from_last_change({eps_expected_report_dt}), 20), ts_delta({eps_best_eeps_cur_yr}, 5), multiply(0.5, ts_delta({eps_best_eeps_cur_yr}, 5)))",
+    "idea": "构建事件窗口条件增强逻辑：以模板B的'距离预期报告日天数'作为条件判断，当处于事件窗口内（小于20天）时全额使用模板A的5日修正动量，窗口外则权重减半。这种结构利用事件临近时的信息释放效应放大信号有效性，同时避免在信息真空期过度交易，实现'事件驱动+动量'的有机结合。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 20), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), multiply(0.5, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)))",
+        "trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 20), ts_delta(anl69_eps_best_eeps_cur_yr, 5), multiply(0.5, ts_delta(anl69_eps_best_eeps_cur_yr, 5)))",
+        "trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 20), ts_delta(anl69_eps_best_eeps_cur_yr, 5), multiply(0.5, ts_delta(anl69_eps_best_eeps_cur_yr, 5)))",
+        "trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 20), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), multiply(0.5, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)))"
+    ]
+}

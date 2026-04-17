@@ -1,0 +1,8 @@
+{
+    "template": "quantile( subtract( ts_mean( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), 5 ), ts_mean( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), 60 ) ), driver=\\\"gaussian\\\" )",
+    "idea": "多时间框架惊喜加速度。分别计算短期(5日)和长期(60日)移动平均的盈余惊喜，取差值得到“惊喜加速度”（短期相对长期的变化），通过quantile高斯拉伸突出“惊喜正在快速改善/恶化”的动量特征，而非静态水平。",
+    "expression_list": [
+        "quantile( subtract( ts_mean( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), 5 ), ts_mean( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), 60 ) ), driver=\\\"gaussian\\\" )",
+        "quantile( subtract( ts_mean( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), 5 ), ts_mean( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), 60 ) ), driver=\\\"gaussian\\\" )"
+    ]
+}

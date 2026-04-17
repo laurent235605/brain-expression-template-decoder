@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(quantile(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), driver=\"cauchy\"), sector)",
+    "idea": "使用柯西分布进行分位数拉伸替代幂变换，更激进地将极端尾部分布拉开，同时将近中段压缩至零附近，适用于捕捉肥尾分布下的罕见极端错误定价事件。",
+    "expression_list": [
+        "group_zscore(quantile(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), driver=\"cauchy\"), sector)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ), 5 )",
+    "idea": "盈利惊喜动量捕捉。在条件化计算Surprise并衰减平滑的基础上，使用ts_delta计算近期（5天）与稍早期Surprise的变化率，识别盈利预期修正的加速或减速趋势，捕捉\"惊喜的惊喜\"二阶效应。",
+    "expression_list": [
+        "ts_delta( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), 5 )",
+        "ts_delta( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), 5 )"
+    ]
+}

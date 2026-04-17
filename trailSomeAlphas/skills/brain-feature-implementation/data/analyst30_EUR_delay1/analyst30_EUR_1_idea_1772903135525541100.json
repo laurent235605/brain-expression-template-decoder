@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(quantile(winsorize(vec_avg({adjustedgrossamt}), std=4), driver=\"gaussian\"), 0.8), winsorize(vec_avg({adjustedgrossamt}), std=4), 0), 5)",
+    "idea": "极端分位择时策略：将清洗后的股息水平通过高斯分位映射拉伸尾部，仅保留高于80%分位数的极高端信号（严格收入策略），中段及低段视为噪音置零，最后应用5日线性衰减平滑权重变化，在保持高股息暴露的同时显著降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(quantile(winsorize(vec_avg(anl30_adjustedgrossamt), std=4), driver=\"gaussian\"), 0.8), winsorize(vec_avg(anl30_adjustedgrossamt), std=4), 0), 5)",
+        "ts_decay_linear(trade_when(greater(quantile(winsorize(vec_avg(anl30_unadjustedgrossamt), std=4), driver=\"gaussian\"), 0.8), winsorize(vec_avg(anl30_unadjustedgrossamt), std=4), 0), 5)"
+    ]
+}

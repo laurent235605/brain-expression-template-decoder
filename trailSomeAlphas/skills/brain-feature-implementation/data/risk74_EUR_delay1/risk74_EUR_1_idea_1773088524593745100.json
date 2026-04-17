@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_zscore(ts_delta(winsorize(if_else(is_nan({exp_usa}),0,{exp_usa}),std=4),60),252),group_cartesian_product(sector,market_cap))",
+    "idea": "地理暴露变化率的时序-截面双重标准化：计算60日暴露变化率（ts_delta）以捕捉公司战略转向美国市场的动量，使用252日窗口进行历史Z-Score标准化判断当前变化是否处于历史极端水平，最后在行业与市值规模的笛卡尔积分组内排名，识别在特定细分群体（如小盘科技）中正在快速增加美国暴露的标的。",
+    "expression_list": [
+        "group_rank(ts_zscore(ts_delta(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,rsk74_raw_exp_usa),std=4),60),252),group_cartesian_product(sector,market_cap))"
+    ]
+}

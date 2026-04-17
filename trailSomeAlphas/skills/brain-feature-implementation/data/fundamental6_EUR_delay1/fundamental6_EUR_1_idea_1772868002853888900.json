@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(divide({cptnewq_dlttq}, {cptnewq_ceqq}), 126)",
+    "idea": "**Concept**: Capital Structure Persistence\n- **Sample Fields Used**: `cptnewq_dlttq`, `cptnewq_ceqq`\n- **Definition**: The stability of the debt-to-equity ratio over time, calculated as the time-series standard deviation of the leverage ratio.\n- **Why This Feature**: Stable capital structure indicates consistent financing policy and lower refinancing risk; sudden shifts may signal distress or strategic pivots.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Capital structure components are slow-moving; missing values likely represent data gaps rather than zero debt/equity, so ts_backfill is suitable.\n- **Directionality**: Lower values indicate stable financing structure; higher values indicate capital restructuring activity.\n- **Boundary Conditions**: Negative equity (insolvency) creates negative ratios requiring sign handling; extremely low debt creates high sensitivity to small changes.",
+    "expression_list": [
+        "ts_std_dev(divide(fnd6_cptnewq_dlttq, fnd6_cptnewq_ceqq), 126)"
+    ]
+}

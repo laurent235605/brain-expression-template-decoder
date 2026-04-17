@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(vec_ir(vec_filter({aily_delta_recon_value}, value=\"nan\")), industry), driver=\"cauchy\")",
+    "idea": "**概念**: 分析师修订信息比率（Consistency-Adjusted Revision）\n- **改进逻辑**: 使用vec_ir（均值/标准差）衡量日内修订的信号噪音比——高IR代表分析师方向一致，低IR代表分歧；经行业中性化后，使用quantile(..., driver=\"cauchy\")进行分布拉伸，将中间区间的平庸共识压缩至0附近，同时极端高/低IR的股票被显著拉开距离，强化多空两端权重；此模板区分了\"高波动但随机\"与\"高波动且一致\"两种状态。\n- **适用场景**: 挖掘分析师行为具有一致性趋势（共识形成）或极度混乱（强烈分歧）的极端机会。",
+    "expression_list": [
+        "quantile(group_zscore(vec_ir(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), industry), driver=\"cauchy\")"
+    ]
+}

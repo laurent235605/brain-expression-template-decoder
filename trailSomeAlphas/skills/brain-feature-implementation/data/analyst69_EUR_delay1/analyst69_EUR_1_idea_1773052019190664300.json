@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5), inverse(add(1, days_from_last_change({eps_expected_report_dt}))))",
+    "idea": "跨输入的数据清洗与衰减逻辑重组：先对盈利预期应用Input 2的21日回溯填充逻辑确保数据完整性，计算5日变化后，乘以‘距离上次预期日期变更天数+1’的倒数（inverse），使近期刚变更过财报日期的股票修正信号被指数级惩罚衰减，而长期稳定的日程背景下的修正信号获得全额权重。",
+    "expression_list": [
+        "multiply(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), inverse(add(1, days_from_last_change(anl69_aeps_expected_report_dt))))",
+        "multiply(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), inverse(add(1, days_from_last_change(anl69_aeps_expected_report_dt))))",
+        "multiply(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), inverse(add(1, days_from_last_change(anl69_eps_expected_report_dt))))",
+        "multiply(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), inverse(add(1, days_from_last_change(anl69_eps_expected_report_dt))))"
+    ]
+}

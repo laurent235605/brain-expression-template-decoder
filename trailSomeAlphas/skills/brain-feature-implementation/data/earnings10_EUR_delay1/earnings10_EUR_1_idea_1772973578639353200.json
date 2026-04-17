@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(multiply(group_zscore(winsorize(vec_avg({elta_value}),std=4),industry), sign(winsorize(vec_avg({aily_delta_recon_value}),std=4))), subtract(1, rank(vec_stddev({aily_delta_recon_value})))), 5)",
+    "idea": "向量离散度置信加权：利用原始向量数据的截面标准差（vec_stddev）构建置信度权重，对高一致性（低波动、低标准差分位）的修正信号赋予更高权重，对高波动（噪音大）的修正降权。通过（1 - rank(stddev)）实现：离散度越低，权重越接近1；离散度越高，权重越低。解决数据质量不一导致的信号噪音问题，提升信号稳健性。",
+    "expression_list": [
+        "ts_decay_linear(multiply(multiply(group_zscore(winsorize(vec_avg(ern10_elta_value),std=4),industry), sign(winsorize(vec_avg(ern10_aily_delta_recon_value),std=4))), subtract(1, rank(vec_stddev(ern10_aily_delta_recon_value)))), 5)"
+    ]
+}

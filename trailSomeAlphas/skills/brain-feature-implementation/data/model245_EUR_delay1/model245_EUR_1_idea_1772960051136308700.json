@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(ts_corr(vec_avg({rank}), ts_delay(vec_avg({rank}), 1), 20), 0.3), ts_av_diff(vec_avg({rank}), 60), 0)",
+    "idea": "条件均值回归（门槛逻辑）：融合模板1的均值偏离与模板2的持续性检测。仅当排名自相关性低于阈值（表明持续性断裂、排名处于非稳定状态）时，才交易均值回归信号；高持续性时视为趋势延续，关闭均值回归仓位。使用trade_when实现条件开关，避免在趋势强劲时反向操作。",
+    "expression_list": [
+        "trade_when(less(ts_corr(vec_avg(mdl245_rank), ts_delay(vec_avg(mdl245_rank), 1), 20), 0.3), ts_av_diff(vec_avg(mdl245_rank), 60), 0)"
+    ]
+}

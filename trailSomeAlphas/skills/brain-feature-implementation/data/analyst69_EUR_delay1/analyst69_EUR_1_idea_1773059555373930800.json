@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(days_from_last_change({eps_expected_report_dt}), 252)), 2), ts_zscore(days_from_last_change({eps_expected_report_dt}), 252), 0)",
+    "idea": "**历史异常值检测（Historical Anomaly）**：计算当前稳定性指标相对于自身过去252日（一年）历史的zscore，仅当偏离度超过2个标准差时才产生信号（`trade_when`过滤）。该模板识别\"相对于自身历史而言异常稳定\"（显著高于历史均值，正向zscore）或\"异常不稳定\"（显著低于历史均值，负向zscore）的极端状态，避免在常态波动中交易。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(days_from_last_change(anl69_aeps_expected_report_dt), 252)), 2), ts_zscore(days_from_last_change(anl69_aeps_expected_report_dt), 252), 0)",
+        "trade_when(greater(abs(ts_zscore(days_from_last_change(anl69_eps_expected_report_dt), 252)), 2), ts_zscore(days_from_last_change(anl69_eps_expected_report_dt), 252), 0)"
+    ]
+}

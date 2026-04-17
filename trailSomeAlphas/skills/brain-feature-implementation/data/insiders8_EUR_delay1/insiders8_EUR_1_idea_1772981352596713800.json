@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(abs(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60)),0.85), ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), NaN)",
+    "idea": "**概念**: 极端结构锁定下的信念检测\n仅在所有权结构呈现极端稳定（相关性>0.85）或极端不稳定（相关性<-0.85）时，才评估内幕持仓的波动率。过滤掉所有权结构模糊区间，专注于结构清晰状态下的内幕信心持续性测量，避免结构重组噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60)),0.85), ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), NaN)",
+        "trade_when(greater(abs(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60)),0.85), ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), NaN)",
+        "trade_when(greater(abs(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60)),0.85), ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), NaN)",
+        "trade_when(greater(abs(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60)),0.85), ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), NaN)"
+    ]
+}

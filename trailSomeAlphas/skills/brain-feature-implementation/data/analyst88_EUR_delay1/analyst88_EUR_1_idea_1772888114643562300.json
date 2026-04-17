@@ -1,0 +1,16 @@
+{
+    "template": "divide(vec_stddev({abstract_method1_pos}), add(vec_avg({abstract_method1_pos}), 0.0001))",
+    "idea": "**Concept**: Sentiment Distribution Stationarity\n- **Sample Fields Used**: abstract_method1_pos, abstract_method1_neg\n- **Definition**: Coefficient of variation (std/mean) of sentence-level sentiment within a single document; measures internal consistency of argumentation\n- **Why This Feature**: Stable documents have consistent tone throughout; unstable documents mix bullish and bearish points (hedging or balanced analysis)\n- **is filling nan necessary**: Single-document analysis - NaN handling less critical unless report has no sentences; use pasteurize() to handle inf values from division\n- **Directionality**: Low values indicate uniform sentiment (strong conviction); High values indicate mixed messaging (uncertainty or comprehensive risk assessment)\n- **Boundary Conditions**: Zero indicates all sentences identical; Extreme values indicate outlier sentences contradicting the mean",
+    "expression_list": [
+        "divide(vec_stddev(anl88_arr_barclays_abstract_method1_pos), add(vec_avg(anl88_arr_barclays_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_arr_db_abstract_method1_pos), add(vec_avg(anl88_arr_db_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_arr_jpm_abstract_method1_pos), add(vec_avg(anl88_arr_jpm_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_arr_ms_abstract_method1_pos), add(vec_avg(anl88_arr_ms_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_baml_abstract_method1_pos), add(vec_avg(anl88_baml_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_barclays_abstract_method1_pos), add(vec_avg(anl88_barclays_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_db_abstract_method1_pos), add(vec_avg(anl88_db_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_jefferies_abstract_method1_pos), add(vec_avg(anl88_jefferies_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_jpm_abstract_method1_pos), add(vec_avg(anl88_jpm_abstract_method1_pos), 0.0001))",
+        "divide(vec_stddev(anl88_ms_abstract_method1_pos), add(vec_avg(anl88_ms_abstract_method1_pos), 0.0001))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "({holt_debt_score} + {other_liabilities_score} + {payable_score}) / 3",
+    "idea": "**Concept**: Liability Transparency Index\n- **Sample Fields Used**: `holt_debt_score`, `other_liabilities_score`, `accounts_payable_score`\n- **Definition**: Composite measure of off-balance sheet and contingent liability disclosure quality\n- **Why This Feature**: Capital structure opacity often hides in \"other\" categories and off-balance sheet vehicles; this feature quantifies the structural transparency of liability reporting\n- **is filling nan necessary**: Yes, use group_mean or ts_backfill as these components have lower coverage (~70-80%), but require at least 2 components\n- **Directionality**: High values indicate comprehensive liability disclosure; Low values indicate hidden leverage or contingent liability risks\n- **Boundary Conditions**: Very low values (<2) with high overall_score indicates \"cosmetic\" quality (hiding debt); High values across all liability components indicates conservative financial engineering",
+    "expression_list": [
+        "(mdl255_holt_debt_score + mdl255_other_liabilities_score + mdl255_accounts_payable_score) / 3"
+    ]
+}

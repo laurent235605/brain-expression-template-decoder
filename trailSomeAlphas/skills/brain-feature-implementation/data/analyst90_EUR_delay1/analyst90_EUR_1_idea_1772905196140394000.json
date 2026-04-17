@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_std_dev(vec_avg({likelihood_score}), 60) - ts_std_dev(vec_avg({likelihood_score}), 20), 10) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20))",
+    "idea": "对输入2的波动率期限结构差分应用10日线性衰减平滑（ts_decay_linear）后，再经输入1的短期波动率标准化，构建'平滑收敛速度的风险调整指标'，减少单日噪音对收敛判断的干扰。",
+    "expression_list": [
+        "ts_decay_linear(ts_std_dev(vec_avg(success_likelihood_score), 60) - ts_std_dev(vec_avg(success_likelihood_score), 20), 10) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20))"
+    ]
+}

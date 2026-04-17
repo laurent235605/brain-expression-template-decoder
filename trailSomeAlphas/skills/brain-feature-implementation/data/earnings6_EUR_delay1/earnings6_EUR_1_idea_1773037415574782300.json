@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( divide(vec_avg({x_dividend}), add(ts_decay_linear(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry )",
+    "idea": "近期加权股息持续性：将模板1中的历史均值(ts_mean)替换为线性衰减均值(ts_decay_linear)，赋予近期股息数据更高权重，构建对近期分红变化更敏感的持续性指标，同时保留行业中性化。",
+    "expression_list": [
+        "group_zscore( divide(vec_avg(ern6_x_dividend), add(ts_decay_linear(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(vec_avg(ern6_x_dividend_233), add(ts_decay_linear(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(vec_avg(ern6_x_dividend_oc), add(ts_decay_linear(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_decay_linear(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry )"
+    ]
+}

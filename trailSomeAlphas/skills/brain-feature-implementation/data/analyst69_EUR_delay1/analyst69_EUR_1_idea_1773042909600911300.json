@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 0.8), signed_power(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry), 1.5), multiply(0.3, group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry)))",
+    "idea": "分档非线性响应：对行业内稳定天数处于前20%（极高稳定）的股票应用幂次放大（signed_power），强化尾部收益；对中等稳定度股票仅保留30%权重，构建凸性响应函数以区分极端与常态。",
+    "expression_list": [
+        "if_else(greater(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 0.8), signed_power(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), 1.5), multiply(0.3, group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry)))",
+        "if_else(greater(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 0.8), signed_power(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), 1.5), multiply(0.3, group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry)))"
+    ]
+}

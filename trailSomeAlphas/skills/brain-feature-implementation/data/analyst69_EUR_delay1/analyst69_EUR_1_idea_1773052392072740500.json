@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(signed_power(quantile(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), driver=\"gaussian\"), 2), industry)",
+    "idea": "高斯分布拉伸的尾部 emphasized 信号。先对5日预期修订进行winsorize去极值，通过quantile以高斯核函数将原始分布映射到正态分布形态，将中间区间的温和修订压缩至0附近，同时将极端修订向正负无穷方向拉伸；再使用signed_power进行2次幂处理进一步放大尾部差异，最终行业内标准化，强化对极端预期调整事件的暴露。",
+    "expression_list": [
+        "group_zscore(signed_power(quantile(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), driver=\"gaussian\"), 2), industry)",
+        "group_zscore(signed_power(quantile(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), driver=\"gaussian\"), 2), industry)"
+    ]
+}

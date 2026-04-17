@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_delta({hfown_pctown}, 5), 5)",
+    "idea": "对Input 1的5日速度算子进行二次差分（二阶导数/加速度），构造持仓变化加速度信号。识别资金流入正在'加速'（动量增强）或'减速'（趋势衰竭）的拐点，弥补单纯速度信号在趋势反转识别上的滞后性，体现时序视角的创新（guidance第4.2.2步变化趋势）。",
+    "expression_list": [
+        "ts_delta(ts_delta(rsk74_hfown_pctown, 5), 5)"
+    ]
+}

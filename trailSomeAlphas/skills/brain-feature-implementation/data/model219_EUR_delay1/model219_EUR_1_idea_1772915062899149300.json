@@ -1,0 +1,10 @@
+{
+    "template": "subtract({roic}, {susgrowth})",
+    "idea": "**Concept**: Economic Value Added Spread\n- **Sample Fields Used**: `roic`, `fcfroi`, `ocfroi`, `susgrowth`\n- **Definition**: Core economic profitability exceeding reinvestment requirements, the essence of value creation\n- **Why This Feature**: True alpha comes from companies earning returns above their cost of capital sustainably\n- **Logical Meaning**: Measures genuine economic profit generation ability independent of accounting choices\n- **is filling nan necessary**: No, inability to calculate ROIC indicates financial/insurance firms requiring different models\n- **Directionality**: Higher values indicate durable competitive advantages and economic moats\n- **Boundary Conditions**: Extreme values attract competition; sustainability depends on `susgrowth`",
+    "expression_list": [
+        "subtract(mdl219_1_roic, mdl219_1_susgrowth)",
+        "subtract(mdl219_2_roic, mdl219_1_susgrowth)",
+        "subtract(mdl219_2_roic, mdl219_2_susgrowth)",
+        "subtract(mdl219_1_roic, mdl219_2_susgrowth)"
+    ]
+}

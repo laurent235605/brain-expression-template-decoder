@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract({cptnewq_atq}, ts_delay({cptnewq_atq}, 63)), ts_delay({cptnewq_atq}, 63))",
+    "idea": "**Concept**: Asset Growth Rate\n- **Sample Fields Used**: `cptnewq_atq`\n- **Definition**: The percentage change in total assets quarter-over-quarter, indicating investment intensity or divestment activity.\n- **Why This Feature**: Rapid asset growth may indicate over-investment (Empire Building) or productive capacity expansion; asset shrinkage may indicate restructuring or distress.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Asset values are continuous; missing data should be backfilled to prevent artificial growth spikes.\n- **Directionality**: High positive values indicate expansion (may dilute returns if NPV<0); negative values indicate contraction (may improve efficiency).\n- **Boundary Conditions**: M&A activity creates step-function changes; asset write-downs create negative jumps.",
+    "expression_list": [
+        "divide(subtract(fnd6_cptnewq_atq, ts_delay(fnd6_cptnewq_atq, 63)), ts_delay(fnd6_cptnewq_atq, 63))"
+    ]
+}

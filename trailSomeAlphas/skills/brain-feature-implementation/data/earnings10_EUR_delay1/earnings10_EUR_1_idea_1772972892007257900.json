@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), std=4), industry)",
+    "idea": "行业中性化动量模板。先对原始估计值进行63日回溯填充避免缺失值造成的假信号，计算5日平均估计变化率捕捉短期修正动量，经winsorize去除极端异常值后，进行行业zscore标准化。这样能识别出相对于同行业 peers 的异常修正行为，避免行业系统性偏差干扰，专注于捕捉跨行业的相对预期变化强度。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), std=4), industry)"
+    ]
+}

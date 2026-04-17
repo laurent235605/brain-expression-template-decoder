@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_sum(ts_delta({hfown_pctown}, 1), 20), 5)",
+    "idea": "结合模板B的累积流逻辑与指南中的线性衰减算子。相比简单移动平均(ts_mean)，线性衰减赋予近期数据更高权重，在保持对持续建仓敏感度的同时降低整体换手率，构造一个对最新资金流动更敏感但 turnover 可控的增强版本。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 5)"
+    ]
+}

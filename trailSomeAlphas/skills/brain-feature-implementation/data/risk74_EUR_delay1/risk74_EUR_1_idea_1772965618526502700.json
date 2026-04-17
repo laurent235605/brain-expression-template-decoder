@@ -1,0 +1,8 @@
+{
+    "template": "{hfown_pctown} * {momentum}",
+    "idea": "**Concept**: HF Momentum Amplification\n- **Sample Fields Used**: `hfown_pctown`, `momentum`, `momentum_ts`\n- **Definition**: Interaction between hedge fund ownership and momentum to identify stocks where smart money is riding price trends\n- **Why This Feature**: HF ownership validates momentum (smart money confirmation) or indicates crowded momentum trades depending on levels\n- **Logical Meaning**: High values indicate hedge funds are long momentum stocks (trend following); negative values indicate hedge funds shorting or avoiding momentum\n- **is filling nan necessary**: No, momentum is complete; HF data gaps are meaningful (no HF interest)\n- **Directionality**: High = HF long momentum (trend continuation likely); Low/Negative = HF avoiding momentum (reversal possible)\n- **Boundary Conditions**: Extreme values indicate \"smart money\" consensus on trends; zero indicates HF agnosticism to momentum",
+    "expression_list": [
+        "rsk74_hfown_pctown * rsk74_momentum",
+        "rsk74_hfown_pctown * rsk74_momentum_ts"
+    ]
+}

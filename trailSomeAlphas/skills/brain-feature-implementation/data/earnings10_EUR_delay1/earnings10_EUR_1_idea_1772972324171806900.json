@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(ts_delta(divide(subtract(vec_avg({aily_delta_recon_value}), ts_mean(vec_avg({aily_delta_recon_value}), 20)), ts_std_dev(vec_avg({aily_delta_recon_value}), 20)), 5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5)), industry)",
+    "idea": "惊喜加速度信号：计算模板2中修订惊喜Z-Score的5日变化率（二阶导数/加速度），再用模板1的分歧度进行置信加权。捕捉“分析师预期调整正在加速”的动量效应（信息扩散早期），同时用分歧度过滤掉分析师群体混乱期的假信号，并进行行业中性化。",
+    "expression_list": [
+        "group_zscore(multiply(ts_delta(divide(subtract(vec_avg(ern10_aily_delta_recon_value), ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)), ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20)), 5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5)), industry)"
+    ]
+}

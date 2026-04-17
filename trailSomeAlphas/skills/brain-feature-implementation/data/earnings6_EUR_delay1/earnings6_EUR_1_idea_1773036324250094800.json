@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(winsorize(group_zscore(multiply(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), divide(1, add(vec_stddev({estimated_eps}), 0.01))), {industry}), std=4), 1.5)",
+    "idea": "在原始百分比意外基础上，引入分析师预测分歧度（vec_stddev）作为置信度权重，分歧度越低（预测越集中）的信号权重越高；进行行业中性化处理（group_zscore），消除不同行业盈利预期的系统性偏差；使用signed_power(y=1.5)非线性放大极端意外，同时通过winsorize(std=4)处理极端异常值，防止估计值接近零时的数值不稳定。该模板保留了原始逻辑的核心，但通过不确定性调整和行业中性化显著提升了信噪比。",
+    "expression_list": []
+}

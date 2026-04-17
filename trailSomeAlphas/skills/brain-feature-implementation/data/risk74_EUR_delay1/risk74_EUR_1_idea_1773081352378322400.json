@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_sum(ts_delta({hfown_pctown}, 1), 20), 5)",
+    "idea": "将模板B的delta算子二次应用，构造二阶导数（加速度）指标。不仅关注对冲基金的累积持仓变化（一阶/水平），更关注这种累积趋势本身在最近5天是否在加速或减速（二阶/变化率），捕捉资金流入/流出的拐点和动量崩溃点。",
+    "expression_list": [
+        "ts_delta(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 5)"
+    ]
+}

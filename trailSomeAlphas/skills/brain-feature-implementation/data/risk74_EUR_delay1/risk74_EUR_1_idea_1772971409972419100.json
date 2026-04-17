@@ -1,0 +1,14 @@
+{
+    "template": "if_else(and(greater(abs({concentration} - ts_mean({concentration}, 60)), 0.2), greater({raw_concentration}, 0.7)), {crowding} * {value_ts}, 0)",
+    "idea": "高绝对集中度背景下的动态拥挤价值陷阱：仅在原始地理集中度{raw_concentration}处于高位（>70%分位）且正在发生剧烈变化（偏离>0.2）时，才暴露于拥挤价值信号；识别那些本已地理集中且正在变得更加集中的股票中的价值陷阱。",
+    "expression_list": [
+        "if_else(and(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), rsk74_raw_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), rsk74_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), liquidity_factor_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), liquidity_timeseries_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), rsk74_raw_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), rsk74_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), liquidity_factor_crowding * rsk74_value_ts, 0)",
+        "if_else(and(greater(abs(rsk74_concentration - ts_mean(rsk74_concentration, 60)), 0.2), greater(rsk74_raw_concentration, 0.7)), liquidity_timeseries_crowding * rsk74_value_ts, 0)"
+    ]
+}

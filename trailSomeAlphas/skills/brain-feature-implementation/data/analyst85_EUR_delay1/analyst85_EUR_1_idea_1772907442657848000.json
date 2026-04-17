@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(zscore(rank(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20))), 1.5)",
+    "idea": "先对累积分歧度变化进行截面排序(rank)消除量纲影响，再通过signed_power(y=1.5)非线性放大极端值(无论多头或空头尾部)，压缩中间区间权重，使策略更聚焦于分歧度极度收敛或发散的尾部股票，增强对极端不确定性事件的暴露。",
+    "expression_list": [
+        "signed_power(zscore(rank(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20))), 1.5)"
+    ]
+}

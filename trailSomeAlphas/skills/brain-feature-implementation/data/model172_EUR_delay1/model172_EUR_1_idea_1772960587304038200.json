@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(subtract({cfroichg}, ts_delay({cfroichg}, 5)), 0), ts_sum({cfroidrs}, 10), reverse(ts_sum({cfroidrs}, 10)))",
+    "idea": "加速度方向调制漂移：以Input 1的加速度符号作为交易开关(condition)，对Input 2的累积漂移进行方向性翻转。当加速度为正(加速改善)时，保留累积漂移的多头暴露；当加速度为负(减速恶化)时，将累积漂移反向(空头暴露)。实现Input 1的二阶导数逻辑对Input 2一阶趋势的方向控制，构建激进的顺加速交易结构。",
+    "expression_list": [
+        "trade_when(greater(subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5)), 0), ts_sum(mdl172_cfroidrs, 10), reverse(ts_sum(mdl172_cfroidrs, 10)))"
+    ]
+}

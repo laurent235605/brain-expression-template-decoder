@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_delta(vector_neut(ts_backfill({fundreportedequityassets},21), ts_backfill({reported_asset_value},21)),10),0.5)",
+    "idea": "聚焦于权益配置的边际变化而非绝对水平，计算向量中性化残差的10日差分以捕捉基金经理近期加仓或减仓的行为变化，使用0.5次方的signed_power对极端变动进行非线性压缩、保留正负方向信息，构建对调仓速度敏感的配置动量因子，识别正在形成或反转的配置趋势。",
+    "expression_list": [
+        "signed_power(ts_delta(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,21), ts_backfill(fund_reported_asset_value,21)),10),0.5)"
+    ]
+}

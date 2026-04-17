@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(signed_power(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 0.5), vec_stddev(vec_filter({fiscalyearend}, value=\"nan\"))), sector)",
+    "idea": "构建“广度×异质性”复合复杂度因子：vec_count衡量多重子公司架构的实体数量（经0.5次幂压缩防极端值），vec_stddev衡量会计时间的分散程度，两者相乘得到综合复杂度评分；相比单一维度，更能识别兼具规模扩张与时间错配风险的高风险财报结构，组内zscore标准化确保行业可比性。",
+    "expression_list": [
+        "group_zscore(multiply(signed_power(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 0.5), vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\"))), sector)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(vec_skewness({data_item_value}), 252) - ts_zscore(ts_skewness(vec_avg({data_item_value}), 63), 252)",
+    "idea": "跨频率偏度背离：对比当前向量偏度的历史Z分数与短期（63日）滚动偏度的历史Z分数之间的差异。正值表明当前偏度相对于自身长期历史处于极端高位，而短期偏度尚未完全反映，存在均值回归或趋势延续的套利空间；该模板捕捉不同时间维度上偏度信息的背离现象。",
+    "expression_list": [
+        "ts_zscore(vec_skewness(anl89_data_item_value), 252) - ts_zscore(ts_skewness(vec_avg(anl89_data_item_value), 63), 252)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(winsorize(group_zscore(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),std=4),industry),1.5)",
+    "idea": "在原始残差基础上，先进行行业中性化(zscore)以消除行业间可比性问题，再通过signed_power(1.5)非线性放大极端空头压力股票的特质信号，同时保留正负方向；最后再次winsorize控制尾部极值对组合权重的过度影响，专注于捕捉分布两端的alpha。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),std=4),industry),1.5)",
+        "signed_power(winsorize(group_zscore(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),std=4),industry),1.5)"
+    ]
+}

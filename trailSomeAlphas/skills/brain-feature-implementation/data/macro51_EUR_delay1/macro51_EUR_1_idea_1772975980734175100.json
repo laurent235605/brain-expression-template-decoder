@@ -1,0 +1,7 @@
+{
+    "template": "if_else( greater( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ), 0.9 ), negate( ts_delta( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ), 21 ) ), if_else( less( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ), 0.1 ), ts_delta( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ), 21 ), 0 ) )",
+    "idea": "极值速度过滤的均值回归信号。仅在历史分位处于极端高位（>90%）且分位正在回落（负速度，用negate转换）时做空，在极端低位（<10%）且分位正在回升（正速度）时做多，中间区间强制归零。通过引入一阶差分（ts_delta）作为从属条件，避免在趋势延续阶段过早介入，仅捕捉极值拐点处的反转动能。",
+    "expression_list": [
+        "if_else( greater( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ), 0.9 ), negate( ts_delta( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ), 21 ) ), if_else( less( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ), 0.1 ), ts_delta( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ), 21 ), 0 ) )"
+    ]
+}

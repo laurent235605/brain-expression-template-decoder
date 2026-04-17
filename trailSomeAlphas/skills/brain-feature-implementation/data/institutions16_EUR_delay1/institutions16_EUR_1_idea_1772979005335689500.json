@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(zscore(ts_delta(vector_neut(ts_mean(winsorize(ts_backfill({fundreportedequityassets}, 21), std=4), 20), ts_mean(winsorize(ts_backfill({reported_asset_value}, 21), std=4), 20)), 21)), 5)",
+    "idea": "不关注配置水平的存量，而是关注配置强度相对于基金规模的变化率（增量信号）；先对输入数据进行20日移动平均平滑以降低单期申报噪音，经向量中性化后计算21日残差变化量（ts_delta），再通过zscore标准化识别统计显著的调仓行为；最后经5日衰减平滑，适用于捕捉基金经理的调仓加速动量、建仓完成度或信心变化信号，规避静态持仓的均值回复风险。",
+    "expression_list": [
+        "ts_decay_linear(zscore(ts_delta(vector_neut(ts_mean(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), std=4), 20), ts_mean(winsorize(ts_backfill(fund_reported_asset_value, 21), std=4), 20)), 21)), 5)"
+    ]
+}

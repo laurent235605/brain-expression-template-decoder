@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry)",
+    "idea": "先通过vec_filter清洗NaN值计算会计年度分散度，再用126日平滑捕捉持续性的会计结构复杂性（而非一次性数据噪音），最后进行行业内标准化，识别相对于同业具有异常财政年度分散度的公司，反映长期业务架构复杂性。",
+    "expression_list": [
+        "group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry)"
+    ]
+}

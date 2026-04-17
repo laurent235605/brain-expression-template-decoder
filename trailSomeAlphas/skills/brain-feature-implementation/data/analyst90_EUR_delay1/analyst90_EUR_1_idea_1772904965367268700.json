@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(zscore(ts_mean(vec_avg({likelihood_score}), 5)), 1.5), rank(winsorize(ts_mean(vec_avg({likelihood_score}), 5) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 0)",
+    "idea": "双重平滑稳健触发：将模板1的条件判断和核心信号均替换为5日移动平均版本，用平滑后的信心水平触发平滑后的价格偏离排名，过滤日内异常跳动，构建更稳健的趋势跟踪型信号。",
+    "expression_list": [
+        "trade_when(greater(zscore(ts_mean(vec_avg(success_likelihood_score), 5)), 1.5), rank(winsorize(ts_mean(vec_avg(success_likelihood_score), 5) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 0)"
+    ]
+}

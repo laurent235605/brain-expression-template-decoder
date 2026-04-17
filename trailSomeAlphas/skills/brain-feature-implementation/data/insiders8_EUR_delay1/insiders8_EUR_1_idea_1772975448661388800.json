@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 1.5), sector) * (2 * ts_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 126) - 1), 20)",
+    "idea": "融合模板2的非线性放大（signed_power 1.5）与模板1的时间序列条件（126日排名映射至[-1,1]）及平滑（20日平均）。先对截面偏离进行极值放大，再与历史分位条件相乘，最后平滑确保信号持续性，兼顾极端识别与噪声抑制，实现截面与时间的双重非线性增强。",
+    "expression_list": [
+        "ts_mean(group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 1.5), sector) * (2 * ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 126) - 1), 20)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_normalize(ts_regression(winsorize({momentum}, std=4), winsorize({value_ts} + {earnyild}, std=4), 126, rettype=0), industry), driver=\"cauchy\")",
+    "idea": "使用126日滚动回归提取动量中无法被价值与盈利收益解释的部分（残差），即\"纯净动量\"，对输入字段预先进行去极值处理确保回归稳健性。在行业层面进行归一化控制暴露后，采用柯西分位数转换极度放大尾部信号（纯因子暴露），同时极度压缩中间区域，专门捕捉具有显著单一因子特征的股票。",
+    "expression_list": [
+        "quantile(group_normalize(ts_regression(winsorize(rsk74_momentum, std=4), winsorize(rsk74_value_ts + rsk74_earnyild, std=4), 126, rettype=0), industry), driver=\"cauchy\")",
+        "quantile(group_normalize(ts_regression(winsorize(rsk74_momentum_ts, std=4), winsorize(rsk74_value_ts + rsk74_earnyild, std=4), 126, rettype=0), industry), driver=\"cauchy\")"
+    ]
+}

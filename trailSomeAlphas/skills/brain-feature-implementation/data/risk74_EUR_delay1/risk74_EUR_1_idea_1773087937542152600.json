@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( multiply( ({hfown_pctown} / {hfown_numown}), log( add(1, ts_backfill( {fund_num_owners_encr}, 63 ) ) ) ), industry )",
+    "idea": "复合机构持仓结构交互：将集中度比率与机构总数量（经63日回溯填充处理缺失值后取log(1+x)变换）相乘，在行业内部标准化。该模板区分“少量机构重仓”（高集中度+低总数，乘积中等）与“大量机构轻仓”（低集中度+高总数，乘积可能较高）及“大量机构重仓”（极高乘积）三种结构性场景，识别不同资金性质（主动集中布局vs被动指数化配置）带来的价格影响差异。",
+    "expression_list": [
+        "group_zscore( multiply( (rsk74_hfown_pctown / rsk74_hfown_numown), log( add(1, ts_backfill( hedge_fund_num_owners_encr, 63 ) ) ) ), industry )"
+    ]
+}

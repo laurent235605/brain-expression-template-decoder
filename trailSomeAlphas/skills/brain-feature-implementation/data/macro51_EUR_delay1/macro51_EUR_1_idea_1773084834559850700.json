@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(divide(ts_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),252),add(ts_std_dev(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63)/ts_backfill({600_ucits_weight},63),std=4),63),0.001)),driver=\"gaussian\"),10)",
+    "idea": "波动率自适应高斯分位。将时序Z-score除以近期波动率(63日标准差)进行风险调整，再通过高斯分位转换极度放大尾信号、压缩中段噪音，最后使用10日线性衰减平滑权重变化，适用于高波动环境下的稳健反转策略。",
+    "expression_list": [
+        "ts_decay_linear(quantile(divide(ts_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),252),add(ts_std_dev(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63)/ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63),std=4),63),0.001)),driver=\"gaussian\"),10)"
+    ]
+}

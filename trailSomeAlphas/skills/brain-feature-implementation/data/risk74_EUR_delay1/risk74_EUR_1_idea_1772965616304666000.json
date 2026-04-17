@@ -1,0 +1,8 @@
+{
+    "template": "{concentration} - ts_mean({concentration}, 60)",
+    "idea": "**Concept**: Geographic Concentration Spike\n- **Sample Fields Used**: `concentration`, `raw_concentration`\n- **Definition**: Short-term deviation of geographic concentration from trend to identify companies undergoing rapid internationalization or retrenchment\n- **Why This Feature**: Sudden concentration changes indicate strategic shifts (nearshoring, China+1 strategies) with significant tariff implications\n- **Logical Meaning**: Positive spikes indicate increasing concentration (higher risk); negative spikes indicate diversification (risk reduction)\n- **is filling nan necessary**: Yes, use `ts_backfill({concentration}, 10)` to handle quarterly reporting lags before calculating deviation\n- **Directionality**: Positive = increasing concentration risk; Negative = decreasing concentration/diversifying; Zero = stable geographic mix\n- **Boundary Conditions**: Extreme values indicate M&A activity or major divestitures; persistent elevation indicates structural shift to concentrated markets",
+    "expression_list": [
+        "rsk74_concentration - ts_mean(rsk74_concentration, 60)",
+        "rsk74_raw_concentration - ts_mean(rsk74_raw_concentration, 60)"
+    ]
+}

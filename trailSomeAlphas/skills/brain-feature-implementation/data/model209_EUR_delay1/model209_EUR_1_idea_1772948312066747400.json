@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum({investment})",
+    "idea": "**Concept**: Net Portfolio Exposure\n- **Sample Fields Used**: investment\n- **Definition**: Algebraic sum of all investment values indicating net long/short position\n- **Why This Feature**: Cumulative measure of directional bias; positive indicates net long exposure, negative indicates net short\n- **Logical Meaning**: Aggregate portfolio stance relative to market direction\n- **is filling nan necessary**: Treat NaN as 0 (neutral) to avoid biasing net exposure\n- **Directionality**: Positive indicates net long; negative indicates net short; zero indicates market neutral\n- **Boundary Conditions**: Unbounded; scales with portfolio assets under management",
+    "expression_list": [
+        "vec_sum(mdl209_investment)"
+    ]
+}

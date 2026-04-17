@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr({active_return_decile_rank_long}, {active_weight_decile_rank_long}, 60)",
+    "idea": "将模板1的时间序列相关性结构迁移应用于模板2的收益-权重分位数字段，测量机构持仓排名与收益排名在60日窗口内的协同稳定性。高相关性表明\"聪明钱\"持仓与收益表现持续对齐，低相关性则暗示持仓错位或风格漂移，可用于识别机构行为的持续性或反转点。",
+    "expression_list": [
+        "ts_corr(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long, 60)"
+    ]
+}

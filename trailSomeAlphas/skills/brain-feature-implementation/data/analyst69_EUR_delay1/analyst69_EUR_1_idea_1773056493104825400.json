@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 5) - ts_decay_linear(ts_sum(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 1), 63), 20)",
+    "idea": "对模板B的累积修订压力信号应用双时间尺度线性衰减（5日快速 vs 20日慢速），通过快慢信号相减构建'预期调整加速度'指标。当短期修订强度超过长期趋势时产生正向信号，类似于MACD结构但应用于分析师预期流，捕捉预期调整从缓慢到陡峭的拐点。",
+    "expression_list": [
+        "ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 5) - ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 1), 63), 20)",
+        "ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 5) - ts_decay_linear(ts_sum(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 1), 63), 20)"
+    ]
+}

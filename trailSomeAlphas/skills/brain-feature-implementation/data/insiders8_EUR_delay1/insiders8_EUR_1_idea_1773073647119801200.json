@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(winsorize(ts_delta({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 5), std=4), 1.5), sector)",
+    "idea": "捕捉收益-权重偏离的5日变化率（动量），对正在加速形成的定价错误进行早期识别与幂次放大，符合\"变化本身即信号\"的假设。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 5), std=4), 1.5), sector)"
+    ]
+}

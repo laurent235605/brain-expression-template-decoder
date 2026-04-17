@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(subtract(quantile({exp_usa}, driver=\"uniform\"), quantile({exp_chn}, driver=\"uniform\")), industry), ts_delta({hfown_pctown}, 5))",
+    "idea": "**交叉增强：美中暴露利差 × 对冲基金流向**\n基于模板1提到的多区域暴露字段，构建美国与中国暴露的量化利差（quantile相减），经行业中性化后作为“地缘政治/贸易政策敏感度”代理变量；与模板2的原始HF流速相乘。正向信号表示“美国暴露显著高于中国暴露+HF买入”（受益中美分化），负向信号表示“中国暴露相对更高+HF卖出”（规避地缘风险），实现宏观对冲逻辑的微观化。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), quantile(rsk74_raw_exp_chn, driver=\"uniform\")), industry), ts_delta(rsk74_hfown_pctown, 5))"
+    ]
+}

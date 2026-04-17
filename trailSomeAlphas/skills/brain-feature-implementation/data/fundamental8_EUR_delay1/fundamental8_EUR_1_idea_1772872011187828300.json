@@ -1,0 +1,22 @@
+{
+    "template": "({gross_mgn} - {ebitda_oper_mgn}) - ts_mean({gross_mgn} - {ebitda_oper_mgn}, 252)",
+    "idea": "**Concept**: Margin Regime Divergence\n- **Sample Fields Used**: gross_mgn, ebitda_oper_mgn\n- **Definition**: Sudden widening or narrowing of the spread between gross margin and EBITDA margin relative to historical norms\n- **Why This Feature**: Signals SG&A inflation, structural cost issues, or operating leverage breakdowns not visible in aggregate profitability metrics\n- **Logical Meaning**: Cost structure stability between direct costs (COGS) and operating overhead (SG&A, R&D)\n- **is filling nan necessary**: Quarterly gaps common; ts_backfill acceptable but preserve step-changes at fiscal year ends when audit adjustments occur\n- **Directionality**: Large positive spread expansion = SG&A leverage (good), Negative = overhead bloat or administrative inefficiency\n- **Boundary Conditions**: Values outside historical 5th/95th percentiles indicate structural business model changes",
+    "expression_list": [
+        "(fnd8_1af_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1af_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1qf_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1qf_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_af_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_af_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_qf_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_qf_matrix_ff_gross_mgn - fnd8_er_1af_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1af_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1af_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1qf_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1qf_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_af_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_af_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_qf_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_qf_matrix_ff_gross_mgn - fnd8_er_1qf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1af_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1af_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1qf_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1qf_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_af_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_af_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_qf_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_qf_matrix_ff_gross_mgn - fnd8_eraf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1af_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1af_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_1qf_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_1qf_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_af_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_af_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn, 252)",
+        "(fnd8_qf_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn) - ts_mean(fnd8_qf_matrix_ff_gross_mgn - fnd8_erqf_matrix_ff_ebitda_oper_mgn, 252)"
+    ]
+}

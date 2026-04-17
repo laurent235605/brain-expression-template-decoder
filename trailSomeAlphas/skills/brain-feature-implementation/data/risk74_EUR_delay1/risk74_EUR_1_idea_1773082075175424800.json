@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(group_rank(winsorize(ts_sum(ts_delta({shortint},1),15), std=4), industry), 252)",
+    "idea": "截面分位与时序极端值的交叉验证：先计算空头累积变化的行业内分位排名，再对该排名进行252天时序Z-score标准化，识别'当前空头排名处于历史极端高位'的标的。",
+    "expression_list": [
+        "ts_zscore(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15), std=4), industry), 252)",
+        "ts_zscore(group_rank(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15), std=4), industry), 252)"
+    ]
+}

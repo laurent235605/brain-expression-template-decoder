@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(reverse(signed_power(ts_zscore(divide(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), 252), 2)), sector), 3)",
+    "idea": "波动率趋势加速双窗口：比较20日短期波动率与60日长期波动率的比率，观察波动率收敛/发散趋势，经历史Z-Score标准化与行业中性化后反转，识别治理稳定性趋势转折的加速阶段。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(reverse(signed_power(ts_zscore(divide(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), 252), 2)), sector), 3)"
+    ]
+}

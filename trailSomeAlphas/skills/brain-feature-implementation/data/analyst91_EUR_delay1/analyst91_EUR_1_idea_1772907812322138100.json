@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(ts_decay_linear(ts_std_dev(vec_avg({exposure_value}), 5), 3), ts_decay_linear(ts_std_dev(vec_avg({exposure_value}), 60), 10)), sector), 3)",
+    "idea": "差异化衰减期限利差策略。先对短周期波动率应用3日快速线性衰减、长周期应用10日慢速线性衰减，再计算利差并进行行业标准化与三次幂变换。融合模板B的期限对比思想与模板A的非线性增强，通过差异化的时序处理增强信号稳定性：短端保留对近期突变的敏感性，长端过滤暂时性波动，最终突出那些持续偏离行业地域波动常态的极端转型标的。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(ts_decay_linear(ts_std_dev(vec_avg(anl91_exposure_value), 5), 3), ts_decay_linear(ts_std_dev(vec_avg(anl91_exposure_value), 60), 10)), sector), 3)"
+    ]
+}

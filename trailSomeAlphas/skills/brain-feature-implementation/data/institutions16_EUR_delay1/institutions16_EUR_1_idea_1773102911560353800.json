@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5), 20), 0.8), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 10), 0)",
+    "idea": "仅在signed_power放大后的行业残差处于其20日历史高位（前20%分位）时才开启仓位，否则为0。结合了\"极端值非线性放大\"与\"时序分位点择时\"，避免在短暂偏离后立即介入，等待极端信号持续确认后再通过衰减结构持仓，平衡了信号强度与持续性验证，降低假阳性交易。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5), 20), 0.8), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 10), 0)"
+    ]
+}

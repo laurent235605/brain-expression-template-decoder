@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(signed_power(winsorize(group_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector) * 2 - 1, std=4), 1.5), sector)",
+    "idea": "将模板1的离散化稳定性排名转换为连续非线性信号：先将行业排名中心化至[-1,1]区间，再通过1.5次幂signed_power放大极端协同持有（正值）或极端分歧（负值），最后进行行业zscore标准化。既保留了“只有两端有信号”的假设，又避免了硬截断导致的信息损失，实现了从离散状态机到连续凸性信号的转换。",
+    "expression_list": [
+        "group_zscore(signed_power(winsorize(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector) * 2 - 1, std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector) * 2 - 1, std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector) * 2 - 1, std=4), 1.5), sector)",
+        "group_zscore(signed_power(winsorize(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector) * 2 - 1, std=4), 1.5), sector)"
+    ]
+}

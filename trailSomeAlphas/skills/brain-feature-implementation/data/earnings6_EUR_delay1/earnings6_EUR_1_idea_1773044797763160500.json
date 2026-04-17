@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( quantile( trade_when( greater(vec_avg({x_dividend}), 0), right_tail( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 0.01 ), 0 ), driver=\"gaussian\" ), industry )",
+    "idea": "结合模板1的股息比率计算与模板2的条件过滤逻辑，引入极值处理与分布变换。先通过right_tail截断极低端噪音（<0.01），再使用高斯分位数映射（quantile）拉开头尾与中间区间的距离，最后进行行业标准化，增强对同行业极端分红行为的区分度。",
+    "expression_list": [
+        "group_zscore( quantile( trade_when( greater(vec_avg(ern6_x_dividend), 0), right_tail( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 0.01 ), 0 ), driver=\"gaussian\" ), industry )",
+        "group_zscore( quantile( trade_when( greater(vec_avg(ern6_x_dividend_233), 0), right_tail( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 0.01 ), 0 ), driver=\"gaussian\" ), industry )",
+        "group_zscore( quantile( trade_when( greater(vec_avg(ern6_x_dividend_oc), 0), right_tail( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 0.01 ), 0 ), driver=\"gaussian\" ), industry )",
+        "group_zscore( quantile( trade_when( greater(vec_avg(ern6_x_dividend_oc_235), 0), right_tail( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 0.01 ), 0 ), driver=\"gaussian\" ), industry )"
+    ]
+}

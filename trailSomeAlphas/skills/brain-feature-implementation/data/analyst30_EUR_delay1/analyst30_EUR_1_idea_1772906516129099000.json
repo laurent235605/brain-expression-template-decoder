@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(winsorize(vec_count(vec_filter({fiscalyearend}, value=\"nan\")), std=4), {sector})",
+    "idea": "财务年度变更次数经去极值后在行业内进行组内标准化。值越高表示该公司会计日历稳定性显著差于同业，可能暗示并购重组或会计政策激进变更，剥离行业季节性影响后更纯净地捕捉个体结构风险。",
+    "expression_list": []
+}

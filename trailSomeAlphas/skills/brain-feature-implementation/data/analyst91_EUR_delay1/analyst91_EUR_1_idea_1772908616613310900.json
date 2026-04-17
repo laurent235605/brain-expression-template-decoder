@@ -1,0 +1,7 @@
+{
+    "template": "hump(group_zscore(quantile(ts_std_dev(ts_backfill(winsorize(vec_avg({exposure_value}), std=4), 20), 20), driver=\"cauchy\"), industry), hump=0.01)",
+    "idea": "厚尾分布拉伸与交易成本控制：使用quantile算子配合cauchy分布驱动，将历史波动率映射为厚尾形态，显著放大极端值（极高/极低波动）的信号强度，压缩中间区间的区分度；最后通过hump算子忽略每日微小波动（仅当变化超过1%阈值时调仓），在保留极端alpha的同时有效控制换手率，提升实仓可行性。",
+    "expression_list": [
+        "hump(group_zscore(quantile(ts_std_dev(ts_backfill(winsorize(vec_avg(anl91_exposure_value), std=4), 20), 20), driver=\"cauchy\"), industry), hump=0.01)"
+    ]
+}

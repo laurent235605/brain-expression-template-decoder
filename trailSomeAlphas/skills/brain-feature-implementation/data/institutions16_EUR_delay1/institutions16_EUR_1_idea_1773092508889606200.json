@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(vector_neut(ts_mean(ts_backfill({fundreportedequityassets}, 21), 63), ts_mean(ts_backfill({reported_asset_value}, 21), 63)), 21), industry)",
+    "idea": "配置变化动量（行业相对）：使用63日移动平均平滑输入数据以降低短期申报噪音，计算规模中性残差后，取21日变化量（Delta）衡量基金近期加仓或减仓股票资产的强度变化，并在行业内进行横向Z-score比较。适用于捕捉配置决心的边际变化（加速建仓或减仓），而非静态的持仓水平。",
+    "expression_list": [
+        "group_zscore(ts_delta(vector_neut(ts_mean(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), 63), ts_mean(ts_backfill(fund_reported_asset_value, 21), 63)), 21), industry)"
+    ]
+}

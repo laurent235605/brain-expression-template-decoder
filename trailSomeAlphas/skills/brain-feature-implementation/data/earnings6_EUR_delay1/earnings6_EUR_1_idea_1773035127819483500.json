@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 20)",
+    "idea": "时序加权的股息持续性：对原始股息持续性比率应用ts_decay_linear（线性衰减加权），赋予近期股息变化更高权重。相比简单ts_mean，此处理能更快捕捉股息政策的最新变化，同时通过20日窗口平滑单日异常波动，在反应速度与信号稳定性间取得平衡，适用于股息策略的换手率控制。",
+    "expression_list": [
+        "ts_decay_linear(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 20)",
+        "ts_decay_linear(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 20)",
+        "ts_decay_linear(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 20)",
+        "ts_decay_linear(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 20)"
+    ]
+}

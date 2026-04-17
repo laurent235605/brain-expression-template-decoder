@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_sum(ts_delta(vec_avg({retain_earn}), 252), 756), ts_mean(vec_avg({tot_asset}), 756))",
+    "idea": "**Concept**: Retained Earnings Growth Trajectory\n- **Sample Fields Used**: retain_earn\n- **Definition**: 3-year cumulative change in retained earnings normalized by average total assets\n- **Why This Feature**: Measures long-term profit retention and reinvestment success; declining cumulative trend indicates dividend overpayment or accumulated losses\n- **Logical Meaning**: Accumulated historical profitability available for reinvestment or distribution\n- **is filling nan necessary**: Annual data points require interpolation or backfilling for quarterly analysis\n- **Directionality**: Positive cumulative growth indicates value retention; negative indicates eroding equity base\n- **Boundary Conditions**: Declining values approaching zero indicate depleted equity; rapid growth indicates aggressive retention",
+    "expression_list": [
+        "divide(ts_sum(ts_delta(vec_avg(fnd72_pit_or_bs_a_bs_retain_earn), 252), 756), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 756))",
+        "divide(ts_sum(ts_delta(vec_avg(fnd72_pit_or_bs_a_bs_retain_earn), 252), 756), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 756))",
+        "divide(ts_sum(ts_delta(vec_avg(fnd72_pit_or_bs_q_bs_retain_earn), 252), 756), ts_mean(vec_avg(fnd72_pit_or_bs_q_bs_tot_asset), 756))",
+        "divide(ts_sum(ts_delta(vec_avg(fnd72_pit_or_bs_q_bs_retain_earn), 252), 756), ts_mean(vec_avg(fnd72_pit_or_bs_a_bs_tot_asset), 756))"
+    ]
+}

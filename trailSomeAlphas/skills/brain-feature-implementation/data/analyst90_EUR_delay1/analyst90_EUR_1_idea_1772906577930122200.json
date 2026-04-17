@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(zscore(vec_avg({likelihood_score})), 1.5), winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), if_else(less(zscore(vec_avg({likelihood_score})), -1.5), multiply(-1, winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 0))",
+    "idea": "构建对称双尾策略：高置信区间（zscore>1.5）正向持仓，低置信区间（zscore<-1.5）反向持仓，中段置零，实现“两头下注，中间规避”的市场中性结构。",
+    "expression_list": [
+        "if_else(greater(zscore(vec_avg(success_likelihood_score)), 1.5), winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), if_else(less(zscore(vec_avg(success_likelihood_score)), -1.5), multiply(-1, winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 0))"
+    ]
+}

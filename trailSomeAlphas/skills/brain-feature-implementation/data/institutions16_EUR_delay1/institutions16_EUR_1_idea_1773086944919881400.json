@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(add(multiply(0.7, divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), multiply(0.3, ts_delta(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 21))), industry), driver=\"gaussian\")",
+    "idea": "构建动态复合信号：70%权重给当前风险调整配置水平，30%权重给过去21日的变化趋势(ts_delta)，捕捉配置动量；在行业中性化后，使用gaussian分位转换将中间区间压缩、尾部拉伸，强化对极端偏离行业均值标的的区分度。",
+    "expression_list": [
+        "quantile(group_zscore(add(multiply(0.7, divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), multiply(0.3, ts_delta(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 21))), industry), driver=\"gaussian\")"
+    ]
+}

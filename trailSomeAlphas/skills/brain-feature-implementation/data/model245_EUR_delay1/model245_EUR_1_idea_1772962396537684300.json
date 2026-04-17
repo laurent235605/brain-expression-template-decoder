@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(zscore(ts_sum(ts_delta(vec_avg({rank}), 1), 20))), 2), ts_sum(ts_delta(vec_avg({rank}), 1), 20), 0)",
+    "idea": "**概念**: 极端累积变化事件驱动信号\n- **融合逻辑**: 结合模板1的累积排名变化与模板2的\"极端值识别\"思路，仅当20日累积变化超过截面2个标准差时才持仓（trade_when + abs + zscore）。中段噪音区间强制为0，避免平庸排名迁移的无效交易。\n- **信号分层**: 使用zscore进行截面标准化，确保每日选出的极端股票具有可比性；结合绝对值判断捕捉双向极端（剧烈升级或降级）。\n- **风险控制**: 通过right_tail/left_tail逻辑（用trade_when实现）显著降低换手率，只在\"显著事件\"发生时建立仓位。\n- **Decay建议**: 可进一步包裹ts_decay_linear(..., 3)以平滑事件后衰减。",
+    "expression_list": [
+        "trade_when(greater(abs(zscore(ts_sum(ts_delta(vec_avg(mdl245_rank), 1), 20))), 2), ts_sum(ts_delta(vec_avg(mdl245_rank), 1), 20), 0)"
+    ]
+}

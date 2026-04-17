@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(quantile(ts_zscore(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), std=4), 252), driver=\"gaussian\"), 0.8), 1.0, trade_when(less(quantile(ts_zscore(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1)), std=4), 252), driver=\"gaussian\"), 0.2), -1.0, 0))",
+    "idea": "时序极端值捕捉：观察当前流动性效率比率相对于其过去一年（252日）历史的表现，使用高斯分位数拉伸尾部，仅当指标处于历史前20%（极端高效）时做多，处于历史后20%（极端低效）时做空，中间区间视为无信号赋值为0，捕捉极端市场容量利用时机。",
+    "expression_list": [
+        "trade_when(greater(quantile(ts_zscore(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), std=4), 252), driver=\"gaussian\"), 0.8), 1.0, trade_when(less(quantile(ts_zscore(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1)), std=4), 252), driver=\"gaussian\"), 0.2), -1.0, 0))"
+    ]
+}

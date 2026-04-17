@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(ts_std_dev({value_08316q}, 252), ts_mean(ts_std_dev({value_08316q}, 252), 63)), multiply(group_rank(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), industry), ts_rank(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), 504)), 0)",
+    "idea": "**低波动 regime 下的双击动量过滤**：结合\"波动率 regime 择时\"与\"横截面-时序双击\"结构。仅在当前运营利润率波动率低于近期平均水平（经营稳定期）时开放交易，信号为行业内排名（相对同行）与过去2年历史分位数（相对自身历史）的乘积。该模板避免了在财报高波动期（可能伴随一次性损益噪音）产生虚假双击信号，确保\"既优于行业又处于自身高位\"的信号建立在经营稳健的基础上。",
+    "expression_list": [
+        "trade_when(less(ts_std_dev(fnd28_newq_value_08316q, 252), ts_mean(ts_std_dev(fnd28_newq_value_08316q, 252), 63)), multiply(group_rank(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), industry), ts_rank(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), 504)), 0)",
+        "trade_when(less(ts_std_dev(fnd28_ratesq_value_08316q, 252), ts_mean(ts_std_dev(fnd28_ratesq_value_08316q, 252), 63)), multiply(group_rank(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), industry), ts_rank(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), 504)), 0)"
+    ]
+}

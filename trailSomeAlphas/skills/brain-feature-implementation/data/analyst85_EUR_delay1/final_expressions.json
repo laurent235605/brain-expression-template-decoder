@@ -1,0 +1,17 @@
+[
+    "(vec_avg(anl85_version) - ts_mean(vec_avg(anl85_version), 20)) / ts_std_dev(vec_avg(anl85_version), 20)",
+    "jump_decay(purify(ts_delta(vec_avg(anl85_version), 1)), 5, sensitivity=0.5, force=0.1)",
+    "quantile(vec_avg(anl85_version), driver=\"gaussian\", sigma=1.0)",
+    "sigmoid(vec_avg(anl85_version))",
+    "ts_decay_exp_window(vec_avg(anl85_version), 20, factor=0.1)",
+    "ts_delta(ts_delta(vec_avg(anl85_version), 5), 5)",
+    "ts_delta(vec_avg(anl85_version), 5)",
+    "ts_delta(vec_avg(anl85_version), 5) * vec_range(anl85_version)",
+    "ts_std_dev(vec_avg(anl85_version), 20)",
+    "ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20)",
+    "vec_ir(anl85_version)",
+    "vec_percentage(anl85_version, 0.9) - vec_percentage(anl85_version, 0.1)",
+    "vec_skewness(anl85_version)",
+    "vec_stddev(anl85_version) - ts_median(vec_stddev(anl85_version), 20)",
+    "vec_stddev(anl85_version) / vec_avg(anl85_version)"
+]

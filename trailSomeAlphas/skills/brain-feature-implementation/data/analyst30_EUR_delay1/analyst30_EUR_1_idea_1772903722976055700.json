@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.6, group_zscore(vec_count(vec_filter({currency_code}, value=\"nan\")), industry)), multiply(0.4, ts_zscore(vec_count(vec_filter({currency_code}, value=\"nan\")), 252)))",
+    "idea": "综合相对-历史复杂度评分：将当前行业相对复杂度（group_zscore，60%权重）与自身历史一年（252日）时序zscore位置（40%权重）加权合成，既考虑相对于同业竞争者的结构复杂性，又纳入历史上自身运营复杂度的分位水平，形成更稳健的多币种暴露信号。",
+    "expression_list": [
+        "add(multiply(0.6, group_zscore(vec_count(vec_filter(payment_currency_code, value=\"nan\")), industry)), multiply(0.4, ts_zscore(vec_count(vec_filter(payment_currency_code, value=\"nan\")), 252)))"
+    ]
+}

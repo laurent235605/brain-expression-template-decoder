@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(winsorize(ts_backfill({exp_nondomicile1}, 21), std=4), ts_mean(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4), 252)), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)))",
+    "idea": "非本土敞口条件触发：融合Input2的非本土敞口控制逻辑，仅当公司具有显著非本土敞口(高于其历史均值)时，才全额交易其区域价差信号；对于纯本土公司则降低仓位至30%。此逻辑假设全球化程度高的公司其区域价差信号更具定价效率和信息含量。",
+    "expression_list": [
+        "trade_when(greater(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 21), std=4), ts_mean(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4), 252)), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)))",
+        "trade_when(greater(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 21), std=4), ts_mean(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4), 252)), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)))"
+    ]
+}

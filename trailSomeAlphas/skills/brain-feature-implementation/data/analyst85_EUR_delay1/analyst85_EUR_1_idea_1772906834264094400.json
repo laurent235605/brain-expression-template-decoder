@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_zscore(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 252), std=4), industry)",
+    "idea": "先计算20日累积修订波动率相对其自身过去一年（252日）历史的时序Z-Score，识别个股调研活跃度的“历史异常”状态，再进行行业中性化，剔除不同行业天然波动基数差异，捕捉跨行业可比的极端调研事件。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_zscore(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 252), std=4), industry)"
+    ]
+}

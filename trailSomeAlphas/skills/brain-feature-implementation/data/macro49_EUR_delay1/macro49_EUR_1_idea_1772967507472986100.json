@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(winsorize(divide(ts_backfill(vec_median({notional}), lookback=5, k=1), ts_backfill(vec_median({shares}), lookback=5, k=1)), std=4), lookback=63), group=sector)",
+    "idea": "**增强逻辑：时序均值回归 + 截面行业中性**\n- **改进点1（稳健性）**：将vec_avg替换为vec_median，降低极端大额交易对参考价计算的瞬时冲击，使价格代理更稳健。\n- **改进点2（极值处理）**：使用winsorize(std=4)裁剪极端值，防止因拆分、合并或数据错误导致的异常价格代理主导信号。\n- **改进点3（时序视角）**：通过ts_zscore(63)计算当前价格代理相对其63日历史均值的偏离程度，识别因公告延迟或公司行为导致的定价异常（高zscore暗示均值回归机会）。\n- **改进点4（行业中性）**：最后进行group_zscore(sector)标准化，剔除行业层面的共同价格水平差异，专注于行业内相对定价错误。",
+    "expression_list": [
+        "group_zscore(ts_zscore(winsorize(divide(ts_backfill(vec_median(mcr49_notional), lookback=5, k=1), ts_backfill(vec_median(mcr49_shares), lookback=5, k=1)), std=4), lookback=63), group=sector)"
+    ]
+}

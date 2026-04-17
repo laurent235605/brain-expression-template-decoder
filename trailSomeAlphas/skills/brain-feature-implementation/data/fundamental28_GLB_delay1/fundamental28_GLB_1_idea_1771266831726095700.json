@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), 0), signed_power(group_zscore(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), industry), 1.5), negate(signed_power(group_zscore(winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), industry), 0.5)))",
+    "idea": "非对称响应结构（Asymmetric Response）。区分利润率扩张与收缩两种状态：对扩张采用幂>1的变换放大极端改善，对收缩采用幂<1的变换压缩尾部风险，体现市场对企业盈利上行弹性的追逐高于对下行风险的惩罚。行业中性化处理确保比较基准一致。",
+    "expression_list": [
+        "if_else(greater(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0), signed_power(group_zscore(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), industry), 1.5), negate(signed_power(group_zscore(winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), industry), 0.5)))",
+        "if_else(greater(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0), signed_power(group_zscore(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), industry), 1.5), negate(signed_power(group_zscore(winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), industry), 0.5)))"
+    ]
+}

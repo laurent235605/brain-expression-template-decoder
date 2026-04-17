@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_normalize(trade_when(equal(bucket(rank(ts_backfill({sustratfy1},60)),\"0,1,0.1\"),9), multiply(signed_power(group_zscore(winsorize(ts_backfill({cfroi_1},21),4),sector),2), group_zscore(winsorize(ts_backfill({fcg_in},21),4),sector)),0),sector),maxPercent=0.01)",
+    "idea": "分桶离散择时模型：将{sustratfy1}按十分位分桶（bucket），仅选取最高十分位（bucket=9，即前10%最具可持续性的公司）作为投资池；在该精英子集内，使用signed_power(y=2)对行业内zscore标准化后的CFROI进行平方放大以突出极端经济回报，与行业中性化后的FCG相乘，最终通过truncate(maxPercent=0.01)控制个股最大权重至1%，防止组合过度集中于单一标的，适用于高质量因子的精选策略。",
+    "expression_list": [
+        "truncate(group_normalize(trade_when(equal(bucket(rank(ts_backfill(mdl172_sustratfy1,60)),\"0,1,0.1\"),9), multiply(signed_power(group_zscore(winsorize(ts_backfill(mdl172_cfroi_1,21),4),sector),2), group_zscore(winsorize(ts_backfill(mdl172_fcg_in,21),4),sector)),0),sector),maxPercent=0.01)"
+    ]
+}

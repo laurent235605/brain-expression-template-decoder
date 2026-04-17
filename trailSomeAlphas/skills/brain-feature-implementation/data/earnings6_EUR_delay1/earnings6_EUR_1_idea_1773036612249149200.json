@@ -1,0 +1,10 @@
+{
+    "template": "divide(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 63), 252), 0.001)), add(ts_std_dev(ts_backfill(vec_avg({x_dividend}), 63), 252), 0.001))",
+    "idea": "构建股息稳定性调整后的持续性比率（类似于夏普比率的思路）：分子为当期股息与历史均值的持续性比率，分母为历史252日股息标准差（加常数防除零）。该模板惩罚股息派发波动剧烈的公司，奖励不仅当前股息水平高且历史派发路径稳定的标的，更适合识别高质量红利股。",
+    "expression_list": [
+        "divide(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 63), 252), 0.001)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend), 63), 252), 0.001))",
+        "divide(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 63), 252), 0.001)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_233), 63), 252), 0.001))",
+        "divide(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 63), 252), 0.001)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_oc), 63), 252), 0.001))",
+        "divide(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 63), 252), 0.001)), add(ts_std_dev(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 63), 252), 0.001))"
+    ]
+}

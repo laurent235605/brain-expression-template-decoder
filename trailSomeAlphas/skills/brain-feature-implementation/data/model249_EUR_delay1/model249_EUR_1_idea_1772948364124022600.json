@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(vec_avg({score}), 60)",
+    "idea": "**Concept**: Persistent Acquisition Likelihood Score\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The 60-day moving average of the acquisition likelihood score, measuring structural rather than transient target status\n- **Why This Feature**: Tender offers often follow months of accumulation or strategic evaluation; stocks with consistently high scores represent structural targets rather than statistical noise\n- **is filling nan necessary**: Yes, NaN values may occur for newly listed stocks or data errors. Use `ts_backfill(vec_avg({score}), 5)` to carry forward last valid score for up to 5 days, then let NaN propagate to avoid stale data bias.\n- **Logical Meaning**: Represents the persistent component of acquisition likelihood, filtering daily volatility and model noise\n- **Directionality**: Higher values indicate stocks with sustained high probability of receiving tender offers\n- **Boundary Conditions**: Values near 0 indicate persistent low likelihood; extreme positive values indicate long-duration high-probability targets; sudden drops to NaN indicate data quality issues or delistings",
+    "expression_list": [
+        "ts_mean(vec_avg(mdl249_score), 60)"
+    ]
+}

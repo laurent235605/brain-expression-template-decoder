@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0.85), ts_rank(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), 20), 0), ts_decay_linear(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)), 5))",
+    "idea": "使用原始时序排名(ts_rank)而非Z分数以降低肥尾影响，仅当处于历史85%分位以上时开仓，并叠加线性衰减平滑(ts_decay_linear)处理新鲜度权重，在保持对近期数据敏感的同时，通过衰减函数平衡信号强度与换手率。",
+    "expression_list": [
+        "multiply(trade_when(greater(ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0.85), ts_rank(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), 20), 0), ts_decay_linear(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)), 5))"
+    ]
+}

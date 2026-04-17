@@ -1,0 +1,7 @@
+{
+    "template": "truncate(ts_decay_linear(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0), 5), maxPercent=0.01)",
+    "idea": "稳健时间序列回归残差经平滑处理。先对原始换手率与资产规模进行63日回溯填充和4倍标准差缩尾以消除极端值与缺失值影响，使用252日滚动窗口回归剥离规模对换手率的线性解释，提取残差后通过5日线性衰减加权平滑降低短期噪音，最后截断单日最大权重至1%以控制个股集中度风险。适用于捕捉持续性的规模调整后交易活跃度，避免一次性异常交易冲击。",
+    "expression_list": [
+        "truncate(ts_decay_linear(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0), 5), maxPercent=0.01)"
+    ]
+}

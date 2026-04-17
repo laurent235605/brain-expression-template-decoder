@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(winsorize(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), std=4), s_log_1p(abs(ts_backfill(vec_skewness({notional}), lookback=5, k=1)))), group=sector)",
+    "idea": "**增强逻辑：高阶矩信息复合 + 非线性变换**\n- **改进点1（信息含量提取）**：除基础价格代理外，引入vec_skewness({notional})刻画名义金额分布的偏度。正偏度暗示存在大额主动买入（机构行为），负偏度暗示大额主动卖出，作为价格有效性的置信权重。\n- **改进点2（非线性压缩）**：使用s_log_1p(abs(x))对偏度进行对称对数压缩，将极端偏度值映射到有限区间[-1,1]附近，防止少数极度偏态的交易时段过度主导信号。\n- **改进点3（复合信号）**：将价格水平与'交易质量'（偏度）相乘，构造'高质量价格发现'指标：只有当价格代理伴随显著的非对称交易流（高偏度）时才赋予高权重，最后进行行业标准化。",
+    "expression_list": [
+        "group_zscore(multiply(winsorize(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), std=4), s_log_1p(abs(ts_backfill(vec_skewness(mcr49_notional), lookback=5, k=1)))), group=sector)"
+    ]
+}

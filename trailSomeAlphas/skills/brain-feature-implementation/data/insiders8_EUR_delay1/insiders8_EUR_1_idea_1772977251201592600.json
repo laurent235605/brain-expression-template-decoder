@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore(ts_delta(ts_regression(winsorize({of_owners_decile_rank_long}, std=4), winsorize({owners_decile_rank_long}, std=4), 60, rettype=0), 20), 252)",
+    "idea": "集中度异常变化动量模板。捕捉所有权结构残差的时序变化加速度而非绝对水平。计算当前残差相对于20天前的变化（ts_delta），再将其映射到历史252天的Z-score分布中（ts_zscore），识别那些正在快速偏离历史常态的标的，适用于捕捉突发事件或静默积累导致的所有权结构突变信号。",
+    "expression_list": [
+        "ts_zscore(ts_delta(ts_regression(winsorize(insd8_effective_number_of_owners_decile_rank_long, std=4), winsorize(insd8_effective_number_of_owners_decile_rank_long, std=4), 60, rettype=0), 20), 252)",
+        "ts_zscore(ts_delta(ts_regression(winsorize(insd8_effective_number_of_owners_decile_rank_long, std=4), winsorize(insd8_total_number_of_owners_decile_rank_long, std=4), 60, rettype=0), 20), 252)",
+        "ts_zscore(ts_delta(ts_regression(winsorize(insd8_total_number_of_owners_decile_rank_long, std=4), winsorize(insd8_total_number_of_owners_decile_rank_long, std=4), 60, rettype=0), 20), 252)",
+        "ts_zscore(ts_delta(ts_regression(winsorize(insd8_total_number_of_owners_decile_rank_long, std=4), winsorize(insd8_effective_number_of_owners_decile_rank_long, std=4), 60, rettype=0), 20), 252)"
+    ]
+}

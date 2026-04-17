@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(group_zscore(ts_sum(winsorize(vec_avg(ts_backfill({data_item_value}, 63)), std=4), 126), industry), 21)",
+    "idea": "行业相对累积动量：先对向量数据做后向填充并取均值，经过去极值(winsoirize)后进行126日累积，在行业内部进行z-score标准化以剔除行业间不可比性，最后计算21日变化率捕捉相对于同行的累积加速趋势，适用于捕捉财务动能超越行业平均的标的。",
+    "expression_list": [
+        "ts_delta(group_zscore(ts_sum(winsorize(vec_avg(ts_backfill(anl89_data_item_value, 63)), std=4), 126), industry), 21)"
+    ]
+}

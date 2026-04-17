@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(and(greater(ts_rank(winsorize(ts_backfill({surp},21),4),63),0.7), less(ts_rank(winsorize({ttmaccu},4),252),0.3)), multiply(ts_zscore(winsorize(ts_backfill({surp},21),4),63), reverse(ts_zscore(winsorize({ttmaccu},4),252))), 0.0)",
+    "idea": "时序动量与质量持续性验证：不仅看当前截面值，更验证盈余惊喜是否处于自身过去63个交易日的高位（前30%分位），且应计项目处于过去252个交易日（一年）的低位（后30%分位），确保持续性而非偶然偏离；仅当双条件满足时才建立多头敞口，否则平仓，捕捉具有长期持续能力的真实业绩突破。",
+    "expression_list": [
+        "trade_when(and(greater(ts_rank(winsorize(ts_backfill(mdl219_1_surp,21),4),63),0.7), less(ts_rank(winsorize(mdl219_1_ttmaccu,4),252),0.3)), multiply(ts_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),63), reverse(ts_zscore(winsorize(mdl219_1_ttmaccu,4),252))), 0.0)",
+        "trade_when(and(greater(ts_rank(winsorize(ts_backfill(mdl219_2_surp,21),4),63),0.7), less(ts_rank(winsorize(mdl219_1_ttmaccu,4),252),0.3)), multiply(ts_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),63), reverse(ts_zscore(winsorize(mdl219_1_ttmaccu,4),252))), 0.0)",
+        "trade_when(and(greater(ts_rank(winsorize(ts_backfill(mdl219_1_surp,21),4),63),0.7), less(ts_rank(winsorize(mdl219_2_ttmaccu,4),252),0.3)), multiply(ts_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),63), reverse(ts_zscore(winsorize(mdl219_2_ttmaccu,4),252))), 0.0)",
+        "trade_when(and(greater(ts_rank(winsorize(ts_backfill(mdl219_2_surp,21),4),63),0.7), less(ts_rank(winsorize(mdl219_2_ttmaccu,4),252),0.3)), multiply(ts_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),63), reverse(ts_zscore(winsorize(mdl219_2_ttmaccu,4),252))), 0.0)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_sum(subtract(vec_avg({cash_from_oper}), vec_avg({cap_expend_prpty_add})), 504), divide(1, add(1, vec_stddev(subtract({cash_from_oper}, {cap_expend_prpty_add})))))",
+    "idea": "在累计自由现金流总量的基础上，引入向量标准差衡量现金流生成的稳定性（波动性惩罚）。通过将504日累计值除以(1+现金流波动率)，对盈利质量差、现金流大起大落的公司进行降权，筛选出具有'持续、稳定'现金创造能力的标的，而非依赖一次性非经常性损益的伪高现金流公司。",
+    "expression_list": [
+        "multiply(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 504), divide(1, add(1, vec_stddev(subtract(fnd72_pit_or_cf_a_cf_cash_from_oper, fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)))))",
+        "multiply(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)), 504), divide(1, add(1, vec_stddev(subtract(fnd72_pit_or_cf_q_cf_cash_from_oper, fnd72_pit_or_cf_a_cf_cap_expend_prpty_add)))))",
+        "multiply(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 504), divide(1, add(1, vec_stddev(subtract(fnd72_pit_or_cf_a_cf_cash_from_oper, fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)))))",
+        "multiply(ts_sum(subtract(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), vec_avg(fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)), 504), divide(1, add(1, vec_stddev(subtract(fnd72_pit_or_cf_q_cf_cash_from_oper, fnd72_pit_or_cf_q_cf_cap_expend_prpty_add)))))"
+    ]
+}

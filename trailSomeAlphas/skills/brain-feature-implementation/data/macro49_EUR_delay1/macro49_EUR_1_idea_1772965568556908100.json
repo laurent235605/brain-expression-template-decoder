@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff(divide(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({shares}), lookback=5, k=1)), 60)",
+    "idea": "**Concept**: Notional-Volume Divergence Signal\n- **Sample Fields Used**: notional, shares\n- **Definition**: Deviation of the implied price (notional/shares) from recent historical levels to detect inconsistencies or special situations\n- **Why This Feature**: Anomalous ratios suggest corporate actions (splits, spin-offs), dual-class share confusion, or data errors; also captures extreme price movements between announcement and effective date\n- **is filling nan necessary**: Yes, backfill both fields to align timestamps before calculating ratio and its deviation.\n- **Directionality**: Extreme deviations indicate corporate actions or price gaps; persistent divergence suggests stale data or complex share structures\n- **Boundary Conditions**: Ratio near zero suggests missing data; extreme spikes suggest reverse splits or delisting scenarios requiring caution",
+    "expression_list": [
+        "ts_av_diff(divide(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1)), 60)"
+    ]
+}

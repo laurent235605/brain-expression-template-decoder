@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(subtract(ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 5), ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20)), std=4), 252)",
+    "idea": "捕捉预期修订的加速度而非速度本身。通过比较短期（5日平滑）与中期（20日平滑）修订动量的差值，识别分析师行为正在增强或减弱的拐点；将该二阶导信号置于252日历史分位数中评估，过滤掉季节性常规调整，专注于动量变化的极端异常状态。",
+    "expression_list": [
+        "ts_rank(winsorize(subtract(ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 5), ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20)), std=4), 252)",
+        "ts_rank(winsorize(subtract(ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 5), ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20)), std=4), 252)"
+    ]
+}

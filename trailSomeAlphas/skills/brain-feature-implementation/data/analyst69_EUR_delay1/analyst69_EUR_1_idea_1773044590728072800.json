@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(winsorize(multiply(sign(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5)), reverse(sign(ts_regression({returns}, group_mean({returns}, log(ts_mean({market_cap}, 21)), industry), 21, rettype=0)))), std=4), industry)",
+    "idea": "预期修订与价格残差的背离验证（Post-Earnings Drift增强）。将预期修订方向与经CAPM模型（行业市值加权市场组合）调整后的个股残差收益方向进行反向叠加（即上修但股价跑输时强化信号），利用市场反应不足构建反向验证的alpha来源。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_sum(ts_delta({hfown_pctown}, 1), 20), 126), 0.9), ts_sum(ts_delta({hfown_pctown}, 1), 20), trade_when(less(ts_rank(ts_sum(ts_delta({hfown_pctown}, 1), 20), 126), 0.1), ts_sum(ts_delta({hfown_pctown}, 1), 20), 0))",
+    "idea": "自适应时序极端阈值策略。基于股票自身历史126日（半年）的流量分布，通过ts_rank计算当前20日累积流量的历史百分位。仅当流量处于历史前10%（极度买入）或后10%（极度卖出）时保留原始信号，中间80%区间视为噪音并置零。这种条件化交易（trade_when）大幅降低了无效交易频率，专注于极端情绪驱动的反转或动量机会。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 126), 0.9), ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), trade_when(less(ts_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 126), 0.1), ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 0))"
+    ]
+}

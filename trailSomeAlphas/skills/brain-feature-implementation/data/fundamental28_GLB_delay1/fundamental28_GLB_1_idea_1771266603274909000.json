@@ -1,0 +1,10 @@
+{
+    "template": "multiply(-1, divide(subtract(divide({value_03501a}, {value_02300q}), ts_mean(divide({value_03501a}, {value_02300q}), 252)), ts_std_dev(divide({value_03501a}, {value_02300q}), 252)))",
+    "idea": "**概念**: 杠杆比率均值回归信号\n- **融合来源**: 模板4（权益资本结构）+ 模板1（Z-Score标准化）+ 反转运算符（reverse）\n- **定义**: 对权益资产比的当前历史Z-Score取负值，即极端高权益（低杠杆）时给出负信号，极端低权益时给出正信号\n- **为何有效**: 资本结构具有向行业均值回归的特性，极端保守（过高权益）可能预示资本运用效率低下，极端激进（过低权益）虽风险高但可能处于扩张期；与模板1的动量延续逻辑相反，此处捕捉均值回复\n- **逻辑含义**: 负值表示当前权益比率远高于历史均值（过度保守），正值表示远低于历史均值（高杠杆）；预期向历史中枢回归\n- **边界条件**: 使用252日窗口建立历史基准，确保跨越完整财报周期；反转仅针对Z-Score而非原始值，保持统计稳健性\n- **方向性**: 反转因子，高Z-Score（历史极高权益）预示未来可能降低权益（发债回购），低Z-Score预示可能增权益（增发去杠杆）",
+    "expression_list": [
+        "multiply(-1, divide(subtract(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), ts_mean(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), 252)), ts_std_dev(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), 252)))",
+        "multiply(-1, divide(subtract(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), ts_mean(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), 252)), ts_std_dev(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), 252)))",
+        "multiply(-1, divide(subtract(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), ts_mean(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), 252)), ts_std_dev(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), 252)))",
+        "multiply(-1, divide(subtract(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), ts_mean(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), 252)), ts_std_dev(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), 252)))"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "hump_decay(trade_when(greater(abs(ts_delta(group_rank(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), {industry}), 21)), 0.2), ts_delta(group_rank(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), {industry}), 21), 0), hump=0.02)",
+    "idea": "基于行业内稳定性变化率的动量增强模板。首先计算个股报告日期稳定性的高斯分位数，在行业内部进行横截面排名以消除行业异质性，然后计算21日变化率（加速度）识别稳定性拐点，仅当变化幅度超过阈值（0.2）时触发交易，并配合hump_decay降低高换手率，捕捉'稳定性突变'带来的定价偏差。",
+    "expression_list": []
+}

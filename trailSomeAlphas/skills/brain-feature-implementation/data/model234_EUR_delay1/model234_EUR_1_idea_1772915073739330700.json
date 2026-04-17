@@ -1,0 +1,7 @@
+{
+    "template": "divide(subtract({volume}, ts_mean({volume}, 12)), ts_std_dev({volume}, 12))",
+    "idea": "**Concept**: Volume Z-Score\n- **Sample Fields Used**: volume\n- **Definition**: Standardized deviation of current volume from its 12-month rolling mean measured in standard deviations\n- **Why This Feature**: Statistically identifies unusual trading activity that may signal information events, index rebalancing, or distress\n- **Logical Meaning**: Quantifies how abnormal current liquidity is compared to the security's own history. Extreme positive values suggest unusual attention; extreme negative values suggest unusual neglect or trading halts.\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 3) for the historical window calculations to ensure robust statistics, but keep current period unfilled to detect true anomalies.\n- **Directionality**: Positive = unusually high volume (potential signal); Negative = unusually low volume (potential liquidity risk); Near zero = normal activity\n- **Boundary Conditions**: |z| > 2 indicates statistically significant anomaly (95% confidence); |z| > 3 indicates extreme event (99.7% confidence)",
+    "expression_list": [
+        "divide(subtract(mdl234_volume, ts_mean(mdl234_volume, 12)), ts_std_dev(mdl234_volume, 12))"
+    ]
+}

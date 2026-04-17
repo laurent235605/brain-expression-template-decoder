@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 2)",
+    "idea": "先将地理暴露向量取均值并后向填充63天、截断4倍标准差以清洗数据，计算20日滚动标准差得到波动率；随后在行业层面进行Z-Score标准化，消除行业固有差异（如基建行业天然波动高于软件业）；最后使用平方运算放大尾部极端值，强化对“业务结构稳定性显著偏离同业常态”公司的识别，低波动端视为质量信号，高波动端视为风险信号。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 2)"
+    ]
+}

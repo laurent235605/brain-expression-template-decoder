@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill({surp},21),4),sector), reverse(group_zscore(winsorize({ttmaccu},4),sector))),5)",
+    "idea": "行业中性化与衰减平滑的稳健版本：首先对盈余惊喜{surp}进行21日回溯填充以修正披露延迟导致的缺失，对两端进行4倍标准差缩尾处理消除极端异常；同时在行业层面进行Z-score标准化，消除不同行业间应计项目{ttmaccu}基线差异带来的不可比性；最后通过5日线性衰减降低换手率，确保信号平滑过渡而非剧烈切换，适合作为底仓配置。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector))),5)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_1_ttmaccu,4),sector))),5)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_2_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector))),5)",
+        "ts_decay_linear(multiply(group_zscore(winsorize(ts_backfill(mdl219_1_surp,21),4),sector), reverse(group_zscore(winsorize(mdl219_2_ttmaccu,4),sector))),5)"
+    ]
+}

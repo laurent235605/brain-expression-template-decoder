@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_av_diff(vec_avg({rank}), 60), add(ts_std_dev(vec_avg({rank}), 60), 0.001))",
+    "idea": "Z分数标准化偏离（波动率调整）：将原始排名偏离值除以其60日滚动标准差，转换为“多少个标准差”单位。相比原始差值，该转换使不同波动特征的股票偏离幅度可比，抑制高波动品种的虚假信号，增强横截面稳健性与信号可比性。",
+    "expression_list": [
+        "divide(ts_av_diff(vec_avg(mdl245_rank), 60), add(ts_std_dev(vec_avg(mdl245_rank), 60), 0.001))"
+    ]
+}

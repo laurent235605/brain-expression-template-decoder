@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_std_dev(vec_avg({x_dividend}), 252), abs(ts_mean(vec_avg({x_dividend}), 252)))",
+    "idea": "**Concept**: Dividend Stability Coefficient\n- **Sample Fields Used**: x_dividend\n- **Definition**: Coefficient of variation (standard deviation / mean) of dividend amounts over a 252-day rolling window\n- **Why This Feature**: Consistent dividend policies indicate stable cash flows and management confidence; high volatility in dividend amounts may signal earnings instability or cyclical business models\n- **Logical Meaning**: Measures the regularity of dividend declarations; low values indicate stable income-focused companies, high values indicate irregular or special dividend payers\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. For dividend data, zero or null often means no dividend was declared, which is meaningful information about payout policy, so nan should be filled with 0 rather than forward-filled.\n- **Directionality**: Lower values indicate stable dividend policy (potential quality signal); extremely high values indicate unpredictable payouts (potential risk or opportunity)\n- **Boundary Conditions**: Near-zero values indicate perfectly consistent dividends; undefined when mean is zero (no dividends paid)",
+    "expression_list": [
+        "divide(ts_std_dev(vec_avg(ern6_x_dividend), 252), abs(ts_mean(vec_avg(ern6_x_dividend), 252)))",
+        "divide(ts_std_dev(vec_avg(ern6_x_dividend_233), 252), abs(ts_mean(vec_avg(ern6_x_dividend_233), 252)))",
+        "divide(ts_std_dev(vec_avg(ern6_x_dividend_oc), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc), 252)))",
+        "divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252)))"
+    ]
+}

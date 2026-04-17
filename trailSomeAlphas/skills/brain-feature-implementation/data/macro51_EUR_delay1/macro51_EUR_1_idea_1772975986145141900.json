@@ -1,0 +1,7 @@
+{
+    "template": "multiply( group_zscore( ts_rank( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 252 ), sector ), s_log_1p( abs( ts_delta( winsorize( ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4 ), 21 ) ) ) )",
+    "idea": "近期变动增强的历史极值信号。将行业调整后的历史百分位（主信号）与近期（21日）流动性溢价变化的绝对幅度（经对数压缩s_log_1p处理后的从属放大器）相乘。该结构赋予“处于历史极值区间且近期刚刚发生显著变动”的股票更高权重，而处于极值但近期无变化（可能处于平台期）的股票权重降低，从而精准捕捉高置信度的均值回归启动点。",
+    "expression_list": [
+        "multiply( group_zscore( ts_rank( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 252 ), sector ), s_log_1p( abs( ts_delta( winsorize( ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4 ), 21 ) ) ) )"
+    ]
+}

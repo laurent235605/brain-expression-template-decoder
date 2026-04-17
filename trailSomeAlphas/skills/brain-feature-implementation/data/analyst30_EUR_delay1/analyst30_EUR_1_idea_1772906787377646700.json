@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry), zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\"))))",
+    "idea": "相对偏离度因子：计算公司财年离散度相对于行业均值与全市场均值的差异（行业Zscore - 市场Zscore）。正值表示该离散度在行业内部更显异常（相对于同行更差），负值表示比行业更集中。用于识别行业内的财务报告结构异类。",
+    "expression_list": [
+        "subtract(group_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\"))))"
+    ]
+}

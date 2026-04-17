@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(subtract(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 5), ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 60)), 252)",
+    "idea": "借鉴期限结构思想，比较短期（5日）与长期（60日）平均披露间隔的差异。正值代表近期披露频率突然降低（间隔变长），可能预示业绩风险积聚或不确定性上升；负值代表近期披露更频繁。252日Z-score识别该“期限利差”的历史极端位置，捕捉披露节奏的快速恶化或改善，而非绝对水平。",
+    "expression_list": [
+        "ts_zscore(subtract(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 5), ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 60)), 252)",
+        "ts_zscore(subtract(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 5), ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 60)), 252)"
+    ]
+}

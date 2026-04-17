@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(ts_backfill({hfown_pctown}, 63)), 10), multiply(group_zscore(ts_rank(ts_delta(ts_backfill({hfown_pctown}, 63), 1), 126), sector), signed_power(ts_zscore(ts_mean(ts_backfill({hfown_pctown}, 63), 10), 252), 0.5)), 0)",
+    "idea": "**事件Freshness与历史极值共振**: 仅当持仓数据在10日内有更新时触发交易（避免 stale 数据）；信号由两部分合成：一是过去126日（半年）内的历史分位排名（捕捉极端变化），二是过去10日平均持仓水平在过去252日（一年）中的z-score的符号幂变换（捕捉绝对持仓水平的历史极值）；两者相乘实现“近期剧烈变动+历史高位”的double momentum效应，适用于捕捉机构建仓突破历史区间的关键节点。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(ts_backfill(rsk74_hfown_pctown, 63)), 10), multiply(group_zscore(ts_rank(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), 126), sector), signed_power(ts_zscore(ts_mean(ts_backfill(rsk74_hfown_pctown, 63), 10), 252), 0.5)), 0)"
+    ]
+}

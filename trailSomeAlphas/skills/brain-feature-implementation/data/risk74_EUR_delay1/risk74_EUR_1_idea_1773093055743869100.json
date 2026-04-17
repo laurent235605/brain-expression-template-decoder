@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_zscore(ts_rank(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), 126), industry), maxPercent=0.015)",
+    "idea": "将原始的截面信噪比转化为“该股票自身历史分位数”视角(过去126日)，再进行行业内标准化。这样捕捉的是“相对于自身历史而言极端的持仓异动”，同时剔除行业间 hedge fund 持仓行为差异（如科技股天然波动大）的影响，降低行业暴露，只押注那些即使在自身历史波动中也属异常的资金流。",
+    "expression_list": [
+        "truncate(group_zscore(ts_rank(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), 126), industry), maxPercent=0.015)"
+    ]
+}

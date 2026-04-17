@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(quantile(group_zscore(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), std=4), {industry}), driver=\"gaussian\"), 5)",
+    "idea": "在原始Surprise基础上构建四层增强：首先通过winsorize剔除极端值噪音；接着使用group_zscore进行行业中性化处理，消除不同行业间预期差基差异带来的不可比性；然后应用quantile高斯分位数变换将中间区间信号压缩至零附近，同时将极端正负Surprise拉伸至更远位置，强化对尾部极端事件的暴露；最后以ts_decay_linear进行5日线性衰减，显著降低换手率并提升信号稳定性，形成可长期持有的极端预期差策略。",
+    "expression_list": []
+}

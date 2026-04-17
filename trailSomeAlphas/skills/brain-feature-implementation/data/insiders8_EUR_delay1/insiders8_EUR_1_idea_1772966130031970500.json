@@ -1,0 +1,10 @@
+{
+    "template": "ts_delta(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 5) * abs(group_zscore(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector))",
+    "idea": "条件动量加速因子：计算60日相关性的5日变化率（delta），并将其乘以该相关性的行业中性化绝对水平。该构造实现了\"条件放大\"——当所有权结构已经处于极端状态（高绝对zscore）且正在快速变化（高delta）时，信号强度最大。这捕捉了\"极端状态下的加速突破\"现象，避免在平庸状态下对小幅波动过度反应，同时保留了方向性（正delta为稳定性增加，负delta为瓦解）。",
+    "expression_list": [
+        "ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 5) * abs(group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector))",
+        "ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 5) * abs(group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector))",
+        "ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 5) * abs(group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector))",
+        "ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 5) * abs(group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector))"
+    ]
+}

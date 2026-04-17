@@ -1,0 +1,7 @@
+{
+    "template": "group_scale(subtract(group_rank(ts_sum(ts_delta({hfown_pctown},1),20), sector), group_rank(ts_sum(ts_delta({fund_pct_ownership_encr},1),20), sector)), sector)",
+    "idea": "组内秩次稳健差分：将模板1的group_zscore替换为group_rank（组内排名），先分别计算对冲基金与共同基金持仓变化的20日累计行业排名，再求差分，最后进行组内标准化(group_scale)。此方法对异常值更稳健，减少极端持仓跳变的影响。",
+    "expression_list": [
+        "group_scale(subtract(group_rank(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), sector), group_rank(ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20), sector)), sector)"
+    ]
+}

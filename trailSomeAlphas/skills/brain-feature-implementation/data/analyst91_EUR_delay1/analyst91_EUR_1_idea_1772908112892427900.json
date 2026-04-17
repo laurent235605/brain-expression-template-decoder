@@ -1,0 +1,7 @@
+{
+    "template": "add(left_tail(group_zscore(ts_decay_linear(ts_std_dev(vec_avg(winsorize(ts_backfill({exposure_value}, 63), std=4)), 10), industry), maximum=-1.0), multiply(-1, right_tail(group_zscore(ts_decay_linear(ts_std_dev(vec_avg(winsorize(ts_backfill({exposure_value}, 63), std=4)), 10), industry), minimum=1.0)))",
+    "idea": "先对暴露波动率进行10日线性衰减平滑（ts_decay_linear）以降低日频噪音；在行业层面标准化后，使用非对称尾部分割：以 left_tail 截断保留极低波动端（业务极度稳定）赋予正权重，以 right_tail 截断保留极高波动端（业务剧烈波动）赋予负权重；中间区间视为噪音直接剔除，构建纯净的多空组合，避免中等波动股票的干扰。",
+    "expression_list": [
+        "add(left_tail(group_zscore(ts_decay_linear(ts_std_dev(vec_avg(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 10), industry), maximum=-1.0), multiply(-1, right_tail(group_zscore(ts_decay_linear(ts_std_dev(vec_avg(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 10), industry), minimum=1.0)))"
+    ]
+}

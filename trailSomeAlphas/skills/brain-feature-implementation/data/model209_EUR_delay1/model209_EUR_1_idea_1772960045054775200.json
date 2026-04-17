@@ -1,0 +1,5 @@
+{
+    "template": "if_else(greater(group_rank(vec_skewness({investment}), {sector}), 0.9), signed_power(vec_skewness({investment}), 1.5), if_else(less(group_rank(vec_skewness({investment}), {sector}), 0.1), signed_power(vec_skewness({investment}), 1.5), 0))",
+    "idea": "极端分位非线性放大（行业头尾策略）：仅在投资偏度处于行业前10%（极度右偏，少数大仓位）或后10%（极度左偏，多数大仓位）时进行交易，中间区间视为噪音置零。对极端值应用1.5次幂的符号保持变换（signed_power）以放大尾部信号强度，同时保留方向信息（正偏/负偏），构建基于配置极端性的多空信号。",
+    "expression_list": []
+}

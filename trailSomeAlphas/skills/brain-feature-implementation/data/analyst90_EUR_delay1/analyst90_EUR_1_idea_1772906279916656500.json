@@ -1,0 +1,7 @@
+{
+    "template": "let(ld, subtract(vec_avg({likelihood_score}), ts_mean(vec_avg({likelihood_score}), 30)), pr, divide(vec_avg({exit_price}), vec_avg({openprice})), ldr, rank(ld), bkt, bucket(ldr, \"0,1,0.2\"), core, if_else(equal(bkt, 0), multiply(negate(signed_power(abs(ld), 0.7)), subtract(ts_rank(pr, 30), 0.5)), if_else(equal(bkt, 4), multiply(signed_power(abs(ld), 0.7), subtract(ts_rank(pr, 30), 0.5)), 0)), zscore(winsorize(core, std=4)))",
+    "idea": "将概率偏离度按横截面分五档（0.2分位桶），仅对极端低（第0桶）和极端高（第4桶）赋予非线性权重（幂0.7压缩极端值影响但保留排序），中段视为噪音置零，并结合价格动量历史分位构建非对称多空响应结构。",
+    "expression_list": [
+        "let(ld, subtract(vec_avg(success_likelihood_score), ts_mean(vec_avg(success_likelihood_score), 30)), pr, divide(vec_avg(expected_exit_price), vec_avg(anl90_openprice)), ldr, rank(ld), bkt, bucket(ldr, \"0,1,0.2\"), core, if_else(equal(bkt, 0), multiply(negate(signed_power(abs(ld), 0.7)), subtract(ts_rank(pr, 30), 0.5)), if_else(equal(bkt, 4), multiply(signed_power(abs(ld), 0.7), subtract(ts_rank(pr, 30), 0.5)), 0)), zscore(winsorize(core, std=4)))"
+    ]
+}

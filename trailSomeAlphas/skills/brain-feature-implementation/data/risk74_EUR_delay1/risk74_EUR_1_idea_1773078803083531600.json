@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_regression({value_ts}, ts_mean({crowding}, 20), 60, rettype=0), group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector))",
+    "idea": "引入 CAPM 残差思想：先计算价值因子对拥挤度（20日均值）的时序回归残差（剥离拥挤度解释的部分，获取纯净价值），再与机构流偏离度相乘，获取'纯粹价值'与'聪明钱流向'的交叉增强信号，避免共线性干扰。",
+    "expression_list": [
+        "multiply(ts_regression(rsk74_value_ts, ts_mean(liquidity_factor_crowding, 20), 60, rettype=0), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector))",
+        "multiply(ts_regression(rsk74_value_ts, ts_mean(liquidity_timeseries_crowding, 20), 60, rettype=0), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector))",
+        "multiply(ts_regression(rsk74_value_ts, ts_mean(rsk74_crowding, 20), 60, rettype=0), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector))",
+        "multiply(ts_regression(rsk74_value_ts, ts_mean(rsk74_raw_crowding, 20), 60, rettype=0), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector))"
+    ]
+}

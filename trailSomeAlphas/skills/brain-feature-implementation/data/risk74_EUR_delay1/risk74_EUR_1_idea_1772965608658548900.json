@@ -1,0 +1,7 @@
+{
+    "template": "quantile({exp_usa}, driver=\"uniform\")",
+    "idea": "**Concept**: Relative Geographic Exposure\n- **Sample Fields Used**: `exp_usa`, `exp_chn`, `exp_nondomicile1`\n- **Definition**: Cross-sectional ranking of geographic exposure to identify pure-plays vs. diversified peers\n- **Why This Feature**: Relative exposure determines beta to regional shocks; helps construct geographic factor-neutral portfolios\n- **Logical Meaning**: High values indicate highest exposure to specific region (high beta); low values indicate domestic/low exposure (low beta)\n- **is filling nan necessary**: Yes, fill missing exposure with 0 (domestic assumption) before ranking\n- **Directionality**: High = high regional beta (aggressive play); Low = low regional beta (defensive); use for pair trades\n- **Boundary Conditions**: Extreme values indicate pure-play exporters; near-zero indicates domestic defensive names",
+    "expression_list": [
+        "quantile(rsk74_raw_exp_usa, driver=\"uniform\")"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "sign(vec_avg({investment}))",
+    "idea": "**Concept**: Portfolio Directional Bias\n- **Sample Fields Used**: investment\n- **Definition**: Sign of average investment indicating essential long/short/neutral stance stripped of magnitude\n- **Why This Feature**: Distills portfolio to its essential directional essence: bullish, bearish, or neutral, removing scale effects\n- **Logical Meaning**: Fundamental market view of the strategy\n- **is filling nan necessary**: Exclude NaNs to ensure sign reflects actual positions\n- **Directionality**: +1 indicates net long bias; -1 indicates net short bias; 0 indicates neutral\n- **Boundary Conditions**: Discrete values -1, 0, or 1",
+    "expression_list": [
+        "sign(vec_avg(mdl209_investment))"
+    ]
+}

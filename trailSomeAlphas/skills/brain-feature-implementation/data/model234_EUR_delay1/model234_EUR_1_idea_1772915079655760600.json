@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_returns({volume}, 1), ts_delay(ts_returns({volume}, 1), 1))",
+    "idea": "**Concept**: Volume Acceleration\n- **Sample Fields Used**: volume\n- **Definition**: Second derivative of volume measuring the change in the rate of change (delta of delta)\n- **Why This Feature**: Identifies inflection points in liquidity trends—when increasing volume begins to decrease or vice versa\n- **Logical Meaning**: Positive acceleration suggests momentum building (sustained interest); negative acceleration suggests momentum fading (peak interest passed)\n- **is filling nan necessary**: Yes, use ts_backfill({volume}, 1) to ensure consecutive calculations don't amplify missing data artifacts\n- **Directionality**: Positive = rate of increase accelerating; Negative = rate of increase decelerating (or rate of decrease accelerating)\n- **Boundary Conditions**: Near zero indicates steady trends; large absolute values indicate turning points",
+    "expression_list": [
+        "subtract(ts_returns(mdl234_volume, 1), ts_delay(ts_returns(mdl234_volume, 1), 1))"
+    ]
+}

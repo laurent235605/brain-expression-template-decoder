@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(ts_zscore(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 252), add(ts_rank(ts_std_dev(returns, 21), 63), 0.05)), industry)",
+    "idea": "将分子进行252日（1年）历史时序zscore标准化以识别'历史极端信念水平'，并将分母改为波动率的63日滚动分位数（ts_rank）以创建非线性风险惩罚——在中等波动与极高波动之间差异饱和，避免过度惩罚中等波动基金。",
+    "expression_list": [
+        "group_zscore(divide(ts_zscore(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 252), add(ts_rank(ts_std_dev(returns, 21), 63), 0.05)), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(signed_power(ts_delta(winsorize(ts_backfill({hfown_pctown}, 21), std=4), 63), 0.5), industry)",
+    "idea": "捕捉持仓变化动量而非静态水平，计算63日持仓变化Delta并经signed_power(0.5)压缩极端波动保留方向，再进行行业中性化，识别HF持续增持/减持的加速度信号，避免静态高持仓均值回归风险。",
+    "expression_list": [
+        "group_zscore(signed_power(ts_delta(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), 63), 0.5), industry)"
+    ]
+}

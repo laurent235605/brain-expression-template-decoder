@@ -1,0 +1,7 @@
+{
+    "template": "jump_decay(purify(ts_delta(vec_avg({version}), 1)), 5, sensitivity=0.5, force=0.1)",
+    "idea": "**Concept**: Purified Version Increment\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Cleansed version changes with infinite values removed and extreme jumps dampened using jump decay\n- **Why This Feature**: Removes data artifacts and extreme outliers to reveal the true underlying rate of version updates without noise from data errors\n- **is filling nan necessary**: Use `purify` to clear infinities, then `jump_decay` to handle extreme values, preserving NaNs for genuine missing data\n- **Directionality**: Positive values indicate genuine version increases; near-zero indicates stability; negative values rare (version rollbacks)\n- **Boundary Conditions**: Capped by jump_decay parameters; zero indicates no meaningful change after purification",
+    "expression_list": [
+        "jump_decay(purify(ts_delta(vec_avg(anl85_version), 1)), 5, sensitivity=0.5, force=0.1)"
+    ]
+}

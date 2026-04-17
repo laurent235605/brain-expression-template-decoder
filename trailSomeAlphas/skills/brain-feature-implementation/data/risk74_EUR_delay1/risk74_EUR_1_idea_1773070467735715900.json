@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression( winsorize(ts_backfill({exp_usa},63),std=4), group_mean(winsorize(ts_backfill({exp_usa},63),std=4), log(ts_mean(cap,21)), sector), 252, rettype=0 )",
+    "idea": "特质性地域纯玩因子：以行业市值加权平均地域暴露作为解释变量，通过252天滚动回归剥离行业共同趋势，取残差作为alpha。高残差代表在行业内的极端地域纯玩属性，低残差代表跟随行业平均的防御型配置。",
+    "expression_list": [
+        "ts_regression( winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), log(ts_mean(cap,21)), sector), 252, rettype=0 )"
+    ]
+}

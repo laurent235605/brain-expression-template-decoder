@@ -1,0 +1,8 @@
+{
+    "template": "group_compare(subtract({factor_e}, {factor_s}), subtract({factor_s}, {factor_g}), industry)",
+    "idea": "**交叉增强逻辑**: 将Input 2的ESG成分概念分解为E-S（环境减社会）和S-G（社会减治理）两个差异向量，使用`group_compare`（类比Input 1的Actual vs Estimate Spread模板）在行业内部比较这两个差异的相对关系。识别那些\"环境远强于社会，且社会远强于治理\"的阶梯状不平衡 profile，这类非线性ESG结构往往预示着特定的监管风险或转型机遇，比单纯的总分更具预测力。",
+    "expression_list": [
+        "group_compare(subtract(rsk74_factor_e, rsk74_factor_s), subtract(rsk74_factor_s, rsk74_factor_g), industry)",
+        "group_compare(subtract(rsk74_factor_esg, rsk74_factor_s), subtract(rsk74_factor_s, rsk74_factor_g), industry)"
+    ]
+}

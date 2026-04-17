@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_decay_linear(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 10), 2)",
+    "idea": "在模板2的行业Z-Score基础上引入10日线性衰减平滑（ts_decay_linear），赋予近期波动率更高权重的同时控制换手率；相比简单移动平均，此结构更适合捕捉业务结构调整的渐进过程，结合平方运算强化对行业相对极端偏离的识别。",
+    "expression_list": [
+        "signed_power(ts_decay_linear(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 10), 2)"
+    ]
+}

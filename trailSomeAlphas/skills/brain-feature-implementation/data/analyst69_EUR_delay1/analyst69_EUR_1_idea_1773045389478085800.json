@@ -1,0 +1,8 @@
+{
+    "template": "subtract(quantile(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), driver=gaussian), multiply(0.5, quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian)))",
+    "idea": "**高斯空间价差（Quantile-Gaussian映射）**：将两个模板信号均映射至高斯分位空间(quantile...gaussian)，以效率因子的分位值减去0.5倍修正动量分位值，构建'质量-情绪'价差信号，属于激进的风险平价重组与空间变换。",
+    "expression_list": [
+        "subtract(quantile(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), driver=gaussian), multiply(0.5, quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian)))",
+        "subtract(quantile(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), driver=gaussian), multiply(0.5, quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian)))"
+    ]
+}

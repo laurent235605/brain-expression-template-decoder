@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 21)), 0.3), subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), 0), industry)",
+    "idea": "仅在观测到美国敞口发生显著变化（21日Delta超过阈值）时，基于当前中美价差建仓，结合事件驱动逻辑捕捉管理层主动调整区域战略后的超额收益，其余时间保持中性降低无效换手。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 21)), 0.3), subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), 0), industry)"
+    ]
+}

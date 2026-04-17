@@ -1,0 +1,7 @@
+{
+    "template": "core = vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)); z_industry = group_zscore(core, industry); dispersion = ts_std_dev(z_industry, 20); disp_score = zscore(dispersion); boosted = multiply(z_industry, add(1, multiply(0.5, disp_score))); rank_core = group_rank(core, industry); is_very = or(greater(rank_core, 0.95), less(rank_core, 0.05)); is_moderate = or(greater(rank_core, 0.9), less(rank_core, 0.1)); signal = if_else(is_very, signed_power(boosted, 1.3), if_else(is_moderate, boosted, 0)); smoothed = ts_mean(signal, 3); final = group_normalize(smoothed, industry)",
+    "idea": "离散度加权的分层非线性策略：根据行业内该因子的横截面标准差（离散度）动态调整信号强度，当基金间配置分歧较大时（高离散度）增强信号；采用95%/5%与90%/10%双层分桶，对极值应用1.3次幂强调，最后通过group_normalize确保行业中性。",
+    "expression_list": [
+        "core = vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)); z_industry = group_zscore(core, industry); dispersion = ts_std_dev(z_industry, 20); disp_score = zscore(dispersion); boosted = multiply(z_industry, add(1, multiply(0.5, disp_score))); rank_core = group_rank(core, industry); is_very = or(greater(rank_core, 0.95), less(rank_core, 0.05)); is_moderate = or(greater(rank_core, 0.9), less(rank_core, 0.1)); signal = if_else(is_very, signed_power(boosted, 1.3), if_else(is_moderate, boosted, 0)); smoothed = ts_mean(signal, 3); final = group_normalize(smoothed, industry)"
+    ]
+}

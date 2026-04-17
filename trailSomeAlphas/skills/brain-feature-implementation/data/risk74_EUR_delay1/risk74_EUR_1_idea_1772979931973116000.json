@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_sum(ts_delta({hfown_pctown}, 1), 20), 10)",
+    "idea": "资金流向动量（加速度）：捕捉20日累积流在10日窗口内的变化率（二阶导），识别建仓速度加快（斜率上升）或放缓（斜率下降）的动能拐点，早于静态累积流反映趋势强化或衰竭",
+    "expression_list": [
+        "ts_delta(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 10)"
+    ]
+}

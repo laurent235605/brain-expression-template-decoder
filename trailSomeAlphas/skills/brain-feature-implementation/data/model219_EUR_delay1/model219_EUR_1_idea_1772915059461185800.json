@@ -1,0 +1,10 @@
+{
+    "template": "multiply({surp}, reverse({ttmaccu}))",
+    "idea": "**Concept**: Earnings Surprise Persistence\n- **Sample Fields Used**: `surp`, `fc_numrevy1`, `ttmaccu`\n- **Definition**: Unexpected earnings deviation weighted by accrual quality to identify genuine surprises vs. accounting artifacts\n- **Why This Feature**: Genuine surprises (low accruals) persist; managed earnings (high accruals) reverse\n- **Logical Meaning**: High values with low accruals indicate sustainable positive surprise; high accruals suggest manipulation\n- **is filling nan necessary**: Yes, use `ts_backfill()` for surprise data as delays create artificial NaNs\n- **Directionality**: Positive values indicate under-promise/over-deliver management quality\n- **Boundary Conditions**: Extreme outliers often indicate one-time items; verify with `spefcn`",
+    "expression_list": [
+        "multiply(mdl219_1_surp, reverse(mdl219_1_ttmaccu))",
+        "multiply(mdl219_2_surp, reverse(mdl219_1_ttmaccu))",
+        "multiply(mdl219_2_surp, reverse(mdl219_2_ttmaccu))",
+        "multiply(mdl219_1_surp, reverse(mdl219_2_ttmaccu))"
+    ]
+}

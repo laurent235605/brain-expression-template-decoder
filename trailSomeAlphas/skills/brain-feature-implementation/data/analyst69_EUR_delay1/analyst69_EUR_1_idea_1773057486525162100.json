@@ -1,0 +1,8 @@
+{
+    "template": "ts_backfill(days_from_last_change({eps_expected_report_dt}), 5)",
+    "idea": "回填处理的变更信号（Backfilled Change Signal）。对报告日期变更间隔进行短窗口回填（借鉴输入2处理分析师预期时的ts_backfill逻辑），处理因数据更新不同步导致的伪零值或缺失。确保在检测到变更时，即使因数据源延迟导致当日值为NaN，也能用前值填充维持信号连续性，避免误判。",
+    "expression_list": [
+        "ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 5)",
+        "ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 5)"
+    ]
+}

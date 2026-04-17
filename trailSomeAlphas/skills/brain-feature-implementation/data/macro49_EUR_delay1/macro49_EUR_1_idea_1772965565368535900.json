@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1))",
+    "idea": "**Concept**: Liquidity-Adjusted Trade Intensity\n- **Sample Fields Used**: notional, vda\n- **Definition**: Product of notional value and VDA to capture situations where large dollar amounts coincide with limited liquidity capacity\n- **Why This Feature**: Multiplicative interaction identifies the most dangerous rebalances: high dollar value in illiquid names. This is where market impact is maximized and price dislocation most likely.\n- **is filling nan necessary**: Yes, backfill both fields independently to ensure alignment before multiplication.\n- **Directionality**: High values indicate severe capacity strain (large $ in illiquid name); low values indicate easy absorption (small $ or liquid name)\n- **Boundary Conditions**: Exponentially increasing impact at high values; threshold effects likely around institutional liquidity capacity limits",
+    "expression_list": [
+        "multiply(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1))"
+    ]
+}

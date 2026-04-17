@@ -1,0 +1,10 @@
+{
+    "template": "winsorize(group_zscore(ts_decay_linear(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 21), industry), 4)",
+    "idea": "行业中性事件强度持续性信号。首先将三个事件字段通过vec_avg转换为标量并二值化（事件发生为1，否则为0），加总得到当日事件密集度。使用时序衰减算子ts_decay_linear(window=21)捕捉事件在短期内的聚集持续性（认为连续多日有事件比单日爆发更具信息含量）。随后进行行业中性化处理（group_zscore by industry），消除不同行业披露惯例差异带来的偏差。最后通过winsorize(std=4)处理极端值，得到稳健的行业相对事件活跃度评分。逻辑：事件聚集且持续的公司往往处于战略转折期，经行业比较后更能识别出异常活跃的企业。",
+    "expression_list": [
+        "winsorize(group_zscore(ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 21), industry), 4)",
+        "winsorize(group_zscore(ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 21), industry), 4)",
+        "winsorize(group_zscore(ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 21), industry), 4)",
+        "winsorize(group_zscore(ts_decay_linear(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 21), industry), 4)"
+    ]
+}

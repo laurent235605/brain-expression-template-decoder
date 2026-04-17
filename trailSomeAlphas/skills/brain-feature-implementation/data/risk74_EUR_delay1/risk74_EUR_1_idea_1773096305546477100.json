@@ -1,0 +1,16 @@
+{
+    "template": "trade_when(greater(ts_rank(winsorize({nondomicile},std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize({concentration},std=4), 5), 2), signed_power(ts_delta(winsorize({concentration},std=4), 20), 2)), 0)",
+    "idea": "多时间尺度动量分化：在模板1的高海外收入条件触发下，计算地理集中度短期（5日）与中期（20日）非线性变化的差值，通过短周期减长周期识别风险加速（正值）或减速（负值）的拐点信号，捕捉风险扩散速率的变化而非绝对水平。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2)), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.8), subtract(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 5), 2), signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2)), 0)"
+    ]
+}

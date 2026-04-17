@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(quantile(divide(subtract(ts_mean(vec_avg({actual_eps}), 20), ts_mean(vec_avg({estimated_eps}), 20)), add(abs(ts_mean(vec_avg({estimated_eps}), 20)), 0.01)), driver=\"gaussian\"), industry)",
+    "idea": "融合模板1的惊喜计算与模板2的时间序列平滑思想，对实际与预期EPS分别进行20日移动平均后再计算惊喜比率，最后进行行业zscore标准化，降低单日数据噪音。",
+    "expression_list": [
+        "group_zscore(quantile(divide(subtract(ts_mean(vec_avg(ern6_actual_eps), 20), ts_mean(vec_avg(ern6_estimated_eps), 20)), add(abs(ts_mean(vec_avg(ern6_estimated_eps), 20)), 0.01)), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(divide(subtract(ts_mean(vec_avg(ern6_actual_eps_274), 20), ts_mean(vec_avg(ern6_estimated_eps), 20)), add(abs(ts_mean(vec_avg(ern6_estimated_eps), 20)), 0.01)), driver=\"gaussian\"), industry)"
+    ]
+}

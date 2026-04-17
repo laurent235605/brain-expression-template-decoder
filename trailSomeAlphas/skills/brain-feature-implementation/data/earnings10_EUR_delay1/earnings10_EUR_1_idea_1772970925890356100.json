@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(quantile(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), driver=\"gaussian\")), 1.0), quantile(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), driver=\"gaussian\"), 0), multiply(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)), add(1, multiply(0.2, winsorize(ts_zscore(winsorize(ts_backfill(vec_skewness({aily_delta_recon_value}), 63), std=4), 20), std=2)))))",
+    "idea": "高斯分位数变换与偏度动态衰减：使用gaussian driver的quantile变换将修正值映射到正态分布，极大强化极端尾部的区分度；新鲜度权重与实时偏度水平耦合（通过vec_skewness计算），当分布呈现正偏（潜在利好）时自动增强权重，实现信号强度与分布形态的动态交互。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(quantile(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), driver=\"gaussian\")), 1.0), quantile(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), driver=\"gaussian\"), 0), multiply(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)), add(1, multiply(0.2, winsorize(ts_zscore(winsorize(ts_backfill(vec_skewness(ern10_aily_delta_recon_value), 63), std=4), 20), std=2)))))"
+    ]
+}

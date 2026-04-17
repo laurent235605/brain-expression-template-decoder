@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(ts_delta(winsorize(ts_backfill(vec_avg({elta_value}),63),std=4),5),add(1,multiply(0.5,winsorize(zscore(vec_ir({elta_value})),2)))),industry)",
+    "idea": "利用向量信息比率(vec_ir)衡量分析师预期修正的共识稳定性，将5日动量乘以(1+0.5*IR_ZScore)的权重系数——高共识（IR高）的股票信号被放大，低共识（分歧大）的股票信号被压缩，最后进行行业中性化，构建质量加权的预期修正因子。",
+    "expression_list": [
+        "group_zscore(multiply(ts_delta(winsorize(ts_backfill(vec_avg(ern10_elta_value),63),std=4),5),add(1,multiply(0.5,winsorize(zscore(vec_ir(ern10_elta_value)),2)))),industry)"
+    ]
+}

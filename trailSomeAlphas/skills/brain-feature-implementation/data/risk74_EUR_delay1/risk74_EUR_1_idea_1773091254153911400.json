@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(group_zscore(winsorize(ts_backfill({momentum},63),std=4) / (winsorize(ts_backfill({value_ts}+{earnyild},63),std=4) + 0.0001), industry), 126)",
+    "idea": "时序ZScore因子风格偏离度捕捉：计算经数据清洗后的动量对价值盈利综合暴露比率，先进行行业中性化(group_zscore)确保截面可比性；随后应用126日滚动窗口的时序ZScore(ts_zscore)度量当前因子暴露比例相对个股自身历史平均水平的偏离程度。该模板专门捕捉因子风格切换的极端偏离机会——当比值显著高于历史均值时暗示过度拥挤的动量暴露可能面临反转，显著低于均值时则暗示深度价值修复潜力。",
+    "expression_list": [
+        "ts_zscore(group_zscore(winsorize(ts_backfill(rsk74_momentum,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001), industry), 126)",
+        "ts_zscore(group_zscore(winsorize(ts_backfill(rsk74_momentum_ts,63),std=4) / (winsorize(ts_backfill(rsk74_value_ts+rsk74_earnyild,63),std=4) + 0.0001), industry), 126)"
+    ]
+}

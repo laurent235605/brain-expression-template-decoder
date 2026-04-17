@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1))), 252), industry), 2)",
+    "idea": "**事件频率加速检测（Regime Shift）**：构建20日滚动事件密度均值，通过ts_zscore与个股自身252日历史均值比较，捕捉\"忙碌季启动\"的加速度信号；再进行group_zscore行业内横向比较，识别全市场范围内事件活动突然异常活跃的个股；最后使用signed_power(..., 2)非线性放大极端偏离值（正负两端），强化对罕见的高强度公司活动窗口的暴露，同时压缩中等波动噪音。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 252), industry), 2)",
+        "signed_power(group_zscore(ts_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 252), industry), 2)",
+        "signed_power(group_zscore(ts_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 252), industry), 2)",
+        "signed_power(group_zscore(ts_zscore(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1))), 252), industry), 2)"
+    ]
+}

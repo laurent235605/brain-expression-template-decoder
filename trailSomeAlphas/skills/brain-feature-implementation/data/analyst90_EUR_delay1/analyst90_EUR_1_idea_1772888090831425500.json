@@ -1,0 +1,8 @@
+{
+    "template": "vec_count(vec_filter({recommendation_weighting}, value=\"nan\")) / (vec_count({authorcompany}) + 0.0001)",
+    "idea": "**Concept**: Recommendation Breadth Indicator\n- **Sample Fields Used**: `recommendation_weighting`, `authorcompany`\n- **Definition**: Count of distinct active buy recommendations (vector count) divided by count of distinct author companies\n- **Why This Feature**: Distinguishes between concentrated recommendations (few authors, high weight) and broad consensus (many authors); breadth suggests durability\n- **is filling nan necessary**: Use vec_filter to remove NaN before counting to ensure accurate breadth measurement.\n- **Logical Meaning**: High values indicate many analysts agree (wisdom of crowds); low values indicate concentrated bets by few sources\n- **Directionality**: Higher breadth generally indicates more robust signals; low breadth indicates potential idiosyncratic risk\n- **Boundary Conditions**: 1 indicates single source; high values indicate widespread coverage",
+    "expression_list": [
+        "vec_count(vec_filter(buy_recommendation_weighting, value=\"nan\")) / (vec_count(anl90_authorcompany) + 0.0001)",
+        "vec_count(vec_filter(sell_recommendation_weighting, value=\"nan\")) / (vec_count(anl90_authorcompany) + 0.0001)"
+    ]
+}

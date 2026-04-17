@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), industry)), 1.5), group_zscore(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), industry), 0), 3)",
+    "idea": "行业中性极端信念捕捉：先对原始字段进行63日回溯填充和4倍标准差截尾清洗，通过向量中性化剥离基金规模效应；在行业内部进行zscore标准化后，仅保留绝对偏离大于1.5倍标准差的极端值（中段噪音置零），最后应用3日线性衰减控制换手率，专注捕捉具有持续性信念的极端配置决策。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(group_zscore(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), industry)), 1.5), group_zscore(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), industry), 0), 3)"
+    ]
+}

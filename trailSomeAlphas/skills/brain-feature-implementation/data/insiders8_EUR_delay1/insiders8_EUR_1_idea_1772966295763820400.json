@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(group_zscore({active_return_decile_rank_long} - {active_weight_decile_rank_long}, sector) * (2 * ts_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 126) - 1), 20)",
+    "idea": "将截面行业中性分歧与过去126日（半年）时间序列排名（映射到-1至1）相乘，只有当分歧处于历史极值区间且当前偏离显著时才强化权重，20日均滑处理确保信号的持续性而非脉冲噪音。",
+    "expression_list": [
+        "ts_mean(group_zscore(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, sector) * (2 * ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 126) - 1), 20)"
+    ]
+}

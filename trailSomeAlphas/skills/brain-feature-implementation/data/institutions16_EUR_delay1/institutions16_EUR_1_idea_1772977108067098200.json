@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), add(1, signed_power(group_zscore(divide(winsorize(ts_delta(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), 21), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0.5)))",
+    "idea": "同时捕捉配置强度水平与变化动量：将风险调整后的残差水平与经同样风险调整后的21日变化量进行非线性组合（signed_power压缩中间值、放大极端动量），强化那些既有高仓位又在近期显著加仓的基金信号，对动量为负的高仓位基金进行惩罚性降权。",
+    "expression_list": [
+        "multiply(group_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), add(1, signed_power(group_zscore(divide(winsorize(ts_delta(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), 21), std=4), add(ts_std_dev(returns, 21), 0.001)), industry), 0.5)))"
+    ]
+}

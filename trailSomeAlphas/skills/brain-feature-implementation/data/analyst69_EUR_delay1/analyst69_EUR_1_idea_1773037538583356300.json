@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(divide(ts_delta({ebitda_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({ebitda_best_eeps_cur_yr}, 20), 5))), 0.05), signed_power(winsorize(divide(ts_delta({ebitda_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({ebitda_best_eeps_cur_yr}, 20), 5)), std=3), 1.5), 0), 3)",
+    "idea": "将模板1的百分比变化逻辑应用于EBITDA字段（模板2），设置5%阈值（借鉴模板1的边界条件概念）使用trade_when仅捕获极端变动。通过signed_power（y=1.5）非线性放大尾部信号，并以3日线性衰减平滑（ts_decay_linear），在保持对重大事件敏感度的同时显著降低换手，平衡创新性与可实现性。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5))), 0.05), signed_power(winsorize(divide(ts_delta(anl69_ebitda_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_ebitda_best_eeps_cur_yr, 20), 5)), std=3), 1.5), 0), 3)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_rank(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), industry), 10)",
+    "idea": "放弃Z-score的线性距离假设，改用行业内分位（group_rank）仅保留排序信息，对非正态分布（如指数右偏的间隔天数）更稳健。随后使用10日线性衰减加权（ts_decay_linear）而非简单平均，赋予近期排序更高权重以更快反应变化，同时通过衰减权重自然控制平滑度与换手率，适用于高偏斜场景。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), industry), 10)",
+        "ts_decay_linear(group_rank(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), industry), 10)"
+    ]
+}

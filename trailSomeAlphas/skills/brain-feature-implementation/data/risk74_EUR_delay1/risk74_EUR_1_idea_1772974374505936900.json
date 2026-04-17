@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_sum(ts_delta(group_zscore(winsorize({hfown_pctown}, 4), industry), 1), 20), 252), 1.5)",
+    "idea": "**行业中性化历史极端资金流**：先对原始持仓比例进行4倍标准差截尾去极值，消除数据错误影响；在行业内部进行zscore标准化，剥离行业配置偏差（如科技板块天然高持仓）；计算20日累积净流入/流出后，再看该累积值相对于个股自身252日历史的时序zscore位置，最后用signed_power(1.5)非线性放大处于历史极端（持续大买或大卖）的股票权重，同时压缩中间区域的噪音，强调“异常坚定”或“异常恐慌”的调仓行为。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_sum(ts_delta(group_zscore(winsorize(rsk74_hfown_pctown, 4), industry), 1), 20), 252), 1.5)"
+    ]
+}

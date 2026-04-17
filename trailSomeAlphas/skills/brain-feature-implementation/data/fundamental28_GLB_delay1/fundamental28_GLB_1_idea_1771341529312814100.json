@@ -1,0 +1,5 @@
+{
+    "template": "ts_delta(ts_rank({return}-{asset},15), 5)",
+    "idea": "计算15日时序排名的5日差分(ts_delta)，捕捉资产收益差排名的加速度变化，识别动量拐点",
+    "expression_list": []
+}

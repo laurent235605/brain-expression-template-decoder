@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({newa2_oiadp}, 63)",
+    "idea": "**Concept**: Operating Income Momentum\n- **Sample Fields Used**: `newa2_oiadp`\n- **Definition**: The quarter-over-quarter absolute change in operating income after depreciation, capturing the trajectory of core business profitability.\n- **Why This Feature**: Accelerating operating income indicates improving operational efficiency or pricing power; deceleration may signal margin compression or saturation.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Operating income is reported annually in some versions; quarterly changes require backfilling to ensure valid delta calculations.\n- **Directionality**: Positive values indicate growth (momentum effect); negative values indicate contraction (value trap risk or turnaround opportunity).\n- **Boundary Conditions**: Extreme changes from near-zero bases create outliers; seasonality in annual data requires careful window selection.",
+    "expression_list": [
+        "ts_delta(fnd6_newa2_oiadp, 63)"
+    ]
+}

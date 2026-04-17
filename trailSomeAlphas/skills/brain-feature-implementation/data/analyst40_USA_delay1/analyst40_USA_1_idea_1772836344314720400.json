@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), industry), 252)), 2), reverse(signed_power(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), industry), 252), 2)), multiply(reverse(signed_power(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), industry), 252), 2)), 0.3))",
+    "idea": "行业中性化历史极端偏离分层仓位策略。先对性别比波动率进行行业中性化（group_zscore），计算其在252日历史中的zscore位置，使用signed_power放大极端偏离。通过trade_when实现条件仓位：仅当历史偏离绝对值大于2个标准差时满仓反向交易（高波动做空/低波动做多），中等偏离时仓位降至30%，以过滤噪音区间并增强尾部收益。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), industry), 252)), 2), reverse(signed_power(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), industry), 252), 2)), multiply(reverse(signed_power(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), industry), 252), 2)), 0.3))"
+    ]
+}

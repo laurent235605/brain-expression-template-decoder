@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), 63)",
+    "idea": "数据可得性的时序动量信号，衡量过去63个交易日数据点的累积速度，捕捉IPO后数据逐步完善（正向alpha）或退市前数据中断（负向预警）的非线性特征",
+    "expression_list": [
+        "ts_delta(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), 63)"
+    ]
+}

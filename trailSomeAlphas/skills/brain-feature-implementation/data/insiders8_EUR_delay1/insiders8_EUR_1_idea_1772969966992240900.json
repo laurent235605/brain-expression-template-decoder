@@ -1,0 +1,5 @@
+{
+    "template": "winsorize( divide( ts_std_dev( ts_regression( ts_backfill( {weight_net}, 63 ), group_mean( ts_backfill( {weight_net}, 63 ), log( ts_mean( {cap}, 21 ) ), {sector} ), 63, rettype=0 ), 20 ), add( abs( ts_mean( ts_regression( ts_backfill( {weight_net}, 63 ), group_mean( ts_backfill( {weight_net}, 63 ), log( ts_mean( {cap}, 21 ) ), {sector} ), 63, rettype=0 ), 20 ) ), 0.0001 ) ), std=4 )",
+    "idea": "特质性持仓稳定性（剥离行业Beta）。先将{weight_net}对市值加权的行业平均持仓做63日滚动回归取残差（剔除行业配置轮动影响），再计算残差序列的20日变异系数。该指标衡量个股独立于板块流动的主动管理信念强度，避免因行业整体加减仓导致的伪稳定性，适用于识别真正的个股alpha conviction。",
+    "expression_list": []
+}

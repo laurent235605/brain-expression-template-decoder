@@ -1,0 +1,7 @@
+{
+    "template": "quantile({reported_asset_value})",
+    "idea": "**Concept**: Cross-Sectional Size Percentile\n- **Sample Fields Used**: `reported_asset_value`\n- **Definition**: Gaussian quantile transformation of fund size ranking across the universe\n- **Why This Feature**: Relative size positioning indicates capacity constraints and market impact potential; large percentile funds move markets, small percentile are price takers\n- **Logical Meaning**: Normalized rank of fund within institutional universe; captures relative importance and liquidity provision capacity\n- **is filling nan necessary**: No, `quantile()` operator typically handles NaNs by excluding them from ranking, but `pasteurize()` may be applied first to ensure extreme values don't distort distribution\n- **Directionality**: High values indicate large institutions (whales), low values indicate small boutiques; extremes indicate market concentration\n- **Boundary Conditions**: -1.0 to +1.0 typical range (gaussian); values beyond ±3 indicate extreme outliers (mega funds or micro funds)",
+    "expression_list": [
+        "quantile(fund_reported_asset_value)"
+    ]
+}

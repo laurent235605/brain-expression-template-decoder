@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(vec_count(vec_filter({fiscalyearend}, \"nan\")), 5), group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, \"nan\")), 63), industry), group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, \"nan\")), 252), industry))",
+    "idea": "数据丰度自适应：根据有效财政年度观测值数量动态调整平滑窗口——当数据点充足（>5）时使用63日短窗口捕捉细节，数据稀疏时切换至252日长窗口降低噪声，保证信号稳健性。",
+    "expression_list": [
+        "trade_when(greater(vec_count(vec_filter(anl30_fiscalyearend, \"nan\")), 5), group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), 63), industry), group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, \"nan\")), 252), industry))"
+    ]
+}

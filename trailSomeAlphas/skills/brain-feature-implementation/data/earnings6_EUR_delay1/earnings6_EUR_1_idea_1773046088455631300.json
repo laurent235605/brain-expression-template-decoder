@@ -1,0 +1,8 @@
+{
+    "template": "rank( winsorize( ts_decay_linear( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20 ), std=4 ) )",
+    "idea": "融合模板2的衰减平滑与极值处理思路，先对衰减后的Surprise进行winsorize截断（4倍标准差）处理极端值，再做截面rank排名。此举在保留近期信息权重的同时，降低肥尾极端值对排序的干扰，增强因子稳健性。",
+    "expression_list": [
+        "rank( winsorize( ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), std=4 ) )",
+        "rank( winsorize( ts_decay_linear( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20 ), std=4 ) )"
+    ]
+}

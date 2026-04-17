@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_corr(subtract(winsorize({bmpo},4), group_mean(winsorize({bmpo},4), log(ts_mean(cap,21)), industry)), subtract(winsorize({pctchgqtrsales},4), group_mean(winsorize({pctchgqtrsales},4), log(ts_mean(cap,21)), industry)), 12), industry)",
+    "idea": "异质性经营杠杆剥离器。先将经营利润率与营收增长率分别进行行业中性化（减去行业市值对数加权均值），剔除行业共同趋势影响，再计算残差序列的12期相关性。这捕捉了个股特有的、独立于行业周期的成本结构稳定性，最后进行行业内标准化，适用于发现具有独特规模经济效应或管理效率的个体企业。",
+    "expression_list": [
+        "group_zscore(ts_corr(subtract(winsorize(mdl219_1_bmpo,4), group_mean(winsorize(mdl219_1_bmpo,4), log(ts_mean(cap,21)), industry)), subtract(winsorize(mdl219_1_pctchgqtrsales,4), group_mean(winsorize(mdl219_1_pctchgqtrsales,4), log(ts_mean(cap,21)), industry)), 12), industry)",
+        "group_zscore(ts_corr(subtract(winsorize(mdl219_2_bmpo,4), group_mean(winsorize(mdl219_2_bmpo,4), log(ts_mean(cap,21)), industry)), subtract(winsorize(mdl219_1_pctchgqtrsales,4), group_mean(winsorize(mdl219_1_pctchgqtrsales,4), log(ts_mean(cap,21)), industry)), 12), industry)",
+        "group_zscore(ts_corr(subtract(winsorize(mdl219_1_bmpo,4), group_mean(winsorize(mdl219_1_bmpo,4), log(ts_mean(cap,21)), industry)), subtract(winsorize(mdl219_2_pctchgqtrsales,4), group_mean(winsorize(mdl219_2_pctchgqtrsales,4), log(ts_mean(cap,21)), industry)), 12), industry)",
+        "group_zscore(ts_corr(subtract(winsorize(mdl219_2_bmpo,4), group_mean(winsorize(mdl219_2_bmpo,4), log(ts_mean(cap,21)), industry)), subtract(winsorize(mdl219_2_pctchgqtrsales,4), group_mean(winsorize(mdl219_2_pctchgqtrsales,4), log(ts_mean(cap,21)), industry)), 12), industry)"
+    ]
+}

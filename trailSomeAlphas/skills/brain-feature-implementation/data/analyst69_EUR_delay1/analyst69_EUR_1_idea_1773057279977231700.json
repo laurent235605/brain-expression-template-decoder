@@ -1,0 +1,8 @@
+{
+    "template": "subtract(group_zscore(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 10), 5), industry), group_zscore(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 10), 20), industry))",
+    "idea": "将模板1的双期差分加速度结构迁移至模板2的盈利效率比率(EPS/EBITDA)上，对效率比率先进行10日线性衰减平滑后，分别计算5日短期与20日中期变化率，并在行业内标准化后取差分。该结构旨在捕捉盈利转化效率的加速改善或恶化拐点，而非单纯的预期数值变化，实现基本面质量与动量节奏的交叉验证。",
+    "expression_list": [
+        "subtract(group_zscore(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 5), industry), group_zscore(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 20), industry))",
+        "subtract(group_zscore(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 5), industry), group_zscore(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 10), 20), industry))"
+    ]
+}

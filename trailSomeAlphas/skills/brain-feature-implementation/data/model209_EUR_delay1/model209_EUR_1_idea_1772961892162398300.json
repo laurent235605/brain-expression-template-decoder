@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum({investment}) / (1 + ts_decay_linear(vec_sum({lastcostingfailed}), 10))",
+    "idea": "**概念**: 衰减加权近期风险惩罚\n- **逻辑**: 分母使用10日线性衰减(ts_decay_linear)加权失败次数，近期失败权重更高(N, N-1...)，远期失败影响指数下降。符合\"时序上持续更好才是好\"逻辑，但注意这会增加turnover（相对ts_mean），适合需要快速反应风险变化的激进策略。\n- **边界**: 近期集中爆发失败会导致分母急剧增大，迅速压低有效投资暴露。",
+    "expression_list": [
+        "vec_sum(mdl209_investment) / (1 + ts_decay_linear(vec_sum(mdl209_lastcostingfailed), 10))"
+    ]
+}

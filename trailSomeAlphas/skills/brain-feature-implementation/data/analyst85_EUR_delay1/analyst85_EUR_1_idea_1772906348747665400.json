@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(trade_when(and(greater(group_rank(vec_skewness({version}), industry), 0.85), greater(group_rank(ts_delta(vec_skewness({version}), 5), industry), 0.7)), 1, trade_when(and(less(group_rank(vec_skewness({version}), industry), 0.15), less(group_rank(ts_delta(vec_skewness({version}), 5), industry), 0.3)), -1, trade_when(and(greater(group_rank(vec_skewness({version}), industry), 0.85), less(group_rank(ts_delta(vec_skewness({version}), 5), industry), 0.3)), -0.5, trade_when(and(less(group_rank(vec_skewness({version}), industry), 0.15), greater(group_rank(ts_delta(vec_skewness({version}), 5), industry), 0.7)), 0.5, 0))))), industry), 3)",
+    "idea": "动量确认型极值反转策略：要求极端偏度（前15%/后15%）必须伴随同向的5日变化率动量确认（行业排名前30%/后30%），区分趋势强化与均值回复场景，对背离信号（极值但动量反向）赋予半仓权重（±0.5），实现多空非对称的渐进式建仓与3日衰减。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(trade_when(and(greater(group_rank(vec_skewness(anl85_version), industry), 0.85), greater(group_rank(ts_delta(vec_skewness(anl85_version), 5), industry), 0.7)), 1, trade_when(and(less(group_rank(vec_skewness(anl85_version), industry), 0.15), less(group_rank(ts_delta(vec_skewness(anl85_version), 5), industry), 0.3)), -1, trade_when(and(greater(group_rank(vec_skewness(anl85_version), industry), 0.85), less(group_rank(ts_delta(vec_skewness(anl85_version), 5), industry), 0.3)), -0.5, trade_when(and(less(group_rank(vec_skewness(anl85_version), industry), 0.15), greater(group_rank(ts_delta(vec_skewness(anl85_version), 5), industry), 0.7)), 0.5, 0))))), industry), 3)"
+    ]
+}

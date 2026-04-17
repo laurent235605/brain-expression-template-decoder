@@ -1,0 +1,8 @@
+{
+    "template": "multiply(signed_power(group_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 2), signed_power(ts_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), 252), 1))",
+    "idea": "结合截面极端性与时序极端性：股票当前的预告日期稳定度不仅要处于行业横截面的极端分位（行业Z-score），还需处于自身历史252日区间的极端水平（时序Z-score，如创近期新高/新低）。通过乘积结构捕捉'预期日期突变事件'或'长期固化状态'带来的非对称信息冲击，增强尾部收益的区分度。",
+    "expression_list": [
+        "multiply(signed_power(group_zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 2), signed_power(ts_zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), 252), 1))",
+        "multiply(signed_power(group_zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 2), signed_power(ts_zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), 252), 1))"
+    ]
+}

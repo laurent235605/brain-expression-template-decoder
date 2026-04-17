@@ -1,0 +1,16 @@
+{
+    "template": "signed_power(multiply(quantile(winsorize({concentration},std=4),driver='gaussian'), quantile(if_else(is_nan({nondomicile}),0,winsorize({nondomicile},std=4)),driver='gaussian')), 1.5)",
+    "idea": "高斯尾部强化风险：对两个因子进行去极值后映射至高斯分布（quantile），将中间值压缩在0附近、极端值拉伸，再通过1.5次幂（signed_power）非线性放大双侧尾部；该模板专注于识别极端危险（双高）与极端安全（双低/低集中高分散）的情况，对中等风险区间降权，提高因子对尾部风险的区分度。",
+    "expression_list": [
+        "signed_power(multiply(quantile(winsorize(rsk74_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_nondomicile),0,winsorize(rsk74_nondomicile,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,winsorize(rsk74_raw_exp_nondomicile1,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,winsorize(rsk74_raw_exp_nondomicile2,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_std_exp_nondomicile1),0,winsorize(rsk74_std_exp_nondomicile1,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_std_exp_nondomicile2),0,winsorize(rsk74_std_exp_nondomicile2,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_raw_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,winsorize(rsk74_raw_exp_nondomicile1,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_raw_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,winsorize(rsk74_raw_exp_nondomicile2,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_raw_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_nondomicile),0,winsorize(rsk74_nondomicile,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_raw_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_std_exp_nondomicile1),0,winsorize(rsk74_std_exp_nondomicile1,std=4)),driver='gaussian')), 1.5)",
+        "signed_power(multiply(quantile(winsorize(rsk74_raw_concentration,std=4),driver='gaussian'), quantile(if_else(is_nan(rsk74_std_exp_nondomicile2),0,winsorize(rsk74_std_exp_nondomicile2,std=4)),driver='gaussian')), 1.5)"
+    ]
+}

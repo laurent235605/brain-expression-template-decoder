@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(add(multiply(signed_power(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),5),std=4),group_mean(ts_sum(ts_delta({shortint},1),5),log(ts_mean({cap},21)),industry),21,rettype=0),1.5),0.6),multiply(signed_power(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),22),std=4),group_cartesian_product(industry,bucket(log(ts_mean({cap},21)),\"0,1,0.25\")),63,rettype=0),1.5),0.4)),industry)",
+    "idea": "构建多时间尺度复合信号：短期分量（5日累积/21日回归）权重60%，中期分量（22日累积/63日回归）权重40%，后者使用行业与市值四分位交叉分组进行更精细的系统性风险剥离；各分量经signed_power尾部放大后加权合成，并做行业中性化处理，兼顾空头压力的即时冲击与中期趋势。",
+    "expression_list": [
+        "group_normalize(add(multiply(signed_power(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),5),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),5),log(ts_mean(market_cap_usd,21)),industry),21,rettype=0),1.5),0.6),multiply(signed_power(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),22),std=4),group_cartesian_product(industry,bucket(log(ts_mean(market_cap_usd,21)),\"0,1,0.25\")),63,rettype=0),1.5),0.4)),industry)",
+        "group_normalize(add(multiply(signed_power(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),5),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),5),log(ts_mean(market_cap_usd,21)),industry),21,rettype=0),1.5),0.6),multiply(signed_power(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),22),std=4),group_cartesian_product(industry,bucket(log(ts_mean(market_cap_usd,21)),\"0,1,0.25\")),63,rettype=0),1.5),0.4)),industry)"
+    ]
+}

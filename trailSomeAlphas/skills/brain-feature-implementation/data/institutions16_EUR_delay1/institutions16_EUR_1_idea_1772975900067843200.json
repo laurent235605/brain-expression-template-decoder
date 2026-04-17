@@ -1,0 +1,7 @@
+{
+    "template": "asset_clean = winsorize(ts_backfill({reported_asset_value}, 5), std=4); short_d = ts_delta(asset_clean, 5); long_d = ts_delta(asset_clean, 20); short_z = group_zscore(short_d, sector); long_z = group_zscore(long_d, sector); accel = subtract(short_z, long_z); mask = greater(abs(accel), 1.0); core = trade_when(mask, accel, 0); final = ts_decay_exp_window(core, 10)",
+    "idea": "多周期资产变动加速度：捕捉短期（5日）相对长期（20日）资产变动的行业中性加速度（Momentum Divergence），仅当加速度绝对值超过1个标准差时开仓，其余时间归零，配合指数衰减窗口捕捉资产_gathering的动量积聚与衰竭拐点。",
+    "expression_list": [
+        "asset_clean = winsorize(ts_backfill(fund_reported_asset_value, 5), std=4); short_d = ts_delta(asset_clean, 5); long_d = ts_delta(asset_clean, 20); short_z = group_zscore(short_d, sector); long_z = group_zscore(long_d, sector); accel = subtract(short_z, long_z); mask = greater(abs(accel), 1.0); core = trade_when(mask, accel, 0); final = ts_decay_exp_window(core, 10)"
+    ]
+}

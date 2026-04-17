@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_av_diff(vec_avg({rank}), 60), driver=\"gaussian\")",
+    "idea": "高斯分位数转换（尾部分布拉伸）：对排名偏离值进行高斯分位数转换，将原本可能均匀或偏斜的分布映射为标准正态分布形态。此操作将中间区间的轻微偏离压缩至零附近（视为噪音），同时将极端偏离拉伸至更远的尾部，强化对极端排名错配股票的捕捉能力，符合“只有两端有信号”的逻辑。",
+    "expression_list": [
+        "quantile(ts_av_diff(vec_avg(mdl245_rank), 60), driver=\"gaussian\")"
+    ]
+}

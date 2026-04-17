@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(divide(subtract(vec_avg({rank}), ts_decay_exp_window(vec_avg({rank}), 20, 0.5)), add(ts_std_dev(subtract(vec_avg({rank}), ts_decay_exp_window(vec_avg({rank}), 20, 0.5)), 60), 0.001)), industry)",
+    "idea": "**增强概念**: 波动率调整的截面惊讶度\n- **核心改进**: 将原始偏差除以其60日历史波动率（标准差），实现波动率标准化（类似t-statistic），再进行行业内排名；低波动环境下的同等偏差获得更高权重，高波动环境下的噪声被压缩。\n- **逻辑含义**: 识别\"经风险调整后的趋势突破强度\"；在整体市场不确定性较高时，只有足够大的 deviation 才被视为有效信号；解决了原始信号在市场动荡期假阳性过多的问题。\n- **计算细节**: 分母加0.001防止除零，group_rank确保每日行业内相对惊讶度可比。",
+    "expression_list": [
+        "group_rank(divide(subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, 0.5)), add(ts_std_dev(subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, 0.5)), 60), 0.001)), industry)"
+    ]
+}

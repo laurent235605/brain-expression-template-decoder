@@ -1,0 +1,8 @@
+{
+    "template": "ts_delta(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),10)",
+    "idea": "历史极端动量捕捉：计算空头历史Z-score的10日变化率（一阶差分），识别'空头压力正在加速恶化/缓解'的动量特征，而非仅关注绝对水平，捕捉空头buildup的加速阶段或covering的恐慌程度。",
+    "expression_list": [
+        "ts_delta(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),10)",
+        "ts_delta(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),10)"
+    ]
+}

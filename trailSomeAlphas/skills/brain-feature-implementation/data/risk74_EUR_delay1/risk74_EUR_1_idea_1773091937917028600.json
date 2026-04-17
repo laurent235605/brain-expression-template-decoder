@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)), 1.5), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)))",
+    "idea": "极端分化条件下的非对称仓位配置：仅在行业标准化后的区域敞口价差绝对值超过1.5个标准差时建立全额仓位，中间区间仅保留30%轻度暴露，利用trade_when实现信噪比分层，专注于极端地缘配置错配机会同时降低中等区间的噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)), 1.5), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), multiply(0.3, group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)))"
+    ]
+}

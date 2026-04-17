@@ -1,0 +1,8 @@
+{
+    "template": "{weight_net} / ({of_owners_decile_rank_long} + 0.5)",
+    "idea": "**Concept**: Crowding-Adjusted Net Sentiment\n- **Sample Fields Used**: weight_net, of_owners_decile_rank_long\n- **Definition**: Net weight divided by effective owners decile rank, scaling directional bias by concentration risk\n- **Why This Feature**: Adjusts for the risk of crowded trades; high net weight with few effective owners is riskier (crowded exit) than with many owners\n- **is filling nan necessary**: Ensure owners data is backfilled if missing due to reporting delays, as concentration changes slowly.\n- **Directionality**: High values indicate strong directional bias with low crowding (optimal); low values indicate either weak bias or high crowding\n- **Boundary Conditions**: Near-zero owners rank (decile 1) creates extreme values; cap at reasonable threshold or use additive smoothing",
+    "expression_list": [
+        "insd8_weight_net / (insd8_effective_number_of_owners_decile_rank_long + 0.5)",
+        "insd8_weight_net / (insd8_total_number_of_owners_decile_rank_long + 0.5)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), 0.6), ts_delta({eps_best_eeps_cur_yr}, 5), 0)",
+    "idea": "以Input 2的稳定性分位数作为Input 1的仓位开关：仅当财报预期日期处于历史高度稳定区间（高斯分位>0.6，即日程极少变动）时，才暴露于短期盈利修正动量；在日程频繁变动的‘不稳定期’内将信号置零，避免在事件不确定期押注分析师预期，实现‘稳定期才交易’的激进择时逻辑。",
+    "expression_list": [
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.6), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0)",
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.6), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0)",
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.6), ts_delta(anl69_eps_best_eeps_cur_yr, 5), 0)",
+        "trade_when(greater(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), 0.6), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 0)"
+    ]
+}

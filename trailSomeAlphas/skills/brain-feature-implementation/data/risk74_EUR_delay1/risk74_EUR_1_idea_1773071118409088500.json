@@ -1,0 +1,16 @@
+{
+    "template": "group_zscore(multiply(multiply(winsorize(ts_backfill({concentration},63),std=4), winsorize(ts_backfill({nondomicile},63),std=4)), ts_std_dev(winsorize(ts_backfill({concentration},63),std=4),63)), sector)",
+    "idea": "结合集中度63日时序波动率调整风险权重，惩罚“集中度不稳定且海外暴露高”的高波动单一市场依赖，识别海外收入结构脆弱、地理分布可能发生突变的企业风险。",
+    "expression_list": [
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_nondomicile,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_nondomicile,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63)), sector)",
+        "group_zscore(multiply(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4)), ts_std_dev(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),63)), sector)"
+    ]
+}

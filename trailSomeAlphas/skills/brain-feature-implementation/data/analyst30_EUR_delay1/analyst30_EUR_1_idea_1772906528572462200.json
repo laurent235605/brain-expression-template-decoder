@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(vec_count({currency_code}), vec_count({fiscalyearend}), 126, rettype=0)",
+    "idea": "货币复杂度对财务稳定性的126日回归残差。剥离由会计变更（财务年度调整）解释的币种变化部分，残差代表由市场驱动、有机扩张产生的纯粹FX多元化，可用于区分主动全球化战略与被动并购导致的币种叠加。",
+    "expression_list": [
+        "ts_regression(vec_count(payment_currency_code), vec_count(anl30_fiscalyearend), 126, rettype=0)"
+    ]
+}

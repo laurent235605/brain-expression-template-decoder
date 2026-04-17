@@ -1,0 +1,8 @@
+{
+    "template": "e = group_zscore(winsorize(ts_backfill({factor_e}, 126), 4), industry); s = group_zscore(winsorize(ts_backfill({factor_s}, 126), 4), industry); g = group_zscore(winsorize(ts_backfill({factor_g}, 126), 4), industry); de = ts_delta(e, 21); dg = ts_delta(g, 21); is_opposing = and(greater(de, 0), less(dg, 0)); divergence = subtract(de, dg); level_score = add(add(ts_mean(e, 63), ts_mean(s, 63)), ts_mean(g, 63)); core = trade_when(is_opposing, multiply(-1, abs(divergence)), multiply(0.1, level_score))",
+    "idea": "时序动量分歧捕捉与行业中性化。通过检测E（环境）与G（治理）21日变化的反向运动（如环境评分上升但治理评分下降），识别潜在的监管套利风险或结构性恶化。当检测到反向运动时，生成负向信号，其强度与分歧幅度成正比；无分歧时，采用温和的平均水平信号。适用于捕捉关税或制裁政策针对特定ESG维度的非对称冲击。",
+    "expression_list": [
+        "e = group_zscore(winsorize(ts_backfill(rsk74_factor_e, 126), 4), industry); s = group_zscore(winsorize(ts_backfill(rsk74_factor_s, 126), 4), industry); g = group_zscore(winsorize(ts_backfill(rsk74_factor_g, 126), 4), industry); de = ts_delta(e, 21); dg = ts_delta(g, 21); is_opposing = and(greater(de, 0), less(dg, 0)); divergence = subtract(de, dg); level_score = add(add(ts_mean(e, 63), ts_mean(s, 63)), ts_mean(g, 63)); core = trade_when(is_opposing, multiply(-1, abs(divergence)), multiply(0.1, level_score))",
+        "e = group_zscore(winsorize(ts_backfill(rsk74_factor_esg, 126), 4), industry); s = group_zscore(winsorize(ts_backfill(rsk74_factor_s, 126), 4), industry); g = group_zscore(winsorize(ts_backfill(rsk74_factor_g, 126), 4), industry); de = ts_delta(e, 21); dg = ts_delta(g, 21); is_opposing = and(greater(de, 0), less(dg, 0)); divergence = subtract(de, dg); level_score = add(add(ts_mean(e, 63), ts_mean(s, 63)), ts_mean(g, 63)); core = trade_when(is_opposing, multiply(-1, abs(divergence)), multiply(0.1, level_score))"
+    ]
+}

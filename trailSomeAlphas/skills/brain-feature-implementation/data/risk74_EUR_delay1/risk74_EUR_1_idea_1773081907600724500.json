@@ -1,0 +1,16 @@
+{
+    "template": "group_zscore(divide(multiply(winsorize({concentration},4), winsorize({nondomicile},4)), add(0.001, group_mean(multiply(winsorize({concentration},4), winsorize({nondomicile},4)), industry))), industry)",
+    "idea": "构建相对地理风险比率：将个股的集中度-境外收入乘积除以其所在行业的均值（加0.001防除零），再进行行业zscore标准化。此设计识别在同业中异常突出的单一国家依赖（相对于行业平均国际化分散程度），有效剔除如半导体行业天然高海外集中度的行业基准影响，凸显个体异常值。",
+    "expression_list": [
+        "group_zscore(divide(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_nondomicile,4)), add(0.001, group_mean(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_nondomicile,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_raw_exp_nondomicile1,4)), add(0.001, group_mean(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_raw_exp_nondomicile1,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_raw_exp_nondomicile2,4)), add(0.001, group_mean(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_raw_exp_nondomicile2,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_std_exp_nondomicile1,4)), add(0.001, group_mean(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_std_exp_nondomicile1,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_std_exp_nondomicile2,4)), add(0.001, group_mean(multiply(winsorize(rsk74_concentration,4), winsorize(rsk74_std_exp_nondomicile2,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_nondomicile,4)), add(0.001, group_mean(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_nondomicile,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_raw_exp_nondomicile1,4)), add(0.001, group_mean(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_raw_exp_nondomicile1,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_raw_exp_nondomicile2,4)), add(0.001, group_mean(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_raw_exp_nondomicile2,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_std_exp_nondomicile1,4)), add(0.001, group_mean(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_std_exp_nondomicile1,4)), industry))), industry)",
+        "group_zscore(divide(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_std_exp_nondomicile2,4)), add(0.001, group_mean(multiply(winsorize(rsk74_raw_concentration,4), winsorize(rsk74_std_exp_nondomicile2,4)), industry))), industry)"
+    ]
+}

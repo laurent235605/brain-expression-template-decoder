@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(truncate(ts_decay_linear(trade_when(greater(group_rank(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), industry), 0.9), signed_power(group_zscore(winsorize(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), std=3), industry), 1.5), 0), 10), maxPercent=0.02), industry)",
+    "idea": "严格风控中性版本：采用3倍标准差保守清洗，仅取行业前10%极端值，经10日线性衰减降低换手率，单票权重上限2%防止个例风险，最终进行行业中性化(group_normalize)剥离板块beta，构建纯会计复杂度因子。",
+    "expression_list": [
+        "group_normalize(truncate(ts_decay_linear(trade_when(greater(group_rank(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), industry), 0.9), signed_power(group_zscore(winsorize(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=3), industry), 1.5), 0), 10), maxPercent=0.02), industry)"
+    ]
+}

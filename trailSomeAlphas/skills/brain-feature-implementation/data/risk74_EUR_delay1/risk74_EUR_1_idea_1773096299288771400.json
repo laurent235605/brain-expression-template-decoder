@@ -1,0 +1,16 @@
+{
+    "template": "trade_when(less(ts_rank(winsorize({concentration},std=4), 60), 0.2), signed_power(ts_delta(winsorize({nondomicile},std=4), 20), 2), 0)",
+    "idea": "反向条件动量捕获：反转模板1的条件逻辑，当地理集中度处于历史底部20%（极低分散度）时触发对海外收入占比20日非线性变化的跟踪，使用signed_power放大极端变化，识别低集中度掩盖下的潜在海外风险累积与爆发。",
+    "expression_list": [
+        "trade_when(less(ts_rank(winsorize(rsk74_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_nondomicile,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_raw_exp_nondomicile1,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_raw_exp_nondomicile2,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_std_exp_nondomicile1,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_std_exp_nondomicile2,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_raw_exp_nondomicile1,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_raw_exp_nondomicile2,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_nondomicile,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_std_exp_nondomicile1,std=4), 20), 2), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_concentration,std=4), 60), 0.2), signed_power(ts_delta(winsorize(rsk74_std_exp_nondomicile2,std=4), 20), 2), 0)"
+    ]
+}

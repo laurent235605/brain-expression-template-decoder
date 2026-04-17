@@ -1,0 +1,7 @@
+{
+    "template": "zscore(subtract(ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 63), ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252)))",
+    "idea": "**溢价期限结构背离信号**：构建短期（63天）与长期（252天）历史分位数的差值（subtract），并zscore标准化。当短期分位数显著高于长期（近期快速拉升至历史高位），差值为正且极端，预示超买反转；反之预示超卖反弹。该模板捕捉不同时间维度上的定价不一致性，识别中长期趋势与短期情绪的偏离。",
+    "expression_list": [
+        "zscore(subtract(ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 63), ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252)))"
+    ]
+}

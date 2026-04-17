@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(ts_regression(vec_skewness({exposure_value}), ts_step(), 126, rettype=2), std=4)",
+    "idea": "地理集中度趋势变化的稳健估计（时序回归与极值控制）。融合模板1的偏度度量与时序分析思路，引入回归斜率计算：使用126日时间序列回归（rettype=2取斜率）衡量地理集中度的长期趋势方向与强度（正斜率=持续集中，负斜率=持续分散），并经winsorize裁剪极值。相比简单的Z-score，此模板更关注\"持续性战略演变\"而非\"短期偏离\"，适用于捕捉坚定的地理扩张或收缩战略。",
+    "expression_list": [
+        "winsorize(ts_regression(vec_skewness(anl91_exposure_value), ts_step(), 126, rettype=2), std=4)"
+    ]
+}

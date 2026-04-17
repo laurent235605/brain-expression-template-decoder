@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_std_dev(add(multiply(0.6, vec_avg({exposure_value})), multiply(0.4, vec_skewness({exposure_value}))), 5), ts_std_dev(add(multiply(0.6, vec_avg({exposure_value})), multiply(0.4, vec_skewness({exposure_value}))), 60))",
+    "idea": "融合地理敞口的均值水平（业务广泛度）与向量偏度（区域集中度风险/尾部依赖），构建加权复合地域风险指标后计算5日与60日波动率期限利差，捕捉那些不仅整体地域波动加剧且存在特定高风险区域高度集中的'结构性转型'公司，区分单纯分散化调整与战略性聚焦重组。",
+    "expression_list": [
+        "subtract(ts_std_dev(add(multiply(0.6, vec_avg(anl91_exposure_value)), multiply(0.4, vec_skewness(anl91_exposure_value))), 5), ts_std_dev(add(multiply(0.6, vec_avg(anl91_exposure_value)), multiply(0.4, vec_skewness(anl91_exposure_value))), 60))"
+    ]
+}

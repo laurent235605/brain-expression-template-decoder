@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(ts_std_dev(vec_skewness({exposure_value}), 5), ts_std_dev(vec_skewness({exposure_value}), 60)), ts_step(), 20, rettype=2)",
+    "idea": "使用vec_skewness（偏度）刻画地域敞口分布的不对称性（如单一市场依赖风险）；计算偏度的短长期波动率利差后，通过20日时间序列回归提取斜率(rettype=2)，该斜率代表'地域重组加速度的持续性'而非单次波动，可有效识别并购整合周期的启动与结束阶段，避免短期噪声干扰。",
+    "expression_list": [
+        "ts_regression(subtract(ts_std_dev(vec_skewness(anl91_exposure_value), 5), ts_std_dev(vec_skewness(anl91_exposure_value), 60)), ts_step(), 20, rettype=2)"
+    ]
+}

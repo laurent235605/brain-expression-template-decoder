@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( trade_when( less( days_from_last_change( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ) ), 10 ), group_zscore( last_diff_value( winsorize( ts_backfill( {hfown_pctown}, 63 ), 4 ), 63 ), industry ), 0 ), 5 )",
+    "idea": "事件驱动型模板：利用days_from_last_change识别最近10天内发生显著持仓变化的股票，计算其变化幅度并在行业内标准化；随后应用线性衰减(ts_decay_linear)降低历史事件的权重，捕捉'刚刚发生且未完全price in'的持仓变动，避免对 stale information 的持续暴露。",
+    "expression_list": [
+        "ts_decay_linear( trade_when( less( days_from_last_change( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ) ), 10 ), group_zscore( last_diff_value( winsorize( ts_backfill( rsk74_hfown_pctown, 63 ), 4 ), 63 ), industry ), 0 ), 5 )"
+    ]
+}

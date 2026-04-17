@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5)",
+    "idea": "对行业内标准化后的权益配置残差进行对称幂变换（signed_power，指数1.5），在不改变多空方向的前提下，非线性地放大极端偏离（头尾）的权重，同时压缩中间区域的区分度。适用于认为\"配置偏离越大，alpha越强\"的凸性收益场景，增强对高置信度偏离的暴露。",
+    "expression_list": [
+        "signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5)"
+    ]
+}

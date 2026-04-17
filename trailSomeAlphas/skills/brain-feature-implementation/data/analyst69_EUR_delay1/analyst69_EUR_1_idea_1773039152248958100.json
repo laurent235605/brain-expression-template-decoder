@@ -1,0 +1,8 @@
+{
+    "template": "multiply(signed_power(group_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 2), signed_power(group_zscore(winsorize(ts_delta(days_from_last_change({eps_expected_report_dt}), 5), std=4), industry), 1))",
+    "idea": "捕捉盈利预告日期的'稳定性动量'：不仅要求当前日期处于行业极端稳定或极不稳定状态（高|低），还要求近期5日呈现'越来越稳定'（变化率为负）或'越来越不稳定'（变化率为正）的趋势确认。通过将原始因子的行业Z-score与一阶差分的行业Z-score相乘，过滤掉暂时性噪音，仅保留趋势强化型的极端信号。",
+    "expression_list": [
+        "multiply(signed_power(group_zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 2), signed_power(group_zscore(winsorize(ts_delta(days_from_last_change(anl69_aeps_expected_report_dt), 5), std=4), industry), 1))",
+        "multiply(signed_power(group_zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 2), signed_power(group_zscore(winsorize(ts_delta(days_from_last_change(anl69_eps_expected_report_dt), 5), std=4), industry), 1))"
+    ]
+}

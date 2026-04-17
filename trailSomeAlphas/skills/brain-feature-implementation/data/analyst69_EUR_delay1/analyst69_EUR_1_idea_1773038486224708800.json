@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), 20)",
+    "idea": "管道重排与算子替换：基于指南中关于换手率的建议，将Template2的ts_decay_linear（高换手）替换为ts_mean（低换手），保持事件检测逻辑（63日回溯+1日差分）不变。使用等权平均替代线性衰减，显著降低信号换手率同时保留对报告变更事件的捕捉能力。",
+    "expression_list": [
+        "ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), 20)",
+        "ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(zscore({exp_usa}), add(1, multiply(0.3, zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20)))))",
+    "idea": "交叉增强的主从结构：以地理暴露为主信号(A)，资金流为从属调节器(B)。将资金流z-score限制在±0.3倍并映射到[0.7, 1.3]的缩放因子，确保资金流只能线性放大或缩小地理暴露信号的强度（不改变符号），符合指南中\"从属信号B的安全用法模板\"，避免B颠覆A的方向。",
+    "expression_list": [
+        "multiply(zscore(rsk74_raw_exp_usa), add(1, multiply(0.3, zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20)))))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(subtract(group_rank({fund_num_owners_encr}, sector), group_rank({hfown_pctown}, sector))), 0.3), subtract(group_rank({fund_num_owners_encr}, sector), group_rank({hfown_pctown}, sector)), 0)",
+    "idea": "**概念**: 持仓结构错配与反拥挤（Structural Dislocation / Anti-Crowding）\\n- **核心逻辑**: 通过持仓基金数量排名与持仓比例排名的差值识别结构错配。当差值绝对值超过30%分位阈值时触发交易，正向差值（基金多但持仓少）代表分散化/拥挤，负向差值（基金少但持仓多）代表集中建仓。\\n- **信号解释**: 正向信号规避\"多人小额持有\"的拥挤多头风险（关税冲击下易踩踏），负向信号捕捉\"少数人大额持有\"的隐蔽信心，特别适用于识别行业内的流动性风险与集中度过高的标的。",
+    "expression_list": [
+        "trade_when(greater(abs(subtract(group_rank(hedge_fund_num_owners_encr, sector), group_rank(rsk74_hfown_pctown, sector))), 0.3), subtract(group_rank(hedge_fund_num_owners_encr, sector), group_rank(rsk74_hfown_pctown, sector)), 0)"
+    ]
+}

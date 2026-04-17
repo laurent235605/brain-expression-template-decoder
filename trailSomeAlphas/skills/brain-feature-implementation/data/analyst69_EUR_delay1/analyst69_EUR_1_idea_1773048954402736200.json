@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(subtract(winsorize({eps_best_eeps_cur_yr}, 4), ts_mean(winsorize({eps_best_eeps_cur_yr}, 4), 252)), {sector})",
+    "idea": "捕捉当前预期相对于其252日长期趋势的偏离度(均值回复逻辑)，行业中性化后识别过度乐观或悲观的极端偏离；适用于捕捉'预期过热后的回调'或'过度悲观后的修复'机会",
+    "expression_list": []
+}

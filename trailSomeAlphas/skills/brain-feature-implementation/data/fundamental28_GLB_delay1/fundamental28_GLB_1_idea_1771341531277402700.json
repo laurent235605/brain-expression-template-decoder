@@ -1,0 +1,5 @@
+{
+    "template": "ts_rank(zscore({return}-{asset}), 15)",
+    "idea": "先对收益差做截面zscore标准化消除均值漂移，再进行15日时序排名，确保信号在截面上可比",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_decay_linear(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 10))",
+    "idea": "资产流加速度（二阶动量）平滑版：计算20日资产变化相对于60日移动平均变化率的偏离（即资金流入/流出的加速度），应用10日线性衰减加权平滑短期噪音，最后标准化。正值表示资产流入正在加速（动能积聚），负值表示流出加速或流入衰竭，适用于捕捉资金流向的拐点与趋势强化信号，而非单纯的存量水平。",
+    "expression_list": [
+        "zscore(ts_decay_linear(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 10))"
+    ]
+}

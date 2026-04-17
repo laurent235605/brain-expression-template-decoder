@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_regression(ts_std_dev(winsorize(ts_backfill(subtract(vec_ir({exposure_value}), vec_skewness({exposure_value})), 63), std=4), 20), group_mean(ts_std_dev(winsorize(ts_backfill(subtract(vec_ir({exposure_value}), vec_skewness({exposure_value})), 63), std=4), 20), industry), 252, rettype=0), 252), 3)",
+    "idea": "利用向量信息比率(vec_ir)衡量暴露集中度稳定性，结合偏度(vec_skewness)识别非对称风险，通过回归剔除行业共同波动(ts_regression)得到特质性业务风险，再立方拉伸。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_regression(ts_std_dev(winsorize(ts_backfill(subtract(vec_ir(anl91_exposure_value), vec_skewness(anl91_exposure_value)), 63), std=4), 20), group_mean(ts_std_dev(winsorize(ts_backfill(subtract(vec_ir(anl91_exposure_value), vec_skewness(anl91_exposure_value)), 63), std=4), 20), industry), 252, rettype=0), 252), 3)"
+    ]
+}

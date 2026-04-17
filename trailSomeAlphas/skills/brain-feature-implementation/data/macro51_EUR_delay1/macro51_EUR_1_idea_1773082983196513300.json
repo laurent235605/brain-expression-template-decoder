@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector), driver=\"cauchy\")",
+    "idea": "尾部风险强调型行业中性信号。对行业中性化后的比率进行Cauchy分布分位数转换，利用肥尾特性将中间区间的噪音压缩至零附近，同时极度放大极端偏好/厌恶的尾部信号，适合构建双向极端配置策略。",
+    "expression_list": [
+        "quantile(group_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector), driver=\"cauchy\")"
+    ]
+}

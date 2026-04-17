@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( ts_delta( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ), industry )",
+    "idea": "交叉应用模板2的条件化Surprise计算与模板1的行业中性化框架，并加入变化率算子（ts_delta）。通过计算20日Surprise的变化速度，识别盈利惊喜正在加速或减速的拐点信号，再进行行业标准化，捕捉业绩动能的行业相对趋势。",
+    "expression_list": [
+        "group_zscore( ts_delta( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), industry )",
+        "group_zscore( ts_delta( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), industry )"
+    ]
+}

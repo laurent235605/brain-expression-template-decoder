@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(quantile(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 63), std=4), driver=gaussian), group_mean(quantile(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 63), std=4), driver=gaussian), log(ts_mean(cap,21)), sector), 252, rettype=0)",
+    "idea": "行业中性残差预期：通过CAPM式回归剔除行业贝塔影响（以市值对数加权行业均值为市场代理），保留个股特异盈利预期残差，识别独立于板块趋势的成长alpha，避免行业轮动干扰",
+    "expression_list": [
+        "ts_regression(quantile(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), std=4), driver=gaussian), group_mean(quantile(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), std=4), driver=gaussian), log(ts_mean(cap,21)), sector), 252, rettype=0)",
+        "ts_regression(quantile(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), std=4), driver=gaussian), group_mean(quantile(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), std=4), driver=gaussian), log(ts_mean(cap,21)), sector), 252, rettype=0)"
+    ]
+}

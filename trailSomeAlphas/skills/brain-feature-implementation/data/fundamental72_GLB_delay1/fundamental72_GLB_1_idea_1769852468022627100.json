@@ -1,0 +1,22 @@
+{
+    "template": "divide(abs(subtract(vec_avg({comprehensive_income}), vec_avg({net_inc_avail_com_shrhldrs}))), vec_avg({tot_asset}))",
+    "idea": "**Concept**: Comprehensive Income Divergence\n- **Sample Fields Used**: comprehensive_income, net_inc_avail_com_shrhldrs\n- **Definition**: Absolute deviation of comprehensive income from net income, normalized by total assets\n- **Why This Feature**: Large deviations indicate significant unrealized gains/losses, foreign exchange impacts, or pension adjustments not captured in net income, signaling earnings quality issues\n- **Logical Meaning**: Identifies periods where \"hidden\" volatility in other comprehensive income components materially impacts total economic performance\n- **is filling nan necessary**: Comprehensive income components may be missing for some periods; backfill only if subsequent data exists\n- **Directionality**: Higher values indicate lower earnings quality and greater off-income-statement volatility\n- **Boundary Conditions**: Values >5% of assets suggest material non-operating adjustments; persistent deviations indicate structural currency or pension exposure",
+    "expression_list": [
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_a_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_q_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(abs(subtract(vec_avg(fnd72_pit_or_is_a_is_comprehensive_income_per_shr), vec_avg(fnd72_pit_or_is_q_is_net_inc_avail_com_shrhldrs))), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))"
+    ]
+}

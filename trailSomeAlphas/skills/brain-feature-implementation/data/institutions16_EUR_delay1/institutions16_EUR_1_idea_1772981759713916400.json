@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(trade_when(greater(ts_std_dev(returns, 21), ts_mean(ts_std_dev(returns, 63), 21)), signed_power(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=3), add(subtract(ts_max(returns, 21), ts_min(returns, 21)), 0.001)), 1.5), nan), industry)",
+    "idea": "仅在近期波动率显著高于长期均值的高波动regime下触发交易，使用21日收益极差（Max-Min）替代标准差以捕捉实际面临的尾风险范围；对极端信念值进行1.5次幂非线性放大，行业内排名并剔除低波动时期的潜在噪音信号。",
+    "expression_list": [
+        "group_rank(trade_when(greater(ts_std_dev(returns, 21), ts_mean(ts_std_dev(returns, 63), 21)), signed_power(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=3), add(subtract(ts_max(returns, 21), ts_min(returns, 21)), 0.001)), 1.5), nan), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({opentimestamp}) - vec_avg({loadedidstimestamp})",
+    "idea": "**Concept**: Operational Pipeline Latency\n- **Sample Fields Used**: opentimestamp, loadedidstimestamp\n- **Definition**: Average time difference between data loading and position opening, measuring execution speed\n- **Why This Feature**: Quantifies operational efficiency; increasing latency indicates pipeline bottlenecks or execution delays\n- **Logical Meaning**: Time cost of the decision-making and execution process\n- **is filling nan necessary**: Exclude entries where either timestamp is NaN as they represent incomplete process tracking\n- **Directionality**: Positive values indicate normal flow (open after load); negative values suggest data issues (open before load recorded)\n- **Boundary Conditions**: Theoretically unbounded but practically constrained by market hours and trading limits",
+    "expression_list": [
+        "vec_avg(mdl209_opentimestamp) - vec_avg(mdl209_loadedidstimestamp)"
+    ]
+}

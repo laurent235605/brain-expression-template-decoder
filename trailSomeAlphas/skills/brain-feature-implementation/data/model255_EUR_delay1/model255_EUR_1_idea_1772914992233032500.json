@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({overall_score}, 5)",
+    "idea": "**Concept**: Quality Deterioration Momentum\n- **Sample Fields Used**: `overall_score`, `niqs`\n- **Definition**: Rate of change in overall earnings quality and net income quality over short windows to detect early warning signals\n- **Why This Feature**: Accounting quality typically deteriorates gradually before restatements or crashes; momentum captures the direction and speed of this decline faster than absolute levels\n- **is filling nan necessary**: Yes, use ts_backfill with 3-day window to handle weekend/holiday gaps in daily quintile updates\n- **Directionality**: Negative values (declining) indicate increasing accounting risk; Positive values indicate improving transparency\n- **Boundary Conditions**: Large negative deltas (< -1 quintile over 5 days) critical warning; Positive momentum may indicate audit cleanups or business model stabilization",
+    "expression_list": [
+        "ts_delta(mdl255_overall_score, 5)"
+    ]
+}

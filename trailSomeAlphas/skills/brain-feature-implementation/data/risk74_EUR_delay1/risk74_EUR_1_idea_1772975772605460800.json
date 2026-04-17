@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_rank(winsorize(ts_backfill({hfown_pctown}, 21), std=4), 252), industry)",
+    "idea": "历史相对位置截面比较：计算当前持仓在过去252日中的时序分位（0-1），再进行行业中性Zscore，识别那些相对自身历史处于极端高位但行业相对中性的标的，捕捉HF建仓突破历史区间的行为。",
+    "expression_list": [
+        "group_zscore(ts_rank(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), 252), industry)"
+    ]
+}

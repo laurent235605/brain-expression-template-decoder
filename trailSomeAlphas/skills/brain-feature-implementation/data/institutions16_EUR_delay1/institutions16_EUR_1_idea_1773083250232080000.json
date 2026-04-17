@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0), driver=\"gaussian\")",
+    "idea": "高斯分布拉伸的极端分位信号。在提取规模中性残差后，使用高斯分位数转换(quantile)将原始残差分布映射为标准正态分布形态，将中间区间的噪音信号压缩至零附近，同时将两端的极端异常交易行为(极度活跃或极度惰性)大幅拉伸放大。此方法增强了尾部区分度，使得只有显著偏离规模预测模型的基金才被赋予极端权重，适合构建强调极端异常值的统计套利策略。",
+    "expression_list": [
+        "quantile(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0), driver=\"gaussian\")"
+    ]
+}

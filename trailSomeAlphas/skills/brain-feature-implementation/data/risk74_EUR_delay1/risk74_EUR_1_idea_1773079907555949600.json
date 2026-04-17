@@ -1,0 +1,8 @@
+{
+    "template": "add(multiply(0.7, min(min(group_zscore(winsorize(ts_backfill({factor_e},63),std=4),industry), group_zscore(winsorize(ts_backfill({factor_s},63),std=4),industry)), group_zscore(winsorize(ts_backfill({factor_g},63),std=4),industry))), multiply(0.3, ts_mean(add(add(group_zscore(winsorize(ts_backfill({factor_e},63),std=4),industry), group_zscore(winsorize(ts_backfill({factor_s},63),std=4),industry)), group_zscore(winsorize(ts_backfill({factor_g},63),std=4),industry)), 21)))",
+    "idea": "**短板理论保守评分（Weakest-Link）**：基于“木桶效应”，以行业中性化后的最低分项（min of three）作为主要权重（70%），叠加21日平滑均值（30%）。该模板强调任一维度的严重缺陷（如治理暴雷）都会成为整体风险爆发点，相比简单加总更能识别隐藏的尾部风险，适合防御性配置与避险筛选。",
+    "expression_list": [
+        "add(multiply(0.7, min(min(group_zscore(winsorize(ts_backfill(rsk74_factor_e,63),std=4),industry), group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),std=4),industry)), group_zscore(winsorize(ts_backfill(rsk74_factor_g,63),std=4),industry))), multiply(0.3, ts_mean(add(add(group_zscore(winsorize(ts_backfill(rsk74_factor_e,63),std=4),industry), group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),std=4),industry)), group_zscore(winsorize(ts_backfill(rsk74_factor_g,63),std=4),industry)), 21)))",
+        "add(multiply(0.7, min(min(group_zscore(winsorize(ts_backfill(rsk74_factor_esg,63),std=4),industry), group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),std=4),industry)), group_zscore(winsorize(ts_backfill(rsk74_factor_g,63),std=4),industry))), multiply(0.3, ts_mean(add(add(group_zscore(winsorize(ts_backfill(rsk74_factor_esg,63),std=4),industry), group_zscore(winsorize(ts_backfill(rsk74_factor_s,63),std=4),industry)), group_zscore(winsorize(ts_backfill(rsk74_factor_g,63),std=4),industry)), 21)))"
+    ]
+}

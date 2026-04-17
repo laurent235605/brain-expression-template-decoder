@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(winsorize(ts_delta(ts_delta(vec_avg({elta_value}), 5), 5), std=3), 20)",
+    "idea": "预期修正加速度（二阶动量）模板。通过嵌套计算5日二阶差分（变化率的变化率），捕捉分析师预期的拐点与加速/减速阶段，识别预期趋势的惯性变化，经winsorize去除极端跳跃后应用指数衰减窗口加权。相比一阶动量，加速度更能发现预期修正从启动到加速或从加速到衰竭的转换点，适用于捕捉预期趋势的早期加速或衰竭信号。",
+    "expression_list": [
+        "ts_decay_exp_window(winsorize(ts_delta(ts_delta(vec_avg(ern10_elta_value), 5), 5), std=3), 20)"
+    ]
+}

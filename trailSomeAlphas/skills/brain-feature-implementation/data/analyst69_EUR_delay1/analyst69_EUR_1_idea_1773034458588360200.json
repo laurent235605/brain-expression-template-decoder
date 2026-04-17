@@ -1,0 +1,8 @@
+{
+    "template": "ts_corr({sales_best_eeps_cur_yr}, {eps_best_eeps_cur_yr}, 40)",
+    "idea": "**Concept**: Sales-EPS Correlation Quality\n- **Sample Fields Used**: sales_best_eeps_cur_yr, eps_best_eeps_cur_yr\n- **Definition**: 40-day rolling correlation between sales and EPS estimate changes measuring top-line dependency\n- **Why This Feature**: High correlation indicates earnings driven by volume/price (quality earnings); low correlation indicates cost-driven or financial engineering earnings\n- **Logical Meaning**: Earnings quality indicator based on revenue correlation; divergence often signals margin compression/expansion or non-operating items\n- **is filling nan necessary**: Sales and EPS updates may be asynchronous; ts_backfill(10) on both series before correlation to align observation dates.\n- **Directionality**: High correlation (>0.7) indicates revenue-quality earnings; low correlation suggests cost-cutting or buyback-driven EPS growth\n- **Boundary Conditions**: Correlation breakdowns often occur during inflationary periods (revenue up, margins down) or restructuring",
+    "expression_list": [
+        "ts_corr(anl69_sales_best_eeps_cur_yr, anl69_aeps_best_eeps_cur_yr, 40)",
+        "ts_corr(anl69_sales_best_eeps_cur_yr, anl69_eps_best_eeps_cur_yr, 40)"
+    ]
+}

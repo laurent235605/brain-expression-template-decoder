@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(rank(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20)), 0.9), less(rank(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20)), 0.1)), ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 0)",
+    "idea": "**极端尾部事件捕捉（Tail-Only Strategy）**：仅保留横截面排序中前10%（资产激增，潜在并购或爆款）与后10%（资产骤降，清盘或巨额赎回）的标的，中段80%视为噪音并强制置零。通过非对称暴露构造“双向动量”：多头极端流入者（动量延续），空头极端流出者（动量延续或困境），剔除中等波动带来的不确定性。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20)), 0.9), less(rank(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20)), 0.1)), ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 0)"
+    ]
+}

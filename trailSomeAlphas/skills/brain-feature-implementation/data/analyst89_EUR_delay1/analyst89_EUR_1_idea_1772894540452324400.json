@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(days_from_last_change(vec_avg({fiscal_period_end})), 126)",
+    "idea": "**Concept**: Reporting Period Regularity Index\n- **Sample Fields Used**: fiscal_period_end\n- **Definition**: Standard deviation of the day-differences between consecutive fiscal period ends, measuring the consistency of reporting intervals\n- **Why This Feature**: Regular reporting cadence indicates organizational discipline and transparency; irregular intervals may signal acquisitions, divestitures, accounting delays, or governance issues\n- **Logical Meaning**: The consistency of corporate reporting calendar timing; deviations from regular quarterly or annual cycles\n- **is filling nan necessary**: Yes, gaps in fiscal period data would create artificial irregularity; use ts_backfill to maintain continuity\n- **Directionality**: Low values indicate regular, predictable reporting schedules (positive governance signal); high values indicate erratic reporting (potential red flag)\n- **Boundary Conditions**: 0 indicates perfectly regular reporting (e.g., exact 90-day quarters); values >30 suggest significant scheduling irregularities or fiscal year changes",
+    "expression_list": [
+        "ts_std_dev(days_from_last_change(vec_avg(anl89_fiscal_period_end)), 126)"
+    ]
+}

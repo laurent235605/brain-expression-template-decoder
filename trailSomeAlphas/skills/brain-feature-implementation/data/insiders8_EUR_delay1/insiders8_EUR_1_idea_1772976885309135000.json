@@ -1,0 +1,10 @@
+{
+    "template": "rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60)) * rank({active_return_decile_rank_long} - {active_weight_decile_rank_long})",
+    "idea": "横截面双重极端值构造：股权结构稳定性排名（模板1）与持仓背离排名（模板2）的乘积。只有当股票同时处于\"极度稳定的所有权结构\"和\"极度持仓收益错配\"两个极端时，信号才达到最强，形成高置信度的非对称交易机会（高稳定性下的均值回归或动量加速）。",
+    "expression_list": [
+        "rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)) * rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long)",
+        "rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)) * rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long)",
+        "rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60)) * rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long)",
+        "rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60)) * rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long)"
+    ]
+}

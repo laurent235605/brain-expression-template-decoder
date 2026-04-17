@@ -1,0 +1,14 @@
+{
+    "template": "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), ts_delta(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 1), 0), 5), 20)",
+    "idea": "管道重排：仅在报告日期变更日（输入1条件），提取当日预期相关性的变化值（输入2），对连续5个变更日的相关性变化进行平均后，应用20日衰减（输入1），构建'事件驱动的预期结构调整'复合指标。",
+    "expression_list": [
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)",
+        "ts_decay_linear(ts_mean(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), 0), 5), 20)"
+    ]
+}

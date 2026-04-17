@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), subtract(1.3, multiply(0.6, rank(days_from_last_change(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)))))))",
+    "idea": "构建事件时效性加权，利用days_from_last_change识别敞口结构变化时点，近期变化给予1.3倍权重，远期变化降至0.7倍，捕捉机构调仓后的短期定价滞后效应。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), subtract(1.3, multiply(0.6, rank(days_from_last_change(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)))))))"
+    ]
+}

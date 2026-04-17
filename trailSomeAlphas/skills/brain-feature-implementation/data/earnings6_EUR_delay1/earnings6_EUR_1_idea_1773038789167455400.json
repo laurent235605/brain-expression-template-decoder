@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(trade_when(greater(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001), divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 0), industry)",
+    "idea": "将模板2的显式阈值条件（避免极小分母）应用于模板1的股息持续性计算，确保历史股息均值显著大于零时才计算比率，提高因子稳健性。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001), divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 0), industry)",
+        "group_zscore(trade_when(greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001), divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 0), industry)",
+        "group_zscore(trade_when(greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001), divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 0), industry)",
+        "group_zscore(trade_when(greater(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001), divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 0), industry)"
+    ]
+}

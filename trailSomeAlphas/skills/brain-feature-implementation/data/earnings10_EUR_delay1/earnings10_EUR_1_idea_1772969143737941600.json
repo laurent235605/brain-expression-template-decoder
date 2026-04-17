@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_skewness({aily_delta_recon_value}), 63), std=4), 20)), 1.5), ts_zscore(winsorize(ts_backfill(vec_skewness({aily_delta_recon_value}), 63), std=4), 20), 0), subtract(1, divide(min(days_from_last_change(vec_skewness({aily_delta_recon_value})), 10), 10))), hump=0.01)",
+    "idea": "采用向量偏度(vec_skewness)捕捉重建价值分布的不对称性，结合阈值交易和新鲜度衰减，最后通过hump_decay控制微小波动带来的换手率，专门交易具有显著偏度特征且信息新鲜的事件驱动机会，降低无效调仓。",
+    "expression_list": [
+        "hump_decay(multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(vec_skewness(ern10_aily_delta_recon_value), 63), std=4), 20)), 1.5), ts_zscore(winsorize(ts_backfill(vec_skewness(ern10_aily_delta_recon_value), 63), std=4), 20), 0), subtract(1, divide(min(days_from_last_change(vec_skewness(ern10_aily_delta_recon_value)), 10), 10))), hump=0.01)"
+    ]
+}

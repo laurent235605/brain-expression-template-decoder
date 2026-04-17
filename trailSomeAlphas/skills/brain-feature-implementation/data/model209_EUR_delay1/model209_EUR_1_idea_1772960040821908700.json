@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(winsorize(vec_skewness(vec_filter({investment}, value=\"nan\")), std=4), 126)",
+    "idea": "历史极端偏度捕捉：先对投资向量过滤缺失值并计算偏度，经过去极值处理后，计算其在过去126个交易日（半年）的时序Z分数。该模板识别当前投资组合配置的不对称性是否处于自身历史极端水平（如超过±2标准差），用于捕捉资金配置策略发生结构性突变的异常时点，而非仅仅关注静态的偏度水平。",
+    "expression_list": [
+        "ts_zscore(winsorize(vec_skewness(vec_filter(mdl209_investment, value=\"nan\")), std=4), 126)"
+    ]
+}

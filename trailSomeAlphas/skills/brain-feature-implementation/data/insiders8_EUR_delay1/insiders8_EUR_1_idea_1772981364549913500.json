@@ -1,0 +1,10 @@
+{
+    "template": "group_rank(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), {of_owners_decile_rank_long}) - group_rank(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), {of_owners_decile_rank_long})",
+    "idea": "**概念**: 组内相对信念-结构背离\n在有效持有人分位数组内，比较内幕持仓稳定性的排名与所有权结构惯性的排名。差值为正表示该股票在同类有效持有人结构中具有异常稳定的内幕持仓，但所有权结构却在变动（或反之），识别组内的异常一致/分歧模式。",
+    "expression_list": [
+        "group_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), insd8_effective_number_of_owners_decile_rank_long) - group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), insd8_effective_number_of_owners_decile_rank_long)",
+        "group_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), insd8_effective_number_of_owners_decile_rank_long) - group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), insd8_effective_number_of_owners_decile_rank_long)",
+        "group_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), insd8_total_number_of_owners_decile_rank_long) - group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), insd8_total_number_of_owners_decile_rank_long)",
+        "group_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), insd8_total_number_of_owners_decile_rank_long) - group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), insd8_total_number_of_owners_decile_rank_long)"
+    ]
+}

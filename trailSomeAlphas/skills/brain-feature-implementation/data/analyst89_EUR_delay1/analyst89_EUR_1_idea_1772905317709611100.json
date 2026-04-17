@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_sum(vec_avg({data_item_value}), 63), inverse(ts_std_dev(vec_avg({data_item_value}), 63)))",
+    "idea": "将63日财务累积和除以同期向量均值的波动率（标准差），构造经风险调整后的积累稳定性指标。该做法惩罚那些虽然累积值高但波动剧烈、数据质量不稳定的标的，奖励那些积累稳健、可预测性强的公司，类似于基本面版本的夏普比率。",
+    "expression_list": [
+        "multiply(ts_sum(vec_avg(anl89_data_item_value), 63), inverse(ts_std_dev(vec_avg(anl89_data_item_value), 63)))"
+    ]
+}

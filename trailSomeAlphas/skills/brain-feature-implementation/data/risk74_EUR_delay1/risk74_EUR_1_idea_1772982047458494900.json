@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 21), sector), 5)",
+    "idea": "捕捉残差动量 - 不仅关注当前偏离程度，更关注残差的近期变化加速度（21日变化），经行业中性化与5日线性衰减平滑后，识别美国敞口正在异常扩大或缩小的公司，降低高频噪音干扰。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), 21), sector), 5)",
+        "ts_decay_linear(group_zscore(ts_delta(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), 21), sector), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile(vector_neut(winsorize(ts_backfill({fundreportedequityassets},10),std=3), winsorize(ts_backfill({reported_asset_value},10),std=3)), driver=\"cauchy\")",
+    "idea": "**概念**：尾部 emphasize 的配确信率（Tail-Emphasized Conviction）\n**逻辑**：对中性化后的敞口应用3倍标准差极值处理和10日回溯填充，随后进行柯西分布分位数转换（quantile with driver=cauchy）。\n**为什么**：柯西转换将中间区间（平庸配置）的信号压缩至接近零，而将极端配置（无论多头超配还是空头低配）拉向分布两极，适合捕捉\"显著偏离规模预测\"的高确信度决策，过滤中等程度的噪音配置。\n**方向性**：极端正值（接近分布右尾）表示高度确信的战略性超配，极端负值表示高度确信的风险规避或现金偏好。\n**边界条件**：中间区域（配置与规模匹配）信号趋近于零，相当于自动的 \"trade_when\" 过滤，只在信号强烈时建仓，降低换手率。",
+    "expression_list": [
+        "quantile(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,10),std=3), winsorize(ts_backfill(fund_reported_asset_value,10),std=3)), driver=\"cauchy\")"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), group_mean(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), log(ts_mean(cap, 21)), sector), 252, rettype=0)",
+    "idea": "将模板1的中美价差作为目标变量，回归剔除行业市值加权的平均区域偏好（系统性Beta），获取纯粹由公司特质驱动的跨区域配置Alpha残差，避免行业集体转向带来的伪信号，实现类似CAPM残差因子的纯Alpha提取。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), log(ts_mean(cap, 21)), sector), 252, rettype=0)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(quantile(ts_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 252), driver=\"gaussian\"), sector), 3)",
+    "idea": "历史情境化非线性极端值：首先计算当前60日相关性在过去252日（一年）中的时序分位数（ts_rank），然后将该分位数通过高斯驱动映射拉伸至极值（quantile），再进行行业中性化，最后应用signed_power三次方放大尾部信号。该模板识别相对于个股自身历史而言 unprecedented 的所有权结构变化——无论是创历史新高的稳定性还是极端瓦解，中间历史常态被压缩，仅保留极端事件的高信号强度。",
+    "expression_list": [
+        "signed_power(group_zscore(quantile(ts_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 252), driver=\"gaussian\"), sector), 3)",
+        "signed_power(group_zscore(quantile(ts_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 252), driver=\"gaussian\"), sector), 3)",
+        "signed_power(group_zscore(quantile(ts_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 252), driver=\"gaussian\"), sector), 3)",
+        "signed_power(group_zscore(quantile(ts_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 252), driver=\"gaussian\"), sector), 3)"
+    ]
+}

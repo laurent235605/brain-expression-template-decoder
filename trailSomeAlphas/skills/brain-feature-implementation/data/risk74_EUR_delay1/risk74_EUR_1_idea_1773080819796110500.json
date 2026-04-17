@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(ts_decay_linear(group_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4), industry), 10), industry)",
+    "idea": "将空头累积变化从时序维度转为行业截面维度，结合输入2的10天线性衰减与行业归一化，捕捉行业内相对的极端空头异动，适应不同行业结构性空头水平的差异，降低个股特异性噪音。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4), industry), 10), industry)",
+        "group_normalize(ts_decay_linear(group_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4), industry), 10), industry)"
+    ]
+}

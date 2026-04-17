@@ -1,0 +1,8 @@
+{
+    "template": "subtract(group_rank(ts_decay_linear(ts_delta(winsorize({eps_best_eeps_cur_yr}, std=4), 5), 10), industry), group_rank(ts_decay_linear(ts_delta(winsorize({eps_best_eeps_cur_yr}, std=4), 20), 10), industry))",
+    "idea": "综合模板1的加速度计算、模板2的平滑处理以及极值清洗与行业相对排名逻辑。首先对原始数据进行4倍标准差winsorize极值裁剪，随后经10日线性衰减平滑后计算双期变化率，最后转换为行业内排名差分。该方法对异常修订值具有鲁棒性，且通过排名而非原始数值比较，更聚焦于股票在行业内的相对预期改善排序，降低跨行业不可比性干扰。",
+    "expression_list": [
+        "subtract(group_rank(ts_decay_linear(ts_delta(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), 5), 10), industry), group_rank(ts_decay_linear(ts_delta(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), 20), 10), industry))",
+        "subtract(group_rank(ts_decay_linear(ts_delta(winsorize(anl69_eps_best_eeps_cur_yr, std=4), 5), 10), industry), group_rank(ts_decay_linear(ts_delta(winsorize(anl69_eps_best_eeps_cur_yr, std=4), 20), 10), industry))"
+    ]
+}

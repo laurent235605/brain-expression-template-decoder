@@ -1,0 +1,14 @@
+{
+    "template": "divide(add(vec_avg({rental_exp_year_4}), vec_avg({rental_exp_year_5})), vec_avg({tot_asset}))",
+    "idea": "**Concept**: Operating Lease Commitment Concentration\n- **Sample Fields Used**: rental_exp_year_4, rental_exp_year_5, tot_asset\n- **Definition**: Forward lease commitments (years 4-5) as percentage of total assets, measuring off-balance-sheet liability exposure\n- **Why This Feature**: Captures long-term lease obligations not fully reflected in debt metrics; critical for retail, airline, and real estate intensive industries\n- **Logical Meaning**: Structural exposure to long-term fixed obligations requiring future cash generation\n- **is filling nan necessary**: Missing future lease commitments may indicate no leases or disclosure gaps; verify before filling\n- **Directionality**: Higher values indicate significant off-balance-sheet leverage; low values indicate asset-light or owned-asset models\n- **Boundary Conditions**: Values >20% of assets indicate lease-dependent business model; zero indicates minimal lease exposure",
+    "expression_list": [
+        "divide(add(vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_q_bs_tot_asset))",
+        "divide(add(vec_avg(fnd72_pit_or_bs_q_bs_rental_exp_year_4), vec_avg(fnd72_pit_or_bs_a_bs_rental_exp_year_5)), vec_avg(fnd72_pit_or_bs_a_bs_tot_asset))"
+    ]
+}

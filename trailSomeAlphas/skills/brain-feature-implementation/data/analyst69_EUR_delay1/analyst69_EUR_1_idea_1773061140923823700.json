@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(abs(ts_delta(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 1)), 20)",
+    "idea": "将输入2的相关性序列进行日内差分后取绝对值（无论正负变化），再通过输入1的20日线性衰减平滑，量化预期结构重组的强度及其市场消化过程，适用于捕捉周期拐点而不论方向。",
+    "expression_list": [
+        "ts_decay_linear(abs(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1)), 20)",
+        "ts_decay_linear(abs(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1)), 20)",
+        "ts_decay_linear(abs(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1)), 20)",
+        "ts_decay_linear(abs(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1)), 20)"
+    ]
+}

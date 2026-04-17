@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_mean(vec_avg({cash_from_oper}), 126), ts_mean(vec_avg({cash_paid_for_int_debt}), 126))",
+    "idea": "**Concept**: Debt Servicing Coverage Ratio\n- **Sample Fields Used**: cash_from_oper, cash_paid_for_int_debt\n- **Definition**: Operating cash flow divided by cash interest paid, with 126-day smoothing\n- **Why This Feature**: Directly measures ability to service debt obligations from operations; critical distress predictor combining liquidity generation with financing burden\n- **Logical Meaning**: Synthesis of operational performance (numerator) and financial leverage cost (denominator)\n- **is filling nan necessary**: Missing interest payments should be treated as zero only if confirmed no debt; otherwise backfill\n- **Directionality**: Higher values indicate stronger coverage (>3 is healthy); values <1 indicate distress\n- **Boundary Conditions**: Values approaching infinity indicate no debt; negative values indicate cash burn despite interest obligations",
+    "expression_list": [
+        "divide(ts_mean(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), 126), ts_mean(vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt), 126))",
+        "divide(ts_mean(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), 126), ts_mean(vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt), 126))",
+        "divide(ts_mean(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), 126), ts_mean(vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt), 126))",
+        "divide(ts_mean(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), 126), ts_mean(vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt), 126))"
+    ]
+}

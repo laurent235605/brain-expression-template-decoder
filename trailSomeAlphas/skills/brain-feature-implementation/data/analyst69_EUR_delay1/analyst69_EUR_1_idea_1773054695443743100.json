@@ -1,0 +1,8 @@
+{
+    "template": "bucket(rank(winsorize(divide(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), std=4)), range=\"0,1,0.2\")",
+    "idea": "基于输入1的速度概念，采用分桶运算符实现'头尾有效、中段噪音'的区间结构。先通过winsorize清理极值，rank转为分位后，使用bucket将速度分为5档（0.2分位间隔）。该输出可与trade_when结合，仅对第1档（底部20%，加速下调）和第5档（顶部20%，加速上调）建立反向/正向头寸，中段视为噪音赋值为0或中性权重，符合'只有极端修订才有预测力'的经济直觉。",
+    "expression_list": [
+        "bucket(rank(winsorize(divide(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), std=4)), range=\"0,1,0.2\")",
+        "bucket(rank(winsorize(divide(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), std=4)), range=\"0,1,0.2\")"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(trade_when(and(greater(abs(ts_zscore(winsorize(vec_avg({rank}), std=4), 60)), 1.5), greater(ts_delta(vec_avg({rank}), 5), 0)), ts_zscore(winsorize(vec_avg({rank}), std=4), 60), 0), hump=0.02)",
+    "idea": "**概念**：条件性均值回归确认（Conditional Mean-Reversion with Confirmation）\n- **核心逻辑**：基础仍为`vec_avg`排名水平的`ts_zscore`，但引入双重条件`and`：1) 绝对偏离度>1.5标准差（统计极端，由`abs`与`greater`判断）；2) 近5日变化`ts_delta(5)>0`（趋势确认，避免抄底过早）\n- **噪音过滤**：`hump_decay(0.02)`设置最小变动阈值，忽略小于2%的权重变化，显著降低换手率；`trade_when`在条件不满足时输出0（空仓），实现区间择时\n- **清洗**：前置`winsorize`防止极端排名值影响均值/std计算\n- **经济含义**：仅当排名处于历史极端分位（极度看好/看空）且近期呈现持续同向移动（动量确认）时才下注，结合反转与动量，避免假突破与过早反转",
+    "expression_list": [
+        "hump_decay(trade_when(and(greater(abs(ts_zscore(winsorize(vec_avg(mdl245_rank), std=4), 60)), 1.5), greater(ts_delta(vec_avg(mdl245_rank), 5), 0)), ts_zscore(winsorize(vec_avg(mdl245_rank), std=4), 60), 0), hump=0.02)"
+    ]
+}

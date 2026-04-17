@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), 63), 252)",
+    "idea": "数据覆盖改善动量：通过计算数据丰富度（有效数据日计数）在63日窗口内的变化量（ts_delta），识别数据披露频率正在显著提升（如近期完成IPO过渡期、开始定期披露或并购后整合完成）或急剧恶化（潜在退市风险、经营停滞导致停止更新财报）的公司；对变化量进行252日历史Z-score标准化，使信号具有跨时间的可比性，强调信息质量的动态趋势而非静态水平。",
+    "expression_list": [
+        "ts_zscore(ts_delta(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), 63), 252)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "winsorize(group_zscore(log({volume}), {industry}) - group_zscore(ts_rank({returns}, 20), {industry}), std=3)",
+    "idea": "成交量与价格动量背离检测（异常行为识别）。计算个股行业内成交量标准化得分与20日收益历史排名标准化得分之间的差值，识别“放量滞涨”（高成交量伴随低收益排名）或“缩量上涨”（低成交量伴随高收益排名）的背离形态，截尾处理后作为潜在的反转或趋势确认信号。",
+    "expression_list": []
+}

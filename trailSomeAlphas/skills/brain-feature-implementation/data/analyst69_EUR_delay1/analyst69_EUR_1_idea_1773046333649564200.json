@@ -1,0 +1,8 @@
+{
+    "template": "truncate(scale(multiply(group_zscore(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), add(1, multiply(0.35, quantile(subtract(ts_delta({eps_best_eeps_cur_yr}, 3), ts_delta({eps_best_eeps_cur_yr}, 10)), driver=cauchy)))), longscale=1.2, shortscale=0.8), maxPercent=0.02)",
+    "idea": "加速差分+Cauchy加权+多空非对称杠杆：利用3日减10日修正差捕捉预期加速拐点，通过Cauchy分布拉伸尾部极值，多头给予1.2倍杠杆、空头0.8倍杠杆的非对称结构，并截断个股权重至2%以控制单票风险。",
+    "expression_list": [
+        "truncate(scale(multiply(group_zscore(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), add(1, multiply(0.35, quantile(subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 3), ts_delta(anl69_eps_best_eeps_cur_yr, 10)), driver=cauchy)))), longscale=1.2, shortscale=0.8), maxPercent=0.02)",
+        "truncate(scale(multiply(group_zscore(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), add(1, multiply(0.35, quantile(subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 3), ts_delta(anl69_aeps_best_eeps_cur_yr, 10)), driver=cauchy)))), longscale=1.2, shortscale=0.8), maxPercent=0.02)"
+    ]
+}

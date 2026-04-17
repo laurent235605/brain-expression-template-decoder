@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(winsorize(ts_std_dev(vec_avg({likelihood_score}), 20), std=4), 120)",
+    "idea": "历史波动率区间定位：计算短期（20日）likelihood波动率，并将其与过去120天的自身历史分布进行标准化（ts_zscore），识别当前处于历史极端低位（分析师高度一致）或历史极端高位（观点剧烈分歧/模型校准漂移）的反转或趋势机会。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 20), std=4), 120)"
+    ]
+}

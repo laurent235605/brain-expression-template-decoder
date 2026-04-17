@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_regression(rank(winsorize(ts_backfill({fundportfolioturnover},63),std=4)), rank(log(winsorize(ts_backfill({reported_asset_value},63),std=4))), 126, rettype=0), 1.5)",
+    "idea": "非线性秩次稳健回归：先将两个变量截面排名（rank）后再进行回归，消除极端值对回归系数的杠杆影响，最后通过`signed_power`放大极端残差。该方法对异常值更稳健，适合数据质量较差或分布严重偏斜的场景，强化头尾区分度。",
+    "expression_list": [
+        "signed_power(ts_regression(rank(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4)), rank(log(winsorize(ts_backfill(fund_reported_asset_value,63),std=4))), 126, rettype=0), 1.5)"
+    ]
+}

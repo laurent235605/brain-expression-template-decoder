@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), 10)",
+    "idea": "平滑衰减价格偏离：使用线性衰减平均（ts_decay_linear）替代即时值，降低因子换手率（相比简单平均能更快反应但比即时值稳定），同时保留近期价格-概率错配的信息，适合平衡信号时效性与交易成本。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), 10)"
+    ]
+}

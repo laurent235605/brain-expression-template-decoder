@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(group_rank(last_diff_value(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 63), industry), 0.9), less(ts_rank(ts_std_dev(returns, 21), 63), 0.3)), ts_decay_linear(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 10), 0)",
+    "idea": "构建事件驱动框架：利用last_diff_value捕捉风险调整后配置强度的最新变化幅度，结合days_from_last_change实现事件半衰期加权，并仅在近期波动率处于历史低位（ts_rank<0.3）且配置发生显著跃升（group_rank>0.9）时触发交易，过滤高波动噪音下的虚假信号。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(last_diff_value(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 63), industry), 0.9), less(ts_rank(ts_std_dev(returns, 21), 63), 0.3)), ts_decay_linear(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 10), 0)"
+    ]
+}

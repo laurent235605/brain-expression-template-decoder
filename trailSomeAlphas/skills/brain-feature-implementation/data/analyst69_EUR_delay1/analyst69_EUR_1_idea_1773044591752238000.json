@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(ts_decay_linear(winsorize(ts_regression(ts_delta(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 10), 5), 5), ts_log(ts_mean({market_cap}, 21)), 252, rettype=0), std=4), 10), industry)",
+    "idea": "二阶修订加速度经双重中性化与衰减加权。通过计算预期EPS的5日差分的差分（加速度），剥离市值因子（对数市值加权回归残差）与行业因子（group_normalize），并应用10日线性衰减加权，突出近期修订动能的持续性信号，有效过滤一次性噪音。",
+    "expression_list": []
+}

@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(subtract(0.5, group_rank(winsorize(ts_std_dev(ts_regression(ts_backfill({of_owners_decile_rank_long},21), ts_backfill({owners_decile_rank_long},21), 60, rettype=0), 20),4), sector)), sector), 3)",
+    "idea": "将简单的相关性度量转化为回归残差波动性（非协同性度量），假设残差标准差越大代表所有权结构分歧越严重。通过行业分位倒数映射（低波动/高协同对应高分，高波动/低协同对应低分），并使用三次幂（signed_power）强化极端共识与极端分歧的尾部效应，构建反向交易逻辑（做多低波动/高共识，做空高波动/高分歧）。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(0.5, group_rank(winsorize(ts_std_dev(ts_regression(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,21), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,21), 60, rettype=0), 20),4), sector)), sector), 3)",
+        "signed_power(group_zscore(subtract(0.5, group_rank(winsorize(ts_std_dev(ts_regression(ts_backfill(insd8_effective_number_of_owners_decile_rank_long,21), ts_backfill(insd8_total_number_of_owners_decile_rank_long,21), 60, rettype=0), 20),4), sector)), sector), 3)",
+        "signed_power(group_zscore(subtract(0.5, group_rank(winsorize(ts_std_dev(ts_regression(ts_backfill(insd8_total_number_of_owners_decile_rank_long,21), ts_backfill(insd8_total_number_of_owners_decile_rank_long,21), 60, rettype=0), 20),4), sector)), sector), 3)",
+        "signed_power(group_zscore(subtract(0.5, group_rank(winsorize(ts_std_dev(ts_regression(ts_backfill(insd8_total_number_of_owners_decile_rank_long,21), ts_backfill(insd8_effective_number_of_owners_decile_rank_long,21), 60, rettype=0), 20),4), sector)), sector), 3)"
+    ]
+}

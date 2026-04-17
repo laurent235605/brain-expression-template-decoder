@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(greater(abs(group_zscore(ts_delta(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), 5), industry)), 1), ts_decay_linear(reverse(signed_power(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4), industry), 252), 2)), 3), 0), industry)",
+    "idea": "波动率加速度触发的行业平衡衰减策略。构建行业相对波动率加速度指标（group_zscore of ts_delta），仅当加速度绝对值超过1个标准差（即治理结构稳定性发生显著突变）时触发交易信号。对信号施加3日线性衰减（ts_decay_linear）控制换手率，并通过group_normalize确保每日行业内多空净暴露为零，实现纯粹的行业内相对价值轮动。",
+    "expression_list": [
+        "group_normalize(trade_when(greater(abs(group_zscore(ts_delta(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), 5), industry)), 1), ts_decay_linear(reverse(signed_power(ts_zscore(group_zscore(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4), industry), 252), 2)), 3), 0), industry)"
+    ]
+}

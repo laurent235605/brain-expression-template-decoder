@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(winsorize(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),20)",
+    "idea": "特质残差平滑增强：对剥离行业beta后的特质空头残差应用20日线性衰减加权（近期权重线性递减），在保持行业中性化的同时降低日间噪音，提取更稳定的idiosyncratic做空压力趋势，适配中等换手约束。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),20)",
+        "ts_decay_linear(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),20)"
+    ]
+}

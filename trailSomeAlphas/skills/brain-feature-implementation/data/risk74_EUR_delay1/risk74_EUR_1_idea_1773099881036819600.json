@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(quantile(winsorize(ts_backfill({exp_usa}, 63), std=4), driver=\"gaussian\"), quantile(winsorize(ts_backfill({exp_chn}, 63), std=4), driver=\"gaussian\")), industry)",
+    "idea": "中美市场敞口差异的行业中性套利模板。先对中美敞口分别进行63日回溯填充与4倍标准差截尾清洗，经高斯分位转换消除量纲差异后求差值，最后行业中性化。高值代表美国敞口显著高于中国敞口，捕捉跨区域相对价值偏离与地缘政治对冲机会；低值则相反。适用于构建中美相对价值配对交易。",
+    "expression_list": [
+        "group_zscore(subtract(quantile(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), driver=\"gaussian\"), quantile(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), driver=\"gaussian\")), industry)"
+    ]
+}

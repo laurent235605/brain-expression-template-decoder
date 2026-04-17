@@ -1,0 +1,7 @@
+{
+    "template": "days_from_last_change(vec_avg({dividend_status_240}))",
+    "idea": "**Concept**: Dividend Status Transition\n- **Sample Fields Used**: dividend_status_240\n- **Definition**: Days since last change in dividend status category (Pays, Suspended, Resumed)\n- **Why This Feature**: Captures the recency of policy changes; recent resumptions or suspensions are significant corporate events that may persist in market memory\n- **Logical Meaning**: Measures the stability of dividend policy categorical state; low values indicate recent policy shifts\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Status changes are discrete events; NaN likely means no status assigned yet, which should be kept distinct until first observation.\n- **Directionality**: Lower values indicate recent policy changes (higher event risk/opportunity); higher values indicate long-term policy stability\n- **Boundary Conditions**: Zero indicates status changed today; increasing values indicate time elapsed since last corporate action",
+    "expression_list": [
+        "days_from_last_change(vec_avg(ern6_dividend_status_240))"
+    ]
+}

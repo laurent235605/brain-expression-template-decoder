@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_rank(days_from_last_change({eps_expected_report_dt}), industry), 20)",
+    "idea": "行业内相对信息分层信号：结合模板2的行业分组思想与模板1的时序平滑，使用 group_rank 将 days_from_last_change 转换为行业内分位数（0-1），再应用 ts_decay_linear 平滑，识别行业内信息环境最稳定（分位接近1）与最动荡（分位接近0）的极端分组，避免跨行业比较偏差。",
+    "expression_list": [
+        "ts_decay_linear(group_rank(days_from_last_change(anl69_aeps_expected_report_dt), industry), 20)",
+        "ts_decay_linear(group_rank(days_from_last_change(anl69_eps_expected_report_dt), industry), 20)"
+    ]
+}

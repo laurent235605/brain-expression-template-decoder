@@ -1,0 +1,7 @@
+{
+    "template": "multiply(winsorize(subtract(quantile({exp_usa}, driver=\"uniform\"), 0.5), 2), ts_zscore(ts_delta({hfown_pctown}, 5), 20))",
+    "idea": "**交叉增强：地理暴露偏离度 × HF流速强度**\n将模板1的uniform quantile映射转换为相对于中位数（0.5）的偏离度（winsorize限制在±2标准差），作为多空对称的地理beta因子；与模板2的HF流速20日zscore相乘。该结构同时捕捉高美国暴露（正向）与低美国暴露/纯国内（负向）两个极端，并根据HF资金方向动态调整权重：HF买入时超配高暴露、低配低暴露；HF卖出时反向操作，形成双向动态对冲。",
+    "expression_list": [
+        "multiply(winsorize(subtract(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), 0.5), 2), ts_zscore(ts_delta(rsk74_hfown_pctown, 5), 20))"
+    ]
+}

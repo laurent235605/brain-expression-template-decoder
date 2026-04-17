@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 1), quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), 0)",
+    "idea": "以模板2的时序Z-score作为条件过滤器（trade_when），仅在报告日期稳定性处于历史极端状态（高波动期）时启用模板1的修正分位数信号，实现'事件不确定期+情绪极端'的双重确认策略。",
+    "expression_list": [
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 1), quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), 0)",
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 1), quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), 0)",
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 1), quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian), 0)",
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 1), quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian), 0)"
+    ]
+}

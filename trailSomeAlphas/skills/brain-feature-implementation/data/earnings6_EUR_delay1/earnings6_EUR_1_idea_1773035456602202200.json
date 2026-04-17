@@ -1,0 +1,8 @@
+{
+    "template": "winsorize(ts_zscore(vec_avg({actual_eps})), 4) * vec_avg({stock_split_ratio_243}) - group_mean(vec_avg({actual_eps}), log(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252)), vec_avg({stock_split_ratio_243}))",
+    "idea": "拆股分组中性化：将单季度EPS（而非累积）进行标准化后乘以拆股比率，再减去以拆股比率为分组依据的组内均值。这是对模板2的group_mean概念的激进扩展——不是按行业分组，而是按\"资本结构事件类型\"（拆股比率）分组，在同质资本结构组内比较盈利水平。利用对数TTM EPS作为组内权重，确保大市值/高盈利公司对组内均值贡献更大，实现\"在相同拆股 regime 下的相对盈利 surprise\"信号。",
+    "expression_list": [
+        "winsorize(ts_zscore(vec_avg(ern6_actual_eps)), 4) * vec_avg(ern6_stock_split_ratio_243) - group_mean(vec_avg(ern6_actual_eps), log(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252)), vec_avg(ern6_stock_split_ratio_243))",
+        "winsorize(ts_zscore(vec_avg(ern6_actual_eps_274)), 4) * vec_avg(ern6_stock_split_ratio_243) - group_mean(vec_avg(ern6_actual_eps_274), log(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252)), vec_avg(ern6_stock_split_ratio_243))"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(trade_when(less(days_from_last_change({eps_expected_report_dt}), 10), subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), 0), 5)",
+    "idea": "事件驱动增强：仅在报告日期近期变更（10日内）触发信号，捕捉日程调整后分析师预期的快速重定价。配合5日线性衰减平滑降低单日异常冲击，聚焦事件窗口内的加速度聚集效应。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0), 5)",
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0), 5)",
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), 0), 5)",
+        "ts_decay_linear(trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 10), subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), 0), 5)"
+    ]
+}

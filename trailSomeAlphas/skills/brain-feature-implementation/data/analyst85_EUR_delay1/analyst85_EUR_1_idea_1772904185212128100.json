@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater(rank(ts_regression(group_rank(vec_skewness({version}), industry), group_mean(vec_skewness({version}), log(ts_mean({cap},21)), industry), 252, rettype=0)), 0.8), 1, if_else(less(rank(ts_regression(group_rank(vec_skewness({version}), industry), group_mean(vec_skewness({version}), log(ts_mean({cap},21)), industry), 252, rettype=0)), 0.2), -1, 0)), industry), 5)",
+    "idea": "特质偏度回归残差策略：借鉴CAPM残差思想，将个股偏度行业排名对市场/行业市值加权平均偏度做252日滚动回归(ts_regression, rettype=0)，剥离系统性行业偏度影响，提取特质性(idiosyncratic)偏度残差；对该残差进行全市场排名(rank)并取极端20%分桶，构建纯由个股特异性分布形态驱动的多空组合；经行业归一化(group_normalize)控制行业暴露后，施加5日线性衰减平衡信号持续时间与 turnover，专注于捕捉公司层面极端风险态度的定价偏差。",
+    "expression_list": []
+}

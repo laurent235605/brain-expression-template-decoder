@@ -1,0 +1,8 @@
+{
+    "template": "divide(vec_stddev({adjustedgrossamt}), max(1, vec_count({currency_code})))",
+    "idea": "**Concept**: Complexity-Adjusted Dividend Volatility\n- **Sample Fields Used**: `adjustedgrossamt`, `currency_code`\n- **Definition**: Standard deviation of dividend amounts normalized by currency diversity to isolate policy volatility from structural complexity\n- **Why This Feature**: Separates true dividend policy instability from volatility induced by multi-currency operations or FX effects\n- **Logical Meaning**: Pure dividend policy volatility excluding structural currency noise\n- **is filling nan necessary**: Ensure `currency_code` is valid for all observations; use `ts_backfill` for missing currency codes if assuming continuity, otherwise filter\n- **Directionality**: Higher values indicate unstable dividend policy; lower values indicate consistent policy across currencies\n- **Boundary Conditions**: >= 0; 0 indicates perfect stability regardless of complexity",
+    "expression_list": [
+        "divide(vec_stddev(anl30_adjustedgrossamt), max(1, vec_count(payment_currency_code)))",
+        "divide(vec_stddev(anl30_unadjustedgrossamt), max(1, vec_count(payment_currency_code)))"
+    ]
+}

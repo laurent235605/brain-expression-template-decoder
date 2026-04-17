@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(vec_skewness({exposure_value}), 126), sector), 3)",
+    "idea": "将模板1的地理集中度偏度时序分析（vec_skewness + ts_zscore）与模板2的组内标准化（group_zscore）及三次幂非线性增强（signed_power）相结合。在行业中性框架下，极端放大地理集中度的结构性变化信号，同时压缩接近行业平均水平的中等变化区间至接近零，构建\"只有极端地理重组才有预测力\"的行业多空组合。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(vec_skewness(anl91_exposure_value), 126), sector), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(vector_neut(winsorize(ts_backfill({fundreportedequityassets}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4)), std=3))",
+    "idea": "对原始字段进行63日回溯填充和4倍标准差缩尾处理以消除数据缺失和极端值影响，通过向量中性化剥离基金规模效应后，对残差再次进行3倍标准差缩尾和横截面标准化，得到干净且可比的股票配置强度信号，适用于捕捉纯 allocation 的截面偏离。",
+    "expression_list": [
+        "zscore(winsorize(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4)), std=3))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "{reported_asset_value} / {companyreportedtotalassets}",
+    "idea": "**Concept**: Fund Contribution to Parent Company\n- **Sample Fields Used**: `reported_asset_value`, `companyreportedtotalassets`\n- **Definition**: Ratio of individual fund AUM to total company AUM, measuring structural importance within corporate hierarchy\n- **Why This Feature**: Identifies flagship products versus niche offerings; high contribution funds are less likely to be liquidated and receive more resources\n- **Logical Meaning**: Represents concentration risk at company level; high values indicate single-product dependency, low values indicate diversified conglomerate\n- **is filling nan necessary**: Yes, company data often lags fund data; use `ts_backfill(lookback=90)` on company assets to align with fund reporting dates, or use most recent available\n- **Directionality**: High values indicate dominant/flagship fund status; low values indicate minor/satellite fund status\n- **Boundary Conditions**: Near 1.0 indicates single-fund company (high risk); near 0 indicates negligible contribution; sudden drops indicate spin-offs or liquidations",
+    "expression_list": [
+        "fund_reported_asset_value / inst16_ipreo_companyreportedtotalassets"
+    ]
+}

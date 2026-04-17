@@ -1,0 +1,8 @@
+{
+    "template": "subtract({value_04001q}, {cfsourceusea_value_04840a})",
+    "idea": "**Concept**: FX-Adjusted Cash Generation\n- **Sample Fields Used**: `value_04001q`, `cfsourceusea_value_04840a`\n- **Definition**: Net income starting line minus FX translation effects to isolate operational cash generation\n- **Why This Feature**: Removes non-operational currency noise to reveal underlying business performance\n- **Logical Meaning**: Core operational cash flow before translational accounting adjustments; pure operational signal\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If FX effect is NaN (domestic company), the adjustment should be zero (no effect), not filled from other companies.\n- **Directionality**: Higher values indicate stronger core operational generation independent of currency games\n- **Boundary Conditions**: Large differences between adjusted and unadjusted indicate high FX volatility or international exposure",
+    "expression_list": [
+        "subtract(fnd28_cfq_value_04001q, fnd28_cfsourceusea_value_04840a)",
+        "subtract(fnd28_nddq1_value_04001q, fnd28_cfsourceusea_value_04840a)"
+    ]
+}

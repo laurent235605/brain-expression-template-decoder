@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(abs(ts_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 126)) > 1.5, signed_power(winsorize(ts_delta({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 10), std=4), 2.0), 0), sector)",
+    "idea": "仅当定价偏离度处于历史极值区间（126日Zscore>1.5）时，对近10日的变化速率进行非线性放大（2次幂）并行业中性和，捕捉极端偏离后的动量加速；中间历史常态区间视为噪音直接清零，实现“极端区间+趋势确认”的双重过滤。",
+    "expression_list": [
+        "group_normalize(trade_when(abs(ts_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 126)) > 1.5, signed_power(winsorize(ts_delta(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 10), std=4), 2.0), 0), sector)"
+    ]
+}

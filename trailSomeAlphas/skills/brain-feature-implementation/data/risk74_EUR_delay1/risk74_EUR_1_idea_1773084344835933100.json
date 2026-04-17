@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(bucket(rank(trade_when(and(not(is_nan({exp_nondomicile1})), less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05)), ts_mean(add({exp_nondomicile1}, {exp_nondomicile2}), 2), NaN)), \"0,1,0.1\"), industry)",
+    "idea": "将输入1的截面分位思想（通过bucket实现十分位离散化）应用于输入2的验证后海外敞口均值，先通过双数据源验证过滤噪音，再将通过验证的样本按分位分桶（0-10%, 10-20%等），最后行业标准化，构建'分层筛选+数据验证'的稳健结构，降低极端值影响。",
+    "expression_list": [
+        "group_zscore(bucket(rank(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), NaN)), \"0,1,0.1\"), industry)",
+        "group_zscore(bucket(rank(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), NaN)), \"0,1,0.1\"), industry)",
+        "group_zscore(bucket(rank(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2), 2), NaN)), \"0,1,0.1\"), industry)",
+        "group_zscore(bucket(rank(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_mean(add(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2), 2), NaN)), \"0,1,0.1\"), industry)"
+    ]
+}

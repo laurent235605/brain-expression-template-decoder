@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector)), 2.0), signed_power(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 3), ts_decay_linear(group_zscore(ts_std_dev(vec_avg({exposure_value}), 20), sector), 5))",
+    "idea": "自适应双模式处理策略。条件性融合两种运算符逻辑：当行业标准化波动率Z-score的绝对值超过2倍标准差（极端区域）时，应用模板A的三次幂非线性放大以强调尾部 alpha；当处于非极端区间时，应用模板B的线性衰减平滑以降低噪音和换手率。这种\"极端时强化、常态时平滑\"的智能切换结构，在保持对极端地域敞口偏离敏感度的同时，显著改善常规区间的信号质量和可实现性。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector)), 2.0), signed_power(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 3), ts_decay_linear(group_zscore(ts_std_dev(vec_avg(anl91_exposure_value), 20), sector), 5))"
+    ]
+}

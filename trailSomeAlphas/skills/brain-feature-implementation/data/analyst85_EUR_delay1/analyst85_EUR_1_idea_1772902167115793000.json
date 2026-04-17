@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(quantile(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), driver=\"gaussian\"), 1.65), ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), NaN)",
+    "idea": "仅当20日累积修订强度处于高斯分布分位数的95%以上（约1.65倍标准差右尾）时才保留原值，其余区间视为无效噪音并赋NaN。通过极端阈值过滤，专注捕捉高分析师拥挤度或信息不确定性导致的潜在过度反应或反转机会，实现非对称头寸暴露。",
+    "expression_list": [
+        "trade_when(greater(quantile(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), driver=\"gaussian\"), 1.65), ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), NaN)"
+    ]
+}

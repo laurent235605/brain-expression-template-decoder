@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(subtract(group_rank(ts_std_dev(vec_avg({exposure_value}), 5), sector), group_rank(ts_std_dev(vec_avg({exposure_value}), 60), sector)), 3)",
+    "idea": "行业内排名利差非线性策略。将短期和长期波动率先进行行业内分位数排名（0-1标准化）处理，计算排名利差后再进行三次幂变换。结合模板A的非线性增强与模板B的期限对比框架，使用排名替代原始值更能捕捉相对位置变化，消除量纲和异常值影响，对行业内地域敞口波动率排名正在发生剧烈跃迁（无论向上或向下）的公司给予极端权重，识别相对地位快速变化的转型标的。",
+    "expression_list": [
+        "signed_power(subtract(group_rank(ts_std_dev(vec_avg(anl91_exposure_value), 5), sector), group_rank(ts_std_dev(vec_avg(anl91_exposure_value), 60), sector)), 3)"
+    ]
+}

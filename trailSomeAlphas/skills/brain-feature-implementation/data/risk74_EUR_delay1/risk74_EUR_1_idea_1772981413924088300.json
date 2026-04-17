@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore({hfown_pctown}, sector), ts_zscore(group_zscore({hfown_pctown}, sector), 252))",
+    "idea": "结合截面与序时视角：先计算行业内相对持仓Z-score，再看该Z-score在过去252日中的历史分位（标准化）。只有当当前相对持仓处于历史极端高位时才放大信号，捕捉“创新高持仓”的动量或极端反转。",
+    "expression_list": [
+        "multiply(group_zscore(rsk74_hfown_pctown, sector), ts_zscore(group_zscore(rsk74_hfown_pctown, sector), 252))"
+    ]
+}

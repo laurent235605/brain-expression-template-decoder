@@ -1,0 +1,7 @@
+{
+    "template": "hump(group_zscore(signed_power(winsorize(if_else(days_from_last_change({active_return_decile_rank_long} - {active_weight_decile_rank_long}) <= 5, {active_return_decile_rank_long} - {active_weight_decile_rank_long}, 0), std=4), 1.5), sector), hump=0.02)",
+    "idea": "仅捕捉近5日内发生分位数位移（定价偏离变动事件）的股票，对其偏离度进行幂放大和行业中性化；利用hump算子忽略日内权重低于2%的微小调整，仅在信号发生显著跳跃时触发再平衡，适用于事件驱动型定价修复策略并有效控制换手。",
+    "expression_list": [
+        "hump(group_zscore(signed_power(winsorize(if_else(days_from_last_change(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long) <= 5, insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 0), std=4), 1.5), sector), hump=0.02)"
+    ]
+}

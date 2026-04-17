@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(multiply(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), signed_power(add(1, add(winsorize(vec_stddev({elta_value}), std=4), multiply(-0.3, winsorize(vec_skewness({elta_value}), std=4)))), -0.5)), industry)",
+    "idea": "高阶矩质量融合：在传统标准差（二阶矩）基础上融入偏度（vec_skewness）信息构建复合质量指标。负偏度（左尾风险）加剧分歧惩罚，正偏度（右尾乐观）适度缓解惩罚，捕捉分布非对称性带来的隐含信息优势。",
+    "expression_list": [
+        "group_zscore(multiply(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), signed_power(add(1, add(winsorize(vec_stddev(ern10_elta_value), std=4), multiply(-0.3, winsorize(vec_skewness(ern10_elta_value), std=4)))), -0.5)), industry)"
+    ]
+}

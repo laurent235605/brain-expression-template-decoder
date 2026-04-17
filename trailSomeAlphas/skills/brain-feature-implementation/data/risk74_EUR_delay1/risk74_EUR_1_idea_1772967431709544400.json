@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252)",
+    "idea": "计算当前空头累积变化相对于过去252天历史分布的时序Z-score，识别相对于该股票自身历史而言的极端空头 buildup 或 covering 行为，适应不同股票空头水平的长期结构性差异，捕捉'历史罕见'的空头异动信号。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252)",
+        "ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252)"
+    ]
+}

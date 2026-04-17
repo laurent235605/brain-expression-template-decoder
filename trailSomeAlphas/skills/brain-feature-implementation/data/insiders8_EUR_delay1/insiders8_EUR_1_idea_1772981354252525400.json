@@ -1,0 +1,10 @@
+{
+    "template": "ts_regression(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), ts_delta(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60),20), 60, rettype=0)",
+    "idea": "**概念**: 结构变化无法解释的信念残差\n将所有权结构相关性的日变化作为解释变量，对内幕持仓稳定性进行时间序列回归，提取残差。该残差代表那些不能用所有权结构变化解释的、纯粹的内幕 conviction（信念）。高残差意味着内幕行为独立于所有权结构变动，可能包含私有信息。",
+    "expression_list": [
+        "ts_regression(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60),20), 60, rettype=0)",
+        "ts_regression(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_delta(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60),20), 60, rettype=0)",
+        "ts_regression(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60),20), 60, rettype=0)",
+        "ts_regression(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), ts_delta(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60),20), 60, rettype=0)"
+    ]
+}

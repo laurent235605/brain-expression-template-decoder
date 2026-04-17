@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(quantile(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), driver=\"gaussian\"), industry)",
+    "idea": "使用高斯分位数转换（quantile）替代简单的截尾处理，将原始修订动量映射到近似正态分布后再进行行业标准化（group_zscore），使极端值定义更加统计稳健，减少硬截断（winsorize）可能带来的信息损失，同时保留行业中性化特性。",
+    "expression_list": [
+        "group_zscore(quantile(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), driver=\"gaussian\"), industry)",
+        "group_zscore(quantile(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), driver=\"gaussian\"), industry)"
+    ]
+}

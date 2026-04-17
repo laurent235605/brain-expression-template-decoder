@@ -1,0 +1,7 @@
+{
+    "template": "subtract(0, ts_zscore(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 126))",
+    "idea": "历史分位数均值回归策略。计算当前Listing偏好比率在过去126个交易日的Z-Score并取反，识别相对于自身历史均值的极端偏离，捕捉权重配置过度拥挤后的修复机会，高值对应比率过低（被低估）的反弹潜力。",
+    "expression_list": [
+        "subtract(0, ts_zscore(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 126))"
+    ]
+}

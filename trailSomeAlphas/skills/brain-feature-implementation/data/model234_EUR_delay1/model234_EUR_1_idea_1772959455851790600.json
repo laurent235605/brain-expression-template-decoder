@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(abs(group_zscore(quantile({volume}, driver=\"cauchy\"), {sector})), {sector})",
+    "idea": "行业流动性分散度：使用柯西分位拉伸成交量分布的头尾，计算行业内Z分数后取绝对值（不关心方向只关心偏离度），最后行业内归一化，构建捕捉行业内流动性二元分化（极热或极冷）的风险因子。",
+    "expression_list": []
+}

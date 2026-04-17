@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry)), 2), group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry), 0)",
+    "idea": "结合模板2的行业分组逻辑与模板1的两端信号聚焦思路，仅在行业zscore绝对值大于2的极端区域进行交易，中段噪音设为0，实现行业内的极端事件驱动策略。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry)), 2), group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 0)",
+        "trade_when(greater(abs(group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry)), 2), group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry), 0)"
+    ]
+}

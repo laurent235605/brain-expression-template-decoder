@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore(vec_skewness(vec_filter({investment}, value=\"nan\")), {sector})",
+    "idea": "行业中性相对偏度：在行业组内对投资偏度进行标准化（Z分数处理）。不同行业固有的业务属性可能导致天然不同的持仓集中度（如科技行业天然分散 vs 公用事业天然集中），该模板剔除行业共性后，识别相对于同业具有异常配置哲学（如极度押注少数龙头或极度分散）的特异性投资行为，避免行业配置偏误。",
+    "expression_list": []
+}

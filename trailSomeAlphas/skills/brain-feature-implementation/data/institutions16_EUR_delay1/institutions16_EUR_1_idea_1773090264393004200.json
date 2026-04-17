@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(ts_decay_linear(subtract(ts_delta({reported_asset_value}, 20), ts_mean(ts_delta({reported_asset_value}, 20), 60)), 10), 0.6), multiply(ts_decay_linear(subtract(ts_delta({reported_asset_value}, 60), ts_mean(ts_delta({reported_asset_value}, 60), 120)), 20), 0.4)), sector)",
+    "idea": "双周期风险调整复合信号：融合短期（20日）与中期（60日）两个时间维度的资产流加速度，分别经10日与20日衰减平滑后按6:4权重合成。通过行业中性化与分组标准化处理，兼顾资金流向的短期爆发与中长期趋势确认，降低单一周期噪音。",
+    "expression_list": [
+        "group_zscore(add(multiply(ts_decay_linear(subtract(ts_delta(fund_reported_asset_value, 20), ts_mean(ts_delta(fund_reported_asset_value, 20), 60)), 10), 0.6), multiply(ts_decay_linear(subtract(ts_delta(fund_reported_asset_value, 60), ts_mean(ts_delta(fund_reported_asset_value, 60), 120)), 20), 0.4)), sector)"
+    ]
+}

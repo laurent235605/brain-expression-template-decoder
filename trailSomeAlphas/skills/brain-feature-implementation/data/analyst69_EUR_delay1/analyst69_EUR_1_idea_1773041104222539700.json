@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), industry), 3), 20)",
+    "idea": "将模板1的极端值聚焦思想应用于模板2的连续信号处理。先对回溯填充后的天数变化进行group_zscore组内标准化，消除行业间固有差异；再使用signed_power（幂次=3）非线性放大尾部极端值（极度稳定或极度不稳定），压缩中间噪音区间；最后通过20日线性衰减平滑信号，形成对极端偏离的持续暴露。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), industry), 3), 20)",
+        "ts_decay_linear(signed_power(group_zscore(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), industry), 3), 20)"
+    ]
+}

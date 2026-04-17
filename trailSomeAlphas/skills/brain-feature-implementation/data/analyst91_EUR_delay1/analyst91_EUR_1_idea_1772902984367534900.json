@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_decay_linear(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 5), industry)), 1.5), group_zscore(ts_decay_linear(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 5), industry), 0)",
+    "idea": "行业中性极端湍流捕捉：先将地理敞口波动率期限利差在行业内部标准化（group_zscore），剔除行业Beta影响，仅保留极端尾部（|z-score|>1.5）的信号，中间噪音区间通过trade_when压缩至零，显著降低假阳性。使用ts_decay_linear保留近期敏感性，但通过行业中性化确保捕捉的是公司特质性地域重组而非行业整体迁移。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_decay_linear(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 5), industry)), 1.5), group_zscore(ts_decay_linear(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 5), industry), 0)"
+    ]
+}

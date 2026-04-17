@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(and(greater(group_rank(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector), 0.8), greater(ts_rank(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 126), 0.8)), signed_power(group_zscore(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.2), 0)",
+    "idea": "双重极端筛选机制：要求会计年度分散度同时在截面维度（行业内前20%）和时序维度（自身历史126日前20%）均处于极端高位，避免对长期高复杂度公司的持续暴露；仅在“创新高”的财务风险中枢触发非线性放大(signed_power)，捕捉结构性突变带来的alpha。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 0.8), greater(ts_rank(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), 0.8)), signed_power(group_zscore(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.2), 0)"
+    ]
+}

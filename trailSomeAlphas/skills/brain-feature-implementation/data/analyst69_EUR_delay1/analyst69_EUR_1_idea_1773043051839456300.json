@@ -1,0 +1,10 @@
+{
+    "template": "ts_regression(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252, rettype=0)",
+    "idea": "借鉴CAPM残差模板结构，将日期稳定性作为“市场因子”剥离：以252日为窗口，用时间序列回归（`ts_regression`，rettype=0取残差）剔除日期稳定性对累积盈利调整压力的解释部分。残差代表超出“日期变更伴随的例行调整”这一共同模式的独立修正动能，保留纯alpha成分。",
+    "expression_list": [
+        "ts_regression(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252, rettype=0)",
+        "ts_regression(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252, rettype=0)",
+        "ts_regression(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252, rettype=0)",
+        "ts_regression(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252, rettype=0)"
+    ]
+}

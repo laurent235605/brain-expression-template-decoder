@@ -1,0 +1,14 @@
+{
+    "template": "if_else(less(bucket(rank(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change({eps_expected_report_dt})), multiply(-1, zscore(days_from_last_change({eps_expected_report_dt}))))",
+    "idea": "分桶反转策略（Bucketed Regime Reversal）。将预期相关系数按分位分桶（高/低两档），利用if_else实现状态依赖的符号切换：在高相关分桶中保持日期稳定性信号原始方向（稳定=好），在低相关分桶中反转信号（稳定=坏，或认为此时日程变动反而预示积极变化）。适用于捕捉不同盈利周期下的异质性反应。",
+    "expression_list": [
+        "if_else(less(bucket(rank(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_aeps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_aeps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_aeps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_aeps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_aeps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_aeps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_aeps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_aeps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_eps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_eps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_eps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_eps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_eps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_eps_expected_report_dt))))",
+        "if_else(less(bucket(rank(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60)), \"0,1,0.5\"), 0.5), zscore(days_from_last_change(anl69_eps_expected_report_dt)), multiply(-1, zscore(days_from_last_change(anl69_eps_expected_report_dt))))"
+    ]
+}

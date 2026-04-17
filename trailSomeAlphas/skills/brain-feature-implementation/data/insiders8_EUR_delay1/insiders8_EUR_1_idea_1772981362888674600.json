@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), 20) / (ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001) + 0.01)",
+    "idea": "**概念**: 近期结构粘性加权信念比\n分子使用线性衰减加权（近20日）的所有权结构相关性，强调最新变化；分母为当前内幕持仓波动率。该比率放大那些所有权结构正在快速固化（近期相关性上升）且内幕持仓稳定的标的，识别结构转型完成后的配置机会。",
+    "expression_list": [
+        "ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 20) / (ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001) + 0.01)",
+        "ts_decay_linear(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 20) / (ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001) + 0.01)",
+        "ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 20) / (ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001) + 0.01)",
+        "ts_decay_linear(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 20) / (ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001) + 0.01)"
+    ]
+}

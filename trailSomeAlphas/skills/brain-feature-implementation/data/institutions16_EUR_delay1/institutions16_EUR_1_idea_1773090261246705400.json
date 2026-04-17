@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_normalize(subtract(ts_delta({reported_asset_value}, 20), ts_mean(ts_delta({reported_asset_value}, 20), 60)), sector), ts_decay_linear(greater(abs(ts_delta({reported_asset_value}, 1)), ts_std_dev(ts_delta({reported_asset_value}, 1), 60)), 10))",
+    "idea": "事件驱动的近因加权策略：基于资产加速度信号，叠加近期重大变化事件（单日变化超过60日历史波动率）的时间衰减权重。当资产值发生显著跳跃时，该事件在随后10日内对因子贡献递减的额外权重，配合行业中性化处理，旨在捕捉资金流入的突发事件后持续性动量。",
+    "expression_list": [
+        "multiply(group_normalize(subtract(ts_delta(fund_reported_asset_value, 20), ts_mean(ts_delta(fund_reported_asset_value, 20), 60)), sector), ts_decay_linear(greater(abs(ts_delta(fund_reported_asset_value, 1)), ts_std_dev(ts_delta(fund_reported_asset_value, 1), 60)), 10))"
+    ]
+}

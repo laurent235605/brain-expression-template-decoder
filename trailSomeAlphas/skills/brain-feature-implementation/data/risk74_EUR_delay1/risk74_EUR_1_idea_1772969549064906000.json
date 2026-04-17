@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_zscore(winsorize(({hfown_pctown} / {hfown_numown}), std=4), 20), ts_zscore(winsorize(({hfown_pctown} / {hfown_numown}), std=4), 60)), industry)",
+    "idea": "多时间框架偏离度加速器：分别计算分散度指标相对于20日短期和60日长期历史均值的Zscore，通过减法构造两者的背离程度（短期Zscore - 长期Zscore），正值表示持仓正在相对于长期趋势加速集中（风险急升），负值表示加速分散，最后进行行业中性化处理，用于捕捉趋势转折点而非静态水平。",
+    "expression_list": [
+        "group_zscore(subtract(ts_zscore(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), 20), ts_zscore(winsorize((rsk74_hfown_pctown / rsk74_hfown_numown), std=4), 60)), industry)"
+    ]
+}

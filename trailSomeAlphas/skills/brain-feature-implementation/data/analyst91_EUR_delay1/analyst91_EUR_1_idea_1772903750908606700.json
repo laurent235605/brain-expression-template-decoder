@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(vec_skewness({exposure_value}), group_mean(vec_skewness({exposure_value}), log(ts_mean(cap,21)), industry), 126, rettype=0)",
+    "idea": "剥离行业市值加权的平均地域集中度影响，提取特质性地域集中风险（残差）。聚焦于公司主动选择的地域\"All-in\"策略，而非被动跟随行业布局，捕捉真正的差异化风险暴露。",
+    "expression_list": [
+        "ts_regression(vec_skewness(anl91_exposure_value), group_mean(vec_skewness(anl91_exposure_value), log(ts_mean(cap,21)), industry), 126, rettype=0)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_zscore(trade_when(greater(ts_rank(winsorize(multiply(ts_delta({eps_best_eeps_cur_yr}, 5), subtract({eps_best_eeps_cur_yr}, {eps_mean_eeps_cur_yr})), std=4), 252), 0.8), winsorize(multiply(ts_delta({eps_best_eeps_cur_yr}, 5), subtract({eps_best_eeps_cur_yr}, {eps_mean_eeps_cur_yr})), std=4), 0), industry), 3)",
+    "idea": "将短期修订动量与最佳-一致预期分歧度相乘，构建'置信度加权'的修订信号：当最乐观分析师上调预期且其观点显著高于共识时，信号增强。仅当该合成指标处于历史极端分位(>80%)时开仓，并经行业中性化和3日衰减处理，以平衡信号强度与换手率，适用于高确信度的预期修正。",
+    "expression_list": []
+}

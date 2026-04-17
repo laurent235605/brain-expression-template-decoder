@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(divide(winsorize(vec_avg({x_dividend}), std=4), add(ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 63), 252), 0.001)), std=4), industry)",
+    "idea": "在计算股息持续性比率前对向量平均股息进行winsorize极值处理（去除特殊股息干扰），计算当期与历史252日均值的比率，再次进行截面winsorize以控制极端值影响，最后按行业做group_zscore中性化，得到行业相对的股息稳定性信号，适用于捕捉行业内股息政策相对稳健或异常变化的标的。",
+    "expression_list": [
+        "group_zscore(winsorize(divide(winsorize(vec_avg(ern6_x_dividend), std=4), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 63), 252), 0.001)), std=4), industry)",
+        "group_zscore(winsorize(divide(winsorize(vec_avg(ern6_x_dividend_233), std=4), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 63), 252), 0.001)), std=4), industry)",
+        "group_zscore(winsorize(divide(winsorize(vec_avg(ern6_x_dividend_oc), std=4), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 63), 252), 0.001)), std=4), industry)",
+        "group_zscore(winsorize(divide(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 63), 252), 0.001)), std=4), industry)"
+    ]
+}

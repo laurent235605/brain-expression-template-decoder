@@ -1,0 +1,7 @@
+{
+    "template": "divide(add({entwdrat}, {debteqiv}), {coverage})",
+    "idea": "**Concept**: Capital Structure Efficiency\n- **Sample Fields Used**: entwdrat, debteqiv, coverage, leveragemkt\n- **Definition**: Composite leverage score weighting market-based and accounting-based leverage measures by interest coverage capacity\n- **Why This Feature**: Captures the full spectrum of financial risk by combining debt levels with ability to service that debt via operating cash flows\n- **Logical Meaning**: Low values indicate conservative, flexible capital structures; high values indicate aggressive leverage with limited coverage cushion\n- **is filling nan necessary**: Yes, coverage ratios may be missing for zero-debt companies. Use replace() to set coverage to a high default value (e.g., 100) for these cases, as no debt implies infinite coverage.\n- **Directionality**: Low = financial flexibility; High = bankruptcy risk or aggressive financial engineering\n- **Boundary Conditions**: Values <1 indicate coverage concerns; >10 indicates excess capacity",
+    "expression_list": [
+        "divide(add(mdl172_entwdrat, mdl172_debteqiv), mdl172_coverage)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_delta(vec_stddev({version}), 1), 0), signed_power(zscore(ts_sum(winsorize(ts_delta(vec_stddev({version}), 1), std=4), 20)), 1.2), signed_power(zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20)), 0.7))",
+    "idea": "对分歧度上升(发散)与下降(收敛)采取非对称响应：当分歧扩大时，保留原始方向并使用signed_power(y=1.2)适度放大；当分歧收敛时，取绝对值并使用signed_power(y=0.7)压缩幅度，反映市场对'不确定性消除'的反应弱于'不确定性爆发'的实证特征，构建方向依赖的非线性 alpha。",
+    "expression_list": [
+        "if_else(greater(ts_delta(vec_stddev(anl85_version), 1), 0), signed_power(zscore(ts_sum(winsorize(ts_delta(vec_stddev(anl85_version), 1), std=4), 20)), 1.2), signed_power(zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20)), 0.7))"
+    ]
+}

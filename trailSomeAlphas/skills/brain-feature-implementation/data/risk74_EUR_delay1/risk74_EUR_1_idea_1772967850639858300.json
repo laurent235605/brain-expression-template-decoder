@@ -1,0 +1,16 @@
+{
+    "template": "trade_when(greater(ts_rank(winsorize({nondomicile},std=4), 60), 0.8), ts_delta(winsorize({concentration},std=4), 20), 0)",
+    "idea": "高海外敞口下的集中动量：仅对近期（60日）海外收入占比处于历史高位（前20%分位）的股票，计算其20日地理集中度的变化量。捕捉正在加速恶化（集中度快速提升）的单一国家依赖风险，避免对长期稳定分散型公司的误判。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.8), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.8), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.8), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.8), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.8), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.8), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.8), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.8), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.8), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0)",
+        "trade_when(greater(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.8), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0)"
+    ]
+}

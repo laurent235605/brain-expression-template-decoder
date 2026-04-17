@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(winsorize(vec_skewness(vec_filter({investment}, value=\"nan\")), std=4), 5), 20)",
+    "idea": "偏度动量趋势（衰减加权）：计算投资偏度在5日内的变化量（一阶差分），捕捉配置集中度是正在快速向集中化还是分散化转变，随后应用20日线性衰减加权平滑。该模板强调近期变化的重要性，适用于识别正在形成中的投资风格切换（如从分散试错转向集中押注），相比静态偏度具有更强的预测性。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(winsorize(vec_skewness(vec_filter(mdl209_investment, value=\"nan\")), std=4), 5), 20)"
+    ]
+}

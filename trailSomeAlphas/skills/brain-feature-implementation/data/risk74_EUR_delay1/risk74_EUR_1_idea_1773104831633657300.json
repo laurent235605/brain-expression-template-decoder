@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), ts_step(), 126, rettype=2), industry)",
+    "idea": "趋势增强型（Momentum Spread）：将静态价差转化为动态趋势信号，通过时间序列回归提取过去126天中美敞口价差的斜率（rettype=2），捕捉区域配置轮动的加速度而非 mere 水平差异。行业中性化确保信号来源于敞口调整的速度（地缘政治周期的启停），而非行业Beta的静态暴露。",
+    "expression_list": [
+        "group_zscore(ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), ts_step(), 126, rettype=2), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); vol_trend = ts_delta(vol_clean, 20); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); combined = add(level_score, multiply(0.3, zscore(winsorize(ts_backfill(vol_trend, 63), std=4)))); core = trade_when(greater(vol_clean, 0), combined, multiply(combined, 0.3)); hump_decay(core, hump=0.01)",
+    "idea": "结合期限结构水平与趋势（ts_delta），识别“稳定度正在改善”的增强场景。对波动率差为正且趋势向上的股票给予双重正向暴露，对不稳定股票整体压缩权重，并使用hump_decay抑制日间微小波动导致的换手率。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); vol_trend = ts_delta(vol_clean, 20); level_score = zscore(winsorize(ts_backfill(b, 63), std=4)); combined = add(level_score, multiply(0.3, zscore(winsorize(ts_backfill(vol_trend, 63), std=4)))); core = trade_when(greater(vol_clean, 0), combined, multiply(combined, 0.3)); hump_decay(core, hump=0.01)"
+    ]
+}

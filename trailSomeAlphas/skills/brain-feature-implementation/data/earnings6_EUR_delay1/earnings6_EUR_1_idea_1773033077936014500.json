@@ -1,0 +1,8 @@
+{
+    "template": "quantile( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver=\"gaussian\" )",
+    "idea": "分位数拉伸极端Surprise捕捉。对模板1计算出的Surprise应用quantile(..., driver=\"gaussian\")进行高斯分位数变换，将中间区间的噪音压缩至0附近，同时将极端正负Surprise拉伸至更远位置，强化对'极端超预期/低于预期'事件的暴露，符合'只有两端有信号'的逻辑。",
+    "expression_list": [
+        "quantile( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" )",
+        "quantile( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), driver=\"gaussian\" )"
+    ]
+}

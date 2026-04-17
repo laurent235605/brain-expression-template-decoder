@@ -1,0 +1,7 @@
+{
+    "template": "({active_weight_decile_rank_long} - {active_return_decile_rank_long}) / ts_std_dev(({active_weight_decile_rank_long} - {active_return_decile_rank_long}), 60)",
+    "idea": "**Concept**: Active-Implied Return Divergence\n- **Sample Fields Used**: active_weight_decile_rank_long, active_return_decile_rank_long\n- **Definition**: Z-score of the difference between active weight decile and BL-implied return decile, identifying stocks where positioning doesn't match expected returns\n- **Why This Feature**: Large divergences indicate either non-optimization-based holding reasons (constraints, ESG exclusions) or informational advantages not captured by the BL model\n- **is filling nan necessary**: If one field is missing but not the other, the divergence is undefined (NaN). Do not fill; preserve NaN to avoid false signals.\n- **Directionality**: High positive values (weight rank >> return rank) suggest over-positioning or expected return underestimation; negative values suggest under-positioning\n- **Boundary Conditions**: Extreme outliers may indicate data errors or special situations (spin-offs, halts)",
+    "expression_list": [
+        "(insd8_active_weight_decile_rank_long - insd8_black_litterman_implied_active_return_decile_rank_long) / ts_std_dev((insd8_active_weight_decile_rank_long - insd8_black_litterman_implied_active_return_decile_rank_long), 60)"
+    ]
+}

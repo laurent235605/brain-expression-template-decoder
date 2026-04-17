@@ -1,0 +1,5 @@
+{
+    "template": "group_zscore( winsorize( quantile( divide( subtract( vec_median({actual_eps}), vec_median({estimated_eps}) ), add( vec_stddev({estimated_eps}), 0.01 ) ), driver=\"gaussian\" ), std=4 ), {industry} )",
+    "idea": "稳健标准化+行业中性极端捕捉。使用vec_median替代vec_avg降低极端分析师估计的干扰，vec_stddev作为分母衡量预期分歧，先进行高斯分位数拉伸将极端惊喜推至尾部，再经winsorize去极值，最后用group_zscore实现行业内相对比较，精准捕捉'行业内极端超预期/低于预期'事件，避免行业间估计水平差异的干扰。",
+    "expression_list": []
+}

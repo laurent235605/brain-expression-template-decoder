@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(bucket(group_rank(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_mean(ts_std_dev(returns, 21), 63), 0.001)), group_cartesian_product(industry, bucket(ts_mean(cap,21), \"0,1,0.2\"))), range=\"0,1,0.1\"), industry)",
+    "idea": "风险分母采用长短波动率均值（21日波动率的63日均值）以平滑风险估计；在“行业×市值五分位”的笛卡尔积分组内进行排名（精细控制规模-行业交互效应）；通过十分位分桶将连续信号离散化，突出极端分组；最后group_normalize确保每个行业内部多空平衡；识别在同业同规模组内风险调整后配置最极端的基金，避免规模偏差导致的伪信号。",
+    "expression_list": [
+        "group_normalize(bucket(group_rank(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_mean(ts_std_dev(returns, 21), 63), 0.001)), group_cartesian_product(industry, bucket(ts_mean(cap,21), \"0,1,0.2\"))), range=\"0,1,0.1\"), industry)"
+    ]
+}

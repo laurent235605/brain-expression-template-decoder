@@ -1,0 +1,7 @@
+{
+    "template": "asset_clean = winsorize(ts_backfill({reported_asset_value}, 5), std=4); delta = ts_delta(asset_clean, 20); xs_neutral = group_zscore(delta, sector); ts_rel = ts_zscore(xs_neutral, 126); final = signed_power(winsorize(ts_rel, std=3), 1.5)",
+    "idea": "历史相对极端值强化：在行业中性处理后，进一步考察资产变动相对于个股自身历史（半年窗口）的极端程度，通过Z-score度量历史分位，再以1.5次幂非线性放大尾部，捕捉突破历史区间的持续性资产_gathering能力。",
+    "expression_list": [
+        "asset_clean = winsorize(ts_backfill(fund_reported_asset_value, 5), std=4); delta = ts_delta(asset_clean, 20); xs_neutral = group_zscore(delta, sector); ts_rel = ts_zscore(xs_neutral, 126); final = signed_power(winsorize(ts_rel, std=3), 1.5)"
+    ]
+}

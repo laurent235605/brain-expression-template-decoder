@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), driver=\"gaussian\"), 10)",
+    "idea": "使用分位数变换替代幂变换进行尾部强化：对平滑后的行业内标准化残差应用高斯分位数映射(quantile)，将中间区域压缩至0附近并将统计尾部拉远，相比signed_power更强调极端分位的预测力，同时保持排序单调性，最后经10日衰减控制换手，适用于认为“只有极端分位才有alpha”的均衡策略。",
+    "expression_list": [
+        "ts_decay_linear(quantile(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), driver=\"gaussian\"), 10)"
+    ]
+}

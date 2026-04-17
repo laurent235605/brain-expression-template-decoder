@@ -1,0 +1,7 @@
+{
+    "template": "{fundreportedequityassets} / {reported_asset_value}",
+    "idea": "**Concept**: Equity Allocation Percentage\n- **Sample Fields Used**: `fundreportedequityassets`, `reported_asset_value`\n- **Definition**: Proportion of total fund assets allocated to equity securities\n- **Why This Feature**: Fundamental structural characteristic determining beta exposure, volatility, and market correlation; stable structural feature for risk classification\n- **Logical Meaning**: Represents risk asset commitment; high values indicate equity-centric strategies, low values indicate income/defensive strategies\n- **is filling nan necessary**: Yes, use `ts_backfill()` on numerator and denominator to ensure ratio calculation uses aligned data points; critical for quarterly disclosure timing mismatches\n- **Directionality**: High values (0.8-1.0) indicate equity funds; low values (0.0-0.2) indicate bond funds; intermediate values indicate balanced or flexible allocation\n- **Boundary Conditions**: 0 indicates pure fixed income/alternatives; 1 indicates pure equity; values >1 suggest leverage or pricing anomalies",
+    "expression_list": [
+        "inst16_ipreo_fundreportedequityassets / fund_reported_asset_value"
+    ]
+}

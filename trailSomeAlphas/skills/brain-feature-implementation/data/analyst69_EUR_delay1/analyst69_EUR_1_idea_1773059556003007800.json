@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(days_from_last_change({eps_expected_report_dt}), industry), 2)",
+    "idea": "**行业中性化极端稳定性信号**：首先使用`group_zscore`在行业内部进行标准化，消除不同行业（如科技vs公用事业）在报告日期变动频率上的固有差异；随后使用`signed_power(..., 2)`对标准化后的值进行非线性放大，既保留了方向性（高值=长期稳定为正，低值=近期变动为负），又极度放大了两端的极端情况（极度稳定和极度不稳定），使信号更聚焦于显著的日程规划异常。",
+    "expression_list": [
+        "signed_power(group_zscore(days_from_last_change(anl69_aeps_expected_report_dt), industry), 2)",
+        "signed_power(group_zscore(days_from_last_change(anl69_eps_expected_report_dt), industry), 2)"
+    ]
+}

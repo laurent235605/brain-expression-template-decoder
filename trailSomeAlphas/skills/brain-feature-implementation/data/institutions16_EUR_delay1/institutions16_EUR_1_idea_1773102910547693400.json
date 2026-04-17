@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), 1.5), 10)",
+    "idea": "先通过20日平均平滑短期噪音并计算行业内残差，接着用signed_power(1.5)放大极端偏离的头尾信号，最后通过10日线性衰减降低换手。融合了\"平滑去噪+非线性强化的双阶段增强\"与\"衰减降换手\"的优势，既捕捉持续性趋势又凸性放大高置信度偏离，实现稳定性与敏感性的均衡。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), 1.5), 10)"
+    ]
+}

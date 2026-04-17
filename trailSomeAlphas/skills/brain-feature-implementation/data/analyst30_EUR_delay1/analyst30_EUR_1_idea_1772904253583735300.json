@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 252), 0.9), signed_power(group_zscore(ts_decay_linear(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), 20), industry), 1.5), 0)",
+    "idea": "结合历史分位与行业中性，仅当会计年度分散度(标准差)处于自身历史极端高位(前10%)时触发信号，利用ts_decay_linear捕捉近期趋势而非噪音，通过signed_power非线性放大极端值，识别业务结构复杂性达到历史极值且持续恶化的公司。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 252), 0.9), signed_power(group_zscore(ts_decay_linear(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), 20), industry), 1.5), 0)"
+    ]
+}

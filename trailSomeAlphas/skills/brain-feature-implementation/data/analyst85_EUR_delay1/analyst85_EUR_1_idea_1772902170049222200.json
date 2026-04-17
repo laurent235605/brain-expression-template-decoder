@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 5), industry)",
+    "idea": "行业中性化版本动量：对原始版本均值进行后向填充和去极值处理，计算5日变化率后，在行业内部进行Z-Score标准化，剔除行业层面的系统性更新噪音，捕捉个股特有的信息变动加速度。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize(ts_backfill(vec_avg(anl85_version), 63), std=4), 5), industry)"
+    ]
+}

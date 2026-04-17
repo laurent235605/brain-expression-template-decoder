@@ -1,0 +1,7 @@
+{
+    "template": "raw = winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4); cs_signal = group_zscore(signed_power(raw, 1.5), sector); ts_extreme = ts_zscore(cs_signal, 63); active = and(greater(abs(cs_signal), 1.5), greater(abs(ts_extreme), 1.0)); final = trade_when(active, cs_signal, 0); final = ts_decay_linear(final, 5)",
+    "idea": "在原有截面行业中性化基础上，引入时序维度验证：只有当定价偏离度在截面上处于极端（|zscore|>1.5）且相对于该股票自身历史也处于极端（63日zscore>1.0）时才开仓，实现“截面+时序”双极值共振过滤；中间区间及历史常态时直接置零，显著降低噪音；最后加入5日线性衰减平滑，控制换手率。",
+    "expression_list": [
+        "raw = winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4); cs_signal = group_zscore(signed_power(raw, 1.5), sector); ts_extreme = ts_zscore(cs_signal, 63); active = and(greater(abs(cs_signal), 1.5), greater(abs(ts_extreme), 1.0)); final = trade_when(active, cs_signal, 0); final = ts_decay_linear(final, 5)"
+    ]
+}

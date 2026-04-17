@@ -1,0 +1,8 @@
+{
+    "template": "add( multiply( 0.7, ts_decay_linear( group_rank( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_range({estimated_eps}), 0.01) ), industry ), 20 ) ), multiply( 0.3, ts_rank( divide( subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01) ), 60 ) ) )",
+    "idea": "复合双时间尺度信号：70%权重为近期行业相对排名（分母改用估计区间宽度vec_range衡量分析师分歧度，分歧越大Surprise信号越可信），经20天线性衰减；30%权重为个股自身历史Surprise的60日历史分位数（ts_rank），兼顾截面相对位置与时序历史位置，降低单一时间窗口的偶然性。",
+    "expression_list": [
+        "add( multiply( 0.7, ts_decay_linear( group_rank( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_range(ern6_estimated_eps), 0.01) ), industry ), 20 ) ), multiply( 0.3, ts_rank( divide( subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), 60 ) ) )",
+        "add( multiply( 0.7, ts_decay_linear( group_rank( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_range(ern6_estimated_eps), 0.01) ), industry ), 20 ) ), multiply( 0.3, ts_rank( divide( subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01) ), 60 ) ) )"
+    ]
+}

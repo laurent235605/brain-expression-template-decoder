@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(if_else(greater(abs(vec_avg({estimated_eps})), 0.1), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), multiply(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), 5)), industry)",
+    "idea": "**双机制条件处理（规模自适应）**：针对不同预期EPS规模采用差异化计算逻辑：当预期EPS绝对值大于0.1时，使用百分比惊喜（相对变化，适合正常盈利公司）；当预期EPS绝对值小于等于0.1（接近盈亏平衡或极小盈利）时，使用绝对惊喜乘以系数5（避免小分母导致的百分比失真，更适合小盈利或亏损公司）。通过if_else实现条件分支，最后在行业内排名（group_rank），确保不同规模、不同盈利水平的公司在各自行业内可比，避免规模偏差。",
+    "expression_list": [
+        "group_rank(if_else(greater(abs(vec_avg(ern6_estimated_eps)), 0.1), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), multiply(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), 5)), industry)",
+        "group_rank(if_else(greater(abs(vec_avg(ern6_estimated_eps)), 0.1), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), multiply(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), 5)), industry)"
+    ]
+}

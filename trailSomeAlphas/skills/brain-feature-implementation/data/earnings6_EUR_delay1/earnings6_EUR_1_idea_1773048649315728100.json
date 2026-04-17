@@ -1,0 +1,5 @@
+{
+    "template": "if_else(or(greater(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 0.9), less(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01))), 0.1)), signed_power(group_zscore(quantile(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), driver=\"gaussian\"), {industry}), 2), 0)",
+    "idea": "极端分位非对称暴露：仅对盈利惊喜分布的前10%（大幅 beat）和后10%（大幅 miss）建立非对称头寸，中间80%平淡区间视为噪音并置零（if_else逻辑）；对选出的极端值先进行高斯分位数变换（quantile gaussian）将均匀分布拉伸至尾部，再进行行业中性化（group_zscore），最后使用平方（signed_power 2）强化极端股票的权重差异，构建高换手率但高区分度的事件驱动策略。",
+    "expression_list": []
+}

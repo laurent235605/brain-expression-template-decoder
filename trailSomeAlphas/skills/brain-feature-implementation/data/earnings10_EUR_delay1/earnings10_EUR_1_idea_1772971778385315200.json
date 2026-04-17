@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(if_else(less(bucket(rank(winsorize(vec_stddev({elta_value}), std=4)), range=\"0,1,0.2\"), 0.1), multiply(signed_power(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), 1.5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.2)), if_else(less(bucket(rank(winsorize(vec_stddev({elta_value}), std=4)), range=\"0,1,0.2\"), 0.5), multiply(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -0.5)), multiply(signed_power(ts_delta(winsorize(vec_avg({elta_value}), std=4), 5), 0.7), signed_power(add(1, winsorize(vec_stddev({elta_value}), std=4)), -1.0)))), industry)",
+    "idea": "动态分桶非线性响应：将分析师分歧度按历史分位划分为低/中/高三档，对低分歧（高置信）动量施加1.5次幂放大，对高分歧（低置信）动量施加0.7次幂压缩并加重惩罚权重，中段维持标准缩放，实现非线性置信响应。",
+    "expression_list": [
+        "group_zscore(if_else(less(bucket(rank(winsorize(vec_stddev(ern10_elta_value), std=4)), range=\"0,1,0.2\"), 0.1), multiply(signed_power(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), 1.5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.2)), if_else(less(bucket(rank(winsorize(vec_stddev(ern10_elta_value), std=4)), range=\"0,1,0.2\"), 0.5), multiply(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -0.5)), multiply(signed_power(ts_delta(winsorize(vec_avg(ern10_elta_value), std=4), 5), 0.7), signed_power(add(1, winsorize(vec_stddev(ern10_elta_value), std=4)), -1.0)))), industry)"
+    ]
+}

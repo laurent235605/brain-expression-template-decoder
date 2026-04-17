@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore( ts_std_dev( ts_backfill( vec_avg({quintile}), 3 ), 60 ), 252 )",
+    "idea": "稳定性时序动量（均值回归）因子。计算当前60日滚动标准差在过去252日（一年）历史中的z-score位置，识别分位数稳定性的极端偏离。高z-score表示当前处于历史罕见的动荡期（可能即将回归稳定），低z-score表示处于历史最稳定阶段（可能持续或反转），用于捕捉稳定性自身的周期特征。",
+    "expression_list": [
+        "ts_zscore( ts_std_dev( ts_backfill( vec_avg(mdl249_quintile), 3 ), 60 ), 252 )"
+    ]
+}

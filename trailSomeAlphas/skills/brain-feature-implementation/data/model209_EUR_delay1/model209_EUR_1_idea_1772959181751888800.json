@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(vec_count({lastcostingfailed}), 5), subtract(1, vec_avg({lastcostingfailed})), 0)",
+    "idea": "数据充足性过滤：仅当向量样本量足够（计数>5）时才计算可靠性，避免样本不足导致的统计误判。结合向量计数算子与条件交易逻辑，确保信号基于充分的数据支撑，缺失数据时保守地赋予零暴露。",
+    "expression_list": [
+        "trade_when(greater(vec_count(mdl209_lastcostingfailed), 5), subtract(1, vec_avg(mdl209_lastcostingfailed)), 0)"
+    ]
+}

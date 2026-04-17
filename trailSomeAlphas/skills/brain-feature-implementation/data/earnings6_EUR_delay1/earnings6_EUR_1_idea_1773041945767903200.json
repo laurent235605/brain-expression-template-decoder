@@ -1,0 +1,10 @@
+{
+    "template": "quantile(group_zscore(divide(vec_percentage({x_dividend}, 0.5), add(ts_median(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252), 0.001)), industry), driver=\"gaussian\")",
+    "idea": "稳健型股息持续性：使用vec_percentage(..., 0.5)取当日股息向量的中位数（替代均值）以抵抗特别股息的极端值干扰，并与历史252天股息中位数比较。经行业中性化后，通过高斯分位数转换（quantile）将中间区间压缩至0附近，仅保留极端尾部信号（极高或极低的持续性）。适用于识别具有真正稳定分红政策（vs一次性分红）的行业龙头或风险标的。",
+    "expression_list": [
+        "quantile(group_zscore(divide(vec_percentage(ern6_x_dividend, 0.5), add(ts_median(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252), 0.001)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(vec_percentage(ern6_x_dividend_233, 0.5), add(ts_median(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252), 0.001)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(vec_percentage(ern6_x_dividend_oc, 0.5), add(ts_median(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252), 0.001)), industry), driver=\"gaussian\")",
+        "quantile(group_zscore(divide(vec_percentage(ern6_x_dividend_oc_235, 0.5), add(ts_median(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252), 0.001)), industry), driver=\"gaussian\")"
+    ]
+}

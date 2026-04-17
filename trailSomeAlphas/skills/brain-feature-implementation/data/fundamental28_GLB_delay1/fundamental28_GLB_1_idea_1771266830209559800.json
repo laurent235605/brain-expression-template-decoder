@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(add(multiply(0.7, winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4)), multiply(0.3, winsorize(divide(ts_delta(ts_delta({value_08316q}, 63), 63), ts_mean({value_08316q}, 252)), std=4))), industry)",
+    "idea": "双动量融合（一阶变化+二阶加速度）。同时考虑利润率的当期变化速度（一阶导）和变化加速度（二阶导），通过加权组合（0.7:0.3）在行业内部标准化。相比单一动量，能更早识别经营拐点（加速改善vs减速恶化）。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.7, winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4)), multiply(0.3, winsorize(divide(ts_delta(ts_delta(fnd28_newq_value_08316q, 63), 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4))), industry)",
+        "group_zscore(add(multiply(0.7, winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4)), multiply(0.3, winsorize(divide(ts_delta(ts_delta(fnd28_ratesq_value_08316q, 63), 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4))), industry)"
+    ]
+}

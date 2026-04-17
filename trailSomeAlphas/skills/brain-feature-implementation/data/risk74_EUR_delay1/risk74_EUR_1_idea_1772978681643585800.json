@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)),std=4), group_mean(winsorize(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)),std=4), log(ts_mean({cap},21)), industry), 252, rettype=0)",
+    "idea": "地理暴露残差因子（Idiosyncratic Geographic Risk）。借鉴CAPM残差模板，以行业市值加权平均美国暴露作为'市场组合'，通过252日回归剥离行业共性地理β，保留残差项。高残差表示公司主动偏离行业趋势进行美国市场押注（管理层特异性决策），低残差表示随波逐流，用于区分'行业β'与'个股α'的地理风险来源。",
+    "expression_list": [
+        "ts_regression(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)),std=4), group_mean(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)),std=4), log(ts_mean(market_cap_usd,21)), industry), 252, rettype=0)"
+    ]
+}

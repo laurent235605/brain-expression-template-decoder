@@ -1,0 +1,7 @@
+{
+    "template": "vec_count({currency_code})",
+    "idea": "**Concept**: Multi-Currency Exposure Complexity\n- **Sample Fields Used**: `currency_code`\n- **Definition**: Count of distinct currency codes present in the dividend vector\n- **Why This Feature**: Identifies complex capital structures, ADR programs, or multi-jurisdictional operations with dividends paid in multiple currencies\n- **Logical Meaning**: Operational complexity and FX exposure diversification; single currency indicates simple structure, multiple indicates complexity\n- **is filling nan necessary**: NaN values represent unspecified currencies and should be filtered out before counting to avoid inflating complexity metrics\n- **Directionality**: Higher values indicate multi-currency dividend structures; 1 indicates single currency uniformity\n- **Boundary Conditions**: Integer >= 0; typically 1-3 for most equities; >3 indicates highly complex structures",
+    "expression_list": [
+        "vec_count(payment_currency_code)"
+    ]
+}

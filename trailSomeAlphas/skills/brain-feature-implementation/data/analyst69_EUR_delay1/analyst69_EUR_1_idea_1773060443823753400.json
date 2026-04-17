@@ -1,0 +1,8 @@
+{
+    "template": "quantile(winsorize(ts_decay_exp_window(multiply(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 21), 126)), halflife=10), std=3), driver=cauchy)",
+    "idea": "多时间尺度非线性交互模板。将行业截面Z分数（5日修正）与个股时序Z分数（21日修正的历史极端性）进行乘法交互，而非传统加法，确保只有当横向与纵向同时极端时才产生强信号；通过指数衰减窗口（半衰期10天）赋予近期信号更高权重，并使用cauchy分布拉伸尾部，强调肥尾事件带来的Alpha机会。",
+    "expression_list": [
+        "quantile(winsorize(ts_decay_exp_window(multiply(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 21), 126)), halflife=10), std=3), driver=cauchy)",
+        "quantile(winsorize(ts_decay_exp_window(multiply(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 21), 126)), halflife=10), std=3), driver=cauchy)"
+    ]
+}

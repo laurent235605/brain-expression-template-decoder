@@ -1,0 +1,7 @@
+{
+    "template": "power({stoxx_europe_600_ucits_weight}, 2)",
+    "idea": "**Concept**: Weight Concentration Index\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The Herfindahl-style concentration measure capturing how allocated the portfolio is across constituents, derived from the weight itself through squared normalization\n- **Why This Feature**: While individual weights sum to 1, the distribution of weights (concentrated vs. dispersed) reveals fund risk profile and benchmark tracking precision—high concentration increases specific risk\n- **is filling nan necessary**: No, NaN values represent missing constituents and should be treated as zero weight for concentration calculations; filling would artificially reduce concentration\n- **Directionality**: Higher values indicate concentrated bets in few names (active management or momentum); lower values indicate diversified, index-like distribution\n- **Boundary Conditions**: Ranges from 1/N (perfect equal weight) to 1 (single stock fund)",
+    "expression_list": [
+        "power(mcr51_ishares_stoxx_europe_600_ucits_weight, 2)"
+    ]
+}

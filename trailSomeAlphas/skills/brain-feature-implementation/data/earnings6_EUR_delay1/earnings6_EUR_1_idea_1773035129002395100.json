@@ -1,0 +1,8 @@
+{
+    "template": "divide(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_std_dev(vec_avg({actual_eps}), 63), 0.01))",
+    "idea": "波动率调整的惊喜信号：用EPS自身的63日历史波动率对惊喜幅度进行标准化。高波动股票（如成长股）通常需要更大的惊喜才能产生同等市场反应，而低波动股票（如公用事业）的微小惊喜可能更具信息含量。通过除以ts_std_dev实现跨波动性的可比性，避免高波动股票因自然误差范围大而淹没真实信号。",
+    "expression_list": [
+        "divide(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_std_dev(vec_avg(ern6_actual_eps), 63), 0.01))",
+        "divide(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_std_dev(vec_avg(ern6_actual_eps_274), 63), 0.01))"
+    ]
+}

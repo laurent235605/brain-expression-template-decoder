@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_delta(vec_avg({version}), 5), 5)",
+    "idea": "**Concept**: Version Acceleration\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Second derivative of version changes - the acceleration of revision activity calculated as change in momentum\n- **Why This Feature**: Identifies inflection points where analyst activity shifts from increasing to decreasing or vice versa, signaling turning points in information flow\n- **is filling nan necessary**: Apply `ts_backfill` with short window (2 days) before differencing to handle isolated NaNs, but preserve consecutive NaN blocks\n- **Directionality**: Positive acceleration indicates escalating analyst attention (potential catalyst approaching); negative acceleration indicates settling views\n- **Boundary Conditions**: Extreme values indicate single-day version jumps (likely data errors); moderate values indicate organic revision patterns",
+    "expression_list": [
+        "ts_delta(ts_delta(vec_avg(anl85_version), 5), 5)"
+    ]
+}

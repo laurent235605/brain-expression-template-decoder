@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(vec_avg({data_item_value}), 63, factor=0.5) / ts_mean(vec_avg({data_item_value}), 252)",
+    "idea": "**Concept**: Recency Weighted Valuation\n- **Sample Fields Used**: data_item_value\n- **Definition**: Ratio of exponentially weighted recent average to simple historical average, emphasizing recent vs older financial performance\n- **Why This Feature**: Recent financial performance often has higher predictive power for near-term stock returns; this feature identifies whether recent fundamentals are improving or deteriorating relative to the historical trend\n- **Logical Meaning**: The bias of recent financial performance relative to longer-term history; indicates acceleration or deceleration in fundamentals\n- **is filling nan necessary**: Yes, backfill to ensure the exponential decay calculation has continuous input\n- **Directionality**: Values >1 indicate recent performance is above historical average (positive momentum); values <1 indicate recent underperformance relative to history (negative momentum); 1 indicates stable trend\n- **Boundary Conditions**: Extreme values indicate significant inflection points; sustained values >1.5 or <0.5 suggest structural business changes",
+    "expression_list": [
+        "ts_decay_exp_window(vec_avg(anl89_data_item_value), 63, factor=0.5) / ts_mean(vec_avg(anl89_data_item_value), 252)"
+    ]
+}

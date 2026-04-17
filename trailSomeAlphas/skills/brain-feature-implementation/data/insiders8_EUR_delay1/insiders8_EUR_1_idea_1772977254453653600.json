@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(group_zscore(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long}, sector, 63), std=4), winsorize(group_backfill({owners_decile_rank_long}, sector, 63), std=4), 60, rettype=0), sector), 1.5)",
+    "idea": "基于行业中性化的极值放大模板。先使用group_backfill对缺失值按行业中位数回填，并对原始分位数据进行截尾去极值（winsorize）处理；通过60日滚动回归提取所有权集中度残差，进行行业中性化Z-score标准化；最后应用signed_power(1.5)非线性放大极端残差（异常集中或分散）的信号强度，同时压缩中间噪音区间，突出显著的结构性异常。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long, sector, 63), std=4), winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long, sector, 63), std=4), 60, rettype=0), sector), 1.5)",
+        "signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long, sector, 63), std=4), winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long, sector, 63), std=4), 60, rettype=0), sector), 1.5)",
+        "signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long, sector, 63), std=4), winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long, sector, 63), std=4), 60, rettype=0), sector), 1.5)",
+        "signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long, sector, 63), std=4), winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long, sector, 63), std=4), 60, rettype=0), sector), 1.5)"
+    ]
+}

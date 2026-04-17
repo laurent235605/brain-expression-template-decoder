@@ -1,0 +1,8 @@
+{
+    "template": "winsorize(multiply(ts_zscore(divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), nan_out(vec_avg({unadjustedgrossamt}), 0.0001)), 252), group_zscore(divide(subtract(vec_avg({unadjustedgrossamt}), vec_avg({adjustedgrossamt})), nan_out(vec_avg({unadjustedgrossamt}), 0.0001)), industry)), 4)",
+    "idea": "**历史-截面双偏离共振 (Dual Divergence Resonance)**：计算调整比例相对于自身历史（252日）的`ts_zscore`与相对于同行业横截面的`group_zscore`，两者相乘作为交互项；当公司既偏离自身历史常态、又偏离行业同期水平时（双高或双低），信号强度被平方级放大；若仅单一维度偏离则相互抵消，有效过滤孤立噪音。",
+    "expression_list": [
+        "winsorize(multiply(ts_zscore(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), 252), group_zscore(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_unadjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), industry)), 4)",
+        "winsorize(multiply(ts_zscore(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), 252), group_zscore(divide(subtract(vec_avg(anl30_unadjustedgrossamt), vec_avg(anl30_adjustedgrossamt)), nan_out(vec_avg(anl30_unadjustedgrossamt), 0.0001)), industry)), 4)"
+    ]
+}

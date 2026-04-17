@@ -1,0 +1,7 @@
+{
+    "template": "group_scale(((vec_avg({aily_delta_recon_value}) - ts_mean(vec_avg({aily_delta_recon_value}), 5)) / ts_std_dev(vec_avg({aily_delta_recon_value}), 5)) - ((vec_avg({aily_delta_recon_value}) - ts_mean(vec_avg({aily_delta_recon_value}), 60)) / ts_std_dev(vec_avg({aily_delta_recon_value}), 60)), sector)",
+    "idea": "双窗口预期差比较（短期过激vs长期趋势）：分别计算5日短期与60日长期的修订惊喜Z-Score，取两者之差以识别短期分析师预期与长期趋势的背离（Regime Change），并在行业内进行缩放标准化（group_scale），捕捉短期的过度反应或滞后修正机会，适用于预期拐点交易。",
+    "expression_list": [
+        "group_scale(((vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 5)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 5)) - ((vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 60)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 60)), sector)"
+    ]
+}

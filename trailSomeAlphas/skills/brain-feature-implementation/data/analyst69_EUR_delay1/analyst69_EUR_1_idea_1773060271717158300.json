@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), negative(group_rank(ts_delay(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), industry)), 0), 20)",
+    "idea": "利用延迟算子捕获报告日期变更前的历史稳定性（变更前一日距上次变更的天数），通过行业内排名（group_rank）识别在同行中原本报告日程最为稳定的公司。此类公司的突然调整蕴含更强的不确定性信息，赋予与其历史稳定性成正比的负面权重，并经20日衰减构建基于相对稳定性冲击的行业中性事件因子。",
+    "expression_list": [
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), negative(group_rank(ts_delay(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), industry)), 0), 20)",
+        "ts_decay_linear(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), negative(group_rank(ts_delay(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), industry)), 0), 20)"
+    ]
+}

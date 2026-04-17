@@ -1,0 +1,8 @@
+{
+    "template": "divide(ts_delta(ts_mean(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), 5), ts_delay(ts_mean(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), 5))",
+    "idea": "平滑后的效率转化率趋势：将模板2的EBITDA-EPS转化率作为基础，先应用ts_mean进行5日平滑降噪，再套用模板1的velocity计算框架，捕捉利润转化效率的趋势性变化而非单日噪音，适用于识别分析师对结构性杠杆预期的持续调整。",
+    "expression_list": [
+        "divide(ts_delta(ts_mean(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), 5), ts_delay(ts_mean(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), 5))",
+        "divide(ts_delta(ts_mean(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), 5), ts_delay(ts_mean(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), 5))"
+    ]
+}

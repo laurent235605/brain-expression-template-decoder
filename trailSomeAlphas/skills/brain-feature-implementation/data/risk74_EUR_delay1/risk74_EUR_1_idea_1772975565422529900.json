@@ -1,0 +1,14 @@
+{
+    "template": "multiply(subtract(max(max({factor_e}, {factor_s}), {factor_g}), min(min({factor_e}, {factor_s}), {factor_g})), signed_power(group_rank({crowding}, industry), 2))",
+    "idea": "**交叉增强逻辑**: 将Input 2的\"ESG不平衡剖面\"概念（最大-最小成分差异）与Input 1的拥挤度结合。通过`signed_power`对拥挤度排名进行非线性放大（第1.1步形状控制，y>1），突出极端拥挤股票的风险。该模板识别ESG内部差异大且市场拥挤的股票，这类股票往往面临双重风险：基本面不一致引发的监管风险与流动性风险。",
+    "expression_list": [
+        "multiply(subtract(max(max(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(rsk74_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(rsk74_raw_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(liquidity_factor_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(liquidity_timeseries_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(rsk74_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(rsk74_raw_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(liquidity_factor_crowding, industry), 2))",
+        "multiply(subtract(max(max(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), min(min(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g)), signed_power(group_rank(liquidity_timeseries_crowding, industry), 2))"
+    ]
+}

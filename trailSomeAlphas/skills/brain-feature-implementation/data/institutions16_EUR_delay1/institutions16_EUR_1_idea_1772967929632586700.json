@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(ts_delta(winsorize(ts_backfill({fundportfolioturnover},63),std=4),20), ts_delta(log(winsorize(ts_backfill({reported_asset_value},63),std=4)),20), 60, rettype=0)",
+    "idea": "变动率动量剥离：计算20日变化率（delta）后进行回归残差提取，衡量'规模变动无法解释的换手率变动'。该模板捕捉基金在规模调整基础上的交易动能变化，用于检测风格转变或异常调仓行为，对短期反转或动量策略更有效。",
+    "expression_list": [
+        "ts_regression(ts_delta(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4),20), ts_delta(log(winsorize(ts_backfill(fund_reported_asset_value,63),std=4)),20), 60, rettype=0)"
+    ]
+}

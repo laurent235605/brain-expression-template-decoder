@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_mean(signed_power(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 1.5), 5), 10)",
+    "idea": "交叉融合两个模板的核心算子顺序：先应用模板2的幂变换放大行业偏离的凸性，再进行5日移动平均（短周期平滑）消除幂变换可能放大的单日噪音，最后通过10日线性衰减（长周期稳定）控制最终组合换手。这种\"放大-短平滑-长衰减\"的级联结构在保持对持续偏离敏感的同时，有效抑制了信号抖动导致的过度交易。",
+    "expression_list": [
+        "ts_decay_linear(ts_mean(signed_power(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 1.5), 5), 10)"
+    ]
+}

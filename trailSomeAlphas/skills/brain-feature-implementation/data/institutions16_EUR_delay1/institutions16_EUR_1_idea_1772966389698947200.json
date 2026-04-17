@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(ts_backfill({fundportfolioturnover},63),std=4), bucket(rank(ts_backfill({reported_asset_value},63)),\"0,1,0.2\"))), 1.5), group_zscore(winsorize(ts_backfill({fundportfolioturnover},63),std=4), bucket(rank(ts_backfill({reported_asset_value},63)),\"0,1,0.2\")), 0)",
+    "idea": "**非参数化规模分层中性化（分桶法）**：不假设规模与换手率的线性关系。先将基金按规模排名分为5个分位数桶（bucket），在每个规模桶内计算换手率的组内zscore（group_zscore）。使用trade_when逻辑运算符，仅当|zscore|超过1.5倍标准差时才保留信号（极端异常活跃或被动），中间区间视为噪音置零。这种方法避免了跨规模组的不可比性，更精准捕捉同规模 peers 中的异常交易行为。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), bucket(rank(ts_backfill(fund_reported_asset_value,63)),\"0,1,0.2\"))), 1.5), group_zscore(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), bucket(rank(ts_backfill(fund_reported_asset_value,63)),\"0,1,0.2\")), 0)"
+    ]
+}

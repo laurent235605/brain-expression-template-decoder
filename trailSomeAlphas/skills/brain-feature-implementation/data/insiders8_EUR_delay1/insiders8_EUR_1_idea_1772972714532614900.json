@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(ts_zscore(winsorize(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), std=4), 252), sector)",
+    "idea": "历史极端偏离模板：首先计算机构持仓与总持仓分位排名的60日滚动相关性，然后对该相关性序列进行252日历史zscore标准化，识别当前所有权结构稳定性是否处于历史极端水平（过高或过低），最后进行行业中性化。该模板捕获“历史罕见的所有权结构松动或稳固”信号，强调时间序列上的异常值而非绝对水平，适用于捕捉长期结构性的股东行为拐点。",
+    "expression_list": [
+        "group_zscore(ts_zscore(winsorize(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), std=4), 252), sector)",
+        "group_zscore(ts_zscore(winsorize(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), std=4), 252), sector)",
+        "group_zscore(ts_zscore(winsorize(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), std=4), 252), sector)",
+        "group_zscore(ts_zscore(winsorize(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), std=4), 252), sector)"
+    ]
+}

@@ -1,0 +1,18 @@
+[
+    "abs(subtract(vec_avg(mdl245_rank), ts_median(vec_avg(mdl245_rank), 60)))",
+    "divide(subtract(vec_avg(mdl245_rank), ts_min(vec_avg(mdl245_rank), 60)), subtract(ts_max(vec_avg(mdl245_rank), 60), ts_min(vec_avg(mdl245_rank), 60)))",
+    "divide(ts_av_diff(vec_avg(mdl245_rank), 60), ts_std_dev(vec_avg(mdl245_rank), 60))",
+    "divide(vec_avg(mdl245_rank), ts_std_dev(vec_avg(mdl245_rank), 20))",
+    "inverse(ts_std_dev(vec_avg(mdl245_rank), 20))",
+    "multiply(ts_delta(vec_avg(mdl245_rank), 5), inverse(ts_std_dev(vec_avg(mdl245_rank), 20)))",
+    "reverse(vec_avg(mdl245_rank))",
+    "subtract(ts_delta(vec_avg(mdl245_rank), 5), ts_delta(vec_avg(mdl245_rank), 10))",
+    "subtract(vec_avg(mdl245_rank), ts_decay_exp_window(vec_avg(mdl245_rank), 20, factor=0.5))",
+    "ts_av_diff(vec_avg(mdl245_rank), 60)",
+    "ts_corr(vec_avg(mdl245_rank), ts_delay(vec_avg(mdl245_rank), 1), 20)",
+    "ts_decay_linear(vec_avg(mdl245_rank), 20)",
+    "ts_delta(vec_avg(mdl245_rank), 5)",
+    "ts_skewness(vec_avg(mdl245_rank), 60)",
+    "ts_std_dev(vec_avg(mdl245_rank), 20)",
+    "ts_sum(ts_delta(vec_avg(mdl245_rank), 1), 20)"
+]

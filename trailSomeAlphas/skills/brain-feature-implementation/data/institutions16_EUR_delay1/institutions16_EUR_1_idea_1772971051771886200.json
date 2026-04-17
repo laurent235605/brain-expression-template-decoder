@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(vector_neut(ts_backfill({fundreportedequityassets},5), ts_backfill({reported_asset_value},5)), bucket(rank(ts_backfill({reported_asset_value},5)),range=\"0,1,0.1\"))",
+    "idea": "**概念**：规模分层相对配置强度（Size-Stratified Relative Allocation）\n**逻辑**：先将基金按总资产规模分为10个分位组（十分位，bucket），在每个规模组内计算向量中性化权益敞口的组内Z分数（group_zscore）。\n**为什么**：大型基金面临流动性约束、投资范围限制与小基金不同，直接跨规模比较有偏差；在同规模组内比较能识别\"同重量级选手\"中的配置异常者，剥离规模-风格混杂效应。\n**方向性**：高Z分数（如>2）表示在该规模组内权益配置显著激进，低Z分数（如<-2）表示相对于同规模 peers 异常保守。\n**边界条件**：零值表示配置与组内平均水平一致；组内样本过少时信号可能不稳定，但分桶设计保证了每组至少有一定样本量。",
+    "expression_list": [
+        "group_zscore(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets,5), ts_backfill(fund_reported_asset_value,5)), bucket(rank(ts_backfill(fund_reported_asset_value,5)),range=\"0,1,0.1\"))"
+    ]
+}

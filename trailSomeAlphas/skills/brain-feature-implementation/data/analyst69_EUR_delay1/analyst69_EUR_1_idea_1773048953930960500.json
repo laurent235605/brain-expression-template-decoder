@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(multiply(group_rank(winsorize({eps_best_eeps_cur_yr}, 4), {sector}), inverse(add(0.1, ts_std_dev(winsorize({eps_best_eeps_cur_yr}, 4), 126)))), {sector})",
+    "idea": "用预期稳定性(126日标准差的倒数加0.1防除零)作为质量权重调整行业内的预期排名，惩罚那些波动大、分析师分歧高的不稳定预期；group_normalize确保行业内多空平衡，形成质量增强型预期因子",
+    "expression_list": []
+}

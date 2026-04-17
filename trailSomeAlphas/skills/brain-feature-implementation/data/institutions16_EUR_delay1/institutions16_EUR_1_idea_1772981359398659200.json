@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(truncate(signed_power(ts_decay_linear(ts_zscore(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252), 10), 1.5), maxPercent=0.02), industry)",
+    "idea": "引入时间序列视角，通过252日ts_zscore识别当前风险调整后配置强度相对自身历史的位置，利用线性衰减（ts_decay_linear）平滑短期噪音，并通过signed_power(1.5)非线性放大历史极端偏离，最终进行行业中性化与权重截断，构建低换手的长周期特质性暴露因子。",
+    "expression_list": [
+        "group_normalize(truncate(signed_power(ts_decay_linear(ts_zscore(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 252), 10), 1.5), maxPercent=0.02), industry)"
+    ]
+}

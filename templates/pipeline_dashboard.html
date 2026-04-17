@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha 自动流水线</title>
+<style>
+:root {
+  --bg: #0f1419; --surface: #1a2332; --surface2: #243044;
+  --border: #2d3f56; --text: #e6edf3; --text2: #8b949e;
+  --accent: #58a6ff; --green: #3fb950; --red: #f85149;
+  --yellow: #d29922; --purple: #bc8cff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+.header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; gap: 16px; }
+.header h1 { font-size: 1.3rem; }
+.header .back { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* Create form */
+.create-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 24px; }
+.create-panel h2 { font-size: 1.1rem; margin-bottom: 16px; color: var(--accent); }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group label { font-size: 0.8rem; color: var(--text2); }
+.form-group input, .form-group select, .form-group textarea { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; color: var(--text); font-size: 0.9rem; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+.form-group textarea { resize: vertical; min-height: 60px; font-family: monospace; font-size: 0.8rem; }
+.secret-toggle-wrap { position: relative; display: flex; align-items: center; width: 100%; }
+.secret-toggle-wrap > input { width: 100%; padding-right: 42px; }
+.secret-toggle-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border: none; border-radius: 999px; background: transparent; color: var(--text2); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+.secret-toggle-btn:hover { background: rgba(139, 148, 158, 0.12); color: var(--text); }
+.secret-toggle-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.secret-toggle-btn svg { width: 16px; height: 16px; pointer-events: none; }
+.btn { padding: 8px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: 0.2s; }
+.btn-primary { background: var(--accent); color: #000; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-success { background: var(--green); color: #000; }
+.btn-stop-config-active { background: rgba(210,153,34,0.2); color: #f2cc60; border: 1px solid rgba(210,153,34,0.45); }
+.btn-stop-config-inactive { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); opacity: 0.72; }
+.btn-sm { padding: 4px 12px; font-size: 0.8rem; }
+.form-actions { margin-top: 16px; display: flex; gap: 8px; }
+
+/* Pipeline list */
+.pipeline-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; }
+.pipeline-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.pipeline-id { font-weight: 600; color: var(--accent); font-size: 1rem; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+.badge-running { background: var(--green); color: #000; }
+.badge-stopped { background: var(--text2); color: #fff; }
+.badge-error { background: var(--red); color: #fff; }
+.badge-idle { background: var(--yellow); color: #000; }
+
+.stats-row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 12px; }
+.stat { display: flex; flex-direction: column; }
+.stat-value { font-size: 1.4rem; font-weight: 700; }
+.stat-label { font-size: 0.75rem; color: var(--text2); }
+.stop-summary-active { color: #f2cc60; }
+.stop-summary-inactive { color: var(--text2); opacity: 0.75; }
+
+/* Phase indicator */
+.phases { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+.phase { padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; background: var(--surface2); color: var(--text2); cursor: pointer; transition: all 0.15s; border: 1px solid transparent; user-select: none; }
+.phase:hover { border-color: var(--accent); }
+.phase.active { background: var(--accent); color: #000; font-weight: 600; }
+.phase.done { background: rgba(63,185,80,0.15); color: var(--green); border-color: var(--green); }
+.phase.error { background: rgba(248,81,73,0.15); color: var(--red); border-color: var(--red); }
+
+/* Expandable stage detail */
+.stage-detail { display:none; margin-top:8px; background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden; animation:fadeIn 0.2s ease; }
+.stage-detail.show { display:block; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+.stage-detail-header { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--surface2); font-size:0.82rem; font-weight:600; color:var(--accent); }
+.stage-detail-header .close-stage { cursor:pointer; color:var(--text2); font-size:1rem; }
+.stage-detail-header .close-stage:hover { color:var(--text); }
+.stage-log { max-height:350px; overflow-y:auto; padding:8px 12px; font-family:'Cascadia Code','Fira Code',monospace; font-size:0.76rem; line-height:1.6; }
+.stage-log .log-line { white-space:pre-wrap; word-break:break-all; }
+.stage-log .log-line.error { color:var(--red); }
+.stage-log .log-line.warning { color:var(--yellow); }
+.stage-log .log-line.info { color:var(--text); }
+.stage-log .log-line .ts { color:var(--text2); }
+.stage-log .streaming-cursor { display:inline-block; width:8px; height:14px; background:var(--accent); animation:blink 1s step-end infinite; vertical-align:text-bottom; margin-left:2px; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Pool table */
+.pool-section { margin-top: 16px; }
+.pool-section.collapsed .log-box { display:none; }
+.pool-section:not(.collapsed) .log-toggle-btn .arrow { transform:rotate(90deg); }
+.pool-toolbar { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.pool-section h3 { font-size: 0.95rem; margin-bottom: 8px; color: var(--text2); }
+.pool-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.pool-table th, .pool-table td { padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+.pool-table th { color: var(--text2); font-weight: 500; }
+.pool-table .status-done { color: var(--green); }
+.pool-table .status-warning { color: var(--yellow); }
+.pool-table .status-error { color: var(--red); }
+.pool-table .status-pending { color: var(--text2); }
+.pool-table .status-running { color: var(--yellow); }
+.pool-table .status-aborted { color: var(--red); font-style: italic; }
+.pool-table td.idea-link { cursor:pointer; color:var(--accent); text-decoration:underline; }
+.pool-table td.idea-link:hover { color:var(--blue); }
+.pool-table td.completed-link { cursor:pointer; color:var(--accent); text-decoration:underline; }
+.pool-table td.completed-link:hover { color:var(--blue); }
+
+/* Detail modal (reuse prompt modal pattern) */
+.detail-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:2000; align-items:center; justify-content:center; }
+.detail-overlay.show { display:flex; }
+.detail-modal { background:var(--surface); border:1px solid var(--border); border-radius:10px; width:92%; max-width:820px; max-height:85vh; display:flex; flex-direction:column; box-shadow:0 8px 32px rgba(0,0,0,0.5); }
+.detail-modal-header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--border); font-weight:600; font-size:0.9rem; }
+.detail-modal-header .close-btn { background:none; border:none; color:var(--text2); font-size:1.3rem; cursor:pointer; }
+.detail-modal-body { padding:16px; overflow-y:auto; flex:1; }
+.detail-modal-body table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+.detail-modal-body th, .detail-modal-body td { padding:5px 8px; text-align:left; border-bottom:1px solid var(--border); }
+.detail-modal-body th { color:var(--text2); font-weight:500; position:sticky; top:0; background:var(--surface); }
+.detail-modal-body th.sortable { cursor:pointer; user-select:none; }
+.detail-modal-body th.sortable:hover { color:var(--text); }
+.detail-modal-body td.expr-cell { max-width:400px; word-break:break-all; font-family:'Consolas','Courier New',monospace; font-size:0.72rem; }
+.detail-modal-body pre { background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:10px; font-size:0.78rem; line-height:1.5; overflow:auto; max-height:60vh; white-space:pre-wrap; word-break:break-all; }
+
+/* Prompt modal overlay */
+.prompt-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:2200; align-items:center; justify-content:center; }
+.prompt-overlay.show { display:flex; }
+.prompt-modal { background:var(--surface); border:1px solid var(--border); border-radius:10px; width:90%; max-width:720px; max-height:85vh; display:flex; flex-direction:column; box-shadow:0 8px 32px rgba(0,0,0,0.5); }
+.prompt-modal-header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--border); font-weight:600; }
+.prompt-modal-header .close-btn { background:none; border:none; color:var(--text2); font-size:1.3rem; cursor:pointer; }
+.prompt-modal-body { padding:16px; overflow-y:auto; flex:1; display:flex; flex-direction:column; }
+.prompt-modal-body textarea { width:100%; flex:1; min-height:300px; background:var(--bg); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:10px; font-size:0.82rem; line-height:1.6; resize:vertical; font-family:inherit; }
+.prompt-modal-footer { padding:10px 16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.prompt-modal-footer .prompt-hint { font-size:0.75rem; color:var(--text2); }
+.prompt-modal-footer .btn-group { display:flex; gap:6px; }
+
+.advanced-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:2100; align-items:center; justify-content:center; }
+.advanced-overlay.show { display:flex; }
+.advanced-modal { background:var(--surface); border:1px solid var(--border); border-radius:10px; width:94%; max-width:980px; max-height:88vh; display:flex; flex-direction:column; box-shadow:0 8px 32px rgba(0,0,0,0.5); }
+.advanced-modal-header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--border); }
+.advanced-modal-header-title { display:flex; flex-direction:column; gap:4px; }
+.advanced-modal-header-title span:last-child { font-size:0.76rem; color:var(--text2); font-weight:400; }
+.advanced-modal-header .close-btn { background:none; border:none; color:var(--text2); font-size:1.3rem; cursor:pointer; }
+.advanced-modal-body { padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:14px; }
+.advanced-nav { display:flex; flex-wrap:wrap; gap:8px; }
+.advanced-nav-btn { padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:var(--surface2); color:var(--text2); cursor:pointer; font-size:0.78rem; }
+.advanced-nav-btn.active { background:var(--accent); color:#000; border-color:var(--accent); font-weight:600; }
+.advanced-editor { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px; display:flex; flex-direction:column; gap:12px; }
+.advanced-editor-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+.advanced-editor-title { display:flex; flex-direction:column; gap:6px; }
+.advanced-editor-title h3 { font-size:0.96rem; }
+.advanced-editor-title p { font-size:0.8rem; color:var(--text2); line-height:1.6; }
+.advanced-toggle { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--text); white-space:nowrap; }
+.advanced-token-list { display:flex; flex-wrap:wrap; gap:6px; }
+.advanced-token { display:inline-flex; align-items:center; padding:3px 8px; border-radius:999px; background:rgba(88,166,255,0.12); border:1px solid rgba(88,166,255,0.35); color:var(--accent); font-size:0.74rem; font-family:monospace; }
+.advanced-token.active { background:rgba(88,166,255,0.24); border-color:rgba(88,166,255,0.7); box-shadow:0 0 0 1px rgba(88,166,255,0.2) inset; }
+.advanced-token-link { cursor:pointer; text-decoration:underline; }
+.advanced-token-note { font-size:0.76rem; color:var(--text2); }
+.advanced-editor textarea { width:100%; min-height:320px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:10px; resize:vertical; font-size:0.82rem; line-height:1.6; font-family:inherit; }
+.advanced-editor textarea:disabled { opacity:0.55; cursor:not-allowed; }
+.advanced-editor-actions { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+.advanced-editor-actions .btn-group { display:flex; gap:6px; }
+.advanced-validation { font-size:0.78rem; color:var(--yellow); min-height:18px; }
+.advanced-modal-footer { padding:12px 16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.advanced-modal-footer .hint { font-size:0.76rem; color:var(--text2); }
+.advanced-modal-footer .btn-group { display:flex; gap:6px; }
+.advanced-modal-footer .btn[disabled] { opacity:0.5; cursor:not-allowed; }
+
+.stop-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:2250; align-items:center; justify-content:center; }
+.stop-overlay.show { display:flex; }
+.stop-modal { background:var(--surface); border:1px solid var(--border); border-radius:10px; width:92%; max-width:860px; max-height:88vh; display:flex; flex-direction:column; box-shadow:0 8px 32px rgba(0,0,0,0.5); }
+.stop-modal-header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--border); }
+.stop-modal-header .close-btn { background:none; border:none; color:var(--text2); font-size:1.3rem; cursor:pointer; }
+.stop-modal-body { padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:14px; }
+.stop-card { border:1px solid var(--border); border-radius:8px; background:var(--bg); padding:14px; display:flex; flex-direction:column; gap:12px; }
+.stop-card h3 { font-size:0.92rem; color:var(--accent); }
+.stop-card p { font-size:0.78rem; color:var(--text2); line-height:1.6; }
+.stop-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; }
+.stop-checkline { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--text); }
+.stop-checkline input[type="checkbox"] { transform:translateY(1px); }
+.stop-modal-footer { padding:12px 16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.stop-modal-footer .hint { font-size:0.76rem; color:var(--text2); }
+.stop-modal-footer .btn-group { display:flex; gap:6px; }
+
+.empty-state { text-align: center; padding: 48px; color: var(--text2); }
+.refresh-indicator { font-size: 0.75rem; color: var(--text2); }
+
+/* Tooltip blue dot */
+.tip { display:inline-block; width:14px; height:14px; background:var(--accent); color:#000; border-radius:50%; font-size:10px; text-align:center; line-height:14px; cursor:help; position:relative; margin-left:4px; vertical-align:middle; font-style:normal; }
+.tip:hover::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:4px; font-size:0.78rem; white-space:normal; min-width:180px; max-width:300px; z-index:100; pointer-events:none; box-shadow:0 4px 12px rgba(0,0,0,0.4); }
+
+/* Floating actions */
+.floating-actions { position:fixed; right:24px; bottom:24px; display:flex; flex-direction:column; gap:12px; align-items:center; z-index:1001; }
+.floating-action { display:flex; flex-direction:column; align-items:center; gap:6px; }
+.floating-action-label { font-size:0.74rem; color:var(--text2); background:rgba(13,17,23,0.92); border:1px solid var(--border); border-radius:999px; padding:3px 10px; line-height:1.2; white-space:nowrap; }
+.workflow-toggle { width:48px; height:48px; border-radius:50%; background:var(--accent); color:#000; border:none; font-size:1.4rem; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.4); transition:transform 0.2s; display:flex; align-items:center; justify-content:center; }
+.workflow-toggle:hover { transform:scale(1.1); }
+
+.submitter-toggle { width:48px; height:48px; border-radius:50%; background:#ff9f1c; color:#111; border:none; font-size:1.2rem; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.4); transition:transform 0.2s; display:flex; align-items:center; justify-content:center; }
+.submitter-toggle:hover { transform:scale(1.1); }
+
+.archive-toggle { width:48px; height:48px; border-radius:50%; background:var(--purple); color:#fff; border:none; font-size:1.3rem; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.4); transition:transform 0.2s; display:flex; align-items:center; justify-content:center; position:relative; }
+.archive-toggle:hover { transform:scale(1.1); }
+.archive-badge { position:absolute; top:-4px; right:-4px; min-width:18px; height:18px; border-radius:9px; background:var(--red); color:#fff; font-size:0.65rem; font-weight:700; display:flex; align-items:center; justify-content:center; padding:0 4px; }
+.archive-panel { position:fixed; bottom:164px; right:24px; width:420px; max-height:60vh; background:var(--surface); border:1px solid var(--border); border-radius:10px; z-index:1010; box-shadow:0 8px 32px rgba(0,0,0,0.5); overflow-y:auto; display:none; animation:wfSlideUp 0.25s ease; }
+.archive-panel.show { display:block; }
+.archive-header { padding:14px 18px 10px; border-bottom:1px solid var(--border); font-size:1rem; font-weight:700; color:var(--purple); display:flex; justify-content:space-between; align-items:center; }
+.archive-body { padding:10px 14px 14px; }
+.archive-item { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:var(--surface2); border:1px solid var(--border); border-radius:6px; margin-bottom:8px; font-size:0.82rem; }
+.archive-item-info { display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+.archive-item-id { font-weight:600; color:var(--accent); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.archive-item-meta { color:var(--text2); font-size:0.75rem; }
+.archive-item-actions { display:flex; gap:6px; flex-shrink:0; margin-left:10px; }
+.archive-empty { color:var(--text2); text-align:center; padding:20px; font-size:0.85rem; }
+.workflow-panel { position:fixed; bottom:164px; right:24px; width:380px; max-height:70vh; background:var(--surface); border:1px solid var(--border); border-radius:10px; z-index:1010; box-shadow:0 8px 32px rgba(0,0,0,0.5); overflow-y:auto; display:none; animation:wfSlideUp 0.25s ease; }
+.workflow-panel.show { display:block; }
+@keyframes wfSlideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.wf-header { padding:14px 18px 10px; border-bottom:1px solid var(--border); font-size:1rem; font-weight:700; color:var(--accent); }
+.wf-body { padding:14px 18px 18px; font-size:0.82rem; line-height:1.7; color:var(--text); }
+.wf-stage { display:flex; gap:10px; margin-bottom:10px; }
+.wf-num { flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--accent); color:#000; font-size:0.72rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.wf-arrow { text-align:center; color:var(--text2); font-size:0.75rem; margin:2px 0 2px 7px; }
+.wf-info { color:var(--text2); font-size:0.78rem; line-height:1.6; padding:10px 0 0; border-top:1px solid var(--border); margin-top:6px; }
+.wf-diagram { margin:0 0 14px; padding:12px; border:1px solid var(--border); border-radius:8px; background:var(--surface2); }
+.wf-diagram-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:8px; }
+.wf-diagram-row:last-child { margin-bottom:0; }
+.wf-box { padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-size:0.76rem; font-weight:600; }
+.wf-box.pool { background:rgba(88,166,255,0.12); border-color:var(--accent); color:var(--accent); }
+.wf-link { color:var(--text2); font-size:0.74rem; }
+.wf-pool-card { margin:10px 0; padding:12px; border-radius:10px; border:1px solid rgba(88,166,255,0.35); background:rgba(88,166,255,0.08); }
+.wf-pool-title { color:var(--accent); font-size:0.82rem; font-weight:700; text-align:center; margin-bottom:6px; }
+.wf-pool-note { color:var(--text2); font-size:0.74rem; text-align:center; }
+.wf-filter-chain { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:10px 0; }
+.wf-box.filter { background:rgba(46,160,67,0.10); border-color:rgba(46,160,67,0.35); color:#7ee787; }
+.wf-box.return { background:rgba(210,153,34,0.10); border-color:rgba(210,153,34,0.35); color:#f2cc60; }
+
+@media (max-width: 720px) {
+  .floating-actions { right:12px; bottom:12px; }
+  .archive-panel,
+  .workflow-panel { right:12px; left:12px; width:auto; max-width:none; bottom:156px; }
+}
+
+/* Dataset search area */
+.ds-search { margin-top:12px; padding:12px; background:var(--surface2); border-radius:6px; border:1px solid var(--border); }
+.ds-search-bar { display:flex; gap:8px; margin-top:8px; margin-bottom:8px; }
+.ds-search-bar input { flex:1; }
+.ds-results { max-height:200px; overflow-y:auto; }
+.ds-results table { width:100%; border-collapse:collapse; font-size:0.8rem; }
+.ds-results th,.ds-results td { padding:5px 8px; text-align:left; border-bottom:1px solid var(--border); }
+.ds-results tr.clickable { cursor:pointer; transition:background 0.15s; }
+.ds-results tr.clickable:hover { background:rgba(88,166,255,0.1); }
+.ds-results tr.selected td { color:var(--green); font-weight:600; }
+.ds-selected { margin-top:8px; font-size:0.85rem; color:var(--green); font-weight:500; }
+
+/* Activity log */
+.log-section { margin-top:12px; }
+.log-section.collapsed .log-box { display:none; }
+.log-toggle-btn { cursor:pointer; background:var(--surface2); border:1px solid var(--border); color:var(--text2); padding:6px 14px; border-radius:4px; font-size:0.82rem; transition:0.15s; }
+.log-toggle-btn:hover { border-color:var(--accent); color:var(--text); }
+.log-toggle-btn .arrow { display:inline-block; transition:transform 0.2s; margin-right:4px; }
+.log-section:not(.collapsed) .log-toggle-btn .arrow { transform:rotate(90deg); }
+.log-section h3 { font-size:0.9rem; color:var(--text2); margin-bottom:6px; }
+.log-box { background:var(--bg); border:1px solid var(--border); border-radius:4px; max-height:220px; overflow-y:auto; padding:8px 12px; font-family:'Cascadia Code','Fira Code',monospace; font-size:0.78rem; line-height:1.6; }
+.log-entry { white-space:pre-wrap; word-break:break-all; }
+.log-entry .ts { color:var(--text2); }
+.log-entry .msg { color:var(--text); }
+.log-entry.error .msg { color:var(--red); }
+.log-entry.warning .msg { color:var(--yellow); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="/" class="back">← 返回</a>
+  <h1>🔄 Alpha 自动流水线</h1>
+  <span class="refresh-indicator" id="refreshIndicator"></span>
+</div>
+
+<div class="container">
+  <!-- Create new pipeline -->
+  <div class="create-panel">
+    <h2>➕ 创建新流水线</h2>
+    <div style="margin-bottom:12px;padding:8px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:0.85rem;display:flex;align-items:center;gap:12px">
+      <span>🔧 全局 Worker 额度</span>
+      <span style="font-size:1.2rem;font-weight:700;color:var(--accent)" id="globalWorkerDisplay">-/8</span>
+      <span style="color:var(--text2);font-size:0.78rem">(所有运行中流水线共享8个Worker并发额度)</span>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>区域 (Region) <i class="tip" data-tip="选择回测的市场区域。USA=美国, CHN=中国, EUR=欧洲, ASI=亚洲, GLB=全球">i</i></label>
+        <select id="cfgRegion"><option value="">加载中...</option></select>
+      </div>
+      <div class="form-group">
+        <label>延迟 (Delay) <i class="tip" data-tip="交易延迟天数。1=信号发出后T+1交易(更稳健), 0=信号当天交易(更激进)">i</i></label>
+        <select id="cfgDelay"><option value="">请先选择区域</option></select>
+      </div>
+      <div class="form-group">
+        <label>Universe <i class="tip" data-tip="股票池范围。TOP3000=前3000只, TOP500=前500只等, 数字越小流动性越好">i</i></label>
+        <select id="cfgUniverse"><option value="">请先选择区域</option></select>
+      </div>
+      <div class="form-group">
+        <label>数据类型 <i class="tip" data-tip="MATRIX=矩阵型数据(如基本面), VECTOR=向量型数据(如行业分类、指数成分)">i</i></label>
+        <select id="cfgDataType"><option value="MATRIX">MATRIX</option><option value="VECTOR">VECTOR</option></select>
+      </div>
+      <div class="form-group">
+        <label>雇几个工人 <i class="tip" data-tip="并发回测Worker数: 同时跑几个idea, 每个占1个concurrent额度(即一个worker)。根据账户并发限制调整, 一般2-8">i</i></label>
+        <input type="number" id="cfgSimConcurrent" value="2" min="1" max="10">
+      </div>
+      <div class="form-group">
+        <label>每个工人最多同时回测几个 <i class="tip" data-tip="每个worker每批提交几个alpha: 一个Idea产出>=2个Alpha时使用Multi回测, 此值决定每个Multi批次装多少个Alpha。建议2-5, 最大10">i</i></label>
+        <input type="number" id="cfgMultiSlots" value="2" min="1" max="10">
+      </div>
+      <div class="form-group">
+        <label>每轮最大增强数 <i class="tip" data-tip="每轮循环中最多对多少个模板做增强操作, 建议2-4">i</i></label>
+        <input type="number" id="cfgMaxEnhance" value="4" min="1" max="100">
+      </div>
+    </div>
+    <!-- Dataset search -->
+    <div class="ds-search">
+      <label style="font-size:0.85rem;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span>🔍 选择数据集 <i class="tip" data-tip="先选区域/延迟/Universe, 先加载数据集列表, 再输入关键词实时筛选, 从列表中点击选择要挖掘Alpha的数据集">i</i></span>
+        <button class="btn btn-primary btn-sm" id="loadDatasetsBtn" onclick="loadDatasets()">加载数据集</button>
+      </label>
+      <div class="ds-search-bar">
+        <input type="text" id="dsSearchInput" placeholder="输入关键词搜索 (如 fundamental, sentiment, price...)"
+               style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:8px 10px;color:var(--text);font-size:0.9rem"
+               disabled>
+      </div>
+      <div class="ds-results" id="dsResults"></div>
+      <div class="ds-selected" id="dsSelected" style="display:none"></div>
+    </div>
+    <div class="form-grid" style="margin-top:12px">
+      <div class="form-group">
+        <label>LLM API Key <i class="tip" data-tip="用于AI生成和决策的大模型API密钥, 支持Moonshot/Kimi等兼容OpenAI格式的Key">i</i></label>
+        <input type="password" id="cfgApiKey" class="secret-toggle-target" placeholder="sk-...">
+      </div>
+      <div class="form-group">
+        <label>LLM Base URL <i class="tip" data-tip="大模型API的基础URL地址, 如 https://api.moonshot.cn/v1">i</i></label>
+        <input type="text" id="cfgBaseUrl" value="https://api.moonshot.cn/v1">
+      </div>
+      <div class="form-group">
+        <label>LLM Model <i class="tip" data-tip="使用的大模型名称, 如 kimi-k2.5">i</i></label>
+        <input type="text" id="cfgModel" value="kimi-k2.5">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn" id="advancedSettingsBtn" style="background:var(--surface2);color:var(--text)" onclick="openAdvancedSettings()">⚙ 高级设置</button><span class="tip" data-tip="在创建前按阶段配置提示词。这里只影响当前这一次新建任务，不会改动系统默认值。">i</span>
+      <button class="btn btn-stop-config-inactive" id="stopSettingsBtn" onclick="openStopConditionsForCreate()">🛑 停止条件</button><span class="tip" data-tip="可在创建前设置自动停机条件。留空表示无界，不会自动停。运行中也可以再改。">i</span>
+      <button class="btn btn-primary" onclick="createPipeline()">🚀 创建并启动</button>
+    </div>
+  </div>
+
+  <!-- Pipeline list -->
+  <div id="pipelineList"></div>
+  <div class="empty-state" id="emptyState" style="display:none">暂无流水线。创建一个开始工作！</div>
+</div>
+
+<div class="floating-actions">
+  <div class="floating-action">
+    <button class="submitter-toggle" id="submitterToggle" title="打开 交个Alpha" onclick="openSubmitter()">📤</button>
+    <div class="floating-action-label">交个Alpha</div>
+  </div>
+  <div class="floating-action">
+    <button class="workflow-toggle" id="wfToggle" title="查看使用说明">💡</button>
+    <div class="floating-action-label">使用说明</div>
+  </div>
+  <div class="floating-action">
+    <button class="archive-toggle" id="archiveToggle" title="查看归档流水线">
+      📦
+      <span class="archive-badge" id="archiveBadge" style="display:none">0</span>
+    </button>
+    <div class="floating-action-label">归档列表</div>
+  </div>
+</div>
+<div class="archive-panel" id="archivePanel">
+  <div class="archive-header">
+    <span>📦 归档流水线</span>
+    <span style="font-size:0.78rem;color:var(--text2);font-weight:400">点击“恢复”回到当前队列</span>
+  </div>
+  <div class="archive-body" id="archiveBody">
+    <div class="archive-empty">暂无归档流水线</div>
+  </div>
+</div>
+<div class="workflow-panel" id="wfPanel">
+  <div class="wf-header">🔄 使用说明</div>
+  <div class="wf-body">
+    <div class="wf-diagram">
+      <div class="wf-diagram-row">
+        <span class="wf-box">GENERATE</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box">初始 idea</span>
+      </div>
+      <div class="wf-diagram-row">
+        <span class="wf-box">IMPLEMENT</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box return">增强后新 idea</span>
+      </div>
+      <div class="wf-pool-card">
+        <div class="wf-pool-title">IDEA 池</div>
+        <div class="wf-diagram-row" style="margin-bottom:0">
+          <span class="wf-box pool">所有新 idea 都先入池</span>
+          <span class="wf-box pool">初始的进池</span>
+          <span class="wf-box pool">增强后的也回池</span>
+        </div>
+        <div class="wf-pool-note">池子会越积越大，前端看到的所有 idea 都是在这里统一排队、记录、重试、归档。</div>
+      </div>
+      <div class="wf-filter-chain">
+        <span class="wf-box filter">INSPECT 筛掉非法表达式</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box filter">SIMULATE 筛掉回测失败/弱结果</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box filter">DECIDE 只挑少数继续增强</span>
+      </div>
+      <div class="wf-diagram-row">
+        <span class="wf-box">留下来的少数</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box">ENHANCE</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box">IMPLEMENT</span>
+        <span class="wf-link">→</span>
+        <span class="wf-box return">再回 IDEA 池</span>
+      </div>
+    </div>
+    <div class="wf-stage"><span class="wf-num">0</span><div><b>IDEA 池</b><br>无论是刚生成的 idea，还是增强后重新实现出来的 idea，都会进入这同一个池。池子不是一次性的，它会随着每轮循环持续变大。</div></div>
+    <div class="wf-arrow">⬇</div>
+    <div class="wf-stage"><span class="wf-num">1</span><div><b>GENERATE</b><br>先按数据集生成一批初始 idea。</div></div>
+    <div class="wf-arrow">⬇</div>
+    <div class="wf-stage"><span class="wf-num">2</span><div><b>INSPECT</b><br>校验表达式，并为可用 idea 选择回测参数。</div></div>
+    <div class="wf-arrow">⬇</div>
+    <div class="wf-stage"><span class="wf-num">3</span><div><b>SIMULATE</b><br>提交到 BRAIN 回测，产出 Sharpe、Fitness、Turnover 等结果。</div></div>
+    <div class="wf-arrow">⬇</div>
+    <div class="wf-stage"><span class="wf-num">4</span><div><b>DECIDE</b><br>这里不是所有 idea 都继续往下走，而是继续筛选。只有少数通过前面多轮筛选的 idea，才会进入下一轮增强。</div></div>
+    <div class="wf-arrow">⬇</div>
+    <div class="wf-stage"><span class="wf-num">5</span><div><b>ENHANCE</b><br>对入选模板做增强，生成新变体。</div></div>
+    <div class="wf-arrow">⬇</div>
+    <div class="wf-stage"><span class="wf-num">6</span><div><b>IMPLEMENT</b><br>把增强结果落成新 idea，再放回池里，和旧 idea 一起继续排队筛选。</div></div>
+    <div class="wf-info">
+      这个系统的核心不是“线性跑完一次”，而是“idea 池不断扩张，筛选不断收紧”。大量 idea 进入池子，只有被持续筛过的少数，才会继续被增强。
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Workflow panel toggle ── */
+document.getElementById('wfToggle').addEventListener('click', () => {
+  document.getElementById('archivePanel').classList.remove('show');
+  document.getElementById('wfPanel').classList.toggle('show');
+});
+document.getElementById('archiveToggle').addEventListener('click', () => {
+  document.getElementById('wfPanel').classList.remove('show');
+  document.getElementById('archivePanel').classList.toggle('show');
+  if (document.getElementById('archivePanel').classList.contains('show')) refreshArchive();
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#wfPanel') && !e.target.closest('#wfToggle')) {
+    document.getElementById('wfPanel').classList.remove('show');
+  }
+  if (!e.target.closest('#archivePanel') && !e.target.closest('#archiveToggle')) {
+    document.getElementById('archivePanel').classList.remove('show');
+  }
+});
+
+/* ── State ── */
+let pipeOptions = null;
+let selectedDataset = null; // {id, name, category}
+let _allDatasets = [];
+let _dsCache = [];
+let _pipelineMap = {};
+let _poolSortState = {};
+let _promptTemplateCatalog = [];
+let _advancedPromptDrafts = {};
+let _advancedWorkingPromptDrafts = {};
+let _advancedWorkingPromptAcknowledged = false;
+let _activePromptTemplateKey = '';
+let _createStopConditions = _defaultStopConditions();
+let _stopConditionModalMode = 'create';
+let _stopConditionModalPid = '';
+
+function _defaultStopConditions() {
+  return {
+    sharpe_target_count: { min_sharpe: null, target_count: null, use_abs: false },
+    max_pool_ideas: null,
+    max_alpha_submitted: null,
+    max_sim_completed: null,
+    max_iterations: null,
+    diminishing_returns: {
+      enabled: false,
+      min_sharpe: null,
+      lookback_rounds: 2,
+      degrade_ratio: 0.5,
+      min_baseline_samples: 20,
+    }
+  };
+}
+
+function _cloneStopConditions(source) {
+  const base = _defaultStopConditions();
+  const raw = source || {};
+  if (raw.sharpe_target_count) Object.assign(base.sharpe_target_count, raw.sharpe_target_count || {});
+  if (raw.diminishing_returns) Object.assign(base.diminishing_returns, raw.diminishing_returns || {});
+  ['max_pool_ideas', 'max_alpha_submitted', 'max_sim_completed', 'max_iterations'].forEach(function(key) {
+    if (raw[key] !== undefined) base[key] = raw[key];
+  });
+  return JSON.parse(JSON.stringify(base));
+}
+
+function _valueOrEmpty(value) {
+  return value === null || value === undefined ? '' : value;
+}
+
+function _activeStopConditionCount(stopConditions) {
+  const sc = _cloneStopConditions(stopConditions);
+  let count = 0;
+  if (sc.sharpe_target_count.min_sharpe !== null && sc.sharpe_target_count.target_count !== null) count += 1;
+  ['max_pool_ideas', 'max_alpha_submitted', 'max_sim_completed', 'max_iterations'].forEach(function(key) {
+    if (sc[key] !== null && sc[key] !== undefined && sc[key] !== '') count += 1;
+  });
+  if (sc.diminishing_returns && sc.diminishing_returns.enabled) count += 1;
+  return count;
+}
+
+function _hasActiveStopConditions(stopConditions) {
+  return _activeStopConditionCount(stopConditions) > 0;
+}
+
+function updateStopSettingsButton() {
+  const btn = document.getElementById('stopSettingsBtn');
+  if (!btn) return;
+  const count = _activeStopConditionCount(_createStopConditions);
+  btn.textContent = count > 0 ? ('🛑 停止条件 (' + count + ')') : '🛑 停止条件';
+  btn.classList.toggle('btn-stop-config-active', count > 0);
+  btn.classList.toggle('btn-stop-config-inactive', count === 0);
+}
+
+function getHeaders() {
+  const h = {'Content-Type': 'application/json'};
+  const sid = localStorage.getItem('brain_session_id');
+  if (sid) h['Session-ID'] = sid;
+  return h;
+}
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function escAttr(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+function escJsStr(s) { return (s||'').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+function tipDot(text) { return '<span class="tip" data-tip="' + escAttr(text) + '">i</span>'; }
+
+function getSecretToggleIcon(isVisible) {
+  if (isVisible) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"></path><path d="M10.58 10.58A2 2 0 0012 14a2 2 0 001.42-.58"></path><path d="M9.88 5.09A10.94 10.94 0 0112 5c5 0 9.27 3.11 11 7a11.8 11.8 0 01-4.24 5.18"></path><path d="M6.61 6.61A11.84 11.84 0 001 12c.9 2.18 2.56 4.02 4.73 5.19"></path></svg>';
+  }
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+}
+
+function initSecretToggles() {
+  document.querySelectorAll('input.secret-toggle-target').forEach((input) => {
+    if (input.dataset.secretToggleReady === 'true') {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'secret-toggle-wrap';
+    input.parentNode.insertBefore(wrapper, input);
+    wrapper.appendChild(input);
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'secret-toggle-btn';
+
+    const sync = () => {
+      const isVisible = input.type === 'text';
+      button.innerHTML = getSecretToggleIcon(isVisible);
+      button.setAttribute('aria-label', isVisible ? '隐藏密钥' : '显示密钥');
+      button.title = isVisible ? '隐藏密钥' : '显示密钥';
+    };
+
+    button.addEventListener('click', () => {
+      input.type = input.type === 'password' ? 'text' : 'password';
+      sync();
+    });
+
+    wrapper.appendChild(button);
+    input.dataset.secretToggleReady = 'true';
+    sync();
+  });
+}
+
+async function openSubmitter() {
+  try {
+    const apiKey = document.getElementById('cfgApiKey').value.trim() || localStorage.getItem('deepseekApiKey') || '';
+    const baseUrl = document.getElementById('cfgBaseUrl').value.trim() || localStorage.getItem('inspire_llm_url') || 'https://api.moonshot.cn/v1';
+    const model = document.getElementById('cfgModel').value.trim() || localStorage.getItem('featureEngModelName') || 'kimi-k2.5';
+    const response = await fetch('/api/open-submitter', {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({
+        apiKey,
+        baseUrl,
+        model,
+      })
+    });
+    const result = await response.json();
+    if (result.success) {
+      alert(result.message || 'Alpha submitter script started in new terminal window');
+    } else {
+      alert(result.error || 'Failed to open submitter');
+    }
+  } catch (error) {
+    alert('Error opening submitter: ' + error.message);
+  }
+}
+
+/* ── Auto-load saved keys ── */
+const KEY_MAP = {
+  'cfgApiKey': 'deepseekApiKey',
+  'cfgModel': 'featureEngModelName',
+};
+document.addEventListener('DOMContentLoaded', () => {
+  initSecretToggles();
+  for (const [inputId, storageKey] of Object.entries(KEY_MAP)) {
+    const saved = localStorage.getItem(storageKey);
+    if (saved) document.getElementById(inputId).value = saved;
+  }
+  const savedUrl = localStorage.getItem('inspire_llm_url');
+  if (savedUrl) document.getElementById('cfgBaseUrl').value = savedUrl;
+  loadPipelineOptions();
+  loadPromptTemplateCatalog().catch(() => {});
+  updateStopSettingsButton();
+  document.getElementById('cfgRegion').addEventListener('change', onRegionChange);
+  document.getElementById('cfgDelay').addEventListener('change', resetDatasetChooser);
+  document.getElementById('cfgUniverse').addEventListener('change', resetDatasetChooser);
+  document.getElementById('dsSearchInput').addEventListener('input', filterDatasets);
+  refresh();
+  setInterval(refresh, 8000);
+  refreshArchive();
+});
+
+/* ── Dynamic dropdown loading ── */
+function loadPipelineOptions() {
+  fetch('/api/inspiration/options', { headers: getHeaders() })
+    .then(r => r.json())
+    .then(data => { pipeOptions = data; populateRegions(data); })
+    .catch(() => {
+      document.getElementById('cfgRegion').innerHTML = '<option value="">加载失败, 请确保已登录BRAIN</option>';
+    });
+}
+function populateRegions(data) {
+  const sel = document.getElementById('cfgRegion');
+  sel.innerHTML = '<option value="">-- 选择区域 --</option>';
+  if (!data.EQUITY) return;
+  Object.keys(data.EQUITY).forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r; opt.textContent = r;
+    sel.appendChild(opt);
+  });
+}
+function onRegionChange() {
+  const region = document.getElementById('cfgRegion').value;
+  const delaySel = document.getElementById('cfgDelay');
+  const uniSel = document.getElementById('cfgUniverse');
+  delaySel.innerHTML = '<option value="">-- 选择延迟 --</option>';
+  uniSel.innerHTML = '<option value="">-- 选择Universe --</option>';
+  resetDatasetChooser();
+
+  if (!region || !pipeOptions || !pipeOptions.EQUITY || !pipeOptions.EQUITY[region]) return;
+  const info = pipeOptions.EQUITY[region];
+  (info.delays || []).forEach(d => {
+    const opt = document.createElement('option'); opt.value = d; opt.textContent = d; delaySel.appendChild(opt);
+  });
+  (info.universes || []).forEach(u => {
+    const opt = document.createElement('option'); opt.value = u; opt.textContent = u; uniSel.appendChild(opt);
+  });
+}
+
+function _getDatasetField(ds, keys) {
+  for (const key of keys) {
+    if (!ds || !key) continue;
+    if (ds[key] !== undefined && ds[key] !== null && ds[key] !== '') return ds[key];
+    if (String(key).includes('.')) {
+      let current = ds;
+      let found = true;
+      for (const part of String(key).split('.')) {
+        if (current && current[part] !== undefined && current[part] !== null) {
+          current = current[part];
+        } else {
+          found = false;
+          break;
+        }
+      }
+      if (found && current !== '') return current;
+    }
+  }
+  return null;
+}
+
+function _fmtDatasetMetric(value, suffix) {
+  if (value === null || value === undefined || value === '') return '';
+  const num = Number(value);
+  if (Number.isFinite(num)) {
+    const scaled = (suffix === '%' && num >= 0 && num <= 1) ? num * 100 : num;
+    return scaled.toFixed(2).replace(/\.00$/, '') + (suffix || '');
+  }
+  return String(value);
+}
+
+function resetDatasetChooser() {
+  selectedDataset = null;
+  _allDatasets = [];
+  _dsCache = [];
+  document.getElementById('dsSelected').style.display = 'none';
+  document.getElementById('dsSearchInput').value = '';
+  document.getElementById('dsSearchInput').disabled = true;
+  document.getElementById('dsResults').innerHTML = '';
+  const btn = document.getElementById('loadDatasetsBtn');
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = '加载数据集';
+  }
+}
+
+function _datasetSearchText(ds) {
+  const parts = [
+    ds && ds.id,
+    ds && ds.name,
+    ds && ds.description,
+    ds && ds.category,
+    ds && ds.subcategory,
+    _getDatasetField(ds, ['category.name', 'category.id'])
+  ];
+  return parts
+    .map(v => {
+      if (v === null || v === undefined) return '';
+      if (typeof v === 'object') return JSON.stringify(v);
+      return String(v);
+    })
+    .join(' ')
+    .toLowerCase();
+}
+
+function renderDatasetResults(datasets) {
+  const region = document.getElementById('cfgRegion').value;
+  const delay = document.getElementById('cfgDelay').value;
+  const universe = document.getElementById('cfgUniverse').value;
+  const rd = document.getElementById('dsResults');
+  if (!region || !delay || !universe) {
+    rd.innerHTML = '<span style="color:var(--text2)">请先选择区域、延迟和 Universe</span>';
+    return;
+  }
+  _dsCache = Array.isArray(datasets) ? datasets : [];
+  if (!_dsCache.length) {
+    rd.innerHTML = '<span style="color:var(--text2)">没有匹配的数据集</span>';
+    return;
+  }
+
+  let html = '<table><thead><tr><th>ID</th><th>名称</th><th>分类</th><th>Fields</th><th>Alphas</th><th>Coverage</th><th>Date Coverage</th></tr></thead><tbody>';
+  _dsCache.forEach((ds, i) => {
+    let cat = ds.category;
+    if (typeof cat === 'object' && cat !== null) cat = cat.name || cat.id || JSON.stringify(cat);
+    const fieldCount = _fmtDatasetMetric(_getDatasetField(ds, ['fieldCount', 'fieldsCount', 'field_count', 'numFields', 'numberOfFields', 'fieldNumber', 'field_number']), '');
+    const alphaCount = _fmtDatasetMetric(_getDatasetField(ds, ['alphaCount', 'alpha_count', 'alphas', 'alpha.count']), '');
+    const coverage = _fmtDatasetMetric(_getDatasetField(ds, ['coverage', 'datasetCoverage', 'field_coverage']), '%');
+    const dateCoverage = _fmtDatasetMetric(_getDatasetField(ds, ['date_coverage', 'dateCoverage', 'date coverage']), '');
+    const isSelected = selectedDataset && String(selectedDataset.id) === String(ds.id);
+    html += '<tr class="clickable' + (isSelected ? ' selected' : '') + '" data-idx="' + i + '">'
+      + '<td style="color:var(--accent);font-weight:600">' + escHtml(String(ds.id)) + '</td>'
+      + '<td>' + escHtml(ds.name || '') + '</td>'
+      + '<td>' + escHtml(String(cat || '')) + '</td>'
+      + '<td>' + escHtml(fieldCount || '-') + '</td>'
+      + '<td>' + escHtml(alphaCount || '-') + '</td>'
+      + '<td>' + escHtml(coverage || '-') + '</td>'
+      + '<td>' + escHtml(dateCoverage || '-') + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  rd.innerHTML = html;
+  rd.querySelectorAll('tr.clickable').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const ds = _dsCache[parseInt(tr.dataset.idx, 10)];
+      let cat = ds.category;
+      if (typeof cat === 'object' && cat !== null) cat = cat.name || cat.id || String(cat);
+      const fieldCount = _fmtDatasetMetric(_getDatasetField(ds, ['fieldCount', 'fieldsCount', 'field_count', 'numFields', 'numberOfFields', 'fieldNumber', 'field_number']), '');
+      const alphaCount = _fmtDatasetMetric(_getDatasetField(ds, ['alphaCount', 'alpha_count', 'alphas', 'alpha.count']), '');
+      const coverage = _fmtDatasetMetric(_getDatasetField(ds, ['coverage', 'datasetCoverage', 'field_coverage']), '%');
+      const dateCoverage = _fmtDatasetMetric(_getDatasetField(ds, ['date_coverage', 'dateCoverage', 'date coverage']), '');
+      selectedDataset = {
+        id: String(ds.id),
+        name: ds.name || '',
+        category: String(cat || ''),
+        fieldCount: fieldCount || '',
+        alphaCount: alphaCount || '',
+        coverage: coverage || '',
+        dateCoverage: dateCoverage || ''
+      };
+      rd.querySelectorAll('tr.clickable').forEach(r => r.classList.remove('selected'));
+      tr.classList.add('selected');
+      const sel = document.getElementById('dsSelected');
+      sel.style.display = 'block';
+      sel.innerHTML = '\u2705 已选择: '
+        + escHtml(selectedDataset.name)
+        + ' (ID: ' + escHtml(selectedDataset.id)
+        + ', 分类: ' + escHtml(selectedDataset.category)
+        + ', Fields: ' + escHtml(selectedDataset.fieldCount || '-')
+        + ', Alphas: ' + escHtml(selectedDataset.alphaCount || '-')
+        + ', Coverage: ' + escHtml(selectedDataset.coverage || '-')
+        + ', Date Coverage: ' + escHtml(selectedDataset.dateCoverage || '-')
+        + ')';
+    });
+  });
+}
+
+function filterDatasets() {
+  const rd = document.getElementById('dsResults');
+  if (!_allDatasets.length) {
+    rd.innerHTML = '<span style="color:var(--text2)">请先点击“加载数据集”</span>';
+    return;
+  }
+  const keyword = document.getElementById('dsSearchInput').value.trim().toLowerCase();
+  if (!keyword) {
+    renderDatasetResults(_allDatasets);
+    return;
+  }
+  const filtered = _allDatasets.filter(ds => _datasetSearchText(ds).includes(keyword));
+  renderDatasetResults(filtered);
+}
+
+/* ── Dataset loading ── */
+function loadDatasets() {
+  const region = document.getElementById('cfgRegion').value;
+  const delay = document.getElementById('cfgDelay').value;
+  const universe = document.getElementById('cfgUniverse').value;
+  if (!region || !delay || !universe) { alert('请先选择区域、延迟和Universe'); return; }
+
+  const rd = document.getElementById('dsResults');
+  const btn = document.getElementById('loadDatasetsBtn');
+  const input = document.getElementById('dsSearchInput');
+  rd.innerHTML = '<span style="color:var(--text2)">正在加载数据集...</span>';
+  btn.disabled = true;
+  btn.textContent = '加载中...';
+  input.disabled = true;
+
+  fetch('/api/inspiration/datasets', {
+    method: 'POST', headers: getHeaders(),
+    body: JSON.stringify({ region, delay, universe, search: '' })
+  })
+  .then(async r => {
+    const data = await r.json();
+    if (!r.ok) throw new Error((data && data.error) || '加载数据集失败');
+    if (!Array.isArray(data)) throw new Error((data && data.error) || '返回的数据格式不正确');
+    _allDatasets = data;
+    input.disabled = false;
+    btn.textContent = '重新加载';
+    filterDatasets();
+  })
+  .catch(err => {
+    _allDatasets = [];
+    _dsCache = [];
+    rd.innerHTML = '<span style="color:var(--red)">加载出错: ' + escHtml(err.message || String(err)) + '</span>';
+    btn.textContent = '加载数据集';
+  })
+  .finally(() => {
+    btn.disabled = false;
+    if (_allDatasets.length) input.disabled = false;
+  });
+}
+
+function searchDatasets() {
+  if (_allDatasets.length) {
+    filterDatasets();
+    return;
+  }
+  loadDatasets();
+}
+
+/* ── Create pipeline ── */
+function saveKeys() {
+  for (const [inputId, storageKey] of Object.entries(KEY_MAP)) {
+    const val = document.getElementById(inputId).value.trim();
+    if (val) localStorage.setItem(storageKey, val);
+  }
+}
+
+async function createPipeline() {
+  if (!selectedDataset) { alert('请先搜索并选择一个数据集'); return; }
+  saveKeys();
+  const promptOverrides = buildPromptOverridesPayload();
+  if (promptOverrides === null) return;
+  const stopConditions = _cloneStopConditions(_createStopConditions);
+  const body = {
+    data_category: selectedDataset.category,
+    dataset_id: selectedDataset.id,
+    region: document.getElementById('cfgRegion').value,
+    delay: parseInt(document.getElementById('cfgDelay').value),
+    universe: document.getElementById('cfgUniverse').value,
+    data_type: document.getElementById('cfgDataType').value,
+    sim_concurrent: parseInt(document.getElementById('cfgSimConcurrent').value),
+    sim_multi_slots: parseInt(document.getElementById('cfgMultiSlots').value),
+    max_enhance_per_round: parseInt(document.getElementById('cfgMaxEnhance').value),
+    moonshot_api_key: document.getElementById('cfgApiKey').value.trim(),
+    moonshot_base_url: document.getElementById('cfgBaseUrl').value.trim(),
+    moonshot_model: document.getElementById('cfgModel').value.trim(),
+    prompt_overrides: promptOverrides,
+    stop_conditions: stopConditions,
+  };
+  if (!body.moonshot_api_key) { alert('请填写 LLM API Key'); return; }
+
+  try {
+    const resp = await fetch('/api/pipeline/create', { method:'POST', headers: getHeaders(), body: JSON.stringify(body) });
+    const data = await resp.json();
+    if (!data.ok) { alert('创建失败: ' + data.error); return; }
+    await fetch('/api/pipeline/' + data.pipeline_id + '/start', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ moonshot_api_key: body.moonshot_api_key })
+    });
+    resetAdvancedPromptDrafts();
+    _createStopConditions = _defaultStopConditions();
+    updateStopSettingsButton();
+    refresh();
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+function _stopConditionSummary(stopConditions) {
+  const sc = _cloneStopConditions(stopConditions);
+  const parts = [];
+  if (sc.sharpe_target_count.min_sharpe !== null && sc.sharpe_target_count.target_count !== null) {
+    const sharpeLabel = sc.sharpe_target_count.use_abs ? '|Sharpe|' : 'Sharpe';
+    parts.push(sharpeLabel + '≥' + sc.sharpe_target_count.min_sharpe + ' 达到 ' + sc.sharpe_target_count.target_count + ' 个');
+  }
+  if (sc.max_pool_ideas) parts.push('池中 idea ≥ ' + sc.max_pool_ideas);
+  if (sc.max_alpha_submitted) parts.push('回测提交量 ≥ ' + sc.max_alpha_submitted);
+  if (sc.max_sim_completed) parts.push('回测完成量 ≥ ' + sc.max_sim_completed);
+  if (sc.max_iterations) parts.push('迭代数 ≥ ' + sc.max_iterations);
+  if (sc.diminishing_returns && sc.diminishing_returns.enabled) {
+    parts.push('增强收益递减: 最近 ' + sc.diminishing_returns.lookback_rounds + ' 轮低于历史 ' + sc.diminishing_returns.degrade_ratio + ' 倍');
+  }
+  return parts.length ? parts.join('；') : '未设置';
+}
+
+function _stopConditionSummaryHtml(stopConditions) {
+  const hasActive = _hasActiveStopConditions(stopConditions);
+  const summary = escHtml(_stopConditionSummary(stopConditions));
+  const cls = hasActive ? 'stop-summary-active' : 'stop-summary-inactive';
+  return '<span class="' + cls + '">' + summary + '</span>';
+}
+
+function _stopSharpeProgressHtml(p) {
+  const sc = _cloneStopConditions((p && p.stop_conditions) || {});
+  const sharpeCfg = sc.sharpe_target_count || {};
+  if (sharpeCfg.min_sharpe === null || sharpeCfg.target_count === null) return '';
+  const metrics = (p && p.stop_metrics) || {};
+  const useAbs = metrics.qualified_sharpe_use_abs !== undefined
+    ? !!metrics.qualified_sharpe_use_abs
+    : !!sharpeCfg.use_abs;
+  const sharpeLabel = useAbs ? '|Sharpe|' : 'Sharpe';
+  const threshold = metrics.qualified_sharpe_threshold !== undefined && metrics.qualified_sharpe_threshold !== null
+    ? metrics.qualified_sharpe_threshold
+    : sharpeCfg.min_sharpe;
+  const qualifiedCount = metrics.qualified_sharpe_count !== undefined && metrics.qualified_sharpe_count !== null
+    ? metrics.qualified_sharpe_count
+    : 0;
+  return 'Sharpe统计: 按 ' + sharpeLabel + ' 计算，已达标 ' + qualifiedCount + ' / ' + sharpeCfg.target_count + '，阈值 ' + threshold;
+}
+
+function openStopConditionsForCreate() {
+  _stopConditionModalMode = 'create';
+  _stopConditionModalPid = '';
+  populateStopConditionForm(_createStopConditions, {
+    title: '创建前停止条件',
+    hint: '留空表示不启用该条件。应用后，仅影响接下来新建的流水线。',
+    saveLabel: '应用到本次创建',
+  });
+  document.getElementById('stop-overlay').classList.add('show');
+}
+
+function openStopConditionsForPipeline(pid) {
+  const pipeline = _pipelineMap[pid] || {};
+  _stopConditionModalMode = 'runtime';
+  _stopConditionModalPid = pid;
+  populateStopConditionForm(pipeline.stop_conditions || _defaultStopConditions(), {
+    title: pid.substring(0, 30) + ' — 停止条件',
+    hint: '保存后立即写回当前流水线配置；若新条件已满足，会直接触发停止。',
+    saveLabel: '保存到当前流水线',
+  });
+  document.getElementById('stop-overlay').classList.add('show');
+}
+
+function closeStopConditionsModal() {
+  document.getElementById('stop-overlay').classList.remove('show');
+}
+
+function populateStopConditionForm(stopConditions, options) {
+  const sc = _cloneStopConditions(stopConditions);
+  const opts = options || {};
+  document.getElementById('stop-modal-title').textContent = opts.title || '停止条件';
+  document.getElementById('stop-modal-hint').textContent = opts.hint || '';
+  document.getElementById('stop-modal-save-btn').textContent = opts.saveLabel || '保存';
+  document.getElementById('scSharpeMin').value = _valueOrEmpty(sc.sharpe_target_count.min_sharpe);
+  document.getElementById('scSharpeCount').value = _valueOrEmpty(sc.sharpe_target_count.target_count);
+  document.getElementById('scSharpeUseAbs').checked = !!sc.sharpe_target_count.use_abs;
+  document.getElementById('scMaxPoolIdeas').value = _valueOrEmpty(sc.max_pool_ideas);
+  document.getElementById('scMaxAlphaSubmitted').value = _valueOrEmpty(sc.max_alpha_submitted);
+  document.getElementById('scMaxSimCompleted').value = _valueOrEmpty(sc.max_sim_completed);
+  document.getElementById('scMaxIterations').value = _valueOrEmpty(sc.max_iterations);
+  document.getElementById('scDiminishingEnabled').checked = !!(sc.diminishing_returns && sc.diminishing_returns.enabled);
+  document.getElementById('scDiminishingSharpe').value = _valueOrEmpty(sc.diminishing_returns.min_sharpe);
+  document.getElementById('scDiminishingLookback').value = _valueOrEmpty(sc.diminishing_returns.lookback_rounds);
+  document.getElementById('scDiminishingRatio').value = _valueOrEmpty(sc.diminishing_returns.degrade_ratio);
+  document.getElementById('scDiminishingSamples').value = _valueOrEmpty(sc.diminishing_returns.min_baseline_samples);
+}
+
+function collectStopConditionForm() {
+  const sharpeMin = document.getElementById('scSharpeMin').value.trim();
+  const sharpeCount = document.getElementById('scSharpeCount').value.trim();
+  return {
+    sharpe_target_count: {
+      min_sharpe: sharpeMin === '' ? null : parseFloat(sharpeMin),
+      target_count: sharpeCount === '' ? null : parseInt(sharpeCount, 10),
+      use_abs: document.getElementById('scSharpeUseAbs').checked,
+    },
+    max_pool_ideas: document.getElementById('scMaxPoolIdeas').value.trim() === '' ? null : parseInt(document.getElementById('scMaxPoolIdeas').value, 10),
+    max_alpha_submitted: document.getElementById('scMaxAlphaSubmitted').value.trim() === '' ? null : parseInt(document.getElementById('scMaxAlphaSubmitted').value, 10),
+    max_sim_completed: document.getElementById('scMaxSimCompleted').value.trim() === '' ? null : parseInt(document.getElementById('scMaxSimCompleted').value, 10),
+    max_iterations: document.getElementById('scMaxIterations').value.trim() === '' ? null : parseInt(document.getElementById('scMaxIterations').value, 10),
+    diminishing_returns: {
+      enabled: document.getElementById('scDiminishingEnabled').checked,
+      min_sharpe: document.getElementById('scDiminishingSharpe').value.trim() === '' ? null : parseFloat(document.getElementById('scDiminishingSharpe').value),
+      lookback_rounds: parseInt(document.getElementById('scDiminishingLookback').value || '2', 10),
+      degrade_ratio: parseFloat(document.getElementById('scDiminishingRatio').value || '0.5'),
+      min_baseline_samples: parseInt(document.getElementById('scDiminishingSamples').value || '20', 10),
+    }
+  };
+}
+
+async function saveStopConditions() {
+  const payload = collectStopConditionForm();
+  try {
+    if (_stopConditionModalMode === 'create') {
+      _createStopConditions = _cloneStopConditions(payload);
+      updateStopSettingsButton();
+      closeStopConditionsModal();
+      return;
+    }
+    const pid = _stopConditionModalPid;
+    const resp = await fetch('/api/pipeline/' + pid + '/update-stop-conditions', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ stop_conditions: payload })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert('停止条件保存失败: ' + (data.error || 'unknown error')); return; }
+    closeStopConditionsModal();
+    if (data.status && data.status.pipeline_id) {
+      _pipelineMap[data.status.pipeline_id] = data.status;
+      _updateCardInPlace(data.status);
+    }
+    if (data.stop_triggered) {
+      alert('停止条件已保存，并已触发自动停止:\n' + (data.stop_reason || ''));
+    }
+    refresh();
+  } catch (e) {
+    alert('停止条件保存失败: ' + e.message);
+  }
+}
+
+function _promptSectionByKey(key) {
+  return (_promptTemplateCatalog || []).find(function(item) { return item.key === key; }) || null;
+}
+
+function _cloneAdvancedPromptDrafts(source) {
+  const nextDrafts = {};
+  (_promptTemplateCatalog || []).forEach(function(section) {
+    const draft = (source && source[section.key]) || {};
+    nextDrafts[section.key] = {
+      text: typeof draft.text === 'string' ? draft.text : (section.default_text || ''),
+      variantKey: typeof draft.variantKey === 'string' ? draft.variantKey : ''
+    };
+  });
+  return nextDrafts;
+}
+
+function _ensureAdvancedDrafts() {
+  (_promptTemplateCatalog || []).forEach(function(section) {
+    if (!_advancedPromptDrafts[section.key]) {
+      _advancedPromptDrafts[section.key] = { text: section.default_text || '', variantKey: '' };
+    }
+    if (!_advancedWorkingPromptDrafts[section.key]) {
+      _advancedWorkingPromptDrafts[section.key] = { text: section.default_text || '', variantKey: '' };
+    }
+  });
+}
+
+function _countAdvancedOverridesFrom(drafts) {
+  return (_promptTemplateCatalog || []).filter(function(section) {
+    const draft = (drafts || {})[section.key] || { text: section.default_text || '', variantKey: '' };
+    return (draft.text || '').trim() !== (section.default_text || '').trim() || !!(draft.variantKey || '').trim();
+  }).length;
+}
+
+function _countAdvancedOverrides() {
+  _ensureAdvancedDrafts();
+  return _countAdvancedOverridesFrom(_advancedPromptDrafts);
+}
+
+function updateAdvancedSettingsButton() {
+  const btn = document.getElementById('advancedSettingsBtn');
+  if (!btn) return;
+  const count = _countAdvancedOverrides();
+  btn.textContent = count > 0 ? ('⚙ 高级设置 (' + count + ')') : '⚙ 高级设置';
+}
+
+async function loadPromptTemplateCatalog(force) {
+  if (_promptTemplateCatalog.length && !force) {
+    _ensureAdvancedDrafts();
+    updateAdvancedSettingsButton();
+    return _promptTemplateCatalog;
+  }
+  const resp = await fetch('/api/pipeline/prompt-templates', { headers: getHeaders() });
+  const data = await resp.json();
+  if (!data.ok) throw new Error(data.error || '加载高级提示词模板失败');
+  _promptTemplateCatalog = data.sections || [];
+  if (!_activePromptTemplateKey && _promptTemplateCatalog.length) {
+    _activePromptTemplateKey = _promptTemplateCatalog[0].key;
+  }
+  _ensureAdvancedDrafts();
+  if (!Object.keys(_advancedWorkingPromptDrafts || {}).length) {
+    _advancedWorkingPromptDrafts = _cloneAdvancedPromptDrafts(_advancedPromptDrafts);
+  }
+  updateAdvancedSettingsButton();
+  return _promptTemplateCatalog;
+}
+
+function resetAdvancedPromptDrafts() {
+  _advancedPromptDrafts = _cloneAdvancedPromptDrafts(null);
+  _advancedWorkingPromptDrafts = _cloneAdvancedPromptDrafts(null);
+  _advancedWorkingPromptAcknowledged = false;
+  updateAdvancedSettingsButton();
+  if (document.getElementById('advanced-overlay').classList.contains('show')) {
+    renderAdvancedSettingsModal();
+  }
+}
+
+function _validateAdvancedSection(section, text) {
+  const expected = (section.default_text || '').match(/\{\{[A-Z0-9_]+\}\}/g) || [];
+  const actual = (text || '').match(/\{\{[A-Z0-9_]+\}\}/g) || [];
+  const missing = expected.filter(function(token) { return actual.indexOf(token) < 0; });
+  const added = actual.filter(function(token) { return expected.indexOf(token) < 0; });
+  if (missing.length || added.length) {
+    let msg = '提示：你修改了可用变量集合。运行通常不会中断，但模型会失去对应上下文。';
+    if (missing.length) msg += ' 缺少: ' + missing.join(', ') + '。';
+    if (added.length) msg += ' 新增: ' + added.join(', ') + '。';
+    return msg;
+  }
+  return '';
+}
+
+function buildPromptOverridesPayload() {
+  if (!_promptTemplateCatalog.length) return {};
+  const payload = {};
+  (_promptTemplateCatalog || []).forEach(function(section) {
+    const draft = _advancedPromptDrafts[section.key];
+    if (!draft) return;
+    const text = (draft.text || '').trim();
+    if (!text) return;
+    if (text !== (section.default_text || '').trim() || !!(draft.variantKey || '').trim()) {
+      payload[section.key] = text;
+    }
+  });
+  return payload;
+}
+
+async function openAdvancedSettings() {
+  try {
+    await loadPromptTemplateCatalog();
+    if (!_activePromptTemplateKey && _promptTemplateCatalog.length) {
+      _activePromptTemplateKey = _promptTemplateCatalog[0].key;
+    }
+    _advancedWorkingPromptDrafts = _cloneAdvancedPromptDrafts(_advancedPromptDrafts);
+    _advancedWorkingPromptAcknowledged = false;
+    renderAdvancedSettingsModal();
+    document.getElementById('advanced-overlay').classList.add('show');
+  } catch (e) {
+    alert('加载高级设置失败: ' + e.message);
+  }
+}
+
+function closeAdvancedSettings() {
+  document.getElementById('advanced-overlay').classList.remove('show');
+}
+
+function switchAdvancedPromptSection(key) {
+  _activePromptTemplateKey = key;
+  renderAdvancedSettingsModal();
+}
+
+function setAdvancedPromptAcknowledged(checked) {
+  _advancedWorkingPromptAcknowledged = !!checked;
+  renderAdvancedSettingsModal(false);
+}
+
+function updateAdvancedPromptText(value) {
+  const section = _promptSectionByKey(_activePromptTemplateKey);
+  if (!section) return;
+  _ensureAdvancedDrafts();
+  _advancedWorkingPromptDrafts[section.key].text = value;
+  _advancedWorkingPromptDrafts[section.key].variantKey = '';
+  const msg = _validateAdvancedSection(section, value || '');
+  const validationEl = document.getElementById('advanced-validation-msg');
+  if (validationEl) validationEl.textContent = msg || '';
+}
+
+function applyAdvancedPromptPreset(sectionKey, presetKey) {
+  const section = _promptSectionByKey(sectionKey);
+  if (!section) return;
+  const presets = Array.isArray(section.preset_options) ? section.preset_options : [];
+  const preset = presets.find(function(item) { return item.key === presetKey; });
+  if (!preset) return;
+  _ensureAdvancedDrafts();
+  _advancedWorkingPromptDrafts[section.key].text = preset.text || section.default_text || '';
+  _advancedWorkingPromptDrafts[section.key].variantKey = preset.key || '';
+  renderAdvancedSettingsModal(false);
+}
+
+async function showAdvancedVariablePreview(sectionKey, token) {
+  try {
+    const dataTypeEl = document.getElementById('cfgDataType');
+    const maxEnhanceEl = document.getElementById('cfgMaxEnhance');
+    const params = new URLSearchParams({
+      section_key: sectionKey,
+      token: token,
+      data_type: dataTypeEl ? dataTypeEl.value : 'MATRIX',
+      max_enhance_per_round: maxEnhanceEl ? String(parseInt(maxEnhanceEl.value || '4', 10) || 4) : '4',
+    });
+    const resp = await fetch('/api/pipeline/prompt-token-preview?' + params.toString(), { headers: getHeaders() });
+    const data = await resp.json();
+    if (!data.ok) {
+      alert('加载变量内容失败: ' + (data.error || 'unknown error'));
+      return;
+    }
+    _setPromptModalView({
+      mode: 'view',
+      title: data.title || ('变量预览 ' + token),
+      text: data.content || '',
+      hint: data.description || '这是该变量在运行时会插入的内容预览。',
+      readOnly: true,
+      showReset: false,
+      showSave: false,
+      placeholder: ''
+    });
+  } catch (e) {
+    alert('加载变量内容失败: ' + e.message);
+  }
+}
+
+function _updateAdvancedModalFooter() {
+  const ackEl = document.getElementById('advanced-ack-checkbox');
+  const applyBtn = document.getElementById('advanced-apply-btn');
+  const hintEl = document.getElementById('advanced-footer-hint');
+  if (ackEl) ackEl.checked = !!_advancedWorkingPromptAcknowledged;
+  if (applyBtn) applyBtn.disabled = !_advancedWorkingPromptAcknowledged;
+  if (hintEl) {
+    const changed = _countAdvancedOverridesFrom(_advancedWorkingPromptDrafts);
+    hintEl.textContent = changed > 0
+      ? '当前有 ' + changed + ' 个阶段草稿已修改；点击“应用”后才会用于新建流水线。'
+      : '当前没有改动；若你修改了提示词，点击“应用”后才会用于新建流水线。';
+  }
+}
+
+function applyAdvancedSettings() {
+  if (!_advancedWorkingPromptAcknowledged) return;
+  _advancedPromptDrafts = _cloneAdvancedPromptDrafts(_advancedWorkingPromptDrafts);
+  closeAdvancedSettings();
+  updateAdvancedSettingsButton();
+}
+
+function renderAdvancedSettingsModal(refreshNav) {
+  const navHost = document.getElementById('advanced-nav');
+  const editorHost = document.getElementById('advanced-editor-host');
+  if (!navHost || !editorHost) return;
+  _ensureAdvancedDrafts();
+  if (refreshNav !== false) {
+    navHost.innerHTML = (_promptTemplateCatalog || []).map(function(section) {
+      const draft = _advancedPromptDrafts[section.key] || { text: section.default_text || '', variantKey: '' };
+      const customized = (draft.text || '').trim() !== (section.default_text || '').trim() || !!(draft.variantKey || '').trim();
+      return '<button class="advanced-nav-btn ' + (_activePromptTemplateKey === section.key ? 'active' : '') + '" type="button" onclick="switchAdvancedPromptSection(\'' + section.key + '\')">'
+        + escHtml(section.title)
+        + (customized ? ' *' : '')
+        + '</button>';
+    }).join('');
+  }
+
+  const section = _promptSectionByKey(_activePromptTemplateKey) || (_promptTemplateCatalog || [])[0];
+  if (!section) {
+    editorHost.innerHTML = '<div class="advanced-editor">暂无可配置项</div>';
+    _updateAdvancedModalFooter();
+    return;
+  }
+  const draft = _advancedWorkingPromptDrafts[section.key] || { text: section.default_text || '', variantKey: '' };
+  const validationMsg = _validateAdvancedSection(section, draft.text || '');
+  const tokenHtml = (section.locked_tokens || []).length
+    ? '<div class="advanced-token-list">' + section.locked_tokens.map(function(token) { return '<button class="advanced-token advanced-token-link" type="button" onclick="showAdvancedVariablePreview(\'' + escJsStr(section.key) + '\',\'' + escJsStr(token) + '\')">' + escHtml(token) + '</button>'; }).join('') + '</div><div class="advanced-token-note" style="margin-top:8px">点击变量名可查看它在运行时会插入什么内容。</div>'
+    : '<div class="advanced-token-note">本项没有可用变量。</div>';
+  const presetHtml = (section.preset_options || []).length
+    ? '<div class="advanced-token-note" style="margin-top:12px">快速选择内置版本：</div><div class="advanced-token-list" style="margin-top:8px">' + (section.preset_options || []).map(function(preset) {
+        const active = (draft.variantKey || '') === (preset.key || '');
+        return '<button class="advanced-token' + (active ? ' active' : '') + '" type="button" onclick="applyAdvancedPromptPreset(\'' + escJsStr(section.key) + '\',\'' + escJsStr(preset.key || '') + '\')">' + escHtml(preset.label || preset.key || '') + '</button>';
+      }).join('') + '</div><div class="advanced-token-note" style="margin-top:8px">选择预设后会将该版本作为显式配置提交，新建流水线时不会再随机。</div>'
+    : '';
+
+  editorHost.innerHTML = ''
+    + '<div class="advanced-editor">'
+    + '<div class="advanced-editor-head">'
+    + '<div class="advanced-editor-title"><h3>' + escHtml(section.title) + '</h3><p>' + escHtml(section.description || '') + '</p></div>'
+    + '</div>'
+    + '<div>' + tokenHtml + presetHtml + '<div class="advanced-token-note" style="margin-top:8px">这些变量只是提示词模板里的运行时占位符。你可以删除或改动它们，但模型可能失去对应上下文。</div></div>'
+    + '<textarea spellcheck="false" oninput="updateAdvancedPromptText(this.value)">' + escHtml(draft.text || '') + '</textarea>'
+    + '<div class="advanced-editor-actions">'
+    + '<div class="advanced-validation" id="advanced-validation-msg">' + escHtml(validationMsg || '') + '</div>'
+    + '</div></div>';
+  _updateAdvancedModalFooter();
+}
+
+/* ── Refresh & render ── */
+function _setRefreshIndicator(message) {
+  const indicator = document.getElementById('refreshIndicator');
+  if (indicator) indicator.textContent = message || '';
+}
+
+async function refresh(options) {
+  const opts = options || {};
+  try {
+    const resp = await fetch('/api/pipeline/list');
+    const data = await resp.json();
+    if (!data.ok) {
+      if (opts.reportError) alert(data.error || '刷新失败');
+      return null;
+    }
+    renderPipelines(data.pipelines);
+    if (data.workers) {
+      const gw = document.getElementById('globalWorkerDisplay');
+      if (gw) gw.textContent = data.workers.used + '/' + data.workers.limit;
+    }
+    _setRefreshIndicator('更新: ' + new Date().toLocaleTimeString());
+    return data;
+  } catch(e) {
+    if (opts.reportError) alert('刷新失败: ' + e.message);
+    return null;
+  }
+}
+
+function statusBadge(st) {
+  const s = (st||'').toLowerCase();
+  if (s === 'running') return '<span class="badge badge-running">运行中</span>';
+  if (s === 'error') return '<span class="badge badge-error">错误</span>';
+  if (s === 'stopping') return '<span class="badge badge-stopped">正在停止</span>';
+  if (s === 'stopped') return '<span class="badge badge-stopped">已停止</span>';
+  return '<span class="badge badge-idle">' + (s||'idle') + '</span>';
+}
+
+function phaseName(p) {
+  const map = {generate:'① 生成',inspect:'② 检查',simulate:'③ 回测',decide:'④ 决策',enhance:'⑤ 增强',implement:'⑥ 实现',idle:'等待中'};
+  return map[p] || p || '-';
+}
+function phaseIcon(p) {
+  const map = {generate:'🧠',inspect:'🔍',simulate:'📊',decide:'🤖',enhance:'⚡',implement:'🚀',idle:'⏳'};
+  return map[p] || '•';
+}
+
+function phaseHasPrompt(p) {
+  return ['generate', 'inspect', 'simulate', 'decide', 'enhance', 'implement'].includes(String(p || '').toLowerCase());
+}
+
+function phasePromptButtons(pid, phase) {
+  const ph = String(phase || '').toLowerCase();
+  if (!phaseHasPrompt(ph)) return '';
+  if (ph === 'inspect') {
+    return '<button class="btn btn-sm" type="button" style="background:var(--surface2);color:var(--text2)" onclick="event.stopPropagation();showStagePrompt(\'' + pid + '\',\'settings\')">📝 查看选参提示词</button>'
+      + tipDot('查看 INSPECT 阶段给模型选 neutralization、decay 等参数时使用的提示词。')
+      + '<button class="btn btn-sm" type="button" style="background:var(--surface2);color:var(--text2)" onclick="event.stopPropagation();showStagePrompt(\'' + pid + '\',\'repair\')">🛠 查看修复提示词</button>'
+      + tipDot('查看 INSPECT 阶段在表达式不合法时，用来让模型修复表达式的提示词。');
+  }
+  if (ph === 'enhance') {
+    return '<button class="btn btn-sm" type="button" style="background:var(--surface2);color:var(--text2)" onclick="event.stopPropagation();showStagePrompt(\'' + pid + '\',\'single\')">📝 查看单模板增强提示词</button>'
+      + tipDot('查看 ENHANCE 阶段在单个模板上做常规增强时使用的提示词。')
+      + '<button class="btn btn-sm" type="button" style="background:var(--surface2);color:var(--text2)" onclick="event.stopPropagation();showStagePrompt(\'' + pid + '\',\'cross\')">🔀 查看交叉增强提示词</button>'
+      + tipDot('查看 ENHANCE 阶段把多个模板做交叉融合增强时使用的提示词。');
+  }
+  return '<button class="btn btn-sm" type="button" style="background:var(--surface2);color:var(--text2)" onclick="event.stopPropagation();showStagePrompt(\'' + pid + '\',\'\')">📝 查看本阶段提示词</button>'
+    + tipDot('查看当前阶段实际使用的提示词内容。这里是只读预览，修改请到创建前的高级设置里进行。');
+}
+
+const ALL_PHASES = ['generate','inspect','simulate','decide','enhance','implement'];
+
+/* ── SSE state per pipeline ── */
+const pipeStreams = {}; // pid -> EventSource
+
+/* ── Track last state for diff-based refresh ── */
+let _lastPipelineJson = '';
+
+function renderPipelines(list) {
+  _pipelineMap = Object.fromEntries((list || []).map(p => [p.pipeline_id, p]));
+  const newJson = JSON.stringify(list);
+  const el = document.getElementById('pipelineList');
+  const empty = document.getElementById('emptyState');
+
+  if (!list.length) {
+    if (_lastPipelineJson !== newJson) { el.innerHTML=''; empty.style.display='block'; _lastPipelineJson=newJson; }
+    return;
+  }
+  empty.style.display='none';
+
+  // If same pipeline set exists, do incremental in-place update (no DOM rebuild)
+  if (_lastPipelineJson) {
+    const oldList = JSON.parse(_lastPipelineJson || '[]');
+    const oldIds = new Set(oldList.map(p=>p.pipeline_id));
+    const newIds = new Set(list.map(p=>p.pipeline_id));
+    const sameSet = oldIds.size === newIds.size && [...newIds].every(id => oldIds.has(id));
+    if (sameSet && _lastPipelineJson !== newJson) {
+      list.forEach(p => _updateCardInPlace(p));
+      _lastPipelineJson = newJson;
+      _cachePrompts(list);
+      // Disconnect SSE for pipelines that stopped running; don't auto-connect running ones
+      list.forEach(p => { if (!p.running) disconnectSSE(p.pipeline_id); });
+      return;
+    }
+    if (_lastPipelineJson === newJson) {
+      return; // nothing changed at all
+    }
+  }
+
+  // Full rebuild (first load or pipeline set changed)
+  el.innerHTML = list.map(p => _buildCardHtml(p)).join('');
+  _lastPipelineJson = newJson;
+  _cachePrompts(list);
+  // Disconnect SSE for stopped pipelines; running pipelines connect on-demand via log panel
+  list.forEach(p => { if (!p.running) disconnectSSE(p.pipeline_id); });
+}
+
+function _buildPhasesHtml(p) {
+  const phase = p.phase || '';
+  return ALL_PHASES.map(ph => {
+    let cls = '';
+    if (phase === ph) cls = 'active';
+    const idx = ALL_PHASES.indexOf(ph);
+    const curIdx = ALL_PHASES.indexOf(phase);
+    if (curIdx > 0 && idx < curIdx && p.running) cls = 'done';
+    return '<div class="phase ' + cls + '" data-pid="' + p.pipeline_id + '" data-phase="' + ph + '" onclick="toggleStage(\'' + p.pipeline_id + '\',\'' + ph + '\')">'
+      + phaseIcon(ph) + ' ' + phaseName(ph) + '</div>';
+  }).join('');
+}
+
+function _actionBtns(p) {
+  var startStop;
+  if (p.status === 'stopping') {
+    startStop = '<button class="btn btn-sm" disabled style="opacity:0.6;background:var(--surface2);color:var(--text2)">⏳ 正在停止...</button>';
+  } else if (p.running) {
+    startStop = '<button class="btn btn-danger btn-sm" onclick="stopPipe(\'' + p.pipeline_id + '\')">⏹ 停止</button>';
+  } else {
+    startStop = '<button class="btn btn-success btn-sm" onclick="startPipe(\'' + p.pipeline_id + '\')">▶ 启动</button>';
+  }
+  const stopConfigBtnClass = _hasActiveStopConditions(p.stop_conditions || {}) ? 'btn-stop-config-active' : 'btn-stop-config-inactive';
+  const stopConfigBtn = '<button class="btn btn-sm ' + stopConfigBtnClass + '" onclick="openStopConditionsForPipeline(\'' + p.pipeline_id + '\')">🛑 停止条件</button>';
+  const restartBtn = '<button class="btn btn-sm" style="background:#ff9800;color:#111" onclick="forceRestartPipe(\'' + p.pipeline_id + '\')">↻ 强制重启</button>';
+  const archiveBtn = '<button class="btn btn-sm" style="background:var(--purple);color:#fff" onclick="archivePipe(\'' + p.pipeline_id + '\')">📦 归档</button>';
+  const deleteBtn = '<button class="btn btn-sm" style="background:var(--surface2);color:var(--red)" onclick="deletePipe(\'' + p.pipeline_id + '\')">🗑</button>';
+  return startStop + ' ' + stopConfigBtn + ' ' + restartBtn + ' ' + archiveBtn + ' ' + deleteBtn;
+}
+
+function _inferSuggestedDataType(p) {
+  if (!p) return '';
+  const explicit = String(p.suggested_data_type || '').trim().toUpperCase();
+  if (explicit === 'MATRIX' || explicit === 'VECTOR') return explicit;
+  const err = String(p.error || '').toUpperCase();
+  if (err.includes('DATA_TYPE=MATRIX') || err.includes('TYPE=MATRIX')) return 'VECTOR';
+  if (err.includes('DATA_TYPE=VECTOR') || err.includes('TYPE=VECTOR')) return 'MATRIX';
+  return '';
+}
+
+function _needsDataTypeRestart(p) {
+  if (!p) return false;
+  if (String(p.error_code || '') === 'generate_data_type_mismatch') return true;
+  return !!_inferSuggestedDataType(p);
+}
+
+function _dataTypeHintHtml(p) {
+  const currentType = escHtml(String(p.data_type || 'MATRIX').toUpperCase());
+  const suggestedType = _inferSuggestedDataType(p);
+  let html = '数据类型: <span style="color:var(--accent);font-weight:600">' + currentType + '</span>';
+  if (_needsDataTypeRestart(p) && suggestedType) {
+    html += ' <span style="color:var(--yellow)">(建议改为 ' + escHtml(suggestedType) + ' 后强制重启)</span>';
+  }
+  return html;
+}
+
+function _workerHtml(p) {
+  var wk = p.sim_concurrent || 2;
+  var slots = p.sim_multi_slots || 2;
+  var html = '<span style="font-size:0.82rem;color:var(--text2);display:inline-flex;align-items:center;gap:6px">';
+  html += '👷 Worker: ';
+  html += '<button class="btn btn-sm" style="padding:0 6px;font-size:0.8rem;background:var(--surface2);color:var(--text)" onclick="adjustWorkers(\'' + p.pipeline_id + '\',-1)">−</button>';
+  html += '<span style="font-weight:700;color:var(--accent);min-width:16px;text-align:center">' + wk + '</span>';
+  html += '<button class="btn btn-sm" style="padding:0 6px;font-size:0.8rem;background:var(--surface2);color:var(--text)" onclick="adjustWorkers(\'' + p.pipeline_id + '\',1)">+</button>';
+  html += ' | Alpha/批: <span style="font-weight:600">' + slots + '</span>';
+  html += '</span>';
+  return html;
+}
+
+function _llmRequestSummaryHtml(info) {
+  const counts = info || {};
+  const byStage = counts.by_stage || {};
+  const parts = [];
+  ['generate', 'inspect', 'decide', 'enhance'].forEach(function(stage) {
+    if ((byStage[stage] || 0) > 0) {
+      parts.push(stage + ': ' + byStage[stage]);
+    }
+  });
+  if (!parts.length) return 'LLM请求: 0';
+  return 'LLM请求: ' + (counts.total || 0) + ' (' + parts.join(' | ') + ')';
+}
+
+function _statsHtml(ps, llmInfo) {
+  const llmTotal = ((llmInfo || {}).total) || 0;
+  return '<div class="stat"><span class="stat-value">' + (ps.total||0) + '</span><span class="stat-label">池中 Ideas</span></div>'
+    + '<div class="stat"><span class="stat-value">' + (ps.inspect_done||0) + '</span><span class="stat-label">已检查</span></div>'
+    + '<div class="stat"><span class="stat-value">' + (ps.sim_done||0) + '</span><span class="stat-label">已回测Alpha</span></div>'
+    + '<div class="stat"><span class="stat-value">' + (ps.enhance_selected||0) + '</span><span class="stat-label">已增强</span></div>'
+    + '<div class="stat"><span class="stat-value">' + (ps.from_gen||0) + '</span><span class="stat-label">来自生成</span></div>'
+    + '<div class="stat"><span class="stat-value">' + (ps.from_enhance||0) + '</span><span class="stat-label">来自增强</span></div>'
+    + '<div class="stat"><span class="stat-value">' + llmTotal + '</span><span class="stat-label">LLM请求</span></div>';
+}
+
+function _metaHtml(p) {
+  let s = _dataTypeHintHtml(p) + ' | 迭代: ' + (p.iteration||0) + ' | 最后检查点: ' + (p.last_checkpoint||'-');
+  s += '<br>' + escHtml(_llmRequestSummaryHtml(p.llm_request_counts || {}));
+  s += '<br>停止条件: ' + _stopConditionSummaryHtml(p.stop_conditions || {});
+  const stopSharpeProgress = _stopSharpeProgressHtml(p);
+  if (stopSharpeProgress) s += '<br>' + escHtml(stopSharpeProgress);
+  if (p.stop_reason) s += '<br><span style="color:var(--yellow)">停止原因: ' + escHtml(p.stop_reason) + '</span>';
+  if (p.error) s += '<span style="color:var(--red)"> | 错误: ' + escHtml(p.error) + '</span>';
+  return s;
+}
+
+function _buildCardHtml(p) {
+  const ps = p.pool_stats || {};
+  return '<div class="pipeline-card" id="pipe-' + p.pipeline_id + '">'
+    + '<div class="pipeline-header">'
+    + '<span class="pipeline-id">' + p.pipeline_id + '</span>'
+    + '<div style="display:flex;gap:8px;align-items:center">'
+    + '<span id="badge-' + p.pipeline_id + '">' + statusBadge(p.status) + '</span>'
+    + '<span id="btns-' + p.pipeline_id + '">' + _actionBtns(p) + '</span>'
+    + '</div></div>'
+    + '<div style="margin-bottom:8px" id="workers-' + p.pipeline_id + '">' + _workerHtml(p) + '</div>'
+    + '<div class="phases" id="phases-' + p.pipeline_id + '">' + _buildPhasesHtml(p) + '</div>'
+    + '<div class="stats-row" id="stats-' + p.pipeline_id + '">' + _statsHtml(ps, p.llm_request_counts || {}) + '</div>'
+    + '<div id="meta-' + p.pipeline_id + '" style="font-size:0.8rem;color:var(--text2)">' + _metaHtml(p) + '</div>'
+    /* Stage detail expand area — hidden by default */
+    + '<div class="stage-detail" id="stage-' + p.pipeline_id + '">'
+    + '<div class="stage-detail-header"><span id="stage-title-' + p.pipeline_id + '">阶段详情</span>'
+    + '<div id="stage-prompt-actions-' + p.pipeline_id + '" style="display:flex;align-items:center;gap:8px">'
+    + '<span class="close-stage" onclick="closeStage(\'' + p.pipeline_id + '\')">&times;</span></div></div>'
+    + '<div class="stage-log" id="stage-log-' + p.pipeline_id + '"></div>'
+    + '</div>'
+    /* Pool section */
+    + '<div class="pool-section collapsed" id="poolsec-' + p.pipeline_id + '">'
+    + '<div class="pool-toolbar">'
+    + '<button class="log-toggle-btn" type="button" onclick="togglePool(\'' + p.pipeline_id + '\')">'
+    + '<span class="arrow">▶</span> 🗂 池详情</button>'
+    + '<button class="btn btn-sm" type="button" style="background:var(--surface2);color:var(--text2)" onclick="loadPool(\'' + p.pipeline_id + '\')">刷新</button>'
+    + '</div>'
+    + '<div id="pool-' + p.pipeline_id + '" class="log-box"></div>'
+    + '</div>'
+    /* Overall activity log — collapsed by default */
+    + '<div class="log-section collapsed" id="logsec-' + p.pipeline_id + '">'
+    + '<button class="log-toggle-btn" onclick="toggleFullLog(\'' + p.pipeline_id + '\')">' 
+    + '<span class="arrow">▶</span> 📋 全部日志</button>'
+    + '<div class="log-box" id="log-' + p.pipeline_id + '"></div>'
+    + '</div></div>';
+}
+
+/* ── Prompt modal ── */
+var _promptCache = {};  // pid → decide_prompt string
+var _defaultPrompt = null;  // cached default prompt
+var _promptModalPid = null;  // currently open modal for which pipeline
+var _promptModalMode = 'view';
+var _stagePromptPhaseByPid = {};
+var _stagePromptKindByPid = {};
+
+function _cachePrompts(pipelines) {
+  pipelines.forEach(function(p) { _promptCache[p.pipeline_id] = p.decide_prompt || ''; });
+}
+
+function _setPromptModalView(opts) {
+  var overlay = document.getElementById('prompt-overlay');
+  var title = document.getElementById('prompt-modal-title');
+  var ta = document.getElementById('prompt-modal-textarea');
+  var hint = document.getElementById('prompt-modal-hint');
+  var resetBtn = document.getElementById('prompt-modal-reset-btn');
+  var saveBtn = document.getElementById('prompt-modal-save-btn');
+
+  _promptModalMode = opts.mode || 'view';
+  title.textContent = opts.title || '提示词';
+  ta.value = opts.text || '';
+  ta.readOnly = !!opts.readOnly;
+  ta.placeholder = opts.placeholder || '';
+  hint.textContent = opts.hint || '';
+  if (resetBtn) resetBtn.style.display = opts.showReset ? '' : 'none';
+  if (saveBtn) saveBtn.style.display = opts.showSave ? '' : 'none';
+  overlay.classList.add('show');
+}
+
+function _formatPromptSections(sections) {
+  return (sections || []).map(function(section) {
+    return '===== ' + (section.label || 'Prompt Section') + ' =====\n\n' + (section.content || '');
+  }).join('\n\n');
+}
+
+async function _ensureDefaultPrompt() {
+  if (_defaultPrompt !== null) return _defaultPrompt;
+  try {
+    const r = await fetch('/api/pipeline/default-prompt');
+    const d = await r.json();
+    if (d.ok) _defaultPrompt = d.prompt || '';
+    else _defaultPrompt = '';
+  } catch(e) { _defaultPrompt = ''; }
+  return _defaultPrompt;
+}
+
+async function showPrompt(pid) {
+  _promptModalPid = pid;
+  var customText = _promptCache[pid] || '';
+  var defText = await _ensureDefaultPrompt();
+  var isCustom = !!customText;
+  var displayText = customText || defText;
+
+  _setPromptModalView({
+    mode: 'edit',
+    title: pid.substring(0, 30) + ' — 决策提示词',
+    text: displayText,
+    hint: isCustom ? '当前使用自定义提示词' : '当前使用内置默认提示词',
+    readOnly: false,
+    showReset: true,
+    showSave: true,
+    placeholder: '输入决策提示词...'
+  });
+}
+
+async function showStagePrompt(pid, kind) {
+  var phase = _stagePromptPhaseByPid[pid] || '';
+  var promptKind = String(kind || _stagePromptKindByPid[pid] || '');
+  if (!phase) return;
+  try {
+    _stagePromptKindByPid[pid] = promptKind;
+    const url = '/api/pipeline/' + pid + '/phase-prompt?phase=' + encodeURIComponent(phase)
+      + '&kind=' + encodeURIComponent(promptKind);
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (!data.ok) {
+      alert('加载阶段提示词失败: ' + (data.error || 'unknown error'));
+      return;
+    }
+    _promptModalPid = pid;
+    _setPromptModalView({
+      mode: 'view',
+      title: pid.substring(0, 30) + ' — ' + (data.title || (phaseName(phase) + '提示词')),
+      text: _formatPromptSections(data.sections || []),
+      hint: phaseName(phase) + ' 当前为只读查看。若要修改阶段提示词，请在创建新流水线前使用“高级设置”。',
+      readOnly: true,
+      showReset: false,
+      showSave: false,
+      placeholder: ''
+    });
+  } catch (e) {
+    alert('加载阶段提示词失败: ' + e.message);
+  }
+}
+
+function closePromptModal() {
+  document.getElementById('prompt-overlay').classList.remove('show');
+  _promptModalPid = null;
+}
+
+async function savePrompt() {
+  var pid = _promptModalPid;
+  if (!pid || _promptModalMode !== 'edit') return;
+  var ta = document.getElementById('prompt-modal-textarea');
+  var newText = (ta.value || '').trim();
+  var defText = await _ensureDefaultPrompt();
+  // If text is same as default, treat as empty (use built-in)
+  var toSend = (newText === defText.trim()) ? '' : newText;
+  try {
+    await fetch('/api/pipeline/' + pid + '/update-prompt', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ decide_prompt: toSend })
+    });
+    _promptCache[pid] = toSend;
+    var hint = document.getElementById('prompt-modal-hint');
+    hint.textContent = toSend ? '✓ 已保存自定义提示词' : '✓ 已恢复为内置默认提示词';
+    setTimeout(function(){ hint.textContent = toSend ? '当前使用自定义提示词' : '当前使用内置默认提示词'; }, 2000);
+  } catch(e) { alert('保存失败: ' + e.message); }
+}
+
+async function resetPromptToDefault() {
+  var pid = _promptModalPid;
+  if (!pid || _promptModalMode !== 'edit') return;
+  var defText = await _ensureDefaultPrompt();
+  document.getElementById('prompt-modal-textarea').value = defText;
+  // Immediately save as empty (= use default)
+  try {
+    await fetch('/api/pipeline/' + pid + '/update-prompt', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ decide_prompt: '' })
+    });
+    _promptCache[pid] = '';
+    var hint = document.getElementById('prompt-modal-hint');
+    hint.textContent = '✓ 已恢复为内置默认提示词';
+    setTimeout(function(){ hint.textContent = '当前使用内置默认提示词'; }, 2000);
+  } catch(e) { alert('恢复失败: ' + e.message); }
+}
+
+/* Update an existing card in-place without destroying DOM (preserves open panels, logs, SSE) */
+function _updateCardInPlace(p) {
+  const card = document.getElementById('pipe-' + p.pipeline_id);
+  if (!card) return;
+  const badge = document.getElementById('badge-' + p.pipeline_id);
+  if (badge) badge.innerHTML = statusBadge(p.status);
+  const btns = document.getElementById('btns-' + p.pipeline_id);
+  if (btns) btns.innerHTML = _actionBtns(p);
+  const wkEl = document.getElementById('workers-' + p.pipeline_id);
+  if (wkEl) wkEl.innerHTML = _workerHtml(p);
+  const stats = document.getElementById('stats-' + p.pipeline_id);
+  if (stats) stats.innerHTML = _statsHtml(p.pool_stats || {}, p.llm_request_counts || {});
+  const meta = document.getElementById('meta-' + p.pipeline_id);
+  if (meta) meta.innerHTML = _metaHtml(p);
+  const phasesEl = document.getElementById('phases-' + p.pipeline_id);
+  if (phasesEl) phasesEl.innerHTML = _buildPhasesHtml(p);
+}
+
+function effectiveSimStatus(entry) {
+  const sm = entry.sim_summary || {};
+  const count = sm.count || 0;
+  const completed = sm.completed || 0;
+  const failed = sm.failed || 0;
+  const warning = Number((sm.status_breakdown && sm.status_breakdown.WARNING) || 0);
+  if ((entry.sim_status || '') === 'done' && count > 0 && completed === 0) return 'error';
+  if ((entry.sim_status || '') === 'done' && warning > 0 && failed === 0) return 'warning';
+  return entry.sim_status || '';
+}
+
+function normalizeSimErrorMessage(value) {
+  if (value == null) return '';
+  const text = String(value).trim();
+  if (!text) return '';
+  const lowered = text.toLowerCase();
+  if (lowered === 'nan' || lowered === 'null' || lowered === 'none' || lowered === 'undefined') return '';
+  return text;
+}
+
+function firstSimError(summary, alphas) {
+  const firstError = normalizeSimErrorMessage(summary && summary.first_error);
+  if (firstError) return firstError;
+  const examples = (summary && summary.error_examples) || [];
+  for (const example of examples) {
+    const msg = normalizeSimErrorMessage(example);
+    if (msg) return msg;
+  }
+  for (const alpha of (alphas || [])) {
+    const msg = normalizeSimErrorMessage(alpha.error_details || alpha.error || '');
+    if (msg) return msg;
+    const statusMsg = normalizeSimErrorMessage(alpha.status || '');
+    if (statusMsg && statusMsg !== 'COMPLETED' && statusMsg !== 'COMPLETE') return statusMsg;
+  }
+  return '';
+}
+
+/* ── Toggle stage detail panel ── */
+function toggleStage(pid, phase) {
+  const panel = document.getElementById('stage-' + pid);
+  const title = document.getElementById('stage-title-' + pid);
+  const logEl = document.getElementById('stage-log-' + pid);
+  const promptActions = document.getElementById('stage-prompt-actions-' + pid);
+  if (!panel) return;
+
+  // If already showing this phase, close it
+  if (panel.classList.contains('show') && panel.dataset.phase === phase) {
+    panel.classList.remove('show');
+    return;
+  }
+
+  panel.dataset.phase = phase;
+  _stagePromptPhaseByPid[pid] = phase;
+  _stagePromptKindByPid[pid] = '';
+  title.textContent = phaseIcon(phase) + ' ' + phaseName(phase) + ' — 详细日志';
+  if (promptActions) {
+    promptActions.innerHTML = phasePromptButtons(pid, phase) + '<span class="close-stage" onclick="closeStage(\'' + pid + '\')">&times;</span>';
+  }
+  logEl.innerHTML = '<span style="color:var(--text2)">加载中...</span>';
+  panel.classList.add('show');
+
+  // Fetch phase-specific logs
+  fetch('/api/pipeline/' + pid + '/log?n=200&phase=' + phase)
+    .then(r => r.json())
+    .then(data => {
+      if (!data.ok || !data.log.length) {
+        logEl.innerHTML = '<span style="color:var(--text2)">该阶段暂无日志</span>';
+        return;
+      }
+      renderStageLogs(logEl, data.log, pid, phase);
+    })
+    .catch(() => {
+      logEl.innerHTML = '<span style="color:var(--red)">加载失败</span>';
+    });
+}
+
+function renderStageLogs(el, logs, pid, phase) {
+  el.innerHTML = logs.map(e => {
+    const cls = e.level === 'error' ? ' error' : (e.level === 'warning' ? ' warning' : ' info');
+    return '<div class="log-line' + cls + '"><span class="ts">[' + escHtml(e.ts) + ']</span> ' + escHtml(e.msg) + '</div>';
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+function closeStage(pid) {
+  const panel = document.getElementById('stage-' + pid);
+  const promptActions = document.getElementById('stage-prompt-actions-' + pid);
+  if (panel) panel.classList.remove('show');
+  if (promptActions) promptActions.innerHTML = '<span class="close-stage" onclick="closeStage(\'' + pid + '\')">&times;</span>';
+}
+
+/* ── SSE Streaming ── */
+function connectSSE(pid) {
+  if (pipeStreams[pid]) return; // already connected
+  const source = new EventSource('/api/pipeline/' + pid + '/stream');
+  pipeStreams[pid] = source;
+
+  source.onmessage = (event) => {
+    try {
+      const entry = JSON.parse(event.data);
+      // Append to overall log box
+      appendToLogBox(pid, entry);
+      // If stage detail panel is open and matches this phase, append there too
+      appendToStagePanel(pid, entry);
+    } catch { /* ignore parse errors */ }
+  };
+
+  source.addEventListener('done', (event) => {
+    source.close();
+    delete pipeStreams[pid];
+    refresh();
+  });
+
+  source.addEventListener('error', () => {
+    source.close();
+    delete pipeStreams[pid];
+  });
+}
+
+function disconnectSSE(pid) {
+  if (pipeStreams[pid]) {
+    pipeStreams[pid].close();
+    delete pipeStreams[pid];
+  }
+}
+
+function toggleFullLog(pid) {
+  const sec = document.getElementById('logsec-' + pid);
+  if (!sec) return;
+  const wasCollapsed = sec.classList.contains('collapsed');
+  sec.classList.toggle('collapsed');
+  if (wasCollapsed) {
+    // Expanding: lazy-load historic logs then connect SSE for live updates
+    const box = document.getElementById('log-' + pid);
+    if (box && box.children.length === 0) loadLog(pid);
+    connectSSE(pid);
+  } else {
+    // Collapsing: disconnect SSE to free the browser connection slot
+    disconnectSSE(pid);
+  }
+}
+
+function togglePool(pid) {
+  const sec = document.getElementById('poolsec-' + pid);
+  if (!sec) return;
+  const wasCollapsed = sec.classList.contains('collapsed');
+  sec.classList.toggle('collapsed');
+  // Lazy-load: fetch pool only when expanding and box is empty
+  if (wasCollapsed) {
+    const box = document.getElementById('pool-' + pid);
+    if (box && box.innerHTML === '') loadPool(pid);
+  }
+}
+
+function appendToLogBox(pid, entry) {
+  const box = document.getElementById('log-' + pid);
+  if (!box) return;
+  const cls = entry.level === 'error' ? ' error' : (entry.level === 'warning' ? ' warning' : ' info');
+  const div = document.createElement('div');
+  div.className = 'log-entry' + cls;
+  div.innerHTML = '<span class="ts">[' + escHtml(entry.ts || '') + ']</span> <span class="msg">' + escHtml(entry.msg || '') + '</span>';
+  box.appendChild(div);
+  // Keep reasonable size
+  while (box.children.length > 200) box.removeChild(box.firstChild);
+  box.scrollTop = box.scrollHeight;
+}
+
+function appendToStagePanel(pid, entry) {
+  const panel = document.getElementById('stage-' + pid);
+  if (!panel || !panel.classList.contains('show')) return;
+  const openPhase = panel.dataset.phase;
+  if (entry.phase !== openPhase) return;
+
+  const logEl = document.getElementById('stage-log-' + pid);
+  if (!logEl) return;
+  // Remove placeholder
+  const placeholder = logEl.querySelector('span[style]');
+  if (placeholder) placeholder.remove();
+
+  const cls = entry.level === 'error' ? ' error' : (entry.level === 'warning' ? ' warning' : ' info');
+  const div = document.createElement('div');
+  div.className = 'log-line' + cls;
+  div.innerHTML = '<span class="ts">[' + escHtml(entry.ts || '') + ']</span> ' + escHtml(entry.msg || '');
+  logEl.appendChild(div);
+  while (logEl.children.length > 300) logEl.removeChild(logEl.firstChild);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function _poolSortMeta(key) {
+  const meta = {
+    idea_file: { index: 0, type: 'string' },
+    origin: { index: 1, type: 'string' },
+    inspect_status: { index: 2, type: 'string' },
+    sim_status: { index: 3, type: 'string' },
+    completed: { index: 4, type: 'number' },
+    sharpe: { index: 5, type: 'number' },
+    fitness: { index: 6, type: 'number' },
+    enhance: { index: 7, type: 'string' }
+  };
+  return meta[key] || meta.idea_file;
+}
+
+function _poolSortCompare(a, b, type, dir) {
+  if (type === 'number') {
+    const av = Number(a);
+    const bv = Number(b);
+    const an = Number.isFinite(av) ? av : -Infinity;
+    const bn = Number.isFinite(bv) ? bv : -Infinity;
+    return dir === 'asc' ? an - bn : bn - an;
+  }
+  const as = String(a || '').toLowerCase();
+  const bs = String(b || '').toLowerCase();
+  return dir === 'asc' ? as.localeCompare(bs) : bs.localeCompare(as);
+}
+
+function applyPoolSort(pid) {
+  const box = document.getElementById('pool-' + pid);
+  if (!box) return;
+  const table = box.querySelector('table.pool-table');
+  if (!table) return;
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  const state = _poolSortState[pid] || { key: 'idea_file', dir: 'asc' };
+  const meta = _poolSortMeta(state.key);
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort((ra, rb) => {
+    const a = (ra.children[meta.index] && ra.children[meta.index].dataset.sort) || '';
+    const b = (rb.children[meta.index] && rb.children[meta.index].dataset.sort) || '';
+    return _poolSortCompare(a, b, meta.type, state.dir);
+  });
+  rows.forEach((row) => tbody.appendChild(row));
+
+  table.querySelectorAll('thead th[data-sort-key]').forEach((th) => {
+    const key = th.dataset.sortKey;
+    const label = th.dataset.label || th.textContent.replace(/[↑↓]$/, '').trim();
+    th.dataset.label = label;
+    th.style.cursor = 'pointer';
+    th.textContent = label + (key === state.key ? (state.dir === 'asc' ? ' ↑' : ' ↓') : '');
+  });
+}
+
+function sortPoolTable(pid, key) {
+  const current = _poolSortState[pid] || { key: 'idea_file', dir: 'asc' };
+  _poolSortState[pid] = {
+    key: key,
+    dir: current.key === key && current.dir === 'asc' ? 'desc' : 'asc'
+  };
+  applyPoolSort(pid);
+}
+
+async function loadPool(pid) {
+  const box = document.getElementById('pool-' + pid);
+  if (!box) return;
+  box.innerHTML = '<p style="color:var(--text2)">池详情加载中...</p>';
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/pool');
+    const data = await resp.json();
+    if (!data.ok) {
+      box.innerHTML = '<p style="color:var(--red)">池详情加载失败: ' + escHtml(data.error || 'unknown error') + '</p>';
+      return;
+    }
+    const pool = data.pool || [];
+    if (!pool.length) { box.innerHTML='<p style="color:var(--text2)">池为空</p>'; return; }
+
+    const rowErrors = [];
+    const rows = pool.map((e, index) => {
+      try {
+        if (!e || typeof e !== 'object') throw new Error('entry is not an object');
+      const sc = (s) => 'status-' + (s||'pending');
+      const sm = e.sim_summary||{};
+      const effectiveStatus = effectiveSimStatus(e);
+      const fmtMV = (avg, v) => avg!=null ? (avg + (v!=null&&v>0 ? '('+v+')' : '')) : '-';
+      const inspectCell = (e.inspect_status === 'error')
+        ? '<span class="' + sc(e.inspect_status) + '">' + (e.inspect_status||'-') + '</span> <button class="btn btn-sm" style="padding:1px 6px;font-size:0.7rem;margin-left:4px;background:var(--blue);color:#fff" onclick="retryInspectIdea(\'' + pid + '\',\'' + escJsStr(e.idea_file) + '\')">重试</button>'
+        : '<span class="' + sc(e.inspect_status) + '">' + (e.inspect_status||'-') + '</span>';
+      var simLocHref = e.sim_location ? (e.sim_location.startsWith('http') ? e.sim_location : 'https://api.worldquantbrain.com' + e.sim_location) : '';
+      const simCell = (effectiveStatus === 'running')
+        ? (simLocHref
+          ? '<a href="' + escHtml(simLocHref) + '" target="_blank" class="status-running" style="text-decoration:underline;cursor:pointer">running</a>'
+          : '<span class="status-running">running</span>')
+        + ' <button class="btn btn-danger btn-sm" style="padding:1px 6px;font-size:0.7rem;margin-left:4px" onclick="abortIdea(\'' + pid + '\',\'' + escJsStr(e.idea_file) + '\')">中断</button>'
+        : (effectiveStatus === 'aborted' || effectiveStatus === 'error')
+        ? '<span class="' + sc(effectiveStatus) + '">' + effectiveStatus + '</span> <button class="btn btn-sm" style="padding:1px 6px;font-size:0.7rem;margin-left:4px;background:var(--blue);color:#fff" onclick="retryIdea(\'' + pid + '\',\'' + escJsStr(e.idea_file) + '\')">继续/重试</button>'
+        : '<span class="' + sc(effectiveStatus) + '">' + (effectiveStatus||'-') + '</span>';
+      // csvAttempted = total rows written to CSV (sum of all statuses)
+      var csvAttempted = sm.status_breakdown
+        ? Object.values(sm.status_breakdown).reduce(function(a,b){return a+b;}, 0)
+        : (sm.completed||0) + (sm.failed||0);
+      var completedNum = sm.completed||0;
+      var warningNum = Number((sm.status_breakdown && sm.status_breakdown.WARNING) || 0);
+      if (!Number.isFinite(warningNum) || warningNum < 0) warningNum = 0;
+      if (warningNum > completedNum) warningNum = completedNum;
+      var successNum = Math.max(0, completedNum - warningNum);
+      var totalNum = sm.count||0;
+      var numeratorHtml;
+      if (effectiveStatus === 'aborted' || effectiveStatus === 'error') {
+        // Show how many were actually submitted in red; completed (if any) in green prefix
+        numeratorHtml = (completedNum > 0 ? '<span style="color:var(--green)">' + completedNum + '</span>+' : '')
+          + '<span style="color:var(--red)">' + (csvAttempted - completedNum) + '</span>';
+      } else if (effectiveStatus === 'warning') {
+        numeratorHtml = (successNum > 0 ? '<span style="color:var(--green)">' + successNum + '</span>+' : '')
+          + '<span style="color:var(--yellow)">' + warningNum + '</span>';
+      } else {
+        numeratorHtml = String(completedNum);
+      }
+      var completedText = numeratorHtml + '/' + totalNum;
+      var completedCell;
+      if (completedNum > 0 || csvAttempted > 0 || effectiveStatus === 'running') {
+        completedCell = '<td class="completed-link" data-sort="' + completedNum + '" onclick="showSimDetail(\'' + pid + '\',\'' + escJsStr(e.idea_file) + '\')">' + completedText + '</td>';
+      } else {
+        completedCell = '<td data-sort="' + completedNum + '">' + completedText + '</td>';
+      }
+      var enhanceLabel = '';
+      if (e.enhance_selected) {
+        enhanceLabel = (e.enhance_mode==='cross'?'交叉':'单增');
+        if ((e.enhance_status === 'error' || (!e.enhance_status && e.enhance_mode === 'single')) && e.enhance_mode === 'single') {
+          enhanceLabel += '<br><button class="btn btn-sm" style="padding:1px 6px;font-size:0.7rem;margin-top:4px;background:var(--blue);color:#fff" onclick="retryEnhanceIdea(\'' + pid + '\',\'' + escJsStr(e.idea_file) + '\')">重试</button>';
+        }
+      }
+      return '<tr>'
+        + '<td class="idea-link" data-sort="' + escHtml(((e.idea_file||'').split(/[/\\]/).pop() || '').toLowerCase()) + '" title="' + escHtml(e.idea_file||'') + '" onclick="showIdeaContent(\'' + pid + '\',\'' + escJsStr(e.idea_file) + '\')">' + escHtml((e.idea_file||'').split(/[/\\]/).pop()) + '</td>'
+        + '<td data-sort="' + escHtml(String(e.origin||'').toLowerCase()) + '">' + (e.origin||'') + '</td>'
+        + '<td data-sort="' + escHtml(String(e.inspect_status||'').toLowerCase()) + '">' + inspectCell + '</td>'
+        + '<td data-sort="' + escHtml(String(effectiveStatus||'').toLowerCase()) + '">' + simCell + '</td>'
+        + completedCell
+        + '<td data-sort="' + (sm.sharpe_avg != null ? sm.sharpe_avg : '') + '">' + fmtMV(sm.sharpe_avg, sm.sharpe_var) + '</td>'
+        + '<td data-sort="' + (sm.fitness_avg != null ? sm.fitness_avg : '') + '">' + fmtMV(sm.fitness_avg, sm.fitness_var) + '</td>'
+        + '<td data-sort="' + escHtml(String(enhanceLabel.replace(/<[^>]*>/g, '') || '').toLowerCase()) + '">' + enhanceLabel + '</td></tr>';
+      } catch (err) {
+        rowErrors.push('第 ' + (index + 1) + ' 条 idea 渲染失败: ' + (err && err.message ? err.message : String(err)));
+        return '';
+      }
+    }).filter(Boolean).join('');
+
+    if (!rows) {
+      box.innerHTML = '<p style="color:var(--red)">池详情加载失败: 没有可渲染的记录</p>'
+        + (rowErrors.length ? '<div style="margin-top:8px;color:var(--text2);white-space:pre-wrap">' + escHtml(rowErrors.join('\n')) + '</div>' : '');
+      return;
+    }
+
+    box.innerHTML = '<table class="pool-table">'
+      + '<thead><tr>'
+      + '<th data-sort-key="idea_file" onclick="sortPoolTable(\'' + pid + '\',\'idea_file\')">Idea 文件</th>'
+      + '<th data-sort-key="origin" onclick="sortPoolTable(\'' + pid + '\',\'origin\')">来源</th>'
+      + '<th data-sort-key="inspect_status" onclick="sortPoolTable(\'' + pid + '\',\'inspect_status\')">检查</th>'
+      + '<th data-sort-key="sim_status" onclick="sortPoolTable(\'' + pid + '\',\'sim_status\')">回测</th>'
+      + '<th data-sort-key="completed" onclick="sortPoolTable(\'' + pid + '\',\'completed\')">完成/总数</th>'
+      + '<th data-sort-key="sharpe" onclick="sortPoolTable(\'' + pid + '\',\'sharpe\')">Sharpe均(方差)</th>'
+      + '<th data-sort-key="fitness" onclick="sortPoolTable(\'' + pid + '\',\'fitness\')">Fitness均(方差)</th>'
+      + '<th data-sort-key="enhance" onclick="sortPoolTable(\'' + pid + '\',\'enhance\')">增强</th>'
+      + '</tr></thead>'
+      + '<tbody>' + rows + '</tbody></table>'
+      + (rowErrors.length ? '<div style="margin-top:8px;color:var(--yellow);white-space:pre-wrap">部分记录未显示:\n' + escHtml(rowErrors.join('\n')) + '</div>' : '');
+    if (!_poolSortState[pid]) _poolSortState[pid] = { key: 'idea_file', dir: 'asc' };
+    applyPoolSort(pid);
+  } catch(e) {
+    box.innerHTML = '<p style="color:var(--red)">池详情加载失败: ' + escHtml(e && e.message ? e.message : String(e)) + '</p>';
+  }
+}
+
+async function abortIdea(pid, ideaFile) {
+  if (!confirm('确定中断该Idea的回测？')) return;
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/abort-idea', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ idea_file: ideaFile })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert('中断失败: ' + (data.error||'')); return; }
+    await loadPool(pid);
+  } catch(e) { alert('中断失败: ' + e.message); }
+}
+
+async function retryIdea(pid, ideaFile) {
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/retry-idea', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ idea_file: ideaFile })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert('继续/重试失败: ' + (data.error||'')); return; }
+    await loadPool(pid);
+  } catch(e) { alert('继续/重试失败: ' + e.message); }
+}
+
+async function retryInspectIdea(pid, ideaFile) {
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/retry-inspect-idea', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ idea_file: ideaFile })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert('检查重试失败: ' + (data.error||'')); return; }
+    await loadPool(pid);
+  } catch(e) { alert('检查重试失败: ' + e.message); }
+}
+
+async function retryEnhanceIdea(pid, ideaFile) {
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/retry-enhance-idea', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ idea_file: ideaFile })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert('增强重试失败: ' + (data.error||'')); return; }
+    await loadPool(pid);
+  } catch(e) { alert('增强重试失败: ' + e.message); }
+}
+
+async function adjustWorkers(pid, delta) {
+  try {
+    // Get current value from the last known pipeline data
+    const resp0 = await fetch('/api/pipeline/list');
+    const d0 = await resp0.json();
+    if (!d0.ok) return;
+    const pipe = d0.pipelines.find(p => p.pipeline_id === pid);
+    if (!pipe) return;
+    const newVal = (pipe.sim_concurrent || 2) + delta;
+    if (newVal < 1) return;
+    const resp = await fetch('/api/pipeline/' + pid + '/update-workers', {
+      method: 'POST', headers: getHeaders(),
+      body: JSON.stringify({ sim_concurrent: newVal })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert(data.error || '调整失败'); return; }
+    refresh();
+  } catch(e) { alert('调整失败: ' + e.message); }
+}
+
+async function startPipe(pid) {
+  const pipeline = _pipelineMap[pid];
+  if (_needsDataTypeRestart(pipeline)) {
+    const suggested = _inferSuggestedDataType(pipeline) || 'VECTOR';
+    const current = String((pipeline && pipeline.data_type) || 'MATRIX').toUpperCase();
+    const ok = confirm(
+      '流水线 ' + pid + ' 在 GENERATE 阶段疑似数据类型选错。\n\n'
+      + '当前 data_type: ' + current + '\n'
+      + '建议改为: ' + suggested + '\n\n'
+      + '是否按建议修改 data_type 并强制重启流水线？'
+    );
+    if (!ok) return;
+    await forceRestartPipe(pid, { suggestedDataType: suggested, confirmText: false });
+    return;
+  }
+  const apiKey = document.getElementById('cfgApiKey').value.trim() || localStorage.getItem('deepseekApiKey') || '';
+  await fetch('/api/pipeline/' + pid + '/start', {
+    method:'POST', headers: getHeaders(),
+    body: JSON.stringify({ moonshot_api_key: apiKey })
+  });
+  refresh();
+}
+
+async function stopPipe(pid) {
+  if (!confirm('停止流水线 ' + pid + '？\n当前已经在跑的回测会继续收尾，但不会再领取新的回测任务。')) return;
+  await fetch('/api/pipeline/' + pid + '/stop', { method:'POST' });
+  refresh();
+}
+
+async function forceRestartPipe(pid, options) {
+  const opts = options || {};
+  const pipeline = _pipelineMap[pid] || {};
+  const suggested = String(opts.suggestedDataType || '').toUpperCase();
+  const nextType = (suggested === 'MATRIX' || suggested === 'VECTOR') ? suggested : '';
+  if (opts.confirmText !== false) {
+    let message = '确定要强制重启流水线 ' + pid + '？\n这会删除当前流水线，并按原配置新建一个新的。旧流水线会完全停止。';
+    if (nextType) {
+      message += '\n\n同时会把 data_type 从 ' + String((pipeline.data_type || 'MATRIX')).toUpperCase() + ' 改为 ' + nextType + '。';
+    }
+    if (!confirm(message)) return;
+  }
+  try {
+    const apiKey = document.getElementById('cfgApiKey').value.trim() || localStorage.getItem('deepseekApiKey') || '';
+    const resp = await fetch('/api/pipeline/' + pid + '/force-restart', {
+      method:'POST', headers: getHeaders(),
+      body: JSON.stringify({ moonshot_api_key: apiKey, data_type: nextType || undefined })
+    });
+    const data = await resp.json();
+    if (!data.ok) { alert(data.error || '强制重启失败'); return; }
+    const newPid = String(data.pipeline_id || '').trim();
+    const changedType = nextType && nextType !== String((pipeline.data_type || 'MATRIX')).toUpperCase();
+    _lastPipelineJson = '';
+    _setRefreshIndicator(
+      newPid
+        ? ('已强制重启: ' + pid + ' -> ' + newPid + (changedType ? (' | data_type=' + nextType) : ''))
+        : '已提交强制重启请求'
+    );
+    const refreshed = await refresh({ reportError: true });
+    if (newPid && (!refreshed || !_pipelineMap[newPid])) {
+      window.location.reload();
+      return;
+    }
+    if (newPid && newPid !== pid) {
+      alert('已强制重启，新的流水线 ID: ' + newPid + (changedType ? ('\n新的 data_type: ' + nextType) : ''));
+    }
+  } catch(e) { alert('强制重启失败: ' + e.message); }
+}
+
+async function deletePipe(pid) {
+  if (!confirm('确定要永久删除流水线 ' + pid + '？\n此操作将删除所有本地文件，不可恢复！')) return;
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/delete', { method:'POST' });
+    const data = await resp.json();
+    if (!data.ok) { alert(data.error || '删除失败'); return; }
+    _lastPipelineJson = '';  // force full rebuild
+    refresh();
+  } catch(e) { alert('删除失败: ' + e.message); }
+}
+
+async function archivePipe(pid) {
+  if (!confirm('归档流水线 ' + pid + '？\n归档后可从右下角归档面板恢复。')) return;
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/archive', { method:'POST' });
+    const data = await resp.json();
+    if (!data.ok) { alert(data.error || '归档失败'); return; }
+    _lastPipelineJson = '';  // force full rebuild
+    refresh();
+    refreshArchive();
+  } catch(e) { alert('归档失败: ' + e.message); }
+}
+
+async function restorePipe(pid) {
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/restore', { method:'POST' });
+    const data = await resp.json();
+    if (!data.ok) { alert(data.error || '恢复失败'); return; }
+    _lastPipelineJson = '';  // force full rebuild
+    refresh();
+    refreshArchive();
+  } catch(e) { alert('恢复失败: ' + e.message); }
+}
+
+async function deleteArchivedPipe(pid) {
+  if (!confirm('永久删除归档流水线 ' + pid + '？\n此操作将删除所有本地文件，不可恢复！')) return;
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/delete', { method:'POST' });
+    const data = await resp.json();
+    if (!data.ok) { alert(data.error || '删除失败'); return; }
+    refreshArchive();
+  } catch(e) { alert('删除失败: ' + e.message); }
+}
+
+async function refreshArchive() {
+  try {
+    const resp = await fetch('/api/pipeline/archived');
+    const data = await resp.json();
+    if (!data.ok) return;
+    const list = data.archived || [];
+    // Update badge
+    const badge = document.getElementById('archiveBadge');
+    if (list.length > 0) { badge.textContent = list.length; badge.style.display = 'flex'; }
+    else { badge.style.display = 'none'; }
+    // Update panel content
+    const body = document.getElementById('archiveBody');
+    if (!list.length) {
+      body.innerHTML = '<div class="archive-empty">暂无归档流水线</div>';
+      return;
+    }
+    body.innerHTML = list.map(function(a) {
+      var meta = (a.dataset_id||'') + ' | ' + (a.region||'') + ' | d' + (a.delay||'?');
+      if (a.pool_stats) meta += ' | Ideas: ' + (a.pool_stats.total||0);
+      if (a.archived_at) meta += ' | 归档: ' + a.archived_at.replace('T',' ').replace('Z','');
+      return '<div class="archive-item">'
+        + '<div class="archive-item-info">'
+        + '<div class="archive-item-id" title="' + escHtml(a.pipeline_id) + '">' + escHtml(a.pipeline_id) + '</div>'
+        + '<div class="archive-item-meta">' + escHtml(meta) + '</div>'
+        + '</div>'
+        + '<div class="archive-item-actions">'
+        + '<button class="btn btn-sm btn-success" onclick="restorePipe(\'' + escJsStr(a.pipeline_id) + '\')">↩ 恢复</button>'
+        + '<button class="btn btn-sm" style="background:var(--surface2);color:var(--red)" onclick="deleteArchivedPipe(\'' + escJsStr(a.pipeline_id) + '\')">🗑</button>'
+        + '</div></div>';
+    }).join('');
+  } catch(e) { /* ignore */ }
+}
+
+async function loadLog(pid) {
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/log?n=80');
+    const data = await resp.json();
+    if (!data.ok) return;
+    const box = document.getElementById('log-' + pid);
+    if (!data.log.length) { box.innerHTML = '<span style="color:var(--text2)">暂无日志</span>'; return; }
+    box.innerHTML = data.log.map(e => {
+      const cls = e.level === 'error' ? ' error' : (e.level === 'warning' ? ' warning' : '');
+      return '<div class="log-entry' + cls + '"><span class="ts">[' + escHtml(e.ts) + ']</span> <span class="msg">' + escHtml(e.msg) + '</span></div>';
+    }).join('');
+    box.scrollTop = box.scrollHeight;
+  } catch(e) { /* ignore */ }
+}
+
+/* ── Idea content & sim detail modals ── */
+let _detailSimState = null;
+
+function _openDetailModal(title, bodyHtml) {
+  document.getElementById('detail-modal-title').textContent = title;
+  document.getElementById('detail-modal-body').innerHTML = bodyHtml;
+  document.getElementById('detail-overlay').classList.add('show');
+}
+function closeDetailModal() {
+  _detailSimState = null;
+  document.getElementById('detail-overlay').classList.remove('show');
+}
+
+function _detailSortMarker(key) {
+  if (!_detailSimState || _detailSimState.sortKey !== key) return '';
+  return _detailSimState.sortDir === 'asc' ? ' ▲' : ' ▼';
+}
+
+function _detailCompareValues(left, right, type, dir) {
+  const asc = dir === 'asc';
+  const leftMissing = left == null || left === '';
+  const rightMissing = right == null || right === '';
+  if (leftMissing && rightMissing) return 0;
+  if (leftMissing) return 1;
+  if (rightMissing) return -1;
+  if (type === 'number') {
+    const lnum = Number(left);
+    const rnum = Number(right);
+    if (!Number.isFinite(lnum) && !Number.isFinite(rnum)) return 0;
+    if (!Number.isFinite(lnum)) return 1;
+    if (!Number.isFinite(rnum)) return -1;
+    return asc ? (lnum - rnum) : (rnum - lnum);
+  }
+  const ltext = String(left).toLowerCase();
+  const rtext = String(right).toLowerCase();
+  return asc ? ltext.localeCompare(rtext, 'zh-CN') : rtext.localeCompare(ltext, 'zh-CN');
+}
+
+function _renderSimDetailModal() {
+  if (!_detailSimState) return;
+  const sortKey = _detailSimState.sortKey || 'sharpe';
+  const sortDir = _detailSimState.sortDir || 'desc';
+  const sortType = (sortKey === 'sharpe' || sortKey === 'fitness' || sortKey === 'turnover') ? 'number' : 'string';
+  const alphas = (_detailSimState.alphas || []).slice().sort(function(a, b) {
+    return _detailCompareValues(a[sortKey], b[sortKey], sortType, sortDir);
+  });
+  const rows = alphas.map(function(a, i) {
+    var upperStatus = (a.status||'').toUpperCase();
+    var stCls = upperStatus.indexOf('WARNING') >= 0
+      ? 'color:var(--yellow)'
+      : (upperStatus.indexOf('COMPLETE') >= 0
+        ? 'color:var(--green)'
+        : (upperStatus.indexOf('ERROR') >= 0 || upperStatus.indexOf('FAIL') >= 0 || upperStatus.indexOf('TIMEOUT') >= 0 || upperStatus.indexOf('CANCEL') >= 0 || upperStatus.indexOf('MISSING') >= 0 ? 'color:var(--red)' : ''));
+    return '<tr>'
+      + '<td>' + (i+1) + '</td>'
+      + '<td>' + (a.alpha_id ? '<a href="https://platform.worldquantbrain.com/alpha/' + encodeURIComponent(a.alpha_id) + '" target="_blank" style="color:var(--accent);text-decoration:underline">' + escHtml(a.alpha_id) + '</a>' : '-') + '</td>'
+      + '<td class="expr-cell">' + escHtml(a.expression||'-') + '</td>'
+      + '<td><b>' + (a.sharpe!=null&&a.sharpe!=='' ? a.sharpe : '-') + '</b></td>'
+      + '<td>' + (a.fitness!=null&&a.fitness!=='' ? a.fitness : '-') + '</td>'
+      + '<td>' + (a.turnover!=null&&a.turnover!=='' ? a.turnover : '-') + '</td>'
+      + '<td style="' + stCls + '">' + escHtml(a.status||'-') + '</td>'
+      + '<td class="expr-cell">' + escHtml(a._normalized_error || '-') + '</td></tr>';
+  }).join('');
+  _openDetailModal(
+    _detailSimState.title,
+    _detailSimState.summaryHtml
+      + '<table><thead><tr>'
+      + '<th>#</th><th>Alpha ID</th><th>表达式</th>'
+      + '<th class="sortable" onclick="sortSimDetail(\'sharpe\')">Sharpe' + _detailSortMarker('sharpe') + '</th>'
+      + '<th class="sortable" onclick="sortSimDetail(\'fitness\')">Fitness' + _detailSortMarker('fitness') + '</th>'
+      + '<th class="sortable" onclick="sortSimDetail(\'turnover\')">Turnover' + _detailSortMarker('turnover') + '</th>'
+      + '<th class="sortable" onclick="sortSimDetail(\'status\')">状态' + _detailSortMarker('status') + '</th>'
+      + '<th class="sortable" onclick="sortSimDetail(\'error\')">错误' + _detailSortMarker('error') + '</th>'
+      + '</tr></thead><tbody>' + rows + '</tbody></table>'
+  );
+}
+
+function sortSimDetail(key) {
+  if (!_detailSimState) return;
+  if (_detailSimState.sortKey === key) {
+    _detailSimState.sortDir = _detailSimState.sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    _detailSimState.sortKey = key;
+    _detailSimState.sortDir = (key === 'status' || key === 'error') ? 'asc' : 'desc';
+  }
+  _renderSimDetailModal();
+}
+
+async function showIdeaContent(pid, ideaFile) {
+  _detailSimState = null;
+  _openDetailModal('加载中...', '<span style="color:var(--text2)">正在读取...</span>');
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/idea-content?idea_file=' + encodeURIComponent(ideaFile));
+    const data = await resp.json();
+    if (!data.ok) { _openDetailModal('错误', '<span style="color:var(--red)">' + escHtml(data.error||'未知错误') + '</span>'); return; }
+    var name = ideaFile.split(/[/\\]/).pop();
+    if (data.type === 'expressions') {
+      var s0 = (data.expressions[0] || {}).settings || {};
+      var settingLine = '<div style="margin-bottom:8px;font-size:0.82rem;color:var(--text2)">delay=<b>' + (s0.delay!=null?s0.delay:'-') + '</b> &nbsp; neutralization=<b>' + escHtml(s0.neutralization||'-') + '</b></div>';
+      var rows = data.expressions.map(function(ex, i) {
+        return '<tr><td>' + (i+1) + '</td><td class="expr-cell">' + escHtml(ex.expression||'') + '</td></tr>';
+      }).join('');
+      _openDetailModal('📋 ' + name + ' (' + data.expressions.length + ' 个表达式)',
+        settingLine + '<table><thead><tr><th>#</th><th>表达式</th></tr></thead><tbody>' + rows + '</tbody></table>');
+    } else {
+      var txt = (typeof data.content === 'string') ? data.content : JSON.stringify(data.content, null, 2);
+      _openDetailModal('📄 ' + name, '<pre>' + escHtml(txt) + '</pre>');
+    }
+  } catch(e) {
+    _openDetailModal('错误', '<span style="color:var(--red)">' + escHtml(e.message) + '</span>');
+  }
+}
+
+async function showSimDetail(pid, ideaFile) {
+  _detailSimState = null;
+  _openDetailModal('加载中...', '<span style="color:var(--text2)">正在读取回测结果...</span>');
+  try {
+    const resp = await fetch('/api/pipeline/' + pid + '/sim-detail?idea_file=' + encodeURIComponent(ideaFile));
+    const data = await resp.json();
+    if (!data.ok) { _openDetailModal('错误', '<span style="color:var(--red)">' + escHtml(data.error||'未知错误') + '</span>'); return; }
+    var name = ideaFile.split(/[/\\]/).pop();
+    var alphas = data.alphas || [];
+    if (!alphas.length) { _openDetailModal('📊 ' + name, '<span style="color:var(--text2)">无回测记录</span>'); return; }
+    var summary = data.summary || {};
+    var hasFailures = (summary.failed || 0) > 0 || alphas.some(function(a) {
+      var status = String(a.status || '').toUpperCase();
+      return status.indexOf('ERROR') >= 0 || status.indexOf('FAIL') >= 0 || status.indexOf('TIMEOUT') >= 0 || status.indexOf('CANCEL') >= 0 || status.indexOf('MISSING') >= 0;
+    });
+    var errorMsg = hasFailures ? firstSimError(summary, alphas) : '';
+    var summaryHtml = '';
+    if (errorMsg) {
+      summaryHtml += '<div style="margin-bottom:10px;padding:10px 12px;background:rgba(248,81,73,0.12);border:1px solid rgba(248,81,73,0.35);border-radius:6px;color:var(--text)">'
+        + '<div style="font-size:0.8rem;color:var(--red);font-weight:700;margin-bottom:4px">平台错误</div>'
+        + '<div style="font-family:\'Cascadia Code\',\'Fira Code\',monospace;font-size:0.8rem;white-space:pre-wrap">' + escHtml(errorMsg) + '</div>'
+        + '</div>';
+    }
+    _detailSimState = {
+      title: '📊 ' + name + ' — 回测详情 (' + alphas.length + '条)',
+      summaryHtml: summaryHtml,
+      sortKey: 'sharpe',
+      sortDir: 'desc',
+      alphas: alphas.map(function(a) {
+        return Object.assign({}, a, {
+          error: normalizeSimErrorMessage(a.error_details || a.error || ''),
+          _normalized_error: normalizeSimErrorMessage(a.error_details || a.error || '')
+        });
+      })
+    };
+    _renderSimDetailModal();
+  } catch(e) {
+    _openDetailModal('错误', '<span style="color:var(--red)">' + escHtml(e.message) + '</span>');
+  }
+}
+</script>
+
+<!-- Detail Modal -->
+<div class="detail-overlay" id="detail-overlay" onclick="if(event.target===this)closeDetailModal()">
+  <div class="detail-modal">
+    <div class="detail-modal-header">
+      <span id="detail-modal-title">详情</span>
+      <button class="close-btn" onclick="closeDetailModal()">&times;</button>
+    </div>
+    <div class="detail-modal-body" id="detail-modal-body"></div>
+  </div>
+</div>
+
+<!-- Prompt Modal -->
+<div class="prompt-overlay" id="prompt-overlay" onclick="if(event.target===this)closePromptModal()">
+  <div class="prompt-modal">
+    <div class="prompt-modal-header">
+      <span id="prompt-modal-title">决策提示词</span>
+      <button class="close-btn" onclick="closePromptModal()">&times;</button>
+    </div>
+    <div class="prompt-modal-body">
+      <textarea id="prompt-modal-textarea" spellcheck="false" placeholder="输入决策提示词..."></textarea>
+    </div>
+    <div class="prompt-modal-footer">
+      <span class="prompt-hint" id="prompt-modal-hint"></span>
+      <div class="btn-group" id="prompt-modal-actions">
+        <button class="btn btn-sm" id="prompt-modal-reset-btn" style="background:var(--surface2);color:var(--text2)" onclick="resetPromptToDefault()">恢复默认</button>
+        <button class="btn btn-sm btn-success" id="prompt-modal-save-btn" onclick="savePrompt()">💾 保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="advanced-overlay" id="advanced-overlay" onclick="if(event.target===this)closeAdvancedSettings()">
+  <div class="advanced-modal">
+    <div class="advanced-modal-header">
+      <div class="advanced-modal-header-title">
+        <span>高级设置</span>
+        <span>阶段级提示词覆盖仅作用于当前这次创建，不会改动系统默认，也不会影响下一次任务。</span>
+      </div>
+      <button class="close-btn" onclick="closeAdvancedSettings()">&times;</button>
+    </div>
+    <div class="advanced-modal-body">
+      <div class="advanced-nav" id="advanced-nav"></div>
+      <div id="advanced-editor-host"></div>
+    </div>
+    <div class="advanced-modal-footer">
+      <span class="hint" id="advanced-footer-hint">点击“应用”后，当前草稿才会用于新建流水线。</span>
+      <div class="btn-group">
+        <label class="advanced-toggle"><input id="advanced-ack-checkbox" type="checkbox" onchange="setAdvancedPromptAcknowledged(this.checked)">我已知悉仅影响当前流水线</label>
+        <button class="btn btn-sm btn-success" id="advanced-apply-btn" onclick="applyAdvancedSettings()" disabled>应用</button><span class="tip" data-tip="保存当前高级设置草稿，随后创建的新流水线会使用这些覆盖。仅对这一次创建生效。">i</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stop-overlay" id="stop-overlay" onclick="if(event.target===this)closeStopConditionsModal()">
+  <div class="stop-modal">
+    <div class="stop-modal-header">
+      <span id="stop-modal-title">停止条件</span>
+      <button class="close-btn" onclick="closeStopConditionsModal()">&times;</button>
+    </div>
+    <div class="stop-modal-body">
+      <div class="stop-card">
+        <h3>结果目标</h3>
+        <p>当达到足够多的高 Sharpe 结果时自动停止。两个值需要同时填写，并可选择按原值或绝对值统计。</p>
+        <div class="stop-grid">
+          <div class="form-group">
+            <label>Sharpe 阈值</label>
+            <input type="number" id="scSharpeMin" min="0" step="0.01" placeholder="例如 1.25">
+          </div>
+          <div class="form-group">
+            <label>目标结果数</label>
+            <input type="number" id="scSharpeCount" min="1" step="1" placeholder="例如 20">
+          </div>
+        </div>
+        <label class="stop-checkline"><input type="checkbox" id="scSharpeUseAbs">按绝对值统计，使用 |Sharpe| &gt;= 阈值</label>
+      </div>
+      <div class="stop-card">
+        <h3>硬上限</h3>
+        <p>这些条件用于限制池规模、回测量和总迭代次数。</p>
+        <div class="stop-grid">
+          <div class="form-group">
+            <label>最大池中 idea 数</label>
+            <input type="number" id="scMaxPoolIdeas" min="1" step="1" placeholder="留空表示不限">
+          </div>
+          <div class="form-group">
+            <label>最大回测提交量</label>
+            <input type="number" id="scMaxAlphaSubmitted" min="1" step="1" placeholder="累计提交的 alpha 数">
+          </div>
+          <div class="form-group">
+            <label>最大回测完成量</label>
+            <input type="number" id="scMaxSimCompleted" min="1" step="1" placeholder="累计 completed 数">
+          </div>
+          <div class="form-group">
+            <label>最大迭代数</label>
+            <input type="number" id="scMaxIterations" min="1" step="1" placeholder="例如 10">
+          </div>
+        </div>
+      </div>
+      <div class="stop-card">
+        <h3>增强收益递减</h3>
+        <p>比较最近若干轮增强产出的合格率；当最近轮次明显弱于历史基线时停止。</p>
+        <label class="stop-checkline"><input type="checkbox" id="scDiminishingEnabled">启用增强收益递减停止</label>
+        <div class="stop-grid">
+          <div class="form-group">
+            <label>合格 Sharpe 阈值</label>
+            <input type="number" id="scDiminishingSharpe" min="0" step="0.01" placeholder="留空时跟随 Sharpe 目标阈值，否则默认 1.0">
+          </div>
+          <div class="form-group">
+            <label>最近回看轮数</label>
+            <input type="number" id="scDiminishingLookback" min="1" step="1" value="2">
+          </div>
+          <div class="form-group">
+            <label>降至历史多少倍</label>
+            <input type="number" id="scDiminishingRatio" min="0.01" step="0.01" value="0.5">
+          </div>
+          <div class="form-group">
+            <label>基线最少 completed 数</label>
+            <input type="number" id="scDiminishingSamples" min="1" step="1" value="20">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stop-modal-footer">
+      <span class="hint" id="stop-modal-hint"></span>
+      <div class="btn-group">
+        <button class="btn btn-sm" style="background:var(--surface2);color:var(--text2)" onclick="closeStopConditionsModal()">取消</button>
+        <button class="btn btn-sm btn-success" id="stop-modal-save-btn" onclick="saveStopConditions()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

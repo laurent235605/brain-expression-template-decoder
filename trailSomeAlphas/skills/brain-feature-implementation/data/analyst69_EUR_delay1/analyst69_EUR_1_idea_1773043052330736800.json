@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 0), hump(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 0.02), ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63))",
+    "idea": "构建自适应换手率控制结构：当Template A的日期稳定性Z-score大于0（处于历史稳定期）时，对Template B的累积压力应用`hump`压缩微小波动（降低换手率）；反之在日期动荡期保持原始敏感度。此结构融合Template A的稳定性识别与Template B的累积压力，实现“稳定期低换手、动荡期高敏感”的状态切换。",
+    "expression_list": [
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 0), hump(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 0.02), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63))",
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 0), hump(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 0.02), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63))",
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 0), hump(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 0.02), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63))",
+        "trade_when(greater(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 0), hump(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 0.02), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63))"
+    ]
+}

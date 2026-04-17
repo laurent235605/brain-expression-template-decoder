@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr(group_rank(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), ts_delay(group_rank(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 5), 20)",
+    "idea": "计算中美敞口价差行业排名的20日自相关性（秩相关稳定性），捕捉'区域偏好趋势持续稳定'的信号，对排名持续单向移动或稳定的股票赋予更高置信度，过滤掉排名震荡的噪音股，增强因子的动量持续性和可执行性。",
+    "expression_list": [
+        "ts_corr(group_rank(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), ts_delay(group_rank(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 5), 20)"
+    ]
+}

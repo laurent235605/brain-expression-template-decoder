@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), 252)",
+    "idea": "融合模板A的5日短期修正动量与模板B的252日时序Z-score标准化框架。先对盈利预测变化进行3倍标准差缩尾抑制极端公告噪音，再计算其在过去252个交易日中的历史偏离程度。该结构既保留分析师预期短期调整的敏感性，又通过长期历史比较识别当前修正力度是否处于统计极端，避免在市场整体预期大幅调整时期的信号失真。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), 252)",
+        "ts_zscore(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), 252)"
+    ]
+}

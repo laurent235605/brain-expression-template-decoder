@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_corr(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), vec_count(vec_filter({fiscalyearend}, value=\"nan\")), 126), industry)",
+    "idea": "引入高阶维度分析，通过计算会计年度极差与有效数据量(非NaN计数)的126日时序相关性，经行业标准化后识别两种对立模式：正相关代表\"规模扩张伴随管理复杂度上升\"，负相关代表\"规模扩张但财政统筹能力增强\"，捕捉业务模式质变信号。",
+    "expression_list": [
+        "group_zscore(ts_corr(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\")), 126), industry)"
+    ]
+}

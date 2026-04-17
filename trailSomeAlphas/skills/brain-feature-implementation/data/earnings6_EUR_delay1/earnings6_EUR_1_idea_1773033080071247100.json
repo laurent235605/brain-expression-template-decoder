@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry )",
+    "idea": "行业内相对股息持续性。直接对模板2的股息持续性比率应用group_zscore进行行业内标准化，识别在同行业中有异常分红行为（显著高于或低于历史常态）的公司，避免不同行业分红政策差异导致的误判。",
+    "expression_list": [
+        "group_zscore( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry )",
+        "group_zscore( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(ts_delta(vec_avg({version}), 5), group_mean(ts_delta(vec_avg({version}), 5), log(ts_mean(cap,21)), industry), 252, rettype=0)",
+    "idea": "相对行业残差动量：将个股版本动量对行业市值加权平均版本动量进行时间序列回归（252日窗口），取残差项。该模板剥离了行业Beta，仅保留个股特质性的信息更新alpha。",
+    "expression_list": [
+        "ts_regression(ts_delta(vec_avg(anl85_version), 5), group_mean(ts_delta(vec_avg(anl85_version), 5), log(ts_mean(cap,21)), industry), 252, rettype=0)"
+    ]
+}

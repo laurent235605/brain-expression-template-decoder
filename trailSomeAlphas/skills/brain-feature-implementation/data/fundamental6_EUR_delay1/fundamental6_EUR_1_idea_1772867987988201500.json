@@ -1,0 +1,7 @@
+{
+    "template": "divide(add({newq_gdwlq}, {ewq_intanq}), {cptnewq_atq})",
+    "idea": "**Concept**: Intangible Capital Intensity\n- **Sample Fields Used**: `newq_gdwlq`, `ewq_intanq`, `cptnewq_atq`\n- **Definition**: The proportion of total assets composed of goodwill and intangible assets, indicating knowledge-based vs. physical capital intensity.\n- **Why This Feature**: High intangible intensity creates valuation uncertainty (difficult to liquidate) and growth optionality; distinguishes asset-heavy from asset-light models.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Many industrial companies have zero intangibles; this is meaningful (not missing), so zeros should not be filled.\n- **Directionality**: High values indicate brand/IP/knowledge-based business models (tech, pharma); low values indicate physical asset bases (utilities, manufacturing).\n- **Boundary Conditions**: Post-impairment step-downs create structural breaks; goodwill from recent M&A inflates temporarily.",
+    "expression_list": [
+        "divide(add(fnd6_newq_gdwlq, fnd6_ewq_intanq), fnd6_cptnewq_atq)"
+    ]
+}

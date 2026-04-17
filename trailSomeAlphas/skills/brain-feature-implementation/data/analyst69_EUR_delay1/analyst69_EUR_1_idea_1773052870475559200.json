@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5), std=4), 252)",
+    "idea": "将模板B的回溯填充机制与126日（调整为21日更贴合盈余修正频率）稳健性处理应用于模板A的EPS数据。先对预期EPS进行21日回溯填充确保数据连续性，再计算5日动量及其252日历史分位，显著降低低覆盖度股票的数据缺失偏差，提升样本外稳健性与覆盖面。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), std=4), 252)",
+        "ts_rank(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), std=4), 252)"
+    ]
+}

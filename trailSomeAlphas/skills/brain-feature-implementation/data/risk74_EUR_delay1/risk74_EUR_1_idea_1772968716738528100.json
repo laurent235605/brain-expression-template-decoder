@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(ts_mean(subtract(group_zscore({hfown_pctown}, sector), multiply(0.5, group_zscore({fund_num_owners_encr}, sector))), 21), 4)",
+    "idea": "**概念**: 行业集中持仓信心度（Conviction vs Crowding）\\n- **核心逻辑**: 通过对比持仓比例与持仓基金数量的行业标准化差异，识别\"高持仓比例但持有基金数量少\"的鲸鱼式建仓（高信心），与\"低持仓比例但基金数量多\"的分散式/拥挤持仓。经21日平滑与4倍标准差去极值，降低单日数据噪音。\\n- **信号解释**: 正值代表HF集中押注（行业超配且持仓集中），负值代表HF分散持有或回避，适用于识别关税冲击下具备阿尔法能力的精选标的。",
+    "expression_list": [
+        "winsorize(ts_mean(subtract(group_zscore(rsk74_hfown_pctown, sector), multiply(0.5, group_zscore(hedge_fund_num_owners_encr, sector))), 21), 4)"
+    ]
+}

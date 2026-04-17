@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(winsorize(abs(ts_delta(vec_avg({version}), 1)), std=4), 20, factor=0.1)",
+    "idea": "版本更新强度衰减。计算版本号的日度绝对变化（ts_delta + abs），捕捉更新频率与幅度，经过去极值处理（winsorize）后进行指数加权衰减。该信号关注近期是否有持续的版本修订活动（变化的速度），而非绝对版本水平（变化的位移）。",
+    "expression_list": [
+        "ts_decay_exp_window(winsorize(abs(ts_delta(vec_avg(anl85_version), 1)), std=4), 20, factor=0.1)"
+    ]
+}

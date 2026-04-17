@@ -1,0 +1,7 @@
+{
+    "template": "divide({newa2_ppent}, {cptnewq_dlttq})",
+    "idea": "**Concept**: Tangible Asset Coverage\n- **Sample Fields Used**: `newa2_ppent`, `cptnewq_dlttq`\n- **Definition**: The ratio of net property, plant, and equipment to long-term debt, measuring tangible collateral coverage for secured lenders.\n- **Why This Feature**: High coverage indicates asset-backing for debt (lower credit risk); low coverage indicates reliance on unsecured financing or cash flows for debt service.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Service companies may have minimal PP&E; zero is meaningful (asset-light), not missing.\n- **Directionality**: High values indicate strong collateral coverage (creditworthiness); low values indicate reliance on unsecured cash flows.\n- **Boundary Conditions**: Zero debt creates infinite ratios; asset-light models (tech) show near-zero tangible assets.",
+    "expression_list": [
+        "divide(fnd6_newa2_ppent, fnd6_cptnewq_dlttq)"
+    ]
+}

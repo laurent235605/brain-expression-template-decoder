@@ -1,0 +1,7 @@
+{
+    "template": "vec_sum({lastcostingfailed}) / vec_count({lastcostingfailed})",
+    "idea": "**Concept**: Systemic Failure Rate\n- **Sample Fields Used**: lastcostingfailed\n- **Definition**: Ratio of failed entities to total valid entities (sum divided by count)\n- **Why This Feature**: Structural measure of system-wide operational health vs. entity-specific random failures\n- **Logical Meaning**: Percentage of portfolio subject to pricing infrastructure breakdown\n- **is filling nan necessary**: Exclude NaNs from denominator to avoid understating failure rate; count only entities with known status\n- **Directionality**: 0 indicates perfect system health; 1 indicates complete costing system failure\n- **Boundary Conditions**: 0 to 1 proportional range",
+    "expression_list": [
+        "vec_sum(mdl209_lastcostingfailed) / vec_count(mdl209_lastcostingfailed)"
+    ]
+}

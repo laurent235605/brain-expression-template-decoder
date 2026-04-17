@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(pasteurize({volume}), ts_step(), 126, rettype=0)",
+    "idea": "趋势剥离残差：对pasteurize清洗后的成交量进行126日（半年）时间趋势回归，提取残差(rettype=0)作为流动性异常波动信号，剔除长期趋势后突出显示偏离自身流动性趋势的极端事件，适用于捕捉均值回归机会",
+    "expression_list": [
+        "ts_regression(pasteurize(mdl234_volume), ts_step(), 126, rettype=0)"
+    ]
+}

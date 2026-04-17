@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_std_dev(vec_avg({likelihood_score}), 60) - ts_std_dev(vec_avg({likelihood_score}), 20), industry) * (vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20)))",
+    "idea": "将输入2的波动率期限结构在行业内的相对排名（group_rank）作为权重缩放因子，乘以输入1的信噪比信号；在行业内部，波动率收敛最显著（排名最高）的股票获得信噪比信号的放大权重，实现行业内优选。",
+    "expression_list": [
+        "group_rank(ts_std_dev(vec_avg(success_likelihood_score), 60) - ts_std_dev(vec_avg(success_likelihood_score), 20), industry) * (vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20)))"
+    ]
+}

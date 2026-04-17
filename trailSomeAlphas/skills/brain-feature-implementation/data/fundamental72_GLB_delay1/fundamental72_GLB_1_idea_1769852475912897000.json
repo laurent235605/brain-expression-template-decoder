@@ -1,0 +1,8 @@
+{
+    "template": "ts_corr(vec_avg({cash_from_oper}), ts_delay(vec_avg({cash_from_oper}), 252), 504)",
+    "idea": "**Concept**: Operating Cash Flow Persistence\n- **Sample Fields Used**: cash_from_oper\n- **Definition**: Rolling 504-day autocorrelation of operating cash flow levels\n- **Why This Feature**: Persistent operating cash flows indicate sustainable business models; erratic cash generation suggests cyclicality or working capital management issues\n- **Logical Meaning**: Captures the stability of core business cash generation independent of accounting accruals\n- **is filling nan necessary**: Quarterly gaps should be backfilled using ts_backfill to maintain continuity for time series calculations\n- **Directionality**: Higher values (closer to 1.0) indicate stable, predictable cash generation\n- **Boundary Conditions**: Negative autocorrelation suggests mean-reverting or cyclical cash flows; values >0.8 indicate exceptional stability",
+    "expression_list": [
+        "ts_corr(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), ts_delay(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), 252), 504)",
+        "ts_corr(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), ts_delay(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), 252), 504)"
+    ]
+}

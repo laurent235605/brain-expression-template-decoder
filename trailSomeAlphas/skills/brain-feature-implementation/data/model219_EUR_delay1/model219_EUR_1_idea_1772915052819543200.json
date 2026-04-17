@@ -1,0 +1,14 @@
+{
+    "template": "divide(multiply({curindbp}, {actrtn6m}), {betasigma})",
+    "idea": "**Concept**: Risk-Adjusted Value Momentum\n- **Sample Fields Used**: `curindbp`, `actrtn6m`, `betasigma`\n- **Definition**: Value positions (low B/P) with positive momentum adjusted for volatility risk\n- **Why This Feature**: Pure value is risky; combining with momentum and risk filters improves Sharpe ratio\n- **Logical Meaning**: Identifies cheap stocks that are already moving, with reasonable risk profiles\n- **is filling nan necessary**: Yes, use `group_mean()` for missing beta within sectors\n- **Directionality**: Higher values indicate better risk-adjusted value opportunities\n- **Boundary Conditions**: Extreme momentum may indicate value traps reversing; verify with `chgvolpre4y`",
+    "expression_list": [
+        "divide(multiply(mdl219_1_curindbp_, mdl219_1_actrtn6m), mdl219_1_betasigma)",
+        "divide(multiply(mdl219_1_curindbp_, mdl219_2_actrtn6m), mdl219_1_betasigma)",
+        "divide(multiply(mdl219_2_curindbp_, mdl219_1_actrtn6m), mdl219_1_betasigma)",
+        "divide(multiply(mdl219_2_curindbp_, mdl219_2_actrtn6m), mdl219_1_betasigma)",
+        "divide(multiply(mdl219_2_curindbp_, mdl219_2_actrtn6m), mdl219_2_betasigma)",
+        "divide(multiply(mdl219_2_curindbp_, mdl219_1_actrtn6m), mdl219_2_betasigma)",
+        "divide(multiply(mdl219_1_curindbp_, mdl219_2_actrtn6m), mdl219_2_betasigma)",
+        "divide(multiply(mdl219_1_curindbp_, mdl219_1_actrtn6m), mdl219_2_betasigma)"
+    ]
+}

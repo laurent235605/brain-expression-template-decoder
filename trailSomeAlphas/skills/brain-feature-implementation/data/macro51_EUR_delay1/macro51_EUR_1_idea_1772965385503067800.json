@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window({stoxx_europe_600_ucits_weight}, 20, factor=0.9)",
+    "idea": "**Concept**: Weight Memory Decay\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: Exponentially weighted moving average of historical weights, giving more importance to recent allocations while maintaining memory of past positions\n- **Why This Feature**: ETF allocation decisions (or lack thereof, via passive drift) have persistence; exponential decay captures the fading influence of old rebalancing decisions on current positioning\n- **is filling nan necessary**: Yes, use ts_backfill() before applying exponential decay to ensure continuous memory; gaps in data would create \"amnesia\" in the decay function\n- **Directionality**: Values trending up indicate recent accumulation; values trending down indicate recent divestment; flat values indicate stable holding patterns\n- **Boundary Conditions**: Bounded by minimum and maximum historical weights in the decay window",
+    "expression_list": [
+        "ts_decay_exp_window(mcr51_ishares_stoxx_europe_600_ucits_weight, 20, factor=0.9)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)), 1.0), ts_decay_linear(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 3), ts_mean(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 10))",
+    "idea": "构建条件式动态响应机制：当行业中性后的敞口差异绝对值超过1个标准差（极端区域）时，采用3日线性衰减（ts_decay_linear）快速响应；处于中等偏离区间时，自动切换至10日移动平均（ts_mean）钝化噪音。实现“极端信号重仓敏感、中庸信号轻仓过滤”的智能仓位分配策略。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)), 1.0), ts_decay_linear(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 3), ts_mean(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 10))"
+    ]
+}

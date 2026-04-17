@@ -1,0 +1,26 @@
+{
+    "template": "multiply(rank(ts_sum(ts_delta({shortint}, 1), 15)), rank(multiply({concentration}, {nondomicile})))",
+    "idea": "将空头信号与地理风险信号均转换为截面排名（rank）后再相乘，消除量纲差异和原始数值的极端值影响，强调'做空压力最大的股票中地理风险也相对最高'的相对排序逻辑，实现纯横截面比较。",
+    "expression_list": [
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_concentration, rsk74_nondomicile)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_concentration, rsk74_nondomicile)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_nondomicile)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_nondomicile)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2)))",
+        "multiply(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), rank(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2)))"
+    ]
+}

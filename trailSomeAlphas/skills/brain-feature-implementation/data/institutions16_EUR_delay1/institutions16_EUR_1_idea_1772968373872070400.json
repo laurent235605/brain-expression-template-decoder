@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), 252), industry)",
+    "idea": "行业与历史双中性资产流动量：先进行20日回溯填充处理缺失值，计算20日资产变化并做4倍标准差截尾（剔除并购/清算导致的极端异常值），随后通过252日时间序列zscore判断当前资产增速相对于自身历史的极端程度，最后进行行业内标准化。该模板捕捉既显著强于自身历史均值、又领先于行业同业的特质性资产净流入信号，消除行业配置beta干扰。",
+    "expression_list": [
+        "group_zscore(ts_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), 252), industry)"
+    ]
+}

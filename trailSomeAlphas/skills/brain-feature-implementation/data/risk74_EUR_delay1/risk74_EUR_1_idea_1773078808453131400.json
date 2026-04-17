@@ -1,0 +1,10 @@
+{
+    "template": "multiply(bucket(group_rank({crowding}, sector), range=\"0,1,0.1\"), group_zscore({value_ts}, sector))",
+    "idea": "使用分桶（bucket）算子对拥挤度进行离散化处理（仅取行业前10%分位，其余视为0），再与行业标准化的价值因子相乘，构建'极端拥挤×价值'的尾部策略，中间区间视为噪音不予交易，强化头部信号。",
+    "expression_list": [
+        "multiply(bucket(group_rank(liquidity_factor_crowding, sector), range=\"0,1,0.1\"), group_zscore(rsk74_value_ts, sector))",
+        "multiply(bucket(group_rank(liquidity_timeseries_crowding, sector), range=\"0,1,0.1\"), group_zscore(rsk74_value_ts, sector))",
+        "multiply(bucket(group_rank(rsk74_crowding, sector), range=\"0,1,0.1\"), group_zscore(rsk74_value_ts, sector))",
+        "multiply(bucket(group_rank(rsk74_raw_crowding, sector), range=\"0,1,0.1\"), group_zscore(rsk74_value_ts, sector))"
+    ]
+}

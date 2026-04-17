@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_ir({exposure_value}), 63), std=4), 20), group_cartesian_product(industry, sector)), 2), 10), group_cartesian_product(industry, sector))",
+    "idea": "采用向量信息比率(vec_ir，即均值/标准差)衡量业务结构分布的稳定性效率，在行业-板块二维交叉分组(group_cartesian_product)内进行Z-Score标准化以控制更细粒度的风格暴露，计算10日变化量(ts_delta)捕捉'业务结构稳定性效率'的改善/恶化动量；适用于识别细分赛道内业务布局从分散低效向集中高效转变的结构性机会。",
+    "expression_list": [
+        "group_zscore(ts_delta(signed_power(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_ir(anl91_exposure_value), 63), std=4), 20), group_cartesian_product(industry, sector)), 2), 10), group_cartesian_product(industry, sector))"
+    ]
+}

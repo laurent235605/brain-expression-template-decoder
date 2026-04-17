@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(if_else(or(greater(rank(ts_sum(vec_avg({aily_delta_recon_value}), 20)), 0.9), less(rank(ts_sum(vec_avg({aily_delta_recon_value}), 20)), 0.1)), winsorize(ts_sum(vec_avg({aily_delta_recon_value}), 20), 4), 0), industry)",
+    "idea": "**极端分位数事件驱动**: 仅保留全市场20日累积修正处于极端分位数（前10%多头或后10%空头）的股票信号，将中间80%区间视为噪音并强制置零；对保留的极值进行winsorize处理后，按行业进行group_normalize归一化，确保每个行业内部多空平衡。此模板基于'只有极端累积修正才产生持续alpha'的假设，剔除温和调整带来的干扰。",
+    "expression_list": [
+        "group_normalize(if_else(or(greater(rank(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20)), 0.9), less(rank(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20)), 0.1)), winsorize(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), 4), 0), industry)"
+    ]
+}

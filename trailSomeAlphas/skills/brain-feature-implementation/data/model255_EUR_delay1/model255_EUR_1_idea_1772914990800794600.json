@@ -1,0 +1,7 @@
+{
+    "template": "quantile({cacfroi50co2e}, driver=\"uniform\")",
+    "idea": "**Concept**: Relative Carbon Efficiency Percentile\n- **Sample Fields Used**: `cacfroi50co2e`\n- **Definition**: Cross-sectional ranking of carbon-adjusted returns to identify relative transition winners vs. losers within the universe\n- **Why This Feature**: Absolute carbon metrics miss sector effects (utilities vs tech); relative positioning identifies best-in-class carbon efficiency regardless of industry\n- **is filling nan necessary**: No, cross-sectional ranking naturally handles NaN by assigning lowest rank or excluding; filling would distort relative positioning\n- **Directionality**: High percentile values indicate top-quartile carbon efficiency; Low values indicate laggards facing regulatory/valuation compression\n- **Boundary Conditions**: Extreme percentiles (top/bottom decile) indicate potential long/short candidates for carbon-neutral portfolios",
+    "expression_list": [
+        "quantile(mdl255_cacfroi50co2e, driver=\"uniform\")"
+    ]
+}

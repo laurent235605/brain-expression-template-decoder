@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(ts_backfill({reported_asset_value}, 20)), 10), scale(quantile(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), driver=\"cauchy\"), longscale=1.2, shortscale=1.2), 0)",
+    "idea": "数据新鲜度过滤与Cauchy分布映射 —— 利用days_from_last_change确保仅使用近10日内有数据更新的股票，对126日特质性残差应用Cauchy分布分位映射（quantile）极度拉伸极端值、压缩中间值，最后通过scale调整多空杠杆至1.2倍以增强表达，适合捕捉事件驱动后的极端反转或动量。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(ts_backfill(fund_reported_asset_value, 20)), 10), scale(quantile(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), driver=\"cauchy\"), longscale=1.2, shortscale=1.2), 0)"
+    ]
+}

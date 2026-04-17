@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry)), 1.5), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 10), 0)",
+    "idea": "融合模板2对极端值的敏感性与模板1的衰减平滑逻辑，引入条件交易算子（trade_when）。仅当行业中性残差的绝对值超过1.5个标准差（显著偏离）时才建仓并应用10日衰减平滑，中等偏离区间则视为噪音赋值为0。这种\"极端阈值筛选+稳定持仓\"结构既保留了高偏离 alpha 的捕捉能力，又避免了中等信号区间的无效交易。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry)), 1.5), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 10), 0)"
+    ]
+}

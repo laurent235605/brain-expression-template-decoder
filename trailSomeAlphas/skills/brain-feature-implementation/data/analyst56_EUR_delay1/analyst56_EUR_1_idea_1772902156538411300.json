@@ -1,0 +1,7 @@
+{
+    "template": "quantile(winsorize(ts_delta(vec_avg({daily_probability}), 5), std=4), driver=\"gaussian\")",
+    "idea": "截尾动量的极端值稳健化：先对5日动量进行4倍标准差截尾处理消除异常跳跃，再进行高斯分位数转换，增强对数据错误的鲁棒性",
+    "expression_list": [
+        "quantile(winsorize(ts_delta(vec_avg(anl56_daily_probability), 5), std=4), driver=\"gaussian\")"
+    ]
+}

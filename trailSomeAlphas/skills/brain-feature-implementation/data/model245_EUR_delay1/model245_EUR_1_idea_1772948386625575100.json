@@ -1,0 +1,7 @@
+{
+    "template": "abs(subtract(vec_avg({rank}), ts_median(vec_avg({rank}), 60)))",
+    "idea": "**Concept**: Historical Rank Extremity\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Absolute distance of current rank from its 60-day median rank\n- **Why This Feature**: Simple robust measure of how unusual the current rank is compared to typical ranking, using median to avoid outlier sensitivity in the historical window\n- **Logical Meaning**: Large distances indicate the model has significantly upgraded or downgraded the stock compared to its typical historical positioning\n- **is filling nan necessary**: Median calculation handles NaN automatically; only fill if temporary single-day gaps exist (ts_backfill with k=1), as median is robust to missing data within the window.\n- **Directionality**: Higher values indicate more extreme deviations from normal ranking; 0 indicates currently at the median historical rank\n- **Boundary Conditions**: 0 to (max_rank - min_rank) over the 60-day window; bounded by universe size",
+    "expression_list": [
+        "abs(subtract(vec_avg(mdl245_rank), ts_median(vec_avg(mdl245_rank), 60)))"
+    ]
+}

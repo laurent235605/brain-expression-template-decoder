@@ -1,0 +1,7 @@
+{
+    "template": "bucket(group_rank(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), range=\"0,1,0.2\")",
+    "idea": "离散化分桶策略：将连续的行业中性流偏离度信号通过group_rank分桶(bucket)转化为离散的五分位信号，仅利用极端分位（如前20% vs 后20%）构建多空，中段分位视为无信号，实现非线性的\"头尾策略\"，降低中间噪音干扰。",
+    "expression_list": [
+        "bucket(group_rank(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), range=\"0,1,0.2\")"
+    ]
+}

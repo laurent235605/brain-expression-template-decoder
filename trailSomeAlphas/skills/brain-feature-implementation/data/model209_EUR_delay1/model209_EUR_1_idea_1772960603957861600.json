@@ -1,0 +1,7 @@
+{
+    "template": "(vec_percentage({opentimestamp}, 0.9) - vec_percentage({loadedidstimestamp}, 0.1)) / (vec_percentage({opentimestamp}, 0.5) + 1) - (vec_percentage({opentimestamp}, 0.1) - vec_percentage({loadedidstimestamp}, 0.9)) / (vec_percentage({opentimestamp}, 0.5) + 1)",
+    "idea": "非对称分位数利差指标：分别构建极端慢执行(90分位开盘-10分位加载)与极端快执行(10分位开盘-90分位加载)场景，以中位数归一化后作差，有效分离执行质量的偏态特征，识别极端尾部风险与机会",
+    "expression_list": [
+        "(vec_percentage(mdl209_opentimestamp, 0.9) - vec_percentage(mdl209_loadedidstimestamp, 0.1)) / (vec_percentage(mdl209_opentimestamp, 0.5) + 1) - (vec_percentage(mdl209_opentimestamp, 0.1) - vec_percentage(mdl209_loadedidstimestamp, 0.9)) / (vec_percentage(mdl209_opentimestamp, 0.5) + 1)"
+    ]
+}

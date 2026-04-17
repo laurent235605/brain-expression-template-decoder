@@ -1,0 +1,7 @@
+{
+    "template": "right_tail(group_rank(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), minimum=0.8)",
+    "idea": "极端右尾聚焦策略：使用行业内分位排名(group_rank)后，通过right_tail(0.8)仅保留前20%的极端高配权益信号，将中低分位视为无信号(NaN)。该结构直接剔除空头和中性仓位，专注于“超配权益”的极端多头机会，是对模板二“头尾效应”逻辑的进一步极端化应用，适用于多头增强或高置信度偏离场景。",
+    "expression_list": [
+        "right_tail(group_rank(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), minimum=0.8)"
+    ]
+}

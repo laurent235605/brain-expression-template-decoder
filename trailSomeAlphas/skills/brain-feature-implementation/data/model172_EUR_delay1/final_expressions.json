@@ -1,0 +1,18 @@
+[
+    "divide(add(mdl172_entwdrat, mdl172_debteqiv), mdl172_coverage)",
+    "divide(subtract(mdl172_p_erati1, mdl172_p_erati2), add(mdl172_prc_book, mdl172_prc_sale))",
+    "divide(ts_std_dev(add(add(add(mdl172_cfroi_1, mdl172_cfroi_2), mdl172_cfroi_3), mdl172_cfroi_4), 5), abs(ts_mean(add(add(add(mdl172_cfroi_1, mdl172_cfroi_2), mdl172_cfroi_3), mdl172_cfroi_4), 5)))",
+    "divide(mdl172_epssurpq, mdl172_vol_his_3m)",
+    "multiply(mdl172_prc_book, divide(add(1, mdl172_entwdrat), add(mdl172_cfroi_1, 0.01)))",
+    "multiply(mdl172_sustratfy1, multiply(mdl172_cfroi_1, mdl172_fcg_in))",
+    "multiply(mdl172_sustratfy1, subtract(mdl172_grow_fy5, mdl172_1_gaigr))",
+    "subtract(quantile(mdl172_prc_book, driver=\"uniform\"), quantile(mdl172_p_erati1, driver=\"uniform\"))",
+    "subtract(mdl172_cfroi_1, ts_mean(mdl172_cfroitrn, 20))",
+    "subtract(mdl172_cfroichg, ts_delay(mdl172_cfroichg, 5))",
+    "subtract(mdl172_grow_fy5, multiply(mdl172_percgrowfy1, 5))",
+    "ts_std_dev(add(add(add(add(mdl172_1_gaigr, mdl172_2_igaigr), mdl172_3_igaigr), mdl172_4_igaigr), mdl172_5_igaigr), 5)",
+    "ts_sum(add(add(add(mdl172_grow_fy5, mdl172_epsgrow5), mdl172_invgrow5), mdl172_salegrow), 5)",
+    "ts_sum(mdl172_cfroidrs, 10)",
+    "vector_neut(subtract(mdl172_cfroi_1, mdl172_cfroimk5), mdl172_mark_cap)",
+    "vector_neut(mdl172_prc_book, add(mdl172_grow_fy5, mdl172_epsgrow5))"
+]

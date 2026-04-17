@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.001))), 0.9), less(rank(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.001))), 0.1)), signed_power(winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.001)), std=3), 2), 0)",
+    "idea": "**极端尾部聚焦策略（中间噪音剔除）**：假设只有极端的业绩惊喜（前10%或后10%）具有显著预测能力，中间区间（市场共识附近）为噪音。首先计算全市场排名（rank），通过trade_when条件判断：仅当惊喜排名位于前10%（greater 0.9）或后10%（less 0.1）时保留信号，中间区间强制置零；对保留的极端值使用signed_power（power=2）进行二次放大，构建高conviction的多空组合，降低中间地带模糊信号带来的换手和噪音。",
+    "expression_list": [
+        "trade_when(or(greater(rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001))), 0.9), less(rank(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001))), 0.1)), signed_power(winsorize(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001)), std=3), 2), 0)",
+        "trade_when(or(greater(rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001))), 0.9), less(rank(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001))), 0.1)), signed_power(winsorize(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.001)), std=3), 2), 0)"
+    ]
+}

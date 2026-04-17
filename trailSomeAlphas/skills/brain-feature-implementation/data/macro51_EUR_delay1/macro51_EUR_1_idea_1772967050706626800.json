@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear( quantile( winsorize( {stoxx_europe_600_ucits_weight} / ts_median( winsorize( {stoxx_europe_600_ucits_weight}, std=4 ), 252 ), std=4 ), driver=\"gaussian\" ), 10 )",
+    "idea": "高斯分位数时序衰减模板。首先计算权重相对其年度(252日)历史时间序列中位数的比率，经winsorize清洗后通过高斯分位数转换(quantile with gaussian driver)将分布拉伸至标准正态形态（强化极端偏离信号，将中间区间压缩至零附近），最后应用10日线性衰减平滑。该结构适用于构建渐进式调仓策略，对权重层级的长期结构性转移给予平滑且持续的暴露，同时抑制短期毛刺。",
+    "expression_list": [
+        "ts_decay_linear( quantile( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight / ts_median( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight, std=4 ), 252 ), std=4 ), driver=\"gaussian\" ), 10 )"
+    ]
+}

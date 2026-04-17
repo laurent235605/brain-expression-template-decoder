@@ -1,0 +1,8 @@
+{
+    "template": "subtract({roe_best_eeps_cur_yr}, {eps_best_eeps_cur_yr})",
+    "idea": "**Concept**: ROE-EPS Expectation Spread\n- **Sample Fields Used**: roe_best_eeps_cur_yr, eps_best_eeps_cur_yr\n- **Definition**: Difference between consensus ROE and EPS estimates (different scales, captures relative profitability expectations)\n- **Why This Feature**: ROE is percentage-based, EPS is currency-based; spread anomalies indicate capital structure changes or share count volatility\n- **Logical Meaning**: Discrepancy between return on equity and absolute earnings expectations; divergence may signal buyback impact or equity issuance\n- **is filling nan necessary**: ROE and EPS have different coverage patterns; ts_backfill(20) on both to maximize paired observations.\n- **Directionality**: Large positive spread indicates high profitability expectations relative to earnings level (may indicate small equity base)\n- **Boundary Conditions**: Extreme values indicate potential data errors or extraordinary items affecting one metric but not the other",
+    "expression_list": [
+        "subtract(anl69_roe_best_eeps_cur_yr, anl69_aeps_best_eeps_cur_yr)",
+        "subtract(anl69_roe_best_eeps_cur_yr, anl69_eps_best_eeps_cur_yr)"
+    ]
+}

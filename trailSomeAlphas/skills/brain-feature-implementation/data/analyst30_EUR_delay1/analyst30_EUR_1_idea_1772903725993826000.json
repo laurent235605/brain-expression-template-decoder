@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_std_dev(vec_count(vec_filter({currency_code}, value=\"nan\")), 126), industry)",
+    "idea": "币种结构不稳定性风险指标：计算半年（126日）窗口期内币种数量的时序标准差，衡量公司跨境支付结构的波动程度，在行业内部zscore标准化后识别正在进行剧烈运营调整或面临外汇管理风险的异常公司。",
+    "expression_list": [
+        "group_zscore(ts_std_dev(vec_count(vec_filter(payment_currency_code, value=\"nan\")), 126), industry)"
+    ]
+}

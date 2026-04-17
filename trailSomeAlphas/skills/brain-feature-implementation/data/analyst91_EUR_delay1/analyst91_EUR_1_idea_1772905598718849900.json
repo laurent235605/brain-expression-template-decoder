@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(less(group_rank(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), industry), 0.2), greater(group_rank(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), industry), 0.8)), multiply(-1, group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry)), 0)",
+    "idea": "采用“两端信号、中段噪音”结构：仅保留行业内波动率分位数最低（前20%，视为质量）和最高（后20%，视为风险）的两端标的，中间60%视为噪音赋零；通过对Z-Score乘以-1实现“低波动为正、高波动为负”的反向映射，构建非对称多空组合。",
+    "expression_list": [
+        "trade_when(or(less(group_rank(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), industry), 0.2), greater(group_rank(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), industry), 0.8)), multiply(-1, group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry)), 0)"
+    ]
+}

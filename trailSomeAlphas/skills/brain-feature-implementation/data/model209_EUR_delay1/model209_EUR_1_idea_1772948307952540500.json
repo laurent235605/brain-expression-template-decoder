@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({investment}) / (1 + vec_sum({lastcostingfailed}))",
+    "idea": "**Concept**: Risk-Adjusted Investment Deployment\n- **Sample Fields Used**: investment, lastcostingfailed\n- **Definition**: Average investment normalized by failure count plus one, measuring capital deployed per unit operational risk\n- **Why This Feature**: Relative efficiency metric comparing investment scale to operational problems; higher values indicate successful deployment despite obstacles\n- **Logical Meaning**: Investment throughput per operational incident\n- **is filling nan necessary**: Filter paired missing values; denominator ensures no division by zero\n- **Directionality**: Higher values indicate better risk-adjusted deployment; decreases as failures accumulate\n- **Boundary Conditions**: Approaches average investment when no failures; trends toward zero as failures dominate",
+    "expression_list": [
+        "vec_avg(mdl209_investment) / (1 + vec_sum(mdl209_lastcostingfailed))"
+    ]
+}

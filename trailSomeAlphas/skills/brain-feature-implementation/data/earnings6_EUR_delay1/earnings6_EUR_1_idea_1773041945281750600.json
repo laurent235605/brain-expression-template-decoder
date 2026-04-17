@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(trade_when(greater(abs(divide(ts_delta(vec_avg({x_dividend}), 63), add(ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252), 0.001))), 0.1), divide(ts_delta(vec_avg({x_dividend}), 63), add(ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252), 0.001)), 0), industry)",
+    "idea": "事件驱动型构造，仅当股息在过去63天内发生显著变化（超过历史均值10%阈值）时才产生信号，其余时间视为无信号（0）。通过trade_when过滤日常噪音，保留股息公告、特别分红或削减股息等重大事件冲击，并经行业标准化后用于跨行业比较。适用于短期事件套利，避免持有期间因股息平稳而产生的无效暴露。",
+    "expression_list": [
+        "group_zscore(trade_when(greater(abs(divide(ts_delta(vec_avg(ern6_x_dividend), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252), 0.001))), 0.1), divide(ts_delta(vec_avg(ern6_x_dividend), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252), 0.001)), 0), industry)",
+        "group_zscore(trade_when(greater(abs(divide(ts_delta(vec_avg(ern6_x_dividend_233), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252), 0.001))), 0.1), divide(ts_delta(vec_avg(ern6_x_dividend_233), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252), 0.001)), 0), industry)",
+        "group_zscore(trade_when(greater(abs(divide(ts_delta(vec_avg(ern6_x_dividend_oc), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252), 0.001))), 0.1), divide(ts_delta(vec_avg(ern6_x_dividend_oc), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252), 0.001)), 0), industry)",
+        "group_zscore(trade_when(greater(abs(divide(ts_delta(vec_avg(ern6_x_dividend_oc_235), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252), 0.001))), 0.1), divide(ts_delta(vec_avg(ern6_x_dividend_oc_235), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252), 0.001)), 0), industry)"
+    ]
+}

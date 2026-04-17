@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), industry)), ts_mean(abs(ts_delta(group_zscore(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 5), std=4), industry), 5)), 60)), signed_power(group_zscore(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), industry), 0.7), 0)",
+    "idea": "基于历史波动率阈值的非线性条件交易。仅当当前行业标准化修订幅度超过其60日历史平均绝对波动时触发交易，对通过的强信号应用0.7次幂变换（signed_power）以压缩极端尾部风险，构建低换手率、高信噪比的非线性动量因子。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), industry)), ts_mean(abs(ts_delta(group_zscore(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), std=4), industry), 5)), 60)), signed_power(group_zscore(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), industry), 0.7), 0)",
+        "trade_when(greater(abs(group_zscore(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), industry)), ts_mean(abs(ts_delta(group_zscore(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), std=4), industry), 5)), 60)), signed_power(group_zscore(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), industry), 0.7), 0)"
+    ]
+}

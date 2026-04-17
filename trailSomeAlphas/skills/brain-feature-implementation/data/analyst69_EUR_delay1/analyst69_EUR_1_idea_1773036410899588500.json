@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60))",
+    "idea": "构建预期修订的加速度信号。分别计算5日短期与20日中期修订动量的60日滚动z-score，通过差分捕捉两者背离。当短周期加速超过长周期时产生正向信号，预示分析师情绪的强化与动量延续；反之则标识动能衰竭与潜在拐点。此模板融合了趋势跟踪与均值回归逻辑，适用于识别预期调整的拐点时机。",
+    "expression_list": [
+        "subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60))",
+        "subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60))"
+    ]
+}

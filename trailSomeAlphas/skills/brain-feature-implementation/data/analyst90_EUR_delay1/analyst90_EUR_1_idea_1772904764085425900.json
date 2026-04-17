@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_mean(zscore(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4)), 5), if_else(less(ts_delta(winsorize(ts_std_dev(vec_avg({likelihood_score}), 60), std=4), 20), 0), 1.2, 0.8))",
+    "idea": "平滑背离与信息事件增强：采用5日均值平滑（ts_mean，较decay_linear更低换手）处理背离信号，并检测波动率是否近期下降作为信息事件标志。在事件窗口内放大信号强度，非事件窗口保守配置。",
+    "expression_list": [
+        "multiply(ts_mean(zscore(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4)), 5), if_else(less(ts_delta(winsorize(ts_std_dev(vec_avg(success_likelihood_score), 60), std=4), 20), 0), 1.2, 0.8))"
+    ]
+}

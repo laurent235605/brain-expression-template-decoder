@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_delta({eps_best_eeps_cur_yr}, 5), ts_mean(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), 20))",
+    "idea": "计算当前5日修正动量（模板A）与其20日历史均值的偏离（模板B的平滑技术），构建'预期修正的意外值'指标。正值表示短期修正强于近期趋势（加速上调），负值表示弱于趋势（减速或下调乏力）。该交叉结构捕捉分析师情绪是否过度反应或反应不足，适用于识别预期修正的均值回复或趋势加速转折点。",
+    "expression_list": [
+        "subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_mean(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), 20))",
+        "subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_mean(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), 20))"
+    ]
+}

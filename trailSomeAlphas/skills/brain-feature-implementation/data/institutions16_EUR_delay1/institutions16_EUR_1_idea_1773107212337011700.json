@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(ts_regression(winsorize(ts_backfill({fundreportedequityassets}, 63), std=4), group_mean(ts_backfill({reported_asset_value}, 63), log(ts_mean(cap,21)), industry), 252, rettype=0), add(ts_std_dev(ts_regression(returns, ts_mean(returns,63), 21, rettype=0), 21), 0.001)), industry)",
+    "idea": "使用252日回归残差替代简单向量中性化，更稳健地剥离行业市值加权共性趋势，获取纯净超额权益暴露；风险分母改用特质波动率（收益对行业均值回归的残差标准差），剔除系统性风险干扰；识别那些承担单位非系统性风险获取超额配置的基金，避免市场β波动掩盖真实的选股信念强度。",
+    "expression_list": [
+        "group_zscore(divide(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), std=4), group_mean(ts_backfill(fund_reported_asset_value, 63), log(ts_mean(cap,21)), industry), 252, rettype=0), add(ts_std_dev(ts_regression(returns, ts_mean(returns,63), 21, rettype=0), 21), 0.001)), industry)"
+    ]
+}

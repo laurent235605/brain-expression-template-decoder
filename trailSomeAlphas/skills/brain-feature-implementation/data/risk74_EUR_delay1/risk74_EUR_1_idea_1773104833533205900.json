@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), group_mean(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), log(ts_mean(cap, 21)), industry), 252, rettype=0)",
+    "idea": "市值剥离型（Cap-Neutral Residual）：通过时序回归（252天窗口）将原始价差对行业市值加权平均价差（以log市值为权重的行业均值）进行正交化，提取残差（rettype=0）。该模板剔除大市值公司因国际化程度天然更高而带来的系统性行业暴露，获得纯粹由个股异质地缘政治偏好驱动的Alpha，适用于区分同行业内“真·区域轮动”与“假·市值效应”。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), group_mean(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), log(ts_mean(cap, 21)), industry), 252, rettype=0)"
+    ]
+}

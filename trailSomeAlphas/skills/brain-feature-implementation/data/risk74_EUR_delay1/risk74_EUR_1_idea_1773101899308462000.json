@@ -1,0 +1,16 @@
+{
+    "template": "if_else(greater(ts_backfill(if_else(is_nan({nondomicile}),0,{nondomicile}),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill({concentration},63),std=4), 63), 126), 0)",
+    "idea": "捕捉地理集中度恶化的加速度（近63日变化的时序Z-score），且仅对已有显著海外敞口(>10%)的公司赋予权重。该因子预警\"正在加速把鸡蛋放入同一个外国篮子\"的风险动态，利用时序标准化捕捉变化速率而非静态水平，纯国内公司赋零值。",
+    "expression_list": [
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile1),0,rsk74_raw_exp_nondomicile1),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_raw_exp_nondomicile2),0,rsk74_raw_exp_nondomicile2),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_nondomicile),0,rsk74_nondomicile),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile1),0,rsk74_std_exp_nondomicile1),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 63), 126), 0)",
+        "if_else(greater(ts_backfill(if_else(is_nan(rsk74_std_exp_nondomicile2),0,rsk74_std_exp_nondomicile2),63),0.1), ts_zscore(ts_delta(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4), 63), 126), 0)"
+    ]
+}

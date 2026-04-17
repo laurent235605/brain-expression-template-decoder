@@ -1,0 +1,5 @@
+{
+    "template": "multiply(quantile(ts_regression(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), ts_step(), 60, rettype=2), driver=\"cauchy\"), trade_when(less({market_vol}, ts_mean({market_vol}, 252)), 1.5, 0.8))",
+    "idea": "稳定性趋势与市场波动率动态对冲模板。通过60日线性回归提取稳定性指标的时间趋势（斜率），使用柯西分布映射强化尾部极端趋势识别，最后根据市场波动率（market_vol）动态调整仓位规模——低波动环境放大敞口（1.5倍），高波动环境压缩敞口（0.8倍）。适用于构建防御性的波动率择时增强策略。",
+    "expression_list": []
+}

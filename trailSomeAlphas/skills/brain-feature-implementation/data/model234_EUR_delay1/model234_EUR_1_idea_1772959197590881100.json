@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(winsorize(log({volume}), std=4), 5), {industry}), 10)",
+    "idea": "行业相对成交量加速度的平滑处理。先对数成交量进行5日差分（捕捉短期变化率），在行业内标准化以识别相对同行的成交加速或减速趋势，最后应用10日线性衰减加权平均进行平滑，降低单日异常波动的噪音影响并控制换手率，保留成交量趋势的持续性信号。",
+    "expression_list": []
+}

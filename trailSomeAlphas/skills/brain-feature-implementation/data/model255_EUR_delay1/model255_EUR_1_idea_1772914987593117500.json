@@ -1,0 +1,7 @@
+{
+    "template": "({special_items_score} + {accrued_expenses_score} + {revenue_recognition_score} + {deferred_rev_score}) / 4",
+    "idea": "**Concept**: Core Earnings Manipulation Probability\n- **Sample Fields Used**: `special_items_score`, `accrued_expenses_score`, `revenue_recognition_score`, `deferred_rev_score`\n- **Definition**: Essential composite of red-flag accounting areas stripped of noise to isolate pure manipulation risk\n- **Why This Feature**: Earnings manipulation essence lies in special items classification, accrual aggression, and revenue timing; combining these distills the \"fraud triangle\" into a single metric\n- **is filling nan necessary**: Yes, use ts_backfill for individual components, but require at least 3 of 4 to ensure robustness of the manipulation signal\n- **Directionality**: Low values indicate high manipulation probability (poor scores on red flags); High values indicate clean core earnings\n- **Boundary Conditions**: Values <2 indicate essential manipulation risk; Values >4 combined with low overall_score indicates \"everything is fine\" deception",
+    "expression_list": [
+        "(mdl255_special_items_score + mdl255_accrued_expenses_score + mdl255_revenue_recognition_score + mdl255_deferred_rev_score) / 4"
+    ]
+}

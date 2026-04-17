@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater( abs( ts_delta( ts_backfill( vec_avg( {stock_split_ratio_243} ), 63 ), 63 ) ), 0.01 ), divide( subtract( vec_avg( {actual_eps} ), vec_avg( {estimated_eps} ) ), add( abs( vec_avg( {estimated_eps} ) ), 0.01 ) ), NaN )",
+    "idea": "条件信号融合：利用trade_when实现'仅在近期（63天内）发生过分拆事件的股票池中计算盈利惊喜'。结合模板1的惊喜计算与模板2的事件时间戳逻辑，捕捉'分拆后首次盈利公告'的特殊市场反应，避免在无事件股票上浪费敞口，提升资金效率。",
+    "expression_list": [
+        "trade_when( greater( abs( ts_delta( ts_backfill( vec_avg( ern6_stock_split_ratio_243 ), 63 ), 63 ) ), 0.01 ), divide( subtract( vec_avg( ern6_actual_eps ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ), NaN )",
+        "trade_when( greater( abs( ts_delta( ts_backfill( vec_avg( ern6_stock_split_ratio_243 ), 63 ), 63 ) ), 0.01 ), divide( subtract( vec_avg( ern6_actual_eps_274 ), vec_avg( ern6_estimated_eps ) ), add( abs( vec_avg( ern6_estimated_eps ) ), 0.01 ) ), NaN )"
+    ]
+}

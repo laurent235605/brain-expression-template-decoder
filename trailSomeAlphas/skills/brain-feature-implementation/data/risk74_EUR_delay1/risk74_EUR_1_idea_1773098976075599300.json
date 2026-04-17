@@ -1,0 +1,14 @@
+{
+    "template": "trade_when( and( greater( ts_rank( {concentration}, 60 ), 0.8 ), greater( ts_std_dev( {concentration}, 20 ), ts_mean( ts_std_dev( {concentration}, 20 ), 60 ) ) ), multiply( quantile( {crowding}, \"gaussian\" ), zscore( ts_backfill( {value_ts}, 5 ) ) ), 0 )",
+    "idea": "波动率确认机制：仅当集中度处于60日前20%高位且近期（20日）波动率高于自身历史均值时，触发高斯变换后的拥挤度与回溯填充价值信号的复合alpha；过滤掉低波动环境下的伪集中度信号。",
+    "expression_list": [
+        "trade_when( and( greater( ts_rank( rsk74_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_concentration, 20 ), ts_mean( ts_std_dev( rsk74_concentration, 20 ), 60 ) ) ), multiply( quantile( rsk74_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_concentration, 20 ), ts_mean( ts_std_dev( rsk74_concentration, 20 ), 60 ) ) ), multiply( quantile( rsk74_raw_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_concentration, 20 ), ts_mean( ts_std_dev( rsk74_concentration, 20 ), 60 ) ) ), multiply( quantile( liquidity_factor_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_concentration, 20 ), ts_mean( ts_std_dev( rsk74_concentration, 20 ), 60 ) ) ), multiply( quantile( liquidity_timeseries_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_raw_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_raw_concentration, 20 ), ts_mean( ts_std_dev( rsk74_raw_concentration, 20 ), 60 ) ) ), multiply( quantile( rsk74_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_raw_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_raw_concentration, 20 ), ts_mean( ts_std_dev( rsk74_raw_concentration, 20 ), 60 ) ) ), multiply( quantile( rsk74_raw_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_raw_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_raw_concentration, 20 ), ts_mean( ts_std_dev( rsk74_raw_concentration, 20 ), 60 ) ) ), multiply( quantile( liquidity_factor_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )",
+        "trade_when( and( greater( ts_rank( rsk74_raw_concentration, 60 ), 0.8 ), greater( ts_std_dev( rsk74_raw_concentration, 20 ), ts_mean( ts_std_dev( rsk74_raw_concentration, 20 ), 60 ) ) ), multiply( quantile( liquidity_timeseries_crowding, \"gaussian\" ), zscore( ts_backfill( rsk74_value_ts, 5 ) ) ), 0 )"
+    ]
+}

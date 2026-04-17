@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_sum(if_else(is_nan(signed_power(vec_skewness({aily_delta_recon_value}), 3)), 0, signed_power(vec_skewness({aily_delta_recon_value}), 3)), 20), industry)",
+    "idea": "**概念**: 修正分布偏态累积（非对称风险）\n- **增强逻辑**: 使用vec_skewness计算每日修正分布的偏度，通过signed_power(..., 3)保留正负号并放大尾部（正向偏度表示极端乐观修正占主导，负向则相反），累积20日后在行业内排名。此模板捕捉分析师情绪的\"极端化倾向\"而非单纯波动大小。\n- **NaN处理**: 缺失日偏度记为0（无偏态贡献）。\n- **方向性**: 极端高/低排名分别代表非理性乐观或悲观的一致预期偏离，可用于反向或动量策略。",
+    "expression_list": [
+        "group_rank(ts_sum(if_else(is_nan(signed_power(vec_skewness(ern10_aily_delta_recon_value), 3)), 0, signed_power(vec_skewness(ern10_aily_delta_recon_value), 3)), 20), industry)"
+    ]
+}

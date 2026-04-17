@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), ts_mean(divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), 20), 60, rettype=0)",
+    "idea": "将模板1的EPS修正速度作为因变量，以其20日滚动均值（市场/行业共同趋势代理）作为自变量进行60日回归，提取残差（rettype=0）。借鉴CAPM残差模板逻辑，剥离系统性预期调整，仅保留个股特异性的信息冲击，适用于捕捉alpha型预期修正。",
+    "expression_list": [
+        "ts_regression(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), ts_mean(divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), 20), 60, rettype=0)",
+        "ts_regression(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), ts_mean(divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), 20), 60, rettype=0)"
+    ]
+}

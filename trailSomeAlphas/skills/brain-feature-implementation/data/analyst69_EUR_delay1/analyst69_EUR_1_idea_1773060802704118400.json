@@ -1,0 +1,8 @@
+{
+    "template": "truncate(ts_decay_linear(if_else(less(ts_delta(winsorize(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), std=4), 1), 0), -1, 0), 20), maxPercent=0.02)",
+    "idea": "构建清洗-检测-截断的稳健pipeline：先对原始数据进行4倍标准差winsorize清洗极值和脏点，检测单日跳变事件，经20日线性衰减模拟市场消化过程，最后通过truncate限制单票最大暴露2%。结合Input 1的衰减逻辑与风险控制的truncate算子。",
+    "expression_list": [
+        "truncate(ts_decay_linear(if_else(less(ts_delta(winsorize(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), std=4), 1), 0), -1, 0), 20), maxPercent=0.02)",
+        "truncate(ts_decay_linear(if_else(less(ts_delta(winsorize(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), std=4), 1), 0), -1, 0), 20), maxPercent=0.02)"
+    ]
+}

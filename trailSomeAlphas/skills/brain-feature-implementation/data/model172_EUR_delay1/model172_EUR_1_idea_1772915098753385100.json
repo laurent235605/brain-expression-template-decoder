@@ -1,0 +1,7 @@
+{
+    "template": "divide({epssurpq}, {vol_his_3m})",
+    "idea": "**Concept**: Earnings Surprise Anomaly Intensity\n- **Sample Fields Used**: epssurpq, vol_his_3m\n- **Definition**: EPS surprise magnitude normalized by historical volatility, measuring the \"unexpectedness\" of the earnings beat/miss relative to typical price movements\n- **Why This Feature**: Captures earnings announcements that represent true information shocks vs. noise, particularly when drift (post-announcement drift) patterns exist\n- **Logical Meaning**: High values indicate fundamental regime changes not priced by volatility; low values indicate anticipated earnings moves\n- **is filling nan necessary**: Yes, epssurpq is quarterly with many NaNs between announcements. Use ts_backfill() with lookback=90 to carry the surprise signal for the quarter following announcement.\n- **Directionality**: High positive = underreacted good news (momentum); High negative = underreacted bad news (reversal/avoid)\n- **Boundary Conditions**: Values >3 sigma indicate extreme information events; near-zero indicates consensus meeting",
+    "expression_list": [
+        "divide(mdl172_epssurpq, mdl172_vol_his_3m)"
+    ]
+}

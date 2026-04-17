@@ -1,0 +1,8 @@
+{
+    "template": "bucket( rank( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ) ), range='0,1,0.1' )",
+    "idea": "离散化分级处理。将连续Surprise值先经条件过滤，再通过rank和bucket分桶为10档（每10%一档），实现非线性的分级响应机制，便于后续对不同Surprise等级赋予差异化权重或进行分段回归测试，避免线性假设的局限。",
+    "expression_list": [
+        "bucket( rank( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ) ), range='0,1,0.1' )",
+        "bucket( rank( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ) ), range='0,1,0.1' )"
+    ]
+}

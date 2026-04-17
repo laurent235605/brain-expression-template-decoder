@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_zscore(ts_mean(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 63), industry), maxPercent=0.02)",
+    "idea": "基于模板1的63日平滑与行业标准化架构，引入truncate算子对单只股票权重进行2%的硬性截断，防止因极端会计年度分散度导致的过度集中风险，提升因子的可实施性与风险分散度。",
+    "expression_list": [
+        "truncate(group_zscore(ts_mean(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 63), industry), maxPercent=0.02)"
+    ]
+}

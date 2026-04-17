@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(group_zscore(signed_power(quantile(group_zscore(divide(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), add(1e-6, ts_std_dev(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), 20))), sector), \"gaussian\"), 1.5), sector), sector)",
+    "idea": "引入已实现波动率（20日标准差）对价差进行逆波动率缩放（低波动时放大信号），经行业中性化后使用高斯分位数拉伸（quantile-gaussian）将中间区间压缩至0附近、将尾部极端值进一步拉开，最后进行行业内归一化（group_normalize），构建波动率自适应、强调极端定价错误的行业中性策略。",
+    "expression_list": [
+        "group_normalize(group_zscore(signed_power(quantile(group_zscore(divide(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), add(1e-6, ts_std_dev(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), 20))), sector), \"gaussian\"), 1.5), sector), sector)"
+    ]
+}

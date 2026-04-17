@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta((vec_avg({aily_delta_recon_value}) - ts_mean(vec_avg({aily_delta_recon_value}), 20)) / ts_std_dev(vec_avg({aily_delta_recon_value}), 20), 5), 3)",
+    "idea": "修订加速度动量（二阶导数）：先计算传统20日窗口的修订惊喜Z-Score，再取其5日变化差分（ts_delta）捕捉信息升级或恶化的加速度拐点（预期变化的二阶导），最后通过3日线性衰减（ts_decay_linear）平滑短期噪音，适用于识别业绩预期的动量加速或反转临界点。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta((vec_avg(ern10_aily_delta_recon_value) - ts_mean(vec_avg(ern10_aily_delta_recon_value), 20)) / ts_std_dev(vec_avg(ern10_aily_delta_recon_value), 20), 5), 3)"
+    ]
+}

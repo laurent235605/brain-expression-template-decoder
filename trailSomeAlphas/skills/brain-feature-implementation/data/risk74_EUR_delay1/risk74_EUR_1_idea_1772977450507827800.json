@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=2), 63)",
+    "idea": "Beta时序排序增强：对区域价差的行业敏感度Beta(rettype=2)进行63日滚动时序排序(ts_rank)。识别那些相对于自身历史而言，当前区域-行业敏感度处于极端高/低水平的股票，捕捉区域Beta的动态变化而非静态水平，适用于行业轮动加速的环境。",
+    "expression_list": [
+        "ts_rank(ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=2), 63)"
+    ]
+}

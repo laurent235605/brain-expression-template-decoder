@@ -1,0 +1,8 @@
+{
+    "template": "subtract(trade_when(greater(group_rank(divide(group_zscore(winsorize(ts_delta({value_08316q}, 63), 4), industry), ts_std_dev(ts_delta({value_08316q}, 63), 252)), industry), 0.8), 1, 0), trade_when(less(group_rank(divide(group_zscore(winsorize(ts_delta({value_08316q}, 63), 4), industry), ts_std_dev(ts_delta({value_08316q}, 63), 252)), industry), 0.2), 1, 0))",
+    "idea": "**波动率调整后的极端分位离散化策略**：融合\"信息比率\"（时序波动率调整）与\"硬阈值分位筛选\"思想。首先计算运营动量的行业中性Z-score，并除以过去252日时序标准差得到风险调整后的稳健动量（类似夏普比率），随后仅在行业排名前20%时开多仓（+1）、后20%时开空仓（-1），中间60%强制归零。该结构既保留了波动率调整带来的统计置信度差异，又通过极端分位截断避免了非极端区域的噪音交易，实现高置信度信号的离散化捕捉。",
+    "expression_list": [
+        "subtract(trade_when(greater(group_rank(divide(group_zscore(winsorize(ts_delta(fnd28_newq_value_08316q, 63), 4), industry), ts_std_dev(ts_delta(fnd28_newq_value_08316q, 63), 252)), industry), 0.8), 1, 0), trade_when(less(group_rank(divide(group_zscore(winsorize(ts_delta(fnd28_newq_value_08316q, 63), 4), industry), ts_std_dev(ts_delta(fnd28_newq_value_08316q, 63), 252)), industry), 0.2), 1, 0))",
+        "subtract(trade_when(greater(group_rank(divide(group_zscore(winsorize(ts_delta(fnd28_ratesq_value_08316q, 63), 4), industry), ts_std_dev(ts_delta(fnd28_ratesq_value_08316q, 63), 252)), industry), 0.8), 1, 0), trade_when(less(group_rank(divide(group_zscore(winsorize(ts_delta(fnd28_ratesq_value_08316q, 63), 4), industry), ts_std_dev(ts_delta(fnd28_ratesq_value_08316q, 63), 252)), industry), 0.2), 1, 0))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "subtract(quantile(ts_rank(ts_backfill(vec_avg({score}), 5), 60), \"gaussian\"), ts_mean(quantile(ts_rank(ts_backfill(vec_avg({score}), 5), 60), \"gaussian\"), 60))",
+    "idea": "稳健秩统计偏离策略：先将分数转换为60日历史分位（ts_rank），再通过高斯分位函数（quantile with gaussian driver）将均匀分布映射为标准正态分布以天然放大极端值权重，最后计算该稳健得分的时序均值偏离。此方法对原始数据中的离群点和厚尾分布具有稳健性，降低了单一极端日对均值/标准差的扭曲，属于非参数化的异常检测改进。",
+    "expression_list": [
+        "subtract(quantile(ts_rank(ts_backfill(vec_avg(mdl249_score), 5), 60), \"gaussian\"), ts_mean(quantile(ts_rank(ts_backfill(vec_avg(mdl249_score), 5), 60), \"gaussian\"), 60))"
+    ]
+}

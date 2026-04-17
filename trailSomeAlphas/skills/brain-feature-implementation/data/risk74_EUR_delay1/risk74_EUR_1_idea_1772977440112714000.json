@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=2)",
+    "idea": "区域价差Beta动量版：计算中美敞口价差相对于行业指数的敏感度(Beta系数)。通过ts_regression的rettype=2获取斜率，识别那些对行业景气度具有不对称区域暴露的公司(如高美敞口且对行业Beta极敏感)，捕捉区域配置弹性差异带来的套利机会。",
+    "expression_list": [
+        "ts_regression(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=2)"
+    ]
+}

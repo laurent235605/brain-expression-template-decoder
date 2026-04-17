@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( multiply( divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) ), sqrt( divide( vec_count({estimated_eps}), add(ts_mean(vec_count({estimated_eps}), 63), 0.001) ) ) ), industry )",
+    "idea": "引入分析师覆盖度(vec_count)作为信号质量权重，假设更多分析师覆盖的盈利惊喜更可靠，将原始惊喜比率乘以覆盖度调整因子，并在行业内标准化(group_zscore)，平衡信号强度与数据可靠性。",
+    "expression_list": [
+        "group_zscore( multiply( divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), sqrt( divide( vec_count(ern6_estimated_eps), add(ts_mean(vec_count(ern6_estimated_eps), 63), 0.001) ) ) ), industry )",
+        "group_zscore( multiply( divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), sqrt( divide( vec_count(ern6_estimated_eps), add(ts_mean(vec_count(ern6_estimated_eps), 63), 0.001) ) ) ), industry )"
+    ]
+}

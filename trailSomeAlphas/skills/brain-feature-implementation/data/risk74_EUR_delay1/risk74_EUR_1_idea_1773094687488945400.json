@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),group_mean(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),log(ts_mean({shortint},21)),industry),63,rettype=0)",
+    "idea": "先对15日空头变化进行时序Z-score标准化（消除个股历史波动率差异），再对该标准化序列进行行业回归剥离，得到'经历史波动调整后的行业中性空头异动'，融合时序标准化与截面中性化双重清洗，剥离历史波动和行业双重系统性影响。",
+    "expression_list": [
+        "ts_regression(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),group_mean(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0)",
+        "ts_regression(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),group_mean(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0)"
+    ]
+}

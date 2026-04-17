@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(quantile(ts_regression(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), log(ts_mean({reported_asset_value}, 21)), sector), 252, rettype=0), driver=\"gaussian\"), 2)",
+    "idea": "高斯分布拉伸与极值平方放大：先将残差通过高斯quantile映射转换为近似正态分布以拉伸尾部，再使用signed_power(2)对极端正负残差进行非线性平方放大，显著增强极端异常资金流动的信号权重，同时压缩中间噪音区间的线性影响。",
+    "expression_list": [
+        "signed_power(quantile(ts_regression(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), group_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), log(ts_mean(fund_reported_asset_value, 21)), sector), 252, rettype=0), driver=\"gaussian\"), 2)"
+    ]
+}

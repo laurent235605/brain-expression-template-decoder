@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(if_else(is_nan(signed_power(subtract(vec_max({aily_delta_recon_value}), vec_min({aily_delta_recon_value})), 2)), 0, signed_power(subtract(vec_max({aily_delta_recon_value}), vec_min({aily_delta_recon_value})), 2)), 20), industry)",
+    "idea": "**概念**: 近期加权极端分歧（极差衰减）\n- **增强逻辑**: 用vec_max与vec_min计算每日修正的极差（Range），表征日内最乐观与最悲观分析师的鸿沟；采用ts_decay_linear替代简单求和，对近期分歧赋予更高权重（线性递减），更快响应信息突变；最后进行行业标准化。此模板强调\"当前正在发生\"的激烈辩论而非历史平均。\n- **NaN处理**: 极差缺失时视为0。\n- **方向性**: 高值预示近期存在极端观点碰撞，往往伴随即将落地的重大信息或波动率扩张。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(if_else(is_nan(signed_power(subtract(vec_max(ern10_aily_delta_recon_value), vec_min(ern10_aily_delta_recon_value)), 2)), 0, signed_power(subtract(vec_max(ern10_aily_delta_recon_value), vec_min(ern10_aily_delta_recon_value)), 2)), 20), industry)"
+    ]
+}

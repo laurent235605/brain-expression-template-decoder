@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(winsorize({value_ts},std=4),industry),quantile(winsorize({crowding},std=4),driver=\"gaussian\"))",
+    "idea": "高斯尾部拉伸强化：将拥挤度经截尾后通过高斯分位转换（quantile），将中间区间压缩至0附近并将极端拥挤值拉伸至更远尾部，再与行业标准化价值因子相乘。此方法使得极端拥挤的价值股产生显著偏离零值的信号，而中等拥挤度股票信号趋近于零，有效突出分布尾部的危险拥挤价值交易。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),quantile(winsorize(rsk74_crowding,std=4),driver=\"gaussian\"))",
+        "multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),quantile(winsorize(rsk74_raw_crowding,std=4),driver=\"gaussian\"))",
+        "multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),quantile(winsorize(liquidity_factor_crowding,std=4),driver=\"gaussian\"))",
+        "multiply(group_zscore(winsorize(rsk74_value_ts,std=4),industry),quantile(winsorize(liquidity_timeseries_crowding,std=4),driver=\"gaussian\"))"
+    ]
+}

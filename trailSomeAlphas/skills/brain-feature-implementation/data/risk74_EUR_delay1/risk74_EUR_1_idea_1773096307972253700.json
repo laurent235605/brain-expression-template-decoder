@@ -1,0 +1,16 @@
+{
+    "template": "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize({concentration},std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize({nondomicile},std=4), industry), minimum=1.5)), industry)",
+    "idea": "硬截尾极端尾部隔离：摒弃分位数条件判断，直接使用右尾截断算子隔离行业内Z分数大于1.5的极端异常值，仅对双维度均处于极端右尾（>1.5倍标准差）的样本进行幂次放大与交互，专注于捕捉尾部风险叠加而非渐变过程，最后进行行业中性归一化。",
+    "expression_list": [
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_nondomicile,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_std_exp_nondomicile1,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_std_exp_nondomicile2,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_nondomicile,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_std_exp_nondomicile1,std=4), industry), minimum=1.5)), industry)",
+        "group_normalize(multiply(signed_power(right_tail(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), minimum=1.5), 2), right_tail(group_zscore(winsorize(rsk74_std_exp_nondomicile2,std=4), industry), minimum=1.5)), industry)"
+    ]
+}

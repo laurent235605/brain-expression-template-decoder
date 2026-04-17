@@ -1,0 +1,7 @@
+{
+    "template": "zscore(divide(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), vec_count(vec_filter({fiscalyearend}, value=\"nan\"))))",
+    "idea": "构建'单位实体分散度'指标，将财年分散度除以向量中有效日期数量（实体数），消除大公司因子公司多而天然分散度高的规模偏差，纯粹度量会计周期异质性强度；经zscore标准化后用于跨股票比较，识别单位业务复杂度最高的公司。",
+    "expression_list": [
+        "zscore(divide(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\"))))"
+    ]
+}

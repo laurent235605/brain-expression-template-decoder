@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore( ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20), 60 ) * vec_range({version})",
+    "idea": "通过ts_zscore将当前20日累积修正强度与其60日历史均值进行标准化比较，识别相对历史异常活跃的状态，再乘以当前版本内部离散度(vec_range)，专门发现'突发密集关注且观点分歧加大'的阶段性机会",
+    "expression_list": [
+        "ts_zscore( ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20), 60 ) * vec_range(anl85_version)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_regression(group_zscore(winsorize(ts_backfill({exp_usa}, 21), std=4), industry), ts_step(), 126, rettype=0), signed_power(ts_corr(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), ts_sum(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 20), 252), 3))",
+    "idea": "趋势一致性残差模型：第一维通过126日时间趋势回归残差剥离长期漂移，得到纯截面偏离；第二维计算当前排名与20日累计排名的252日滚动相关系数并立方，捕捉'当前高位且持续累加处于历史高位'的趋势一致性，对强趋势标的给予非线性权重放大。",
+    "expression_list": [
+        "multiply(ts_regression(group_zscore(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), industry), ts_step(), 126, rettype=0), signed_power(ts_corr(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), ts_sum(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 20), 252), 3))"
+    ]
+}

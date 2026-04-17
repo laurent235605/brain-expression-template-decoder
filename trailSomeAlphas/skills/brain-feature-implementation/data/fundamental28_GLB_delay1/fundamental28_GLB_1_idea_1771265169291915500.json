@@ -1,0 +1,10 @@
+{
+    "template": "ts_regression(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), group_mean(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), log({value_02300q}), industry), 252, rettype=0)",
+    "idea": "采用CAPM残差模板结构，将模板1的利润率动量对行业均值进行回归剥离（使用模板3的总资产作为规模代理进行行业加权），取残差作为纯特质性运营改善信号。这种方法消除了行业轮动对盈利动量的系统性影响，分离出真正的个股alpha。",
+    "expression_list": [
+        "ts_regression(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), group_mean(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), log(fnd28_nddq1_value_02300q), industry), 252, rettype=0)",
+        "ts_regression(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), group_mean(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), log(fnd28_bsassetq_value_02300q), industry), 252, rettype=0)",
+        "ts_regression(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), group_mean(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), log(fnd28_nddq1_value_02300q), industry), 252, rettype=0)",
+        "ts_regression(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), group_mean(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), log(fnd28_bsassetq_value_02300q), industry), 252, rettype=0)"
+    ]
+}

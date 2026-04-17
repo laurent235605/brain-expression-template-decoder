@@ -1,0 +1,26 @@
+{
+    "template": "multiply(signed_power(ts_sum(ts_delta({shortint}, 1), 15), 2), signed_power(multiply({concentration}, {nondomicile}), 0.5))",
+    "idea": "对空头兴趣累积变化应用平方幂变换（signed_power）放大极端值，同时对地理风险应用0.5次幂压缩极端值，构建非线性的'极端做空压力×温和地理风险'交叉增强结构，强调尾部信号而压缩中段噪音。",
+    "expression_list": [
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_nondomicile), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_nondomicile), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_raw_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_std_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_concentration, rsk74_std_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_raw_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_nondomicile), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_nondomicile), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile1), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2), 0.5))",
+        "multiply(signed_power(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 2), signed_power(multiply(rsk74_raw_concentration, rsk74_std_exp_nondomicile2), 0.5))"
+    ]
+}

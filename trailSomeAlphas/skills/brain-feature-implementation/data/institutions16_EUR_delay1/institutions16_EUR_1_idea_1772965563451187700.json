@@ -1,0 +1,7 @@
+{
+    "template": "({fundreportedequityassets} / {reported_asset_value}) * ({fundreportedfixedincomeassets} / {reported_asset_value})",
+    "idea": "**Concept**: Diversification Balance Index\n- **Sample Fields Used**: `fundreportedequityassets`, `fundreportedfixedincomeassets`, `reported_asset_value`\n- **Definition**: Product of equity allocation percentage and fixed income allocation percentage, measuring balance between asset classes\n- **Why This Feature**: Balanced funds (60/40 type) show high values; concentrated funds (all equity or all fixed income) show near-zero values; captures diversification strategy\n- **Logical Meaning**: Maximum at 50/50 allocation (balanced fund), approaches zero for single-asset-class funds; measures multi-asset capability\n- **is filling nan necessary**: Yes, missing values in either asset class should be backfilled using `ts_backfill()` before calculation to avoid zero-bias from missing data\n- **Directionality**: High values indicate balanced/diversified approach, low values indicate specialized/concentrated strategy\n- **Boundary Conditions**: Zero indicates pure equity or pure fixed income fund; maximum (0.25) indicates perfect 50/50 split",
+    "expression_list": [
+        "(inst16_ipreo_fundreportedequityassets / fund_reported_asset_value) * (inst16_ipreo_fundreportedfixedincomeassets / fund_reported_asset_value)"
+    ]
+}

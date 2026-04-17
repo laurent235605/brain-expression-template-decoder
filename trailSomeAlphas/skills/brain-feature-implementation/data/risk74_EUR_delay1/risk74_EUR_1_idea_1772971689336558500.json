@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater({hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\"), 0), right_tail(group_zscore({factor_e} + {factor_s} + {factor_g}, sector), 1.0), left_tail(group_zscore({factor_e} + {factor_s} + {factor_g}, sector), -1.0))",
+    "idea": "极端ESG尾部与HF持仓筛选：利用输入2的HF偏离度作为阵营判断（大于0为看多阵营，小于0为看空阵营），在不同阵营下分别提取ESG的右尾（行业领导者）或左尾（行业落后者）。这实现了输入1的边界条件思想（极端值指示leader/laggard）与输入2的sector-relative logic的深度融合，构建双边极端信号。",
+    "expression_list": [
+        "trade_when(greater(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"), 0), right_tail(group_zscore(rsk74_factor_e + rsk74_factor_s + rsk74_factor_g, sector), 1.0), left_tail(group_zscore(rsk74_factor_e + rsk74_factor_s + rsk74_factor_g, sector), -1.0))",
+        "trade_when(greater(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"), 0), right_tail(group_zscore(rsk74_factor_esg + rsk74_factor_s + rsk74_factor_g, sector), 1.0), left_tail(group_zscore(rsk74_factor_esg + rsk74_factor_s + rsk74_factor_g, sector), -1.0))"
+    ]
+}

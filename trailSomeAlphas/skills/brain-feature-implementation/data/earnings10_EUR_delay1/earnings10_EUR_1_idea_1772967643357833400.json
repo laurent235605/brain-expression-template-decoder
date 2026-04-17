@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_decay_linear(ts_delta(vec_avg(ts_backfill({elta_value}, 63)), 5), 3), std=4), industry)",
+    "idea": "综合数据清洗与稳健性处理：先对平均预期序列进行63日回填避免缺失值造成的伪动量，计算5日变化率后采用3日线性衰减降低换手率，再经4倍标准差去极值，最终在行业内Z分数标准化，得到干净且可交易的行业相对预期修正动量。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_decay_linear(ts_delta(vec_avg(ts_backfill(ern10_elta_value, 63)), 5), 3), std=4), industry)"
+    ]
+}

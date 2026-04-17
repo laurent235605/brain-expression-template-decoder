@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize({hfown_pctown}, std=4), industry) * (1 - group_rank(winsorize({fund_num_owners_encr}, std=4), industry))",
+    "idea": "集中度调整因子：将持仓占比的行业中性Zscore与持有人数的行业排名逆向结合（持有人数越少排名越接近0，乘数越接近1），高集中度押注（少数HF高比例持有）获得放大权重，区分聪明钱共识与低集中度分散配置。",
+    "expression_list": [
+        "group_zscore(winsorize(rsk74_hfown_pctown, std=4), industry) * (1 - group_rank(winsorize(hedge_fund_num_owners_encr, std=4), industry))"
+    ]
+}

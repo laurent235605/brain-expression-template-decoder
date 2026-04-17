@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({likelihood_score}), 20) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20)) * (ts_std_dev(vec_avg({likelihood_score}), 60) - ts_std_dev(vec_avg({likelihood_score}), 20))",
+    "idea": "计算输入1中置信均值的20日动量（变化率），经短期波动率标准化后，再乘以输入2的波动率期限结构；捕捉'信心改善速度'与'波动率收敛'的共振效应，只做多动量为正且波动率收敛的叠加场景。",
+    "expression_list": [
+        "ts_delta(vec_avg(success_likelihood_score), 20) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20)) * (ts_std_dev(vec_avg(success_likelihood_score), 60) - ts_std_dev(vec_avg(success_likelihood_score), 20))"
+    ]
+}

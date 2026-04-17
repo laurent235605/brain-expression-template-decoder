@@ -1,0 +1,5 @@
+{
+    "template": "if_else(greater(group_zscore(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long},sector,63),std=4), winsorize(group_backfill({owners_decile_rank_long},sector,63),std=4), 60, rettype=0), sector), 2), multiply(group_zscore(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long},sector,63),std=4), winsorize(group_backfill({owners_decile_rank_long},sector,63),std=4), 60, rettype=0), sector), rank({volume})), if_else(less(group_zscore(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long},sector,63),std=4), winsorize(group_backfill({owners_decile_rank_long},sector,63),std=4), 60, rettype=0), sector), -2), multiply(group_zscore(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long},sector,63),std=4), winsorize(group_backfill({owners_decile_rank_long},sector,63),std=4), 60, rettype=0), sector), subtract(1, rank({volume}))), 0))",
+    "idea": "成交量验证的极端双尾策略（非对称确认）：仅当行业中性残差超过±2倍标准差时开仓。对于正残差（所有权过度分散/零售拥挤），要求伴随高成交量（乘以rank({volume})）确认零售狂热；对于负残差（所有权过度集中/聪明钱吸筹），要求伴随低成交量（乘以(1-rank({volume}))）确认静默积累；中间区间视为噪音清零，实现条件化交易。",
+    "expression_list": []
+}

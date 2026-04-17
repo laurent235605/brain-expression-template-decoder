@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(vec_skewness(vec_filter({version}, value=\\\"nan\\\")), group_mean(vec_skewness(vec_filter({version}, value=\\\"nan\\\")), log(ts_mean(cap,21)), sector), 252, rettype=0)",
+    "idea": "行业Beta剥离的特质偏度：通过252日时序回归，剔除由行业整体版本迁移趋势解释的系统性偏度成分（以市值对数加权），提取个股特有的版本分布不对称性，用于识别独立于行业周期的个体行为异常。",
+    "expression_list": [
+        "ts_regression(vec_skewness(vec_filter(anl85_version, value=\\\"nan\\\")), group_mean(vec_skewness(vec_filter(anl85_version, value=\\\"nan\\\")), log(ts_mean(cap,21)), sector), 252, rettype=0)"
+    ]
+}

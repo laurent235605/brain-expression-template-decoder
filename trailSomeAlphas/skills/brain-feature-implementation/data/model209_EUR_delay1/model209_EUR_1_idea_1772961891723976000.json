@@ -1,0 +1,7 @@
+{
+    "template": "multiply(rank(vec_sum({investment})), subtract(1, multiply(0.5, rank(vec_sum({lastcostingfailed})))))",
+    "idea": "**概念**: 截面排名合成（高投资-低失败优选）\n- **逻辑**: 将总投资排名(0-1)与失败次数排名反向组合，构建\"高投资且相对低失败\"的选股因子。利用rank将两字段映射到统一分位空间，避免量纲差异，符合\"标准差度量转分位度量\"的标准化逻辑。\n- **边界**: 结果范围0-1，0.5为中性；高投资低失败接近1，低投资高失败接近0。",
+    "expression_list": [
+        "multiply(rank(vec_sum(mdl209_investment)), subtract(1, multiply(0.5, rank(vec_sum(mdl209_lastcostingfailed)))))"
+    ]
+}

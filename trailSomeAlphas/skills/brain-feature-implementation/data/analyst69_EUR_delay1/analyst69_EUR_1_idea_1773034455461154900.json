@@ -1,0 +1,8 @@
+{
+    "template": "multiply(sign(ts_delta({eps_best_eeps_cur_yr}, 20)), sign(ts_delta({sales_best_eeps_cur_yr}, 20)))",
+    "idea": "**Concept**: Multi-Metric Revision Alignment\n- **Sample Fields Used**: eps_best_eeps_cur_yr, sales_best_eeps_cur_yr\n- **Definition**: Product of signs of 20-day estimate changes for EPS and Sales (co-directionality indicator)\n- **Why This Feature**: Alignment between revenue and earnings revisions indicates consistent business momentum; divergence signals margin pressure\n- **Logical Meaning**: Directional agreement between top-line and bottom-line forecasts; +1 indicates both upgrading, -1 indicates disagreement, 0 indicates one flat\n- **is filling nan necessary**: Calculate deltas first, then signs; handle NaNs in delta by returning NaN for the product (conservative approach).\n- **Directionality**: +1 (both upgrading) bullish signal; -1 (revenue up but earnings down) bearish margin signal; 0 indicates mixed or stale data\n- **Boundary Conditions**: Persistent -1 readings indicate inflationary/cost headwinds; persistent +1 indicates operating leverage",
+    "expression_list": [
+        "multiply(sign(ts_delta(anl69_aeps_best_eeps_cur_yr, 20)), sign(ts_delta(anl69_sales_best_eeps_cur_yr, 20)))",
+        "multiply(sign(ts_delta(anl69_eps_best_eeps_cur_yr, 20)), sign(ts_delta(anl69_sales_best_eeps_cur_yr, 20)))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(subtract(1, vec_avg({lastcostingfailed})), 20)",
+    "idea": "历史分位定位：考察当前可靠性在过去20天中的历史分位（ts_rank），识别运营状态的相对改善或恶化。即使绝对水平高，若处于自身历史低位则产生负向信号，强调时序相对位置而非绝对值。",
+    "expression_list": [
+        "ts_rank(subtract(1, vec_avg(mdl209_lastcostingfailed)), 20)"
+    ]
+}

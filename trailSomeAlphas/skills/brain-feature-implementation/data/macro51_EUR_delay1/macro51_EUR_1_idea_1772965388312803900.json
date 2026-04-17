@@ -1,0 +1,7 @@
+{
+    "template": "ts_vector_neut({stoxx_europe_600_ucits_weight}, ts_delay({stoxx_europe_600_ucits_weight}, 1), 20)",
+    "idea": "**Concept**: Pure Allocation Signal\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The weight purified of its market-cap-driven component by neutralizing against the implicit market-cap benchmark, isolating active allocation decisions from passive drift\n- **Why This Feature**: At its essence, ETF weight data conflates two phenomena: (1) passive drift due to price changes, and (2) active rebalancing. This feature attempts to strip away the mechanical price effect to reveal intentional allocation.\n- **is filling nan necessary**: Yes, use ts_backfill() to ensure continuity in the neutralization process; missing data points would create discontinuities mistaken for active rebalancing\n- **Directionality**: Positive values indicate active overweight versus passive drift prediction (conviction buying); negative values indicate active underweight (conviction selling or risk management)\n- **Boundary Conditions**: Centered around zero; extreme values indicate significant active bets or index reconstitution events",
+    "expression_list": [
+        "ts_vector_neut(mcr51_ishares_stoxx_europe_600_ucits_weight, ts_delay(mcr51_ishares_stoxx_europe_600_ucits_weight, 1), 20)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_exp_window(add(multiply(0.6, ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)), multiply(0.4, ts_regression(ts_delta(winsorize(ts_backfill({exp_usa}, 63), std=4), 21), ts_delta(winsorize(ts_backfill({exp_nondomicile1}, 63), std=4), 21), 63, rettype=2))), 5)",
+    "idea": "融合残差信号（rettype=0）与敞口变动趋势信号（rettype=2，斜率），加权构建复合因子：60%权重给特质性偏离，40%权重给美国敞口相对于非本土敞口的短期动量，最后使用指数衰减窗口（ts_decay_exp_window）控制换手。",
+    "expression_list": [
+        "ts_decay_exp_window(add(multiply(0.6, ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)), multiply(0.4, ts_regression(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 21), ts_delta(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4), 21), 63, rettype=2))), 5)",
+        "ts_decay_exp_window(add(multiply(0.6, ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), 252, rettype=0)), multiply(0.4, ts_regression(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), 21), ts_delta(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4), 21), 63, rettype=2))), 5)"
+    ]
+}

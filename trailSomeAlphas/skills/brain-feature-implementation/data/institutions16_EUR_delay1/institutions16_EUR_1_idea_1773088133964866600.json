@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(ts_decay_linear(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 20), multiply(0.5, ts_regression(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), ts_step(), 63, rettype=2))), industry)",
+    "idea": "结合风险调整后配置的当前水平（经20日线性衰减平滑）与其63日趋势斜率，识别那些不仅当前配置强度高且近期持续改善的基金；通过合成水平与趋势信号，并在行业内标准化，捕捉具有动量特征的风险调整配置alpha。",
+    "expression_list": [
+        "group_zscore(add(ts_decay_linear(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 20), multiply(0.5, ts_regression(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), ts_step(), 63, rettype=2))), industry)"
+    ]
+}

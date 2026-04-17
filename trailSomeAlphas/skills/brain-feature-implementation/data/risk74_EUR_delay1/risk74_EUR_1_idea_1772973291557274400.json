@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(ts_backfill({exp_usa},63),std=4), winsorize(ts_backfill({exp_chn},63),std=4), 252, rettype=0)",
+    "idea": "以中国市场敞口为解释变量对美国敞口进行回归，提取美国敞口中无法被中国敞口解释的地缘政治对冲残差。适用于识别在中美周期错位中仍保持独立美国特质、不受中国敞口线性解释的异常公司。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa,63),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,63),std=4), 252, rettype=0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_std_dev(vec_skewness({exposure_value}), 20), sector)",
+    "idea": "地理集中度波动率的行业相对性（指标转换与分组结合）。将模板1的vec_skewness（集中度度量）与模板2的短期波动率计算及行业标准化相结合：计算地理集中度在20日窗口内的时序标准差，捕捉\"地理战略摇摆不定\"或\"频繁调整区域布局\"的公司，经行业标准化后识别行业内地理集中度最不稳定的异常个体，适用于发现战略执行缺乏定力的企业。",
+    "expression_list": [
+        "group_zscore(ts_std_dev(vec_skewness(anl91_exposure_value), 20), sector)"
+    ]
+}

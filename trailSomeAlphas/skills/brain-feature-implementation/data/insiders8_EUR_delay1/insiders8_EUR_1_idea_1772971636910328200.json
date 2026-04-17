@@ -1,0 +1,7 @@
+{
+    "template": "if_else(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector) > 0, signed_power(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), 1.8), -signed_power(abs(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector)), 1.2))",
+    "idea": "对多空两端采用非对称幂次处理：多头端使用1.8次幂强烈放大高偏离机会，空头端使用1.2次幂相对保守，利用原始差异的符号区分方向，实现多空风险收益特征的非对称表达，避免对称幂次对空头端过度惩罚。",
+    "expression_list": [
+        "if_else(group_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector) > 0, signed_power(group_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector), 1.8), -signed_power(abs(group_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector)), 1.2))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum({value_04001q}, 252)",
+    "idea": "**Concept**: Annual Earnings Accumulation\n- **Sample Fields Used**: `value_04001q`\n- **Definition**: Rolling 252-day (1-year) sum of net income starting line\n- **Why This Feature**: Captures cumulative earnings power over a fiscal period, smoothing quarterly volatility\n- **Logical Meaning**: Trailing twelve-month earnings proxy using cash flow statement starting point; measures sustained profitability\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Summing over time requires handling missing quarters; gaps should not be filled to avoid overstating cumulative earnings.\n- **Directionality**: Higher values indicate stronger cumulative earnings performance (positive)\n- **Boundary Conditions**: Negative values indicate cumulative losses; sharp changes indicate earnings inflections",
+    "expression_list": [
+        "ts_sum(fnd28_cfq_value_04001q, 252)",
+        "ts_sum(fnd28_nddq1_value_04001q, 252)"
+    ]
+}

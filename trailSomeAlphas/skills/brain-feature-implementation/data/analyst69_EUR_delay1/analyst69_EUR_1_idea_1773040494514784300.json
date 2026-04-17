@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_delta(group_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), industry), 10), 126)",
+    "idea": "先对原始日期变动间隔进行3倍标准差缩尾和20日平滑，消除噪音；随后在行业层面进行标准化，得到个股相对于同业的稳定性分位；计算该相对稳定性在10日内的动量变化（一阶差分），最后进行126日的时序Z-score标准化。捕捉“盈利预告日期安排相对同业趋于稳定的改善趋势”，同时规避行业间报告节奏差异的干扰。",
+    "expression_list": [
+        "ts_zscore(ts_delta(group_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), industry), 10), 126)",
+        "ts_zscore(ts_delta(group_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), industry), 10), 126)"
+    ]
+}

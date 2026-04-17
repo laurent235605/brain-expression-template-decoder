@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(signed_power(group_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), sector), 1.5), hump=0.01)",
+    "idea": "使用signed_power(y=1.5)对清洗后的20日资产变化进行非线性变换，放大显著流入/流出（头尾）的区分度同时保持方向性，压缩中间噪音区间的权重。先进行行业中性化(group_zscore)，再应用hump_decay(0.01)忽略微小波动以降低换手率。此模板强调“显著的资产重新配置行为”而非温和变化，适合捕捉机构资金的剧烈调仓信号。",
+    "expression_list": [
+        "hump_decay(signed_power(group_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), sector), 1.5), hump=0.01)"
+    ]
+}

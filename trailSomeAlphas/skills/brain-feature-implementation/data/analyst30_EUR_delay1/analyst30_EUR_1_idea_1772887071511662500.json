@@ -1,0 +1,8 @@
+{
+    "template": "vec_ir({adjustedgrossamt})",
+    "idea": "**Concept**: Dividend Information Ratio\n- **Sample Fields Used**: `adjustedgrossamt`\n- **Definition**: Signal-to-noise ratio of dividend payments calculated as mean divided by standard deviation\n- **Why This Feature**: Distinguishes high-quality stable income generators from volatile uncertain dividend payers; essential for risk-adjusted income analysis\n- **Logical Meaning**: Quality and reliability metric for dividend income; higher ratios indicate predictable cash flows\n- **is filling nan necessary**: Standard deviation requires sufficient non-NaN observations. Use `ts_backfill` for short gaps to maintain statistical validity, or ensure minimum data coverage before calculation\n- **Directionality**: Higher values indicate high-quality stable dividends (desirable); lower values indicate noisy uncertain payouts (risky)\n- **Boundary Conditions**: Infinity (perfect stability) to 0 (infinite volatility); values >2 indicate excellent stability",
+    "expression_list": [
+        "vec_ir(anl30_adjustedgrossamt)",
+        "vec_ir(anl30_unadjustedgrossamt)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(days_from_last_change({eps_expected_report_dt}), 5), group_zscore(subtract(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delta({eps_best_eeps_cur_yr}, 20)), industry), 0), 5)",
+    "idea": "综合group_zscore、时序平滑与条件交易的终极混合结构。首先在行业内对EPS修订的5日-20日差分进行标准化（group_zscore），然后仅在报告日期近期（>5天）未变更时激活该信号（trade_when），最后通过5日线性衰减平滑降低换手率。该结构同时解决了行业偏离、事件窗口噪音和高换手率三个问题，是稳健与激进的平衡版本。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 5), group_zscore(subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 20)), industry), 0), 5)",
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 5), group_zscore(subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delta(anl69_eps_best_eeps_cur_yr, 20)), industry), 0), 5)",
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 5), group_zscore(subtract(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delta(anl69_eps_best_eeps_cur_yr, 20)), industry), 0), 5)",
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 5), group_zscore(subtract(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 20)), industry), 0), 5)"
+    ]
+}

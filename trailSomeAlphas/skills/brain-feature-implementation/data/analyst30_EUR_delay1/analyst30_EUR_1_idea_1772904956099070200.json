@@ -1,0 +1,7 @@
+{
+    "template": "v = vec_range(vec_filter({fiscalyearend}, value=\"nan\")); days_chg = days_from_last_change(v); recency_w = hump_decay(days_chg, 30); z_level = group_zscore(v, sector); core = multiply(z_level, recency_w); trade_when(and(greater(group_rank(v, sector), 0.85), less(days_chg, 90)), signed_power(core, 1.5), 0)",
+    "idea": "结合事件驱动逻辑，利用days_from_last_change识别近期发生fiscal year-end结构调整的标的，并通过hump_decay在90天内对信号进行半衰加权；仅当分散度处于行业极端高位且近期刚发生结构变更时触发，捕捉“ newly fragmented reporting structure”的即时alpha。",
+    "expression_list": [
+        "v = vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")); days_chg = days_from_last_change(v); recency_w = hump_decay(days_chg, 30); z_level = group_zscore(v, sector); core = multiply(z_level, recency_w); trade_when(and(greater(group_rank(v, sector), 0.85), less(days_chg, 90)), signed_power(core, 1.5), 0)"
+    ]
+}

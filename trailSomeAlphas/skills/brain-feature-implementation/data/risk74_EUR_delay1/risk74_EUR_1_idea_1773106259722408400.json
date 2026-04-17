@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector)), 2), group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), 0)",
+    "idea": "基于模板1的核心背离计算，引入极端值过滤逻辑（仅当行业标准化后的背离绝对值大于2倍标准差时才保留信号），将中段噪音（-2到+2标准差区间）强制置零，实现“两端有效、中间无效”的区间结构，专注于捕捉统计上显著的机构行为分化而忽略微弱波动。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector)), 2), group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(quantile({exp_usa}, driver=\"uniform\"), 0.8), ts_decay_linear(ts_delta({hfown_pctown}, 5), 3), 0)",
+    "idea": "**交叉增强：极端地理暴露下的HF验证**\n提取模板1中quantile右尾（>80%分位）的极端美国暴露股票作为投资池，仅在此范围内启用模板2的对冲基金流速信号（经3日线性衰减平滑）。利用trade_when实现“分层过滤”：先通过地理暴露筛选出高贝塔纯美国概念股，再用HF流速确认机构是否同步加仓，避免在地理分散的防御型股票上浪费头寸。",
+    "expression_list": [
+        "trade_when(greater(quantile(rsk74_raw_exp_usa, driver=\"uniform\"), 0.8), ts_decay_linear(ts_delta(rsk74_hfown_pctown, 5), 3), 0)"
+    ]
+}

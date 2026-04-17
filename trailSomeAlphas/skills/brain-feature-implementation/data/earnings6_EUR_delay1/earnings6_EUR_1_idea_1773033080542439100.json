@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 )",
+    "idea": "条件化稳健Surprise计算。针对模板1中估计值为零或极小时的边界问题，不单纯依赖加极小值(epsilon)，而是使用trade_when显式设定阈值条件（|estimate|>0.01），仅在满足条件时计算Surprise，不满足时设为0，提高因子的纯净度与解释性。",
+    "expression_list": [
+        "trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 )",
+        "trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 )"
+    ]
+}

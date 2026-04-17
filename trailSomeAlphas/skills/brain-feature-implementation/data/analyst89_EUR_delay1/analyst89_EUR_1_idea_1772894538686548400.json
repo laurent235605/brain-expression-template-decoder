@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(days_from_last_change(vec_avg({fiscal_period_end})), 252)",
+    "idea": "**Concept**: Reporting Continuity Essence\n- **Sample Fields Used**: fiscal_period_end\n- **Definition**: Average days between consecutive valid fiscal period ends, measuring the fundamental reporting cadence of the entity\n- **Why This Feature**: The reporting frequency (quarterly vs annual) and regularity are fundamental characteristics of corporate transparency; this captures the essence of information flow velocity from the company to investors\n- **Logical Meaning**: The intrinsic pace of financial disclosure; a measure of information generation and transparency frequency\n- **is filling nan necessary**: No, gaps in reporting are meaningful and should not be filled; they represent periods of opacity\n- **Directionality**: Lower values (~90) indicate frequent quarterly reporting (high transparency); higher values (~365) indicate annual reporting (low transparency); irregular values indicate inconsistent disclosure\n- **Boundary Conditions**: 30 = monthly reporting (unusual for financials, common for operational metrics); 90 = standard quarterly; 365 = annual; >400 indicates skipped reporting periods",
+    "expression_list": [
+        "ts_mean(days_from_last_change(vec_avg(anl89_fiscal_period_end)), 252)"
+    ]
+}

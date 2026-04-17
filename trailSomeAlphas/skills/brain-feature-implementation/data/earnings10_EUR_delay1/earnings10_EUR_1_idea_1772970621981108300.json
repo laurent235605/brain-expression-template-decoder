@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(vec_stddev({aily_delta_recon_value}), ts_mean(vec_stddev({aily_delta_recon_value}), 20)), multiply(group_zscore(winsorize(vec_avg({elta_value}), std=4), industry), sign(ts_mean(winsorize(vec_avg({aily_delta_recon_value}), std=4), 5))), 0)",
+    "idea": "引入向量标准差(vec_stddev)作为\"共识集中度\"过滤器：仅当近期修订向量的离散度低于其20日均值（表明分析师分歧小、共识集中）时才开仓，回避高分歧的不确定性状态。在满足共识集中条件下，结合行业相对预期水平与5日平滑修订方向，捕捉\"一致预期下的方向性动量\"，降低因分析师意见分歧导致的信号反转风险。",
+    "expression_list": [
+        "trade_when(less(vec_stddev(ern10_aily_delta_recon_value), ts_mean(vec_stddev(ern10_aily_delta_recon_value), 20)), multiply(group_zscore(winsorize(vec_avg(ern10_elta_value), std=4), industry), sign(ts_mean(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 5))), 0)"
+    ]
+}

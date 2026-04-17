@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_delta({stoxx_europe_600_ucits_weight}, 5), 5)",
+    "idea": "**Concept**: Weight Momentum Acceleration\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The second derivative of weight over time (change of change), capturing acceleration in portfolio allocation shifts beyond simple trend\n- **Why This Feature**: First-order changes (deltas) capture rebalancing, but acceleration captures urgency—sudden increases in the pace of weight change indicate decisive fund actions or momentum breakouts\n- **is filling nan necessary**: Yes, use ts_backfill() before calculating deltas to avoid interpreting data gaps as dramatic shifts, which would create spurious acceleration signals\n- **Directionality**: Positive values indicate increasing accumulation rate (buying acceleration); negative values indicate increasing divestment rate (selling acceleration)\n- **Boundary Conditions**: Extreme values occur during index reconstitutions or corporate actions (spin-offs, mergers)",
+    "expression_list": [
+        "ts_delta(ts_delta(mcr51_ishares_stoxx_europe_600_ucits_weight, 5), 5)"
+    ]
+}

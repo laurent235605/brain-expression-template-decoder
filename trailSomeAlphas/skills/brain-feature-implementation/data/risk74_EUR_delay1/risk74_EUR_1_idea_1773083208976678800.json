@@ -1,0 +1,8 @@
+{
+    "template": "subtract(winsorize(ts_backfill({concentration}, 10), std=4), ts_mean(winsorize(ts_backfill({concentration}, 10), std=4), 60))",
+    "idea": "融合模板1的数据清洗规范（ts_backfill填补季度滞后+winsorize截尾）与模板2的均值偏离逻辑。对{concentration}先进行63天回填充和4倍标准差截尾处理，再计算与60日均值的偏离，得到更稳健的地理集中度突变信号，减少极端值和缺失数据导致的假阳性。",
+    "expression_list": [
+        "subtract(winsorize(ts_backfill(rsk74_concentration, 10), std=4), ts_mean(winsorize(ts_backfill(rsk74_concentration, 10), std=4), 60))",
+        "subtract(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), ts_mean(winsorize(ts_backfill(rsk74_raw_concentration, 10), std=4), 60))"
+    ]
+}

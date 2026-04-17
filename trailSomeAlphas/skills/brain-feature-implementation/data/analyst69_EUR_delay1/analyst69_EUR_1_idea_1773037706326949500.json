@@ -1,0 +1,10 @@
+{
+    "template": "subtract(quantile(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), driver=\"gaussian\"), quantile(rank(days_from_last_change({eps_expected_report_dt})), driver=\"gaussian\"))",
+    "idea": "**高斯分位组合极化**：先对两个信号进行rank标准化，再通过quantile映射到高斯分布(driver=\"gaussian\")。此操作将中间区间压缩至0附近，将\"高修正+高稳定\"的右尾与\"低修正+低稳定\"的左尾大幅拉开距离。相比线性组合，该模板更强调极端状态的区分度，适合捕捉尾部alpha。",
+    "expression_list": [
+        "subtract(quantile(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), driver=\"gaussian\"), quantile(rank(days_from_last_change(anl69_aeps_expected_report_dt)), driver=\"gaussian\"))",
+        "subtract(quantile(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), driver=\"gaussian\"), quantile(rank(days_from_last_change(anl69_aeps_expected_report_dt)), driver=\"gaussian\"))",
+        "subtract(quantile(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), driver=\"gaussian\"), quantile(rank(days_from_last_change(anl69_eps_expected_report_dt)), driver=\"gaussian\"))",
+        "subtract(quantile(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), driver=\"gaussian\"), quantile(rank(days_from_last_change(anl69_eps_expected_report_dt)), driver=\"gaussian\"))"
+    ]
+}

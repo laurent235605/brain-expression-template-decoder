@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_exp_window(ts_backfill(vec_stddev({version}), 63), 20, factor=0.1), industry)",
+    "idea": "先计算版本向量的标准差（衡量分析师版本更新的分歧度或活跃度），使用63天回溯填补确保时间序列连续性，应用短周期指数衰减（20天，因子0.1）捕捉近期波动趋势，最后进行行业中性zscore标准化，得到行业相对的版本波动溢价，高值表明该股票近期在行业内有异常的版本更新波动。",
+    "expression_list": [
+        "group_zscore(ts_decay_exp_window(ts_backfill(vec_stddev(anl85_version), 63), 20, factor=0.1), industry)"
+    ]
+}

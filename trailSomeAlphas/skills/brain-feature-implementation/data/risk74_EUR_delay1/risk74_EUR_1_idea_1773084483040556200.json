@@ -1,0 +1,14 @@
+{
+    "template": "subtract(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252), ts_zscore(winsorize({crowding}, std=4), 252))",
+    "idea": "构建空头利息动量与拥挤度水平的背离信号：计算源2的空头累积Z-score与源1拥挤度Z-score的差值。正值表示'空头堆积但市场未充分拥挤'（潜在下跌），负值表示'空头回补但市场仍拥挤'（潜在轧空），捕捉两者不同步的套利机会。",
+    "expression_list": [
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), ts_zscore(winsorize(rsk74_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), ts_zscore(winsorize(rsk74_raw_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), ts_zscore(winsorize(liquidity_factor_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252), ts_zscore(winsorize(liquidity_timeseries_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), ts_zscore(winsorize(rsk74_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), ts_zscore(winsorize(rsk74_raw_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), ts_zscore(winsorize(liquidity_factor_crowding, std=4), 252))",
+        "subtract(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252), ts_zscore(winsorize(liquidity_timeseries_crowding, std=4), 252))"
+    ]
+}

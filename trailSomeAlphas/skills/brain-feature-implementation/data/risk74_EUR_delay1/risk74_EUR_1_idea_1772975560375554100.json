@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(multiply(ts_zscore({value_ts}, 63), winsorize(add(add({factor_e}, {factor_s}), {factor_g}), 4)), industry)",
+    "idea": "**交叉增强逻辑**: 直接将价值时序zscore与ESG总和相乘（Input 1的乘法结构应用于Input 2的加和因子），然后通过`group_normalize`在每个行业内进行多空平衡（第6步交易约束）。`winsorize`预处理ESG数据以处理Input 2提到的低覆盖率极端值（第0.1步清洗）。该模板寻找\"基本面ESG强且价值处于历史高位\"的行业内相对赢家，同时控制行业暴露。",
+    "expression_list": [
+        "group_normalize(multiply(ts_zscore(rsk74_value_ts, 63), winsorize(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), 4)), industry)",
+        "group_normalize(multiply(ts_zscore(rsk74_value_ts, 63), winsorize(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), 4)), industry)"
+    ]
+}

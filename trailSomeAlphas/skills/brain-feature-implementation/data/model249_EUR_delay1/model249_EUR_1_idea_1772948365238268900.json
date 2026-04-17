@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({quintile}), 60)",
+    "idea": "**Concept**: Quintile Stability Coefficient\n- **Sample Fields Used**: `mdl249_quintile`\n- **Definition**: The rolling standard deviation of quintile rankings over 60 days, measuring stability of classification\n- **Why This Feature**: Stocks that maintain consistent quintile rankings (especially in top quintile) exhibit structural characteristics of acquisition targets, whereas volatile quintiles suggest model uncertainty or rapidly changing conditions\n- **is filling nan necessary**: Yes, quintile changes are significant events. Use `ts_backfill(vec_avg({quintile}), 3)` to handle temporary gaps without obscuring genuine quintile changes.\n- **Logical Meaning**: Inverse measure of classification uncertainty; stable quintiles suggest genuine structural features rather than model noise\n- **Directionality**: Lower values (high stability) in top quintiles indicate persistent targets; high volatility in any quintile suggests uncertainty\n- **Boundary Conditions**: 0 indicates no quintile change for 60 days (extreme stability); values > 1.0 indicate frequent quintile hopping (instability)",
+    "expression_list": [
+        "ts_std_dev(vec_avg(mdl249_quintile), 60)"
+    ]
+}

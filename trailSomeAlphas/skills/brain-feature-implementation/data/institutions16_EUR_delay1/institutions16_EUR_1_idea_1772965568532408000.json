@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({reported_asset_value}, 20)",
+    "idea": "**Concept**: Asset Flow Momentum\n- **Sample Fields Used**: `reported_asset_value`\n- **Definition**: 20-day change in total reported assets, capturing net flows plus valuation changes\n- **Why This Feature**: Rapid asset growth indicates popularity and potential capacity constraints; rapid decline suggests redemptions, underperformance, or sector rotation away from the strategy\n- **Logical Meaning**: Combines investment performance with investor sentiment (flows); positive values suggest capital attraction, negative values suggest exodus\n- **is filling nan necessary**: Yes, institutional AUM reports often have gaps; use `ts_backfill(lookback=5)` to bridge short gaps but preserve discontinuities for longer periods\n- **Directionality**: Positive values indicate asset gathering (momentum), negative values indicate asset loss (contraction)\n- **Boundary Conditions**: Extreme positive values may indicate merger/acquisition; extreme negative values suggest fund liquidation or massive redemption",
+    "expression_list": [
+        "ts_delta(fund_reported_asset_value, 20)"
+    ]
+}

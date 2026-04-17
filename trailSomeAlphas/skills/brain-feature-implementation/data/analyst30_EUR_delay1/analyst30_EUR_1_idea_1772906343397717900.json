@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( quantile( vec_avg({adjustedgrossamt}), driver=\"gaussian\" ), industry )",
+    "idea": "极端值压缩股息信号：针对股息数据右偏分布及可能存在的极端特殊股息，使用高斯分位数变换(quantile)将原始分布映射为正态分布，压缩极端尾部值的影响，同时放大中间区间的区分度。相比简单截断(winsorize)，该方法保留更多样本信息并进行行业中性化，适合识别\"合理高股息\"而非异常值。",
+    "expression_list": [
+        "group_zscore( quantile( vec_avg(anl30_adjustedgrossamt), driver=\"gaussian\" ), industry )",
+        "group_zscore( quantile( vec_avg(anl30_unadjustedgrossamt), driver=\"gaussian\" ), industry )"
+    ]
+}

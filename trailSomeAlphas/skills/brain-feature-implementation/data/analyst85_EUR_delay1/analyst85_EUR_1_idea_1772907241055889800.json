@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(bucket(rank(vec_stddev({version})), range='0,1,0.2'), 0.8), zscore(ts_delta(vec_avg({version}), 5)), 0), 5)",
+    "idea": "分桶分歧事件捕捉：将分歧度按分位数分桶（参考头尾信号逻辑），仅在极高分歧区间（前20%）捕捉共识变化信号，结合5日衰减平滑事件冲击，避免频繁调仓。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(bucket(rank(vec_stddev(anl85_version)), range='0,1,0.2'), 0.8), zscore(ts_delta(vec_avg(anl85_version), 5)), 0), 5)"
+    ]
+}

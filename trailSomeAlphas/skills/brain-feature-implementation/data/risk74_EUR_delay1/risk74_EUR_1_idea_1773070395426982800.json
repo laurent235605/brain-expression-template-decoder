@@ -1,0 +1,8 @@
+{
+    "template": "group_normalize(if_else(greater(ts_rank({cap},21),0.8), trade_when(greater(abs(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),10),std=4),126)),1.5), ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),10),std=4),126), NaN), NaN),industry)",
+    "idea": "大盘极端异动专用：限制在市值前20%的大盘股中，且仅当空头10日累积变化处于历史1.5倍标准差以外时才交易，最后进行行业内归一化。结合流动性筛选(大盘)与统计极端性双重过滤，专注捕捉流动性好的大市值股票中'罕见'的空头结构性变化。",
+    "expression_list": [
+        "group_normalize(if_else(greater(ts_rank(market_cap_usd,21),0.8), trade_when(greater(abs(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),10),std=4),126)),1.5), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),10),std=4),126), NaN), NaN),industry)",
+        "group_normalize(if_else(greater(ts_rank(market_cap_usd,21),0.8), trade_when(greater(abs(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),10),std=4),126)),1.5), ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),10),std=4),126), NaN), NaN),industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), 0.5)",
+    "idea": "极端背离信号的非线性放大：融合模板1的机构流差分逻辑与模板2的signed_power(0.5)尾部放大技术，直接对行业中性化的流偏离度进行根号压缩，极度放大两端极端背离信号（对冲基金极度增持且公募极度减持的标的），同时压缩中段噪音，适用于捕捉极端聪明钱行为。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), 0.5)"
+    ]
+}

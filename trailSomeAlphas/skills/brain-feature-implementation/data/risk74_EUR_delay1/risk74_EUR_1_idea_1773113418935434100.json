@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 20), std=4), 252)",
+    "idea": "融合模板2的累计资金流（ts_sum+ts_delta）与模板1的历史极端识别（ts_zscore+252日窗口），先对20日累计持仓变化进行winsorize极值处理，再计算其252日时间序列ZScore，识别资金流入/流出强度的历史极端偏离，适用于捕捉持续资金压力后的反转点。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), std=4), 252)"
+    ]
+}

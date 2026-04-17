@@ -1,0 +1,8 @@
+{
+    "template": "subtract({eps_best_eeps_cur_yr}, ts_delay({eps_best_eeps_cur_yr}, 63))",
+    "idea": "**Concept**: Long-Term Estimate Drift\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: 63-day difference in current year estimates capturing persistent drift vs. short-term noise\n- **Why This Feature**: Quarterly horizon aligns with fiscal reporting; distinguishes trend from temporary volatility\n- **Logical Meaning**: Persistent bias in analyst revisions; drift indicates information diffusion or slow-moving sentiment changes\n- **is filling nan necessary**: 63-day lookback requires ts_backfill(63) to ensure valid prior values for illiquid names in EUR universe.\n- **Directionality**: Positive indicates ongoing upgrades (momentum); negative indicates ongoing downgrades (value trap risk)\n- **Boundary Conditions**: Values exceeding 10% of stock price indicate significant forecast changes; check for earnings events or guidance shifts",
+    "expression_list": [
+        "subtract(anl69_aeps_best_eeps_cur_yr, ts_delay(anl69_aeps_best_eeps_cur_yr, 63))",
+        "subtract(anl69_eps_best_eeps_cur_yr, ts_delay(anl69_eps_best_eeps_cur_yr, 63))"
+    ]
+}

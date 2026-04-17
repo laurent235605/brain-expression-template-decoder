@@ -1,0 +1,24 @@
+{
+    "template": "if_else(abs({roe}) > 0.01, {pe_secs} / {roe}, 0)",
+    "idea": "**Concept**: Valuation-Adjusted Quality Spread\n- **Sample Fields Used**: pe_secs, roe\n- **Definition**: Price-to-earnings ratio normalized by return on equity; measures price paid per unit of accounting return (P/E-to-ROE or inverse PEG-like metric)\n- **Why This Feature**: Combines valuation and quality into single efficiency metric; low values indicate \"cheap\" quality, high values indicate overvaluation of returns\n- **Logical Meaning**: Market price per unit of fundamental performance; value-for-money assessment\n- **is filling nan necessary**: Both fields required simultaneously; roe near zero creates extreme outliers requiring winsorization or if_else handling; ts_backfill for individual gaps\n- **Directionality**: Lower values = more attractive valuation-adjusted quality; Higher values = expensive relative to return generation\n- **Boundary Conditions**: Negative roe creates negative values (meaningless); should be NaN'd out or reversed; typical range 0-50 for normal operations",
+    "expression_list": [
+        "if_else(abs(fnd8_1af_matrix_ff_roe) > 0.01, fnd8_1af_matrix_ff_pe_secs / fnd8_1af_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_1qf_matrix_ff_roe) > 0.01, fnd8_1af_matrix_ff_pe_secs / fnd8_1qf_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_af_matrix_ff_roe) > 0.01, fnd8_1af_matrix_ff_pe_secs / fnd8_af_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_basicder_1qf_matrix_ff_roe_nugget) > 0.01, fnd8_1af_matrix_ff_pe_secs / fnd8_basicder_1qf_matrix_ff_roe_nugget, 0)",
+        "if_else(abs(fnd8_basicder_1qf_matrix_ff_roe_rav) > 0.01, fnd8_1af_matrix_ff_pe_secs / fnd8_basicder_1qf_matrix_ff_roe_rav, 0)",
+        "if_else(abs(fnd8_qf_matrix_ff_roe) > 0.01, fnd8_1af_matrix_ff_pe_secs / fnd8_qf_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_1qf_matrix_ff_roe) > 0.01, fnd8_1qf_matrix_ff_pe_secs / fnd8_1qf_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_1af_matrix_ff_roe) > 0.01, fnd8_1qf_matrix_ff_pe_secs / fnd8_1af_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_af_matrix_ff_roe) > 0.01, fnd8_1qf_matrix_ff_pe_secs / fnd8_af_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_basicder_1qf_matrix_ff_roe_nugget) > 0.01, fnd8_1qf_matrix_ff_pe_secs / fnd8_basicder_1qf_matrix_ff_roe_nugget, 0)",
+        "if_else(abs(fnd8_basicder_1qf_matrix_ff_roe_rav) > 0.01, fnd8_1qf_matrix_ff_pe_secs / fnd8_basicder_1qf_matrix_ff_roe_rav, 0)",
+        "if_else(abs(fnd8_qf_matrix_ff_roe) > 0.01, fnd8_1qf_matrix_ff_pe_secs / fnd8_qf_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_qf_matrix_ff_roe) > 0.01, fnd8_qf_matrix_ff_pe_secs / fnd8_qf_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_1af_matrix_ff_roe) > 0.01, fnd8_qf_matrix_ff_pe_secs / fnd8_1af_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_1qf_matrix_ff_roe) > 0.01, fnd8_qf_matrix_ff_pe_secs / fnd8_1qf_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_af_matrix_ff_roe) > 0.01, fnd8_qf_matrix_ff_pe_secs / fnd8_af_matrix_ff_roe, 0)",
+        "if_else(abs(fnd8_basicder_1qf_matrix_ff_roe_nugget) > 0.01, fnd8_qf_matrix_ff_pe_secs / fnd8_basicder_1qf_matrix_ff_roe_nugget, 0)",
+        "if_else(abs(fnd8_basicder_1qf_matrix_ff_roe_rav) > 0.01, fnd8_qf_matrix_ff_pe_secs / fnd8_basicder_1qf_matrix_ff_roe_rav, 0)"
+    ]
+}

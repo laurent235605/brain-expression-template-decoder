@@ -1,0 +1,7 @@
+{
+    "template": "hump(group_rank(ts_decay_linear(add(multiply(0.6, ts_zscore(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 252)), multiply(0.4, ts_zscore(ts_delta(ts_skewness(winsorize(vec_avg({data_item_value}), std=4), 252), 63), 126))), 5), sector), hump=0.02)",
+    "idea": "复合偏度状态衰减加权动量：融合偏度绝对水平（长期Z-score，60%权重）与短期变化速率（126日变化Z-score，40%权重），使用5日线性衰减加权强调近期信息，经行业内排名后通过hump算子控制日度权重波动（忽略小于2%的变化），在保持响应速度的同时降低换手率。",
+    "expression_list": [
+        "hump(group_rank(ts_decay_linear(add(multiply(0.6, ts_zscore(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 252)), multiply(0.4, ts_zscore(ts_delta(ts_skewness(winsorize(vec_avg(anl89_data_item_value), std=4), 252), 63), 126))), 5), sector), hump=0.02)"
+    ]
+}

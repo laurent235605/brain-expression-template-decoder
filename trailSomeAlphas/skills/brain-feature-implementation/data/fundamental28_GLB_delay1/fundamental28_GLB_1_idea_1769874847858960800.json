@@ -1,0 +1,10 @@
+{
+    "template": "regression_neut({value_08251q}, {value_02300q})",
+    "idea": "**Concept**: Coverage Neutralized for Size\n- **Sample Fields Used**: `value_08251q`, `value_02300q`\n- **Definition**: Residual of fixed charge coverage after regressing on total assets (size)\n- **Why This Feature**: Distinguishes coverage due to operational efficiency from coverage due to scale economies or diversification\n- **Logical Meaning**: Coverage ratio independent of company size; identifies efficiently managed small caps vs bloated large caps\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Regression requires paired observations; missing either variable should result in NaN residual.\n- **Directionality**: Positive residuals indicate better coverage than size predicts (operational alpha)\n- **Boundary Conditions**: Extreme residuals indicate outliers in coverage-to-size relationship (niche business models)",
+    "expression_list": [
+        "regression_neut(fnd28_newq_value_08251q, fnd28_nddq1_value_02300q)",
+        "regression_neut(fnd28_newq_value_08251q, fnd28_bsassetq_value_02300q)",
+        "regression_neut(fnd28_ratesq_value_08251q, fnd28_bsassetq_value_02300q)",
+        "regression_neut(fnd28_ratesq_value_08251q, fnd28_nddq1_value_02300q)"
+    ]
+}

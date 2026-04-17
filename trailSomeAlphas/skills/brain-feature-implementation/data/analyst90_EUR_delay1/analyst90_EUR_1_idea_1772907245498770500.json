@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); regime = greater(vol_clean, ts_mean(vol_clean, 252)); level_short = zscore(ts_mean(b, 20)); level_long = zscore(ts_mean(b, 60)); core = if_else(regime, level_short, multiply(level_long, 0.5)); group_normalize(core, industry)",
+    "idea": "构建自适应平滑机制：根据当前稳定度是否高于年度均值（regime）动态选择likelihood计算窗口。高稳定状态下使用短期均值（20日）捕捉最新变化，低稳定状态下使用长期均值（60日）并打折，兼顾信号响应速度与噪音过滤。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); regime = greater(vol_clean, ts_mean(vol_clean, 252)); level_short = zscore(ts_mean(b, 20)); level_long = zscore(ts_mean(b, 60)); core = if_else(regime, level_short, multiply(level_long, 0.5)); group_normalize(core, industry)"
+    ]
+}

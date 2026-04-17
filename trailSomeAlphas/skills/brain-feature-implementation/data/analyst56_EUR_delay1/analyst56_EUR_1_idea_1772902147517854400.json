@@ -1,0 +1,9 @@
+{
+    "template": "quantile(ts_delta(vec_avg({probability}), 5), driver=\"gaussian\", sigma=1.0)",
+    "idea": "融合横截面高斯分位数与时序动量：先计算信念概率的5日变化率，再将其转换为高斯分布分位数，识别\"加速强化中的极端信念\"",
+    "expression_list": [
+        "quantile(ts_delta(vec_avg(anl56_daily_probability), 5), driver=\"gaussian\", sigma=1.0)",
+        "quantile(ts_delta(vec_avg(anl56_probability), 5), driver=\"gaussian\", sigma=1.0)",
+        "quantile(ts_delta(vec_avg(conviction_probability_score), 5), driver=\"gaussian\", sigma=1.0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(trade_when(greater(abs(divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120)))), 2.5), divide(ts_av_diff(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120))), 0), 1.5)",
+    "idea": "**极端尾部事件放大器**: 仅关注统计上显著的极端流动性事件(|Z|>2.5)，使用trade_when将中间区间(|Z|<2.5)置零视为噪音；对捕捉到的极端值使用signed_power(y=1.5)非线性放大尾部信号，增强对极端流动性压力(多头或空头)的暴露；分母添加极小值防止除零错误。",
+    "expression_list": [
+        "signed_power(trade_when(greater(abs(divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120)))), 2.5), divide(ts_av_diff(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120), add(0.0001, ts_std_dev(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120))), 0), 1.5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), add(1, multiply(0.3, s_log_1p(winsorize(add(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), multiply(0.5, group_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), industry))), std=2)))))",
+    "idea": "双时间窗口历史分位增强：结合5日短期与20日长期修正趋势，经行业标准化后以2:1加权相加，再经2倍标准差截断后使用s_log_1p进行对数压缩，既保留正负方向信息又防止极端值过度影响，形成趋势持续叠加近期加速的复合从属信号。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.3, s_log_1p(winsorize(add(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), multiply(0.5, group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), industry))), std=2)))))",
+        "multiply(group_zscore(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), industry), add(1, multiply(0.3, s_log_1p(winsorize(add(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), multiply(0.5, group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), industry))), std=2)))))"
+    ]
+}

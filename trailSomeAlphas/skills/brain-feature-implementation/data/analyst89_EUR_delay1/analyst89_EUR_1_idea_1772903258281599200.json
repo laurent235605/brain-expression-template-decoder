@@ -1,0 +1,5 @@
+{
+    "template": "signed_power(group_zscore(trade_when(greater(abs(ts_skewness(vec_avg({data_item_value}), 126)), 1.2), ts_skewness(vec_avg({data_item_value}), 126), 0), {industry}), 2)",
+    "idea": "极端偏度聚焦与行业中性的结合：仅当分布偏度绝对值超过1.2（显著非对称）时才生成信号，通过行业中性的z-score标准化消除行业固有偏度差异，并使用2次幂变换放大尾部极端偏离，捕捉极端不对称性下的风险与机遇。",
+    "expression_list": []
+}

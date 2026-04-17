@@ -1,0 +1,7 @@
+{
+    "template": "({hfown_pctown} / {hfown_numown}) - ts_mean(({hfown_pctown} / {hfown_numown}), 60)",
+    "idea": "**Concept**: Ownership Dispersion Anomaly\n- **Sample Fields Used**: `hfown_pctown`, `hfown_numown`, `fund_num_owners_encr`\n- **Definition**: Deviation between percentage ownership and number of holders (concentrated vs. distributed HF ownership) relative to historical norms\n- **Why This Feature**: Few funds with large positions (concentrated) behaves differently than many funds with small positions (distributed) despite same aggregate percentage\n- **Logical Meaning**: High values indicate concentrated ownership (few large holders = higher liquidation risk); low values indicate distributed ownership\n- **is filling nan necessary**: No, both fields typically update together; independent NaNs should remain to avoid false signals\n- **Directionality**: High = concentrated risk (dangerous); Low = diversified HF ownership (safer); Normal = balanced\n- **Boundary Conditions**: Extreme concentration suggests \"clipping\" risk if one large holder exits; extreme distribution suggests index-like ownership",
+    "expression_list": [
+        "(rsk74_hfown_pctown / rsk74_hfown_numown) - ts_mean((rsk74_hfown_pctown / rsk74_hfown_numown), 60)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(ts_regression(winsorize(group_backfill({of_owners_decile_rank_long},sector,63),std=4), winsorize(group_backfill({owners_decile_rank_long},sector,63),std=4), 60, rettype=0), sector), 3), 10)",
+    "idea": "非线性增强与低换手平滑（幂变换+衰减）：对行业中性化残差进行三次幂变换（signed_power, y=3），极度放大极端异常值（无论正负）的贡献，同时压缩接近0的噪音区间；随后应用10日线性衰减（ts_decay_linear），降低短期波动导致的换手率，使策略更专注于捕捉具有持续性的中长期所有权结构偏离，平衡信号强度与交易成本。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), sector), 3), 10)",
+        "ts_decay_linear(signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), sector), 3), 10)",
+        "ts_decay_linear(signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), sector), 3), 10)",
+        "ts_decay_linear(signed_power(group_zscore(ts_regression(winsorize(group_backfill(insd8_total_number_of_owners_decile_rank_long,sector,63),std=4), winsorize(group_backfill(insd8_effective_number_of_owners_decile_rank_long,sector,63),std=4), 60, rettype=0), sector), 3), 10)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(trade_when(less(ts_std_dev({shortint}, 20), 0.05), winsorize(ts_sum(ts_delta({shortint},1),15), std=4), 0), industry)",
+    "idea": "将数据质量验证逻辑迁移至空头数据稳定性检验：仅当过去20日空头数据的波动率低于5%（确保数据稳定可靠）时，才计算15日累积空头变化，并在行业内标准化，剔除高噪声时段的交易。",
+    "expression_list": [
+        "group_zscore(trade_when(less(ts_std_dev(rsk74_shortint, 20), 0.05), winsorize(ts_sum(ts_delta(rsk74_shortint,1),15), std=4), 0), industry)",
+        "group_zscore(trade_when(less(ts_std_dev(rsk74_shortint_ts, 20), 0.05), winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15), std=4), 0), industry)"
+    ]
+}

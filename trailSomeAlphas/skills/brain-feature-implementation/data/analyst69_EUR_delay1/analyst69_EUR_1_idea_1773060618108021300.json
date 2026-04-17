@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(greater(days_from_last_change({eps_expected_report_dt}), 90), 1, if_else(less(days_from_last_change({eps_expected_report_dt}), 5), -1, 0)), industry), 5)",
+    "idea": "将模板1的行业归一化三态结果通过5日线性衰减(ts_decay_linear)进行平滑处理。在保留极端信号（±1）识别能力的同时，降低因报告日期变更天数微小波动导致的组合高频换手，实现信号稳定性与交易执行成本的平衡。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(greater(days_from_last_change(anl69_aeps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), -1, 0)), industry), 5)",
+        "ts_decay_linear(group_normalize(if_else(greater(days_from_last_change(anl69_eps_expected_report_dt), 90), 1, if_else(less(days_from_last_change(anl69_eps_expected_report_dt), 5), -1, 0)), industry), 5)"
+    ]
+}

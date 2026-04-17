@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_sum(signed_power(vec_avg({aily_delta_recon_value}), 2), 20), ts_mean(ts_sum(signed_power(vec_avg({aily_delta_recon_value}), 2), 20), 60)), ts_sum(vec_avg({aily_delta_recon_value}), 20), 0)",
+    "idea": "**波动率过滤的条件交易**：融合两个模板构建“信息流量门槛”逻辑。仅当模板1计算的20日修订波动率超过其60日历史均值时（高信息流量期），才启用模板2的方向性信号；否则仓位为0。此结构有效过滤低波动噪音区间，仅在分析师意见激烈变动期下注。",
+    "expression_list": [
+        "trade_when(greater(ts_sum(signed_power(vec_avg(ern10_aily_delta_recon_value), 2), 20), ts_mean(ts_sum(signed_power(vec_avg(ern10_aily_delta_recon_value), 2), 20), 60)), ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), 0)"
+    ]
+}

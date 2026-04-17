@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(if_else(less(days_from_last_change(winsorize(ts_backfill({exp_usa}, 21), std=4)), 60), subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), last_diff_value(winsorize(ts_backfill({exp_usa}, 21), std=4), 252)), 0), industry), ts_decay_exp_window(s_log_1p(ts_zscore(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 252)), 10))",
+    "idea": "事件驱动更新过滤：利用days_from_last_change筛选最近60天内发生过数据更新的标的，以last_diff_value捕捉最新变化幅度作为截面信号，结合历史分位的指数衰减平滑，形成'近期更新+历史高位'的双重确认，有效剔除 stale 数据造成的虚假信号。",
+    "expression_list": [
+        "multiply(group_zscore(if_else(less(days_from_last_change(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 60), subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), last_diff_value(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 252)), 0), industry), ts_decay_exp_window(s_log_1p(ts_zscore(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 252)), 10))"
+    ]
+}

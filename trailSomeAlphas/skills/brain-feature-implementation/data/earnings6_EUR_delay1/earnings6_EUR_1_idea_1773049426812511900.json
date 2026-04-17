@@ -1,0 +1,8 @@
+{
+    "template": "divide( multiply( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), vec_ir({actual_eps}) ), add(ts_mean(ts_backfill(multiply(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), vec_ir({actual_eps})), 5), 252), 0.001) )",
+    "idea": "离散度加权的EPS Surprise持续性：引入向量信息比率（vec_ir）作为置信度权重，对那些盈利surprise内部波动小、信号稳定性高的标的赋予更高权重，构建'质量调整后'的持续性比率，融合向量统计特征（vec_ir代替简单vec_avg）与时序persistence框架，降低高波动噪音标的的干扰。",
+    "expression_list": [
+        "divide( multiply( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), vec_ir(ern6_actual_eps) ), add(ts_mean(ts_backfill(multiply(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), vec_ir(ern6_actual_eps)), 5), 252), 0.001) )",
+        "divide( multiply( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), vec_ir(ern6_actual_eps_274) ), add(ts_mean(ts_backfill(multiply(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), vec_ir(ern6_actual_eps_274)), 5), 252), 0.001) )"
+    ]
+}

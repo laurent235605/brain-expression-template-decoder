@@ -1,0 +1,7 @@
+{
+    "template": "({active_weight_decile_rank_long} - {active_weight_decile_rank_short}) / ({active_weight_decile_rank_long} + {active_weight_decile_rank_short} + 1)",
+    "idea": "**Concept**: Long-Short Conviction Asymmetry\n- **Sample Fields Used**: active_weight_decile_rank_long, active_weight_decile_rank_short\n- **Definition**: Difference between long-side and short-side active weight deciles, normalized by their sum, creating a bounded asymmetry score\n- **Why This Feature**: Captures directional imbalance in conviction intensity; markets are often asymmetric due to short constraints, and this measures where the \"smart money\" has more freedom of action\n- **is filling nan necessary**: If short data is missing (common for non-shortable stocks), treat as zero short interest (decile 1).\n- **Directionality**: Values near +1 indicate strong long conviction with weak short conviction; near -1 indicates the reverse; near 0 indicates balanced active positioning\n- **Boundary Conditions**: Division by zero when both are zero; handle with additive constant",
+    "expression_list": [
+        "(insd8_active_weight_decile_rank_long - insd8_active_weight_decile_rank_short) / (insd8_active_weight_decile_rank_long + insd8_active_weight_decile_rank_short + 1)"
+    ]
+}

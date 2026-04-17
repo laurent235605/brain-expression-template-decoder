@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize(vec_avg({elta_value}),std=4),industry), ts_delta(sign(winsorize(vec_avg({aily_delta_recon_value}),std=4)), 5)), 10)",
+    "idea": "修正动量加速模型：使用时序差分（ts_delta）捕捉修正方向符号的5日变化量，识别方向改变的加速度（而非绝对方向），与行业标准化后的预期水平交互。该模板专门捕捉预期修正正在加速的拐点时刻（如从持平突变为大幅上调），适用于事件驱动型的动量加速识别。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(vec_avg(ern10_elta_value),std=4),industry), ts_delta(sign(winsorize(vec_avg(ern10_aily_delta_recon_value),std=4)), 5)), 10)"
+    ]
+}

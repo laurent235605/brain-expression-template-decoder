@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( winsorize( ({hfown_pctown} / {hfown_numown}) - ts_mean( ({hfown_pctown} / {hfown_numown}), 60 ), std=4 ), industry )",
+    "idea": "行业中性化与历史均值偏离：先计算持仓集中度比率（平均每机构持股比例）相对其60日历史均值的偏离，进行4倍标准差截尾处理以剔除极端脏数据，最后在行业内部进行标准化（Z-Score）。该模板剥离了不同行业天然的持股结构差异（如金融股通常机构多且分散，科技股可能集中），捕捉行业内相对于自身历史的异常集中度风险，适用于行业轮动场景下的相对风险比较。",
+    "expression_list": [
+        "group_zscore( winsorize( (rsk74_hfown_pctown / rsk74_hfown_numown) - ts_mean( (rsk74_hfown_pctown / rsk74_hfown_numown), 60 ), std=4 ), industry )"
+    ]
+}

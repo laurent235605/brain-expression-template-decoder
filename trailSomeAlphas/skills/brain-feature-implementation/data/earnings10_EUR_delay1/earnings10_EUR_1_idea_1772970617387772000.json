@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize(vec_avg({elta_value}), std=4), industry)), 1.5), multiply(group_zscore(winsorize(vec_avg({elta_value}), std=4), industry), sign(ts_mean(winsorize(vec_avg({aily_delta_recon_value}), std=4), 3))), 0)",
+    "idea": "利用条件交易运算符(trade_when)构建\"极端区间开仓\"逻辑：仅当股票预期水平偏离行业均值1.5个标准差以上（尾部区间）时激活信号，中段预期视为噪音直接置零。在触发条件下，结合3日简单移动平均平滑后的修订方向，捕捉\"极端预期下的共识加速确认\"或\"极端低预期的持续恶化确认\"，避免平庸预期下的假突破。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(vec_avg(ern10_elta_value), std=4), industry)), 1.5), multiply(group_zscore(winsorize(vec_avg(ern10_elta_value), std=4), industry), sign(ts_mean(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 3))), 0)"
+    ]
+}

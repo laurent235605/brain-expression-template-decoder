@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(add(multiply(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),5),std=4),252),0.6), multiply(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),20),std=4),252),0.4)),3)",
+    "idea": "融合短期(5日)高权重(60%)与中期(20日)低权重(40%)空头流量Z-score，并通过3日线性衰减赋予近期数据更高敏感度，构建对空头行为动量更敏感的复合信号，平衡及时性与噪音过滤。",
+    "expression_list": [
+        "ts_decay_linear(add(multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),5),std=4),252),0.6), multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),20),std=4),252),0.4)),3)",
+        "ts_decay_linear(add(multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),5),std=4),252),0.6), multiply(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),20),std=4),252),0.4)),3)"
+    ]
+}

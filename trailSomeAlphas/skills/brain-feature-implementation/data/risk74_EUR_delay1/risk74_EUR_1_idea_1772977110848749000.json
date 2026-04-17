@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 1.5)",
+    "idea": "对行业中性化后的中美敞口价差应用1.5次幂非线性变换，放大极端geopolitical tilt（头尾）的区分度，压缩中间噪音区间的权重，增强高确信度信号的仓位集中度，实现'只有极端倾斜才值得重仓'的投资逻辑。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 1.5)"
+    ]
+}

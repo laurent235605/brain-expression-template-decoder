@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({fundportfolioturnover}, 20)",
+    "idea": "**Concept**: Turnover Acceleration\n- **Sample Fields Used**: `fundportfolioturnover`\n- **Definition**: Rate of change in portfolio turnover over 20 days, indicating increasing or decreasing trading intensity\n- **Why This Feature**: Accelerating turnover suggests strategy shifts, market volatility responses, or new management; decelerating turnover suggests settling into positions or passive drift\n- **Logical Meaning**: Captures second-derivative of trading activity; positive acceleration suggests increasing conviction or churn, negative suggests consolidation\n- **is filling nan necessary**: Yes, turnover data is often quarterly; use `ts_backfill(lookback=90)` and consider `ts_decay_linear()` to smooth between reporting points\n- **Directionality**: Positive values indicate increasing trading activity (rising costs, potential alpha generation); negative values indicate decreasing activity (passive drift)\n- **Boundary Conditions**: Extreme positive values may signal strategy pivot or liquidation; extreme negative values suggest conversion to passive index tracking",
+    "expression_list": [
+        "ts_delta(inst16_ipreo_fundportfolioturnover, 20)"
+    ]
+}

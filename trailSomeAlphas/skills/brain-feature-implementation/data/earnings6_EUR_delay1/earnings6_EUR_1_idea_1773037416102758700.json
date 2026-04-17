@@ -1,0 +1,10 @@
+{
+    "template": "trade_when( greater( abs( group_zscore( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry ) ), 1.28 ), group_zscore( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry ), 0 )",
+    "idea": "极端股息持续性择时：应用'区间结构'思维，仅在股息持续性处于行业极端分位(前/后20%，对应|zscore|>1.28)时才保留信号，中段视为噪音置零，使用trade_when实现头尾精选。",
+    "expression_list": [
+        "trade_when( greater( abs( group_zscore( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry ) ), 1.28 ), group_zscore( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry ), 0 )",
+        "trade_when( greater( abs( group_zscore( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry ) ), 1.28 ), group_zscore( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry ), 0 )",
+        "trade_when( greater( abs( group_zscore( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry ) ), 1.28 ), group_zscore( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry ), 0 )",
+        "trade_when( greater( abs( group_zscore( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry ) ), 1.28 ), group_zscore( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry ), 0 )"
+    ]
+}

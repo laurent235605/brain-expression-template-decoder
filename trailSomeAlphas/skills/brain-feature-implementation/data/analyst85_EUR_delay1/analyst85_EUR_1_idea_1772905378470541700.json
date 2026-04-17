@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_decay_exp_window(vec_avg({version}), 20, factor=0.1), add(1, signed_power(ts_decay_exp_window(vec_ir({version}), 20, factor=0.1), 0.5)))",
+    "idea": "将版本均值衰减信号与版本信息比率（vec_ir，均值/标准差）的衰减信号相结合，使用0.5次幂对IR信号进行非线性压缩，通过乘性因子（1 + adjusted_IR）调整主信号强度：当版本更新稳定且持续时（高IR）放大权重，当版本混乱波动时（低IR）降低权重，形成质量调整的版本趋势信号。",
+    "expression_list": [
+        "multiply(ts_decay_exp_window(vec_avg(anl85_version), 20, factor=0.1), add(1, signed_power(ts_decay_exp_window(vec_ir(anl85_version), 20, factor=0.1), 0.5)))"
+    ]
+}

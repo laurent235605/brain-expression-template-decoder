@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(trade_when(greater(ts_std_dev(returns, 21), group_mean(ts_std_dev(returns, 21), industry)), divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), multiply(add(ts_std_dev(returns, 21), 0.001), add(1, abs(group_zscore(ts_std_dev(returns, 21), industry))))), divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), industry), 5)",
+    "idea": "构建波动率自适应机制：当基金波动率高于行业均值时，用行业zscore绝对值作为惩罚因子放大风险分母（高波动者需承担更多风险溢价才值得配置）；当低于均值时保持标准风险调整。最后进行5日线性衰减平滑并组内归一化，平衡信号及时性与换手率。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(trade_when(greater(ts_std_dev(returns, 21), group_mean(ts_std_dev(returns, 21), industry)), divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), multiply(add(ts_std_dev(returns, 21), 0.001), add(1, abs(group_zscore(ts_std_dev(returns, 21), industry))))), divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), industry), 5)"
+    ]
+}

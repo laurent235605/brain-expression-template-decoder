@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(group_zscore(vec_avg({elta_value}), industry), std=3), 2) * sign(ts_decay_linear(winsorize(vec_avg({aily_delta_recon_value}), std=4), 10))",
+    "idea": "对行业相对预期水平进行平方非线性放大（signed_power=2），突出极端高预期（潜在泡沫）与极端低预期（深度价值）的股票；修订方向采用10日线性衰减平均（ts_decay_linear），赋予近期数据更高权重但平滑单日跳变。两者相乘后，强化\"极端预期+持续同向修订\"的自我强化动态，同时抑制中等预期区间的随机波动。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(vec_avg(ern10_elta_value), industry), std=3), 2) * sign(ts_decay_linear(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 10))"
+    ]
+}

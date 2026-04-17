@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), industry), 252)",
+    "idea": "在原始行业中性化波动率基础上，进一步考察该波动率指标在自身历史（252日）中的相对位置。通过时序Z-Score识别“当前业务结构稳定性是否处于历史极端水平”，捕捉从异常波动回归常态或稳定性崩溃的拐点，而非仅关注绝对波动水平。",
+    "expression_list": [
+        "ts_zscore(group_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), industry), 252)"
+    ]
+}

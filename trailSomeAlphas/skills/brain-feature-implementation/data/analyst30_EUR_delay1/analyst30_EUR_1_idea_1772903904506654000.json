@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(abs(ts_delta(vec_range(vec_filter({fiscalyearend}, nan)), 63)), 20)",
+    "idea": "近期财报期重构动量：检测财年末日期离散度的63日(季度)变化(delta)，取绝对值衡量结构变更强度，再经20日线性衰减(ts_decay_linear)平滑处理，识别持续发生的fiscal year end变更事件或子公司财报期整合过程，避免一次性噪音干扰。",
+    "expression_list": [
+        "ts_decay_linear(abs(ts_delta(vec_range(vec_filter(anl30_fiscalyearend, nan)), 63)), 20)"
+    ]
+}

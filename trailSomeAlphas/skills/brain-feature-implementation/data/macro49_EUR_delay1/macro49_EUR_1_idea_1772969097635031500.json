@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(ts_count_nans(ts_backfill(vec_avg({vda}), lookback=5, k=1), 20), 5), 0, ts_decay_linear(group_zscore(add(multiply(0.7, ts_zscore(ts_backfill(vec_avg({vda}), lookback=5, k=1), 120)), multiply(0.3, ts_zscore(ts_backfill(vec_ir({vda}), lookback=5, k=1), 60))), sector), 5))",
+    "idea": "融合流动性水平（vec_avg）与流动性质量/稳定性（vec_ir，信息比率）的复合信号，并在数据质量检查（过去20日缺失值计数 ts_count_nans）通过后才产生信号。通过组内标准化控制行业暴露，配合线性衰减降低换手率，构建更稳健的多维度流动性评分。",
+    "expression_list": [
+        "if_else(greater(ts_count_nans(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 20), 5), 0, ts_decay_linear(group_zscore(add(multiply(0.7, ts_zscore(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 120)), multiply(0.3, ts_zscore(ts_backfill(vec_ir(mcr49_vda), lookback=5, k=1), 60))), sector), 5))"
+    ]
+}

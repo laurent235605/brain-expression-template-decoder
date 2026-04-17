@@ -1,0 +1,5 @@
+{
+    "template": "if_else(greater(ts_rank({volume}, 60), 0.8), signed_power(group_zscore({volume}, {sector}), 3), if_else(less(ts_rank({volume}, 60), 0.2), signed_power(group_zscore({volume}, {sector}), 3), 0))",
+    "idea": "历史分位条件增强：根据60日历史分位将股票分为高成交量（>80%）和低成交量（<20%）两组，对这两组应用立方放大增强信号强度，中间段视为噪音赋0，构建非线性的流动性偏好。",
+    "expression_list": []
+}

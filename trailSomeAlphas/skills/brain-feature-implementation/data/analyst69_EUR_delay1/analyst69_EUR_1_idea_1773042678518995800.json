@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_zscore(subtract(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 60)), 252), driver=\"gaussian\")",
+    "idea": "构建20日与60日双时间窗口稳定性移动平均的差值（短期相对于长期的速度指标），计算其252日时序Z-score以识别趋势性变化，再通过高斯分位数（quantile）拉伸将中间区间压缩、尾部极端值放大，强化对报告日程规律性发生显著趋势突破（加速或减速）个股的区分度。",
+    "expression_list": [
+        "quantile(ts_zscore(subtract(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 60)), 252), driver=\"gaussian\")",
+        "quantile(ts_zscore(subtract(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 60)), 252), driver=\"gaussian\")"
+    ]
+}

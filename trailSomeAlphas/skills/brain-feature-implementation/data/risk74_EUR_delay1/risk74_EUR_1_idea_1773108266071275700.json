@@ -1,0 +1,8 @@
+{
+    "template": "multiply(winsorize(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),ts_decay_linear(greater(ts_zscore(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),252),2),10))",
+    "idea": "事件驱动半衰期结构：以特质空头残差为基底，乘以'历史极端触发衰减因子'（当历史Z-score>2时触发10天线性衰减，否则为0），仅在空头 buildup 达到历史极端后的10天内维持信号，构建事件驱动的时效性增强策略。",
+    "expression_list": [
+        "multiply(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),ts_decay_linear(greater(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),252),2),10))",
+        "multiply(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),ts_decay_linear(greater(ts_zscore(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),252),2),10))"
+    ]
+}

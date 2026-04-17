@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(winsorize(ts_backfill({momentum},lookback=63),std=4), winsorize(ts_backfill(add({value_ts},{earnyild}),lookback=63),std=4), d=126, rettype=0)",
+    "idea": "**剔除价值暴露后的残差动量**：通过时序回归（ts_regression, rettype=0提取残差）计算动量中无法被价值+盈利收益率解释的部分，得到剔除价值因素后的\"纯净动量alpha\"；先进行63天数据回填（ts_backfill）处理缺失值，并进行4倍标准差去极值；适用于分离高相关性风格因子（动量与价值往往负相关），获得与价值因子正交化的动量信号，避免双重暴露。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_backfill(rsk74_momentum,lookback=63),std=4), winsorize(ts_backfill(add(rsk74_value_ts,rsk74_earnyild),lookback=63),std=4), d=126, rettype=0)",
+        "ts_regression(winsorize(ts_backfill(rsk74_momentum_ts,lookback=63),std=4), winsorize(ts_backfill(add(rsk74_value_ts,rsk74_earnyild),lookback=63),std=4), d=126, rettype=0)"
+    ]
+}

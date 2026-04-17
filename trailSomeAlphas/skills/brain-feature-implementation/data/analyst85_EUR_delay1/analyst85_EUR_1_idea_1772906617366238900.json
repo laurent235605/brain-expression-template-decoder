@@ -1,0 +1,7 @@
+{
+    "template": "ts_target_tvr_v2(group_normalize(if_else(greater(group_rank(add(s_log_1p(abs(group_zscore(vec_skewness({version}), industry))), s_log_1p(abs(group_zscore(vec_kurtosis({version}), industry)))), industry), 0.8), 1, if_else(less(group_rank(add(s_log_1p(abs(group_zscore(vec_skewness({version}), industry))), s_log_1p(abs(group_zscore(vec_kurtosis({version}), industry)))), industry), 0.2), -1, 0)), industry), 0.15)",
+    "idea": "高阶矩复合(偏度+峰度)极端信号：将偏度与峰度(vec_kurtosis)组合构建更全面的'肥尾+偏斜'复合指标，经对数压缩(s_log_1p)和行业标准化后相加；仅保留行业排名极端(前20%/后20%)的股票，使用动态换手率目标衰减(ts_target_tvr_v2)自动优化持仓周期以控制换手率在不高于15%的水平，避免固定衰减参数带来的过频交易。",
+    "expression_list": [
+        "ts_target_tvr_v2(group_normalize(if_else(greater(group_rank(add(s_log_1p(abs(group_zscore(vec_skewness(anl85_version), industry))), s_log_1p(abs(group_zscore(vec_kurtosis(anl85_version), industry)))), industry), 0.8), 1, if_else(less(group_rank(add(s_log_1p(abs(group_zscore(vec_skewness(anl85_version), industry))), s_log_1p(abs(group_zscore(vec_kurtosis(anl85_version), industry)))), industry), 0.2), -1, 0)), industry), 0.15)"
+    ]
+}

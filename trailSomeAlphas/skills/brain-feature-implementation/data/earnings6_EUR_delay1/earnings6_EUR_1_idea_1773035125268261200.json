@@ -1,0 +1,10 @@
+{
+    "template": "divide(subtract(vec_avg({x_dividend}), ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252)), add(abs(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252)), 0.001))",
+    "idea": "股息变化率惊喜：将EPS惊喜模板中的\"实际vs预期\"逻辑迁移至股息领域，以252日历史均值作为\"预期基准\"替代缺失的{estimated_dividend}字段。通过subtract计算绝对变化，再以add(..., 0.001)防护除零风险，最终得到类似盈利惊喜的百分比变化信号，用于捕捉股息政策的意外调整。",
+    "expression_list": [
+        "divide(subtract(vec_avg(ern6_x_dividend), ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)), add(abs(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)), 0.001))",
+        "divide(subtract(vec_avg(ern6_x_dividend_233), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)), add(abs(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)), 0.001))",
+        "divide(subtract(vec_avg(ern6_x_dividend_oc), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)), add(abs(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)), 0.001))",
+        "divide(subtract(vec_avg(ern6_x_dividend_oc_235), ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)), add(abs(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)), 0.001))"
+    ]
+}

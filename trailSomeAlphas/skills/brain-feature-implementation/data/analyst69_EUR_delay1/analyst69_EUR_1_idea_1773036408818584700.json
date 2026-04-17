@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), industry)",
+    "idea": "融合短期预期修订动量与行业内中性化处理。先对原始预期数据进行5日回溯填充确保数据连续性，计算5日差分捕捉短期分析师情绪变化，经winsorize去除极端异常值后，使用group_zscore在行业内部进行标准化。此模板剥离了行业beta影响，专注于识别个股特异性的预期上修/下修信号，避免行业轮动噪音干扰。",
+    "expression_list": [
+        "group_zscore(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), industry)",
+        "group_zscore(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), industry)"
+    ]
+}

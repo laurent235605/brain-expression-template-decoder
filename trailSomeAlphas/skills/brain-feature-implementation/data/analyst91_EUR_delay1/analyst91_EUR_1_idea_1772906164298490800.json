@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(if_else(equal(bucket(ts_quantile(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), range=\"0,1,0.2\"), 0), 1.0, if_else(equal(bucket(ts_quantile(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), range=\"0,1,0.2\"), 4), -1.0, 0.0)), 0.01)",
+    "idea": "基于252日时序分位数(ts_quantile)动态定义极端阈值，将股票分为五档，仅对历史波动率最低档（极稳定）赋予+1权重，最高档（极动荡）赋予-1权重，中间档归零，并使用hump_decay平滑权重变化。",
+    "expression_list": [
+        "hump_decay(if_else(equal(bucket(ts_quantile(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), range=\"0,1,0.2\"), 0), 1.0, if_else(equal(bucket(ts_quantile(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), range=\"0,1,0.2\"), 4), -1.0, 0.0)), 0.01)"
+    ]
+}

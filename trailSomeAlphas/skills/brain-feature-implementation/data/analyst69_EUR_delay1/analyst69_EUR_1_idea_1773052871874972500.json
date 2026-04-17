@@ -1,0 +1,10 @@
+{
+    "template": "multiply(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), signed_power(add(1, ts_backfill(days_from_last_change({eps_expected_report_dt}), 126)), -0.3))",
+    "idea": "利用模板B的事件间隔天数作为动态权重，通过signed_power负幂次变换实现“事件新鲜度”加权：距离上次报告日调整越近（天数越小），当前EPS修订动量的权重越高（趋近1.0）；时间久远则权重衰减。融合绝对变化与事件时效性，强调近期结构性变化带来的信息优势，避免陈旧信号的干扰。",
+    "expression_list": [
+        "multiply(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), signed_power(add(1, ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126)), -0.3))",
+        "multiply(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), signed_power(add(1, ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126)), -0.3))",
+        "multiply(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), signed_power(add(1, ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126)), -0.3))",
+        "multiply(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), signed_power(add(1, ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126)), -0.3))"
+    ]
+}

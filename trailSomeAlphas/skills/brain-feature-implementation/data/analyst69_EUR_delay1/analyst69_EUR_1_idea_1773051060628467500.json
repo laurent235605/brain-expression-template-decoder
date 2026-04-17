@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(multiply(group_zscore(divide(winsorize(ts_backfill({eps_best_eeps_cur_yr},63),std=4), winsorize(ts_backfill({ebitda_best_eeps_cur_yr},63),std=4)), sector), add(1, multiply(0.4, winsorize(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr},5),60), ts_zscore(ts_delta({eps_best_eeps_cur_yr},20),60)), std=2)))), 0.02)",
+    "idea": "时序动量加速度增强。通过对比短期（5日）与中期（20日）EPS修正的时序zscore差值，捕捉修正加速度而非绝对水平；对效率比率进行行业中性化后应用非线性放大；引入hump_decay控制日度权重变化幅度（hump=0.02），显著降低换手率，适合修正信号具有持续性的场景。",
+    "expression_list": [
+        "hump_decay(multiply(group_zscore(divide(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), add(1, multiply(0.4, winsorize(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr,5),60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr,20),60)), std=2)))), 0.02)",
+        "hump_decay(multiply(group_zscore(divide(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr,63),std=4), winsorize(ts_backfill(anl69_ebitda_best_eeps_cur_yr,63),std=4)), sector), add(1, multiply(0.4, winsorize(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr,5),60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr,20),60)), std=2)))), 0.02)"
+    ]
+}

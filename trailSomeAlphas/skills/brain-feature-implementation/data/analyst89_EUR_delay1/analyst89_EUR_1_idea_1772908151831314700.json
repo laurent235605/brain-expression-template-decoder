@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), 200), group_zscore(subtract(252, ts_count_nans(vec_avg({fiscal_period_end}), 252)), industry), 0)",
+    "idea": "条件化数据充足性评分，仅在数据记录超过200天的样本中计算行业内相对排名，对数据匮乏标的赋零值不参与交易，构建避免估计误差的纯净数据质量信号",
+    "expression_list": [
+        "trade_when(greater(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), 200), group_zscore(subtract(252, ts_count_nans(vec_avg(anl89_fiscal_period_end), 252)), industry), 0)"
+    ]
+}

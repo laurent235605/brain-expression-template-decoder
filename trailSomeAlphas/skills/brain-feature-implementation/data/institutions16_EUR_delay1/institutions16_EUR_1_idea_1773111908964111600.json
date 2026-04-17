@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), driver=\"gaussian\"), 10)",
+    "idea": "结合模板1的线性衰减平滑与分位数变换（替代模板2的幂变换）。通过高斯分位数变换（quantile gaussian）将行业中性残差映射到标准正态分布，强制将中间区域压缩至零附近并将极端头尾拉伸，再应用10日衰减稳定信号。相比幂变换，分位数变换对异常值更稳健，且能确保尾部对称性，适合极端收益分布场景下的稳健配置。",
+    "expression_list": [
+        "ts_decay_linear(quantile(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), driver=\"gaussian\"), 10)"
+    ]
+}

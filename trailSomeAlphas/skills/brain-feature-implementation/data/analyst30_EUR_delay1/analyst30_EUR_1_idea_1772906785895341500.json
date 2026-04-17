@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(0.6, zscore(winsorize(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), std=4))), multiply(0.4, zscore(winsorize(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), std=4)))), industry)",
+    "idea": "复合结构稳定性指标：60%权重给极差（衡量最大分散幅度），40%权重给标准差（衡量整体日期分布波动），经行业中性化后构建综合评分。相比单一极差更能全面反映子公司财报日期的集中度与一致性。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.6, zscore(winsorize(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4))), multiply(0.4, zscore(winsorize(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), std=4)))), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(ts_sum(vec_avg({aily_delta_recon_value}), 20), 60)",
+    "idea": "**历史分位点修订定位**：交叉应用模板2的20日累积和与ts_rank时序算子，判断当前累积修订值在60日历史窗口中的相对位置（0-1分位）。用于识别“历史新高”或“历史新低”的极端修订事件，避免绝对数值的行业偏差。",
+    "expression_list": [
+        "ts_rank(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), 60)"
+    ]
+}

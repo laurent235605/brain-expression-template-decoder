@@ -1,0 +1,7 @@
+{
+    "template": "reverse(vec_avg({rank}))",
+    "idea": "**Concept**: Model Conviction Proxy\n- **Sample Fields Used**: mdl245_rank\n- **Definition**: Negative of the rank value to convert from \"rank space\" (where lower is better) to \"score space\" (where higher is better)\n- **Why This Feature**: Converts the rank to a more intuitive scale where higher values represent better opportunities, aligning with typical alpha generation conventions where positive values indicate long positions\n- **Logical Meaning**: The essential signal stripped of the rank convention complexity; represents the raw \"goodness\" score as perceived by the model\n- **is filling nan necessary**: Negation preserves NaN values appropriately; no filling necessary as NaN correctly indicates absence of ranking.\n- **Directionality**: Higher values indicate better ranked stocks (more attractive); lower values indicate worse rankings\n- **Boundary Conditions**: -1600 to -1 (for TOPCS1600 universe), or simply negative of the rank range",
+    "expression_list": [
+        "reverse(vec_avg(mdl245_rank))"
+    ]
+}

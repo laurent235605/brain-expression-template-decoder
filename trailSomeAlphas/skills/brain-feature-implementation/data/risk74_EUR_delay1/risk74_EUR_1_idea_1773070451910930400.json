@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_exp_window(group_zscore(ts_zscore(subtract(winsorize(ts_backfill({exp_usa}, 63), std=4), winsorize(ts_backfill({exp_chn}, 63), std=4)), 252), industry), 10)",
+    "idea": "基于中美敞口价差的252日历史分位进行时间序列标准化（ts_zscore），识别极端偏离自身长期中枢的区域配置机会，再经行业中性处理后，通过10日指数衰减加权（ts_decay_exp_window）平滑信号并降低换手率，构建高频噪音过滤后的低频区域轮动因子。",
+    "expression_list": [
+        "ts_decay_exp_window(group_zscore(ts_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4)), 252), industry), 10)"
+    ]
+}

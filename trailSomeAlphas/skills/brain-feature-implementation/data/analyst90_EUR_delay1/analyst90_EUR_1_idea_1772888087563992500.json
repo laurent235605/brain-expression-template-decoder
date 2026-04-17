@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(vec_sum({recommendation_weighting}), 20)",
+    "idea": "**Concept**: Accumulated Buy Pressure Index\n- **Sample Fields Used**: `recommendation_weighting`\n- **Definition**: 20-day rolling sum of aggregated buy recommendation weightings\n- **Why This Feature**: Captures persistent buying pressure over time; single-day spikes may be noise but sustained accumulation indicates strong institutional interest\n- **is filling nan necessary**: Treat NaN days as 0 in the sum to avoid carrying forward stale recommendations indefinitely.\n- **Logical Meaning**: Cumulative measure of analyst commitment; high values indicate sustained accumulation phases\n- **Directionality**: Higher values indicate stronger accumulated bullish pressure\n- **Boundary Conditions**: Linear accumulation during trending markets; flat periods indicate consensus hiatus",
+    "expression_list": [
+        "ts_sum(vec_sum(buy_recommendation_weighting), 20)",
+        "ts_sum(vec_sum(sell_recommendation_weighting), 20)"
+    ]
+}

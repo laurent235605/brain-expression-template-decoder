@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_zscore(subtract(winsorize(ts_backfill({exp_usa},21),std=4), winsorize(ts_backfill({exp_chn},21),std=4)),252), industry)",
+    "idea": "历史分位数行业中性：先将中美敞口价差转换为个股自身历史时间序列Z分数（过去252日），捕捉当前价差处于历史极端位置的股票，再进行行业内标准化，识别那些相对行业 peers 出现历史性区域配置偏离的标的，适用于捕捉长期均值回复与结构性断裂。",
+    "expression_list": [
+        "group_zscore(ts_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa,21),std=4), winsorize(ts_backfill(rsk74_raw_exp_chn,21),std=4)),252), industry)"
+    ]
+}

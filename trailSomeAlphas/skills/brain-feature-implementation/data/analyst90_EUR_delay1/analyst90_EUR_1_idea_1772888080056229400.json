@@ -1,0 +1,8 @@
+{
+    "template": "(vec_avg({recommendation_weighting}) - ts_mean(vec_avg({recommendation_weighting}), 60)) / ts_std_dev(vec_avg({recommendation_weighting}), 60)",
+    "idea": "**Concept**: Conviction Outlier Detection\n- **Sample Fields Used**: `recommendation_weighting`\n- **Definition**: Z-score of current buy recommendation weighting relative to 60-day historical distribution\n- **Why This Feature**: Identifies unusual spikes in analyst interest that may indicate significant news, earnings events, or herding behavior\n- **is filling nan necessary**: Historical mean/std calculations should ignore NaN; do not fill NaN with group means as this dilutes the outlier detection for sparse recommendations.\n- **Logical Meaning**: Values > 2 indicate statistically significant increase in recommendation intensity; <-2 indicate unusual silence\n- **Directionality**: High positive outliers may indicate crowded longs (short-term negative); high negative outliers may indicate contrarian opportunities\n- **Boundary Conditions**: |z-score| > 3 indicates extreme anomalies warranting investigation",
+    "expression_list": [
+        "(vec_avg(buy_recommendation_weighting) - ts_mean(vec_avg(buy_recommendation_weighting), 60)) / ts_std_dev(vec_avg(buy_recommendation_weighting), 60)",
+        "(vec_avg(sell_recommendation_weighting) - ts_mean(vec_avg(sell_recommendation_weighting), 60)) / ts_std_dev(vec_avg(sell_recommendation_weighting), 60)"
+    ]
+}

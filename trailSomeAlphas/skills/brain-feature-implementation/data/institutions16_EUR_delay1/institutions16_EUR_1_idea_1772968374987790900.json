@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0)",
+    "idea": "特质性资产流（剔除行业共同因子）：以行业内市值对数加权平均资产流为解释变量，对个股资产流进行126日滚动回归并提取残差。剔除由宏观配置或行业轮动驱动的系统性资金流动后，残差部分反映公司特定事件（如业绩超预期、独特题材）驱动的异质性资金行为，更适合作为选股alpha来源。",
+    "expression_list": [
+        "ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0)"
+    ]
+}

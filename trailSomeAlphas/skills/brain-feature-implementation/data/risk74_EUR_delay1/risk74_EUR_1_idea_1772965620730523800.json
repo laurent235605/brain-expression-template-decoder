@@ -1,0 +1,11 @@
+{
+    "template": "{nondomicile} / ({exp_usa} + {exp_chn} + {nondomicile} + 0.0001)",
+    "idea": "**Concept**: Geographic Diversification Ratio\n- **Sample Fields Used**: `exp_usa`, `exp_chn`, `nondomicile`, `concentration`\n- **Definition**: Proportion of non-domestic revenue derived from diversified sources vs. concentrated in single high-risk markets\n- **Why This Feature**: Distinguishes between global diversification (safe) and single-market concentration (risky) even when total foreign exposure is identical\n- **Logical Meaning**: High values indicate well-diversified geographic footprint; low values indicate \"all eggs in one basket\" foreign exposure\n- **is filling nan necessary**: Yes, fill missing exposure components with 0 to ensure ratio calculation integrity\n- **Directionality**: High = diversified (lower risk); Low = concentrated (higher risk); 1.0 = purely non-domestic and diversified\n- **Boundary Conditions**: Zero indicates pure domestic play; values approaching 1 indicate extensive diversified international operations",
+    "expression_list": [
+        "rsk74_nondomicile / (rsk74_raw_exp_usa + rsk74_raw_exp_chn + rsk74_nondomicile + 0.0001)",
+        "rsk74_raw_exp_nondomicile1 / (rsk74_raw_exp_usa + rsk74_raw_exp_chn + rsk74_raw_exp_nondomicile1 + 0.0001)",
+        "rsk74_raw_exp_nondomicile2 / (rsk74_raw_exp_usa + rsk74_raw_exp_chn + rsk74_raw_exp_nondomicile2 + 0.0001)",
+        "rsk74_std_exp_nondomicile1 / (rsk74_raw_exp_usa + rsk74_raw_exp_chn + rsk74_std_exp_nondomicile1 + 0.0001)",
+        "rsk74_std_exp_nondomicile2 / (rsk74_raw_exp_usa + rsk74_raw_exp_chn + rsk74_std_exp_nondomicile2 + 0.0001)"
+    ]
+}

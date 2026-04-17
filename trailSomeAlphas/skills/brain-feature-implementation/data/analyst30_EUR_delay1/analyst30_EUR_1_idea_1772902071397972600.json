@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(vec_range(vec_filter({fiscalyearend}, value=\"nan\")), 252)",
+    "idea": "计算当前会计年度分散度相对于其252日历史的zscore，识别财政年度结构的突变（如并购导致新增不同财年子公司或财年变更），正值表示分散度扩大（结构复杂化），负值表示趋于统一（整合完成），用于捕捉会计政策变化的动态过程。",
+    "expression_list": [
+        "ts_zscore(vec_range(vec_filter(anl30_fiscalyearend, value=\"nan\")), 252)"
+    ]
+}

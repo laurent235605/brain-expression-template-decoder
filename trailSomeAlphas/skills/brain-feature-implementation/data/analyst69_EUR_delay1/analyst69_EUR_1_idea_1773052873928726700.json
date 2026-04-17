@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), driver=\"gaussian\")",
+    "idea": "将模板A的EPS修订动量通过模板B的高斯分布映射进行尾部拉伸。先将5日修订变化置于252日历史分位中，再将分位结果映射到标准正态分布空间，使极端修订事件（正负尾部）获得更强的非线性区分度，中间噪音区间压缩，适用于捕捉极端分析师情绪驱动的反转或动量机会。",
+    "expression_list": [
+        "quantile(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), driver=\"gaussian\")",
+        "quantile(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), driver=\"gaussian\")"
+    ]
+}

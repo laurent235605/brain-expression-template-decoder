@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({score}), 20) / abs(ts_delay(vec_avg({score}), 20))",
+    "idea": "**Concept**: Acquisition Momentum\n- **Sample Fields Used**: `mdl249_score`\n- **Definition**: The 20-day change in acquisition likelihood score normalized by the absolute level 20 days prior\n- **Why This Feature**: Corporate events often exhibit momentum as information leaks or strategic positions build; accelerating scores may predict imminent announcements\n- **is filling nan necessary**: Yes, use `ts_backfill(vec_avg({score}), 5)` before calculating delta to ensure continuity in the rate of change calculation.\n- **Logical Meaning**: Captures the velocity of changing acquisition probability; positive momentum suggests building event pressure\n- **Directionality**: Positive values indicate increasing likelihood (bullish for event-driven strategies); negative values indicate decreasing likelihood\n- **Boundary Conditions**: Extreme positive values (>2 std dev) may indicate imminent announcement; extreme negative values suggest failed deal speculation",
+    "expression_list": [
+        "ts_delta(vec_avg(mdl249_score), 20) / abs(ts_delay(vec_avg(mdl249_score), 20))"
+    ]
+}

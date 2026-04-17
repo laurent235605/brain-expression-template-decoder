@@ -1,0 +1,7 @@
+{
+    "template": "hump_decay(signed_power(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 3), hump=0.02)",
+    "idea": "低换手率极端利差策略。对经期限利差（模板B）、行业标准化、三次幂变换（模板A）后的复合信号应用隆起衰减（hump_decay）控制。在完整保留\"期限动能+行业中性+尾部增强\"三重逻辑的同时，通过设置0.02的隆起阈值忽略日内微小波动，仅在信号变化超过阈值时才调整仓位，显著降低策略换手率，提高大规模资金的可交易性和容量，实现高 alpha 与低周转的平衡。",
+    "expression_list": [
+        "hump_decay(signed_power(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 3), hump=0.02)"
+    ]
+}

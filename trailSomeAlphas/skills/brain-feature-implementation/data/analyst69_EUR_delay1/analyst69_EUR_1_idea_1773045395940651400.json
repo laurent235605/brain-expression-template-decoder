@@ -1,0 +1,8 @@
+{
+    "template": "hump_decay(multiply(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), add(1, multiply(0.3, quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian)))), hump=0.02)",
+    "idea": "**周转率约束封装（Hump Decay末端控制）**：对模板1的整体输出应用hump_decay，设置2%的日内变动阈值，忽略微小波动，直接针对激进风格可能带来的高周转问题进行后处理，体现管道末端的运算符创新与交易成本控制。",
+    "expression_list": [
+        "hump_decay(multiply(winsorize(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), add(1, multiply(0.3, quantile(ts_delta(anl69_eps_best_eeps_cur_yr, 5), driver=gaussian)))), hump=0.02)",
+        "hump_decay(multiply(winsorize(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), std=4), add(1, multiply(0.3, quantile(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), driver=gaussian)))), hump=0.02)"
+    ]
+}

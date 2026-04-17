@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill({concentration},63),4), winsorize(ts_backfill({nondomicile},63),4)), industry), 0.5), 10)",
+    "idea": "对原始地理集中度与境外收入乘积进行行业中性化（剔除行业固有国际化特征），通过0.5次幂变换（平方根）压缩极端尾部值以避免单一国家依赖度过高的离群值主导组合，最后应用10日线性衰减平滑以降低换手率，识别具有持续性的“单一海外市场依赖”结构风险。高值表示经行业调整后的极端地理集中风险。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_concentration,63),4), winsorize(ts_backfill(rsk74_nondomicile,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_concentration,63),4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_concentration,63),4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_concentration,63),4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_concentration,63),4), winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),4), winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),4), winsorize(ts_backfill(rsk74_nondomicile,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),4), winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),4)), industry), 0.5), 10)",
+        "ts_decay_linear(signed_power(group_zscore(multiply(winsorize(ts_backfill(rsk74_raw_concentration,63),4), winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),4)), industry), 0.5), 10)"
+    ]
+}

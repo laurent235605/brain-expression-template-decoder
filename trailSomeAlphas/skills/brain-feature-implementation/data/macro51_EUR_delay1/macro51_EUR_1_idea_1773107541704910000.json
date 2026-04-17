@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(less(days_from_last_change(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4)), 10), ts_zscore(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 21), 252), 0)",
+    "idea": "**事件驱动型新鲜偏离**：利用时间序列变化率（ts_delta，21日窗口）识别权重比例的近期突变，并通过历史变化分布（252日zscore）评估该突变的异常程度。仅当数据在近10天内发生过变动（days_from_last_change < 10）时才触发交易，聚焦机构调仓或份额类别流动性结构突变后的短期定价偏离修复，避免在 stale 数据上浪费头寸。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4)), 10), ts_zscore(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 21), 252), 0)"
+    ]
+}

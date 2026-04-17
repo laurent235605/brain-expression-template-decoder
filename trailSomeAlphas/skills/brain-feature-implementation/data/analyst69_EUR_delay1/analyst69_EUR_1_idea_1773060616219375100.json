@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(ts_delta(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 20), 0.3), 1, if_else(less(ts_delta(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 20), -0.3), -1, 0))",
+    "idea": "将模板1的三态阈值逻辑应用于模板2相关性的时间序列变化率(ts_delta)，构建'盈利预期结构动量'信号。20日内相关性快速上升超过0.3视为结构强化赋权+1，快速下降超过0.3视为结构瓦解赋权-1，捕捉分析师预期从分散到收敛或从共识到分歧的拐点。",
+    "expression_list": [
+        "if_else(greater(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), 0.3), 1, if_else(less(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), -0.3), -1, 0))",
+        "if_else(greater(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), 0.3), 1, if_else(less(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), -0.3), -1, 0))",
+        "if_else(greater(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), 0.3), 1, if_else(less(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 20), -0.3), -1, 0))",
+        "if_else(greater(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), 0.3), 1, if_else(less(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 20), -0.3), -1, 0))"
+    ]
+}

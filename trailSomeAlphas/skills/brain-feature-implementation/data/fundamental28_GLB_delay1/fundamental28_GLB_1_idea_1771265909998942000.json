@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(signed_power(quantile(rank(divide(group_zscore(winsorize(ts_delta({value_08316q}, 63), 4), industry), ts_std_dev(ts_delta({value_08316q}, 63), 252))), \"gaussian\"), 1.5), 10)",
+    "idea": "**高斯尾部拉伸的稳健动量衰减**：融合\"信息比率风险调整\"与\"高斯分位尾部强化\"。先构建行业中性动量的信息比率（Z-score除以时序标准差），再通过高斯分位映射将高置信度（高夏普）的信号拉伸、低置信度信号压缩，经1.5次幂非线性放大后应用10日线性衰减平滑。该模板强调\"高统计置信度且持续性良好\"的动量信号，对波动率调整后的极端动量给予非线性权重，适用于低频高信念的动量配置。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(quantile(rank(divide(group_zscore(winsorize(ts_delta(fnd28_newq_value_08316q, 63), 4), industry), ts_std_dev(ts_delta(fnd28_newq_value_08316q, 63), 252))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(divide(group_zscore(winsorize(ts_delta(fnd28_ratesq_value_08316q, 63), 4), industry), ts_std_dev(ts_delta(fnd28_ratesq_value_08316q, 63), 252))), \"gaussian\"), 1.5), 10)"
+    ]
+}

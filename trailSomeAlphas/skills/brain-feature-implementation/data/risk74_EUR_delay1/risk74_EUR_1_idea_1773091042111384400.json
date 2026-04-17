@@ -1,0 +1,8 @@
+{
+    "template": "({hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\")) - signed_power(zscore(max(max({factor_e}, {factor_s}), {factor_g}) - min(min({factor_e}, {factor_s}), {factor_g})), 2)",
+    "idea": "结合模板2的持仓分位偏离，引入模板1隐含的'ESG组件波动'作为风险惩罚。计算单只股票E/S/G三因子中的极差（max-min）并经zscore标准化，使用signed_power放大高波动惩罚，从持仓偏离中扣除。逻辑：即使HF持仓显示偏离，若公司ESG各维度差异极大（表现不稳定），则降低信号权重，增强稳健性。",
+    "expression_list": [
+        "(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\")) - signed_power(zscore(max(max(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g) - min(min(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g)), 2)",
+        "(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\")) - signed_power(zscore(max(max(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g) - min(min(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g)), 2)"
+    ]
+}

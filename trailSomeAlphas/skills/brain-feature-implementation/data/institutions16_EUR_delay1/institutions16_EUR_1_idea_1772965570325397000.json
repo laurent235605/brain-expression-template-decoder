@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_delta({reported_asset_value}, 1), 20)",
+    "idea": "**Concept**: Cumulative Flow Indicator\n- **Sample Fields Used**: `reported_asset_value`\n- **Definition**: Cumulative sum of daily asset value changes over 20 days, isolating flow component from valuation\n- **Why This Feature**: Cumulative measure of capital commitment or withdrawal trend; persistent positive sum indicates sustained inflows, negative indicates sustained outflows\n- **Logical Meaning**: Integrates momentum of asset changes; captures persistence of investor sentiment beyond daily noise\n- **is filling nan necessary**: Yes, calculate `ts_delta` first, then use `ts_backfill()` on the delta series to handle non-trading days or disclosure gaps, then `ts_sum()`\n- **Directionality**: Positive values indicate sustained inflows (popularity), negative values indicate sustained outflows (abandonment)\n- **Boundary Conditions**: Zero indicates balanced flows; extreme positive values suggest bubble-like inflows; extreme negative suggests run-on-fund",
+    "expression_list": [
+        "ts_sum(ts_delta(fund_reported_asset_value, 1), 20)"
+    ]
+}

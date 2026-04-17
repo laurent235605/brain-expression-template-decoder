@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_sum(if_else(is_nan(signed_power(vec_stddev({aily_delta_recon_value}), 2)), 0, signed_power(vec_stddev({aily_delta_recon_value}), 2)), 20), industry)",
+    "idea": "**概念**: 行业相对分析师分歧累积能量\n- **增强逻辑**: 将原始均值替换为vec_stddev以捕捉日内分析师修正意见的分歧度（标准差），计算20日累积平方波动（能量），并在行业内进行标准化（group_zscore）。相比原始版本，此模板不仅衡量修正幅度，更强调\"不确定性\"本身，且通过行业相对化剔除行业特有披露周期噪音。\n- **NaN处理**: 使用if_else将缺失的波动值视为0贡献，避免低估总能量。\n- **方向性**: 高值表示该股票相对于同行业存在异常高的分析师意见分歧，往往伴随信息不确定性溢价。",
+    "expression_list": [
+        "group_zscore(ts_sum(if_else(is_nan(signed_power(vec_stddev(ern10_aily_delta_recon_value), 2)), 0, signed_power(vec_stddev(ern10_aily_delta_recon_value), 2)), 20), industry)"
+    ]
+}

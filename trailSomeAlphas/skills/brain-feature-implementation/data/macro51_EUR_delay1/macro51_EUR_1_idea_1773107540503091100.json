@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(abs(subtract(ts_rank(group_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector), 252), 0.5)), 0.4), subtract(ts_rank(group_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), sector), 252), 0.5), 0), 5)",
+    "idea": "**行业中性历史极值捕捉**：先将权重比率在行业内部进行横向分位（group_rank），消除行业间的配置基数差异；再观察该行业相对排名在自身历史（252日）中的时间序列分位（ts_rank）。仅当该分位处于极端区间（top/bottom 10%，即abs(分位-0.5)>0.4）时才触发非零信号，最后通过5日线性衰减（ts_decay_linear）平滑以降低换手率。该模板捕获的是：某股票在其行业内的相对配置比例达到了历史罕见的极端水平，押注其向行业中枢回归。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(abs(subtract(ts_rank(group_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector), 252), 0.5)), 0.4), subtract(ts_rank(group_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), sector), 252), 0.5), 0), 5)"
+    ]
+}

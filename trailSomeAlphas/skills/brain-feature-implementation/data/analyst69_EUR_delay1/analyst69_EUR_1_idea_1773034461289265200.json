@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63)",
+    "idea": "**Concept**: Cumulative Revision Pressure (Quarterly)\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: 63-day (quarter) sum of daily estimate changes measuring total revision momentum over fiscal quarter\n- **Why This Feature**: Captures persistent directional pressure vs. noise; large absolute values indicate sustained analyst sentiment shift\n- **Logical Meaning**: Total adjustment to earnings expectations over a fiscal quarter; proxy for information arrival intensity\n- **is filling nan necessary**: Daily changes should be calculated on backfilled series to avoid summing false zeros; use ts_backfill(5) on level data before differencing.\n- **Directionality**: Large positive indicates sustained upgrades; large negative indicates sustained downgrades; near zero indicates mean-reverting noise\n- **Boundary Conditions**: Cumulative values plateau when estimates stabilize; inflection points often lead price momentum",
+    "expression_list": [
+        "ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63)",
+        "ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63)"
+    ]
+}

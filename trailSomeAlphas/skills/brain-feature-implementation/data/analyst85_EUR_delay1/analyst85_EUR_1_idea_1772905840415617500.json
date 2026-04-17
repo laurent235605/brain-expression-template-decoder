@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_delta(vec_avg({version}), 5), inverse(add(1, s_log_1p(ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20)))))",
+    "idea": "融合模板1的动量方向与模板2的修订频率的倒数，构建'低频高动量'因子。使用s_log_1p压缩模板2累积强度的长尾，加1后取inverse，使得分析师修订过于频繁（可能过热）时自动降低权重，捕捉稳定趋势中的机会，避免高churn环境下的踩踏陷阱。",
+    "expression_list": [
+        "multiply(ts_delta(vec_avg(anl85_version), 5), inverse(add(1, s_log_1p(ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20)))))"
+    ]
+}

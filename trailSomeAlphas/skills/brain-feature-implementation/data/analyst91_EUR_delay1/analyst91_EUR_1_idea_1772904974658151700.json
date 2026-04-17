@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(vec_skewness({exposure_value}), 20) - s_log_1p(vec_avg({exposure_value})), sector)",
+    "idea": "计算20日平均地理集中度（偏度）与对数压缩后的平均敞口水平之间的差异，并在行业内标准化。捕捉\"结构分化\"信号：当公司变得高度集中于少数区域（高偏度）但平均敞口保持平稳（或相反）时产生alpha，融合模板1的偏度时序分析与模板2的组内比较框架，识别地理策略的质变性背离。",
+    "expression_list": [
+        "group_zscore(ts_mean(vec_skewness(anl91_exposure_value), 20) - s_log_1p(vec_avg(anl91_exposure_value)), sector)"
+    ]
+}

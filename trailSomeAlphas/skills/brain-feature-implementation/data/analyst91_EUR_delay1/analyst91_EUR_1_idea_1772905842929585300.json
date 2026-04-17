@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 20), 252), industry), 3)",
+    "idea": "引入时序差分算子ts_delta捕捉波动率的变化速率（加速度）而非绝对水平，识别业务结构的突变拐点；结合模板1的年度Z-Score标准化与模板2的行业中性化，并通过模板1的立方变换极度放大加速恶化或加速改善的极端信号。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(ts_delta(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 20), 252), industry), 3)"
+    ]
+}

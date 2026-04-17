@@ -1,0 +1,7 @@
+{
+    "template": "hump(winsorize(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), std=3), hump=0.01)",
+    "idea": "换手率稳定化流信号：在模板1的基础上引入hump算子(hump=0.01)，忽略每日微小波动，仅在流偏离度发生显著变化时调整权重，有效控制信号换手率，适合作为低频Alpha叠加。",
+    "expression_list": [
+        "hump(winsorize(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), std=3), hump=0.01)"
+    ]
+}

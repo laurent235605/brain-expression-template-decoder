@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_sum(right_tail(vec_avg({aily_delta_recon_value}), 0), 20), add(multiply(ts_sum(left_tail(vec_avg({aily_delta_recon_value}), 0), 20), -1), 0.0001))",
+    "idea": "多空修订力量不对称比率。将20日内的正向修订（右尾，>=0）累积值与负向修订绝对值（左尾，<=0取反后）累积值相除，构建情绪强度比。极高值表示分析师升级压力远强于降级（单边乐观共识），接近1表示多空力量平衡（分歧状态），低于1表示降级主导。该指标分离了多头与空头分析师的力量对比，识别极端情绪下的预期失衡。",
+    "expression_list": [
+        "divide(ts_sum(right_tail(vec_avg(ern10_aily_delta_recon_value), 0), 20), add(multiply(ts_sum(left_tail(vec_avg(ern10_aily_delta_recon_value), 0), 20), -1), 0.0001))"
+    ]
+}

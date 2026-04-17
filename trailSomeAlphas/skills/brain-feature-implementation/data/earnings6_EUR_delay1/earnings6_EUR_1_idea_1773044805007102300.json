@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( left_tail( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), -0.05 ), industry )",
+    "idea": "专向提取极端负向盈利惊喜（left_tail截断，保留<=-0.05的显著负向Surprise），结合模板2的条件化计算与模板1的行业标准化，构建用于风险警示或反向做空的行业相对业绩暴雷识别因子。",
+    "expression_list": [
+        "group_zscore( left_tail( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), -0.05 ), industry )",
+        "group_zscore( left_tail( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), -0.05 ), industry )"
+    ]
+}

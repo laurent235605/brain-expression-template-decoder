@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(quantile(group_zscore(subtract(zscore(winsorize({active_return_decile_rank_long},4)), zscore(winsorize({active_weight_decile_rank_long},4))), industry), \"gaussian\"), 5)",
+    "idea": "行业中性化Z-score分歧高斯变换。先对原始分位数进行极值清洗（winsorize）和标准化（zscore），计算截面分歧后，在行业内部进行Z-score标准化以剔除行业基准差异，再通过高斯分位数（quantile）拉伸极端尾部增强辨识度，最后经5日线性衰减（ts_decay_linear）控制换手。适用于捕捉行业内相对定价偏离的稳健信号，避免行业轮动干扰。",
+    "expression_list": [
+        "ts_decay_linear(quantile(group_zscore(subtract(zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long,4)), zscore(winsorize(insd8_active_weight_decile_rank_long,4))), industry), \"gaussian\"), 5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract({newa1_ib}, {newa2_oancf}), {cptnewq_atq})",
+    "idea": "**Concept**: Accruals Quality Ratio\n- **Sample Fields Used**: `newa1_ib`, `newa2_oancf`\n- **Definition**: The difference between accrual-based earnings and cash-based earnings, normalized by total assets, measuring accounting discretion.\n- **Why This Feature**: High accruals predict future earnings reversals and lower persistence; this captures the \"non-cash\" component of earnings that requires validation.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example. Cash flow and net income are both critical; missing either creates undefined accruals, requiring backfill or exclusion.\n- **Directionality**: High positive values (accruals > cash) predict negative future returns (accrual anomaly); negative values suggest conservative accounting or cash realization ahead of recognition.\n- **Boundary Conditions**: Distressed firms with negative earnings and positive cash flows create extreme negative ratios; hyper-growth firms show high positive accruals.",
+    "expression_list": [
+        "divide(subtract(fnd6_newa1_ib, fnd6_newa2_oancf), fnd6_cptnewq_atq)",
+        "divide(subtract(fnd6_newa1_ibc, fnd6_newa2_oancf), fnd6_cptnewq_atq)"
+    ]
+}

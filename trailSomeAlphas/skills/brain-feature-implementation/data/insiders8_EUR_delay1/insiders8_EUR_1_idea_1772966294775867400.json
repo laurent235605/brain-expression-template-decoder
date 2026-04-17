@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector)), 1.5), group_zscore(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), 0)",
+    "idea": "仅当收益-权重分歧超过1.5倍行业标准差（极端尾部）时才保留信号，其余区间视为噪音并置零，实现“极端偏离才交易”的择时逻辑，避免轻微分歧带来的假信号。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector)), 1.5), group_zscore(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector), 0)"
+    ]
+}

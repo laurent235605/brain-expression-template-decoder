@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(less(days_from_last_change(vec_avg({elta_value})), 5), group_zscore(winsorize(ts_delta(vec_avg({elta_value}), 5), std=4), industry), 0), 10)",
+    "idea": "事件驱动型信号构建：仅当平均预期在过去5天内发生过实际更新（days_from_last_change < 5）时才开仓，避免陈旧数据干扰，信号经行业内标准化后采用10日半衰期线性衰减，捕捉分析师修订后的市场缓慢反应过程并控制组合换手。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(less(days_from_last_change(vec_avg(ern10_elta_value)), 5), group_zscore(winsorize(ts_delta(vec_avg(ern10_elta_value), 5), std=4), industry), 0), 10)"
+    ]
+}

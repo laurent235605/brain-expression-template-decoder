@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(ts_backfill(vec_avg({vda}), lookback=5, k=1), 20)",
+    "idea": "**Concept**: Liquidity Pressure Acceleration\n- **Sample Fields Used**: vda\n- **Definition**: Rate of change in VDA between consecutive rebalance announcements to detect intensifying liquidity constraints\n- **Why This Feature**: Accelerating VDA suggests deteriorating market structure or increasing index concentration; deceleration suggests improving liquidity or reduced index weight\n- **is filling nan necessary**: Yes, use ts_backfill to ensure delta captures true sequential rebalance events rather than calendar time gaps.\n- **Directionality**: Positive values indicate worsening liquidity impact (increasing days of volume); negative values indicate improving capacity to absorb rebalances\n- **Boundary Conditions**: Large positive jumps (>1.0 day increase) signal potential liquidity crises; consistent negative trends suggest declining index relevance or improving market depth",
+    "expression_list": [
+        "ts_delta(ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else(greater_equal(vec_avg({quintile}), 3), 1, 0), 60) * (vec_avg({quintile}) / vec_avg({quintile}))",
+    "idea": "**Concept**: Consecutive High Quintile Streak\n- **Sample Fields Used**: `mdl249_quintile`\n- **Definition**: Count of consecutive days in quintile 4 or 5, resetting to 0 when dropping below\n- **Why This Feature**: M&A speculation often builds over consecutive sessions; long streaks indicate persistent market narrative or accumulating strategic interest\n- **is filling nan necessary**: Yes, NaN should break the streak (unknown status). Do not backfill; treat NaN as non-qualifying for streak.\n- **Logical Meaning**: Duration of continuous high-probability classification; measures persistence of acquisition narrative\n- **Directionality**: Higher values indicate longer uninterrupted periods of high likelihood; 0 indicates current low likelihood or broken streak\n- **Boundary Conditions**: Maximum theoretical 60 (full window); values > 20 indicate extended speculation; 0 indicates recent downgrade",
+    "expression_list": [
+        "ts_sum(if_else(greater_equal(vec_avg(mdl249_quintile), 3), 1, 0), 60) * (vec_avg(mdl249_quintile) / vec_avg(mdl249_quintile))"
+    ]
+}

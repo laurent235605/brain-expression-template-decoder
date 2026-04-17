@@ -1,0 +1,8 @@
+{
+    "template": "group_rank(s_log_1p(winsorize(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),std=4)),industry)",
+    "idea": "对残差进行对数压缩(s_log_1p)处理，在不改变正负方向的前提下压缩极值尾部距离，降低个别极端数据错误对排序的干扰；随后在行业内部进行分位数排名(group_rank)，得到[0,1]均匀分布的相对排序信号，适用于追求行业内部均衡配置的场景。",
+    "expression_list": [
+        "group_rank(s_log_1p(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),std=4)),industry)",
+        "group_rank(s_log_1p(winsorize(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),std=4)),industry)"
+    ]
+}

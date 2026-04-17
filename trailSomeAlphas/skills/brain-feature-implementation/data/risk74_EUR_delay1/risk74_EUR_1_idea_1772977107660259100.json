@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(winsorize(ts_mean(ts_backfill({exp_usa}, 21), 5), std=4), winsorize(ts_mean(ts_backfill({exp_chn}, 21), 5), std=4)), industry), 10)",
+    "idea": "对中美敞口原始差值先进行5日移动平均平滑以降低短期噪音，再进行行业中性标准化，最后应用10日线性衰减加权以平衡信号稳定性与对近期变化的敏感度，捕捉地缘政治轮动的持续趋势而非单日异动，显著降低换手率。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(winsorize(ts_mean(ts_backfill(rsk74_raw_exp_usa, 21), 5), std=4), winsorize(ts_mean(ts_backfill(rsk74_raw_exp_chn, 21), 5), std=4)), industry), 10)"
+    ]
+}

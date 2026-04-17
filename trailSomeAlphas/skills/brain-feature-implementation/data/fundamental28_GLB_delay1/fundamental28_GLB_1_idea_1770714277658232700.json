@@ -1,0 +1,10 @@
+{
+    "template": "hump_decay(winsorize(ts_regression(ts_mean(winsorize(ts_backfill({value_08251q},63),std=4),63), log(ts_mean(winsorize(ts_backfill({value_02300q},63),std=4),63)), 252, rettype=0), std=4), hump=0.02)",
+    "idea": "强调持续性运营效率而非单季度异常：对输入变量先进行63日移动平均平滑，再进行回归中性化提取残差，最后通过hump_decay控制残差的日度变化幅度（忽略微小波动）。该模板旨在降低换手率，捕捉“可持续的、稳定的规模调整覆盖优势”。",
+    "expression_list": [
+        "hump_decay(winsorize(ts_regression(ts_mean(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4),63), log(ts_mean(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4),63)), 252, rettype=0), std=4), hump=0.02)",
+        "hump_decay(winsorize(ts_regression(ts_mean(winsorize(ts_backfill(fnd28_newq_value_08251q,63),std=4),63), log(ts_mean(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4),63)), 252, rettype=0), std=4), hump=0.02)",
+        "hump_decay(winsorize(ts_regression(ts_mean(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4),63), log(ts_mean(winsorize(ts_backfill(fnd28_bsassetq_value_02300q,63),std=4),63)), 252, rettype=0), std=4), hump=0.02)",
+        "hump_decay(winsorize(ts_regression(ts_mean(winsorize(ts_backfill(fnd28_ratesq_value_08251q,63),std=4),63), log(ts_mean(winsorize(ts_backfill(fnd28_nddq1_value_02300q,63),std=4),63)), 252, rettype=0), std=4), hump=0.02)"
+    ]
+}

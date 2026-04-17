@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(group_rank({shortint}, industry), 0.8), multiply(-1, group_zscore(ts_decay_linear(ts_delta({shortint}, 1), 10), industry)), 0)",
+    "idea": "**概念**: 高空头仓位下的轧空捕捉（Squeeze Setup）\n- **逻辑**: 仅关注行业内部空头仓位已处于前20%的高做空拥挤股票（greater + group_rank），在此基础上捕捉近期（10日指数衰减加权）的空头回补行为（负向delta），作为潜在的轧空信号\n- **条件过滤**: 使用trade_when确保只在高SI环境下交易，避免在低SI股票中的噪音干扰\n- **方向性**: 正值表示高做空股票出现行业相对层面的空头回补（看多/轧空）；零值表示不符合条件，不持仓",
+    "expression_list": [
+        "trade_when(greater(group_rank(rsk74_shortint, industry), 0.8), multiply(-1, group_zscore(ts_decay_linear(ts_delta(rsk74_shortint, 1), 10), industry)), 0)",
+        "trade_when(greater(group_rank(rsk74_shortint_ts, industry), 0.8), multiply(-1, group_zscore(ts_decay_linear(ts_delta(rsk74_shortint_ts, 1), 10), industry)), 0)"
+    ]
+}

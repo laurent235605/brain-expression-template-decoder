@@ -1,0 +1,10 @@
+{
+    "template": "subtract(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), group_zscore(days_from_last_change({eps_expected_report_dt}), industry))",
+    "idea": "**分组相对不确定性调整**：将两个原始信号分别进行行业内标准化(group_zscore)后相减。逻辑是：高修正动量若伴随低日期稳定性(高不确定性)，其可靠性应被惩罚。通过截面运算符实现\"可靠修正=高修正-高不确定性\"的算术逻辑，确保信号在行业内部可比且方向正确。",
+    "expression_list": [
+        "subtract(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), group_zscore(days_from_last_change(anl69_aeps_expected_report_dt), industry))",
+        "subtract(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), group_zscore(days_from_last_change(anl69_aeps_expected_report_dt), industry))",
+        "subtract(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), group_zscore(days_from_last_change(anl69_eps_expected_report_dt), industry))",
+        "subtract(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), group_zscore(days_from_last_change(anl69_eps_expected_report_dt), industry))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "{overall_score} - {intangible_exposure_score}",
+    "idea": "**Concept**: Intangible-Heavy Quality Discount\n- **Sample Fields Used**: `intangible_exposure_score`, `overall_score`\n- **Definition**: Relative penalty applied to overall quality score when intangible asset exposure is high, measuring \"soft asset\" risk premium\n- **Why This Feature**: High intangible exposure combined with low quality scores indicates potential goodwill impairment or R&D write-off risks; high quality with high intangibles indicates moat durability\n- **is filling nan necessary**: Yes, use ts_backfill for missing exposure scores, limited to 2 days due to quarterly updates\n- **Directionality**: Negative values (quality < exposure) indicate overvalued intangibles; Positive values indicate defensible intellectual property\n- **Boundary Conditions**: Extreme negative values indicate \"value traps\" with overstated intangible assets; High positive values indicate quality intangible-heavy compounders",
+    "expression_list": [
+        "mdl255_overall_score - mdl255_intangible_exposure_score"
+    ]
+}

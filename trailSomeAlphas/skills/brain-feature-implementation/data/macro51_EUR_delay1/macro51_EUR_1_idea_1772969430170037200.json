@@ -1,0 +1,7 @@
+{
+    "template": "hump( group_scale( if_else( or( greater( bucket( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), \"0,1,0.1\" ), 8 ), less( bucket( rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) ), \"0,1,0.1\" ), 2 ) ), signed_power( ts_zscore( ts_delta( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 63 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 252 ), 1.5 ), 0 ), industry ), hump=0.005 )",
+    "idea": "动量调整与分桶离散化版。引入63日权重变化率(ts_delta)经252日Zscore标准化，捕捉配置趋势的加速度而非仅静态水平，使用signed_power强调动量信号；采用bucket将股票分为10档离散化排序，仅保留最高两档(8-9)和最低两档(0-1)暴露，中间档视为噪音；添加hump(0.5%)控制日间微小波动导致的频繁调仓，group_scale确保行业内权重线性分布于[0,1]区间。",
+    "expression_list": [
+        "hump( group_scale( if_else( or( greater( bucket( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), \"0,1,0.1\" ), 8 ), less( bucket( rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) ), \"0,1,0.1\" ), 2 ) ), signed_power( ts_zscore( ts_delta( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 63 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 252 ), 1.5 ), 0 ), industry ), hump=0.005 )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "subtract(multiply(ts_delta(vec_avg({rank}), 5), inverse(ts_std_dev(vec_avg({rank}), 20))), multiply(ts_delta(vec_avg({rank}), 20), inverse(ts_std_dev(vec_avg({rank}), 60))))",
+    "idea": "**概念**: 双时间尺度波动率调整动量差分\n- **融合逻辑**: 扩展模板2的单一时标逻辑，构建短期(5d)与长期(20d)经各自历史波动率(20d vs 60d)调整后的动量差值。识别\"近期加速\"vs\"长期趋势\"的背离。\n- **跨模板借鉴**: 使用模板1的\"多日累积/变化\"思想，但改为对比两个不同时间窗口的波动率调整动量；短期动量强于长期时做多（负值表示排名数字下降，即排名改善）。\n- ** regime change 检测**: 当分母波动率窗口长度差异（20 vs 60）与分子匹配时，能有效识别波动率 regime 的变化；适合发现从稳定到活跃或反之的拐点。\n- **中性化效果**: 相减结构天然具有某种自中性化特性，降低整体波动，可作为其他因子的叠加增强器。",
+    "expression_list": [
+        "subtract(multiply(ts_delta(vec_avg(mdl245_rank), 5), inverse(ts_std_dev(vec_avg(mdl245_rank), 20))), multiply(ts_delta(vec_avg(mdl245_rank), 20), inverse(ts_std_dev(vec_avg(mdl245_rank), 60))))"
+    ]
+}

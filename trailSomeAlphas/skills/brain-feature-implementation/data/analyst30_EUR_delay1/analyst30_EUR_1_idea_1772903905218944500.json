@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(group_rank(vec_range(vec_filter({fiscalyearend}, nan)), industry), 0.8), group_rank(vec_range(vec_filter({fiscalyearend}, nan)), industry), 0)",
+    "idea": "极端分散同业对标策略：行业内分组排名(group_rank)后，通过trade_when逻辑仅保留离散度最高的前20%群体(右尾)，用于专门捕捉具有复杂子公司架构或正在进行会计期间调整的特殊公司，可单独作为做空标的池或反向构建稳定性因子。",
+    "expression_list": [
+        "trade_when(greater(group_rank(vec_range(vec_filter(anl30_fiscalyearend, nan)), industry), 0.8), group_rank(vec_range(vec_filter(anl30_fiscalyearend, nan)), industry), 0)"
+    ]
+}

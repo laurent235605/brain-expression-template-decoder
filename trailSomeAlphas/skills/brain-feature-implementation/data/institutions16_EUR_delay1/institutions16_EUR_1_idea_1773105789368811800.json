@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_rank(ts_delta(winsorize(ts_backfill({reported_asset_value}, 5), std=4), 20), 60), 0.5), sector)",
+    "idea": "历史分位偏离度：在清洗数据后，计算当前20日资产变化在过去60天历史窗口中的时序分位(ts_rank)，减去0.5使其均值回归至零，再进行行业中性化，识别那些'当前资产增速处于历史极端高位/低位'的个股，而非单纯看绝对变化大小。",
+    "expression_list": [
+        "group_zscore(subtract(ts_rank(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 5), std=4), 20), 60), 0.5), sector)"
+    ]
+}

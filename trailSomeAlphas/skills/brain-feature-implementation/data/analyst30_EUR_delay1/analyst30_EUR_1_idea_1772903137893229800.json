@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(vec_avg({adjustedgrossamt}), std=4), 63), 252)",
+    "idea": "股息增长动量：基于向量均值构建股息水平序列，经 winsorize 清洗后计算63日变化量（捕捉季度性股息上调或初始分红事件），再相对于过去一年（252日）的历史波动进行标准化，得到当前股息增速的异常值（zscore），用于识别股息能力正在加速改善的标的。",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(vec_avg(anl30_adjustedgrossamt), std=4), 63), 252)",
+        "ts_zscore(ts_delta(winsorize(vec_avg(anl30_unadjustedgrossamt), std=4), 63), 252)"
+    ]
+}

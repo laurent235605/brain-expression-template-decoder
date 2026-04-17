@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(quantile(group_rank(divide(ts_mean(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),21),ts_median(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},21),4),126)),group_cartesian_product(industry,bucket(rank(log(ts_mean(cap,21))),\"0,1,0.2\"))),\"gaussian\"),industry)",
+    "idea": "微观分组高斯分位拉伸模板。通过笛卡尔积(group_cartesian_product)构建“行业×市值五档”的微观分组，在组内计算相对排名(group_rank)以消除行业与规模带来的不可比性；随后利用高斯驱动(gaussian driver)的quantile算子将均匀分布的组内排名转换为高斯分布形态，将中间60%的噪音区间压缩至零附近，同时将头尾10%的极端配置偏离拉伸至更远尾部，最后仅进行行业层面的中性归一化，实现更精细的异质性捕捉。",
+    "expression_list": [
+        "group_normalize(quantile(group_rank(divide(ts_mean(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),21),ts_median(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,21),4),126)),group_cartesian_product(industry,bucket(rank(log(ts_mean(cap,21))),\"0,1,0.2\"))),\"gaussian\"),industry)"
+    ]
+}

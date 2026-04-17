@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(ts_regression(ts_sum(ts_delta(winsorize({shortint},4),1),15), ts_sum(returns, 5), 20, rettype=0), industry)",
+    "idea": "**空头-收益残差剥离（beta中性）**：计算15日空头流量变化与5日累积收益的20日滚动回归残差（rettype=0），再进行行业中性化。经济逻辑：空头增加往往伴随股价下跌（负相关），但此模板剥离了市场下跌解释的空头成分，保留\"空头过度增加但股价未充分反应\"或\"空头回补但股价未上涨\"的残差部分，即剔除市场beta后的纯空头情绪alpha，用于捕捉被错误定价的做空/做多机会。",
+    "expression_list": [
+        "group_zscore(ts_regression(ts_sum(ts_delta(winsorize(rsk74_shortint,4),1),15), ts_sum(returns, 5), 20, rettype=0), industry)",
+        "group_zscore(ts_regression(ts_sum(ts_delta(winsorize(rsk74_shortint_ts,4),1),15), ts_sum(returns, 5), 20, rettype=0), industry)"
+    ]
+}

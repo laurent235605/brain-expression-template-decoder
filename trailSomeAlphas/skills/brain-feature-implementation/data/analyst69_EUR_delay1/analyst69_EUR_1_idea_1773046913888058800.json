@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(group_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 0.85), less(group_rank(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), industry), 0.15)), divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 0)",
+    "idea": "将模板2的盈利效率比率与模板1的极端分位筛选结合，并引入分组中性化逻辑：在行业内部对EPS/EBITDA效率比率进行排名(group_rank)，仅交易行业内前15%（极高效率）与后15%（极低效率）的股票，中段置零。此方法消除了不同行业间盈利结构的系统性差异，捕捉行业内的相对效率优势。",
+    "expression_list": [
+        "trade_when(or(greater(group_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.85), less(group_rank(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.15)), divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 0)",
+        "trade_when(or(greater(group_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.85), less(group_rank(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), industry), 0.15)), divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 0)"
+    ]
+}

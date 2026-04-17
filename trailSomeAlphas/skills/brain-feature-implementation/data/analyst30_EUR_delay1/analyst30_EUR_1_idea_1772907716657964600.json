@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(add(vec_kurtosis(vec_filter({fiscalyearend}, \"nan\")), multiply(-3, vec_count(vec_filter({fiscalyearend}, \"nan\")))), 126), industry)",
+    "idea": "峰度-样本量联合惩罚：利用峰度识别财政年度分布中的极端异常值（如特殊会计期间），并减去样本量惩罚项，防止观测值过少的公司因偶然极端值产生虚假的高复杂性信号。",
+    "expression_list": [
+        "group_zscore(ts_mean(add(vec_kurtosis(vec_filter(anl30_fiscalyearend, \"nan\")), multiply(-3, vec_count(vec_filter(anl30_fiscalyearend, \"nan\")))), 126), industry)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(subtract(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), ts_regression(winsorize(ts_backfill({exp_chn}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_chn}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0)), industry)",
+    "idea": "行业组内残差再平衡：先分别对中美敞口进行双重残差提纯(剔除行业+非本土影响)，再求价差，最后进行行业内二次Z-Score标准化。实现双重中性化：既控制了行业混杂，又在行业内重新标准化确保可比性，适用于行业结构差异极大的市场环境。",
+    "expression_list": [
+        "group_zscore(subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0)), industry)",
+        "group_zscore(subtract(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), ts_regression(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_chn, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0)), industry)"
+    ]
+}

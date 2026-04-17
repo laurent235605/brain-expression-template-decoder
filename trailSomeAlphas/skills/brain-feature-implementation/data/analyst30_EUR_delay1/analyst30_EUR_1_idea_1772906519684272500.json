@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(winsorize(subtract(vec_count({currency_code}), vec_count({fiscalyearend})), std=4), {industry})",
+    "idea": "净结构复杂度因子：货币分散度减去财务变更次数（经过去极值），再经行业内中性化。正向暴露表示纯粹由业务全球化驱动的复杂度（币种多但财务稳），负向暴露暗示会计混乱主导的伪复杂度，实现行业内的可比风险剥离。",
+    "expression_list": []
+}

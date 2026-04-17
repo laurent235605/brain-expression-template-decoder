@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(quantile(winsorize(ts_regression(ts_sum(ts_delta({shortint},1),15),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),driver=\"gaussian\"),252)",
+    "idea": "对行业中性残差先进行高斯分位数变换（压缩中间区间、拉伸尾部），再计算时序Z-score，增强对极端空头异动的敏感度，同时保持稳健性，避免少数极端值主导。",
+    "expression_list": [
+        "ts_zscore(quantile(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),driver=\"gaussian\"),252)",
+        "ts_zscore(quantile(winsorize(ts_regression(ts_sum(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),driver=\"gaussian\"),252)"
+    ]
+}

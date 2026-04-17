@@ -1,0 +1,14 @@
+{
+    "template": "group_zscore(trade_when(and(not(is_nan({exp_nondomicile1})), less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05)), ts_delta(winsorize({concentration},std=4), 20), 0), industry)",
+    "idea": "数据验证门控的集中度动量：将输入1的双源一致性检验逻辑作为输入2集中度Delta信号的交易开关，仅在{exp_nondomicile1}与{exp_nondomicile2}差异小于5%且非缺失时，才计算{concentration}的20日变化量，并在行业内标准化。通过数据质量过滤降低动量信号的测量误差。",
+    "expression_list": [
+        "group_zscore(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_raw_exp_nondomicile1)), less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 0), industry)",
+        "group_zscore(trade_when(and(not(is_nan(rsk74_std_exp_nondomicile1)), less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05)), ts_delta(winsorize(rsk74_concentration,std=4), 20), 0), industry)"
+    ]
+}

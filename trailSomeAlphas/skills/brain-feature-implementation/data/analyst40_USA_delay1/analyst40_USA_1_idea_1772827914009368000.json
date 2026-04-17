@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), sector)",
+    "idea": "稳定性改善动量因子：对比20日短期与60日长期波动率差异，识别治理结构趋于稳定（短期波动率低于长期，差值为负）或趋于动荡（差值为正）的公司。通过组内标准化消除行业固有差异，负值代表稳定性正在改善（政策执行一致性增强），正值代表稳定性恶化，可直接作为动量或反转信号使用，体现时序维度的治理质量变化。",
+    "expression_list": [
+        "group_zscore(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), sector)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "{momentum} / (signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({value_ts}, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({earnyild}, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({hfown_pctown}, 63), 1), std=3), 20), sector), 0.5) + 0.0001)",
+    "idea": "将输入2的持仓流量处理结果作为第三维度加入输入1的分母，构建价值+盈利+流量的三维防御性分母。当机构持续增持（流量因子极高）时，自动提高估值门槛，仅保留经持仓流量验证的估值修复机会；当机构减持时，分母收缩，放大低估值信号的敏感度，实现动态估值-流量双重过滤。",
+    "expression_list": [
+        "rsk74_momentum / (signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_value_ts, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_earnyild, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5) + 0.0001)",
+        "rsk74_momentum_ts / (signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_value_ts, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_earnyild, 63), 1), std=3), 20), sector), 0.5) + signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(rsk74_hfown_pctown, 63), 1), std=3), 20), sector), 0.5) + 0.0001)"
+    ]
+}

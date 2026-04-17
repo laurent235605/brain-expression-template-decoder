@@ -1,0 +1,7 @@
+{
+    "template": "multiply(signed_power(group_zscore(vec_stddev(vec_filter({fiscalyearend}, value=\"nan\")), sector), 1.5), add(1, trade_when(less(days_from_last_change(vec_count(vec_filter({fiscalyearend}, value=\"nan\"))), 21), 0.5, 0)))",
+    "idea": "事件驱动增强模型：基础信号为行业内会计年度标准差的1.5次幂非线性放大；当检测到21天内发生过实体数量变更（并购、剥离或重组，通过days_from_last_change监控vec_count变化）时，权重乘数增加50%。该设计捕捉重组后财报整合风险最高的窗口期，静态结构下则保持基准暴露，避免持续高换手。",
+    "expression_list": [
+        "multiply(signed_power(group_zscore(vec_stddev(vec_filter(anl30_fiscalyearend, value=\"nan\")), sector), 1.5), add(1, trade_when(less(days_from_last_change(vec_count(vec_filter(anl30_fiscalyearend, value=\"nan\"))), 21), 0.5, 0)))"
+    ]
+}

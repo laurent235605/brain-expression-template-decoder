@@ -1,0 +1,16 @@
+{
+    "template": "trade_when(less(ts_rank(winsorize({nondomicile},std=4), 60), 0.2), group_zscore(ts_delta(winsorize({concentration},std=4), 20), industry), 0)",
+    "idea": "低海外敞口下的集中风险：反转输入2的触发条件，当{nondomicile}处于60日历史后20%分位（极低海外收入）时，才对{concentration}的20日行业标准化动量进行交易。捕捉缺乏海外分散的'内向型'集中风险，与原版高敞口风险形成截面互补。",
+    "expression_list": [
+        "trade_when(less(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 0)",
+        "trade_when(less(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), 0.2), group_zscore(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), industry), 0)"
+    ]
+}

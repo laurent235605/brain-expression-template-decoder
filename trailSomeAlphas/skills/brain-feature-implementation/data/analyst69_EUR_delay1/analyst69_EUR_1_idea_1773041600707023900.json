@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(group_zscore(ts_std_dev({eps_best_eeps_cur_yr}, 126), industry), -0.5), signed_power(quantile({eps_best_eeps_cur_yr}, driver=gaussian), 1.2), multiply(0.5, quantile({eps_best_eeps_cur_yr}, driver=gaussian)))",
+    "idea": "**高确信度预期溢价 (High-Conviction Expectation Premium)**\n- **逻辑**：当分析师对某股票的盈利预期分歧度（126日标准差）处于行业低位时，代表高确信度，此时使用signed_power放大预期水平信号（非线性增强）；高分歧时降低权重至0.5倍，过滤噪音。\n- **关键操作**：ts_std_dev衡量预期离散度，group_zscore识别行业内的低分歧个股，trade_when实现条件式仓位调整。\n- **适用场景**：适用于分歧度与预测准确性负相关的市场，强调共识形成的预期更具价值。",
+    "expression_list": [
+        "trade_when(less(group_zscore(ts_std_dev(anl69_aeps_best_eeps_cur_yr, 126), industry), -0.5), signed_power(quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian), 1.2), multiply(0.5, quantile(anl69_aeps_best_eeps_cur_yr, driver=gaussian)))",
+        "trade_when(less(group_zscore(ts_std_dev(anl69_eps_best_eeps_cur_yr, 126), industry), -0.5), signed_power(quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian), 1.2), multiply(0.5, quantile(anl69_eps_best_eeps_cur_yr, driver=gaussian)))"
+    ]
+}

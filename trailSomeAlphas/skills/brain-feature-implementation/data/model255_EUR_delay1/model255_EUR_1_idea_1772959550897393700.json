@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(subtract(group_zscore(winsorize(ts_backfill({overall_score},2),std=4), sector), group_zscore(winsorize(ts_backfill({intangible_exposure_score},2),std=4), sector)), sector), 1.5)",
+    "idea": "行业中性非线性增强模板：通过行业内标准化消除行业差异（如科技股与制造业的无形资产基线差异），对偏离度应用1.5次幂非线性变换，显著放大极端正向偏离（护城河型资产）和极端负向偏离（价值陷阱）的收益贡献，压缩中间温和差异的噪音。",
+    "expression_list": [
+        "signed_power(group_zscore(subtract(group_zscore(winsorize(ts_backfill(mdl255_overall_score,2),std=4), sector), group_zscore(winsorize(ts_backfill(mdl255_intangible_exposure_score,2),std=4), sector)), sector), 1.5)"
+    ]
+}

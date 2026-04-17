@@ -1,0 +1,7 @@
+{
+    "template": "ls_grp = group_zscore(winsorize(vec_avg(ts_backfill({likelihood_score}, 63)), std=4), industry)\nret_grp = group_zscore(winsorize(divide(vec_avg(ts_backfill({exit_price}, 63)), vec_avg(ts_backfill({openprice}, 63))), std=4), industry)\nls_mean = ts_mean(ls_grp, 30)\nret_mean = ts_mean(ret_grp, 30)\ndivergence = subtract(ls_grp, multiply(ls_mean, divide(ret_grp, ret_mean)))\ncore = group_zscore(winsorize(divergence, std=4), industry)",
+    "idea": "行业中性化分歧模板：针对概率得分与收益预期在不同行业间存在水平差异的问题，先进行行业内标准化（group_zscore），消除行业固定效应。在行业内部计算概率-价格分歧度，再次进行行业内标准化，确保信号仅反映行业内的相对定价偏差，避免行业配置偏差。",
+    "expression_list": [
+        "ls_grp = group_zscore(winsorize(vec_avg(ts_backfill(success_likelihood_score, 63)), std=4), industry)\nret_grp = group_zscore(winsorize(divide(vec_avg(ts_backfill(expected_exit_price, 63)), vec_avg(ts_backfill(anl90_openprice, 63))), std=4), industry)\nls_mean = ts_mean(ls_grp, 30)\nret_mean = ts_mean(ret_grp, 30)\ndivergence = subtract(ls_grp, multiply(ls_mean, divide(ret_grp, ret_mean)))\ncore = group_zscore(winsorize(divergence, std=4), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(vec_skewness(vec_filter({aily_delta_recon_value}, value=\"nan\")), 0), multiply(vec_stddev(vec_filter({aily_delta_recon_value}, value=\"nan\")), vec_skewness(vec_filter({aily_delta_recon_value}, value=\"nan\"))), multiply(vec_stddev(vec_filter({aily_delta_recon_value}, value=\"nan\")), 0.5))",
+    "idea": "**概念**: 非对称波动率溢价（Skewness-Adjusted Volatility）\n- **改进逻辑**: 同时提取vec_stddev（波动幅度）与vec_skewness（分布偏度）；利用if_else条件逻辑：当偏度为正（极端正面修订/上调风险）时，将波动率乘以偏度放大信号；当偏度为负或中性时，仅保留0.5倍波动率作为基准。该构造区分了\"高波动伴随极端好消息\"与\"高波动伴随极端坏消息\"，将原始无关方向的能量转化为方向性alpha。\n- **适用场景**: 需要区分修订波动背后方向性_bias_的场景，适用于允许方向性博弈的策略。",
+    "expression_list": [
+        "if_else(greater(vec_skewness(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), 0), multiply(vec_stddev(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), vec_skewness(vec_filter(ern10_aily_delta_recon_value, value=\"nan\"))), multiply(vec_stddev(vec_filter(ern10_aily_delta_recon_value, value=\"nan\")), 0.5))"
+    ]
+}

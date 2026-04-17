@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(signed_power(subtract(divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), 1), 1.5), industry)",
+    "idea": "对模板1的股息持续性因子使用signed_power(1.5)非线性放大极端偏离程度（以1为中性点），强化识别分红政策发生结构性变化的公司，同时保持行业中性化，适用于捕捉分红行为的显著拐点信号。",
+    "expression_list": [
+        "group_zscore(signed_power(subtract(divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), 1), 1.5), industry)",
+        "group_zscore(signed_power(subtract(divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), 1), 1.5), industry)",
+        "group_zscore(signed_power(subtract(divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), 1), 1.5), industry)",
+        "group_zscore(signed_power(subtract(divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), 1), 1.5), industry)"
+    ]
+}

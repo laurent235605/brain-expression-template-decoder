@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(divide(vec_avg({aily_delta_recon_value}), add(vec_stddev({aily_delta_recon_value}), 0.001)), 63), std=4), 20)), 1.5), ts_zscore(winsorize(ts_backfill(divide(vec_avg({aily_delta_recon_value}), add(vec_stddev({aily_delta_recon_value}), 0.001)), 63), std=4), 20), 0), ts_decay_linear(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)), 3))",
+    "idea": "波动率调整的信息比率信号：使用vec_avg与vec_stddev构建信息比率（均值/标准差），过滤掉高波动低质量的修正噪音；对新鲜度权重应用ts_decay_linear（3日窗口）进行平滑处理，避免天数变化导致的权重跳跃，实现更稳定的持仓过渡。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(ts_zscore(winsorize(ts_backfill(divide(vec_avg(ern10_aily_delta_recon_value), add(vec_stddev(ern10_aily_delta_recon_value), 0.001)), 63), std=4), 20)), 1.5), ts_zscore(winsorize(ts_backfill(divide(vec_avg(ern10_aily_delta_recon_value), add(vec_stddev(ern10_aily_delta_recon_value), 0.001)), 63), std=4), 20), 0), ts_decay_linear(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)), 3))"
+    ]
+}

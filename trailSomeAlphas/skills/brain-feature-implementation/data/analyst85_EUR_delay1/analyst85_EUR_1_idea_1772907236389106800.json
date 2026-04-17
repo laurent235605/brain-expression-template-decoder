@@ -1,0 +1,7 @@
+{
+    "template": "if_else(greater(group_rank(vec_stddev({version}), industry), 0.9), signed_power(zscore(ts_delta(vec_avg({version}), 5)), 2), if_else(less(group_rank(vec_stddev({version}), industry), 0.1), multiply(-1, signed_power(zscore(ts_delta(vec_avg({version}), 5)), 2)), multiply(0.3, zscore(ts_delta(vec_avg({version}), 5)))))",
+    "idea": "分位数非线性响应：针对不同分歧分位区间应用差异化响应（前10%强正向放大、后10%强反向、中间压缩至30%权重），体现'只在极端分歧时信号有效'的区间结构逻辑，避免中段噪音干扰。",
+    "expression_list": [
+        "if_else(greater(group_rank(vec_stddev(anl85_version), industry), 0.9), signed_power(zscore(ts_delta(vec_avg(anl85_version), 5)), 2), if_else(less(group_rank(vec_stddev(anl85_version), industry), 0.1), multiply(-1, signed_power(zscore(ts_delta(vec_avg(anl85_version), 5)), 2)), multiply(0.3, zscore(ts_delta(vec_avg(anl85_version), 5)))))"
+    ]
+}

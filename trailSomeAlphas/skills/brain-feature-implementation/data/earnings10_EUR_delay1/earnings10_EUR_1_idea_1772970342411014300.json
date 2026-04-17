@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(divide(ts_sum(vec_avg({aily_delta_recon_value}), 20), add(ts_sum(vec_stddev({aily_delta_recon_value}), 20), 0.0001)), 126)",
+    "idea": "风险调整后的修订强度（信息比率版）。通过将20日累计平均修订值除以同期修订波动率（标准差之和），构造分析师修订的信噪比指标，再进行6个月（126日）的横截面Z-Score标准化。高值表示分析师以低分歧、高确信度持续上调预期，低值或负值表示下调预期或意见高度分歧，有效识别具备统计显著性的预期趋势。",
+    "expression_list": [
+        "ts_zscore(divide(ts_sum(vec_avg(ern10_aily_delta_recon_value), 20), add(ts_sum(vec_stddev(ern10_aily_delta_recon_value), 20), 0.0001)), 126)"
+    ]
+}

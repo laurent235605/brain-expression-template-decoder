@@ -1,0 +1,14 @@
+{
+    "template": "group_zscore(multiply(ts_delta(winsorize({concentration},std=4), 20), trade_when(less(abs(subtract({exp_nondomicile1}, {exp_nondomicile2})), 0.05), 1, 0.5)), industry)",
+    "idea": "行业内质量分级风险信号：根据双源一致性（差异<5%）对集中度变化赋予1倍或0.5倍权重，再在行业内标准化。质量高的信号获得全额暴露，质量存疑信号减半，实现测量误差的软着陆。",
+    "expression_list": [
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_raw_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_std_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), 1, 0.5)), industry)",
+        "group_zscore(multiply(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), trade_when(less(abs(subtract(rsk74_std_exp_nondomicile1, rsk74_raw_exp_nondomicile2)), 0.05), 1, 0.5)), industry)"
+    ]
+}

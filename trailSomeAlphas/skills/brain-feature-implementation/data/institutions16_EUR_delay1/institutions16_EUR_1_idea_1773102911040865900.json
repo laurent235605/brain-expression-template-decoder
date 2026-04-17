@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(vector_neut(ts_decay_linear(winsorize(ts_backfill({fundreportedequityassets},63),std=4), 10), ts_decay_linear(winsorize(ts_backfill({reported_asset_value},63),std=4), 10)), industry)",
+    "idea": "在计算残差前，先对权益配置和报告资产分别进行10日线性衰减平滑，消除短期脉冲式报告噪音，再进行行业中性化。相比原模板的事后衰减，此结构更早地\"净化\"了输入数据，适合处理高频报告波动较大的场景，是数据预处理与趋势捕捉的交叉创新。",
+    "expression_list": [
+        "group_zscore(vector_neut(ts_decay_linear(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), 10), ts_decay_linear(winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 10)), industry)"
+    ]
+}

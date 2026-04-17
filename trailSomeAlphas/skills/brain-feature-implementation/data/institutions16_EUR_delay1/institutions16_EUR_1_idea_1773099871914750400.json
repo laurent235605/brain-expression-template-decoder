@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 60)), 1.5), ts_regression(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 0), 3), sector)",
+    "idea": "历史极端偏离检测与平滑衰减 —— 在126日特质性残差基础上，计算60日时序Zscore以识别当前残差是否处于历史极端水平（|zscore|>1.5），仅保留极端偏离信号以剔除噪音，并通过3日线性衰减窗口降低换手率，最后进行行业中性化确保分组可比。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(trade_when(greater(abs(ts_zscore(ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 60)), 1.5), ts_regression(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), group_mean(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=4), log(ts_mean(cap,21)), sector), 126, rettype=0), 0), 3), sector)"
+    ]
+}

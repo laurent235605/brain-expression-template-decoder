@@ -1,0 +1,7 @@
+{
+    "template": "({high_revenue_fp1} - {low_revenue_fp1}) / ({stddev_revenue_fp1} + 0.01)",
+    "idea": "**Concept**: Extreme Estimate Divergence\n- **Sample Fields Used**: high_revenue_fp1, low_revenue_fp1, mean_revenue_fp1, stddev_revenue_fp1\n- **Definition**: The normalized range between bull (high) and bear (low) case estimates, measuring analyst polarization\n- **Why This Feature**: Wide ranges indicate binary outcomes or controversy (takeover targets, turnaround stories). Identifies stocks where consensus mean may be misleading due to bimodal distributions.\n- **Logical Meaning**: Quantifies analyst disagreement. Values >3 standard deviations suggest extreme views; values <0.5 std devs suggest tight clustering.\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. If yes, do use appropriate method to fill nan value in the following implementation example.\n- **Directionality**: Higher values indicate extreme uncertainty/controversy (often contrarian signals); lower values indicate consensus\n- **Boundary Conditions**: Minimum bound of zero (perfect agreement); no upper bound theoretically",
+    "expression_list": [
+        "(anl14_high_revenue_fp1 - anl14_low_revenue_fp1) / (anl14_stddev_revenue_fp1 + 0.01)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(vec_stddev({exposure_value}), 20), industry)",
+    "idea": "放弃简单的向量均值，改用向量标准差（vec_stddev）衡量公司每日地理暴露的“内部离散度”（即区域集中 vs 分散程度）；通过线性衰减加权（ts_decay_linear）平滑短期噪音后，在行业层面进行中性化比较。该模板识别的是“地理多元化战略”本身的稳定性：低波动代表稳定的区域布局策略，高波动代表正在积极扩张或收缩地理版图。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(vec_stddev(anl91_exposure_value), 20), industry)"
+    ]
+}

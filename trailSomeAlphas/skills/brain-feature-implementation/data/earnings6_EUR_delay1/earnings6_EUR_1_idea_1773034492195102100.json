@@ -1,0 +1,10 @@
+{
+    "template": "group_zscore(winsorize(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, s_log_1p(abs(vec_avg({actual_eps})))), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, log(1+abs(vec_max({stock_split_ratio_243})))))), std=4), industry)",
+    "idea": "**幅度加权组内中性化事件强度**：不再简单计数，而是对EPS使用s_log_1p压缩极端值后加权（幅度越大的业绩 surprise 权重越高），对拆分比例使用vec_max提取最大拆分幅度并取log(1+x)加权，董事会会议保持二元存在性指标。先通过winsorize去除极端异常值，再进行group_zscore行业内标准化，识别相对于同行而言事件活动异常密集且事件质量（幅度）更高的个股，剔除行业固有的事件披露节奏差异。",
+    "expression_list": [
+        "group_zscore(winsorize(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, s_log_1p(abs(vec_avg(ern6_actual_eps)))), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, log(1+abs(vec_max(ern6_stock_split_ratio_243)))))), std=4), industry)",
+        "group_zscore(winsorize(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, s_log_1p(abs(vec_avg(ern6_actual_eps_274)))), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, log(1+abs(vec_max(ern6_stock_split_ratio_243)))))), std=4), industry)",
+        "group_zscore(winsorize(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, s_log_1p(abs(vec_avg(ern6_actual_eps)))), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, log(1+abs(vec_max(ern6_stock_split_ratio_243)))))), std=4), industry)",
+        "group_zscore(winsorize(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, s_log_1p(abs(vec_avg(ern6_actual_eps_274)))), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, log(1+abs(vec_max(ern6_stock_split_ratio_243)))))), std=4), industry)"
+    ]
+}

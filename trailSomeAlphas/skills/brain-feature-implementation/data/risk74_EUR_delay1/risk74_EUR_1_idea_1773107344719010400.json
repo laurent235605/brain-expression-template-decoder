@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(multiply(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), subtract(ts_rank(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), 120), 0.5)), std=3), 3)",
+    "idea": "历史极端值共振验证：首先计算20日流偏离度的行业zscore，再乘以该偏离度在自身120日历史中的分位映射（ts_rank转-0.5~0.5）；当流偏离度既在行业横截面上极端，又处于自身历史高位时信号放大，反之抑制；3日线性衰减平滑；3倍标准差截尾。此设计过滤掉仅短期偶然偏离但无历史持续性的噪音。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(multiply(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), subtract(ts_rank(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), 120), 0.5)), std=3), 3)"
+    ]
+}

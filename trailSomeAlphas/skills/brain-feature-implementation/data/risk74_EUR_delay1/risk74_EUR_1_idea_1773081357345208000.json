@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_sum(ts_delta({hfown_pctown}, 1), 20), industry)",
+    "idea": "将模板B的累积资金流与模板A的地理暴露的group比较逻辑交叉。在同一行业内对20日累积持仓变化进行排名，识别在同行中相对获得资金青睐或抛弃的股票，剥离行业层面的资金流动影响，专注于行业内的异常资金行为。",
+    "expression_list": [
+        "group_rank(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), industry)"
+    ]
+}

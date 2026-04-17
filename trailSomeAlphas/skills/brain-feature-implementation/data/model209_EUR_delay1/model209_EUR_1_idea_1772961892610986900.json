@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({investment}) / add(1, add(vec_sum({lastcostingfailed}), vec_stddev({investment})))",
+    "idea": "**概念**: 波动率增强风险调整部署\n- **逻辑**: 在分母中加入投资向量的标准差(vec_stddev)，构建综合风险度量(失败次数+投资波动)。利用向量算子提取投资金额序列的内在不确定性特征，与运营失败风险叠加，形成更全面的风险惩罚项。\n- **边界**: 投资波动大或失败多都会放大分母，实现\"双风险维度\"约束。",
+    "expression_list": [
+        "vec_avg(mdl209_investment) / add(1, add(vec_sum(mdl209_lastcostingfailed), vec_stddev(mdl209_investment)))"
+    ]
+}

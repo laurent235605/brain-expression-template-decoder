@@ -1,0 +1,8 @@
+{
+    "template": "ts_sum(ts_delta({shortint}, 1), 15)",
+    "idea": "**Concept**: Cumulative Short Interest Buildup\n- **Sample Fields Used**: `shortint`, `shortint_ts`\n- **Definition**: Accumulated short interest changes over 15 days to detect building bearish pressure or covering rallies\n- **Why This Feature**: Short interest spikes indicate negative sentiment; cumulative measures distinguish temporary spikes from persistent bearish bets\n- **Logical Meaning**: Positive values indicate increasing short interest (bearish pressure); negative values indicate covering (potential squeeze)\n- **is filling nan necessary**: No, short interest is daily and complete for liquid names\n- **Directionality**: Positive = building shorts (negative signal); Negative = covering (positive signal); Zero = stable SI\n- **Boundary Conditions**: Extreme positive values indicate crowded short; extreme negative indicates short squeeze potential",
+    "expression_list": [
+        "ts_sum(ts_delta(rsk74_shortint, 1), 15)",
+        "ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)"
+    ]
+}

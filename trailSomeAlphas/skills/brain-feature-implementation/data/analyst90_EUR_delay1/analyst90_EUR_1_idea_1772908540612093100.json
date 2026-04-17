@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_rank(group_rank(winsorize(vec_avg({likelihood_score}), std=4), industry), 252), 2)",
+    "idea": "历史分位双重排序：结合截面(group_rank)与时序(ts_rank)双重视角，识别当前行业相对位置是否处于自身一年历史(252日)的极值区域，通过signed_power(y=2)非线性放大处于历史高位或低位的标的，强调相对自身历史而言的极端情绪反转机会。",
+    "expression_list": [
+        "signed_power(ts_rank(group_rank(winsorize(vec_avg(success_likelihood_score), std=4), industry), 252), 2)"
+    ]
+}

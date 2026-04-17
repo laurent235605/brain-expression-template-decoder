@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff({reported_asset_value}, 60)",
+    "idea": "**Concept**: Size Deviation from Historical Norm\n- **Sample Fields Used**: `reported_asset_value`\n- **Definition**: Deviation of current AUM from 60-day historical average, normalized by standard deviation\n- **Why This Feature**: Unusual size deviations indicate atypical flows or performance; extreme deviations may signal events requiring investigation (block redemption, merger, style drift)\n- **Logical Meaning**: Z-score of fund size; captures outliers in capital allocation that may predict future capacity constraints or closure risk\n- **is filling nan necessary**: Yes, use `ts_backfill()` for missing days, but ensure `ts_mean` and `ts_std_dev` calculations handle NaNs properly by using available data only\n- **Directionality**: Positive high values indicate anomalously large size (capacity risk), negative high values indicate anomalously small size (survival risk)\n- **Boundary Conditions**: Values beyond 3 standard deviations suggest extraordinary events; persistent deviation suggests structural change rather than temporary anomaly",
+    "expression_list": [
+        "ts_av_diff(fund_reported_asset_value, 60)"
+    ]
+}

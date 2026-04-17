@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(divide(winsorize(if_else(is_nan({exp_usa}), 0, {exp_usa}), std=4), add(0.001, ts_std_dev(if_else(is_nan({exp_usa}), 0, {exp_usa}), 126))), industry)",
+    "idea": "波动调整后的敞口确信度。计算美国敞口水平与其过去126日波动率的比值（类似夏普比率），在行业内部排序，筛选出高敞口且低波动的'稳定纯暴露'标的，剔除因数据不稳定造成的伪地理因子暴露。",
+    "expression_list": [
+        "group_rank(divide(winsorize(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), std=4), add(0.001, ts_std_dev(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), 126))), industry)"
+    ]
+}

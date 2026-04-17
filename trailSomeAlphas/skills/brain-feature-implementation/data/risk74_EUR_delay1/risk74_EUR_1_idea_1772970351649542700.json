@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 20), 4), 5), 60)",
+    "idea": "流向加速度动量：计算累积持仓变化的5日差分（二阶导数），并对其进行历史Z分数标准化，识别机构配置行为的加速或减速拐点，捕捉急迫性交易信号",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 4), 5), 60)"
+    ]
+}

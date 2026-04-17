@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(group_zscore(winsorize(vec_avg({elta_value}),std=4),industry), sign(winsorize(vec_avg({aily_delta_recon_value}),std=4)), if_else(greater(rank(winsorize(vec_avg({elta_value}),std=4)),0.8), 2.0, if_else(less(rank(winsorize(vec_avg({elta_value}),std=4)),0.2), 2.0, 0.5))), 5)",
+    "idea": "分位条件增强策略：利用分位数逻辑（rank + greater/less）识别预期水平的极端区间（前20%高预期或后20%低预期），仅在这些区间激活信号并赋予双倍权重（2.0），中段预期（0.5权重）视为噪音降低暴露。结合行业标准化和符号运算，精准捕捉“高预期上调”的泡沫动态与“低预期下调”的 capitulation 状态。",
+    "expression_list": [
+        "ts_decay_linear(multiply(group_zscore(winsorize(vec_avg(ern10_elta_value),std=4),industry), sign(winsorize(vec_avg(ern10_aily_delta_recon_value),std=4)), if_else(greater(rank(winsorize(vec_avg(ern10_elta_value),std=4)),0.8), 2.0, if_else(less(rank(winsorize(vec_avg(ern10_elta_value),std=4)),0.2), 2.0, 0.5))), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "add(multiply(0.7, zscore(ts_av_diff(vec_avg({rank}), 60))), multiply(0.3, zscore(ts_corr(vec_avg({rank}), ts_delay(vec_avg({rank}), 1), 20))))",
+    "idea": "双因子复合评分（信号多元化）：将标准化后的均值偏离（70%权重）与排名持续性（30%权重）线性组合。同时捕捉排名的相对位置（均值回归）与动量特征（持续性），通过加权实现信号 diversified，降低单一逻辑失效风险，在创新性与稳定性间取得平衡。",
+    "expression_list": [
+        "add(multiply(0.7, zscore(ts_av_diff(vec_avg(mdl245_rank), 60))), multiply(0.3, zscore(ts_corr(vec_avg(mdl245_rank), ts_delay(vec_avg(mdl245_rank), 1), 20))))"
+    ]
+}

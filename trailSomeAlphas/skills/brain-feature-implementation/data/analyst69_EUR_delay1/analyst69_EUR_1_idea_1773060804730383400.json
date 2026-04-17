@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_normalize(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), -1, 0), industry), 20)",
+    "idea": "交叉应用Input 1的事件检测与Input 2的组内标准化：在行业内部检测报告日期重置事件(ts_delta<0)，先进行group_normalize消除行业间日历效应差异，再应用20日衰减模拟行业内相对不确定性的持续影响。构建行业中性的事件驱动信号。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0), -1, 0), industry), 20)",
+        "ts_decay_linear(group_normalize(if_else(less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0), -1, 0), industry), 20)"
+    ]
+}

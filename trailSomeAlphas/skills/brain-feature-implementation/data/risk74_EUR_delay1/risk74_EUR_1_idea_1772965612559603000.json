@@ -1,0 +1,10 @@
+{
+    "template": "ts_sum(({crowding} - ts_mean({crowding}, 60)), 20)",
+    "idea": "**Concept**: Cumulative Crowding Pressure Index\n- **Sample Fields Used**: `crowding`, `timeseries_crowding`, `raw_crowding`\n- **Definition**: Accumulated deviation of crowding from long-term average to identify stocks experiencing sustained crowding accumulation or dispersion\n- **Why This Feature**: Cumulative pressure predicts liquidation cascades; stocks under sustained crowding accumulation face eventual violent unwinds\n- **Logical Meaning**: Positive values indicate sustained increase in crowdedness (danger building); negative values indicate sustained dispersion (safety improving)\n- **is filling nan necessary**: No, crowding data is typically robust daily\n- **Directionality**: High positive = pressure building (avoid); High negative = pressure releasing (opportunity); Zero = equilibrium\n- **Boundary Conditions**: Extreme values indicate unsustainable crowdedness; rapid reversals indicate flash crashes or squeezes",
+    "expression_list": [
+        "ts_sum((liquidity_factor_crowding - ts_mean(liquidity_factor_crowding, 60)), 20)",
+        "ts_sum((liquidity_timeseries_crowding - ts_mean(liquidity_timeseries_crowding, 60)), 20)",
+        "ts_sum((rsk74_crowding - ts_mean(rsk74_crowding, 60)), 20)",
+        "ts_sum((rsk74_raw_crowding - ts_mean(rsk74_raw_crowding, 60)), 20)"
+    ]
+}

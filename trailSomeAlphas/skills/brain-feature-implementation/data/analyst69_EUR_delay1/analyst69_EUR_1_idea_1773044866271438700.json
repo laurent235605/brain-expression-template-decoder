@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), 0.85), ts_decay_linear(group_zscore(signed_power(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 1.5), industry), 10), trade_when(less(ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 252), 0.15), multiply(-1, ts_decay_linear(group_zscore(signed_power(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 1.5), industry), 10)), nan))",
+    "idea": "非线性尾部放大条件策略：仅在修订动量处于历史极端分位（高85%或低15%）时激活，使用signed_power对极端值进行1.5次幂拉伸以放大尾部差异，经行业标准化和10日衰减处理，中间区间视为无信号，强化对极端分析师行为的暴露。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), 0.85), ts_decay_linear(group_zscore(signed_power(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 1.5), industry), 10), trade_when(less(ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 252), 0.15), multiply(-1, ts_decay_linear(group_zscore(signed_power(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 1.5), industry), 10)), nan))",
+        "trade_when(greater(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), 0.85), ts_decay_linear(group_zscore(signed_power(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 1.5), industry), 10), trade_when(less(ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 252), 0.15), multiply(-1, ts_decay_linear(group_zscore(signed_power(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 1.5), industry), 10)), nan))"
+    ]
+}

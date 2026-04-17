@@ -1,0 +1,7 @@
+{
+    "template": "multiply(ts_sum(ts_delta({hfown_pctown}, 1), 20), ts_regression(ts_delta({hfown_pctown}, 1), ts_step(), 20, rettype=2))",
+    "idea": "趋势一致性加权流量强度。将20日累积持仓流量乘以每日持仓变化的时序回归斜率（retslope，衡量趋势一致性）。只有当资金持续单向流入（高正相关）且累积量大时，信号才会被显著放大；对于波动无序、方向反复的持仓变化（低相关性），即使累积值较高也会被压缩，从而过滤掉噪音交易，保留高信念度的机构行为。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), ts_regression(ts_delta(rsk74_hfown_pctown, 1), ts_step(), 20, rettype=2))"
+    ]
+}

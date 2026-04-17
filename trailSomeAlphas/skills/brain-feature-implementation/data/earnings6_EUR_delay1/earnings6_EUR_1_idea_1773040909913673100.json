@@ -1,0 +1,8 @@
+{
+    "template": "add( quantile( group_zscore( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), industry ), driver=\"gaussian\" ), multiply( 0.5, quantile( group_zscore( ts_delta( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 63 ), industry ), driver=\"gaussian\" ) ) )",
+    "idea": "双轮驱动（水平+趋势）：结合当前Surprise水平与63日Surprise变化量（ts_delta），权重1:0.5叠加，经行业中性高斯变换，既捕捉静态极端偏离又捕捉业绩动能的边际改善/恶化。",
+    "expression_list": [
+        "add( quantile( group_zscore( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ), driver=\"gaussian\" ), multiply( 0.5, quantile( group_zscore( ts_delta( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 63 ), industry ), driver=\"gaussian\" ) ) )",
+        "add( quantile( group_zscore( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), industry ), driver=\"gaussian\" ), multiply( 0.5, quantile( group_zscore( ts_delta( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 63 ), industry ), driver=\"gaussian\" ) ) )"
+    ]
+}

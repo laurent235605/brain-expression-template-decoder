@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 20)",
+    "idea": "线性衰减平滑版：对Input1的行业中性区域价差应用20日线性衰减加权(ts_decay_linear)。通过给予近期数据更高权重，降低单日数据噪音和极端值冲击，同时比等权移动平均(ts_mean)保留更快的反应速度，适合捕捉持续时间中等的区域轮动周期。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 20)"
+    ]
+}

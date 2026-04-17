@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(quantile(ts_rank(days_from_last_change({eps_expected_report_dt}), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(winsorize({eps_best_eeps_cur_yr}, std=4), industry), 0)",
+    "idea": "行业中性化的事件时钟：将模板A的时间稳定性度量（ts_rank+quantile）通过group_zscore进行行业内标准化，再结合模板B的条件交易结构。仅当个股距离上次预期变更的时间在行业内的偏离度（zscore）处于极端水平（|zscore|>1.5）时，才交易行业中性化的EPS预期。有效控制不同行业间信息披露节奏差异带来的系统性偏差，捕捉行业内的相对异常状态。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), industry), 0)",
+        "trade_when(greater(abs(group_zscore(quantile(ts_rank(days_from_last_change(anl69_aeps_expected_report_dt), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(winsorize(anl69_eps_best_eeps_cur_yr, std=4), industry), 0)",
+        "trade_when(greater(abs(group_zscore(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(winsorize(anl69_eps_best_eeps_cur_yr, std=4), industry), 0)",
+        "trade_when(greater(abs(group_zscore(quantile(ts_rank(days_from_last_change(anl69_eps_expected_report_dt), 252), driver=\"gaussian\"), industry)), 1.5), group_zscore(winsorize(anl69_aeps_best_eeps_cur_yr, std=4), industry), 0)"
+    ]
+}

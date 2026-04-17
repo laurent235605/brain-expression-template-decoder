@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(winsorize(vec_skewness(vec_filter({version}, value=\"nan\")), std=4), industry), 2)",
+    "idea": "二阶矩非线性放大策略：对行业中性化后的偏度指标进行符号保留的幂变换（signed_power, y=2），在保持正负偏度方向性（正偏表示右尾长，负偏表示左尾长）的前提下，非线性放大极端偏度值（|skew|>1的部分被进一步放大），增强对版本分布严重不对称股票（如少数用户坚持用极旧版本而大多数已更新，或相反情况）的区分度。",
+    "expression_list": [
+        "signed_power(group_zscore(winsorize(vec_skewness(vec_filter(anl85_version, value=\"nan\")), std=4), industry), 2)"
+    ]
+}

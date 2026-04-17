@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore( subtract( ts_delta( vec_avg({adjustedgrossamt}), 63 ), ts_delta( vec_avg({adjustedgrossamt}), 126 ) ), 252 )",
+    "idea": "股息加速动量：捕捉股息增长二阶导数（近期季度环比增速 vs 半年前环比增速），识别处于\"加速提升\"阶段的股息政策。通过252日窗口标准化，区分真正的增长动能与季节性噪音，适合挖掘管理层信心增强的早期信号。",
+    "expression_list": [
+        "ts_zscore( subtract( ts_delta( vec_avg(anl30_adjustedgrossamt), 63 ), ts_delta( vec_avg(anl30_adjustedgrossamt), 126 ) ), 252 )",
+        "ts_zscore( subtract( ts_delta( vec_avg(anl30_unadjustedgrossamt), 63 ), ts_delta( vec_avg(anl30_unadjustedgrossamt), 126 ) ), 252 )"
+    ]
+}

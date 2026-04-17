@@ -1,0 +1,8 @@
+{
+    "template": "quantile(winsorize(ts_regression(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5), group_mean(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5), ts_mean({eps_best_eeps_cur_yr}, 21), industry), 126, rettype=0), std=4), driver=gaussian)",
+    "idea": "剔除行业共同趋势后的特质性修正信号（类似CAPM残差），以市值加权（使用EPS本身作为代理）行业均值为基准，通过126日滚动回归提取公司个体层面的独立分析师预期变化，去极值后高斯分位，专注于区别于行业β的α信息。",
+    "expression_list": [
+        "quantile(winsorize(ts_regression(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), group_mean(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), ts_mean(anl69_aeps_best_eeps_cur_yr, 21), industry), 126, rettype=0), std=4), driver=gaussian)",
+        "quantile(winsorize(ts_regression(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), group_mean(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), ts_mean(anl69_eps_best_eeps_cur_yr, 21), industry), 126, rettype=0), std=4), driver=gaussian)"
+    ]
+}

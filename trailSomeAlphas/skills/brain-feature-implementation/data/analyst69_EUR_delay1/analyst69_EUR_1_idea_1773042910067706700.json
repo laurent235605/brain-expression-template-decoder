@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), driver=\"gaussian\"), industry), ts_zscore(days_from_last_change({eps_expected_report_dt}), 63))",
+    "idea": "原始水平与历史分位交互：将经高斯映射的历史分位数（横向比较）与原始稳定天数的时序zscore（纵向比较）相乘，识别'当前处于历史极值且绝对水平极高'的双重确认信号，放大历史罕见且持续加剧的稳定状态。",
+    "expression_list": [
+        "multiply(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), ts_zscore(days_from_last_change(anl69_aeps_expected_report_dt), 63))",
+        "multiply(group_zscore(quantile(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), driver=\"gaussian\"), industry), ts_zscore(days_from_last_change(anl69_eps_expected_report_dt), 63))"
+    ]
+}

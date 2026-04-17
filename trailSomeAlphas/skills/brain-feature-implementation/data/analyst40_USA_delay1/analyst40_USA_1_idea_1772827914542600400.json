@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(if_else(less(bucket(rank(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20)), range='0,1,0.1'), 0.2), 1, if_else(greater(bucket(rank(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20)), range='0,1,0.1'), 0.8), -1, 0)), sector)",
+    "idea": "分桶多空非线性信号：将稳定性指标经清洗后进行排名分桶（十等分），仅对最稳定的20%分桶（前2桶）赋予+1权重（做多），对最不稳定的20%分桶（后2桶）赋予-1权重（做空），中间60%视为噪音赋0值，最后进行行业中性归一化。该模板明确区分“有效信号区间”与“噪音区间”，适用于只有当极端稳定或极端不稳定时才产生显著收益的场景。",
+    "expression_list": [
+        "group_normalize(if_else(less(bucket(rank(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20)), range='0,1,0.1'), 0.2), 1, if_else(greater(bucket(rank(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20)), range='0,1,0.1'), 0.8), -1, 0)), sector)"
+    ]
+}

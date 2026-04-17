@@ -1,0 +1,7 @@
+{
+    "template": "ts_av_diff(vec_avg({data_item_value}), 504) / ts_std_dev(vec_avg({data_item_value}), 504)",
+    "idea": "**Concept**: Fundamental Outlier Detection\n- **Sample Fields Used**: data_item_value\n- **Definition**: Z-score measuring how many standard deviations the current value deviates from its 2-year historical mean\n- **Why This Feature**: Extreme deviations in financial metrics often precede mean reversion or signal fundamental inflection points (earnings surprises, write-downs); identifies statistical outliers requiring investigation\n- **Logical Meaning**: The unusualness of current financial performance relative to historical operating norms; statistical extremity of current fundamentals\n- **is filling nan necessary**: Yes, use ts_backfill to ensure robust historical statistics; outliers in sparse data are not meaningful\n- **Directionality**: High positive values indicate exceptionally strong performance (potential overvaluation or genuine improvement); high negative values indicate exceptionally poor performance (potential distress or temporary setback); near zero indicates normal range\n- **Boundary Conditions**: |z-score| > 3 considered statistically extreme (99.7% confidence); values >5 suggest data errors or catastrophic events; persistent high values suggest structural regime change rather than anomaly",
+    "expression_list": [
+        "ts_av_diff(vec_avg(anl89_data_item_value), 504) / ts_std_dev(vec_avg(anl89_data_item_value), 504)"
+    ]
+}

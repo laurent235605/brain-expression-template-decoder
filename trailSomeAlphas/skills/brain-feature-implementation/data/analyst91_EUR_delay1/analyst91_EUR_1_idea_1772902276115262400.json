@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), 3)",
+    "idea": "以年度（252日）为回望窗口计算波动率的Z-Score（ts_zscore），识别公司业务结构稳定性的长期极端偏离；结合立方变换（signed_power, y=3）极度拉伸正负尾部，将“温和波动”压缩至零附近，仅保留极端稳定（负向极端）与极端动荡（正向极端）的两端信号，适用于构建哑铃型策略（做多极稳定、做空极动荡）。",
+    "expression_list": [
+        "signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), 3)"
+    ]
+}

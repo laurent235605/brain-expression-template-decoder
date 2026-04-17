@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 5), 20), std=4), sector), 3)",
+    "idea": "首先对原始字段进行5日回溯填充(ts_backfill)以处理机构AUM披露的间隔问题，计算20日资产变化率捕捉资金流与估值变动。使用4倍标准差缩尾(winsorize)处理极端值（如并购或清算事件）。通过行业分组zscore(group_zscore)实现行业中性化，因为不同行业的资产增速基准不同（如科技股与公用事业）。最后应用3日线性衰减(ts_decay_linear)平滑以降低换手率，保留核心趋势信号。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 5), 20), std=4), sector), 3)"
+    ]
+}

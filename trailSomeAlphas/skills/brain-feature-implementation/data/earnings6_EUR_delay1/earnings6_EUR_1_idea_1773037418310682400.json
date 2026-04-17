@@ -1,0 +1,10 @@
+{
+    "template": "group_rank( divide(vec_avg({x_dividend}), add(ts_mean(ts_backfill(vec_avg({x_dividend}), 5), 252), 0.001)), industry )",
+    "idea": "行业相对股息持续性（分位数版）：用组内分位数排名(group_rank)替代Z-Score，对模板1的股息持续性比率进行非参数化处理，降低极端异常值影响，更适合股息分布高度偏斜的行业比较。",
+    "expression_list": [
+        "group_rank( divide(vec_avg(ern6_x_dividend), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend), 5), 252), 0.001)), industry )",
+        "group_rank( divide(vec_avg(ern6_x_dividend_233), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252), 0.001)), industry )",
+        "group_rank( divide(vec_avg(ern6_x_dividend_oc), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252), 0.001)), industry )",
+        "group_rank( divide(vec_avg(ern6_x_dividend_oc_235), add(ts_mean(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252), 0.001)), industry )"
+    ]
+}

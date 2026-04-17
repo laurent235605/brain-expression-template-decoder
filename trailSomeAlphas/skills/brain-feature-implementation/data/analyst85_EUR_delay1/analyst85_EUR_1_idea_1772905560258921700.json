@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(winsorize(ts_delta(vec_avg({version}), 5), std=4), 40)",
+    "idea": "**历史分位定位（时序视角）**：不关注版本变化的绝对数值大小，而是观察当前5日变化率在经过极值处理后，处于该股票过去40日历史分布的哪个分位点（0-1映射）。这种设计更适合识别\"相对于自身历史是否进入活跃更新期\"的状态转换，对长期沉寂后突然加速或持续高频更新后骤然降温的信号尤为敏感。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_delta(vec_avg(anl85_version), 5), std=4), 40)"
+    ]
+}

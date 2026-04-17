@@ -1,0 +1,16 @@
+{
+    "template": "multiply(signed_power(ts_zscore(winsorize(ts_backfill({concentration},63),std=4),126),2), group_rank(winsorize(ts_backfill({nondomicile},63),std=4),sector))",
+    "idea": "捕捉集中度相对于自身历史（126日）的Z-score并通过二次幂非线性放大极端偏离，再与行业内海外收入分位相乘，识别“近期急剧集中化”且“海外依赖度高”的动态结构性风险。",
+    "expression_list": [
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_nondomicile,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4),sector))",
+        "multiply(signed_power(ts_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),126),2), group_rank(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4),sector))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), std=2.5), 3)",
+    "idea": "对行业标准化后的地理波动率利差进行2.5倍标准差截尾以剔除极端噪音，随后使用三次幂函数非线性放大尾部差异（极大正值强化做多，极大负值强化做空），压缩中间无效区间的权重，构建对剧烈地域重组或显著稳定化状态高度敏感的陡峭信号曲线。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), std=2.5), 3)"
+    ]
+}

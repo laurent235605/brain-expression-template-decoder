@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(vec_count(vec_filter({currency_code}, value=\"nan\")), 126), 0.8), vec_count({fiscalyearend}), 0)",
+    "idea": "条件触发式信号：仅当货币复杂度处于自身历史前20%（126日窗口）时，才暴露财务年度稳定性因子；否则仓位归零。用于捕捉高速国际化扩张期（币种激增）伴随的会计整合风险，避免稳定期噪音干扰。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(vec_count(vec_filter(payment_currency_code, value=\"nan\")), 126), 0.8), vec_count(anl30_fiscalyearend), 0)"
+    ]
+}

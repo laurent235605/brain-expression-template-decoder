@@ -1,0 +1,10 @@
+{
+    "template": "ts_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 60) - ts_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 60)",
+    "idea": "对比两个维度的时间序列分位数：持仓背离的历史位置减去股权结构稳定性的历史位置。当值极高时（背离历史高位+稳定性历史低位），暗示\"混乱中的错配\"；当值极低时（背离低位+稳定性高位），暗示\"秩序中的收敛\"。捕捉两种模板在时序上的非同步性。",
+    "expression_list": [
+        "ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 60) - ts_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 60)",
+        "ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 60) - ts_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 60)",
+        "ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 60) - ts_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 60)",
+        "ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 60) - ts_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 60)"
+    ]
+}

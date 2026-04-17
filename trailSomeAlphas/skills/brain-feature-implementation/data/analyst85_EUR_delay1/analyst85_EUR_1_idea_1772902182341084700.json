@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(trade_when(and(greater(rank(ts_delta(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 5)), 0.8), greater(rank(vec_range(winsorize(ts_backfill({version}, 63), std=4))), 0.8)), multiply(rank(ts_delta(vec_avg({version}), 5)), rank(vec_range({version}))), 0), {sector})",
+    "idea": "**极端分位数突破确认模板**：对清洗后的版本均值求5日差分并截面排名，同时对版本极差做截面排名。仅当动量与分歧均处于全市场前20%（双高阈值）时触发交易（trade_when），信号强度为两者排名的乘积，否则为0。最后按行业归一化（group_normalize）控制行业暴露。经济逻辑：避免中等分歧或弱动量带来的噪音，只在“强烈共识转向伴随高度不确定”的极端情境下注，利用rank的非线性天然压缩中间段噪音。",
+    "expression_list": []
+}

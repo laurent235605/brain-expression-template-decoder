@@ -1,0 +1,7 @@
+{
+    "template": "{stoxx_europe_600_ucits_weight} / {600_ucits_weight}",
+    "idea": "**Concept**: Relative Weight Dominance\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight, 600_ucits_weight\n- **Definition**: The ratio of the specific STOXX Europe 600 weight to the generic 600 UCITS weight, measuring the premium or discount allocation to specific share classes or listings\n- **Why This Feature**: Different listings of the same underlying stock may carry different weights due to liquidity preferences or tax considerations; this ratio reveals fund manager preference for specific vehicles\n- **is filling nan necessary**: Yes, use ts_backfill() for both fields to ensure ratio stability; if one field is missing, the ratio becomes meaningless and should use last known good values\n- **Directionality**: Values above 1 indicate overweighting the specific STOXX listing versus generic 600 exposure; below 1 indicates preference for alternative listings\n- **Boundary Conditions**: Range theoretically [0, ∞), but practically bounded by arbitrage constraints between share classes",
+    "expression_list": [
+        "mcr51_ishares_stoxx_europe_600_ucits_weight / mcr51_ishares_stoxx_europe_600_ucits_weight"
+    ]
+}

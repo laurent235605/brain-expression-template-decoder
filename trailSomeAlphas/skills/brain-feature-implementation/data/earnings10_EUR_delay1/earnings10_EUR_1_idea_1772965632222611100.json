@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({aily_delta_recon_value}) / (abs(vec_avg({elta_value})) + 0.01)",
+    "idea": "**Concept**: Level-Adjusted Revision Intensity\n- **Sample Fields Used**: `{elta_value}`, `{aily_delta_recon_value}`\n- **Definition**: Daily revision magnitude scaled by the absolute level of the estimate (proportional change)\n- **Why This Feature**: A $1 change on a $10 estimate (10%) is more significant than a $1 change on a $100 estimate (1%). This feature normalizes revision importance by estimate scale.\n- **is filling nan necessary**: Denominator cannot be zero; add small epsilon (0.01) or use max(abs(vec_avg({elta_value})), 0.01). NaN handling in numerator as standard.\n- **Directionality**: High values indicate material proportional revisions; low values indicate trivial updates\n- **Boundary Conditions**: Values > 0.1 indicate 10%+ revisions (major updates); values < 0.001 indicate immaterial noise",
+    "expression_list": [
+        "vec_avg(ern10_aily_delta_recon_value) / (abs(vec_avg(ern10_elta_value)) + 0.01)"
+    ]
+}

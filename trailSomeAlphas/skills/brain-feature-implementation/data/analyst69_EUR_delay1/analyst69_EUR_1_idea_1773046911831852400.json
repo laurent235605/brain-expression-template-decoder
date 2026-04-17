@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(rank(signed_power(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), 5), 0.5)), 0.85), less(rank(signed_power(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), 5), 0.5)), 0.15)), signed_power(ts_delta(ts_decay_linear(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 20), 5), 0.5), 0)",
+    "idea": "结合模板2的平滑趋势结构与signed_power非线性变换：对经20日线性衰减平滑后的效率比率变化(delta)应用0.5次幂的符号幂变换，压缩中段数值差距的同时保留极端尾部信号的方向与幅度，再经分位排名筛选仅交易前15%与后15%。此增强突出了极端效率改善/恶化的股票，降低了中等波动区间的权重干扰。",
+    "expression_list": [
+        "trade_when(or(greater(rank(signed_power(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0.5)), 0.85), less(rank(signed_power(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0.5)), 0.15)), signed_power(ts_delta(ts_decay_linear(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0.5), 0)",
+        "trade_when(or(greater(rank(signed_power(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0.5)), 0.85), less(rank(signed_power(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0.5)), 0.15)), signed_power(ts_delta(ts_decay_linear(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 20), 5), 0.5), 0)"
+    ]
+}

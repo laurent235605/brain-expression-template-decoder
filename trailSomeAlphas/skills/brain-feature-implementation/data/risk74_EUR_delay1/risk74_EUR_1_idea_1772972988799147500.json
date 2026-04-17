@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_rank(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), ts_mean(winsorize(ts_backfill({exp_usa}, 21), std=4), 63)), industry), signed_power(ts_zscore(ts_delta(rank(winsorize(ts_backfill({exp_usa}, 21), std=4)), 21), 126), 2))",
+    "idea": "突破动量复合：第一维采用行业相对排名减去63日移动平均捕捉'突破近期中枢'效应，第二维使用21日变化量的126日时序zscore经平方放大，强调那些不仅处于历史高位且近期呈现加速上升态势的标的，增强趋势确认力度。",
+    "expression_list": [
+        "multiply(group_rank(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), ts_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), 63)), industry), signed_power(ts_zscore(ts_delta(rank(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4)), 21), 126), 2))"
+    ]
+}

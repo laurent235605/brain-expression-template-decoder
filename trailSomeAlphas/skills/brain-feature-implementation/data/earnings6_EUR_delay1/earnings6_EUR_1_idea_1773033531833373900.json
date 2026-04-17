@@ -1,0 +1,10 @@
+{
+    "template": "ts_delta(divide(ts_std_dev(vec_avg({x_dividend}), 252), abs(ts_mean(vec_avg({x_dividend}), 252))), 63)",
+    "idea": "将TTM累积模板中的时序变化算子(ts_delta)应用于股息稳定性系数，捕捉公司股息政策从稳定向不稳定（或反之）的转变拐点。负值表示股息政策趋于稳定（改善），正值表示趋于不稳定（恶化），用于政策趋势交易。",
+    "expression_list": [
+        "ts_delta(divide(ts_std_dev(vec_avg(ern6_x_dividend), 252), abs(ts_mean(vec_avg(ern6_x_dividend), 252))), 63)",
+        "ts_delta(divide(ts_std_dev(vec_avg(ern6_x_dividend_233), 252), abs(ts_mean(vec_avg(ern6_x_dividend_233), 252))), 63)",
+        "ts_delta(divide(ts_std_dev(vec_avg(ern6_x_dividend_oc), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc), 252))), 63)",
+        "ts_delta(divide(ts_std_dev(vec_avg(ern6_x_dividend_oc_235), 252), abs(ts_mean(vec_avg(ern6_x_dividend_oc_235), 252))), 63)"
+    ]
+}

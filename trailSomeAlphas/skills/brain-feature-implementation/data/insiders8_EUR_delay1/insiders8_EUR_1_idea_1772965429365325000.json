@@ -1,0 +1,7 @@
+{
+    "template": "{active_return_decile_rank_long} - {active_weight_decile_rank_long}",
+    "idea": "**Concept**: Return-Weight Decile Divergence\n- **Sample Fields Used**: active_return_decile_rank_long, active_weight_decile_rank_long\n- **Definition**: Relative positioning of return decile versus weight decile, identifying whether insiders are overweight high-return stocks (expected) or overweight low-return stocks (value trap or private info)\n- **Why This Feature**: Classic \"price vs value\" dislocation in institutional holdings; divergence suggests either value opportunities or value traps depending on persistence\n- **is filling nan necessary**: Both fields required for comparison; exclude if either missing.\n- **Directionality**: Positive values (return rank > weight rank) suggest under-owned high-return stocks (opportunity); negative values suggest over-owned low-return stocks (crowded)\n- **Boundary Conditions**: Extreme divergences often revert as either weights adjust to match returns or returns converge to justify weights",
+    "expression_list": [
+        "insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long"
+    ]
+}

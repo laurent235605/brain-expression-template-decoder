@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_sum(ts_backfill(vec_percentage({actual_eps}, 0.5), 5), 252), 504)",
+    "idea": "使用向量中位数(vec_percentage, 0.5)替代简单平均以抵御单季度极端异常值对TTM的扭曲，计算252日滚动累积后，通过504日(两年)时序Z分数(ts_zscore)定位当前盈利水平相对自身历史周期的偏离程度，识别处于历史极端低位(潜在修复)或高位(潜在回落)的盈利状态。",
+    "expression_list": [
+        "ts_zscore(ts_sum(ts_backfill(vec_percentage(ern6_actual_eps, 0.5), 5), 252), 504)",
+        "ts_zscore(ts_sum(ts_backfill(vec_percentage(ern6_actual_eps_274, 0.5), 5), 252), 504)"
+    ]
+}

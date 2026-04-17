@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), group_mean(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), log(ts_mean(cap, 21)), sector)), sector), 10)",
+    "idea": "采用市值加权行业中性化残差提取：先以流通市值对数（log-cap）为权重计算行业平均相关性作为基准（group_mean），用个股相关性减去该基准得到剔除行业 Beta 的残差，再对残差进行行业内标准化（group_zscore）；该模板捕捉的是“相对于同市值结构行业的异常协同持仓”，避免行业景气度或板块轮动对所有权信号的干扰，最后以 10 日平滑降低噪声。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), log(ts_mean(cap, 21)), sector)), sector), 10)",
+        "ts_decay_linear(group_zscore(subtract(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), log(ts_mean(cap, 21)), sector)), sector), 10)",
+        "ts_decay_linear(group_zscore(subtract(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), log(ts_mean(cap, 21)), sector)), sector), 10)",
+        "ts_decay_linear(group_zscore(subtract(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), group_mean(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), log(ts_mean(cap, 21)), sector)), sector), 10)"
+    ]
+}

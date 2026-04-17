@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_delta(winsorize(vec_stddev({version}), std=4), 5))",
+    "idea": "分析师分歧度动量：使用vec_stddev提取版本号分布的标准差（衡量分析师分歧程度），计算其5日变化率并标准化。该信号捕捉分析师意见收敛或发散的动态过程，而非简单的共识水平变化。",
+    "expression_list": [
+        "zscore(ts_delta(winsorize(vec_stddev(anl85_version), std=4), 5))"
+    ]
+}

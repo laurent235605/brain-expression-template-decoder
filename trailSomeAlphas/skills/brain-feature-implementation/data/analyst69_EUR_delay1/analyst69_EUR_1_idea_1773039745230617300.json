@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(greater(ts_rank(ts_backfill(days_from_last_change({eps_expected_report_dt}), 126), 252), 0.3), ts_decay_linear(ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 20), 20), 0)",
+    "idea": "时序衰减与稳定性过滤的融合：将模板2的等权累积和替换为线性衰减求和(ts_decay_linear)以赋予近期修正更高权重，同时引入模板1的稳定性阈值(排除历史稳定分位最低的30%股票，即频繁变更日期的噪音股)。该组合在提升信号时效性的同时，通过稳定性过滤剔除数据质量差的标的，平衡 turnover 与可靠性。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.3), ts_decay_linear(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 20), 20), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 126), 252), 0.3), ts_decay_linear(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 20), 20), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.3), ts_decay_linear(ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 20), 20), 0)",
+        "trade_when(greater(ts_rank(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 126), 252), 0.3), ts_decay_linear(ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 20), 20), 0)"
+    ]
+}

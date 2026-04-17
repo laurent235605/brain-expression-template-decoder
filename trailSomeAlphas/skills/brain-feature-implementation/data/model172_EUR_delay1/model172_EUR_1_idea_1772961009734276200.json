@@ -1,0 +1,7 @@
+{
+    "template": "vector_neut(trade_when(greater(abs(zscore(ts_mean(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)),21))),2), zscore(ts_mean(subtract(winsorize(ts_backfill({cfroi_1},63),std=4), winsorize(ts_backfill({cfroimk5},63),std=4)),21)), 0), {mark_cap})",
+    "idea": "时序平滑与极端尾值聚焦策略：首先对个股及市场CFROI进行63日回溯填充与4倍标准差去极值处理，计算21日移动平均利差以过滤短期噪音，仅保留|Z-score|>2的极端优势（多头）或极端劣势（空头）信号，其余中间区间视为噪音置零，最后通过市值加权中性化剥离规模因子影响，专注于显著的竞争壁垒或结构性劣势。",
+    "expression_list": [
+        "vector_neut(trade_when(greater(abs(zscore(ts_mean(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)),21))),2), zscore(ts_mean(subtract(winsorize(ts_backfill(mdl172_cfroi_1,63),std=4), winsorize(ts_backfill(mdl172_cfroimk5,63),std=4)),21)), 0), mdl172_mark_cap)"
+    ]
+}

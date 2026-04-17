@@ -1,0 +1,7 @@
+{
+    "template": "jump_decay({stoxx_europe_600_ucits_weight}, 5, sensitivity=0.3, force=0.05)",
+    "idea": "**Concept**: Weight Jump Detection\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: Identification of discontinuous jumps in weight using a decay function that suppresses small changes but preserves large discontinuities, filtering noise from signal\n- **Why This Feature**: ETF weights should change smoothly (drift) except during rebalancing dates or corporate actions; jumps reveal non-price-driven allocation changes\n- **is filling nan necessary**: No, NaN values should be preserved as they indicate missing data days where jumps cannot be calculated; filling would create false continuity\n- **Directionality**: Large positive values indicate sudden accumulation or inclusion events; large negative values indicate sudden divestment or exclusion events\n- **Boundary Conditions**: Zero indicates no jump; values capped by physical trading limits and index rules",
+    "expression_list": [
+        "jump_decay(mcr51_ishares_stoxx_europe_600_ucits_weight, 5, sensitivity=0.3, force=0.05)"
+    ]
+}

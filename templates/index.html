@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN 表达式模板解码器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="header-left">
+                    <button onclick="openSubmitter()" class="btn btn-submitter">📤 Alpha提交器</button>
+                    <button onclick="openHKSimulator()" class="btn btn-submitter" style="margin-top: 10px; display: block;">🚀 打开回测器(HK)</button>
+                    <button onclick="openTransformer()" class="btn btn-submitter" style="margin-top: 10px; display: block;">七十二变</button>
+                    <button onclick="window.location.href='/alpha_inspector'" class="btn btn-submitter" style="margin-top: 10px; display: block; background-color: #ff9800; border-color: #ff9800;">🌉 缘分一道桥</button>
+                </div>
+                <div class="header-center">
+                    <h1>AI驱动的一站式BRIAN研究工具</h1>
+                    <p class="subtitle">以BRAIN 表达式模板解码器为核心</p>
+                    <div class="header-center-action">
+                        <button onclick="window.location.href='/pipeline-dashboard'" class="btn btn-submitter" style="background-color: #8b5cf6; border-color: #8b5cf6;">🔄 Alpha自动流水线</button>
+                    </div>
+                </div>
+            </div>
+            <div class="header-buttons">
+                <div class="header-buttons-row">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button id="connectToBrain" class="btn btn-brain">连接到 BRAIN</button>
+                        <button onclick="runSimulator()" class="btn btn-primary">🚀 打开回测器</button>
+                    </div>
+                    <a href="{{ url_for('inspiration_house.inspiration_house') }}" class="btn btn-primary">为已有Alpha推荐OP</a>
+                    <a href="{{ url_for('paper_analysis.paper_analysis') }}" class="btn btn-primary">论文分析</a>
+                    <a href="{{ url_for('feature_engineering.feature_engineering') }}" class="btn btn-primary">从数据字段到Alpha</a>
+
+                    
+                </div>
+            </div>
+        </header>
+
+        <!-- Unified Templates Section -->
+        <div class="templates-section">
+            <div class="templates-header">
+                <h3>模板空间</h3>
+                <div class="template-actions">
+                    <button class="btn btn-small btn-primary" id="toggleTemplateView" onclick="toggleTemplateView()">
+                        <span id="toggleTemplateViewText">只展示用户自建模板</span>
+                    </button>
+                    <button class="btn btn-small btn-outline" onclick="exportCustomTemplates()" title="Export all custom templates">
+                        <span style="margin-right: 5px;">📤</span>导出用户自建模板
+                    </button>
+                    <button class="btn btn-small btn-outline" onclick="document.getElementById('importTemplatesFile').click()" title="Import templates from file">
+                        <span style="margin-right: 5px;">📥</span>从文件导入模板
+                    </button>
+                    <button class="btn btn-small btn-outline" onclick="document.getElementById('transformerFile').click()" title="Load Transformer Candidates from JSON file">
+                        <span style="margin-right: 5px;">🤖</span>加载72变生成的模板
+                    </button>
+                    <button class="btn btn-small btn-outline" onclick="document.getElementById('generatedExpressionsFile').click()" title="Load Generated Expressions from JSON file">
+                        <span style="margin-right: 5px;">📄</span>从JSON文件加载生成的表达式
+                    </button>
+                    <input type="file" id="importTemplatesFile" accept=".json" style="display: none;" onchange="importCustomTemplates(event)">
+                    <input type="file" id="transformerFile" accept=".json" style="display: none;" onchange="handleTransformerFileSelect(event)">
+                    <input type="file" id="generatedExpressionsFile" accept=".json" style="display: none;" onchange="handleGeneratedExpressionsFileSelect(event)">
+                </div>
+            </div>
+            <div class="all-template-buttons">
+                <!-- Example Templates -->
+                <div id="exampleTemplateButtons">
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(2)">Vector数据处理模板</button>
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(1)">单字段深度处理</button>
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(3)">双重中性化</button>
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(4)">组内均值超额信号_Matrix Data</button>
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(5)">组内均值超额信号_Vector Data</button>
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(6)">换手率变动Delta模板</button> 
+                    <button class="btn btn-template btn-template-example" data-template-type="example" onclick="loadTemplateExample(7)">换手率Hump模板</button>
+                </div>
+                
+                <!-- Custom Templates will be loaded here -->
+                <div id="customTemplateButtons">
+                    <!-- Custom templates will be dynamically inserted here -->
+                </div>
+                
+                <!-- Transformer Templates will be loaded here -->
+                <div id="transformerTemplateButtons">
+                    <!-- Transformer templates will be dynamically inserted here -->
+                </div>
+            </div>
+            <div class="custom-template-info" id="noCustomTemplates" style="display: none;">
+                <p style="margin-top: 10px; color: #6c757d; font-style: italic;">暂无自定义模板。创建您的表达式并点击“保存当前”将其保存为模板。</p>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="page-navigation">
+            <button class="nav-tab active" data-page="editor">
+                <span class="nav-icon">✏️</span>
+                <span class="nav-text">表达式编辑器</span>
+            </button>
+            <button class="nav-tab" data-page="decode">
+                <span class="nav-icon">🔄</span>
+                <span class="nav-text">解码模板</span>
+            </button>
+            <button class="nav-tab" data-page="results" id="resultsTab" style="display: none;">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">结果</span>
+                <span class="nav-badge" id="resultsBadge">0</span>
+            </button>
+        </nav>
+
+        <!-- Page Content Container -->
+        <div class="page-container">
+            <!-- Editor Page -->
+            <div class="page-content active" id="editorPage">
+                <div class="main-content">
+                    <div class="editor-section">
+                        <div class="editor-header">
+                            <h2>表达式编辑器</h2>
+                            <div class="editor-actions">
+                                <button id="clearEditor" class="btn btn-outline">清除</button>
+                                <button class="btn btn-secondary" onclick="saveCurrentTemplate()">
+                                    <span style="margin-right: 5px;">💾</span>保存当前模板
+                                </button>
+                                <button class="btn btn-outline" onclick="overwriteExistingTemplate()">
+                                    <span style="margin-right: 5px;">🔄</span>覆盖现有模板
+                                </button>
+                                <button id="inspirationBtn" class="btn btn-primary" style="background-color: #6f42c1; border-color: #6f42c1; opacity: 0.5; cursor: not-allowed;" disabled>
+                                    <span style="margin-right: 5px;">💡</span>找灵感
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-wrapper">
+                            <div class="line-numbers" id="lineNumbers"></div>
+                            <div class="editor-container">
+                                <div id="highlightedText" class="highlighted-text"></div>
+                                <textarea id="expressionEditor" class="expression-editor" placeholder="在此处输入您的表达式...">
+<time_series_operator/>(sentiment_difference, <days/>)</textarea>
+                            </div>
+                        </div>
+                        
+                        <div id="grammarErrors" class="grammar-errors"></div>
+                    </div>
+
+                    <div class="info-panel">
+                        <h3>检测到的模板</h3>
+                        <div id="templateList" class="template-list"></div>
+                        
+                        <h3>语法规则</h3>
+                        <ul class="grammar-rules">
+                            <li><code>/* */</code> - 多行注释</li>
+                            <li><code>;</code> - 语句分隔符（最后一行不需要）</li>
+                            <li>最后一条语句是用于 BRAIN 回测器的 Alpha 表达式</li>
+                            <li>Alpha 表达式不能赋值给变量</li>
+                            <li>不允许使用类、对象、指针或函数</li>
+                        </ul>
+                        
+                        <div class="next-step-hint">
+                            <button class="btn btn-primary" onclick="navigateToPage('decode')">
+                                下一步: 解码模板 →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decode Page -->
+            <div class="page-content" id="decodePage">
+                <div class="decode-content">
+                    <h2>模板解码选项</h2>
+                    <div class="template-status" id="templateStatus">
+                        <!-- Template configuration status will be shown here -->
+                    </div>
+                    
+                    <div class="decode-buttons">
+                        <button id="decodeTemplates" class="btn btn-primary btn-large">full_iteration (全量展开)</button>
+                        <div class="random-iteration-container">
+                            <button id="randomIterationBtn" class="btn btn-primary btn-large">random_iteration (随机展开)</button>
+                            <input type="number" id="randomCount" class="random-count-input" placeholder="数量" min="1" value="10" title="要生成的随机表达式数量">
+                        </div>
+                    </div>
+                    
+                    <div class="decode-info">
+                        <p><strong>全量展开:</strong> 生成所有可能的模板组合</p>
+                        <p><strong>随机展开:</strong> 从可能的组合中生成随机样本</p>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" onclick="navigateToPage('editor')">
+                            ← 返回编辑器
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Page -->
+            <div class="page-content" id="resultsPage">
+                <div class="results-content">
+                    <h2>解码后的表达式</h2>
+                    <div id="resultsList" class="results-list"></div>
+                    <div class="results-actions">
+                        <button id="nextMoveBtn" class="btn btn-secondary btn-small">为表达式追加设置参数</button>
+                        <button id="downloadResults" class="btn btn-primary btn-small" title="Download all generated expressions">下载所有表达式(txt)</button>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" onclick="navigateToPage('decode')">
+                            ← 返回解码
+                        </button>
+                        <button class="btn btn-outline" onclick="navigateToPage('editor')">
+                            ← 返回编辑器
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Variable Input Modal -->
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">输入变量</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription">输入逗号分隔的变量列表:</p>
+                <textarea id="variableInput" class="variable-input" placeholder="variable1, variable2, variable3"></textarea>
+                <div id="brainChooseSection" class="brain-choose-section" style="display: none;">
+                    <button id="chooseBrainBtn" class="btn btn-secondary btn-small">从 BRAIN 选择</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()" class="btn btn-outline">取消</button>
+                <button onclick="applyTemplate()" class="btn btn-primary">应用</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Configuration Info Modal -->
+    <div id="configInfoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="configInfoTitle">模板配置</h3>
+                <span class="close" onclick="closeConfigInfoModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="configInfoContent" class="config-info-content">
+                    <!-- Configuration details will be inserted here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeConfigInfoModal()" class="btn btn-primary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRAIN Login Modal -->
+    <div id="brainLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>连接到 WorldQuant BRAIN</h3>
+                <span class="close" onclick="closeBrainLoginModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="brainLoginForm" onsubmit="event.preventDefault(); authenticateBrain();">
+                    <div class="form-group">
+                        <label for="brainUsername">用户名:</label>
+                        <input type="email" id="brainUsername" class="form-input" placeholder="your.email@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="brainPassword">密码:</label>
+                        <input type="password" id="brainPassword" class="form-input" placeholder="Your password" required>
+                    </div>
+                    <div id="brainLoginStatus" class="login-status"></div>
+                    <div id="loginSpinner" class="login-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeBrainLoginModal()" class="btn btn-outline" id="cancelBtn">取消</button>
+                <button onclick="authenticateBrain()" class="btn btn-primary" id="loginBtn">连接</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRAIN Operators Selection Modal -->
+    <div id="brainOperatorsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>从 BRAIN 选择运算符</h3>
+                <span class="close" onclick="closeBrainOperatorsModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="search-section">
+                    <input type="text" id="operatorSearch" class="form-input" placeholder="搜索运算符...">
+                </div>
+                <div class="category-filter">
+                    <label>按类别过滤:</label>
+                    <select id="categoryFilter" class="form-input">
+                        <option value="">所有类别</option>
+                    </select>
+                </div>
+                <div class="operator-actions">
+                    <button id="selectAllFilteredOperators" class="btn btn-small btn-secondary">Select All Filtered</button>
+                    <button id="clearAllOperators" class="btn btn-small btn-outline">Clear All</button>
+                </div>
+                <div id="operatorsList" class="operators-list">
+                    <!-- Operators will be populated here -->
+                </div>
+                <div class="selected-operators">
+                    <strong>Selected operators:</strong>
+                    <div id="selectedOperators" class="selected-items"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeBrainOperatorsModal()" class="btn btn-outline">Cancel</button>
+                <button onclick="applySelectedOperators()" class="btn btn-primary">Apply Selected</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRAIN Data Fields Selection Modal -->
+    <div id="brainDataFieldsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Get Data Fields via BRAINAPI</h3>
+                <span class="close" onclick="closeBrainDataFieldsModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="data-fields-params">
+                    <div class="params-row">
+                        <div class="param-group">
+                            <label for="regionInput">Region:</label>
+                            <div style="display: flex; gap: 5px;">
+                                <input type="text" id="regionInput" class="form-input" placeholder="e.g., USA" value="USA" style="flex: 1;">
+                                <select id="regionSelect" class="form-input" style="flex: 1; display: none;" onchange="if(this.value) { document.getElementById('regionInput').value = this.value; updateDelayOptions(); }">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="param-group">
+                            <label for="delayInput">Delay:</label>
+                            <div style="display: flex; gap: 5px;">
+                                <input type="text" id="delayInput" class="form-input" placeholder="e.g., 1" value="1" style="flex: 1;">
+                                <select id="delaySelect" class="form-input" style="flex: 1; display: none;" onchange="if(this.value) { document.getElementById('delayInput').value = this.value; updateUniverseOptions(); }">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="param-group">
+                            <label for="universeInput">Universe:</label>
+                            <div style="display: flex; gap: 5px;">
+                                <input type="text" id="universeInput" class="form-input" placeholder="e.g., TOP3000" value="TOP3000" style="flex: 1;">
+                                <select id="universeSelect" class="form-input" style="flex: 1; display: none;" onchange="if(this.value) document.getElementById('universeInput').value = this.value">
+                                    <option value="">Select...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="param-group">
+                            <label for="datasetInput">Dataset ID:</label>
+                            <div style="display: flex; gap: 5px;">
+                                <input type="text" id="datasetInput" class="form-input" placeholder="e.g., fundamental6" value="fundamental6" style="flex: 1;">
+                                <select id="datasetSelect" class="form-input" style="flex: 1; display: none;" onchange="if(this.value) document.getElementById('datasetInput').value = this.value">
+                                    <option value="">Select dataset...</option>
+                                </select>
+                                <button id="loadDatasetsBtn" class="btn btn-small btn-secondary" onclick="loadDatasets()" title="Load Datasets from BRAIN">Load List</button>
+                            </div>
+                        </div>
+                        <div class="param-group">
+                            <button id="loadDataFieldsBtn" class="btn btn-secondary">Load Data Fields</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="dataFieldsLoading" class="loading-message" style="display: none;">
+                    Loading data fields...
+                </div>
+                <div id="dataFieldsContent" class="data-fields-content" style="display: none;">
+                    <div class="data-fields-controls">
+                        <div class="filter-label">
+                            <span>Sample filtering👉</span>
+                        </div>
+                        <div class="filter-options">
+                            <label>
+                                <input type="checkbox" id="filterHighCoverage"> High Coverage (>90%)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="filterPopular"> Popular (>1000 users)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="filterMatrixOnly"> Matrix Type Only
+                            </label>
+                        </div>
+                        <div class="filter-actions">
+                            <button id="selectAllFiltered" class="btn btn-small btn-secondary">Select All Filtered</button>
+                            <button id="clearAllSelected" class="btn btn-small btn-outline">Clear All</button>
+                        </div>
+                    </div>
+                    <div class="data-fields-stats">
+                        <span id="dataFieldsCount">0 fields loaded</span> | 
+                        <span id="filteredCount">0 filtered</span> | 
+                        <span id="selectedCount">0 selected</span>
+                    </div>
+                    <div class="data-fields-table-container">
+                        <table class="data-fields-table">
+                            <thead>
+                                <tr class="header-row">
+                                    <th style="width: 40px;">
+                                        <input type="checkbox" id="selectAllCheckbox" title="Select/Deselect All">
+                                    </th>
+                                    <th style="width: 200px; min-width: 150px;">
+                                        Field ID
+                                        <button class="sort-btn" data-column="id" data-order="asc">↕</button>
+                                    </th>
+                                    <th style="min-width: 300px;">
+                                        Description
+                                        <button class="sort-btn" data-column="description" data-order="asc">↕</button>
+                                    </th>
+                                    <th style="width: 100px;">
+                                        Type
+                                        <button class="sort-btn" data-column="type" data-order="asc">↕</button>
+                                    </th>
+                                    <th style="width: 150px;">
+                                        Coverage
+                                        <button class="sort-btn" data-column="coverage" data-order="asc">↕</button>
+                                    </th>
+                                    <th style="width: 100px;">
+                                        Users
+                                        <button class="sort-btn" data-column="userCount" data-order="asc">↕</button>
+                                    </th>
+                                    <th style="width: 100px;">
+                                        Alphas
+                                        <button class="sort-btn" data-column="alphaCount" data-order="asc">↕</button>
+                                    </th>
+                                </tr>
+                                <tr class="filter-row">
+                                    <th></th>
+                                    <th>
+                                        <input type="text" class="column-filter" data-column="id" placeholder="Filter ID...">
+                                    </th>
+                                    <th>
+                                        <input type="text" class="column-filter" data-column="description" placeholder="Filter description...">
+                                    </th>
+                                    <th>
+                                        <select class="column-filter" data-column="type" id="typeFilter">
+                                            <option value="">All Types</option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <div class="range-filter">
+                                            <input type="number" class="column-filter-min" data-column="coverage" placeholder="Min %" min="0" max="100" step="0.1">
+                                            <span>-</span>
+                                            <input type="number" class="column-filter-max" data-column="coverage" placeholder="Max %" min="0" max="100" step="0.1">
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <input type="number" class="column-filter" data-column="userCount" placeholder="Min users" min="0">
+                                    </th>
+                                    <th>
+                                        <input type="number" class="column-filter" data-column="alphaCount" placeholder="Min alphas" min="0">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataFieldsTableBody">
+                                <!-- Data fields will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="selected-data-fields">
+                        <strong>Selected data fields:</strong>
+                        <div id="selectedDataFields" class="selected-items"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeBrainDataFieldsModal()" class="btn btn-outline">Cancel</button>
+                <button onclick="applySelectedDataFields()" class="btn btn-primary">Apply Selected</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal for Next Move -->
+    <div id="settingsModal" class="modal settings-modal">
+        <div class="modal-content settings-modal-content">
+            <div class="modal-header">
+                <h3>Expression Settings Configuration</h3>
+                <span class="close" onclick="closeSettingsModal()">&times;</span>
+            </div>
+            <div class="modal-body settings-modal-body">
+                <div class="settings-info">
+                    <p><strong>配置要附加到解码表达式的设置</strong></p>
+                    <p class="settings-note">您可以为任何设置输入多个用逗号分隔的值以创建交叉组合</p>
+                </div>
+                
+                <div class="settings-container">
+                    <table class="settings-table">
+                        <thead>
+                            <tr>
+                                <th width="20%">Setting Name</th>
+                                <th width="50%">Value(s)</th>
+                                <th width="15%">Type</th>
+                                <th width="15%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="settingsTableBody">
+                            <tr>
+                                <td>instrumentType</td>
+                                <td><input type="text" class="setting-value-input" data-setting="instrumentType" placeholder="EQUITY" readonly></td>
+                                <td><select class="setting-type-select" data-setting="instrumentType" disabled><option>string</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>region</td>
+                                <td><input type="text" class="setting-value-input" data-setting="region" placeholder="sample:  USA (e.g., USA, EUR, ASI)"></td>
+                                <td><select class="setting-type-select" data-setting="region"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>universe</td>
+                                <td><input type="text" class="setting-value-input" data-setting="universe" placeholder="sample:  TOP3000 (e.g., TOP3000, TOP1000, TOP500)"></td>
+                                <td><select class="setting-type-select" data-setting="universe"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>delay</td>
+                                <td>
+                                    <select class="setting-value-input" data-setting="delay">
+                                        <option value="1" selected>1</option>
+                                        <option value="0">0</option>
+                                    </select>
+                                </td>
+                                <td><select class="setting-type-select" data-setting="delay"><option>number</option><option>string</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>decay</td>
+                                <td><input type="text" class="setting-value-input" data-setting="decay" placeholder="sample:  20 (e.g., 0, 5, 20, 60)"></td>
+                                <td><select class="setting-type-select" data-setting="decay"><option>number</option><option>string</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>neutralization</td>
+                                <td><input type="text" class="setting-value-input" data-setting="neutralization" placeholder="sample:  SUBINDUSTRY (e.g., NONE, SECTOR, INDUSTRY, SUBINDUSTRY)"></td>
+                                <td><select class="setting-type-select" data-setting="neutralization"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>truncation</td>
+                                <td><input type="text" class="setting-value-input" data-setting="truncation" placeholder="sample:  0.08 (e.g., 0.01, 0.05, 0.08, 0.1)"></td>
+                                <td><select class="setting-type-select" data-setting="truncation"><option>number</option><option>string</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>pasteurization</td>
+                                <td>
+                                    <select class="setting-value-input" data-setting="pasteurization">
+                                        <option value="ON" selected>ON</option>
+                                        <option value="OFF">OFF</option>
+                                    </select>
+                                </td>
+                                <td><select class="setting-type-select" data-setting="pasteurization"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>testPeriod</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <input type="range" class="setting-value-input test-period-slider" data-setting="testPeriod" 
+                                               min="0" max="60" value="0" step="1" 
+                                               style="flex: 1; min-width: 200px; margin: 0; padding: 0; 
+                                                      -webkit-appearance: none; appearance: none; 
+                                                      background: #ddd; height: 6px; border-radius: 3px; outline: none;">
+                                        <style>
+                                            .test-period-slider::-webkit-slider-thumb {
+                                                -webkit-appearance: none;
+                                                appearance: none;
+                                                width: 18px;
+                                                height: 18px;
+                                                border-radius: 50%;
+                                                background: #2196F3;
+                                                cursor: pointer;
+                                                border: none;
+                                            }
+                                            .test-period-slider::-moz-range-thumb {
+                                                width: 18px;
+                                                height: 18px;
+                                                border-radius: 50%;
+                                                background: #2196F3;
+                                                cursor: pointer;
+                                                border: none;
+                                            }
+                                            .test-period-slider::-webkit-slider-track {
+                                                background: #ddd;
+                                                height: 6px;
+                                                border-radius: 3px;
+                                            }
+                                            .test-period-slider::-moz-range-track {
+                                                background: #ddd;
+                                                height: 6px;
+                                                border-radius: 3px;
+                                                border: none;
+                                            }
+                                        </style>
+                                        <span id="testPeriodValue" style="min-width: 70px; font-family: monospace; font-size: 12px;">P0Y0M</span>
+                                    </div>
+                                </td>
+                                <td><select class="setting-type-select" data-setting="testPeriod"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>unitHandling</td>
+                                <td><input type="text" class="setting-value-input" data-setting="unitHandling" placeholder="VERIFY" value="VERIFY" readonly></td>
+                                <td><select class="setting-type-select" data-setting="unitHandling" disabled><option>string</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>nanHandling</td>
+                                <td>
+                                    <select class="setting-value-input" data-setting="nanHandling" multiple size="2">
+                                        <option value="OFF" selected>OFF</option>
+                                        <option value="ON">ON</option>
+                                    </select>
+                                </td>
+                                <td><select class="setting-type-select" data-setting="nanHandling"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>maxTrade</td>
+                                <td>
+                                    <select class="setting-value-input" data-setting="maxTrade" multiple size="2">
+                                        <option value="ON" selected>ON</option>
+                                        <option value="OFF">OFF</option>
+                                    </select>
+                                </td>
+                                <td><select class="setting-type-select" data-setting="maxTrade"><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>language</td>
+                                <td><input type="text" class="setting-value-input" data-setting="language" placeholder="FASTEXPR" readonly></td>
+                                <td><select class="setting-type-select" data-setting="language" disabled><option>string</option></select></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>visualization</td>
+                                <td>
+                                    <select class="setting-value-input" data-setting="visualization">
+                                        <option value="false" selected>False</option>
+                                        <option value="true">True</option>
+                                    </select>
+                                </td>
+                                <td><select class="setting-type-select" data-setting="visualization"><option>boolean</option><option>string</option><option>number</option></select></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="add-setting-container">
+                        <button id="addSettingBtn" class="btn btn-secondary btn-small">+ Add Custom Setting</button>
+                    </div>
+                </div>
+                
+                <div class="settings-preview">
+                    <div class="preview-header">
+                        <strong>Preview:</strong> 
+                        <span id="totalCombinations">0</span> total combinations will be generated
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeSettingsModal()" class="btn btn-outline">Cancel</button>
+                <button onclick="confirmAndApplySettings()" class="btn btn-primary" id="generateDownloadBtn">
+                    <span class="btn-text">Generate & Download</span>
+                    <div class="btn-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="progress-text">Generating...</span>
+                    </div>
+                </button>
+                <button onclick="generateAndTest()" class="btn btn-primary" style="background-color: #28a745;">Generate & Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRAIN Test Results Modal -->
+    <div id="brainTestResultsModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3>BRAIN API Test Results</h3>
+                <span class="close" onclick="closeBrainTestResultsModal()">&times;</span>
+            </div>
+            <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                <div id="brainTestProgress" class="test-progress" style="display: none;">
+                    <div class="progress-bar">
+                        <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <p id="progressText">Testing expressions...</p>
+                </div>
+                <div id="brainTestResults" class="test-results">
+                    <!-- Test results will be displayed here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeBrainTestResultsModal()" class="btn btn-primary">Close</button>
+                <button onclick="goToSimulator()" class="btn btn-secondary" id="downloadTestResultsBtn" style="display: none;">🚀 打开回测器(Mainland)</button>
+                <button onclick="confirmAndDownloadExpressionWithSettings()" class="btn btn-secondary" id="downloadExpressionWithSettingsBtn" style="display: none;">
+                    <span class="btn-text">下载带设置的表达式</span>
+                    <div class="btn-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="progress-text">Generating...</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Template Modal -->
+    <div id="saveTemplateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Save Custom Template</h3>
+                <span class="close" onclick="closeSaveTemplateModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="templateName">Template Name:</label>
+                    <input type="text" id="templateName" class="form-input" placeholder="Enter a name for your template" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="templateDescription">Description (optional):</label>
+                    <textarea id="templateDescription" class="form-input" placeholder="Describe what this template does" rows="3"></textarea>
+                </div>
+                <div class="template-configurations-info" id="templateConfigurationsInfo" style="display: none;">
+                    <div style="background-color: #e8f4fd; border: 1px solid #bee5eb; border-radius: 5px; padding: 12px; margin: 10px 0; font-size: 13px;">
+                        <div style="color: #0c5460; font-weight: 500; margin-bottom: 5px;">
+                            📊 Template Configurations Detected
+                        </div>
+                        <div id="configurationsList" style="color: #0c5460;">
+                            <!-- Template configurations will be listed here -->
+                        </div>
+                        <div style="color: #0c5460; font-size: 12px; margin-top: 5px; font-style: italic;">
+                            ✓ These configurations will be saved with your template
+                        </div>
+                    </div>
+                </div>
+                <div class="template-preview">
+                    <div class="preview-label">Preview:</div>
+                    <pre id="templatePreview" style="margin: 0; white-space: pre-wrap; word-wrap: break-word;"></pre>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeSaveTemplateModal()" class="btn btn-outline">Cancel</button>
+                <button onclick="confirmSaveTemplate()" class="btn btn-primary">Save Template</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overwrite Template Modal -->
+    <div id="overwriteTemplateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Overwrite Existing Template</h3>
+                <span class="close" onclick="closeOverwriteTemplateModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="existingTemplateSelect">Select Template to Overwrite:</label>
+                    <select id="existingTemplateSelect" class="form-input">
+                        <option value="">Select a template...</option>
+                    </select>
+                </div>
+                <div id="selectedTemplateInfo" class="form-group" style="display: none;">
+                    <label>Current Description:</label>
+                    <div id="currentTemplateDescription" class="form-input" style="background: #f8f9fa; border: 1px solid #dee2e6; padding: 10px; min-height: 40px; color: #6c757d; font-style: italic;">
+                        <!-- Current template description will be shown here -->
+                    </div>
+                </div>
+                <div class="template-configurations-info" id="overwriteConfigurationsInfo" style="display: none;">
+                    <div style="background-color: #e8f4fd; border: 1px solid #bee5eb; border-radius: 5px; padding: 12px; margin: 10px 0; font-size: 13px;">
+                        <div style="color: #0c5460; font-weight: 500; margin-bottom: 5px;">
+                            📊 Template Configurations Detected
+                        </div>
+                        <div id="overwriteConfigurationsList" style="color: #0c5460;">
+                            <!-- Template configurations will be listed here -->
+                        </div>
+                        <div style="color: #0c5460; font-size: 12px; margin-top: 5px; font-style: italic;">
+                            ✓ These configurations will replace the existing template
+                        </div>
+                    </div>
+                </div>
+                <div class="template-preview">
+                    <div class="preview-label">New Expression Preview:</div>
+                    <pre id="overwriteTemplatePreview" style="margin: 0; white-space: pre-wrap; word-wrap: break-word;"></pre>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeOverwriteTemplateModal()" class="btn btn-outline">Cancel</button>
+                <button onclick="confirmOverwriteTemplate()" class="btn btn-primary" id="overwriteConfirmBtn" disabled>Overwrite Template</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inspiration Modal -->
+    <div id="inspirationModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 1% auto; padding: 0; border: 1px solid #888; width: 98%; max-width: 1800px; height: 95vh; border-radius: 8px; display: flex; flex-direction: column;">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 15px 20px;">
+                <h3 style="margin: 0;">Alpha Inspiration Master (找灵感)</h3>
+                <span id="inspire-close" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            </div>
+            
+            <div class="modal-body" style="padding: 20px; display: flex; gap: 20px; flex: 1; overflow: hidden;">
+                <style>
+                    .inspire-col { transition: all 0.3s ease; position: relative; }
+                    .inspire-col.collapsed { flex: 0 0 50px !important; min-width: 50px; overflow: hidden; background: #f8f9fa; border-radius: 4px; cursor: pointer; border: 1px solid #eee; }
+                    .inspire-col.collapsed .inspire-col-content { display: none; }
+                    .inspire-col.collapsed .col-header { flex-direction: column; align-items: center; height: 100%; justify-content: flex-start; padding-top: 10px; border-bottom: none !important; }
+                    .inspire-col.collapsed .col-header h4 { display: none; }
+                    .inspire-col.collapsed .toggle-btn { transform: rotate(180deg); margin-bottom: 20px; }
+                    .vertical-label { display: none; writing-mode: vertical-rl; text-orientation: mixed; font-weight: bold; font-size: 1.2em; white-space: nowrap; letter-spacing: 2px; padding-top: 10px; }
+                    .inspire-col.collapsed .vertical-label { display: block; }
+                    .toggle-btn { background: none; border: none; cursor: pointer; font-size: 1.2em; color: #666; padding: 0 5px; transition: transform 0.3s; }
+                    .toggle-btn:hover { color: #000; }
+                </style>
+
+                <!-- Column 1: Configuration -->
+                <div id="inspire-col-1" class="inspire-col" style="flex: 0 0 320px; display: flex; flex-direction: column; border-right: 1px solid #eee; padding-right: 15px; overflow-y: auto;">
+                    <div class="col-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #007bff; padding-bottom: 5px;">
+                        <h4 style="margin: 0; color: #007bff;">1. Configuration</h4>
+                        <button class="toggle-btn" onclick="toggleInspireColumn('inspire-col-1')" title="Toggle Column">◀</button>
+                        <span class="vertical-label" style="color: #007bff;">Configuration</span>
+                    </div>
+                    
+                    <div class="inspire-col-content" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px;">
+                            <h5 style="margin-top: 0; margin-bottom: 10px;">LLM Settings</h5>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">Base URL</label>
+                                <input type="text" id="inspire-llm-url" value="https://api.moonshot.cn/v1" class="form-input" style="width: 100%;">
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">Model Name</label>
+                                <input type="text" id="inspire-llm-model" value="kimi-k2.5" class="form-input" style="width: 100%;">
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">API Key</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="password" id="inspire-llm-key" placeholder="Enter API Key" class="form-input secret-toggle-target" style="width: 100%;">
+                                    <button id="inspire-test-llm" class="btn btn-secondary" style="white-space: nowrap;">测试连接</button>
+                                </div>
+                            </div>
+                            <div>
+                                <button id="inspire-enhance" class="btn btn-outline" style="width: 100%;" disabled>增强单个历史模板</button>
+                                <input type="file" id="inspire-idea-file" accept="application/json" multiple style="display: none;">
+                                <button id="inspire-cross-enhance" class="btn btn-outline" style="width: 100%; margin-top: 8px;" disabled>多源模板增强</button>
+                                <input type="file" id="inspire-cross-idea-file" accept="application/json" multiple style="display: none;">
+                                <button id="inspire-enhance-download" class="btn btn-success" style="width: 100%; margin-top: 8px; display: none;">下载增强结果 ZIP 📦</button>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px;">
+                            <h5 style="margin-top: 0; margin-bottom: 10px;">Simulation Settings</h5>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">Region</label>
+                                <select id="inspire-region" class="form-input" style="width: 100%;"><option>Loading...</option></select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">Universe</label>
+                                <select id="inspire-universe" class="form-input" style="width: 100%;"><option>Select Region First</option></select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">Delay</label>
+                                <select id="inspire-delay" class="form-input" style="width: 100%;"><option>Select Region First</option></select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 0.9em; color: #666;">data type</label>
+                                <select id="inspire-data-type" class="form-input" style="width: 100%;">
+                                    <option value="MATRIX" selected>MATRIX</option>
+                                    <option value="VECTOR">VECTOR</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Dataset Selection -->
+                <div id="inspire-col-2" class="inspire-col" style="flex: 0 0 500px; display: flex; flex-direction: column; border-right: 1px solid #eee; padding-right: 15px; overflow-y: auto;">
+                    <div class="col-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #28a745; padding-bottom: 5px;">
+                        <h4 style="margin: 0; color: #28a745;">2. Select Dataset</h4>
+                        <button class="toggle-btn" onclick="toggleInspireColumn('inspire-col-2')" title="Toggle Column">◀</button>
+                        <span class="vertical-label" style="color: #28a745;">Select Dataset</span>
+                    </div>
+                    
+                    <div class="inspire-col-content" style="display: flex; flex-direction: column; flex: 1;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" id="inspire-dataset-search" placeholder="Search dataset..." class="form-input" style="flex-grow: 1;">
+                            <button id="inspire-search-dataset" class="btn btn-secondary">搜索</button>
+                        </div>
+                        
+                        <div id="inspire-selected-dataset" style="margin-bottom: 10px; padding: 10px; background-color: #e8f5e9; border: 1px solid #c3e6cb; border-radius: 4px; display: none;"></div>
+
+                        <div id="inspire-dataset-results" style="flex-grow: 1; overflow-y: auto; border: 1px solid #eee; border-radius: 4px;">
+                            <!-- Results will appear here -->
+                            <div style="padding: 20px; text-align: center; color: #666;">
+                                搜索数据集以开始。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Results -->
+                <div id="inspire-col-3" class="inspire-col" style="flex: 1; display: flex; flex-direction: column; overflow-y: auto;">
+                    <div class="col-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #ffc107; padding-bottom: 5px;">
+                        <h4 style="margin: 0; color: #d39e00;">3. Results</h4>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <button id="inspire-generate" class="btn btn-primary">生成 Alpha 模板</button>
+                            <span style="font-family: 'Segoe Script', 'KaiTi', 'STKaiti', cursive; font-weight: 700; font-size: 16px; color: #6f42c1; text-shadow: 0 1px 2px rgba(0,0,0,0.15);">或</span>
+                            <button id="inspire-direct" class="btn btn-primary">直接来点 Alpha</button>
+                            <button id="inspire-download" class="btn btn-success" style="display: none;">下载模板到本地 📥</button>
+                            <button id="inspire-direct-download" class="btn btn-success" style="display: none;">下载 Alpha 结果 ZIP 📦</button>
+                        </div>
+                        <span class="vertical-label" style="color: #d39e00;">Results</span>
+                    </div>
+
+                    <div class="inspire-col-content" style="display: flex; flex-direction: column; flex: 1;">
+                        <div id="inspire-output" style="flex-grow: 1; background: #fff; border: 1px solid #ddd; padding: 15px; overflow-y: auto; border-radius: 4px;">
+                            <div style="text-align: center; color: #666; margin-top: 50px;">
+                                生成的灵感将显示在这里。
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                             <button id="inspire-new-task" class="btn btn-secondary" style="width: 100%;">开始新任务</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Inspiration Enhance Data Type Modal -->
+    <div id="enhanceDataTypeModal" class="modal" style="display: none; position: fixed; z-index: 1100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 520px; max-width: 90%; border-radius: 8px;">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 12px 16px;">
+                <h3 style="margin: 0;">选择数据类型</h3>
+                <span id="enhance-datatype-close" style="color: #aaa; font-size: 26px; font-weight: bold; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body" style="padding: 16px;">
+                <div style="margin-bottom: 10px; color: #666; font-size: 13px;">
+                    请选择你要增强的历史模板对应的数据类型（区分大小写）。
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">data type</label>
+                    <select id="inspire-enhance-data-type" class="form-input" style="width: 100%;">
+                        <option value="MATRIX" selected>MATRIX</option>
+                        <option value="VECTOR">VECTOR</option>
+                    </select>
+                </div>
+                <div id="enhance-cross-style-row" style="margin-bottom: 10px; display: none;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">交叉风格</label>
+                    <select id="inspire-cross-style" class="form-input" style="width: 100%;">
+                        <option value="conservative">保守 - 保留原模板骨架，少量借鉴</option>
+                        <option value="balanced" selected>均衡 - 融合多模板优点，兼顾创新与稳定</option>
+                        <option value="aggressive">激进 - 最大化创意重组，大胆交叉</option>
+                        <option value="ultra-aggressive">超激进 - 显式运算符管道迁移，完整解释逻辑</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 12px 16px; border-top: 1px solid #eee;">
+                <button id="enhance-datatype-cancel" class="btn btn-secondary">手动输入</button>
+                <button id="enhance-datatype-confirm" class="btn btn-secondary">上传文件</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inspiration Enhance Manual Input Modal -->
+    <div id="enhanceManualModal" class="modal" style="display: none; position: fixed; z-index: 1150; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 4% auto; padding: 0; border: 1px solid #888; width: 860px; max-width: 95%; border-radius: 8px;">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 12px 16px;">
+                <h3 id="enhance-manual-title" style="margin: 0;">手动输入 - 增强单个历史模板</h3>
+                <span id="enhance-manual-close" style="color: #aaa; font-size: 26px; font-weight: bold; cursor: pointer;">&times;</span>
+            </div>
+            <div class="modal-body" style="padding: 16px;">
+                <div style="margin-bottom: 10px; color: #666; font-size: 13px; line-height: 1.5;">
+                    当你没有可上传的 idea JSON，或文件名不符合规则时，可以手动填写下面信息。
+                    <br>
+                    后端会自动生成一个临时 idea JSON，并按 <b>&lt;datasetId&gt;_&lt;region&gt;_&lt;delay&gt;_idea_&lt;ts&gt;.json</b> 的规则处理。
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">datasetId</label>
+                        <input type="text" id="enhance-manual-datasetId" class="form-input" placeholder="例如 fundamental28" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">region</label>
+                        <input type="text" id="enhance-manual-region" class="form-input" placeholder="例如 GLB / USA / CHN" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">delay</label>
+                        <input type="number" id="enhance-manual-delay" class="form-input" placeholder="例如 1" min="0" max="10" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">universe</label>
+                        <input type="text" id="enhance-manual-universe" class="form-input" placeholder="例如 TOPSC1600 / TOP3000" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">Alpha模板template（必填）</label>
+                    <div style="margin-bottom: 6px; color: #666; font-size: 12px;">
+                        提示：要变换的数据字段请用 <b>{}</b> 括起，例如 <b>{ret}</b>。
+                    </div>
+                    <textarea id="enhance-manual-template" class="form-input" rows="4" placeholder="例如 rank(ts_mean({ret}, 20) / ts_stddev({ret}, 20))" style="width: 100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;"></textarea>
+                </div>
+
+                <div style="margin-bottom: 0;">
+                    <label style="display: block; margin-bottom: 6px; font-size: 0.9em; color: #666;">Alpha Template idea（必填）</label>
+                    <textarea id="enhance-manual-idea" class="form-input" rows="3" placeholder="用中文描述 alpha idea" style="width: 100%;"></textarea>
+                </div>
+
+                <div id="enhance-manual-cross-fields" style="display: none; margin-top: 14px; border-top: 1px dashed #ddd; padding-top: 12px;">
+                    <div style="margin-bottom: 6px; color: #dc3545; font-size: 12px; font-weight: 600;">
+                        cross 手动模式至少需要 2 组 template/idea，可继续添加更多组。
+                    </div>
+                    <div id="enhance-manual-cross-list"></div>
+                    <div style="margin-top: 10px;">
+                        <button id="enhance-manual-cross-add" type="button" class="btn btn-outline" style="width: 100%;">继续添加一组</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 10px; padding: 12px 16px; border-top: 1px solid #eee;">
+                <button id="enhance-manual-back" class="btn btn-outline">返回选择文件</button>
+                <button id="enhance-manual-submit" class="btn btn-primary">开始增强</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='brain.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='inspiration.js') }}"></script>
+    <script src="{{ url_for('static', filename='decoder.js') }}"></script>
+    <script src="{{ url_for('static', filename='secret_toggle.js') }}"></script>
+    <script src="{{ url_for('static', filename='usage_widget.js') }}"></script>
+</body>
+</html> 

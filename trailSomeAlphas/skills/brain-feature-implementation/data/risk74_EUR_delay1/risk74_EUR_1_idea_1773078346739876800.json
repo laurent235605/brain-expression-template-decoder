@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(and(greater(abs(group_zscore(winsorize({hfown_pctown}, std=4), {sector})), 2), greater(abs(ts_delta({hfown_pctown}, 21)), 0.5)), group_zscore({hfown_pctown}, {sector}), 0)",
+    "idea": "条件触发式板块异动因子：仅在两个条件同时满足时产生非零信号：1) 持仓比例相对板块偏离度超过2个标准差（极端超配或低配）；2) 近期（21日）持仓比例发生显著绝对变化（>0.5）。通过逻辑运算符（and, greater, abs）和trade_when实现\"强信号才开仓\"的分段逻辑，中段噪音直接置0。用于过滤温和波动，仅捕捉机构在板块内的大额调仓行为。",
+    "expression_list": []
+}

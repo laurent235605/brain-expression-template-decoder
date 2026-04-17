@@ -1,0 +1,14 @@
+{
+    "template": "quantile({roce}, driver=\"gaussian\", sigma=1.0)",
+    "idea": "**Concept**: Cross-Sectional Profitability Decile\n- **Sample Fields Used**: roce\n- **Definition**: Gaussian quantile transformation of return on capital employed across the universe; removes time-series volatility to identify persistent operational outliers\n- **Why This Feature**: Raw ROE/ROIC levels vary by sector and economic regime; cross-sectional ranking identifies true operational excellence regardless of macro environment\n- **Logical Meaning**: Relative efficiency within investment universe; competitive positioning metric\n- **is filling nan necessary**: Cross-sectional operators require complete data for that date; use group_mean or ts_backfill to minimize universe shrinkage, but preserve NaNs for true missing data to avoid bias\n- **Directionality**: Higher values (top decile) indicate industry leaders; Lower values (bottom decile) indicate laggards or distressed operations\n- **Boundary Conditions**: Uniform distribution forces 50% above/below mean; Gaussian transformation compresses extremes",
+    "expression_list": [
+        "quantile(fnd8_er_1af_matrix_ff_cash_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_er_1af_matrix_ff_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_er_1qf_matrix_ff_cash_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_er_1qf_matrix_ff_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_eraf_matrix_ff_cash_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_eraf_matrix_ff_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_erqf_matrix_ff_cash_roce, driver=\"gaussian\", sigma=1.0)",
+        "quantile(fnd8_erqf_matrix_ff_roce, driver=\"gaussian\", sigma=1.0)"
+    ]
+}

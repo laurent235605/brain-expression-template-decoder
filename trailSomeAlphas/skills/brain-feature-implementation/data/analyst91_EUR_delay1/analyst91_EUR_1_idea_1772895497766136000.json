@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(if_else(vec_avg({exposure_value}) > vec_avg({cost_exposure_range_end}), 1, 0), 20)",
+    "idea": "**Concept**: Persistent Cost Pressure Duration\n- **Sample Fields Used**: exposure_value, cost_exposure_range_end\n- **Definition**: Count of days over the past month where exposure value exceeded the upper cost bound, indicating sustained margin pressure\n- **Why This Feature**: Single-day violations may be noise; cumulative duration indicates structural margin problems requiring management attention\n- **Logical Meaning**: Measures the persistence of anomalous cost-exposure relationships; cumulative count indicates severity of operational stress\n- **is filling nan necessary**: For boolean accumulation (counting violations), NaN values should be treated as 0 (no violation) only if confirmed as data gaps rather than unreported violations. Prefer ts_backfill(1) to assume last known state.\n- **Directionality**: Higher values indicate sustained pressure (bearish); zero indicates normal operations\n- **Boundary Conditions**: Maximum value equals lookback window (30); values > 15 indicate persistent structural issues",
+    "expression_list": [
+        "ts_sum(if_else(vec_avg(anl91_exposure_value) > vec_avg(anl91_cost_exposure_range_end), 1, 0), 20)"
+    ]
+}

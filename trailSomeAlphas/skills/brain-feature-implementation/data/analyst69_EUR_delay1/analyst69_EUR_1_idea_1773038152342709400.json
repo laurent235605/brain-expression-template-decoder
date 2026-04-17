@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252)), 2), ts_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), 252), 0)",
+    "idea": "假设只有当披露稳定性显著偏离长期常态（|Z-score|>2）时才存在定价偏差，中间区间为噪音。使用trade_when构造“开关型”信号：仅在极端分位（双尾）保留原始Z-score，其余置零。这降低了中间噪音带来的换手率，聚焦于极端异常值（极度规律或极度混乱）的交易机会。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252)), 2), ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), 252), 0)",
+        "trade_when(greater(abs(ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252)), 2), ts_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), 252), 0)"
+    ]
+}

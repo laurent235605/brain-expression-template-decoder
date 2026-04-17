@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(winsorize(ts_backfill({nondomicile},63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill({concentration},63),std=4),sector),1.5), 0),5)",
+    "idea": "仅当海外收入占比超过20%阈值时激活信号，通过1.5次幂非线性放大极端集中度，并使用5日线性衰减平滑处理以降低换手率，对纯国内企业或低海外暴露企业置零处理，构建可持续的单一市场依赖风险指标。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_nondomicile,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_nondomicile,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector),1.5), 0),5)",
+        "ts_decay_linear(trade_when(greater(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4),0.2), signed_power(group_zscore(winsorize(ts_backfill(rsk74_raw_concentration,63),std=4),sector),1.5), 0),5)"
+    ]
+}

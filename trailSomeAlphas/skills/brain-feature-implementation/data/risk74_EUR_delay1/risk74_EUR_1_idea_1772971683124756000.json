@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(ts_delta(ts_backfill({factor_esg},63), 63), sector), winsorize({hfown_pctown} - quantile({hfown_pctown}, driver=\"uniform\"), 2))",
+    "idea": "动量与持仓偏离的共振：将ESG评分的63日变化率（ts_delta）在行业内部标准化，与HF持仓的sector-relative deviation做非负线性组合（multiply）。此设计融合了输入1的时序视角（ESG改善）与输入2的截面偏离思路，仅当ESG动量与聪明钱超配方向一致时产生强信号，避免单一维度误导。",
+    "expression_list": [
+        "multiply(group_zscore(ts_delta(ts_backfill(rsk74_factor_esg,63), 63), sector), winsorize(rsk74_hfown_pctown - quantile(rsk74_hfown_pctown, driver=\"uniform\"), 2))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "hump( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ), hump=0.01 )",
+    "idea": "换手率控制优化。在条件衰减Surprise基础上引入hump算子，设置最小变动阈值（hump=0.01）忽略微小日间波动，降低因高频噪声导致的不必要再平衡，在保持信号敏感度的同时显著控制turnover成本。",
+    "expression_list": [
+        "hump( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), hump=0.01 )",
+        "hump( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), hump=0.01 )"
+    ]
+}

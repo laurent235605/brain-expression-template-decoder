@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev({overall_score}, 20) / abs(ts_mean({overall_score}, 20))",
+    "idea": "**Concept**: Quality Consistency Ratio\n- **Sample Fields Used**: `overall_score`\n- **Definition**: Rolling coefficient of variation of overall earnings quality to identify companies with stable vs. volatile accounting practices\n- **Why This Feature**: Companies with stable accounting quality (low volatility in quintile rankings) typically have consistent business models and transparent reporting, whereas high volatility suggests restatement risk or cyclical manipulation patterns\n- **is filling nan necessary**: Yes, use ts_backfill to handle missing quintile data due to reporting lags, but limit backfill to 5 days to avoid stale data bias\n- **Directionality**: Low values (stable) indicate predictable accounting; High values indicate erratic reporting quality\n- **Boundary Conditions**: Near-zero values indicate exceptional consistency; Values >0.5 indicate extreme volatility potentially signaling impending restatements",
+    "expression_list": [
+        "ts_std_dev(mdl255_overall_score, 20) / abs(ts_mean(mdl255_overall_score, 20))"
+    ]
+}

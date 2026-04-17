@@ -1,0 +1,7 @@
+{
+    "template": "subtract(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), quantile(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), driver=\"uniform\"))",
+    "idea": "将模板2的行业中性化区域价差减去其全市场均匀分位数，融合模板1的相对分位偏离思想。识别那些不仅行业内区域配置极端，且在全市场分布中也处于尾部的标的，实现双重极端确认（行业+全市场）。",
+    "expression_list": [
+        "subtract(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), quantile(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), driver=\"uniform\"))"
+    ]
+}

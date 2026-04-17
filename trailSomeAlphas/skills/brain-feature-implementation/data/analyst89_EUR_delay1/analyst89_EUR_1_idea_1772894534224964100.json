@@ -1,0 +1,7 @@
+{
+    "template": "ts_corr(vec_avg({data_item_value}), vec_avg({fiscal_period_end}), 252)",
+    "idea": "**Concept**: Value-Period Alignment Quality\n- **Sample Fields Used**: data_item_value, fiscal_period_end\n- **Definition**: Time-series correlation between financial value magnitude and fiscal period recency, detecting trends or seasonality in reporting\n- **Why This Feature**: Strong correlation indicates trending fundamentals (growth or decline); weak correlation suggests stable or seasonal business; helps distinguish trend from noise\n- **Logical Meaning**: The relationship between timing and financial performance magnitude; indicates whether recent periods systematically differ from past periods\n- **is filling nan necessary**: Yes, both series must be aligned and complete for correlation calculation; use ts_backfill on both fields\n- **Directionality**: Positive correlation indicates financial values are increasing over time (growth trend); negative indicates decline; near zero indicates no time-based trend (stable or purely seasonal)\n- **Boundary Conditions**: Correlation near 1 or -1 indicates strong deterministic trend; values near 0 suggest mean-reverting or seasonal patterns; breakdown in correlation may indicate business model shifts",
+    "expression_list": [
+        "ts_corr(vec_avg(anl89_data_item_value), vec_avg(anl89_fiscal_period_end), 252)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(rank(pasteurize({volume})), 0.9), quantile({volume}, driver=\"uniform\"), multiply(quantile({volume}, driver=\"uniform\"), 0.3))",
+    "idea": "条件化截面增强：基于pasteurize清洗后的排名进行分层逻辑，仅对前10%高流动性证券给予完整的uniform分位数权重，其余证券权重压缩至30%，构建头尾差异化暴露的流动性择时结构，避免中段噪音干扰",
+    "expression_list": [
+        "trade_when(greater(rank(pasteurize(mdl234_volume)), 0.9), quantile(mdl234_volume, driver=\"uniform\"), multiply(quantile(mdl234_volume, driver=\"uniform\"), 0.3))"
+    ]
+}

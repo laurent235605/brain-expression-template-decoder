@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(vec_stddev({estimated_eps}), 0.01)), industry)",
+    "idea": "将模板2中盈利惊喜的分母从绝对均值替换为向量标准差vec_stddev，构建经分析师预期分歧度调整的稳健惊喜指标，结合模板1的行业中性化，识别那些预期分歧大但实际大幅超预期的公司，提高信号的信噪比。",
+    "expression_list": [
+        "group_zscore(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), industry)",
+        "group_zscore(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(vec_stddev(ern6_estimated_eps), 0.01)), industry)"
+    ]
+}

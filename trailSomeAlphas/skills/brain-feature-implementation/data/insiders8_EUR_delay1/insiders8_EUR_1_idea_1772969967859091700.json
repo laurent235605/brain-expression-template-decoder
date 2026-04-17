@@ -1,0 +1,7 @@
+{
+    "template": "winsorize( subtract( divide( ts_std_dev( {weight_net}, 20 ), add( abs( ts_mean( {weight_net}, 20 ) ), 0.0001 ) ), divide( ts_std_dev( {weight_net}, 60 ), add( abs( ts_mean( {weight_net}, 60 ) ), 0.0001 ) ) ), std=4 )",
+    "idea": "长短周期持仓稳定性背离（拐点识别）。计算20日短期变异系数与60日长期变异系数之差。当短期CV显著高于长期CV时，表明机构近期正在快速调仓（建仓或派发）；当短期CV显著低于长期CV时，表明近期进入持仓静默期或锁仓。用于识别持仓行为从长期持有转向短期交易（或反之）的转折点。",
+    "expression_list": [
+        "winsorize( subtract( divide( ts_std_dev( insd8_weight_net, 20 ), add( abs( ts_mean( insd8_weight_net, 20 ) ), 0.0001 ) ), divide( ts_std_dev( insd8_weight_net, 60 ), add( abs( ts_mean( insd8_weight_net, 60 ) ), 0.0001 ) ) ), std=4 )"
+    ]
+}

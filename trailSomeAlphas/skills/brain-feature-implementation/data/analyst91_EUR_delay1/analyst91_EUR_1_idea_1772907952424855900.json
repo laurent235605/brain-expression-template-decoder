@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_std_dev(vec_skewness({exposure_value}), 20), sector)",
+    "idea": "地理集中度波动性的行业分位排序（稳健分组替代）。结合模板1的vec_skewness与模板2的短期波动计算，将group_zscore替换为group_rank：使用组内排名（0-1分位）替代标准化Z-score，对地理集中度短期波动性进行行业相对排序。该方法更稳健，不易受行业内极端值对均值的扭曲，能有效识别地理布局最不稳定的行业 outliers。",
+    "expression_list": [
+        "group_rank(ts_std_dev(vec_skewness(anl91_exposure_value), 20), sector)"
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "template": "ts_std_dev(vec_avg({probability}), 20) / abs(ts_mean(vec_avg({probability}), 20))",
+    "idea": "**Concept**: Conviction Stability Coefficient\n- **Sample Fields Used**: `probability`, `daily_probability`\n- **Definition**: Rolling coefficient of variation measuring how stable an analyst's conviction remains over time\n- **Why This Feature**: Stable conviction suggests deep fundamental research; volatile probability indicates reactive trading or uncertainty. Low stability predicts higher turnover and potential reversal signals.\n- **is filling nan necessary**: Probability updates are sparse; NaN values indicate no change in view. Use ts_backfill(vec_avg({probability}), lookback=5) to carry forward last known conviction before calculating stability, as NaN here represents \"no news\" rather than \"zero confidence.\"\n- **Directionality**: Low values (stable) suggest persistent alpha; high values (unstable) predict noise or imminent closure\n- **Boundary Conditions**: Near-zero standard deviation creates extreme ratios; cap at 5.0 to avoid division-by-zero artifacts",
+    "expression_list": [
+        "ts_std_dev(vec_avg(anl56_daily_probability), 20) / abs(ts_mean(vec_avg(anl56_daily_probability), 20))",
+        "ts_std_dev(vec_avg(anl56_probability), 20) / abs(ts_mean(vec_avg(anl56_probability), 20))",
+        "ts_std_dev(vec_avg(conviction_probability_score), 20) / abs(ts_mean(vec_avg(conviction_probability_score), 20))"
+    ]
+}

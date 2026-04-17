@@ -1,0 +1,7 @@
+{
+    "template": "truncate( signed_power( group_zscore( ({hfown_pctown} / {hfown_numown}), sector ), 3 ), maxPercent=0.01 )",
+    "idea": "非线性尾部放大与权重截断：先计算行业内的集中度Z分数，应用保持符号的三次方变换（signed_power）以非线性放大极端值（高集中度更高，低集中度更低，中间压缩），最后截断单只股票权重不超过1%。该模板强化了极端持仓结构的风险暴露，同时通过truncate控制单票最大权重防止因数据异常或流动性缺失导致的组合风险集中，适用于高换手场景下的统计套利。",
+    "expression_list": [
+        "truncate( signed_power( group_zscore( (rsk74_hfown_pctown / rsk74_hfown_numown), sector ), 3 ), maxPercent=0.01 )"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(ts_sum(ts_delta({shortint}, 1), 15), group_mean(ts_sum(ts_delta({shortint}, 1), 15), log(ts_mean(cap, 21)), market), 252, rettype=0)",
+    "idea": "**概念**: 剥离市场共同趋势的特质性做空压力（CAPM Residual Style）\n- **逻辑**: 通过时序回归（ts_regression, rettype=0取残差）剥离市值加权市场整体的做空趋势（group_mean by market with log-cap weighting），保留个体股票相对于市场的特质性做空变化\n- **中性化**: 去除市场beta影响后，得到的残差代表纯粹的个体层面看空/看多情绪，避免市场整体做空情绪（如熊市）的干扰\n- **方向性**: 残差为正表示做空压力高于市场隐含水平（相对看空）；残差为负且绝对值大表示相对市场更强劲的回补（相对看多）",
+    "expression_list": [
+        "ts_regression(ts_sum(ts_delta(rsk74_shortint, 1), 15), group_mean(ts_sum(ts_delta(rsk74_shortint, 1), 15), log(ts_mean(cap, 21)), market), 252, rettype=0)",
+        "ts_regression(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), group_mean(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), log(ts_mean(cap, 21)), market), 252, rettype=0)"
+    ]
+}

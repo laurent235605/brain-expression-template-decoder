@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(quantile(ts_backfill({exp_usa}, 21), driver=\"gaussian\"), quantile(ts_backfill({exp_chn}, 21), driver=\"gaussian\")), industry)",
+    "idea": "使用高斯分位数转换（quantile）替代简单截尾，将中美敞口暴露映射到标准正态分布后再构建价差，增强尾部区分度并压缩中间噪音，结合行业中性化，适用于识别极端区域配置偏离的非线性场景。",
+    "expression_list": [
+        "group_zscore(subtract(quantile(ts_backfill(rsk74_raw_exp_usa, 21), driver=\"gaussian\"), quantile(ts_backfill(rsk74_raw_exp_chn, 21), driver=\"gaussian\")), industry)"
+    ]
+}

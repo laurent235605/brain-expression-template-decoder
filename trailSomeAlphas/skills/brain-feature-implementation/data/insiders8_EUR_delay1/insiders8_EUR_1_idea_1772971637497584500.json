@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(trade_when(bucket(group_rank(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), \"0,1,0.1\") >= 0.9, group_zscore(signed_power(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=3), 1.6), sector), trade_when(bucket(group_rank(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), sector), \"0,1,0.1\") <= 0.1, group_zscore(-signed_power(winsorize({active_weight_decile_rank_long} - {active_return_decile_rank_long}, std=3), 1.6), sector), 0)), 3)",
+    "idea": "将行业分位数严格切分为10档，仅对最高和最低档（Top/Bottom 10%）进行1.6次幂非线性放大和行业中性化，中间80%区间强制置零（视为噪音）；最后应用3日线性衰减平滑换手，严格践行“只交易极端尾端、忽略中段干扰”的假设。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(bucket(group_rank(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector), \"0,1,0.1\") >= 0.9, group_zscore(signed_power(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=3), 1.6), sector), trade_when(bucket(group_rank(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), sector), \"0,1,0.1\") <= 0.1, group_zscore(-signed_power(winsorize(insd8_active_weight_decile_rank_long - insd8_black_litterman_implied_active_return_decile_rank_long, std=3), 1.6), sector), 0)), 3)"
+    ]
+}

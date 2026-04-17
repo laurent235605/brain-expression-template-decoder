@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(multiply(if_else(and(greater(group_rank(winsorize(vec_avg({elta_value}), std=4), industry), 0.8), greater(sign(winsorize(vec_avg({aily_delta_recon_value}), std=4)), 0)), group_rank(winsorize(vec_avg({elta_value}), std=4), industry), if_else(and(less(group_rank(winsorize(vec_avg({elta_value}), std=4), industry), 0.2), less(sign(winsorize(vec_avg({aily_delta_recon_value}), std=4)), 0)), subtract(group_rank(winsorize(vec_avg({elta_value}), std=4), industry), 1), 0)), winsorize(abs(zscore(winsorize(vec_avg({aily_delta_recon_value}), std=4))), std=2)), 5)",
+    "idea": "基于行业内分位数（group_rank）的桶化策略：仅当高预期（前20%）伴随向上修正（动量加速）或低预期（后20%）伴随向下修正（价值陷阱）时产生非零信号；使用修正强度的标准化绝对值作为权重系数，并通过5日衰减平滑，构建非对称的头寸分布。",
+    "expression_list": [
+        "ts_decay_linear(multiply(if_else(and(greater(group_rank(winsorize(vec_avg(ern10_elta_value), std=4), industry), 0.8), greater(sign(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4)), 0)), group_rank(winsorize(vec_avg(ern10_elta_value), std=4), industry), if_else(and(less(group_rank(winsorize(vec_avg(ern10_elta_value), std=4), industry), 0.2), less(sign(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4)), 0)), subtract(group_rank(winsorize(vec_avg(ern10_elta_value), std=4), industry), 1), 0)), winsorize(abs(zscore(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4))), std=2)), 5)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), signed_power(abs(ts_delta(winsorize(ts_backfill({exp_nondomicile1}, 21), std=4), 5)), 0.5))",
+    "idea": "非本土敞口变化率缩放：以Input1的区域价差作为主信号，用非本土敞口的5日变化幅度(|ts_delta|)作为动态缩放因子(通过signed_power压缩至0-1区间)。当公司全球化敞口发生剧烈变化时(可能预示业务重心转移)，放大区域价差信号的权重；反之则缩小，实现事件驱动的区域Alpha增强。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), signed_power(abs(ts_delta(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 21), std=4), 5)), 0.5))",
+        "multiply(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), signed_power(abs(ts_delta(winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 21), std=4), 5)), 0.5))"
+    ]
+}

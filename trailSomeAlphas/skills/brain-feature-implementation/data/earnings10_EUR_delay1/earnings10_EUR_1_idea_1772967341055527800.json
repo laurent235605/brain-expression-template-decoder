@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_normalize(divide(subtract(ts_mean(winsorize(vec_percentage({aily_delta_recon_value}, 0.5), std=4), 5), ts_mean(winsorize(vec_percentage({aily_delta_recon_value}, 0.5), std=4), 60)), ts_std_dev(winsorize(vec_percentage({aily_delta_recon_value}, 0.5), std=4), 60)), industry), 5)",
+    "idea": "多时间尺度动量偏离（稳健中位数版）：使用vec_percentage(..., 0.5)计算修正值的中位数替代均值（对异常值更稳健），构建5日短期与60日长期均值偏离度，除以60日标准差标准化得到趋势加速度指标，进行行业组内归一化(group_normalize)确保每个行业多空平衡，使用5日线性衰减平滑信号。捕捉修正趋势的持续性和拐点，中位数处理有效降低单一极端修正对因子的扭曲影响。",
+    "expression_list": [
+        "ts_decay_linear(group_normalize(divide(subtract(ts_mean(winsorize(vec_percentage(ern10_aily_delta_recon_value, 0.5), std=4), 5), ts_mean(winsorize(vec_percentage(ern10_aily_delta_recon_value, 0.5), std=4), 60)), ts_std_dev(winsorize(vec_percentage(ern10_aily_delta_recon_value, 0.5), std=4), 60)), industry), 5)"
+    ]
+}

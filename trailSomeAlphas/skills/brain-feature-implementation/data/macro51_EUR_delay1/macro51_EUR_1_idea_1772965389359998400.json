@@ -1,0 +1,7 @@
+{
+    "template": "{stoxx_europe_600_ucits_weight} / ts_mean({stoxx_europe_600_ucits_weight}, 20)",
+    "idea": "**Concept**: Weight Persistence Ratio\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The ratio of current weight to its historical average over a lookback window, measuring how much current allocation deviates from the recent norm\n- **Why This Feature**: ETF weights should drift predictably with market movements; extreme deviations from historical averages indicate either significant price divergence or active rebalancing interventions\n- **is filling nan necessary**: Yes, use ts_backfill() to handle temporary missing weight data due to trading halts or data lag, as missing weights typically represent data issues rather than meaningful zero allocations\n- **Directionality**: Values near 1 indicate stable allocation; values significantly above 1 indicate accumulation or outperformance; values below 1 indicate reduction or underperformance\n- **Boundary Conditions**: Upper bound theoretically unbounded (concentration), lower bound approaching 0 (elimination from portfolio)",
+    "expression_list": [
+        "mcr51_ishares_stoxx_europe_600_ucits_weight / ts_mean(mcr51_ishares_stoxx_europe_600_ucits_weight, 20)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "quantile(divide(ts_delta(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5), ts_delay(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), 5)), driver=\"gaussian\")",
+    "idea": "转化率速度的高斯分位映射：对模板2的转化率应用模板1的velocity框架后，使用quantile映射到高斯分布。此举将中间区间的温和变动压缩至零附近，同时将极端加速/减速的转化率变化拉伸放大，强化尾部信号权重，适用于捕捉运营效率的结构性突破。",
+    "expression_list": [
+        "quantile(divide(ts_delta(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), ts_delay(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5)), driver=\"gaussian\")",
+        "quantile(divide(ts_delta(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5), ts_delay(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), 5)), driver=\"gaussian\")"
+    ]
+}

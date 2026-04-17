@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 5), 5), std=4), 3), industry), 1.5)",
+    "idea": "结合模板1的数据清洗流程（backfill+winsorize+group_zscore）与模板2的极端值强调思路，引入时序平滑与非线性变换。先对修订动量进行3日线性衰减平均（ts_decay_linear）以降低日间噪音，经行业标准化后，使用signed_power（幂次1.5）非线性放大行业内极端偏离值，同时保持方向一致性。相比二元截断，这种渐进式放大在保持稳健性的同时增强了统计显著极端值的权重。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 5), 5), std=4), 3), industry), 1.5)",
+        "signed_power(group_zscore(ts_decay_linear(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 5), 5), std=4), 3), industry), 1.5)"
+    ]
+}

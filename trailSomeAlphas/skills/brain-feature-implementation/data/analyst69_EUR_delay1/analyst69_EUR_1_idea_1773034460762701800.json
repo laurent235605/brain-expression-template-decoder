@@ -1,0 +1,8 @@
+{
+    "template": "ts_std_dev({eps_best_eeps_cur_yr}, 20)",
+    "idea": "**Concept**: EPS Estimate Stability Score\n- **Sample Fields Used**: eps_best_eeps_cur_yr\n- **Definition**: Rolling standard deviation of current year EPS estimates over 20-day window measuring consensus volatility\n- **Why This Feature**: Low volatility indicates stable analyst views and high conviction; high volatility suggests disagreement or uncertainty about earnings trajectory\n- **Logical Meaning**: Measures the steadiness of professional opinion; stable estimates suggest information efficiency, unstable estimates suggest pending information arrival\n- **is filling nan necessary**: Daily updates with delay=1 suggest good continuity, but sparse coverage for some EUR small-caps may require ts_backfill(20) to avoid look-ahead bias. If NaN appears, it likely means no analyst coverage (meaningful missingness), so group_mean() filling would be inappropriate.\n- **Directionality**: Low values (stable) generally indicate lower uncertainty; high values indicate potential earnings risk or event volatility\n- **Boundary Conditions**: Near-zero values suggest stale/consensus estimates; extremely high values may precede earnings announcements or guidance changes",
+    "expression_list": [
+        "ts_std_dev(anl69_aeps_best_eeps_cur_yr, 20)",
+        "ts_std_dev(anl69_eps_best_eeps_cur_yr, 20)"
+    ]
+}

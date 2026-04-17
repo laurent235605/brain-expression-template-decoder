@@ -1,0 +1,8 @@
+{
+    "template": "ts_corr({value_08316q}, ts_delay({value_08316q}, 252), 504)",
+    "idea": "**Concept**: Operating Margin Persistence\n- **Sample Fields Used**: `value_08316q`\n- **Definition**: Correlation between current operating margin and margin 252 days (1 year) prior, measured over 504 days (2 years)\n- **Why This Feature**: Measures the durability of competitive advantages; persistent margins indicate moats, volatile margins indicate commodity exposure\n- **Logical Meaning**: Autocorrelation of profitability; high values suggest structural industry position, low values suggest cyclical or competitive pressure\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Correlation requires aligned time series; filling gaps creates spurious persistence.\n- **Directionality**: Higher values indicate persistent margins (quality); low values indicate unstable margins (risk)\n- **Boundary Conditions**: Values near 1 indicate highly predictable margins; near 0 indicate random walk margins; negative indicate mean-reverting margins",
+    "expression_list": [
+        "ts_corr(fnd28_newq_value_08316q, ts_delay(fnd28_newq_value_08316q, 252), 504)",
+        "ts_corr(fnd28_ratesq_value_08316q, ts_delay(fnd28_ratesq_value_08316q, 252), 504)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "regression_neut(ts_backfill(vec_avg({notional}), lookback=5, k=1), ts_backfill(vec_avg({vda}), lookback=5, k=1))",
+    "idea": "**Concept**: Liquidity-Neutralized Size Residual\n- **Sample Fields Used**: notional, vda\n- **Definition**: Residual of notional after regressing out VDA effect (size purged of liquidity impact)\n- **Why This Feature**: Separates \"big because liquid\" from \"big despite illiquid\"; positive residuals indicate unusually large notional for given liquidity; captures information not in VDA alone\n- **is filling nan necessary**: Yes, backfill both fields before regression to ensure alignment.\n- **Directionality**: Positive residuals indicate large flows in liquid names (absorbable); negative residuals indicate small flows in illiquid names (still dangerous)\n- **Boundary Conditions**: Extreme positive outliers indicate whale trades in blue chips; extreme negative suggests data errors or micro-cap inclusion",
+    "expression_list": [
+        "regression_neut(ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1), ts_backfill(vec_avg(mcr49_vda), lookback=5, k=1))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_rank(ts_decay_linear(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 21), 5), sector)",
+    "idea": "行业相对动量加速信号。先对比率做行业中性化，计算21日变化率并经5日线性衰减平滑以降低噪音，再在行业内部排名，识别资金配置偏好正在快速升温且平滑过渡的个股，强调趋势加速而非绝对水平。",
+    "expression_list": [
+        "group_rank(ts_decay_linear(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 21), 5), sector)"
+    ]
+}

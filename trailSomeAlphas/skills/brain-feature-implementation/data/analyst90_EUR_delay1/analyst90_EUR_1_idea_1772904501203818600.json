@@ -1,0 +1,7 @@
+{
+    "template": "zscore(winsorize(ts_std_dev(vec_skewness({likelihood_score}), 60), std=4))",
+    "idea": "高阶矩不稳定性因子：不关注likelihood的均值波动，而是跟踪其分布偏度（skewness）的60日时序标准差。捕捉分析师置信分布的左偏/右偏不对称性的变化速度，识别极端尾部风险预期的形成与消散过程。",
+    "expression_list": [
+        "zscore(winsorize(ts_std_dev(vec_skewness(success_likelihood_score), 60), std=4))"
+    ]
+}

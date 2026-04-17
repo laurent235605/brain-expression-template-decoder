@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 21), group_mean(ts_delta(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), 21), log(ts_mean(cap, 21)), industry)), industry)",
+    "idea": "捕捉个股相对其所在行业的“旋转速度”差异（Relative Rotation）。计算个股21日敞口价差变化，并剔除行业市值加权平均变化（行业整体Beta），剩余部分代表公司特有的前瞻性布局速度，适用于识别领先于行业进行地缘风险调整的先行指标。",
+    "expression_list": [
+        "group_zscore(subtract(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 21), group_mean(ts_delta(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), 21), log(ts_mean(cap, 21)), industry)), industry)"
+    ]
+}

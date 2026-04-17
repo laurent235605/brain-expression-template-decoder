@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(or(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.9), less(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.1)), less(ts_std_dev(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 0.02)), winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=4), 0)",
+    "idea": "整合模板2的极端分位筛选逻辑与模板1的异常值处理（winsorize），并加入时序稳定性验证。仅在短期修订处于全市场前10%或后10%极端区间，且过去20日修订波动率低于阈值（信号稳定）时触发交易。这种双重过滤机制排除了一过性的数据跳跃噪音，确保捕获的是分析师持续调整预期的稳定趋势，同时winsorize处理防止极端异常值扭曲信号。",
+    "expression_list": [
+        "trade_when(and(or(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.9), less(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.1)), less(ts_std_dev(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 0.02)), winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=4), 0)",
+        "trade_when(and(or(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.9), less(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.1)), less(ts_std_dev(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 0.02)), winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=4), 0)"
+    ]
+}

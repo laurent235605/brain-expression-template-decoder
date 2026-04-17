@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(group_rank(winsorize(ts_backfill({reported_asset_value}, 63), std=4), industry), 0.5), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets}, 63), std=4), winsorize(ts_backfill({reported_asset_value}, 63), std=4)), industry), 3), 0)",
+    "idea": "实施规模条件化筛选：仅对行业规模排名中位数以上的大基金应用该信号（排除小规模基金数据稀疏与噪音干扰），通过trade_when将不符合条件的标的权重置零；对符合条件的基金，计算其规模中性化后的行业标准化残差，并经3日线性衰减控制换手率；该模板强调'大资金中的配置异常'更具信息含量，认为大规模基金的主动偏离行为更能反映其研究资源与信心优势。",
+    "expression_list": [
+        "trade_when(greater(group_rank(winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), industry), 0.5), ts_decay_linear(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), std=4), winsorize(ts_backfill(fund_reported_asset_value, 63), std=4)), industry), 3), 0)"
+    ]
+}

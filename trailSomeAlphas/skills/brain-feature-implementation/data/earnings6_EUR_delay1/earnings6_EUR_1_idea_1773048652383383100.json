@@ -1,0 +1,5 @@
+{
+    "template": "if_else(less(multiply(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), if_else(equal(vec_avg({estimated_eps}), 0), 0.01, 0))), ts_delta(vec_avg({estimated_eps}), 63)), 0), multiply(2, group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {industry})), multiply(0.5, group_zscore(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), {industry})))",
+    "idea": "预期修正背离套利：捕捉\"预期修正背离\"效应，通过if_else判断盈利惊喜方向与过去63天分析师一致预期变化方向（ts_delta）是否一致；当两者符号相反（less 0判断为背离，即反向修正后的超预期或正向修正后的低于预期）时赋予2倍权重，同向共识时仅赋予0.5倍权重；显式使用if_else处理分母为零的情况（equal判断），利用市场对背离信息的反应不足获取超额收益。",
+    "expression_list": []
+}

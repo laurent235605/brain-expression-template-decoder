@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract(vec_avg({tax_eff_on_abnormal_item}), ts_mean(vec_avg({tax_eff_on_abnormal_item}), 504)), ts_std_dev(vec_avg({tax_eff_on_abnormal_item}), 504))",
+    "idea": "**Concept**: Abnormal Tax Effect Detection\n- **Sample Fields Used**: tax_eff_on_abnormal_item\n- **Definition**: Z-score of current tax effects on abnormal items relative to trailing 2-year history\n- **Why This Feature**: Unusual tax adjustments often precede restatements or indicate aggressive tax position recognition; anomalous values warrant scrutiny\n- **Logical Meaning**: Captures outlier tax adjustments that deviate from historical patterns of one-time item treatment\n- **is filling nan necessary**: Absence of abnormal items (zero/NaN) is meaningful and should not be filled\n- **Directionality**: Extreme positive or negative z-scores indicate unusual tax events; zero indicates normal operations\n- **Boundary Conditions**: |z-score| > 3 indicates statistically significant anomaly requiring investigation",
+    "expression_list": [
+        "divide(subtract(vec_avg(fnd72_pit_or_is_a_is_tax_eff_on_abnormal_item), ts_mean(vec_avg(fnd72_pit_or_is_a_is_tax_eff_on_abnormal_item), 504)), ts_std_dev(vec_avg(fnd72_pit_or_is_a_is_tax_eff_on_abnormal_item), 504))",
+        "divide(subtract(vec_avg(fnd72_pit_or_is_q_is_tax_eff_on_abnormal_item), ts_mean(vec_avg(fnd72_pit_or_is_q_is_tax_eff_on_abnormal_item), 504)), ts_std_dev(vec_avg(fnd72_pit_or_is_q_is_tax_eff_on_abnormal_item), 504))"
+    ]
+}

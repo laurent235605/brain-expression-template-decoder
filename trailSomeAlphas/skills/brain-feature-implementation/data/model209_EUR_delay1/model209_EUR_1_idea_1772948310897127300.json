@@ -1,0 +1,7 @@
+{
+    "template": "vec_skewness({investment})",
+    "idea": "**Concept**: Investment Distribution Asymmetry\n- **Sample Fields Used**: investment\n- **Definition**: Skewness of investment distribution indicating structural bias toward large or small positions\n- **Why This Feature**: Reveals portfolio construction philosophy: positive skew suggests many small bets with few large convictions; negative suggests concentration among smaller names\n- **Logical Meaning**: Third-moment measure of allocation asymmetry\n- **is filling nan necessary**: Filter NaNs before skewness calculation to avoid distortion\n- **Directionality**: Positive indicates right tail (few large positions dominate); negative indicates left tail (many large positions with few small); zero indicates symmetry\n- **Boundary Conditions**: Theoretically unbounded but typically -3 to +3 in practice",
+    "expression_list": [
+        "vec_skewness(mdl209_investment)"
+    ]
+}

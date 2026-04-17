@@ -1,0 +1,7 @@
+{
+    "template": "ts_mean(multiply(group_zscore(quantile(winsorize({active_return_decile_rank_long} - {active_weight_decile_rank_long}, std=4), driver=\"gaussian\"), sector), (2 * ts_rank({active_return_decile_rank_long} - {active_weight_decile_rank_long}, 126) - 1)), 20)",
+    "idea": "使用高斯分位数（quantile gaussian）替代幂变换，将中间区间压缩至零附近、极端值拉远，再与模板1的126日时间序列排名条件相乘，最后20日平滑。这种双拉伸结构既强调截面极端偏离，又要求历史分位确认，适合处理尖峰厚尾分布的定价分歧数据。",
+    "expression_list": [
+        "ts_mean(multiply(group_zscore(quantile(winsorize(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, std=4), driver=\"gaussian\"), sector), (2 * ts_rank(insd8_black_litterman_implied_active_return_decile_rank_long - insd8_active_weight_decile_rank_long, 126) - 1)), 20)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(group_zscore(vec_skewness(vec_filter({version}, value=\\\"nan\\\")), industry), 21)",
+    "idea": "行业中性偏度动量：在行业内部进行标准化处理，消除行业间固有差异后，计算21日偏度变化率，捕捉版本分布形态的动态演变趋势，适用于发现版本更新行为的加速或减速拐点。",
+    "expression_list": [
+        "ts_delta(group_zscore(vec_skewness(vec_filter(anl85_version, value=\\\"nan\\\")), industry), 21)"
+    ]
+}

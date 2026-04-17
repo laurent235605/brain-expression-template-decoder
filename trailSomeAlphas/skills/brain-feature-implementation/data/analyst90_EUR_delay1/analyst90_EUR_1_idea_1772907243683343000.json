@@ -1,0 +1,7 @@
+{
+    "template": "b = vec_avg({likelihood_score}); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_g_rank = group_rank(vol_clean, industry); stab_quantile = quantile(stab_g_rank, driver=\"gaussian\"); level_g_score = group_zscore(winsorize(ts_backfill(b, 63), std=4), industry); weight = add(1, multiply(0.5, stab_quantile)); core = multiply(level_g_score, weight); group_normalize(core, industry)",
+    "idea": "在行业内进行稳定性分位（group_rank）后，使用高斯分位转换（quantile）将中间区间压缩、尾部拉伸，强化“极端稳定”与“极端不稳定”股票的区分度，配合行业中性likelihood评分构建非线性加权。",
+    "expression_list": [
+        "b = vec_avg(success_likelihood_score); vol_spread = subtract(ts_std_dev(b, 60), ts_std_dev(b, 20)); vol_clean = winsorize(ts_backfill(vol_spread, 63), std=4); stab_g_rank = group_rank(vol_clean, industry); stab_quantile = quantile(stab_g_rank, driver=\"gaussian\"); level_g_score = group_zscore(winsorize(ts_backfill(b, 63), std=4), industry); weight = add(1, multiply(0.5, stab_quantile)); core = multiply(level_g_score, weight); group_normalize(core, industry)"
+    ]
+}

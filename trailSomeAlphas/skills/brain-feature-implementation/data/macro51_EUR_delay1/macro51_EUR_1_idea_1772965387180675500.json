@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(ts_delta({stoxx_europe_600_ucits_weight}, 1), 20)",
+    "idea": "**Concept**: Cumulative Weight Change\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The cumulative sum of daily weight changes over a window, measuring net accumulation or distribution over time rather than point-in-time levels\n- **Why This Feature**: Point weights reflect market cap, but cumulative changes reveal persistent fund flows into specific names—positive cumulative change suggests sustained buying pressure\n- **is filling nan necessary**: Yes, treat NaN as zero change using if_else(is_nan(x), 0, x) before summing, as missing data should not contribute to cumulative flow estimates\n- **Directionality**: Positive values indicate net accumulation over the window; negative values indicate net distribution; near-zero indicates churn without trend\n- **Boundary Conditions**: Bounded by physical limits of shares outstanding and float; extreme values suggest data errors or corporate actions",
+    "expression_list": [
+        "ts_sum(ts_delta(mcr51_ishares_stoxx_europe_600_ucits_weight, 1), 20)"
+    ]
+}

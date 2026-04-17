@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(group_zscore(ts_mean(ts_delta(ts_delta({hfown_pctown}, 1), 1), 5), sector), 252)",
+    "idea": "融合模板2的变化率思想（二阶差分）与模板1的行业-时间双重标准化：计算持仓变化的加速度（ts_delta的ts_delta），经5日平滑（ts_mean）去噪并行业中性化后，识别历史上罕见的加速增持/减持行为，作为趋势突破或衰竭的先行信号。",
+    "expression_list": [
+        "ts_zscore(group_zscore(ts_mean(ts_delta(ts_delta(rsk74_hfown_pctown, 1), 1), 5), sector), 252)"
+    ]
+}

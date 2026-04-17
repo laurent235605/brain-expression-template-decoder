@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(vec_avg({likelihood_score}) - ts_mean(vec_avg({likelihood_score}), 30) * ((vec_avg({exit_price}) / vec_avg({openprice})) / ts_mean(vec_avg({exit_price}) / vec_avg({openprice}), 30)), std=4), industry)",
+    "idea": "行业中性化稳健背离因子：将原始价格-概率背离度在行业组内进行标准化（group_zscore），消除不同行业间分析师覆盖密度和目标价共识水平的结构性差异，增强截面可比性。",
+    "expression_list": [
+        "group_zscore(winsorize(vec_avg(success_likelihood_score) - ts_mean(vec_avg(success_likelihood_score), 30) * ((vec_avg(expected_exit_price) / vec_avg(anl90_openprice)) / ts_mean(vec_avg(expected_exit_price) / vec_avg(anl90_openprice), 30)), std=4), industry)"
+    ]
+}

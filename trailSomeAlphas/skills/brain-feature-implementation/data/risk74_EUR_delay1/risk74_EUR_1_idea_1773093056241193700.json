@@ -1,0 +1,7 @@
+{
+    "template": "truncate(signed_power(group_zscore(add(multiply(0.6, divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001))), multiply(0.4, divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 5), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 20), 0.0001)))), industry), 1.5), maxPercent=0.015)",
+    "idea": "融合长周期(20日累积/60日波动)与短周期(5日累积/20日波动)双时间尺度的信噪比，短周期捕捉突发异动，长周期过滤噪音；通过 group_zscore 行业内标准化后，使用 signed_power(1.5) 非线性放大尾部极端信号，压缩中间噪音区间，使统计显著性强的持仓流压获得更高权重，同时保持多空方向由主信号驱动。",
+    "expression_list": [
+        "truncate(signed_power(group_zscore(add(multiply(0.6, divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001))), multiply(0.4, divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 5), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 20), 0.0001)))), industry), 1.5), maxPercent=0.015)"
+    ]
+}

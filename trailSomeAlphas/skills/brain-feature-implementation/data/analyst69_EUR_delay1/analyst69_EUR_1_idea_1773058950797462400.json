@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(subtract(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), group_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), industry)), 10)",
+    "idea": "行业中性加速度平滑信号：融合模板1的双时间窗口加速度逻辑与模板2的衰减平滑技术，引入group_zscore实现行业内横向比较，消除行业间预期调整水平差异，最后应用10日线性衰减控制换手率，在捕捉预期修订动量背离的同时保持组合稳定性。",
+    "expression_list": [
+        "ts_decay_linear(subtract(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), industry)), 10)",
+        "ts_decay_linear(subtract(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), industry)), 10)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(vec_avg({elta_value}), std=4), industry) * sign(ts_zscore(winsorize(vec_avg({aily_delta_recon_value}), std=4), 20))",
+    "idea": "将预期水平在行业内部进行Zscore标准化，消除不同行业间估值/预期基差不可比的问题；同时对修订方向计算20日时序Zscore，仅当近期修订显著偏离自身历史常态（异常加速或减速）时才赋予方向信号。此模板旨在捕捉\"行业内的相对高预期遭遇显著共识修正\"的动量加速或价值陷阱形成，避免单日噪音干扰。",
+    "expression_list": [
+        "group_zscore(winsorize(vec_avg(ern10_elta_value), std=4), industry) * sign(ts_zscore(winsorize(vec_avg(ern10_aily_delta_recon_value), std=4), 20))"
+    ]
+}

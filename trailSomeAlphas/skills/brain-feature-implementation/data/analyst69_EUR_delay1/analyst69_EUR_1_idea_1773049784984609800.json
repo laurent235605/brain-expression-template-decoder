@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), ts_sum(ts_delta({eps_best_eeps_cur_yr}, 1), 63), 252, rettype=0)",
+    "idea": "采用CAPM残差模板逻辑，将累积修正压力视为'市场/情绪因子'，对盈利转换效率做252日滚动回归，提取rettype=0的残差项。该残差代表不被分析师情绪轮动解释的、由基本面结构性改善（如真实去杠杆、税率优化）驱动的纯alpha，适用于剥离情绪噪音后的价值投资。",
+    "expression_list": [
+        "ts_regression(divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), ts_sum(ts_delta(anl69_eps_best_eeps_cur_yr, 1), 63), 252, rettype=0)",
+        "ts_regression(divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr), ts_sum(ts_delta(anl69_aeps_best_eeps_cur_yr, 1), 63), 252, rettype=0)"
+    ]
+}

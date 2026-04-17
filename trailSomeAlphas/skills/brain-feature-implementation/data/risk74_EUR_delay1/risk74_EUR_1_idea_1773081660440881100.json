@@ -1,0 +1,8 @@
+{
+    "template": "subtract(ts_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), 252), ts_zscore(ts_sum(ts_delta({shortint}, 1), 15), 252))",
+    "idea": "历史极端情绪错配信号。对比当前20日基金流与15日空头变化相对于各自过去一年（252日）历史的Z-score偏离度，识别两类资金当前处于历史极端分位时的背离或收敛状态，避免在常态区间内过度交易。",
+    "expression_list": [
+        "subtract(ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 252), ts_zscore(ts_sum(ts_delta(rsk74_shortint, 1), 15), 252))",
+        "subtract(ts_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 252), ts_zscore(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15), 252))"
+    ]
+}

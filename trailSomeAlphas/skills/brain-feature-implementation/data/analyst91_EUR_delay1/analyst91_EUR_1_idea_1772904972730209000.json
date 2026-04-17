@@ -1,0 +1,7 @@
+{
+    "template": "bucket(group_rank(vec_skewness({exposure_value}), sector), range=\"0,1,0.1\")",
+    "idea": "将地理集中度偏度在行业内进行分位排序（group_rank）后，使用bucket离散化为十分位（0.1间隔）信号。相比连续zscore，减少微小排序差异带来的统计噪音，更适合捕捉\"极度集中（top decile）\"与\"极度分散（bottom decile）\"的两端效应，中间分位视为无信号区间，增强可解释性。",
+    "expression_list": [
+        "bucket(group_rank(vec_skewness(anl91_exposure_value), sector), range=\"0,1,0.1\")"
+    ]
+}

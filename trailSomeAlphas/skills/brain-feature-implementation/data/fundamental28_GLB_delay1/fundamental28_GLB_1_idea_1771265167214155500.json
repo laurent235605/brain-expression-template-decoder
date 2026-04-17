@@ -1,0 +1,10 @@
+{
+    "template": "divide(ts_delta(divide({value_03501a}, {value_02300q}), 63), ts_mean(divide({value_03501a}, {value_02300q}), 252))",
+    "idea": "将模板1的时间序列结构（Delta/Mean）迁移应用于模板3的权益资产比，构建资本结构动量因子。捕捉公司去杠杆或加杠杆的速度相对于历史常态的偏离，识别资本结构的边际变化而非静态水平，适用于发现财务保守化或激进化的拐点。",
+    "expression_list": [
+        "divide(ts_delta(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), 63), ts_mean(divide(fnd28_bdea_value_03501a, fnd28_bsassetq_value_02300q), 252))",
+        "divide(ts_delta(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), 63), ts_mean(divide(fnd28_bdea_value_03501a, fnd28_nddq1_value_02300q), 252))",
+        "divide(ts_delta(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), 63), ts_mean(divide(fnd28_fsa1_value_03501a, fnd28_bsassetq_value_02300q), 252))",
+        "divide(ts_delta(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), 63), ts_mean(divide(fnd28_fsa1_value_03501a, fnd28_nddq1_value_02300q), 252))"
+    ]
+}

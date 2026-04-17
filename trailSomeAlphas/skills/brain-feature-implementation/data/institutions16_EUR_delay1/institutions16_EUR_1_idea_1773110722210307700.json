@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_mean(signed_power(subtract(multiply(ts_rank(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), ts_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 60)), 120), 2), 1), 2), 10))",
+    "idea": "历史时序分位点非线性强化：在资产流加速度基础上，考察其在过去120日中的历史分位水平（ts_rank），将分位点映射至[-1,1]区间后进行signed_power二次方放大极端历史位置（无论历史高位加速还是低位减速），再经10日均值平滑（降低换手率）与截面zscore标准化，适用于识别资金流动的历史极端状态与潜在反转预期。",
+    "expression_list": [
+        "zscore(ts_mean(signed_power(subtract(multiply(ts_rank(subtract(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 20), ts_mean(ts_delta(winsorize(ts_backfill(fund_reported_asset_value, 63), std=4), 20), 60)), 120), 2), 1), 2), 10))"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "divide(subtract({rel5yep}, ts_mean({rel5yep}, 252)), ts_std_dev({rel5yep}, 252))",
+    "idea": "**Concept**: Valuation Regime Deviation\n- **Sample Fields Used**: `rel5yep`, `rel5ybp`, `rel5yfcf`\n- **Definition**: Z-score of current valuation relative to 5-year historical range\n- **Why This Feature**: Extreme deviations from historical valuation regimes often mean-revert\n- **Logical Meaning**: Measures how unusual current valuation is compared to company-specific history\n- **is filling nan necessary**: No, insufficient history should remain NaN to avoid false signals\n- **Directionality**: Very negative values indicate unusually cheap (contrarian buy); very positive indicate expensive\n- **Boundary Conditions**: Values beyond 2 sigma are statistically significant; business model changes invalidate historical comparison",
+    "expression_list": [
+        "divide(subtract(mdl219_1_rel5yep, ts_mean(mdl219_1_rel5yep, 252)), ts_std_dev(mdl219_1_rel5yep, 252))",
+        "divide(subtract(mdl219_2_rel5yep, ts_mean(mdl219_2_rel5yep, 252)), ts_std_dev(mdl219_2_rel5yep, 252))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(add(add(add({grow_fy5}, {epsgrow5}), {invgrow5}), {salegrow}), 5)",
+    "idea": "**Concept**: Multi-Dimensional Growth Accumulation\n- **Sample Fields Used**: grow_fy5, epsgrow5, invgrow5, salegrow, assgrowthfy1\n- **Definition**: Cumulative composite growth score aggregating earnings, investment, sales, and asset growth into single trajectory measure\n- **Why This Feature**: Sustained growth across all dimensions indicates genuine business expansion vs. financial engineering or one-time factors\n- **Logical Meaning**: High cumulative scores indicate broad-based growth; low scores indicate stagnation or mixed signals (e.g., earnings growth without investment growth)\n- **is filling nan necessary**: Yes, growth rates may have varying fiscal year ends. Use ts_backfill() with 30-day window to align reporting periods.\n- **Directionality**: High = broad growth acceleration; Low = deceleration or divergence\n- **Boundary Conditions**: Values >100 indicate hyper-growth; <0 indicates contraction",
+    "expression_list": [
+        "ts_sum(add(add(add(mdl172_grow_fy5, mdl172_epsgrow5), mdl172_invgrow5), mdl172_salegrow), 5)"
+    ]
+}

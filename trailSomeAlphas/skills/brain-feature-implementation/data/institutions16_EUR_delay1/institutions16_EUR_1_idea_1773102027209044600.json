@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(add(multiply(0.6, ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20)), multiply(0.4, ts_delta(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20))), industry)",
+    "idea": "融合水平与变化双维度信号：60%权重赋予20日平滑后的配置残差（捕捉持续偏离的稳定性，源自模板一），40%权重赋予20日变化量(ts_delta)（捕捉边际改善/恶化的动量），经行业内标准化后形成复合信号。该结构既保留了低频配置的稳健性，又纳入了近期调仓的边际信息，适用于趋势加速或反转场景。",
+    "expression_list": [
+        "group_zscore(add(multiply(0.6, ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20)), multiply(0.4, ts_delta(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20))), industry)"
+    ]
+}

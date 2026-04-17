@@ -1,0 +1,8 @@
+{
+    "template": "quantile(group_zscore(trade_when(less(days_from_last_change({eps_best_eeps_cur_yr}), 30), ts_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), 120), 0), industry), driver=gaussian)",
+    "idea": "引入事件驱动与历史极端分位逻辑。利用days_from_last_change筛选仅在最近30天内发生过预测修正的股票，确保信号新鲜度；通过ts_rank评估当前加速度处于自身历史120日窗口中的分位水平，仅当加速度创近期新高或新低时才产生信号。该模板避免在预测静止期持有仓位，专注于捕捉刚启动的预期调整加速行情。",
+    "expression_list": [
+        "quantile(group_zscore(trade_when(less(days_from_last_change(anl69_aeps_best_eeps_cur_yr), 30), ts_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), 120), 0), industry), driver=gaussian)",
+        "quantile(group_zscore(trade_when(less(days_from_last_change(anl69_eps_best_eeps_cur_yr), 30), ts_rank(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), 120), 0), industry), driver=gaussian)"
+    ]
+}

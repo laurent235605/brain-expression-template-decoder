@@ -1,0 +1,8 @@
+{
+    "template": "vector_neut({risk_score}, {exp_usa} + {exp_chn})",
+    "idea": "**Concept**: Pure Tariff Exposure (Orthogonal to Geography)\n- **Sample Fields Used**: `risk_score`, `exp_usa`, `exp_chn`, `exp_nondomicile1`\n- **Definition**: Tariff risk orthogonalized against geographic exposure to capture policy risk not explained by revenue geography (e.g., supply chain, secondary effects)\n- **Why This Feature**: Separates \"tariff risk because we sell to US\" from \"tariff risk because we have complex supply chains\" - the latter is less visible and more dangerous\n- **Logical Meaning**: High values indicate high tariff risk despite low direct geographic exposure (supply chain vulnerability); low values indicate geographic exposure explains all risk\n- **is filling nan necessary**: Yes, ensure geographic exposure is backfilled to avoid spurious residuals\n- **Directionality**: High = hidden/supply-chain tariff risk (dangerous); Low = visible/direct tariff risk (priced in); Negative = over-insured vs. geography\n- **Boundary Conditions**: Extreme values indicate companies with indirect tariff exposure (component suppliers); near-zero indicates pure geographic play",
+    "expression_list": [
+        "vector_neut(tariff_risk_score, rsk74_raw_exp_usa + rsk74_raw_exp_chn)",
+        "vector_neut(tariff_risk_score_specialized, rsk74_raw_exp_usa + rsk74_raw_exp_chn)"
+    ]
+}

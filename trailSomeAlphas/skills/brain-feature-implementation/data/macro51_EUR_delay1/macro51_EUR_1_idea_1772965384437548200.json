@@ -1,0 +1,7 @@
+{
+    "template": "quantile({stoxx_europe_600_ucits_weight}, driver=\"gaussian\", sigma=1.0)",
+    "idea": "**Concept**: Weight Percentile Position\n- **Sample Fields Used**: stoxx_europe_600_ucits_weight\n- **Definition**: The cross-sectional percentile rank of the instrument's weight within the ETF portfolio, normalized to a Gaussian distribution for comparability across time\n- **Why This Feature**: Raw weights are not comparable across different market regimes (bull vs. bear markets affect absolute weights); percentiles reveal whether a stock is becoming systematically more or less important to the portfolio\n- **is filling nan necessary**: No, NaN values should remain NaN as they represent instruments not in the universe; including them in percentile calculation would bias rankings downward\n- **Directionality**: High percentiles (top decile) indicate core holdings; low percentiles indicate peripheral positions; changes in percentile indicate relative importance shifts\n- **Boundary Conditions**: Bounded [0, 1] before Gaussian transformation; extreme tails indicate exceptional positioning",
+    "expression_list": [
+        "quantile(mcr51_ishares_stoxx_europe_600_ucits_weight, driver=\"gaussian\", sigma=1.0)"
+    ]
+}

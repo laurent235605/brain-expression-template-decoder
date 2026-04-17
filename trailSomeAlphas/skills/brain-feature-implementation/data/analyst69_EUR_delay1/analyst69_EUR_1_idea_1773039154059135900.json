@@ -1,0 +1,8 @@
+{
+    "template": "if_else(less(group_rank(winsorize(ts_std_dev(days_from_last_change({eps_expected_report_dt}), 63), std=4), industry), 0.5), signed_power(group_zscore(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), industry), 2), NaN)",
+    "idea": "引入行业'共识度'过滤机制：仅当行业内各股票盈利预告日期稳定性本身较为一致（过去63日截面标准差处于行业后50%，即低离散度环境）时，才交易该行业的极端稳定/不稳定股票。在行业整体预期混乱（高离散）时期自动置空，避免噪声干扰，显著提高因子的条件夏普比率。",
+    "expression_list": [
+        "if_else(less(group_rank(winsorize(ts_std_dev(days_from_last_change(anl69_aeps_expected_report_dt), 63), std=4), industry), 0.5), signed_power(group_zscore(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), industry), 2), NaN)",
+        "if_else(less(group_rank(winsorize(ts_std_dev(days_from_last_change(anl69_eps_expected_report_dt), 63), std=4), industry), 0.5), signed_power(group_zscore(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), industry), 2), NaN)"
+    ]
+}

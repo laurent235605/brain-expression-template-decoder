@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_delta(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 21), 252)",
+    "idea": "**溢价变化速度极端值捕捉**：不关注溢价绝对水平，而是关注其21日变化率（ts_delta）的时序zscore。当溢价近期出现历史极端的快速拉升（超买）或暴跌（超卖）时，信号达到极值，押注其速度不可持续、溢价将回归常态。适用于捕捉短期情绪过度反应后的反转。",
+    "expression_list": [
+        "ts_zscore(ts_delta(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 21), 252)"
+    ]
+}

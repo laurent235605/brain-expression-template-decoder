@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_mean(ts_regression(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),group_mean(ts_sum(ts_delta({shortint},1),15),log(ts_mean({cap},21)),industry),63,rettype=0),5),industry),2)",
+    "idea": "对原始63日回归残差先进行5日移动平均平滑以降低日频抖动，随后计算行业内zscore实现二次中性化，最后使用signed_power以指数为2的非线性变换放大尾部极端值，强化特质性空头压力的多空区分度并压缩中部噪音。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_mean(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),5),industry),2)",
+        "signed_power(group_zscore(ts_mean(ts_regression(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),group_mean(ts_sum(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(market_cap_usd,21)),industry),63,rettype=0),5),industry),2)"
+    ]
+}

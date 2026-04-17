@@ -1,0 +1,5 @@
+{
+    "template": "ts_mean(group_rank(ts_rank(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean({cap}, 21)), {sector}), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 126), {sector}), 3)",
+    "idea": "将特质性残差转换为在其自身历史（126日）中的时序分位数（ts_rank），识别当前偏离处于历史极端水平的标的，经行业内排名后进行3日移动平均平滑，构建基于历史相对位置的低换手率信号，避免短期噪音干扰。",
+    "expression_list": []
+}

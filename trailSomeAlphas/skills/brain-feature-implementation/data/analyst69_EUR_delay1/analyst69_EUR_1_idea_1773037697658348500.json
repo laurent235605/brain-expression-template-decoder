@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(trade_when(greater(days_from_last_change({eps_expected_report_dt}), 60), ts_mean(ts_delta({eps_best_eeps_cur_yr}, 5), 20), 0), 10)",
+    "idea": "**长期稳定筛选平滑模型**：交叉应用来源1的稳定性阈值与来源2的时序平滑逻辑。先用trade_when筛选财报日期稳定超过60天的标的(排除不稳定噪音)，再计算20日修正均值(ts_mean)捕捉持续趋势，最后通过10日线性衰减(ts_decay_linear)降低换手率。相比直接ts_delta，此结构显著降低噪音且控制交易频率。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 60), ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 0), 10)",
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_aeps_expected_report_dt), 60), ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 0), 10)",
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 60), ts_mean(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 20), 0), 10)",
+        "ts_decay_linear(trade_when(greater(days_from_last_change(anl69_eps_expected_report_dt), 60), ts_mean(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 20), 0), 10)"
+    ]
+}

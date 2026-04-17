@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(signed_power(winsorize(ts_delta(ts_backfill(vec_avg({elta_value}), 63), 5), std=4), 2), 10), industry)",
+    "idea": "引入时间序列指数衰减(ts_decay_linear)对5日变化率进行10日平滑，并使用signed_power(2)非线性放大极端修正动量(保留方向)，在行业层面进行Z-Score标准化，捕捉持续且显著的分析师预期修正趋势，同时抑制短期噪音与反转。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(signed_power(winsorize(ts_delta(ts_backfill(vec_avg(ern10_elta_value), 63), 5), std=4), 2), 10), industry)"
+    ]
+}

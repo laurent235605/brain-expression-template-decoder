@@ -1,0 +1,7 @@
+{
+    "template": "trade_when( greater( abs( ts_zscore( {stoxx_europe_600_ucits_weight}, 252 ) ), 2 ), signed_power( group_zscore( rank( winsorize( {stoxx_europe_600_ucits_weight}, std=4 ) ), industry ), 2 ), 0 )",
+    "idea": "极端偏离条件触发模板。首先通过252日时间序列zscore识别权重处于历史极端水平（|zscore|>2）的股票，仅对这些极端样本计算行业内分位数排名(rank)并进行zscore标准化，最后应用signed_power二次方放大尾部信号（强化极端值权重）。该设计过滤掉中间噪音，专注于捕捉那些突破历史波动区间且在同业中处于配置极值的“黑马”或“失宠”核心资产。",
+    "expression_list": [
+        "trade_when( greater( abs( ts_zscore( mcr51_ishares_stoxx_europe_600_ucits_weight, 252 ) ), 2 ), signed_power( group_zscore( rank( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight, std=4 ) ), industry ), 2 ), 0 )"
+    ]
+}

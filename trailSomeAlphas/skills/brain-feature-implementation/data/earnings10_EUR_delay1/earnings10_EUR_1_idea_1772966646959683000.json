@@ -1,0 +1,7 @@
+{
+    "template": "subtract(ts_sum(vec_avg({aily_delta_recon_value}), 5), ts_sum(vec_avg({aily_delta_recon_value}), 20))",
+    "idea": "**双时间尺度修订背离**：对比短期（5日）与长期（20日）累积修订路径的差值。正值表示近期加速上调（短期强于长期），负值表示近期加速下调。融合模板2的累积逻辑与ts_delta的跨期比较思路，捕捉修订动能的边际变化而非绝对水平。",
+    "expression_list": [
+        "subtract(ts_sum(vec_avg(ern10_aily_delta_recon_value), 5), ts_sum(vec_avg(ern10_aily_delta_recon_value), 20))"
+    ]
+}

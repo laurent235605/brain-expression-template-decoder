@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(winsorize(subtract(ts_delta({hfown_pctown}, 5), ts_delta({hfown_pctown}, 20)), std=4), 1.5)",
+    "idea": "多时间框架加速度（二阶导）：计算短期（5日）与中期（20日）持仓变化率的差值，识别资金流入的加速或减速趋势（动量 convexity）。使用signed_power（指数1.5）非线性放大极端背离，同时保留正负方向（建仓加速为正，撤离加速为负），强调流速的曲率而非单纯水平。",
+    "expression_list": [
+        "signed_power(winsorize(subtract(ts_delta(rsk74_hfown_pctown, 5), ts_delta(rsk74_hfown_pctown, 20)), std=4), 1.5)"
+    ]
+}

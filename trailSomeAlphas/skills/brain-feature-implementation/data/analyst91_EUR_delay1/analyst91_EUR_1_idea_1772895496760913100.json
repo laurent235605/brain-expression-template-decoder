@@ -1,0 +1,7 @@
+{
+    "template": "ts_sum(abs(ts_delta(vec_avg({exposure_value}), 1)), 63)",
+    "idea": "**Concept**: Cumulative Exposure Drift\n- **Sample Fields Used**: exposure_value\n- **Definition**: Sum of absolute daily changes in exposure over 63 days (quarterly), measuring total geographic repositioning activity\n- **Why This Feature**: Captures the cumulative effect of small daily adjustments that may not appear significant in point-in-time delta but represent substantial strategic repositioning over time\n- **Logical Meaning**: Total \"distance traveled\" by the exposure metric; high values indicate active portfolio rebalancing or volatile regional performance\n- **is filling nan necessary**: Cumulative sums require continuous data. Use ts_backfill(3) to handle short gaps, but if gaps exceed 5 days, reset the accumulation to avoid stale data contamination.\n- **Directionality**: Higher values indicate high activity/volatility; lower values indicate static positioning\n- **Boundary Conditions**: Theoretical maximum is unbounded; should be normalized by time window for comparability",
+    "expression_list": [
+        "ts_sum(abs(ts_delta(vec_avg(anl91_exposure_value), 1)), 63)"
+    ]
+}

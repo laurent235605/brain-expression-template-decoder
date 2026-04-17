@@ -1,0 +1,8 @@
+{
+    "template": "multiply(group_zscore(subtract(ts_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), 60), ts_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 20), 60)), industry), ts_decay_exp_window(subtract(10, min(days_from_last_change(ts_backfill({eps_best_eeps_cur_yr}, 63)), 10)), 5))",
+    "idea": "事件时效加权动量：识别近期发生预期修订的股票，利用days_from_last_change计算距上次修订的天数，构造10日内线性衰减的时效权重（越近的修订权重越高）。将行业中性化后的加速度信号与新鲜度权重相乘，强化“信息冲击后短期动量延续”效应，同时自然过滤掉陈旧的历史修订信号。",
+    "expression_list": [
+        "multiply(group_zscore(subtract(ts_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), 60), ts_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 20), 60)), industry), ts_decay_exp_window(subtract(10, min(days_from_last_change(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63)), 10)), 5))",
+        "multiply(group_zscore(subtract(ts_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), 60), ts_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 20), 60)), industry), ts_decay_exp_window(subtract(10, min(days_from_last_change(ts_backfill(anl69_eps_best_eeps_cur_yr, 63)), 10)), 5))"
+    ]
+}

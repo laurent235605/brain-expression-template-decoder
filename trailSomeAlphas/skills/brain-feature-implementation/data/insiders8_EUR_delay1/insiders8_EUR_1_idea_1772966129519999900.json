@@ -1,0 +1,10 @@
+{
+    "template": "if_else(greater(group_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), 0.1), -1, 0))",
+    "idea": "离散化多空状态切换：在行业内部对60日相关性进行排名（group_rank），仅对前10%（极高稳定性）赋予+1权重，对后10%（极低稳定性/高波动性）赋予-1权重，中间80%置零。这是一种非黑即白的策略构建方式，基于假设：只有所有权结构极其稳定（协同持有）或极其不稳定（资金分歧极大）的股票才具有预测能力，中等相关性区域信息含量低且噪音大。",
+    "expression_list": [
+        "if_else(greater(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0))",
+        "if_else(greater(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0))",
+        "if_else(greater(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0))",
+        "if_else(greater(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.9), 1, if_else(less(group_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), 0.1), -1, 0))"
+    ]
+}

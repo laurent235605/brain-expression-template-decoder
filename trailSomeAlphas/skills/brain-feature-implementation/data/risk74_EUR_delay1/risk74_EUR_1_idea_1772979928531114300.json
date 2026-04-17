@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_sum(ts_delta(ts_mean(ts_backfill({hfown_pctown}, 63), 5), 1), 20), industry)",
+    "idea": "行业中性化平滑累积流：先以63日回溯填充避免幸存者偏差，5日移动平均平滑单日持仓跳变噪音，20日累加捕捉持续建仓趋势，最后做行业内zscore标准化，剥离行业配置Beta，聚焦于个股特质性的对冲基金建仓压力与退出压力",
+    "expression_list": [
+        "group_zscore(ts_sum(ts_delta(ts_mean(ts_backfill(rsk74_hfown_pctown, 63), 5), 1), 20), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( ts_decay_linear( winsorize( {stoxx_europe_600_ucits_weight} / ts_median( winsorize( {stoxx_europe_600_ucits_weight}, std=4 ), 63 ), std=4 ), 5 ), industry )",
+    "idea": "该模板首先计算当前UCITS权重相对于其63日历史时间序列中位数的比率（捕捉权重层级变化），通过winsorize处理极端异常值后，应用5日线性衰减平滑以降低短期噪音和换手率，最后进行行业内zscore标准化。适用于识别行业内权重正在系统性向大市值核心资产（比率>1且行业内标准化分位高）或向小市值卫星资产迁移的配置信号。",
+    "expression_list": [
+        "group_zscore( ts_decay_linear( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight / ts_median( winsorize( mcr51_ishares_stoxx_europe_600_ucits_weight, std=4 ), 63 ), std=4 ), 5 ), industry )"
+    ]
+}

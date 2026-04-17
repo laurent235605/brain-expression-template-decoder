@@ -1,0 +1,7 @@
+{
+    "template": "{weight_long} * {active_return_decile_rank_long}",
+    "idea": "**Concept**: Long-Side Conviction Intensity\n- **Sample Fields Used**: weight_long, active_return_decile_rank_long\n- **Definition**: Product of absolute long weight and BL-implied return decile rank, weighting high-conviction ideas by their expected alpha\n- **Why This Feature**: Combines magnitude of investment with quality of expected return; identifies \"all-in\" bets by informed investors\n- **is filling nan necessary**: If weight exists but return rank is missing, treat as neutral (5.5 decile) to avoid losing weight information.\n- **Directionality**: High values indicate large positions with high expected returns (strong buy signal); low values indicate small positions or low expected returns\n- **Boundary Conditions**: Extreme values may reflect small-cap illiquidity where weights are large due to benchmark gaps rather than conviction",
+    "expression_list": [
+        "insd8_weight_long * insd8_black_litterman_implied_active_return_decile_rank_long"
+    ]
+}

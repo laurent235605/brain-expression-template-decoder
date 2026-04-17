@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_zscore(vec_skewness({exposure_value}), 126), sector), 3)",
+    "idea": "全链条尾部强调综合策略。完整串联两个模板的核心逻辑：以vec_skewness衡量地理集中度形态，经126日时序标准化（ts_zscore）捕捉风险变化轨迹，通过group_zscore实现行业中性化，最后应用signed_power(3)非线性变换，构建“长期视角-行业中性-极端偏离”三位一体的复合信号。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_zscore(vec_skewness(anl91_exposure_value), 126), sector), 3)"
+    ]
+}

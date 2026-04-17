@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(rank(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 1.0, vec_avg({stock_split_ratio_243}))), 0.9), less(rank(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 1.0, vec_avg({stock_split_ratio_243}))), 0.1)), signed_power(subtract(trade_when(is_nan(vec_avg({stock_split_ratio_243})), 1.0, vec_avg({stock_split_ratio_243})), 1), 0.5), 0)",
+    "idea": "**概念**: 尾部分位极值策略（仅交易极端拆分）\n**逻辑**: 将NaN替换为1（无变化基准），通过rank定位全市场前10%（激进正向拆分）和后10%（反向拆分/合股）的极端事件，仅对这些尾部分位赋予非零信号（使用signed_power 0.5次方压缩极端值防止过拟合），中间区间视为噪音置零。适用于\"只有极端资本结构变化才包含alpha\"的假设，避免对常规小额拆分交易。",
+    "expression_list": [
+        "trade_when(or(greater(rank(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1.0, vec_avg(ern6_stock_split_ratio_243))), 0.9), less(rank(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1.0, vec_avg(ern6_stock_split_ratio_243))), 0.1)), signed_power(subtract(trade_when(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1.0, vec_avg(ern6_stock_split_ratio_243)), 1), 0.5), 0)"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(ts_sum(multiply(ts_delta({hfown_pctown}, 1), ts_rank({volume}, 20)), 20), 5)",
+    "idea": "成交量确认的智能资金压力。将每日持仓变化乘以当日成交量在过去20日的分位数（ts_rank），高成交量伴随的持仓变化获得更高权重，低成交量时的变化被压缩。经20日累加和5日衰减平滑后，该信号更可能反映具有市场冲击力的真实机构行为，而非虚假的价格操纵。",
+    "expression_list": []
+}

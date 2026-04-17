@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(and(or(greater(group_rank({exp_usa},{sector}),0.9), less(group_rank({exp_usa},{sector}),0.1)), greater(abs(ts_zscore(ts_delta({exp_usa},21),126)),1.5)), group_zscore({exp_usa},{sector}), 0)",
+    "idea": "**极端暴露叠加变化率验证（尾部择时）**\n- **逻辑**：仅在行业内暴露处于前10%或后10%的极端分位时开仓，且要求近期（21天）暴露变化幅度在历史（126天）中处于极端水平（|zscore|>1.5）；过滤掉静态高暴露但无变化的噪音，专注捕捉地缘政治事件或财报披露导致的暴露重分类\n- **适用场景**：降低换手率的头尾策略；避免持有长期稳定高暴露但缺乏催化剂的标的",
+    "expression_list": []
+}

@@ -1,0 +1,31 @@
+{
+    "template": "ts_sum({corr_weighted_score} - {composite_score}, 360)",
+    "idea": "**Concept**: Financial Materiality Alignment Trend\n- **Sample Fields Used**: corr_weighted_score, composite_score\n- **Definition**: Cumulative improvement in alignment between overall ESG and financially material ESG\n- **Why This Feature**: Tracks whether company is shifting ESG focus toward financially relevant factors\n- **Logical Meaning**: Positive = improving alignment with financially material ESG factors\n- **Directionality**: Higher = faster alignment improvement\n- **Boundary Conditions**: Steep positive = rapid strategic shift toward material ESG",
+    "expression_list": [
+        "ts_sum(community_corr_weighted_score - community_pillar_composite_score, 360)",
+        "ts_sum(community_corr_weighted_score - environmental_pillar_composite_score, 360)",
+        "ts_sum(community_corr_weighted_score - governance_pillar_composite_score, 360)",
+        "ts_sum(community_corr_weighted_score - social_pillar_composite_score, 360)",
+        "ts_sum(community_corr_weighted_score - workforce_pillar_composite_score, 360)",
+        "ts_sum(environmental_corr_weighted_score - environmental_pillar_composite_score, 360)",
+        "ts_sum(environmental_corr_weighted_score - community_pillar_composite_score, 360)",
+        "ts_sum(environmental_corr_weighted_score - governance_pillar_composite_score, 360)",
+        "ts_sum(environmental_corr_weighted_score - social_pillar_composite_score, 360)",
+        "ts_sum(environmental_corr_weighted_score - workforce_pillar_composite_score, 360)",
+        "ts_sum(governance_corr_weighted_score - governance_pillar_composite_score, 360)",
+        "ts_sum(governance_corr_weighted_score - community_pillar_composite_score, 360)",
+        "ts_sum(governance_corr_weighted_score - environmental_pillar_composite_score, 360)",
+        "ts_sum(governance_corr_weighted_score - social_pillar_composite_score, 360)",
+        "ts_sum(governance_corr_weighted_score - workforce_pillar_composite_score, 360)",
+        "ts_sum(social_corr_weighted_score - social_pillar_composite_score, 360)",
+        "ts_sum(social_corr_weighted_score - community_pillar_composite_score, 360)",
+        "ts_sum(social_corr_weighted_score - environmental_pillar_composite_score, 360)",
+        "ts_sum(social_corr_weighted_score - governance_pillar_composite_score, 360)",
+        "ts_sum(social_corr_weighted_score - workforce_pillar_composite_score, 360)",
+        "ts_sum(workforce_corr_weighted_score - workforce_pillar_composite_score, 360)",
+        "ts_sum(workforce_corr_weighted_score - community_pillar_composite_score, 360)",
+        "ts_sum(workforce_corr_weighted_score - environmental_pillar_composite_score, 360)",
+        "ts_sum(workforce_corr_weighted_score - governance_pillar_composite_score, 360)",
+        "ts_sum(workforce_corr_weighted_score - social_pillar_composite_score, 360)"
+    ]
+}

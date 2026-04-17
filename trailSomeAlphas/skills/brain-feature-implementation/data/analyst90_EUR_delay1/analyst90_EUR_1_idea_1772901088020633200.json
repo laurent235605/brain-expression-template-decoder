@@ -1,0 +1,7 @@
+{
+    "template": "vec_avg({likelihood_score}) / (1 + ts_std_dev(vec_avg({likelihood_score}), 20))",
+    "idea": "信噪比调整信心度：用近期（20日）likelihood 波动率作为噪音调整项，构建类信息比率（信号/噪音）指标。对预测波动大的分析师信号降低权重，突出预测稳定且水平高的股票，融合水平与一致性双重信息。",
+    "expression_list": [
+        "vec_avg(success_likelihood_score) / (1 + ts_std_dev(vec_avg(success_likelihood_score), 20))"
+    ]
+}

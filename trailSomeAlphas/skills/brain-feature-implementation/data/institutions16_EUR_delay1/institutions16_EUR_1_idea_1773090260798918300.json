@@ -1,0 +1,5 @@
+{
+    "template": "trade_when(and(greater(ts_mean({volume}, 20), ts_median(ts_mean({volume}, 20), 500)), not(is_nan({reported_asset_value}))), group_rank(ts_mean(subtract(ts_delta({reported_asset_value}, 20), ts_mean(ts_delta({reported_asset_value}, 20), 60)), 5), industry), 0.5)",
+    "idea": "流动性过滤下的同业相对动量：仅在20日均成交量高于全市场中位水平且数据非空时交易，计算资产流加速度后经5日移动平均平滑，转换为行业内分位数排名。该模板规避低流动性标的的噪音干扰，强调在可交易性充足的前提下，捕捉行业内资产加速流入的相对领先者。",
+    "expression_list": []
+}

@@ -1,0 +1,16 @@
+{
+    "template": "multiply(ts_sum(ts_delta({concentration}, 1), 15), {nondomicile})",
+    "idea": "将模板1的时间序列累积逻辑交叉应用于模板2的地理集中度字段，计算15日集中度变化的累积值，并乘以非本土暴露，捕捉'外国篮子里的鸡蛋在增加'的风险累积效应，识别持续加剧的单一国家风险暴露。",
+    "expression_list": [
+        "multiply(ts_sum(ts_delta(rsk74_concentration, 1), 15), rsk74_nondomicile)",
+        "multiply(ts_sum(ts_delta(rsk74_concentration, 1), 15), rsk74_raw_exp_nondomicile1)",
+        "multiply(ts_sum(ts_delta(rsk74_concentration, 1), 15), rsk74_raw_exp_nondomicile2)",
+        "multiply(ts_sum(ts_delta(rsk74_concentration, 1), 15), rsk74_std_exp_nondomicile1)",
+        "multiply(ts_sum(ts_delta(rsk74_concentration, 1), 15), rsk74_std_exp_nondomicile2)",
+        "multiply(ts_sum(ts_delta(rsk74_raw_concentration, 1), 15), rsk74_raw_exp_nondomicile1)",
+        "multiply(ts_sum(ts_delta(rsk74_raw_concentration, 1), 15), rsk74_raw_exp_nondomicile2)",
+        "multiply(ts_sum(ts_delta(rsk74_raw_concentration, 1), 15), rsk74_nondomicile)",
+        "multiply(ts_sum(ts_delta(rsk74_raw_concentration, 1), 15), rsk74_std_exp_nondomicile1)",
+        "multiply(ts_sum(ts_delta(rsk74_raw_concentration, 1), 15), rsk74_std_exp_nondomicile2)"
+    ]
+}

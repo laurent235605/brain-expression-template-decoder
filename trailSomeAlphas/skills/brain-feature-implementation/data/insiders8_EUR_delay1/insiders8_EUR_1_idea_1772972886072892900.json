@@ -1,0 +1,10 @@
+{
+    "template": "ts_mean(subtract({of_owners_decile_rank_long}, ts_regression({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60, rettype=0)), 5)",
+    "idea": "股权集中度异常信号经5日移动平均平滑处理，降低单日数据跳跃噪音，识别持续性的机构持仓结构异常而非临时波动。",
+    "expression_list": [
+        "ts_mean(subtract(insd8_effective_number_of_owners_decile_rank_long, ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)), 5)",
+        "ts_mean(subtract(insd8_effective_number_of_owners_decile_rank_long, ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)), 5)",
+        "ts_mean(subtract(insd8_total_number_of_owners_decile_rank_long, ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)), 5)",
+        "ts_mean(subtract(insd8_total_number_of_owners_decile_rank_long, ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)), 5)"
+    ]
+}

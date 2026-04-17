@@ -1,0 +1,7 @@
+{
+    "template": "multiply(divide(1, add(1, multiply(0.05, days_from_last_change(winsorize(ts_backfill({overall_genderratio}, 63), std=4))))), reverse(signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), 252), 2)))",
+    "idea": "事件驱动加权反转：利用`days_from_last_change`检测性别比例近期是否发生结构性变化，对越近期的变动赋予越高权重（1/(1+0.05*天数)），叠加原始反转信号，专注于治理变动后的波动率异常修复机会。",
+    "expression_list": [
+        "multiply(divide(1, add(1, multiply(0.05, days_from_last_change(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4))))), reverse(signed_power(ts_zscore(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), 252), 2)))"
+    ]
+}

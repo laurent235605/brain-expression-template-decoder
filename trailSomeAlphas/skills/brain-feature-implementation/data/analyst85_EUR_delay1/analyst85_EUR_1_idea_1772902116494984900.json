@@ -1,0 +1,7 @@
+{
+    "template": "winsorize(group_zscore(ts_delta(vec_skewness(vec_filter({version}, \"nan\")), 20), industry), std=4)",
+    "idea": "时序动量与行业中性化版本偏度：先使用vec_filter清洗数据去除NaN值，计算版本分布的偏度(vec_skewness)，捕捉20日变化动量(ts_delta)以识别分析师更新行为加速或减速的趋势，并在行业内标准化(group_zscore)去除行业固有偏度差异，最后截断极端值(winsorize)。正偏度动量表示分析师正在快速更新至新版本（负偏度动量表示共识停滞在旧版本），适用于捕捉分析师行为模式的拐点信号。",
+    "expression_list": [
+        "winsorize(group_zscore(ts_delta(vec_skewness(vec_filter(anl85_version, \"nan\")), 20), industry), std=4)"
+    ]
+}

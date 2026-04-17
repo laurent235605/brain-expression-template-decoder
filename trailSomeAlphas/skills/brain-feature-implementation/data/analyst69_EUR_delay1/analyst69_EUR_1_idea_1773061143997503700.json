@@ -1,0 +1,10 @@
+{
+    "template": "ts_decay_linear(if_else(less(ts_zscore(ts_delta(ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60), 1), industry), -2), -1, 0), 20)",
+    "idea": "将今明两年EPS预期的滚动相关性（输入2）的日内变化进行行业组内zscore标准化，仅当相对行业出现极端下降（低于-2个标准差）时触发-1信号，并通过20日线性衰减（输入1）平滑，捕捉相对于同行的预期结构断裂信号。",
+    "expression_list": [
+        "ts_decay_linear(if_else(less(ts_zscore(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), industry), -2), -1, 0), 20)",
+        "ts_decay_linear(if_else(less(ts_zscore(ts_delta(ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), industry), -2), -1, 0), 20)",
+        "ts_decay_linear(if_else(less(ts_zscore(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60), 1), industry), -2), -1, 0), 20)",
+        "ts_decay_linear(if_else(less(ts_zscore(ts_delta(ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60), 1), industry), -2), -1, 0), 20)"
+    ]
+}

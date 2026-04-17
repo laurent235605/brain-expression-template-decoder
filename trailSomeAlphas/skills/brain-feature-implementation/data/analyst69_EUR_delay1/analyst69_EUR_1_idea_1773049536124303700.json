@@ -1,0 +1,8 @@
+{
+    "template": "quantile(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=3), 20), driver=gaussian)",
+    "idea": "将模板1的高斯分位数驱动（driver=gaussian）应用于模板2的平滑后报告日期变化天数，把原始的时序Z-score视角转为横截面相对排序视角，识别哪些股票在报告日期稳定性上处于全市场极端分位。",
+    "expression_list": [
+        "quantile(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=3), 20), driver=gaussian)",
+        "quantile(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=3), 20), driver=gaussian)"
+    ]
+}

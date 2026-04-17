@@ -1,0 +1,5 @@
+{
+    "template": "hump_decay(trade_when(greater({volume}, ts_mean({volume}, 20)), rank(winsorize(if_else(less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0), 4)), 0), hump=0.02)",
+    "idea": "引入成交量过滤（trade_when），仅在流动性高于20日均值时激活信号；对变更幅度进行winsorize截断和rank分位数标准化，消除极端值影响，最后使用hump_decay控制换手率，忽略日内微小波动，仅保留显著的日期变更事件冲击。",
+    "expression_list": []
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(winsorize(group_zscore(subtract(ts_sum(ts_delta({hfown_pctown},1),20), ts_sum(ts_delta({fund_pct_ownership_encr},1),20)), sector), std=3), 3)",
+    "idea": "**对冲基金与共同基金流偏离度**: 计算20日对冲基金累计净流入减去同期共同基金累计净流入，捕捉两类机构行为背离（聪明钱 vs 散户跟随者）；在行业层面标准化，识别相对同行更受对冲基金青睐但遭公募基金抛售的标的；3日线性衰减平滑每日 jitter；最后进行3倍标准差截尾。该因子利用机构类型间的信息不对称性，当对冲流显著强于基金流时产生正向信号。",
+    "expression_list": [
+        "ts_decay_linear(winsorize(group_zscore(subtract(ts_sum(ts_delta(rsk74_hfown_pctown,1),20), ts_sum(ts_delta(hedge_fund_pct_ownership_encr,1),20)), sector), std=3), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(vec_skewness({data_item_value})), 1.0), group_rank(vec_skewness({data_item_value}), industry), 0)",
+    "idea": "条件极值偏度策略：仅在向量层面计算的偏度绝对值超过显著性阈值（|skew|>1）时才产生交易信号，此时收益分布呈现显著非对称；其余情况下仓位归零（或设为中性）。该模板通过逻辑判断过滤掉接近对称分布（噪音区间）的无效信号，集中在统计上显著的尾部风险暴露时刻进行交易，提高信噪比。",
+    "expression_list": [
+        "trade_when(greater(abs(vec_skewness(anl89_data_item_value)), 1.0), group_rank(vec_skewness(anl89_data_item_value), industry), 0)"
+    ]
+}

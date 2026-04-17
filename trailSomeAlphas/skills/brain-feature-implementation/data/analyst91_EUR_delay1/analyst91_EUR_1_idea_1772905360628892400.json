@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(vec_skewness({exposure_value}), sector)",
+    "idea": "横截面地理集中度行业中性。融合模板1的向量偏度（vec_skewness）与模板2的行业分组标准化（group_zscore），在单一时点比较同行业内公司的地理集中程度差异，识别“相对同行业过度集中”或“相对同行业过度分散”的结构性异常，适用于无时间序列平滑的即时风险识别。",
+    "expression_list": [
+        "group_zscore(vec_skewness(anl91_exposure_value), sector)"
+    ]
+}

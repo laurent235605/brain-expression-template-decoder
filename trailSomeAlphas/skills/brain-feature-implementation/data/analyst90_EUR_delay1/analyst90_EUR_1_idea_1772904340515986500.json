@@ -1,0 +1,7 @@
+{
+    "template": "ls_clean = winsorize(vec_avg(ts_backfill({likelihood_score}, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill({exit_price}, 63)), vec_avg(ts_backfill({openprice}, 63))), std=4)\nret_rank = rank(ret_clean)\nhigh_regime = greater(ret_rank, 0.8)\nlow_regime = less(ret_rank, 0.2)\nls_mean = ts_mean(ls_clean, 30)\nret_mean = ts_mean(ret_clean, 30)\nbase_div = subtract(ls_clean, multiply(ls_mean, divide(ret_clean, ret_mean)))\namplified = if_else(or(high_regime, low_regime), multiply(base_div, 1.5), base_div)\ncore = group_normalize(winsorize(amplified, std=4), industry)",
+    "idea": "条件放大制度模板：根据收益预期（exit_price/openprice）的截面分位数划分高预期（前20%）与低预期（后20%）制度。仅在收益预期极端的制度下（高预期或低预期）放大分歧信号权重1.5倍，中间制度维持原信号，以捕捉极端目标价设定下的概率校准错误，最后进行行业内归一化控制行业暴露。",
+    "expression_list": [
+        "ls_clean = winsorize(vec_avg(ts_backfill(success_likelihood_score, 63)), std=4)\nret_clean = winsorize(divide(vec_avg(ts_backfill(expected_exit_price, 63)), vec_avg(ts_backfill(anl90_openprice, 63))), std=4)\nret_rank = rank(ret_clean)\nhigh_regime = greater(ret_rank, 0.8)\nlow_regime = less(ret_rank, 0.2)\nls_mean = ts_mean(ls_clean, 30)\nret_mean = ts_mean(ret_clean, 30)\nbase_div = subtract(ls_clean, multiply(ls_mean, divide(ret_clean, ret_mean)))\namplified = if_else(or(high_regime, low_regime), multiply(base_div, 1.5), base_div)\ncore = group_normalize(winsorize(amplified, std=4), industry)"
+    ]
+}

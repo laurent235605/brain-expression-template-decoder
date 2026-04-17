@@ -1,0 +1,7 @@
+{
+    "template": "multiply(days_from_last_change(vec_avg({exposure_value})), ts_delta(vec_skewness({exposure_value}), 5))",
+    "idea": "事件动量叠加器：将距离上次地域敞口均值变化的天数（事件新鲜度倒数）与近期5日集中度变化率相乘。新发生地理重组（天数极小）且集中度正在快速变化的公司获得最高权重，捕捉\"刚刚启动All-in战略\"的短期惯性alpha。激进利用事件驱动初期的市场反应滞后，最大化事件冲击带来的非对称收益。",
+    "expression_list": [
+        "multiply(days_from_last_change(vec_avg(anl91_exposure_value)), ts_delta(vec_skewness(anl91_exposure_value), 5))"
+    ]
+}

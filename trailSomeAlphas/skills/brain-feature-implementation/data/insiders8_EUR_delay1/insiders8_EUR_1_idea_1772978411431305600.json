@@ -1,0 +1,10 @@
+{
+    "template": "multiply(group_zscore(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), sector), subtract(1, multiply(0.5, group_rank(ts_std_dev(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20), sector))))",
+    "idea": "构建波动率自适应的连续化信号：将二元阈值改为组内 Z-Score 连续取值，保留中间区间的微弱信号而非强制置零；同时引入时序波动率惩罚项——计算每只标的 20 日相关性滚动标准差，并在行业内排名，当波动率处于行业前 20%（高噪音环境）时将信号强度乘以 0.5，低波动环境则保持 1 倍权重，实现信噪比自适应的仓位缩放。",
+    "expression_list": [
+        "multiply(group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), subtract(1, multiply(0.5, group_rank(ts_std_dev(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), sector))))",
+        "multiply(group_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), subtract(1, multiply(0.5, group_rank(ts_std_dev(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), sector))))",
+        "multiply(group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), sector), subtract(1, multiply(0.5, group_rank(ts_std_dev(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20), sector))))",
+        "multiply(group_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), sector), subtract(1, multiply(0.5, group_rank(ts_std_dev(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20), sector))))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_mean(vec_count(vec_filter({currency_code}, value=\"nan\")), 20), industry)",
+    "idea": "行业相对复杂度均值信号：先使用vec_filter剔除NaN值，通过vec_count统计有效币种数量，进行20日移动平均平滑以消除短期披露噪音，最后在行业内部进行zscore标准化，识别具有持续多币种复杂运营结构且相对同行更为复杂的上市公司。",
+    "expression_list": [
+        "group_zscore(ts_mean(vec_count(vec_filter(payment_currency_code, value=\"nan\")), 20), industry)"
+    ]
+}

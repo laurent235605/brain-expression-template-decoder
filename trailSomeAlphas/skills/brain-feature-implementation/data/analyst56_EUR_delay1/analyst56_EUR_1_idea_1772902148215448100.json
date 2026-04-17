@@ -1,0 +1,9 @@
+{
+    "template": "ts_delta(quantile(vec_avg({probability}), driver=\"gaussian\"), 5)",
+    "idea": "追踪相对排名的时序演变：先对信念水平进行横截面高斯标准化，再计算其5日变化，捕捉\"排名上升/下降\"的动态趋势",
+    "expression_list": [
+        "ts_delta(quantile(vec_avg(anl56_daily_probability), driver=\"gaussian\"), 5)",
+        "ts_delta(quantile(vec_avg(anl56_probability), driver=\"gaussian\"), 5)",
+        "ts_delta(quantile(vec_avg(conviction_probability_score), driver=\"gaussian\"), 5)"
+    ]
+}

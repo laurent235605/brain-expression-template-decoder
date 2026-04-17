@@ -1,0 +1,12 @@
+{
+    "template": "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), industry), sign(ts_delta(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), 63)))), \"gaussian\"), 1.5), 10)",
+    "idea": "**高斯尾部拉伸的动态再融资压力平滑**：融合\"趋势方向增强\"与\"高斯分位非线性映射\"。先计算行业中性债务水平与变化方向（sign）的乘积，捕捉风险改善/恶化的动态趋势，再通过高斯分位映射将中间区间压缩、极端风险状态拉伸，最后经1.5次幂 signed_power 二次放大尾部并应用10日线性衰减平滑。适用于捕捉再融资风险的极端状态（无论快速改善还是急剧恶化），同时避免短期数据抖动带来的高换手率。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 63)))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 63)))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 63)))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 63)))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), 63)))), \"gaussian\"), 1.5), 10)",
+        "ts_decay_linear(signed_power(quantile(rank(multiply(group_zscore(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), industry), sign(ts_delta(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), 63)))), \"gaussian\"), 1.5), 10)"
+    ]
+}

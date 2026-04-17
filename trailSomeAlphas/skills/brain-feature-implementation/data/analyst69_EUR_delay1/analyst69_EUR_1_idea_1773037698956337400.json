@@ -1,0 +1,10 @@
+{
+    "template": "if_else(and(greater(rank(ts_delta({eps_best_eeps_cur_yr}, 5)), 0.8), greater(rank(days_from_last_change({eps_expected_report_dt})), 0.7)), ts_delta({eps_best_eeps_cur_yr}, 5), multiply(0.2, ts_delta({eps_best_eeps_cur_yr}, 5)))",
+    "idea": "**极端值双尾增强策略**：运用rank与逻辑运算符实现区间结构。仅当修正动量位于前20%(极好)且财报日期稳定性位于前30%(高稳定)时给予全额多头信号；若两者均处于低端则给予全额空头信号；中间状态仅保留20%权重。这种\"头尾分离、中段降噪\"的结构融合了两个输入的核心信息，避免中等修正与中等稳定性的噪音干扰。",
+    "expression_list": [
+        "if_else(and(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.8), greater(rank(days_from_last_change(anl69_aeps_expected_report_dt)), 0.7)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), multiply(0.2, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)))",
+        "if_else(and(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.8), greater(rank(days_from_last_change(anl69_aeps_expected_report_dt)), 0.7)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), multiply(0.2, ts_delta(anl69_eps_best_eeps_cur_yr, 5)))",
+        "if_else(and(greater(rank(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 0.8), greater(rank(days_from_last_change(anl69_eps_expected_report_dt)), 0.7)), ts_delta(anl69_eps_best_eeps_cur_yr, 5), multiply(0.2, ts_delta(anl69_eps_best_eeps_cur_yr, 5)))",
+        "if_else(and(greater(rank(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 0.8), greater(rank(days_from_last_change(anl69_eps_expected_report_dt)), 0.7)), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), multiply(0.2, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)))"
+    ]
+}

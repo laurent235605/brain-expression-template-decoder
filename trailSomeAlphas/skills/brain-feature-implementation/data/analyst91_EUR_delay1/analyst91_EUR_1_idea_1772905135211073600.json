@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(ts_rank(abs(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60))), 252), 0.8), ts_delta(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), 5), 0)",
+    "idea": "仅在地理波动率利差的绝对水平处于历史极端区间（过去一年分位点前20%）时激活交易信号，计算该利差的5日变化率（二阶导/加速度），识别地域重组从'加速动荡'转向'减速稳定'或反向的regime切换临界点，避免在常态波动中无效交易，显著提升信号的信噪比与资本配置效率。",
+    "expression_list": [
+        "trade_when(greater(ts_rank(abs(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60))), 252), 0.8), ts_delta(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), 5), 0)"
+    ]
+}

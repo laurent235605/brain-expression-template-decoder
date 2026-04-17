@@ -1,0 +1,14 @@
+{
+    "template": "subtract(add(add(signed_power(group_zscore({factor_e}, industry), 2), signed_power(group_zscore({factor_s}, industry), 2)), signed_power(group_zscore({factor_g}, industry), 2)), multiply(2, group_rank({crowding}, industry)))",
+    "idea": "对ESG三维度分别进行行业内的平方变换（signed_power）以放大头部领导者的极端优势，并构建一个综合质量得分；随后减去拥挤度排名（0-1区间）的两倍作为惩罚项，最终寻找高质量但市场共识度低（非拥挤）的ESG alpha。",
+    "expression_list": [
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_e, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(rsk74_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_e, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(rsk74_raw_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_e, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(liquidity_factor_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_e, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(liquidity_timeseries_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_esg, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(rsk74_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_esg, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(rsk74_raw_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_esg, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(liquidity_factor_crowding, industry)))",
+        "subtract(add(add(signed_power(group_zscore(rsk74_factor_esg, industry), 2), signed_power(group_zscore(rsk74_factor_s, industry), 2)), signed_power(group_zscore(rsk74_factor_g, industry), 2)), multiply(2, group_rank(liquidity_timeseries_crowding, industry)))"
+    ]
+}

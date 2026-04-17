@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(ts_skewness(vec_skewness({data_item_value}), 63), 252)",
+    "idea": "元偏度（偏度的偏度）时序稳定性：先计算每日向量元素分布的偏度（vec_skewness），再计算该偏度序列在63日窗口的时序偏度，最后通过252日z-score标准化，衡量分布不对称性本身的时序演化模式，识别偏度结构的突变拐点。",
+    "expression_list": [
+        "ts_zscore(ts_skewness(vec_skewness(anl89_data_item_value), 63), 252)"
+    ]
+}

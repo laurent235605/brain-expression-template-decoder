@@ -1,0 +1,22 @@
+{
+    "template": "divide(vec_avg({cash_from_oper}), add(vec_avg({st_debt}), vec_avg({other_st_liab}), vec_avg({cash_paid_for_int_debt})))",
+    "idea": "**Concept**: Fundamental Solvency Essence\n- **Sample Fields Used**: cash_from_oper, st_debt, other_st_liab, cash_paid_for_int_debt\n- **Definition**: Operating cash flow coverage of all short-term obligations including interest, measuring pure liquidity adequacy without refinancing dependency\n- **Why This Feature**: Essential liquidity metric focusing on operational self-sufficiency; removes equity market and long-term financing noise\n- **Logical Meaning**: Can the business fund its immediate obligations from operations alone?\n- **is filling nan necessary**: Ensure all liability components are captured; missing values may understate obligations\n- **Directionality**: Values >2.0 indicate operational self-sufficiency; <1.0 indicates dependency on external financing\n- **Boundary Conditions**: Values approaching zero indicate immediate liquidity crisis; extremely high values indicate inefficient capital structure",
+    "expression_list": [
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_a_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_q_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_a_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_a_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))",
+        "divide(vec_avg(fnd72_pit_or_cf_a_cf_cash_from_oper), add(vec_avg(fnd72_pit_or_bs_q_bs_st_debt), vec_avg(fnd72_pit_or_bs_q_bs_other_st_liab), vec_avg(fnd72_pit_or_cf_q_cf_act_cash_paid_for_int_debt)))"
+    ]
+}

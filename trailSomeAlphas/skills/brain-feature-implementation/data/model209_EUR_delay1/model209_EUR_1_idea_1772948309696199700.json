@@ -1,0 +1,7 @@
+{
+    "template": "vec_max({investment}) / abs(vec_avg({investment}))",
+    "idea": "**Concept**: Investment Concentration Risk\n- **Sample Fields Used**: investment\n- **Definition**: Ratio of maximum single investment to average investment, measuring portfolio concentration\n- **Why This Feature**: Identifies if portfolio risk is dominated by single positions (idiosyncratic risk) vs. diversified across many positions\n- **Logical Meaning**: Quantifies deviation from equal-weighting; high values indicate outliers\n- **is filling nan necessary**: Filter NaNs to prevent artificial inflation of max or deflation of mean\n- **Directionality**: 1 indicates perfectly equal weights; higher values indicate increasing concentration risk\n- **Boundary Conditions**: Minimum 1 (when max equals mean); unbounded upward but practically limited by position limits",
+    "expression_list": [
+        "vec_max(mdl209_investment) / abs(vec_avg(mdl209_investment))"
+    ]
+}

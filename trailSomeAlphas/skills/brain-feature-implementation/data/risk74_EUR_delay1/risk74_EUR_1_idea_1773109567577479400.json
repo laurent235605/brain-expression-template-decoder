@@ -1,0 +1,16 @@
+{
+    "template": "multiply(greater(bucket(ts_rank(winsorize({nondomicile},std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize({concentration},std=4), 20), 2), industry))",
+    "idea": "分桶非对称响应版：将海外收入历史分位划分为5档（每档20%），仅对最高档（0.8-1.0）赋予完整权重（乘1），其他档位自动归零。对集中度变化进行行业内标准化并二次方放大，最后进行行业中性化。实现“高风险敞口+加速集中”的双重非线性定价，避免对中等海外敞口股票的误判。",
+    "expression_list": [
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_raw_exp_nondomicile1,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_raw_exp_nondomicile2,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_nondomicile,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_std_exp_nondomicile1,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2), industry))",
+        "multiply(greater(bucket(ts_rank(winsorize(rsk74_std_exp_nondomicile2,std=4), 60), \"0,1,0.2\"), 0.79), group_normalize(signed_power(ts_delta(winsorize(rsk74_raw_concentration,std=4), 20), 2), industry))"
+    ]
+}

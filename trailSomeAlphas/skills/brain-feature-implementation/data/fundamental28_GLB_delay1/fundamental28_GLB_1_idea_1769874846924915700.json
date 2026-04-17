@@ -1,0 +1,8 @@
+{
+    "template": "multiply({growthratesa_value_08616a}, {value_08251q})",
+    "idea": "**Concept**: Sustainable Growth Quality\n- **Sample Fields Used**: `growthratesa_value_08616a`, `value_08251q`\n- **Definition**: Product of equity growth rate and fixed charge coverage ratio\n- **Why This Feature**: High growth with low coverage suggests leveraged, risky expansion; high coverage supports sustainable growth\n- **Logical Meaning**: Quality-adjusted growth metric; scales growth magnitude by financial stability\n- **is filling nan necessary**: we have some operators to fill nan value like ts_backfill() or group_mean() etc. however, in some cases, if the nan value itself has some meaning, then we should not fill it blindly since it may introduce some bias. so before filling nan value, we should think about whether the nan value has some meaning in the specific scenario. Different frequencies (annual growth vs quarterly coverage) require alignment; do not fill across frequency mismatches.\n- **Directionality**: Higher values indicate high growth with strong coverage (optimal); negative values indicate growth during coverage distress (risky)\n- **Boundary Conditions**: Near-zero coverage with high growth creates extreme values; winsorization recommended",
+    "expression_list": [
+        "multiply(fnd28_growthratesa_value_08616a, fnd28_newq_value_08251q)",
+        "multiply(fnd28_growthratesa_value_08616a, fnd28_ratesq_value_08251q)"
+    ]
+}

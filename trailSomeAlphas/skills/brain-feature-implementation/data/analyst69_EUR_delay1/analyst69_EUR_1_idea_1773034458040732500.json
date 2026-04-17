@@ -1,0 +1,10 @@
+{
+    "template": "ts_corr({eps_best_eeps_cur_yr}, {eps_best_eeps_nxt_yr}, 60)",
+    "idea": "**Concept**: Inter-Temporal Estimate Coherence\n- **Sample Fields Used**: eps_best_eeps_cur_yr, eps_best_eeps_nxt_yr\n- **Definition**: 60-day rolling correlation between current year and next year EPS estimates\n- **Why This Feature**: High correlation suggests analysts view earnings as persistent (good year followed by good year); breakdowns indicate cyclical inflection or one-time items\n- **Logical Meaning**: Captures the structural relationship between near-term and long-term earnings expectations; coherence breakdowns often precede rating changes\n- **is filling nan necessary**: Both fields should have similar coverage patterns given they're from the same dataset module; ts_backfill(5) on each before correlation to handle staggered updates.\n- **Directionality**: High correlation (0.8+) indicates stable business model; low/negative correlation indicates transition year or cyclical peak/trough\n- **Boundary Conditions**: Correlation approaching 1.0 may indicate mechanical forecasting (next year = current year * 1.1); negative correlation suggests turnaround situation",
+    "expression_list": [
+        "ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60)",
+        "ts_corr(anl69_aeps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60)",
+        "ts_corr(anl69_eps_best_eeps_cur_yr, anl69_eps_best_eeps_nxt_yr, 60)",
+        "ts_corr(anl69_eps_best_eeps_cur_yr, anl69_aeps_best_eeps_nxt_yr, 60)"
+    ]
+}

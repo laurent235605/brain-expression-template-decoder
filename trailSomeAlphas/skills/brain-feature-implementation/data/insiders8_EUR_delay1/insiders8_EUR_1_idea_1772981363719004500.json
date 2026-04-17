@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(and(greater(ts_rank(ts_std_dev({weight_net},20)/abs(ts_mean({weight_net},20)+0.0001), 120), 0.9), less(ts_rank(ts_corr({of_owners_decile_rank_long},{owners_decile_rank_long},60), 120), 0.1)), signed_power(ts_zscore({weight_net}, 20), 2), 0)",
+    "idea": "**概念**: 双尾极端背离事件\n仅在两个条件同时满足时触发：内幕持仓波动率处于自身历史最高10%分位（极高不确定性），且所有权结构相关性处于历史最低10%分位（结构崩解）。此时对权重进行非线性放大（signed_power），捕捉危机或重大重组事件中的极端错误定价机会。",
+    "expression_list": [
+        "trade_when(and(greater(ts_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 120), 0.9), less(ts_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 120), 0.1)), signed_power(ts_zscore(insd8_weight_net, 20), 2), 0)",
+        "trade_when(and(greater(ts_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 120), 0.9), less(ts_rank(ts_corr(insd8_effective_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 120), 0.1)), signed_power(ts_zscore(insd8_weight_net, 20), 2), 0)",
+        "trade_when(and(greater(ts_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 120), 0.9), less(ts_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_total_number_of_owners_decile_rank_long,60), 120), 0.1)), signed_power(ts_zscore(insd8_weight_net, 20), 2), 0)",
+        "trade_when(and(greater(ts_rank(ts_std_dev(insd8_weight_net,20)/abs(ts_mean(insd8_weight_net,20)+0.0001), 120), 0.9), less(ts_rank(ts_corr(insd8_total_number_of_owners_decile_rank_long,insd8_effective_number_of_owners_decile_rank_long,60), 120), 0.1)), signed_power(ts_zscore(insd8_weight_net, 20), 2), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "quantile(ts_rank(ts_delta(winsorize(vec_skewness({rank}), std=4), 20), 120), driver=\"gaussian\")",
+    "idea": "**概念**：排名偏度动量（Rank Skewness Momentum）\n- **核心逻辑**：使用`vec_skewness`捕捉排名分布的偏度（模型乐观/悲观倾向的非对称性），比单纯均值更能反映情绪结构；`ts_delta(20)`计算偏度变化速度，识别分布形态转折点\n- **时序定位**：`ts_rank(120)`将当前偏度变化定位在自身历史120日分位，判断该变化是否极端；`quantile(gaussian)`将均匀分布的分位数映射到高斯分布，拉伸尾部（极值更极端），压缩中段噪音\n- **清洗步骤**：`winsorize`前置处理防止极端偏度值主导\n- **经济含义**：排名分布从右偏（多数模型看好少数看空）突变为左偏（多数看空）预示情绪拐点，比单纯排名水平变化更具预测力，适用于捕捉预期反转",
+    "expression_list": [
+        "quantile(ts_rank(ts_delta(winsorize(vec_skewness(mdl245_rank), std=4), 20), 120), driver=\"gaussian\")"
+    ]
+}

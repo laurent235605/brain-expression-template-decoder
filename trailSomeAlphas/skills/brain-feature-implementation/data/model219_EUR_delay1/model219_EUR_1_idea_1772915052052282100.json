@@ -1,0 +1,14 @@
+{
+    "template": "add({actrtn1m}, {actrtn6m}, {actrtn12m}, filter=true)",
+    "idea": "**Concept**: Multi-Horizon Momentum Accumulation\n- **Sample Fields Used**: `actrtn1m`, `actrtn6m`, `actrtn12m`, `actrtn24m`\n- **Definition**: Weighted accumulation of returns across time horizons to distinguish trend from noise\n- **Why This Feature**: Persistent momentum across horizons indicates information diffusion; single-horizon momentum is noisier\n- **Logical Meaning**: High values indicate consistent price appreciation across short, medium, and long-term\n- **is filling nan necessary**: No, missing return data indicates illiquidity or recent listing (meaningful signal)\n- **Directionality**: Positive values indicate persistent uptrend accumulation\n- **Boundary Conditions**: Divergence between short and long-term momentum indicates inflection points",
+    "expression_list": [
+        "add(mdl219_1_actrtn1m, mdl219_1_actrtn6m, mdl219_1_actrtn12m, filter=true)",
+        "add(mdl219_1_actrtn1m, mdl219_2_actrtn6m, mdl219_1_actrtn12m, filter=true)",
+        "add(mdl219_2_actrtn1m, mdl219_1_actrtn6m, mdl219_1_actrtn12m, filter=true)",
+        "add(mdl219_2_actrtn1m, mdl219_2_actrtn6m, mdl219_1_actrtn12m, filter=true)",
+        "add(mdl219_2_actrtn1m, mdl219_2_actrtn6m, mdl219_2_actrtn12m, filter=true)",
+        "add(mdl219_2_actrtn1m, mdl219_1_actrtn6m, mdl219_2_actrtn12m, filter=true)",
+        "add(mdl219_1_actrtn1m, mdl219_2_actrtn6m, mdl219_2_actrtn12m, filter=true)",
+        "add(mdl219_1_actrtn1m, mdl219_1_actrtn6m, mdl219_2_actrtn12m, filter=true)"
+    ]
+}

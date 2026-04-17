@@ -1,0 +1,8 @@
+{
+    "template": "ts_rank(winsorize(ts_delta({eps_best_eeps_cur_yr}, 5), std=3), 252)",
+    "idea": "结合模板A的短期修正与模板B的252日历史比较框架，但将Z-score替换为分位数排名。对5日盈利预测变化进行缩尾后，计算其在过去一年中的历史分位点（0-1）。相比Z-score，该模板对极端值更稳健，能有效识别当前修正强度是否处于历史极端水平（如前10%或后10%），适合构建头尾分段的非线性信号。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), std=3), 252)",
+        "ts_rank(winsorize(ts_delta(anl69_eps_best_eeps_cur_yr, 5), std=3), 252)"
+    ]
+}

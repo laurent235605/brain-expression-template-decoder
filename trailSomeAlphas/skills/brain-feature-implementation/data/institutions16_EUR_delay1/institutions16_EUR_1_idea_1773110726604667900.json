@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(signed_power(subtract(multiply(bucket(group_rank(subtract(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), ts_mean(ts_delta(winsorize(ts_backfill({reported_asset_value}, 63), std=4), 20), 60)), {sector}), range=\"0,1,0.2\"), 2), 1), 3), 10)",
+    "idea": "组内分桶非线性评分：将资产加速度在行业内部进行分组排名后，按0.2间隔分桶为五档，通过signed_power三次方非线性映射将中间桶（0.4-0.6分位）压缩至零附近、两端桶（0-0.2与0.8-1.0）拉伸至±1区间，形成离散评分，再经10日线性衰减平滑，适用于仅对“加速最强/减速最烈”的两端极值赋予显著权重，中段视为噪音并压缩。",
+    "expression_list": []
+}

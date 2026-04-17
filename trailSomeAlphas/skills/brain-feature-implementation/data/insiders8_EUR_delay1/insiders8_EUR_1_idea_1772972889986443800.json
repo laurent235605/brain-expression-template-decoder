@@ -1,0 +1,10 @@
+{
+    "template": "multiply(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long}), add(1, multiply(0.5, group_zscore(subtract({of_owners_decile_rank_long}, ts_regression({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60, rettype=0)), sector))))",
+    "idea": "以股权集中度异常（回归残差）作为动态放大器，当所有权结构呈现极端集中或分散时，非线性地放大收益-权重错配信号，捕捉聪明钱布局与定价偏离的共振效应。",
+    "expression_list": [
+        "multiply(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), add(1, multiply(0.5, group_zscore(subtract(insd8_effective_number_of_owners_decile_rank_long, ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)), sector))))",
+        "multiply(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), add(1, multiply(0.5, group_zscore(subtract(insd8_effective_number_of_owners_decile_rank_long, ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)), sector))))",
+        "multiply(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), add(1, multiply(0.5, group_zscore(subtract(insd8_total_number_of_owners_decile_rank_long, ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)), sector))))",
+        "multiply(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long), add(1, multiply(0.5, group_zscore(subtract(insd8_total_number_of_owners_decile_rank_long, ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)), sector))))"
+    ]
+}

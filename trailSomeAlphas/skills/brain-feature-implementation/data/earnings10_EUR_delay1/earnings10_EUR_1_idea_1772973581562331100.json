@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(winsorize(vec_avg({elta_value}),std=4),industry) * sign(winsorize(vec_avg({aily_delta_recon_value}),std=4)), 1.5), 3)",
+    "idea": "行业中性化后的非线性交互：先对预期水平进行行业标准化（group_zscore）去除行业偏差，与修正方向符号相乘后应用幂变换（signed_power）放大极端值，最后通过线性衰减（ts_decay_linear）降低换手。该结构强化捕捉行业内预期水平极端偏离且修正方向一致的动量加速或价值陷阱形态，同时控制换手率。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(winsorize(vec_avg(ern10_elta_value),std=4),industry) * sign(winsorize(vec_avg(ern10_aily_delta_recon_value),std=4)), 1.5), 3)"
+    ]
+}

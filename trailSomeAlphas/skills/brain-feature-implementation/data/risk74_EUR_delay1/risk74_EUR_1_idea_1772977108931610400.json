@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry)), 1.5), group_zscore(subtract(winsorize(ts_backfill({exp_usa}, 21), std=4), winsorize(ts_backfill({exp_chn}, 21), std=4)), industry), 0)",
+    "idea": "仅当行业标准化后的中美敞口价差超过1.5个标准差（极端地缘政治倾斜）时才持仓，中段噪音区间仓位归零，利用极端尾部分析逻辑构建非对称多空组合，避免在区域偏好不显著时承担无谓风险。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry)), 1.5), group_zscore(subtract(winsorize(ts_backfill(rsk74_raw_exp_usa, 21), std=4), winsorize(ts_backfill(rsk74_raw_exp_chn, 21), std=4)), industry), 0)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(winsorize(ts_sum(ts_delta({hfown_pctown}, 1), 20), 4), industry)",
+    "idea": "行业中性化流向：在行业内部对累积持仓变化进行Z分数标准化，剔除行业Beta影响，捕捉相对于同行的特异性机构行为，避免行业轮动噪音干扰",
+    "expression_list": [
+        "group_zscore(winsorize(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), 4), industry)"
+    ]
+}

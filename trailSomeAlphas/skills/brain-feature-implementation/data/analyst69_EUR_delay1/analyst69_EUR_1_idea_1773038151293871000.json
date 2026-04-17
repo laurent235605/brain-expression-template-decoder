@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(group_zscore(ts_mean(winsorize(days_from_last_change({eps_expected_report_dt}), std=4), 20), industry), 252)",
+    "idea": "考虑到不同行业披露频率存在结构性差异（如消费行业季报密集而工业低频），先进行行业中性化处理（group_zscore）去除行业固定效应，再计算252日时序Z-score。此举识别的是“相对于自身历史，且经过行业可比调整后的异常稳定/不稳定状态”，避免行业配置偏差。std=4放宽极值约束以保留更多尾部信息。",
+    "expression_list": [
+        "ts_zscore(group_zscore(ts_mean(winsorize(days_from_last_change(anl69_aeps_expected_report_dt), std=4), 20), industry), 252)",
+        "ts_zscore(group_zscore(ts_mean(winsorize(days_from_last_change(anl69_eps_expected_report_dt), std=4), 20), industry), 252)"
+    ]
+}

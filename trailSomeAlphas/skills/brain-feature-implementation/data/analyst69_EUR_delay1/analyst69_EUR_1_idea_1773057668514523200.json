@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(less(ts_count_nans({eps_best_eeps_cur_yr}, 20), 5), signed_power(quantile(group_zscore(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 63), 5), std=4), 20), 5), industry), driver=gaussian), 1.5), 0)",
+    "idea": "增加数据质量过滤与尾部强调机制。首先通过ts_backfill对缺失数据进行63日回溯填充，利用winsorize剔除极端异常值；加入ts_count_nans确保最近20日内数据完整度足够时才参与交易，避免稀疏数据噪音；最后使用signed_power对高斯分位后的信号进行非线性放大（幂次1.5），显著增强对预测修正加速度极端拐点的捕捉能力，同时保持方向一致性。",
+    "expression_list": [
+        "trade_when(less(ts_count_nans(anl69_aeps_best_eeps_cur_yr, 20), 5), signed_power(quantile(group_zscore(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), driver=gaussian), 1.5), 0)",
+        "trade_when(less(ts_count_nans(anl69_eps_best_eeps_cur_yr, 20), 5), signed_power(quantile(group_zscore(ts_delta(ts_mean(winsorize(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), 5), std=4), 20), 5), industry), driver=gaussian), 1.5), 0)"
+    ]
+}

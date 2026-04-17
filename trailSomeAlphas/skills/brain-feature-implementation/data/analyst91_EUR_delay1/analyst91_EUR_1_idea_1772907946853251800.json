@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(vec_skewness({exposure_value}), 126)), 2), ts_zscore(vec_skewness({exposure_value}), 126), 0)",
+    "idea": "地理集中度变化的事件驱动捕捉（时序极端值与逻辑运算符结合）。基于模板1的时序Z-score框架，引入区间筛选逻辑：仅在地理集中度时序Z-score的绝对值超过2个标准差（即发生极端结构性变化）时保留原始信号开仓，其余中段区间视为噪音并赋值为0（不予交易）。构建\"地理风险突变\"的择时信号，避免在集中度稳定期承担无意义风险敞口。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(vec_skewness(anl91_exposure_value), 126)), 2), ts_zscore(vec_skewness(anl91_exposure_value), 126), 0)"
+    ]
+}

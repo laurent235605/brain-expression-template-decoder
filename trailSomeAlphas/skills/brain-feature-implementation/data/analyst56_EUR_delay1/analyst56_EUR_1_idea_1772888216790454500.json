@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({daily_probability}), 5)",
+    "idea": "**Concept**: Probability Momentum\n- **Sample Fields Used**: `daily_probability`, `probability`\n- **Definition**: Short-term rate of change in conviction scores capturing accelerating or decelerating analyst confidence\n- **Why This Feature**: Changes in probability often precede price target revisions or position closures; positive momentum indicates strengthening thesis\n- **is filling nan necessary**: Daily snapshots may have gaps. Use ts_backfill to ensure consecutive day comparison, as momentum requires continuous series.\n- **Directionality**: Positive = increasing conviction (bullish acceleration); negative = wavering confidence\n- **Boundary Conditions**: Extreme single-day jumps (>50% change) likely data errors; apply winsorize at 4-sigma before differencing",
+    "expression_list": [
+        "ts_delta(vec_avg(anl56_daily_probability), 5)"
+    ]
+}

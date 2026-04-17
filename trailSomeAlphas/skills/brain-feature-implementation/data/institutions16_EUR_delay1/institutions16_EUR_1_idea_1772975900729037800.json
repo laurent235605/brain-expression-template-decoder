@@ -1,0 +1,5 @@
+{
+    "template": "asset_clean = winsorize(ts_backfill({reported_asset_value}, 5), std=4); delta = ts_delta(asset_clean, 20); cap_log = log(ts_mean({market_cap}, 21)); beta = ts_regression(delta, cap_log, 252, rettype=2); residual = ts_regression(delta, cap_log, 252, rettype=0); low_beta = less(abs(group_zscore(beta, sector)), 1.0); z_resid = group_zscore(residual, sector); final = trade_when(low_beta, z_resid, multiply(z_resid, 0.5))",
+    "idea": "规模Beta剥离与稳定性过滤：通过252日回归剥离市值Beta影响，仅保留残差作为规模中性信号，并额外过滤掉市值Beta绝对值过高的股票（>1个行业标准差），对高Beta股票信号进行衰减处理，确保信号来源于资产变动本身而非市值因子暴露。",
+    "expression_list": []
+}

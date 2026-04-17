@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_zscore(signed_power(multiply(ts_zscore(ts_delta(winsorize(ts_backfill(vec_avg({version}), 63), std=4), 5), 252), ts_zscore(vec_range(winsorize(ts_backfill({version}, 63), std=4)), 63)), 1.5), {industry}), 3)",
+    "idea": "**标准化动量-分歧协同模板**：先对{version}进行63日回溯填充与4倍标准差截尾清洗。计算版本均值的5日变化并经252日历史标准化得到清洁动量，同时计算版本向量的极差(range)并经63日历史标准化得到清洁分歧度。两者相乘后经1.5次幂放大尾部（signed_power），在行业层面中性化（group_zscore），最后以3日线性衰减降低换手率。经济逻辑：捕捉那些修订趋势明确且内部观点分歧同步放大的标的，高分歧确认趋势非偶然，协同信号往往预示持续性更强的定价修正。",
+    "expression_list": []
+}

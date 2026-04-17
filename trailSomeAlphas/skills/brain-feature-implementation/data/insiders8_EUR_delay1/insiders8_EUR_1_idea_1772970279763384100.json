@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(or(greater(bucket(rank(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long})), \"0,1,0.1\"), 0.9), less(bucket(rank(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long})), \"0,1,0.1\"), 0.1)), signed_power(zscore(subtract({active_return_decile_rank_long}, {active_weight_decile_rank_long})), 2), 0)",
+    "idea": "极端分位数非线性增强（头尾策略）。仅关注分歧最严重的头部和尾部10%股票（bucket分桶，中间80%视为噪音并通过trade_when置零），对保留的极端样本应用幂变换（signed_power，指数2）放大内部差异，形成sharp的多空头寸。适用于分歧呈现\"中间无效、两端有效\"的非线性结构，强调极端错配机会。",
+    "expression_list": [
+        "trade_when(or(greater(bucket(rank(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long)), \"0,1,0.1\"), 0.9), less(bucket(rank(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long)), \"0,1,0.1\"), 0.1)), signed_power(zscore(subtract(insd8_black_litterman_implied_active_return_decile_rank_long, insd8_active_weight_decile_rank_long)), 2), 0)"
+    ]
+}

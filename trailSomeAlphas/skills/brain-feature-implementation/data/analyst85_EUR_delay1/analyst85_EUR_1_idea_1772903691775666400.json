@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({version}), 5) * vec_range({version}) * s_log_1p( ts_sum(abs(ts_delta(vec_avg({version}), 1)), 20) )",
+    "idea": "结合版本区间动量与累积修正强度，通过s_log_1p对强度进行对数压缩处理，避免极端活跃值主导信号，捕捉趋势方向与分析师整体活跃度叠加的稳健Alpha，同时保留内部观点离散度的放大效应",
+    "expression_list": [
+        "ts_delta(vec_avg(anl85_version), 5) * vec_range(anl85_version) * s_log_1p( ts_sum(abs(ts_delta(vec_avg(anl85_version), 1)), 20) )"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_delta(252 - ts_count_nans(vec_count({fiscal_period_end}), 252), 63), 10)",
+    "idea": "捕捉数据丰富度的季度（63日）变化趋势，经10日线性衰减平滑。正值表示公司数据披露频率正在提升（如新上市公司逐渐完善报表制度），负值暗示数据开始稀疏（潜在退市或业务停滞风险）。相比原始水平值，此动量信号更能识别 transparency 的拐点变化。",
+    "expression_list": [
+        "ts_decay_linear(ts_delta(252 - ts_count_nans(vec_count(anl89_fiscal_period_end), 252), 63), 10)"
+    ]
+}

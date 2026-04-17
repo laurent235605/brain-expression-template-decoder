@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(add(multiply(2, subtract(rank(add(if_else(is_nan(vec_avg({board_of_directors_meeting})), 0, 1), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_avg({stock_split_ratio_243})), 0, 1)))), 0.5)), multiply(2, subtract(rank(if_else(is_nan(vec_avg({stock_split_ratio_243})), 1, vec_avg({stock_split_ratio_243}))), 0.5))), 3)",
+    "idea": "对事件计数和拆股比例分别进行排名映射至[-1,1]区间后，通过立方（signed_power）极度放大尾部差异，再将两者叠加。该激进变换强调“极端事件密度+极端拆股行为”的双尾叠加股票，压缩中间区域的权重，适合高换手率策略捕捉极端企业行为。",
+    "expression_list": [
+        "signed_power(add(multiply(2, subtract(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), 0.5)), multiply(2, subtract(rank(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243))), 0.5))), 3)",
+        "signed_power(add(multiply(2, subtract(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), 0.5)), multiply(2, subtract(rank(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243))), 0.5))), 3)",
+        "signed_power(add(multiply(2, subtract(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), 0.5)), multiply(2, subtract(rank(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243))), 0.5))), 3)",
+        "signed_power(add(multiply(2, subtract(rank(add(if_else(is_nan(vec_avg(ern6_board_of_directors_meeting_247)), 0, 1), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 0, 1)))), 0.5)), multiply(2, subtract(rank(if_else(is_nan(vec_avg(ern6_stock_split_ratio_243)), 1, vec_avg(ern6_stock_split_ratio_243))), 0.5))), 3)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta(vec_avg({version}), 5) * ts_decay_linear(vec_range({version}), 3)",
+    "idea": "对版本离散度应用3日线性衰减平滑(ts_decay_linear)，降低单日离散度波动的换手率，再与5日动量相乘，在保持趋势敏感性的同时提升信号稳定性，适用于平衡模式下的低频调仓需求",
+    "expression_list": [
+        "ts_delta(vec_avg(anl85_version), 5) * ts_decay_linear(vec_range(anl85_version), 3)"
+    ]
+}

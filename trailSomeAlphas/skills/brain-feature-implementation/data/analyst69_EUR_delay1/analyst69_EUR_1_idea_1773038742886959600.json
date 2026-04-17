@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(group_zscore(ts_delta(quantile(winsorize(ts_backfill({eps_best_eeps_cur_yr}, 63), std=4), driver=gaussian), 21), sector), 5)",
+    "idea": "预期修正动量：捕捉盈利预期近期（21日）的变化速率，经行业中性化与线性衰减平滑，跟踪分析师一致预期的调整持续性，降低单日噪声干扰",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(ts_delta(quantile(winsorize(ts_backfill(anl69_aeps_best_eeps_cur_yr, 63), std=4), driver=gaussian), 21), sector), 5)",
+        "ts_decay_linear(group_zscore(ts_delta(quantile(winsorize(ts_backfill(anl69_eps_best_eeps_cur_yr, 63), std=4), driver=gaussian), 21), sector), 5)"
+    ]
+}

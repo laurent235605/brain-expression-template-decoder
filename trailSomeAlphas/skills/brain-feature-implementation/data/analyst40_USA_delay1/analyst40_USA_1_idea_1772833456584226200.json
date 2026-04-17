@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_delta(subtract(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 60)), 20), sector), 1.5)",
+    "idea": "稳定性改善加速度：在原始波动率差值基础上，计算其20日变化率（二阶导数），识别波动率收敛或发散的加速度。通过signed_power以1.5次幂非线性放大极端改善（加速稳定）或极端恶化（加速动荡）的尾部信号，对治理结构正处于快速优化通道的公司给予更强权重，体现动量效应。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_delta(subtract(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 60)), 20), sector), 1.5)"
+    ]
+}

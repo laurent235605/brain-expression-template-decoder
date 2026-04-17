@@ -1,0 +1,7 @@
+{
+    "template": "ts_std_dev(vec_avg({version}), 20)",
+    "idea": "**Concept**: Version Persistence Ratio\n- **Sample Fields Used**: `anl85_version`\n- **Definition**: Measures the stability of version numbers over time using rolling standard deviation of vector-averaged versions\n- **Why This Feature**: Stable version numbers indicate high-conviction trade ideas that analysts rarely revise, suggesting strong fundamental theses. High volatility in versions indicates uncertainty or rapidly evolving situations.\n- **is filling nan necessary**: NaN values likely indicate inactive or withdrawn trade ideas; these should not be filled blindly as they represent genuine absence of recommendation. Use `ts_backfill` only for temporary data gaps, not for structural NaNs indicating idea withdrawal.\n- **Directionality**: Low values (high stability) suggest conviction and potential alpha persistence; high values suggest noise and potential reversal signals\n- **Boundary Conditions**: Near-zero values indicate dormant or static recommendations; extremely high values indicate data errors or volatile idea churn",
+    "expression_list": [
+        "ts_std_dev(vec_avg(anl85_version), 20)"
+    ]
+}

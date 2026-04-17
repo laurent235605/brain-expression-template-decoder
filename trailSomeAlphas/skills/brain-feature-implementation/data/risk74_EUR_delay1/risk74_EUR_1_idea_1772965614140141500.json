@@ -1,0 +1,10 @@
+{
+    "template": "vector_neut({crowding}, log({cap_usd}))",
+    "idea": "**Concept**: Essential Crowding (Market Cap Adjusted)\n- **Sample Fields Used**: `crowding`, `raw_crowding`, `cap_usd`, `factor_crowding`\n- **Definition**: Crowding measure adjusted for market capitalization to identify true crowding vs. large-cap index effects\n- **Why This Feature**: Large caps appear crowded because indexes own them; essential crowding identifies active bets beyond passive ownership\n- **Logical Meaning**: High values indicate genuine active crowding beyond size effects; low values indicate apparent crowding is just index inclusion\n- **is filling nan necessary**: No, market cap is always available for universe constituents\n- **Directionality**: High = true active crowding (higher liquidation risk); Low = passive/index crowding (stickier); Negative = under-owned vs. size\n- **Boundary Conditions**: Extreme values indicate small-caps with massive active interest; near-zero indicates pure index ownership",
+    "expression_list": [
+        "vector_neut(liquidity_factor_crowding, log(market_cap_usd))",
+        "vector_neut(liquidity_timeseries_crowding, log(market_cap_usd))",
+        "vector_neut(rsk74_crowding, log(market_cap_usd))",
+        "vector_neut(rsk74_raw_crowding, log(market_cap_usd))"
+    ]
+}

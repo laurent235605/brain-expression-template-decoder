@@ -1,0 +1,10 @@
+{
+    "template": "bucket(ts_delta(add(if_else(is_nan(vec_count({board_of_directors_meeting})), 0, vec_count({board_of_directors_meeting})), add(if_else(is_nan(vec_avg({actual_eps})), 0, 1), if_else(is_nan(vec_max({stock_split_ratio_243})), 0, 1))), 5), \"0,1,0.2\")",
+    "idea": "事件节奏变化加速度分桶因子：计算异构事件总数（会议频次vec_count、盈利均值vec_avg、拆股最大值vec_max）的5日时序差分(ts_delta)，识别企业活动由静到动或由动到静的加速/减速拐点。使用bucket算子将加速度划分为五档，仅保留极端加速档（最高20%分位）作为做多信号，捕捉事件密集披露前的信息泄露期。",
+    "expression_list": [
+        "bucket(ts_delta(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, vec_count(ern6_board_of_directors_meeting)), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1))), 5), \"0,1,0.2\")",
+        "bucket(ts_delta(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting)), 0, vec_count(ern6_board_of_directors_meeting)), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1))), 5), \"0,1,0.2\")",
+        "bucket(ts_delta(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, vec_count(ern6_board_of_directors_meeting_247)), add(if_else(is_nan(vec_avg(ern6_actual_eps)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1))), 5), \"0,1,0.2\")",
+        "bucket(ts_delta(add(if_else(is_nan(vec_count(ern6_board_of_directors_meeting_247)), 0, vec_count(ern6_board_of_directors_meeting_247)), add(if_else(is_nan(vec_avg(ern6_actual_eps_274)), 0, 1), if_else(is_nan(vec_max(ern6_stock_split_ratio_243)), 0, 1))), 5), \"0,1,0.2\")"
+    ]
+}

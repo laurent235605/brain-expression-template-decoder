@@ -1,0 +1,7 @@
+{
+    "template": "multiply(group_zscore(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 21), ts_backfill({reported_asset_value}, 21)), std=4), industry), signed_power(quantile(ts_rank(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 126), ts_backfill({reported_asset_value}, 126)), std=4), 126), driver='gaussian'), 2))",
+    "idea": "持续性加权非线性信号：左侧为短期（21日）行业中性残差，右侧为长期（126日）残差的历史分位数经高斯映射和平方放大；两者相乘确保仅在短期配置高且长期历史分位也处于极端位置（前高斯尾部）时产生强信号，通过非线性变换极度强调结构性的长期信念配置。",
+    "expression_list": [
+        "multiply(group_zscore(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 21), ts_backfill(fund_reported_asset_value, 21)), std=4), industry), signed_power(quantile(ts_rank(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 126), ts_backfill(fund_reported_asset_value, 126)), std=4), 126), driver='gaussian'), 2))"
+    ]
+}

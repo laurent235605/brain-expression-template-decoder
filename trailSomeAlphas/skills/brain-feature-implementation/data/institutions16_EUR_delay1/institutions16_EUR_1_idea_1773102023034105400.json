@@ -1,0 +1,7 @@
+{
+    "template": "hump(ts_decay_linear(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), 20), industry), 10), hump=0.02)",
+    "idea": "双层换手率控制结构：在模板一的“20日平滑+10日线性衰减”基础上，叠加hump(0.02)算子忽略权重变动小于2%的微小调整，仅当配置偏离发生实质性变化时才调整仓位。相比单纯衰减，进一步降低组合换手率，同时保持对显著配置变动的敏感性。",
+    "expression_list": [
+        "hump(ts_decay_linear(group_zscore(ts_mean(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), 20), industry), 10), hump=0.02)"
+    ]
+}

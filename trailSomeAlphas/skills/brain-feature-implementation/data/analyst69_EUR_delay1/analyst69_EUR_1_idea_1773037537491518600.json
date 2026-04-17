@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(ts_delta({ebitda_best_eeps_cur_yr}, 20), 0), divide(ts_delta({eps_best_eeps_cur_yr}, 5), ts_delay(ts_backfill({eps_best_eeps_cur_yr}, 10), 5)), 0)",
+    "idea": "利用模板2的20日EBITDA趋势方向作为过滤器，仅当EBITDA中期趋势向上时做多EPS短期速度（模板1），反之亦然。通过trade_when逻辑运算符实现'趋势确认'机制，避免逆势捕捉短期噪音，增强信号稳定性与方向一致性。",
+    "expression_list": [
+        "trade_when(greater(ts_delta(anl69_ebitda_best_eeps_cur_yr, 20), 0), divide(ts_delta(anl69_eps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_eps_best_eeps_cur_yr, 10), 5)), 0)",
+        "trade_when(greater(ts_delta(anl69_ebitda_best_eeps_cur_yr, 20), 0), divide(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), ts_delay(ts_backfill(anl69_aeps_best_eeps_cur_yr, 10), 5)), 0)"
+    ]
+}

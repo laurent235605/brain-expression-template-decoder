@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev({version}), 1)), std=4), 20))",
+    "idea": "将向量算子由均值改为标准差（vec_stddev），计算分析师预测分歧度的绝对变化累积。该信号衡量市场观点收敛或发散的剧烈程度（Revision in Disagreement），而非一致预期的调整，适用于捕捉不确定性变化带来的定价偏差，与一致预期修订强度形成互补。",
+    "expression_list": [
+        "zscore(ts_sum(winsorize(abs(ts_delta(vec_stddev(anl85_version), 1)), std=4), 20))"
+    ]
+}

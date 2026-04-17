@@ -1,0 +1,7 @@
+{
+    "template": "truncate(divide(vec_avg({investment}), add(1, vec_sum({lastcostingfailed}))), maxPercent=0.02)",
+    "idea": "**概念**: 截断尾部风险暴露控制\n- **逻辑**: 先计算风险调整比率，再使用truncate限制单只股票最大权重(maxPercent=0.02)。即使某只股票呈现极高的风险调整效率（投资极高且失败极少），也不允许其超过组合2%权重，防止极端风险集中，属于交易性约束层。\n- **边界**: 强制分散化，牺牲部分alpha换取风险控制。",
+    "expression_list": [
+        "truncate(divide(vec_avg(mdl209_investment), add(1, vec_sum(mdl209_lastcostingfailed))), maxPercent=0.02)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr})",
+    "idea": "**Concept**: EBITDA-to-EPS Conversion Efficiency\n- **Sample Fields Used**: eps_best_eeps_cur_yr, ebitda_best_eeps_cur_yr\n- **Definition**: Ratio of EPS to EBITDA estimates capturing implicit operating and financial leverage in analyst models\n- **Why This Feature**: Reveals how analysts expect operating profits to convert to earnings; changes indicate tax rate, interest, or depreciation forecast shifts\n- **Logical Meaning**: Net profitability extraction rate from operations; structural declines may indicate rising interest costs or tax rate changes\n- **is filling nan necessary**: Ensure both metrics have valid data; divide operation will propagate NaN if either input is NaN. Use ts_backfill(5) on both if coverage differs slightly.\n- **Directionality**: Higher values indicate efficient profit conversion (high margins, low leverage); declining values suggest margin pressure or financial cost increases\n- **Boundary Conditions**: Extreme values near 0 or negative indicate losses; values > 0.5 unusual for capital-intensive industries (check for one-time items)",
+    "expression_list": [
+        "divide(anl69_eps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)",
+        "divide(anl69_aeps_best_eeps_cur_yr, anl69_ebitda_best_eeps_cur_yr)"
+    ]
+}

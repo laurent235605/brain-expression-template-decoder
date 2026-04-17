@@ -1,0 +1,7 @@
+{
+    "template": "ts_regression(group_zscore(ts_decay_linear(ts_delta(ts_backfill({reported_asset_value}, 63), 20) - ts_mean(ts_delta(ts_backfill({reported_asset_value}, 63), 20), 60), 10), industry), group_mean(group_zscore(ts_decay_linear(ts_delta({reported_asset_value}, 20) - ts_mean(ts_delta({reported_asset_value}, 20), 60), 10), industry), log(ts_mean(cap,21)), sector), 252, rettype=0)",
+    "idea": "剥离共同因子的残差加速：将资产流加速度对行业市值加权均值进行252日滚动回归，提取残差作为特质性资金流动信号，剔除行业贝塔影响，专注于公司个体层面的资金加速/减速行为。",
+    "expression_list": [
+        "ts_regression(group_zscore(ts_decay_linear(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20) - ts_mean(ts_delta(ts_backfill(fund_reported_asset_value, 63), 20), 60), 10), industry), group_mean(group_zscore(ts_decay_linear(ts_delta(fund_reported_asset_value, 20) - ts_mean(ts_delta(fund_reported_asset_value, 20), 60), 10), industry), log(ts_mean(cap,21)), sector), 252, rettype=0)"
+    ]
+}

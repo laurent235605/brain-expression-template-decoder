@@ -1,0 +1,5 @@
+{
+    "template": "ts_decay_linear(group_zscore(add(ts_zscore(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean({cap}, 21)), {sector}), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 126), multiply(ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean({cap}, 21)), {sector}), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 21), 63), 0.5)), {sector}), 5)",
+    "idea": "通过融合特质性残差的长期水平（126日zscore）与短期变化动量（21日变化率的63日zscore），并赋予动量项0.5倍权重，识别偏离程度正在加剧的异常公司，最后经5日线性衰减平滑以降低换手率，形成兼具趋势与水平的复合信号。",
+    "expression_list": []
+}

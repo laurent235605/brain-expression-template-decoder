@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_skewness(ts_regression(vec_avg({data_item_value}), group_mean(vec_avg({data_item_value}), log(ts_mean(cap,21)), industry), 252, rettype=0), 252), industry)",
+    "idea": "特质偏度（Idiosyncratic Skewness）：先通过截面回归剥离行业均值影响，计算个股收益分布相对于同业的残差偏度，再在行业内部进行标准化。该模板剔除了行业层面的共同偏度风险，更纯粹地捕捉个股特有的收益不对称性结构，适用于识别被行业风险掩盖的个体尾部风险。",
+    "expression_list": [
+        "group_zscore(ts_skewness(ts_regression(vec_avg(anl89_data_item_value), group_mean(vec_avg(anl89_data_item_value), log(ts_mean(cap,21)), industry), 252, rettype=0), 252), industry)"
+    ]
+}

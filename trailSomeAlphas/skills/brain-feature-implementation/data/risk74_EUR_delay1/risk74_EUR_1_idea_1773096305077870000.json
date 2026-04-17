@@ -1,0 +1,16 @@
+{
+    "template": "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize({concentration},std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize({nondomicile},std=4), industry), driver=\"gaussian\")), 10), industry)",
+    "idea": "高斯分位拉伸行业中性因子：保留模板2的行业中性化与衰减框架，将signed_power替换为高斯分位数变换，通过将中间区间压缩至0附近、将行业极端偏离拉伸至尾部，增强双因子在极端状态下的交互敏感度，弱化中等偏离的噪音干扰。",
+    "expression_list": [
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_nondomicile,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_std_exp_nondomicile1,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_std_exp_nondomicile2,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_raw_exp_nondomicile1,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_raw_exp_nondomicile2,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_nondomicile,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_std_exp_nondomicile1,std=4), industry), driver=\"gaussian\")), 10), industry)",
+        "group_normalize(ts_decay_linear(multiply(quantile(group_zscore(winsorize(rsk74_raw_concentration,std=4), industry), driver=\"gaussian\"), quantile(group_zscore(winsorize(rsk74_std_exp_nondomicile2,std=4), industry), driver=\"gaussian\")), 10), industry)"
+    ]
+}

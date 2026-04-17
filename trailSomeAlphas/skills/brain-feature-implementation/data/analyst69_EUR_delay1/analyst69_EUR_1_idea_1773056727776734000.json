@@ -1,0 +1,8 @@
+{
+    "template": "truncate(group_normalize(trade_when(less(ts_count_nans({eps_best_eeps_cur_yr}, 21), 5), quantile(add(multiply(0.6, group_zscore(ts_delta(ts_backfill({eps_best_eeps_cur_yr}, 21), 5), industry)), multiply(0.4, ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 126))), driver=gaussian), 0), industry), maxPercent=0.02)",
+    "idea": "数据质量过滤与行业再平衡的稳健版本。先以ts_count_nans检验过去21日数据缺失率，若缺失过多则赋0；否则使用ts_backfill填充后合成截面与时序信号，经group_normalize实现行业内多空绝对平衡（净暴露为零），最后以truncate限制个股权重上限。强调可交易性与数据可靠性，降低异常值与行业偏离风险。",
+    "expression_list": [
+        "truncate(group_normalize(trade_when(less(ts_count_nans(anl69_aeps_best_eeps_cur_yr, 21), 5), quantile(add(multiply(0.6, group_zscore(ts_delta(ts_backfill(anl69_aeps_best_eeps_cur_yr, 21), 5), industry)), multiply(0.4, ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 126))), driver=gaussian), 0), industry), maxPercent=0.02)",
+        "truncate(group_normalize(trade_when(less(ts_count_nans(anl69_eps_best_eeps_cur_yr, 21), 5), quantile(add(multiply(0.6, group_zscore(ts_delta(ts_backfill(anl69_eps_best_eeps_cur_yr, 21), 5), industry)), multiply(0.4, ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 126))), driver=gaussian), 0), industry), maxPercent=0.02)"
+    ]
+}

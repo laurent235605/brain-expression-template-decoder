@@ -1,0 +1,7 @@
+{
+    "template": "{balance_sheet_recognition_score} / {cash_flow_score}",
+    "idea": "**Concept**: Accrual-Cash Quality Weight\n- **Sample Fields Used**: `balance_sheet_recognition_score`, `cash_flow_score`\n- **Definition**: Ratio of balance sheet recognition quality to cash flow quality to measure reliance on accruals vs. cash generation\n- **Why This Feature**: Structure of earnings quality matters; cash-heavy quality is more sustainable than accrual-heavy quality, especially in rising rate environments\n- **is filling nan necessary**: Yes, use ts_backfill for either component, but if both missing, return NaN as structure is indeterminate\n- **Directionality**: Values <1 indicate cash-dominated quality (conservative); Values >1 indicate accrual-dominated quality (aggressive); Value =1 indicates balanced\n- **Boundary Conditions**: Near-zero values indicate extreme cash quality with weak balance sheet controls; Values >2 indicate severe accrual dependence",
+    "expression_list": [
+        "mdl255_balance_sheet_recognition_score / mdl255_cash_flow_score"
+    ]
+}

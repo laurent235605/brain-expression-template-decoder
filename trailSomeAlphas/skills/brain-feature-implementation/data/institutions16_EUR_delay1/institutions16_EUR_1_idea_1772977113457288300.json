@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(add(multiply(0.6, divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), add(multiply(0.3, divide(winsorize(ts_delta(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), 21), std=4), add(ts_std_dev(returns, 21), 0.001))), multiply(0.1, divide(winsorize(ts_delta(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), 63), std=4), add(ts_std_dev(returns, 63), 0.001))))), industry)",
+    "idea": "构建多时间维度（当前水平0.6、短期变化0.3、长期趋势0.1）的复合信号，以衰减权重组合既反映当前配置强度又捕捉不同周期的调仓持续性；分别使用对应周期的波动率进行风险调整，最终通过group_normalize实现行业内严格多空平衡，控制行业偏离风险。",
+    "expression_list": [
+        "group_normalize(add(multiply(0.6, divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001))), add(multiply(0.3, divide(winsorize(ts_delta(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), 21), std=4), add(ts_std_dev(returns, 21), 0.001))), multiply(0.1, divide(winsorize(ts_delta(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), 63), std=4), add(ts_std_dev(returns, 63), 0.001))))), industry)"
+    ]
+}

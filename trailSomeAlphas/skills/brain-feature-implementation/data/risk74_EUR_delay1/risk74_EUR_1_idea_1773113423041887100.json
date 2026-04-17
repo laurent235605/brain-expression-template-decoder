@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(multiply(ts_sum(ts_delta({hfown_pctown}, 1), 20), inverse(ts_std_dev(ts_delta({hfown_pctown}, 1), 20))), 252)",
+    "idea": "结合模板2的累计流量与波动率调整：将20日累计持仓变化除以其同期波动率（inverse+multiply实现IR调整），经252日ZScore标准化，识别经风险调整后的资金流历史极端值，区分“高波动噪音”与“低波动持续性”资金流动。",
+    "expression_list": [
+        "ts_zscore(multiply(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), inverse(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 20))), 252)"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(trade_when(or(greater(group_rank(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 63), industry), 0.9), less(group_rank(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 63), industry), 0.1)), signed_power(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), 1.2), 0), 5)",
+    "idea": "引入行业分组与历史时序双重极端验证：先计算5日EPS修订的63日时序Z-Score识别历史极端值，再在行业内进行分位排序筛选前10%/后10%，使用Signed Power非线性放大行业标准化后的信号，最后通过线性衰减平滑降低换手率。强调'在行业内的历史极端变动'才是有效Alpha。",
+    "expression_list": [
+        "ts_decay_linear(trade_when(or(greater(group_rank(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63), industry), 0.9), less(group_rank(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 63), industry), 0.1)), signed_power(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), 1.2), 0), 5)",
+        "ts_decay_linear(trade_when(or(greater(group_rank(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63), industry), 0.9), less(group_rank(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 63), industry), 0.1)), signed_power(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), 1.2), 0), 5)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "right_tail(ts_zscore(ts_decay_linear(divide(winsorize(vec_skewness(ts_backfill({exposure_value}, 21)), std=4), add(winsorize(vec_stddev(ts_backfill({exposure_value}, 21)), std=4), 0.001)), 63), 252), minimum=0)",
+    "idea": "风险调整后的高效集中度趋势（右尾筛选）。以偏度除以标准差（类似信息比率）衡量单位波动下的集中度效率，经63日线性衰减加权（ts_decay_linear）平滑后计算252日Z-score。使用right_tail(..., minimum=0)仅保留右尾（正Z-score），即\"集中度正在高效且持续增强\"的状态，剔除低效分散或无序波动，强化多头信号质量。",
+    "expression_list": [
+        "right_tail(ts_zscore(ts_decay_linear(divide(winsorize(vec_skewness(ts_backfill(anl91_exposure_value, 21)), std=4), add(winsorize(vec_stddev(ts_backfill(anl91_exposure_value, 21)), std=4), 0.001)), 63), 252), minimum=0)"
+    ]
+}

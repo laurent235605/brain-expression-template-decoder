@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(or(greater(rank(ts_corr({bmpo}, {pctchgqtrsales}, 12)), 0.8), less(rank(ts_corr({bmpo}, {pctchgqtrsales}, 12)), 0.2)), signed_power(group_zscore(ts_corr({bmpo}, {pctchgqtrsales}, 12), industry), 2), 0)",
+    "idea": "极端双尾非线性放大策略。仅关注相关系数分布两端的极端股票（全市场前20%高相关与后20%低相关），中段视为噪音并置零。对行业内标准化后的相关性应用平方非线性放大（signed_power），强化极端值的区分度，适用于捕捉经营杠杆极度稳定（正向多头）或成本结构严重失衡（负向空头）的异常值。",
+    "expression_list": [
+        "trade_when(or(greater(rank(ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 12)), 0.8), less(rank(ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 12)), 0.2)), signed_power(group_zscore(ts_corr(mdl219_1_bmpo, mdl219_1_pctchgqtrsales, 12), industry), 2), 0)",
+        "trade_when(or(greater(rank(ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 12)), 0.8), less(rank(ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 12)), 0.2)), signed_power(group_zscore(ts_corr(mdl219_2_bmpo, mdl219_1_pctchgqtrsales, 12), industry), 2), 0)",
+        "trade_when(or(greater(rank(ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 12)), 0.8), less(rank(ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 12)), 0.2)), signed_power(group_zscore(ts_corr(mdl219_1_bmpo, mdl219_2_pctchgqtrsales, 12), industry), 2), 0)",
+        "trade_when(or(greater(rank(ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 12)), 0.8), less(rank(ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 12)), 0.2)), signed_power(group_zscore(ts_corr(mdl219_2_bmpo, mdl219_2_pctchgqtrsales, 12), industry), 2), 0)"
+    ]
+}

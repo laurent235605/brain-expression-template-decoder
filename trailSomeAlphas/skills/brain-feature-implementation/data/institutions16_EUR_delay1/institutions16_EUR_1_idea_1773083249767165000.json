@@ -1,0 +1,7 @@
+{
+    "template": "trade_when(greater(abs(ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0), 21), 63)), 2), ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill({fundportfolioturnover},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4), 252, rettype=0), 21), 63), 0)",
+    "idea": "规模调整换手率的时序动量事件驱动。在计算规模中性残差基础上，取其21日变化量捕捉近期交易活跃度的趋势改变，再计算该变化量在63日历史窗口中的时序Z-score，仅当变化幅度超过2个标准差(绝对值>2)时保留信号，否则置零。该逻辑过滤掉温和的风格漂移，专注于捕捉基金交易行为的显著突变事件，如由被动转向激进或由主动转向指数化的结构性转变。",
+    "expression_list": [
+        "trade_when(greater(abs(ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0), 21), 63)), 2), ts_zscore(ts_delta(ts_regression(winsorize(ts_backfill(inst16_ipreo_fundportfolioturnover,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4), 252, rettype=0), 21), 63), 0)"
+    ]
+}

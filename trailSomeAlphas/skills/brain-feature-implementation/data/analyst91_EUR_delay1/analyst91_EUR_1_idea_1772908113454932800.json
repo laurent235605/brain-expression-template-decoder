@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(subtract(ts_std_dev(vec_avg(winsorize(ts_backfill({exposure_value}, 63), std=4)), 5), ts_std_dev(vec_avg(winsorize(ts_backfill({exposure_value}, 63), std=4)), 60)), industry), driver=\"gaussian\")",
+    "idea": "构建短期（5日）与长期（60日）暴露波动率的差值，捕捉‘波动率突破’或‘波动率收敛’的均值回复/动量效应；在行业中性化后，使用高斯分位数变换（quantile）将中间区间压缩、极端区间拉伸，使得只有显著偏离历史常态的尾部公司获得极值信号，增强对极端风险/质量事件的区分度。",
+    "expression_list": [
+        "quantile(group_zscore(subtract(ts_std_dev(vec_avg(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 5), ts_std_dev(vec_avg(winsorize(ts_backfill(anl91_exposure_value, 63), std=4)), 60)), industry), driver=\"gaussian\")"
+    ]
+}

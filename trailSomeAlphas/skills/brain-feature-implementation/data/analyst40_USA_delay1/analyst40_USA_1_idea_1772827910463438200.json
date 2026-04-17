@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(greater(abs(group_zscore(reverse(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4)), sector)), 2), group_zscore(reverse(winsorize(ts_std_dev(winsorize(ts_backfill({overall_genderratio}, 63), std=4), 20), std=4)), sector), NaN), sector)",
+    "idea": "行业中性极端稳定性策略：先对性别比例数据进行63日回溯填充和4倍标准差去极值，计算20日滚动标准差衡量稳定性，通过reverse反转方向使低波动（高稳定性）对应高得分。进行行业中性zscore标准化后，仅保留极端值（|zscore|>2）作为有效信号，其余视为噪音置NaN，最后行业归一化控制暴露。该模板捕捉“极度稳定vs极度不稳定”的横截面异象，适用于非线性两端分布场景。",
+    "expression_list": [
+        "group_normalize(trade_when(greater(abs(group_zscore(reverse(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4)), sector)), 2), group_zscore(reverse(winsorize(ts_std_dev(winsorize(ts_backfill(anl40_overall_genderratio, 63), std=4), 20), std=4)), sector), NaN), sector)"
+    ]
+}

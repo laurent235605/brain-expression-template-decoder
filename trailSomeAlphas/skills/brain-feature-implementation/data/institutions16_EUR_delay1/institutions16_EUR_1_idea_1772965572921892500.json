@@ -1,0 +1,7 @@
+{
+    "template": "{fundreportedequityassets} / ({fundreportedequityassets} + {fundreportedfixedincomeassets})",
+    "idea": "**Concept**: Relative Equity Preference\n- **Sample Fields Used**: `fundreportedequityassets`, `fundreportedfixedincomeassets`\n- **Definition**: Equity allocation relative to total invested assets (equity plus fixed income), excluding cash and alternatives\n- **Why This Feature**: Compares risk preference within invested capital only; high values indicate equity preference over bonds regardless of cash allocation\n- **Logical Meaning**: Risk-on/risk-off indicator within the liquid portion of the portfolio; relative measure of conviction in equities versus fixed income\n- **is filling nan necessary**: Yes, ensure both asset classes are backfilled using `ts_backfill()` before summing denominator to avoid artificial ratio shifts from missing data in one component\n- **Directionality**: Values >0.5 indicate equity overweight, <0.5 indicate fixed income overweight; 0.5 indicates neutral balance\n- **Boundary Conditions**: 0 indicates pure fixed income, 1 indicates pure equity, 0.5 indicates equal weight",
+    "expression_list": [
+        "inst16_ipreo_fundreportedequityassets / (inst16_ipreo_fundreportedequityassets + inst16_ipreo_fundreportedfixedincomeassets)"
+    ]
+}

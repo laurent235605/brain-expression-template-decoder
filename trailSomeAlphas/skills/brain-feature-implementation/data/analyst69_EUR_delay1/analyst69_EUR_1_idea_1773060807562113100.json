@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(or(greater(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 90), less(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 5)), less(ts_delta(ts_backfill(days_from_last_change({eps_expected_report_dt}), 63), 1), 0)), ts_decay_linear(-1, 20), 0)",
+    "idea": "状态依赖型事件交易：仅在极度稳定(>90天)或极度不稳定(<5天)的极端状态下，且同时发生日期重置事件(delta<0)时才建立空头仓位，经20日衰减，非极端状态或无事件时强制归零。融合Input 2的极端状态识别与Input 1的事件衰减逻辑，实现高置信度的选择性交易。",
+    "expression_list": [
+        "trade_when(and(or(greater(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 90), less(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 5)), less(ts_delta(ts_backfill(days_from_last_change(anl69_aeps_expected_report_dt), 63), 1), 0)), ts_decay_linear(-1, 20), 0)",
+        "trade_when(and(or(greater(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 90), less(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 5)), less(ts_delta(ts_backfill(days_from_last_change(anl69_eps_expected_report_dt), 63), 1), 0)), ts_decay_linear(-1, 20), 0)"
+    ]
+}

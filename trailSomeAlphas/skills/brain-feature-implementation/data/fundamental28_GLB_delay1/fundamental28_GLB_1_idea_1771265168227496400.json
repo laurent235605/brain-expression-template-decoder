@@ -1,0 +1,18 @@
+{
+    "template": "trade_when(less(divide({value_03051q}, {value_03999q}), 0.5), winsorize(divide(ts_delta({value_08316q}, 63), ts_mean({value_08316q}, 252)), std=4), 0)",
+    "idea": "使用模板2（短期流动性暴露）作为交易条件过滤器，仅在流动性风险较低（短债占比<50%）的公司中应用模板1的利润率动量信号。结合winsorize处理极端值，确保信号稳健性，避免流动性危机期间的假突破或数据噪音干扰。",
+    "expression_list": [
+        "trade_when(less(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_bdeq_value_03051q, fnd28_bdeq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_bdeq_value_03051q, fnd28_newq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_fsq1_value_03051q, fnd28_bdeq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_fsq1_value_03051q, fnd28_newq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_nddq1_value_03051q, fnd28_newq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_newq_value_08316q, 63), ts_mean(fnd28_newq_value_08316q, 252)), std=4), 0)",
+        "trade_when(less(divide(fnd28_nddq1_value_03051q, fnd28_bdeq_value_03999q), 0.5), winsorize(divide(ts_delta(fnd28_ratesq_value_08316q, 63), ts_mean(fnd28_ratesq_value_08316q, 252)), std=4), 0)"
+    ]
+}

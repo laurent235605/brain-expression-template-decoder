@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_delta(winsorize(ts_backfill({hfown_pctown}, 21), std=4), 5), ts_delta(winsorize(ts_backfill({hfown_pctown}, 21), std=4), 20)), industry)",
+    "idea": "行业中性加速度：捕捉对冲基金短期(5日)相对于中期(20日)持仓变化的加速度，经winsorize和backfill清洗后做行业中性化处理，剔除行业beta影响，强调在同行业内相对变化最剧烈的个股，适用于识别资金配置的拐点。",
+    "expression_list": [
+        "group_zscore(subtract(ts_delta(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), 5), ts_delta(winsorize(ts_backfill(rsk74_hfown_pctown, 21), std=4), 20)), industry)"
+    ]
+}

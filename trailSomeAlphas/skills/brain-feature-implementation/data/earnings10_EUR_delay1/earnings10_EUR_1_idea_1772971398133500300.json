@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_delta(winsorize(ts_backfill(subtract(vec_avg({elta_value}), vec_percentage({elta_value}, 0.5)), 63), std=4), 5), industry)",
+    "idea": "计算向量均值与中位数(vec_percentage 0.5)的差值作为分布偏度代理，捕捉分析师预期修正中的极端观点偏向(乐观或悲观长尾导致的分布不对称)，经清洗和5日差分后行业中性化，识别由情绪极化带来的定价偏差反转机会。",
+    "expression_list": [
+        "group_zscore(ts_delta(winsorize(ts_backfill(subtract(vec_avg(ern10_elta_value), vec_percentage(ern10_elta_value, 0.5)), 63), std=4), 5), industry)"
+    ]
+}

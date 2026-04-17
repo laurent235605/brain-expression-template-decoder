@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(ts_decay_linear(abs(ts_delta(vec_avg({version}), 1)), 20), industry) * quantile(vec_range({version}), driver=\"gaussian\")",
+    "idea": "将模板2的累积修订强度通过线性衰减平滑以降低换手率，并与模板1的离散度进行行业中性化处理后相乘。高修订活动叠加宽离散度时信号最强，同时通过高斯分位数变换将中间区间压缩至0附近，突出极端值贡献，避免中等分歧区间的噪音干扰。",
+    "expression_list": [
+        "group_zscore(ts_decay_linear(abs(ts_delta(vec_avg(anl85_version), 1)), 20), industry) * quantile(vec_range(anl85_version), driver=\"gaussian\")"
+    ]
+}

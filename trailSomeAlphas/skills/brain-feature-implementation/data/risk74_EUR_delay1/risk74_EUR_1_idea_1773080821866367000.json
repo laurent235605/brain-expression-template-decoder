@@ -1,0 +1,16 @@
+{
+    "template": "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta({shortint},1),std=4),63), group_zscore(winsorize(ts_backfill({nondomicile},63),std=4), industry)), 10)",
+    "idea": "将短期空头日度变化(替代累积和)与海外收入占比结合，应用63天窗口的时序Z-score与行业标准化，经10天线性衰减平滑，捕捉外资敞口与空头动态的时序共振，适应较快的市场变化节奏。",
+    "expression_list": [
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint_ts,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_nondomicile,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint_ts,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile1,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint_ts,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_raw_exp_nondomicile2,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint_ts,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile1,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry)), 10)",
+        "ts_decay_linear(multiply(ts_zscore(winsorize(ts_delta(rsk74_shortint_ts,1),std=4),63), group_zscore(winsorize(ts_backfill(rsk74_std_exp_nondomicile2,63),std=4), industry)), 10)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "trade_when(less(days_from_last_change({eps_expected_report_dt}), 5), ts_delta({eps_best_eeps_cur_yr}, 5), multiply(0.3, ts_delta({eps_best_eeps_cur_yr}, 5)))",
+    "idea": "**事件窗口动态加权**：结合来源1的日期变更检测与来源2的修正动量。使用trade_when构造条件分支：在财报日期发生变更的5天内(less(...,5))给予全额修正信号，此时往往伴随管理层指引或重大事件；其他时间仅保留30%权重，实现\"事件驱动强化，常态保守参与\"的均衡策略。",
+    "expression_list": [
+        "trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), multiply(0.3, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)))",
+        "trade_when(less(days_from_last_change(anl69_aeps_expected_report_dt), 5), ts_delta(anl69_eps_best_eeps_cur_yr, 5), multiply(0.3, ts_delta(anl69_eps_best_eeps_cur_yr, 5)))",
+        "trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 5), ts_delta(anl69_eps_best_eeps_cur_yr, 5), multiply(0.3, ts_delta(anl69_eps_best_eeps_cur_yr, 5)))",
+        "trade_when(less(days_from_last_change(anl69_eps_expected_report_dt), 5), ts_delta(anl69_aeps_best_eeps_cur_yr, 5), multiply(0.3, ts_delta(anl69_aeps_best_eeps_cur_yr, 5)))"
+    ]
+}

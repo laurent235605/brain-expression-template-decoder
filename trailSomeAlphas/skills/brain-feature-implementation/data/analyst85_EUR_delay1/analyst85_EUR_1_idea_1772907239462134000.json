@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(zscore(ts_delta(vec_avg({version}), 5)), zscore(vec_stddev({version}))), industry), 3)",
+    "idea": "共识-分歧背离衰减因子：对比分析师共识变化与分歧水平（高共识+低分歧=强信号），在行业中性基础上应用3日线性衰减以降低换手率，捕捉分歧与共识的背离动态而非单一维度。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(zscore(ts_delta(vec_avg(anl85_version), 5)), zscore(vec_stddev(anl85_version))), industry), 3)"
+    ]
+}

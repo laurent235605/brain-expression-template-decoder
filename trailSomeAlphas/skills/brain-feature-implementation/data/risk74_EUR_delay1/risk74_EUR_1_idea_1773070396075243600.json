@@ -1,0 +1,5 @@
+{
+    "template": "multiply(group_zscore(winsorize(ts_decay_linear(ts_delta({shortint},1),15),std=4),sector), add(1, multiply(0.5, ts_zscore(ts_backfill({volume},63),126))))",
+    "idea": "将行业中性化后的空头变化率(15日线性衰减和)作为主信号，经成交量Z-score辅助放大：成交量相对历史均值越高，信号权重在[0.5,1.5]区间线性增强。既消除行业结构性差异，又避免低成交量下的虚假信号，只放大高流动性伴随的空头异动。",
+    "expression_list": []
+}

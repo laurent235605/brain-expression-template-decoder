@@ -1,0 +1,8 @@
+{
+    "template": "signed_power(group_zscore(ts_regression(add(multiply(0.6,ts_sum(ts_delta({shortint},1),5)),multiply(0.4,ts_sum(ts_delta({shortint},1),20))),group_mean(add(multiply(0.6,ts_sum(ts_delta({shortint},1),5)),multiply(0.4,ts_sum(ts_delta({shortint},1),20))),log(ts_mean({shortint},21)),industry),63,rettype=0),industry),2)",
+    "idea": "融合5日短期与20日中期的空头累积变动（60%/40%加权组合），剔除行业市值加权基准后提取残差，在行业内部进行标准化，最后通过平方非线性放大极端值，强化特质性做空压力与极端空头事件的区分度。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_regression(add(multiply(0.6,ts_sum(ts_delta(rsk74_shortint,1),5)),multiply(0.4,ts_sum(ts_delta(rsk74_shortint,1),20))),group_mean(add(multiply(0.6,ts_sum(ts_delta(rsk74_shortint,1),5)),multiply(0.4,ts_sum(ts_delta(rsk74_shortint,1),20))),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),industry),2)",
+        "signed_power(group_zscore(ts_regression(add(multiply(0.6,ts_sum(ts_delta(rsk74_shortint_ts,1),5)),multiply(0.4,ts_sum(ts_delta(rsk74_shortint_ts,1),20))),group_mean(add(multiply(0.6,ts_sum(ts_delta(rsk74_shortint_ts,1),5)),multiply(0.4,ts_sum(ts_delta(rsk74_shortint_ts,1),20))),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),industry),2)"
+    ]
+}

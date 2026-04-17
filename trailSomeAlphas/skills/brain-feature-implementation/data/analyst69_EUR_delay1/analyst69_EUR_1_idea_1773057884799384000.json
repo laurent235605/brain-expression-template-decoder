@@ -1,0 +1,5 @@
+{
+    "template": "group_normalize(trade_when(greater(abs(group_zscore(quantile(ts_delta({eps_best_eeps_cur_yr}, 5), driver=gaussian), industry)), 1.0), divide(group_zscore(winsorize(divide({eps_best_eeps_cur_yr}, {ebitda_best_eeps_cur_yr}), std=4), industry), add(1, ts_std_dev({returns}, 20))), 0), industry)",
+    "idea": "波动率缩放与组内平衡：在修正极端条件下，将效率因子除以(1+20日收益率波动率)进行波动率缩放（VOL scaling），自动提升低波动股票权重、压减高波动股票权重；最终使用group_normalize确保每个行业内部多空净暴露为零，严格控制行业偏离风险。",
+    "expression_list": []
+}

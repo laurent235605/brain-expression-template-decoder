@@ -1,0 +1,12 @@
+{
+    "template": "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill({value_03051q}, 63), ts_backfill({value_03999q}, 63)), std=4), sector), std=3), 2)",
+    "idea": "首先对分子分母进行63日回溯填充(ts_backfill)处理历史缺失，并进行4倍标准差去极值(winsorize)消除极端脏点。计算短期债务占比后，使用group_zscore进行行业中性化，消除不同行业天然融资结构差异（如银行业vs科技业）。最后应用signed_power(..., 2)非线性放大尾部信号，使refinancing risk极高（高值）或极低的公司在排序中更加突出，同时保持方向性（高短期债务为负向）。",
+    "expression_list": [
+        "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), sector), std=3), 2)",
+        "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill(fnd28_bdeq_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), sector), std=3), 2)",
+        "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), sector), std=3), 2)",
+        "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill(fnd28_fsq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), sector), std=3), 2)",
+        "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_newq_value_03999q, 63)), std=4), sector), std=3), 2)",
+        "signed_power(winsorize(group_zscore(winsorize(divide(ts_backfill(fnd28_nddq1_value_03051q, 63), ts_backfill(fnd28_bdeq_value_03999q, 63)), std=4), sector), std=3), 2)"
+    ]
+}

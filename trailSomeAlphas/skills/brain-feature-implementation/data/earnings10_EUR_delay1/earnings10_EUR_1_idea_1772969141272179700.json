@@ -1,0 +1,7 @@
+{
+    "template": "multiply(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), industry)), 1.5), group_zscore(winsorize(ts_backfill(vec_avg({aily_delta_recon_value}), 63), std=4), industry), 0), subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 10), 10)))",
+    "idea": "引入分组中性化(group_zscore)消除行业偏差，结合模板2的阈值交易和新鲜度衰减，确保信号仅在行业内的极端异常且数据更新鲜时触发，避免行业系统性风险干扰，实现行业相对意义上的事件驱动。",
+    "expression_list": [
+        "multiply(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), industry)), 1.5), group_zscore(winsorize(ts_backfill(vec_avg(ern10_aily_delta_recon_value), 63), std=4), industry), 0), subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 10), 10)))"
+    ]
+}

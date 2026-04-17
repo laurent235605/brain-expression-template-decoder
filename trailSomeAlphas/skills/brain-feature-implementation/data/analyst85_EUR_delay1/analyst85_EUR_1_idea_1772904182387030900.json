@@ -1,0 +1,5 @@
+{
+    "template": "ts_mean(group_normalize(trade_when(greater(group_rank(vec_avg({volume}), industry), 0.2), signed_power(group_zscore(add(winsorize(vec_skewness({version}), std=4), multiply(0.3, winsorize(vec_kurtosis({version}), std=4))), industry), 2), 0), industry), 5)",
+    "idea": "高阶矩复合流动性过滤策略：在原始偏度基础上融入峰度(vec_kurtosis)捕捉尖尾风险，通过1:0.3权重叠加形成复合分布形态指标；先对高阶矩进行截尾处理(winsorize)消除极端脏点，再经行业标准化(group_zscore)与符号幂变换(signed_power)强化极端值区分度；引入成交量过滤(trade_when)剔除后20%低流动性标的，最后用5日等权平滑(ts_mean)替代线性衰减以显著降低换手率，专注于高流动性环境下尾部风险极度不对称的反转机会。",
+    "expression_list": []
+}

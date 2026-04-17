@@ -1,0 +1,7 @@
+{
+    "template": "group_normalize(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(vec_ir({aily_delta_recon_value}), 63), std=4), sector)), 2), multiply(group_zscore(winsorize(ts_backfill(vec_ir({aily_delta_recon_value}), 63), std=4), sector), ts_decay_exp_window(subtract(1, divide(min(days_from_last_change(vec_avg({aily_delta_recon_value})), 20), 20)), 0.9)), 0), sector)",
+    "idea": "将向量数据转化为信息比率(vec_ir)而非简单均值，捕捉修正值的风险调整后收益；使用行业内分组标准化(group_zscore)剔除行业偏差，阈值提升至2倍标准差确保极端信号质量；采用指数衰减窗口(ts_decay_exp_window)替代线性衰减，使近期事件权重衰减更自然呈指数曲线，最后通过行业中性化(group_normalize)控制行业暴露，降低系统性风险。",
+    "expression_list": [
+        "group_normalize(trade_when(greater(abs(group_zscore(winsorize(ts_backfill(vec_ir(ern10_aily_delta_recon_value), 63), std=4), sector)), 2), multiply(group_zscore(winsorize(ts_backfill(vec_ir(ern10_aily_delta_recon_value), 63), std=4), sector), ts_decay_exp_window(subtract(1, divide(min(days_from_last_change(vec_avg(ern10_aily_delta_recon_value)), 20), 20)), 0.9)), 0), sector)"
+    ]
+}

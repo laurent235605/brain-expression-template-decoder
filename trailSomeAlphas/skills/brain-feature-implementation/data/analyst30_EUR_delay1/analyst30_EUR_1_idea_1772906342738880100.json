@@ -1,0 +1,8 @@
+{
+    "template": "trade_when( and( greater( group_rank( vec_median({adjustedgrossamt}), industry ), 0.85 ), less( ts_count_nans( vec_avg({adjustedgrossamt}), 252 ), 10 ) ), ts_decay_linear( group_zscore( vec_median({adjustedgrossamt}), industry ), 90 ), 0 )",
+    "idea": "精选保守收益策略：采用vec_median替代均值以抵抗一次性特殊股息干扰，仅交易行业内前15%的稳健派息者，并通过ts_count_nans过滤近一年有频繁缺失（>10次）的不可靠样本。最后应用90日线性衰减平滑，降低换仓率同时保持对股息政策变化的适度敏感性。",
+    "expression_list": [
+        "trade_when( and( greater( group_rank( vec_median(anl30_adjustedgrossamt), industry ), 0.85 ), less( ts_count_nans( vec_avg(anl30_adjustedgrossamt), 252 ), 10 ) ), ts_decay_linear( group_zscore( vec_median(anl30_adjustedgrossamt), industry ), 90 ), 0 )",
+        "trade_when( and( greater( group_rank( vec_median(anl30_unadjustedgrossamt), industry ), 0.85 ), less( ts_count_nans( vec_avg(anl30_unadjustedgrossamt), 252 ), 10 ) ), ts_decay_linear( group_zscore( vec_median(anl30_unadjustedgrossamt), industry ), 90 ), 0 )"
+    ]
+}

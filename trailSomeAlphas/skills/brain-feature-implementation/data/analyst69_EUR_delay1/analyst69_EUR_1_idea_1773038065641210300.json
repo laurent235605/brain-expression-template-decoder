@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(or(greater(ts_rank(abs(ts_delta({eps_best_eeps_cur_yr}, 5)), 252), 0.9), less(ts_rank(abs(ts_delta({eps_best_eeps_cur_yr}, 5)), 252), 0.1)), quantile(group_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), industry), driver=gaussian), 0)",
+    "idea": "基于历史波动背景的条件极值策略，仅当当前修正幅度的绝对值处于过去一年历史分布的极端90%分位以上或10%分位以下时交易，结合截面行业中性化高斯分位，旨在捕捉极端情绪后的均值回归或动量延续机会，过滤掉中段无效区域。",
+    "expression_list": [
+        "trade_when(or(greater(ts_rank(abs(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 252), 0.9), less(ts_rank(abs(ts_delta(anl69_aeps_best_eeps_cur_yr, 5)), 252), 0.1)), quantile(group_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), industry), driver=gaussian), 0)",
+        "trade_when(or(greater(ts_rank(abs(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 252), 0.9), less(ts_rank(abs(ts_delta(anl69_eps_best_eeps_cur_yr, 5)), 252), 0.1)), quantile(group_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), industry), driver=gaussian), 0)"
+    ]
+}

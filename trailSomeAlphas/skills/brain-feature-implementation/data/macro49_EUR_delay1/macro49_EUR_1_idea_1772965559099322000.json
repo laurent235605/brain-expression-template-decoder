@@ -1,0 +1,7 @@
+{
+    "template": "divide(ts_backfill(vec_avg({shares}), lookback=5, k=1), ts_backfill(vec_avg({notional}), lookback=5, k=1))",
+    "idea": "**Concept**: Share-to-Notional Conversion Factor\n- **Sample Fields Used**: shares, notional\n- **Definition**: Ratio of shares to notional (inverse of price proxy) representing the share volume per dollar of rebalance value\n- **Why This Feature**: Structural characteristic indicating price level and share class structure; stable ratio indicates consistent share class; shifts indicate splits or share changes\n- **is filling nan necessary**: Yes, backfill both fields to calculate stable structural ratios.\n- **Directionality**: High values indicate low-priced stocks (many shares per dollar); low values indicate high-priced stocks; sudden changes indicate corporate actions\n- **Boundary Conditions**: Stable values indicate normal operations; sudden drops suggest forward splits; sudden spikes suggest reverse splits",
+    "expression_list": [
+        "divide(ts_backfill(vec_avg(mcr49_shares), lookback=5, k=1), ts_backfill(vec_avg(mcr49_notional), lookback=5, k=1))"
+    ]
+}

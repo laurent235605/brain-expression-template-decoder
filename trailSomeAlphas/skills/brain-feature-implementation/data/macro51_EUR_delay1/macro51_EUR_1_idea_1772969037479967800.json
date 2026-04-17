@@ -1,0 +1,7 @@
+{
+    "template": "ts_rank(winsorize(ts_backfill({stoxx_europe_600_ucits_weight},63) / ts_backfill({600_ucits_weight},63), std=4), 252)",
+    "idea": "**历史分位数均值回归信号**：计算当前比率在过去252个交易日（一年）中的历史百分位排名（ts_rank）。通过缩尾处理后的长期历史定位，识别当前溢价处于历史极端高位（可能超买）或极端低位（可能超卖）的股票。该模板适用于逆向策略，利用份额类别流动性溢价的周期性波动，当比率偏离历史常态时押注其回归。",
+    "expression_list": [
+        "ts_rank(winsorize(ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63) / ts_backfill(mcr51_ishares_stoxx_europe_600_ucits_weight,63), std=4), 252)"
+    ]
+}

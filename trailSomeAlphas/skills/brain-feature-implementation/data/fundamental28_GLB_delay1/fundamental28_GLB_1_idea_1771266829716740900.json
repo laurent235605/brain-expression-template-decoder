@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_delta(ts_backfill({value_08316q}, 63), 63), ts_mean(ts_backfill({value_08316q}, 252), 252)), std=4), industry), 2), 5)",
+    "idea": "行业中性化、非线性放大与衰减组合。先对原始字段进行回溯填充和极值处理，计算标准化利润率动量，在行业内部进行zscore标准化，通过signed_power(2)放大极端变化，最后用ts_decay_linear(5)平滑降低换手率。捕捉行业内经营效率边际改善/恶化的极端偏离。",
+    "expression_list": [
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_delta(ts_backfill(fnd28_newq_value_08316q, 63), 63), ts_mean(ts_backfill(fnd28_newq_value_08316q, 252), 252)), std=4), industry), 2), 5)",
+        "ts_decay_linear(signed_power(group_zscore(winsorize(divide(ts_delta(ts_backfill(fnd28_ratesq_value_08316q, 63), 63), ts_mean(ts_backfill(fnd28_ratesq_value_08316q, 252), 252)), std=4), industry), 2), 5)"
+    ]
+}

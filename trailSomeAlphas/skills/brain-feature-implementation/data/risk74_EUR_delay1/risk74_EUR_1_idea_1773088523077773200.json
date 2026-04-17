@@ -1,0 +1,7 @@
+{
+    "template": "quantile(group_zscore(winsorize(if_else(is_nan({exp_usa}),0,ts_backfill({exp_usa},63)),std=4),sector),driver=\"gaussian\")",
+    "idea": "行业中性化的高斯分位转换：首先将缺失的地理暴露值填充为0（本土假设），进行63天回溯填补以处理时序缺失，4倍标准差缩尾处理极端值，然后在行业内进行Z-Score标准化以消除行业间的结构性差异，最后通过高斯分位数转换将中间区间压缩、尾部拉伸，突出极端地理贝塔股票的纯进攻或纯防御属性。",
+    "expression_list": [
+        "quantile(group_zscore(winsorize(if_else(is_nan(rsk74_raw_exp_usa),0,ts_backfill(rsk74_raw_exp_usa,63)),std=4),sector),driver=\"gaussian\")"
+    ]
+}

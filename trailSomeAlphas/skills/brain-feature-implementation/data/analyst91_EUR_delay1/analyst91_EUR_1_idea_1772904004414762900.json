@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(group_zscore(subtract(ts_std_dev(vec_avg({exposure_value}), 5), ts_std_dev(vec_avg({exposure_value}), 60)), sector), 5)",
+    "idea": "对行业中性化后的波动率期限利差应用5日线性衰减平滑。融合了两个源模板的优点：既通过group_zscore消除行业差异，又通过ts_decay_linear降低单日噪声，更稳健地识别业务地域转型的临界点，避免假突破。",
+    "expression_list": [
+        "ts_decay_linear(group_zscore(subtract(ts_std_dev(vec_avg(anl91_exposure_value), 5), ts_std_dev(vec_avg(anl91_exposure_value), 60)), sector), 5)"
+    ]
+}

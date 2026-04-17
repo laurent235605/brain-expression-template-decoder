@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(and(greater(group_rank({momentum},sector),0.9), less(group_rank(add({value_ts},{earnyild}),sector),0.1)), signed_power(group_zscore({momentum},sector),2), trade_when(and(less(group_rank({momentum},sector),0.1), greater(group_rank(add({value_ts},{earnyild}),sector),0.9)), reverse(signed_power(group_zscore(add({value_ts},{earnyild}),sector),2)), 0))",
+    "idea": "**极端纯因子敞口分段捕捉**：采用条件交易逻辑（trade_when），仅在动量处于行业前10%且综合价值处于行业后10%时做多（纯动量极致），仅在动量处于行业后10%且综合价值处于行业前10%时做空（纯价值极致），中间混合状态赋0不参与；使用signed_power(y=2)非线性放大极端z-score，增强头部信号权重；该模板严格遵循\"只交易纯因子敞口，回避混合暴露\"的逻辑，避免模棱两可的因子配置。",
+    "expression_list": [
+        "trade_when(and(greater(group_rank(rsk74_momentum,sector),0.9), less(group_rank(add(rsk74_value_ts,rsk74_earnyild),sector),0.1)), signed_power(group_zscore(rsk74_momentum,sector),2), trade_when(and(less(group_rank(rsk74_momentum,sector),0.1), greater(group_rank(add(rsk74_value_ts,rsk74_earnyild),sector),0.9)), reverse(signed_power(group_zscore(add(rsk74_value_ts,rsk74_earnyild),sector),2)), 0))",
+        "trade_when(and(greater(group_rank(rsk74_momentum_ts,sector),0.9), less(group_rank(add(rsk74_value_ts,rsk74_earnyild),sector),0.1)), signed_power(group_zscore(rsk74_momentum_ts,sector),2), trade_when(and(less(group_rank(rsk74_momentum_ts,sector),0.1), greater(group_rank(add(rsk74_value_ts,rsk74_earnyild),sector),0.9)), reverse(signed_power(group_zscore(add(rsk74_value_ts,rsk74_earnyild),sector),2)), 0))"
+    ]
+}

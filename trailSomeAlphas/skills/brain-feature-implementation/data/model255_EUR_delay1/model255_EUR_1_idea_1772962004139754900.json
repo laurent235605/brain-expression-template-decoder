@@ -1,0 +1,7 @@
+{
+    "template": "s1 = winsorize(ts_backfill({special_items_score}, 63), std=4)\ns2 = winsorize(ts_backfill({accrued_expenses_score}, 63), std=4)\ns3 = winsorize(ts_backfill({revenue_recognition_score}, 63), std=4)\ns4 = winsorize(ts_backfill({deferred_rev_score}, 63), std=4)\ncurr = divide(add(add(add(s1, s2), s3), s4), 4)\nlong_term = ts_mean(curr, 252)\ndeviation = subtract(curr, long_term)\ndev_weighted = signed_power(winsorize(deviation, std=3), 1.5)\nbelow_hist = less(curr, long_term)\npersistence = ts_mean(below_hist, 63)\nsignal = subtract(dev_weighted, multiply(3.0, persistence))\nsignal = group_zscore(signal, industry)",
+    "idea": "持续偏离惩罚模型：计算当前得分与长期均值的偏离，并使用幂变换放大极端偏离。同时计算过去63日中低于长期均值的频率（持续性指标），对长期处于低质量区间的股票施加额外惩罚，区分暂时性会计噪音与持续性盈余操纵行为。",
+    "expression_list": [
+        "s1 = winsorize(ts_backfill(mdl255_special_items_score, 63), std=4)\ns2 = winsorize(ts_backfill(mdl255_accrued_expenses_score, 63), std=4)\ns3 = winsorize(ts_backfill(mdl255_revenue_recognition_score, 63), std=4)\ns4 = winsorize(ts_backfill(mdl255_deferred_rev_score, 63), std=4)\ncurr = divide(add(add(add(s1, s2), s3), s4), 4)\nlong_term = ts_mean(curr, 252)\ndeviation = subtract(curr, long_term)\ndev_weighted = signed_power(winsorize(deviation, std=3), 1.5)\nbelow_hist = less(curr, long_term)\npersistence = ts_mean(below_hist, 63)\nsignal = subtract(dev_weighted, multiply(3.0, persistence))\nsignal = group_zscore(signal, industry)"
+    ]
+}

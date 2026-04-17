@@ -1,0 +1,7 @@
+{
+    "template": "zscore(ts_delta({hfown_pctown}, 5)) - 0.5 * zscore(ts_mean(ts_delta({hfown_pctown}, 5), 20))",
+    "idea": "交叉融合Input 1的短期速度与Input 1扩展的20日平均速度（压力概念迁移）。计算短期速度（5日变化）与中期趋势（20日平均速度）的偏离度（divergence），识别'短期加速但长期趋势未跟进'（启动信号）或'短期乏力但长期仍强'（衰竭信号）的形态，增强时序维度比较。",
+    "expression_list": [
+        "zscore(ts_delta(rsk74_hfown_pctown, 5)) - 0.5 * zscore(ts_mean(ts_delta(rsk74_hfown_pctown, 5), 20))"
+    ]
+}

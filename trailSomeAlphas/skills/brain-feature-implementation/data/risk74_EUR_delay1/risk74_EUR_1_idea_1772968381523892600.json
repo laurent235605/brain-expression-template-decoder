@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore(add(add(subtract(ts_mean(winsorize(ts_backfill({factor_e},63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill({factor_e},63),4),252))), subtract(ts_mean(winsorize(ts_backfill({factor_s},63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill({factor_s},63),4),252)))), subtract(ts_mean(winsorize(ts_backfill({factor_g},63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill({factor_g},63),4),252)))), industry)",
+    "idea": "长期稳健性溢价模板：计算各ESG成分过去一年的时序均值（Persistent level）与标准差（Transient volatility），采用'均值-0.5×标准差'的夏普式构造，再在行业间标准化。该模板奖励那些ESG评分长期稳定高企的公司，惩罚评分波动大的企业，反映ESG质量的持续性溢价，利用ts_mean和ts_std_dev分离持久因子与噪音。",
+    "expression_list": [
+        "group_zscore(add(add(subtract(ts_mean(winsorize(ts_backfill(rsk74_factor_e,63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill(rsk74_factor_e,63),4),252))), subtract(ts_mean(winsorize(ts_backfill(rsk74_factor_s,63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill(rsk74_factor_s,63),4),252)))), subtract(ts_mean(winsorize(ts_backfill(rsk74_factor_g,63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill(rsk74_factor_g,63),4),252)))), industry)",
+        "group_zscore(add(add(subtract(ts_mean(winsorize(ts_backfill(rsk74_factor_esg,63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill(rsk74_factor_esg,63),4),252))), subtract(ts_mean(winsorize(ts_backfill(rsk74_factor_s,63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill(rsk74_factor_s,63),4),252)))), subtract(ts_mean(winsorize(ts_backfill(rsk74_factor_g,63),4),252), multiply(0.5, ts_std_dev(winsorize(ts_backfill(rsk74_factor_g,63),4),252)))), industry)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(ts_mean(ts_delta(ts_backfill({hfown_pctown},63),1),20), ts_mean(ts_delta(ts_backfill({fund_pct_ownership_encr},63),1),20)), sector)",
+    "idea": "低换手稳健流差分：交叉应用模板2的63日回溯填充（处理缺失值）与模板1的差分结构，但将ts_decay_linear替换为ts_mean（根据操作指南，ts_mean换手率显著低于线性衰减），构建20日均值流差分，在保持行业中性基础上大幅降低换手率，适合容量较大的组合。",
+    "expression_list": [
+        "group_zscore(subtract(ts_mean(ts_delta(ts_backfill(rsk74_hfown_pctown,63),1),20), ts_mean(ts_delta(ts_backfill(hedge_fund_pct_ownership_encr,63),1),20)), sector)"
+    ]
+}

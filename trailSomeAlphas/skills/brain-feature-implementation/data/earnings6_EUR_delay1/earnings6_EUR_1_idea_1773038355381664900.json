@@ -1,0 +1,8 @@
+{
+    "template": "ts_decay_linear( trade_when( greater( ts_rank( winsorize(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 4), 252 ), 0.8 ), signed_power( divide( divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 5), 252), 0.001) ), 1.5 ), NaN ), 3 )",
+    "idea": "采用条件交易逻辑(trade_when)，仅当当前盈利惊喜处于历史前20%分位(ts_rank>0.8)时激活信号，并通过非线性放大(signed_power)增强极端值的区分度，配合线性衰减(ts_decay_linear)控制换手率，聚焦持续性的盈利惊喜加速。",
+    "expression_list": [
+        "ts_decay_linear( trade_when( greater( ts_rank( winsorize(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 4), 252 ), 0.8 ), signed_power( divide( divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), 1.5 ), NaN ), 3 )",
+        "ts_decay_linear( trade_when( greater( ts_rank( winsorize(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 4), 252 ), 0.8 ), signed_power( divide( divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), add(ts_mean(ts_backfill(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 5), 252), 0.001) ), 1.5 ), NaN ), 3 )"
+    ]
+}

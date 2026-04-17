@@ -1,0 +1,8 @@
+{
+    "template": "trade_when(greater(abs(group_zscore(ts_decay_linear(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),10),industry)),2), group_zscore(ts_decay_linear(winsorize(ts_sum(ts_delta({shortint},1),15),std=4),10),industry), nan)",
+    "idea": "先对15日空头累积变化进行10日线性衰减平滑以降低噪声和换手率，再进行行业中性化（group_zscore），最后通过trade_when仅保留|z-score|>2的极端尾部（拥挤空头和极端回补），过滤中间噪音，构建低频、高信噪比的空头情绪极值因子。",
+    "expression_list": [
+        "trade_when(greater(abs(group_zscore(ts_decay_linear(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),10),industry)),2), group_zscore(ts_decay_linear(winsorize(ts_sum(ts_delta(rsk74_shortint,1),15),std=4),10),industry), nan)",
+        "trade_when(greater(abs(group_zscore(ts_decay_linear(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),10),industry)),2), group_zscore(ts_decay_linear(winsorize(ts_sum(ts_delta(rsk74_shortint_ts,1),15),std=4),10),industry), nan)"
+    ]
+}

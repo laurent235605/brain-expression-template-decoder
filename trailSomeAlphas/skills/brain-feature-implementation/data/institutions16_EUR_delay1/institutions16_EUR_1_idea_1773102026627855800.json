@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(ts_rank(group_zscore(vector_neut(winsorize(ts_backfill({fundreportedequityassets},63),std=4), winsorize(ts_backfill({reported_asset_value},63),std=4)), industry), 60), 10)",
+    "idea": "将截面标准化与时序分位相结合：先计算权益配置残差的行业内zscore，再转换为60日时间序列分位数(ts_rank)，捕捉“当前偏离处于自身历史高位/低位”的纵向特征（如创历史新高可能预示动量延续），最后经10日衰减平滑，适用于配置偏离具有历史分位动量的场景。",
+    "expression_list": [
+        "ts_decay_linear(ts_rank(group_zscore(vector_neut(winsorize(ts_backfill(inst16_ipreo_fundreportedequityassets,63),std=4), winsorize(ts_backfill(fund_reported_asset_value,63),std=4)), industry), 60), 10)"
+    ]
+}

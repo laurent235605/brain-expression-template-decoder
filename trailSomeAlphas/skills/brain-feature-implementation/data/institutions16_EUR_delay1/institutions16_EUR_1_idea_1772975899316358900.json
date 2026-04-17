@@ -1,0 +1,5 @@
+{
+    "template": "asset_clean = winsorize(ts_backfill({reported_asset_value}, 5), std=4); delta = ts_delta(asset_clean, 20); cap_wgt = log(ts_mean({market_cap}, 21)); ind_trend = group_mean(delta, cap_wgt, sector); residual = subtract(delta, ind_trend); z_residual = group_zscore(residual, sector); final = signed_power(winsorize(z_residual, std=3), 2)",
+    "idea": "市值加权行业残差非线性化：剥离市值加权的行业平均资产变动趋势，得到纯净的个股独立_gathering偏离，通过平方幂变换（power=2）非线性放大极端残差，强化行业龙头共性趋势以外的独立资产获取能力信号。",
+    "expression_list": []
+}

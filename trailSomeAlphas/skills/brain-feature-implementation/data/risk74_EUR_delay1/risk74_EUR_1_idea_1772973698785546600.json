@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_delta(ts_mean(if_else(is_nan({exp_usa}), 0, {exp_usa}), 21), 63), industry), 1.5)",
+    "idea": "地理敞口拐点动量。捕捉美国敞口近期（21日均值）相对于63日前的变化速率，经行业中性化后使用signed_power非线性放大极端变化，用于识别正在加速'去美国化'或'增加美国依赖'的结构性拐点公司。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_delta(ts_mean(if_else(is_nan(rsk74_raw_exp_usa), 0, rsk74_raw_exp_usa), 21), 63), industry), 1.5)"
+    ]
+}

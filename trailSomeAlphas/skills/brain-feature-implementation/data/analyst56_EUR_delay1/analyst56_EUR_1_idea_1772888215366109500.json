@@ -1,0 +1,9 @@
+{
+    "template": "ts_av_diff(vec_avg({targetprice}) / vec_avg({openprice}), 20)",
+    "idea": "**Concept**: Target Price Divergence\n- **Sample Fields Used**: `targetprice`, `openprice`, `expected_exit_price`\n- **Definition**: Abnormal deviation between current target price and entry price, normalized by historical volatility of the spread\n- **Why This Feature**: Unusually wide spreads indicate high expected return or deep value traps; narrowing spreads suggest thesis convergence\n- **is filling nan necessary**: Target prices update infrequently. Use ts_backfill on both price series to carry last valid target, as analysts maintain price targets until explicitly changed.\n- **Directionality**: High values = high implied return (value opportunity or value trap); Low values = consensus reached (lower alpha)\n- **Boundary Conditions**: Negative spreads (target below entry) valid for short ideas; filter out zero openprice to avoid division errors",
+    "expression_list": [
+        "ts_av_diff(vec_avg(anl56_targetprice) / vec_avg(anl56_daily_openprice), 20)",
+        "ts_av_diff(vec_avg(anl56_targetprice) / vec_avg(anl56_openprice), 20)",
+        "ts_av_diff(vec_avg(anl56_targetprice) / vec_avg(anl56_reduced_openprice), 20)"
+    ]
+}

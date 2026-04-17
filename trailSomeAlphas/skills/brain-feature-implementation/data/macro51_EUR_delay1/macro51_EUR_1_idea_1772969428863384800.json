@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore( ts_decay_linear( winsorize( if_else( greater( ts_rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 126 ), 0.8 ), signed_power( ts_zscore( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 63 ), 1.5 ), if_else( less( ts_rank( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ), 126 ), 0.2 ), signed_power( ts_zscore( ts_mean( {stoxx_europe_600_ucits_weight}, 21 ) / ts_median( {stoxx_europe_600_ucits_weight}, 126 ), 63 ), 1.5 ), 0 ) ), std=4 ), 5 ), industry )",
+    "idea": "时序Zscore与衰减平滑增强版。将原始比率转化为63日Zscore以捕捉极端偏离程度，使用signed_power(...,1.5)非线性放大尾部效应；改用ts_rank识别历史极端分位(前20%/后20%)替代简单截面rank，增加ts_decay_linear(5日)线性衰减加权降低换手率；最后用group_zscore替代group_normalize实现行业内标准化，保留截面偏离幅度的信息而非简单多空平衡。",
+    "expression_list": [
+        "group_zscore( ts_decay_linear( winsorize( if_else( greater( ts_rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 126 ), 0.8 ), signed_power( ts_zscore( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 63 ), 1.5 ), if_else( less( ts_rank( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ), 126 ), 0.2 ), signed_power( ts_zscore( ts_mean( mcr51_ishares_stoxx_europe_600_ucits_weight, 21 ) / ts_median( mcr51_ishares_stoxx_europe_600_ucits_weight, 126 ), 63 ), 1.5 ), 0 ) ), std=4 ), 5 ), industry )"
+    ]
+}

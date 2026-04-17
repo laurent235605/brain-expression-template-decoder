@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore(winsorize(ts_backfill({crowding} * {value_ts}, 63), std=4), 252)",
+    "idea": "将源2的252天时序Z-score极端检测框架应用于源1的拥挤价值乘积，识别相对于个股自身历史分布的极端拥挤价值陷阱信号，适应不同股票拥挤度的长期结构性差异，捕捉'历史罕见'的拥挤价值共振点。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_backfill(liquidity_factor_crowding * rsk74_value_ts, 63), std=4), 252)",
+        "ts_zscore(winsorize(ts_backfill(liquidity_timeseries_crowding * rsk74_value_ts, 63), std=4), 252)",
+        "ts_zscore(winsorize(ts_backfill(rsk74_crowding * rsk74_value_ts, 63), std=4), 252)",
+        "ts_zscore(winsorize(ts_backfill(rsk74_raw_crowding * rsk74_value_ts, 63), std=4), 252)"
+    ]
+}

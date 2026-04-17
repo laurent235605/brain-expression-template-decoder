@@ -1,0 +1,7 @@
+{
+    "template": "truncate(group_zscore(ts_regression(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), group_mean(divide(ts_sum(winsorize(ts_delta({hfown_pctown}, 1), std=4), 20), add(ts_std_dev(ts_delta({hfown_pctown}, 1), 60), 0.0001)), log(ts_mean(cap,21)), sector), 252, rettype=0), industry), maxPercent=0.015)",
+    "idea": "采用类CAPM残差剥离方法：将原始持仓流压信号对行业市值加权平均进行时间序列回归(252日，rettype=0取残差)，提取残差作为“无法被行业整体持仓趋势解释的异质性流压”；通过 group_zscore 行业内标准化后截断权重。该模板专注捕捉个股相对同业的独特 smart money 行为，剔除板块轮动导致的伪信号，强调 Alpha 的纯粹性。",
+    "expression_list": [
+        "truncate(group_zscore(ts_regression(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), group_mean(divide(ts_sum(winsorize(ts_delta(rsk74_hfown_pctown, 1), std=4), 20), add(ts_std_dev(ts_delta(rsk74_hfown_pctown, 1), 60), 0.0001)), log(ts_mean(cap,21)), sector), 252, rettype=0), industry), maxPercent=0.015)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "{of_owners_decile_rank_long} - ts_regression({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60, rettype=0)",
+    "idea": "**Concept**: Concentration Anomaly Score\n- **Sample Fields Used**: of_owners_decile_rank_long, owners_decile_rank_long\n- **Definition**: Deviation of effective owners from expected based on total owners (residual from rolling regression), identifying unusually concentrated or dispersed ownership\n- **Why This Feature**: Anomalous concentration (few effective owners despite many total owners) suggests hidden coordination or strategic holding companies; anomalous dispersion suggests index inclusion or retail frenzy\n- **is filling nan necessary**: Fill missing decile ranks with sector median using group_mean to maintain cross-sectional comparability.\n- **Directionality**: Positive residuals (more effective owners than expected) suggest dispersed ownership; negative residuals suggest concentrated \"smart money\" pockets\n- **Boundary Conditions**: Extreme negative values may indicate takeover targets or activist situations; extreme positive may indicate index additions",
+    "expression_list": [
+        "insd8_effective_number_of_owners_decile_rank_long - ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)",
+        "insd8_effective_number_of_owners_decile_rank_long - ts_regression(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)",
+        "insd8_total_number_of_owners_decile_rank_long - ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60, rettype=0)",
+        "insd8_total_number_of_owners_decile_rank_long - ts_regression(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60, rettype=0)"
+    ]
+}

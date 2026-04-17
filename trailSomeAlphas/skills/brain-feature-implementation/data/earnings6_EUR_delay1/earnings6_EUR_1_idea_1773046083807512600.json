@@ -1,0 +1,8 @@
+{
+    "template": "group_zscore( ts_decay_linear( trade_when( greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0 ), 20 ), industry )",
+    "idea": "融合模板1的阈值保护机制与模板2的线性衰减加权，并引入行业中性化处理。仅当|估计EPS|>0.01时计算Surprise，经20日线性衰减后，在行业层面进行zscore标准化，得到剔除行业共同因素后的相对预期差信号，提升纯净度与可比性。",
+    "expression_list": [
+        "group_zscore( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), industry )",
+        "group_zscore( ts_decay_linear( trade_when( greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0 ), 20 ), industry )"
+    ]
+}

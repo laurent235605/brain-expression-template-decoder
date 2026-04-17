@@ -1,0 +1,8 @@
+{
+    "template": "scale(if_else(greater(bucket(group_rank(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20), industry), 0, 1, 0.2), 0.8), 1, if_else(less(bucket(group_rank(ts_decay_linear(divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), add(abs(vec_avg({estimated_eps})), 0.01)), 20), industry), 0, 1, 0.2), 0.2), -1, 0)), longscale=1, shortscale=1)",
+    "idea": "分位数离散化多空信号。将行业内的衰减Surprise按0-1分五档（bucket），仅对前20%（>0.8）赋予+1做多，后20%（<0.2）赋予-1做空，中间60%噪音区间归零，最后scale标准化为等权多空组合，剔除微弱信号降低换手率。",
+    "expression_list": [
+        "scale(if_else(greater(bucket(group_rank(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry), 0, 1, 0.2), 0.8), 1, if_else(less(bucket(group_rank(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry), 0, 1, 0.2), 0.2), -1, 0)), longscale=1, shortscale=1)",
+        "scale(if_else(greater(bucket(group_rank(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry), 0, 1, 0.2), 0.8), 1, if_else(less(bucket(group_rank(ts_decay_linear(divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), add(abs(vec_avg(ern6_estimated_eps)), 0.01)), 20), industry), 0, 1, 0.2), 0.2), -1, 0)), longscale=1, shortscale=1)"
+    ]
+}

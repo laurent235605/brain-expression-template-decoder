@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(ts_regression(winsorize(ts_backfill({exp_usa}, 63), std=4), add(group_mean(winsorize(ts_backfill({exp_usa}, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill({exp_nondomicile1}, 63), std=4)), 252, rettype=0), 126)",
+    "idea": "将模板1的横截面残差信号转化为时间序列维度（ts_zscore, 126日窗口）。不仅比较同一时点上公司间的相对异常，更识别每家公司相对自身历史美国敞口残差所处的极端位置。这种'双重相对性'（vs同行且vs自身历史）能发现那些长期稳定但近期开始偏离历史常态的公司，捕捉早期转型信号。",
+    "expression_list": [
+        "ts_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_raw_exp_nondomicile1, 63), std=4)), 252, rettype=0), 126)",
+        "ts_zscore(ts_regression(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), add(group_mean(winsorize(ts_backfill(rsk74_raw_exp_usa, 63), std=4), log(ts_mean(cap, 21)), sector), winsorize(ts_backfill(rsk74_std_exp_nondomicile1, 63), std=4)), 252, rettype=0), 126)"
+    ]
+}

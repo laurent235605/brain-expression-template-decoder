@@ -1,0 +1,7 @@
+{
+    "template": "truncate(scale(quantile(ts_rank(group_zscore(winsorize(vec_percentage({rank}, 0.5), std=4), sector), 252), driver=\"gaussian\"), scale=1, longscale=1.2, shortscale=0.8), maxPercent=0.02)",
+    "idea": "**概念**：复合分位数时序中性化信号（Composite Quantile Neutralization）\n- **核心逻辑**：使用`vec_percentage({rank}, 0.5)`取中位数替代均值，对异常值更稳健；`group_zscore`实现行业中性，确保比较的是行业内相对异常；`ts_rank(252)`定位当前值在一年历史中的分位（0-1）\n- **分布变换**：`quantile(gaussian)`将历史分位映射到高斯分布，实现尾部拉伸（极值奖励/惩罚更重），中段压缩（噪音区权重趋零）\n- **风险约束**：`scale`分别设置多空杠杆（多头1.2倍，空头0.8倍，可调整）；`truncate(0.02)`严格限制单票最大权重2%，防止单一排名极端股票过度集中\n- **经济含义**：综合截面（行业内相对位置）与时序（自身历史位置）的双重偏离，构建稳健的反常检测器，适用于作为组合中的防御性平衡因子",
+    "expression_list": [
+        "truncate(scale(quantile(ts_rank(group_zscore(winsorize(vec_percentage(mdl245_rank, 0.5), std=4), sector), 252), driver=\"gaussian\"), scale=1, longscale=1.2, shortscale=0.8), maxPercent=0.02)"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(group_zscore(ts_sum(ts_delta({hfown_pctown}, 1), 20), sector), 252)",
+    "idea": "将模板2的20日累计资金流经过模板1的双重标准化流程：先通过group_zscore剔除行业资金流动beta，再计算ts_zscore识别该中性化资金流在历史中的极端位置，用于捕捉跨行业资金再平衡中的显著配置异动。",
+    "expression_list": [
+        "ts_zscore(group_zscore(ts_sum(ts_delta(rsk74_hfown_pctown, 1), 20), sector), 252)"
+    ]
+}

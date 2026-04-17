@@ -1,0 +1,8 @@
+{
+    "template": "ts_regression(ts_sum(ts_backfill(vec_avg({actual_eps}), 5), 252), ts_step(), 126, rettype=2) + 0.5 * ts_delta(vec_avg({stock_split_ratio_243}), 126)",
+    "idea": "双动量叠加：将模板1的盈利趋势（TTM EPS的126日斜率）与模板2的拆股趋势（半年度拆股比率变化）进行线性叠加。拆股趋势作为管理层前瞻性行为的代理变量，与盈利动量形成互补——前者反映内部人信心，后者反映历史业绩惯性。通过0.5系数控制拆股权重，确保盈利趋势主导方向，拆股信号仅作增强，符合从属信号不颠覆主逻辑的原则。",
+    "expression_list": [
+        "ts_regression(ts_sum(ts_backfill(vec_avg(ern6_actual_eps), 5), 252), ts_step(), 126, rettype=2) + 0.5 * ts_delta(vec_avg(ern6_stock_split_ratio_243), 126)",
+        "ts_regression(ts_sum(ts_backfill(vec_avg(ern6_actual_eps_274), 5), 252), ts_step(), 126, rettype=2) + 0.5 * ts_delta(vec_avg(ern6_stock_split_ratio_243), 126)"
+    ]
+}

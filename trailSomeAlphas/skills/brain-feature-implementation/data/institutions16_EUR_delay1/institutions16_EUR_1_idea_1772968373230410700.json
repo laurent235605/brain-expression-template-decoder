@@ -1,0 +1,7 @@
+{
+    "template": "ts_zscore(winsorize(ts_delta(ts_backfill({reported_asset_value}, 20), 20), std=3), 126) * (1 - 0.3 * ts_count_nans({reported_asset_value}, 20))",
+    "idea": "质量加权稳健资产流：在标准delta基础上，收紧截尾标准差至3倍（更严格剔除并购/清算离群值），计算126日时间序列zscore；随后用(1 - 0.3×近20日缺失值计数)作为可信度折扣因子，对数据披露不稳定（频繁缺值）的股票进行降权处理。该模板同时控制极端值风险与数据质量风险，提升因子的稳健性。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_delta(ts_backfill(fund_reported_asset_value, 20), 20), std=3), 126) * (1 - 0.3 * ts_count_nans(fund_reported_asset_value, 20))"
+    ]
+}

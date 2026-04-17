@@ -1,0 +1,7 @@
+{
+    "template": "ts_decay_linear(subtract(1, vec_avg({lastcostingfailed})), 10)",
+    "idea": "时序衰减加权：使用线性衰减加权平均（近10日），对近期的可靠性表现赋予更高权重，同时平滑短期噪音。相比简单移动平均，此结构对最新数据更敏感，适合捕捉运营质量的快速恢复或恶化。",
+    "expression_list": [
+        "ts_decay_linear(subtract(1, vec_avg(mdl209_lastcostingfailed)), 10)"
+    ]
+}

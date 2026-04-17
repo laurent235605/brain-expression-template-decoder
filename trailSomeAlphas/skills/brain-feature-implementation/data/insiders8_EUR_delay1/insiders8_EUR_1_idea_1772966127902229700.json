@@ -1,0 +1,10 @@
+{
+    "template": "ts_zscore(ts_corr({of_owners_decile_rank_long}, {owners_decile_rank_long}, 60), 20)",
+    "idea": "持仓结构一致性动量：计算60日滚动相关性后，再计算该相关性序列在20日窗口内的时序zscore。此操作捕捉所有权结构稳定性本身的变化速度（加速度）——正zscore表示持仓正在快速趋于一致（聪明钱与散户同步加仓），负zscore表示结构快速瓦解（机构撤退散户接盘）。适用于捕捉趋势加速或转折点，而非静态水平。",
+    "expression_list": [
+        "ts_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20)",
+        "ts_zscore(ts_corr(insd8_effective_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20)",
+        "ts_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_total_number_of_owners_decile_rank_long, 60), 20)",
+        "ts_zscore(ts_corr(insd8_total_number_of_owners_decile_rank_long, insd8_effective_number_of_owners_decile_rank_long, 60), 20)"
+    ]
+}

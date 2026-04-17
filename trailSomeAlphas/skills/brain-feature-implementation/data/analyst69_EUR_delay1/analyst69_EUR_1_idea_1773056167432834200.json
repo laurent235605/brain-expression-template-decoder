@@ -1,0 +1,10 @@
+{
+    "template": "multiply(subtract(ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 5), 60), ts_zscore(ts_delta({eps_best_eeps_cur_yr}, 20), 60)), ts_mean(rank(days_from_last_change({eps_expected_report_dt})), 20))",
+    "idea": "使用20日滚动均值平滑报告日期稳定性排名后再与修订加速度交互，降低单日异常波动干扰。相比直接使用当日值，平滑后的稳定性度量更能反映公司中长期运营规划的一致性，构建更稳健的预期-事件协同信号。",
+    "expression_list": [
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), ts_mean(rank(days_from_last_change(anl69_aeps_expected_report_dt)), 20))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), ts_mean(rank(days_from_last_change(anl69_aeps_expected_report_dt)), 20))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_eps_best_eeps_cur_yr, 20), 60)), ts_mean(rank(days_from_last_change(anl69_eps_expected_report_dt)), 20))",
+        "multiply(subtract(ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 5), 60), ts_zscore(ts_delta(anl69_aeps_best_eeps_cur_yr, 20), 60)), ts_mean(rank(days_from_last_change(anl69_eps_expected_report_dt)), 20))"
+    ]
+}

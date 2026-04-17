@@ -1,0 +1,10 @@
+{
+    "template": "ts_sum(ts_backfill(vec_avg({x_dividend}), 5), 252)",
+    "idea": "跨模板结构反转：将模板2的TTM累积逻辑迁移至模板1的股息数据，构建年度股息累积流（Dividend TTM Accumulation）。利用252日求和替代比率计算，平滑季度派息噪音，识别公司年度分红能力的真实趋势与可持续性。",
+    "expression_list": [
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_233), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc), 5), 252)",
+        "ts_sum(ts_backfill(vec_avg(ern6_x_dividend_oc_235), 5), 252)"
+    ]
+}

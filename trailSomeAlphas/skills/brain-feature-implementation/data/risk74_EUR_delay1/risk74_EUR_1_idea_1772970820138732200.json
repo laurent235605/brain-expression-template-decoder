@@ -1,0 +1,8 @@
+{
+    "template": "if_else(greater(rank(ts_sum(ts_delta({shortint}, 1), 15)), 0.9), multiply(-1, signed_power(abs(ts_sum(ts_delta({shortint}, 1), 15)), 1.2)), if_else(less(rank(ts_sum(ts_delta({shortint}, 1), 15)), 0.1), signed_power(abs(ts_sum(ts_delta({shortint}, 1), 15)), 1.2), 0))",
+    "idea": "**概念**: 极端双尾非线性放大（Bifurcated Tail Strategy）\n- **逻辑**: 仅保留截面分布的前10%（极端做空累积）和后10%（极端回补），使用if_else嵌套逻辑将中间80%区间置零，对两端进行1.2次幂放大（signed_power）以增强尾部效应\n- **区间处理**: 前10%（高做空）赋予负向放大（做空信号），后10%（高回补）赋予正向放大（做多信号），构建纯粹的多空双向组合\n- **非线性**: 通过power>1放大极端值的差异，强化对极端情绪的暴露，完全忽略中等区间的微弱信号\n- **适用场景**: 适用于认为只有极端做空拥挤或极端恐慌回补才产生显著alpha的假设",
+    "expression_list": [
+        "if_else(greater(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), 0.9), multiply(-1, signed_power(abs(ts_sum(ts_delta(rsk74_shortint, 1), 15)), 1.2)), if_else(less(rank(ts_sum(ts_delta(rsk74_shortint, 1), 15)), 0.1), signed_power(abs(ts_sum(ts_delta(rsk74_shortint, 1), 15)), 1.2), 0))",
+        "if_else(greater(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), 0.9), multiply(-1, signed_power(abs(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), 1.2)), if_else(less(rank(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), 0.1), signed_power(abs(ts_sum(ts_delta(rsk74_shortint_ts, 1), 15)), 1.2), 0))"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(subtract(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), ts_mean(divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 63)), industry)",
+    "idea": "计算当前风险调整信念强度相对于其自身63日历史均值的偏离（即信号改善幅度），而非绝对水平；在行业内部zscore标准化后，捕捉那些近期风险调整配置强度显著突破自身历史区间的基金，避免静态高配置低变化的估值陷阱。",
+    "expression_list": [
+        "group_zscore(subtract(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), ts_mean(divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_std_dev(returns, 21), 0.001)), 63)), industry)"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "template": "scale(truncate(ts_decay_linear(group_zscore(divide(winsorize(ts_backfill({value_03501a}, 63), std=4), winsorize(ts_backfill({value_02300q}, 21), std=4)), industry), 10), maxPercent=0.02), scale=1)",
+    "idea": "带周转控制的稳健结构信号：在基础权益资产比行业中性化后，应用10日线性衰减加权（ts_decay_linear）降低因财报披露时点差异导致的高换手率，通过截断运算符限制单个股票权重不超过2%，最后进行组合缩放标准化。适用于需要低频调仓且严格控制单票集中风险的保守型策略。",
+    "expression_list": [
+        "scale(truncate(ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), industry), 10), maxPercent=0.02), scale=1)",
+        "scale(truncate(ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(fnd28_bdea_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), industry), 10), maxPercent=0.02), scale=1)",
+        "scale(truncate(ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_bsassetq_value_02300q, 21), std=4)), industry), 10), maxPercent=0.02), scale=1)",
+        "scale(truncate(ts_decay_linear(group_zscore(divide(winsorize(ts_backfill(fnd28_fsa1_value_03501a, 63), std=4), winsorize(ts_backfill(fnd28_nddq1_value_02300q, 21), std=4)), industry), 10), maxPercent=0.02), scale=1)"
+    ]
+}

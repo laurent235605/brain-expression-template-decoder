@@ -1,0 +1,7 @@
+{
+    "template": "group_zscore(divide(ts_decay_linear(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), 10), add(ts_mean(ts_std_dev(returns, 21), 63), 0.001)), industry)",
+    "idea": "通过10日线性衰减平滑规模中性残差以捕捉持续配置趋势而非短期噪音，并将分母改为63日均波动率以获得更稳定的风险基准，降低换手率同时保留经风险调整的基金信念强度信号。",
+    "expression_list": [
+        "group_zscore(divide(ts_decay_linear(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), 10), add(ts_mean(ts_std_dev(returns, 21), 63), 0.001)), industry)"
+    ]
+}

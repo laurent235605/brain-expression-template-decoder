@@ -1,0 +1,14 @@
+{
+    "template": "ts_delta(multiply(group_zscore({value_ts}, industry), reverse(group_rank({crowding}, industry))), 20) * sign(group_zscore(add(add({factor_e}, {factor_s}), {factor_g}), industry))",
+    "idea": "将非拥挤价值因子（价值zscore乘以反向拥挤排名）进行时序差分（20日动量），再乘以ESG总分的符号函数，用于捕捉在ESG趋势支持下的、由非拥挤状态驱动的价值修复动量，强化时序持续性。",
+    "expression_list": [
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(rsk74_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(rsk74_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(rsk74_raw_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(rsk74_raw_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(liquidity_factor_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(liquidity_factor_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(liquidity_timeseries_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_e, rsk74_factor_s), rsk74_factor_g), industry))",
+        "ts_delta(multiply(group_zscore(rsk74_value_ts, industry), reverse(group_rank(liquidity_timeseries_crowding, industry))), 20) * sign(group_zscore(add(add(rsk74_factor_esg, rsk74_factor_s), rsk74_factor_g), industry))"
+    ]
+}

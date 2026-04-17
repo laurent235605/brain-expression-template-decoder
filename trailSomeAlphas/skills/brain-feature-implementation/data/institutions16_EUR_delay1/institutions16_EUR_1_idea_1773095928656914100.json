@@ -1,0 +1,7 @@
+{
+    "template": "s_log_1p(group_zscore(quantile(trade_when(less(days_from_last_change(ts_backfill({fundreportedequityassets}, 126)), 20), divide(winsorize(vector_neut(ts_backfill({fundreportedequityassets}, 63), ts_backfill({reported_asset_value}, 63)), std=4), add(ts_mean(ts_std_dev(returns, 21), 5), 0.001)), 0), \"gaussian\"), group_cartesian_product(industry, bucket(rank(ts_backfill({reported_asset_value}, 63)), \"0,1,0.5\"))))",
+    "idea": "时效惩罚与高斯分位转换：对超过20日未更新的持仓数据赋空值，采用高斯分布映射将截面分布转换为正态分位以强化尾部差异，在行业与资产规模交叉分组内进行zscore比较，最后使用对称对数压缩极端值防止过度暴露。",
+    "expression_list": [
+        "s_log_1p(group_zscore(quantile(trade_when(less(days_from_last_change(ts_backfill(inst16_ipreo_fundreportedequityassets, 126)), 20), divide(winsorize(vector_neut(ts_backfill(inst16_ipreo_fundreportedequityassets, 63), ts_backfill(fund_reported_asset_value, 63)), std=4), add(ts_mean(ts_std_dev(returns, 21), 5), 0.001)), 0), \"gaussian\"), group_cartesian_product(industry, bucket(rank(ts_backfill(fund_reported_asset_value, 63)), \"0,1,0.5\"))))"
+    ]
+}

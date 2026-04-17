@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(winsorize(ts_regression(ts_decay_linear(ts_delta({shortint},1),15),group_mean(ts_decay_linear(ts_delta({shortint},1),15),log(ts_mean({shortint},21)),industry),63,rettype=0),std=4),252)",
+    "idea": "使用线性衰减加权（ts_decay_linear）替代简单求和计算空头变化，结合行业中性回归剔除共同因子，在显著降低换手率的同时捕捉更稳定的特质性空头趋势。",
+    "expression_list": [
+        "ts_zscore(winsorize(ts_regression(ts_decay_linear(ts_delta(rsk74_shortint,1),15),group_mean(ts_decay_linear(ts_delta(rsk74_shortint,1),15),log(ts_mean(rsk74_shortint,21)),industry),63,rettype=0),std=4),252)",
+        "ts_zscore(winsorize(ts_regression(ts_decay_linear(ts_delta(rsk74_shortint_ts,1),15),group_mean(ts_decay_linear(ts_delta(rsk74_shortint_ts,1),15),log(ts_mean(rsk74_shortint_ts,21)),industry),63,rettype=0),std=4),252)"
+    ]
+}

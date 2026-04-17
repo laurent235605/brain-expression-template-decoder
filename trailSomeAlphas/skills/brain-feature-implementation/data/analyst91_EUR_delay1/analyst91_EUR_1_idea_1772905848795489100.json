@@ -1,0 +1,7 @@
+{
+    "template": "signed_power(group_zscore(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_avg({exposure_value}), 63), std=4), 20), 252), industry), 2)",
+    "idea": "将模板1的时间序列Z-Score替换为252日时间序列分位数（ts_rank），将当前波动率映射至自身历史分布的相对位置，消除异方差非线性影响；再结合模板2的行业标准化与平方变换，识别处于“历史极端分位”且“行业相对异常”的公司。",
+    "expression_list": [
+        "signed_power(group_zscore(ts_rank(ts_std_dev(winsorize(ts_backfill(vec_avg(anl91_exposure_value), 63), std=4), 20), 252), industry), 2)"
+    ]
+}

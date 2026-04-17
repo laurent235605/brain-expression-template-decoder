@@ -1,0 +1,7 @@
+{
+    "template": "hump(multiply(group_normalize(trade_when(greater(ts_rank(winsorize(vec_avg({likelihood_score}), std=4), 20), 0.8), quantile(vec_avg({likelihood_score}), driver=\"cauchy\"), 0), industry), ts_decay_exp_window(vec_avg({likelihood_score}), 10)), 0.02)",
+    "idea": "高动量Cauchy变换与换手率控制：仅当likelihood_score处于自身20日历史高位(前20%)时，使用Cauchy分位数产生肥尾分布强调极端值，经行业中性化(group_normalize)后，乘以指数衰减窗口(ts_decay_exp_window)平滑近期趋势，最后通过hump(0.02)忽略微小权重变动，显著降低换手率并聚焦于高确信度的动量延续。",
+    "expression_list": [
+        "hump(multiply(group_normalize(trade_when(greater(ts_rank(winsorize(vec_avg(success_likelihood_score), std=4), 20), 0.8), quantile(vec_avg(success_likelihood_score), driver=\"cauchy\"), 0), industry), ts_decay_exp_window(vec_avg(success_likelihood_score), 10)), 0.02)"
+    ]
+}

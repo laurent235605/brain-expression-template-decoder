@@ -1,0 +1,7 @@
+{
+    "template": "vec_stddev({elta_value})",
+    "idea": "**Concept**: KEI Cross-Driver Stability\n- **Sample Fields Used**: `{elta_value}`\n- **Definition**: Standard deviation of KEI estimates across different drivers for the same instrument\n- **Why This Feature**: Low dispersion indicates analysts have consistent expectations across all key business drivers; high dispersion suggests mixed signals or uncertainty about which drivers will dominate\n- **is filling nan necessary**: NaN values in the vector likely indicate missing coverage for specific KEI items. Since vec_stddev ignores NaNs by default, no filling is necessary; filling with zeros would artificially reduce measured dispersion.\n- **Directionality**: High values indicate fragmented expectations (bearish signal due to uncertainty); low values indicate coherent forecasts (bullish signal of certainty)\n- **Boundary Conditions**: Near-zero values indicate all drivers aligned; extremely high values relative to historical norms indicate business model confusion or transition periods",
+    "expression_list": [
+        "vec_stddev(ern10_elta_value)"
+    ]
+}

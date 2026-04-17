@@ -1,0 +1,7 @@
+{
+    "template": "ts_delta({active_weight_decile_rank_long}, 5)",
+    "idea": "**Concept**: Active Conviction Momentum\n- **Sample Fields Used**: active_weight_decile_rank_long\n- **Definition**: Rate of change in active weight decile rank over 5 days, capturing acceleration of conviction\n- **Why This Feature**: Rapid increases in active weight suggest information-driven accumulation; decreases suggest profit-taking or risk reduction\n- **is filling nan necessary**: Use ts_backfill if missing data represents temporary reporting gaps, but only for 1-2 days to avoid stale data contamination.\n- **Directionality**: Positive values indicate increasing conviction (potential alpha); negative values indicate withdrawal\n- **Boundary Conditions**: Extreme spikes may indicate corporate actions or benchmark changes rather than true conviction shifts",
+    "expression_list": [
+        "ts_delta(insd8_active_weight_decile_rank_long, 5)"
+    ]
+}

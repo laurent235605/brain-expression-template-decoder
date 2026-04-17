@@ -1,0 +1,8 @@
+{
+    "template": "ts_mean(trade_when(greater(abs(vec_avg({estimated_eps})), 0.01), divide(subtract(vec_avg({actual_eps}), vec_avg({estimated_eps})), abs(vec_avg({estimated_eps}))), 0), 5)",
+    "idea": "对条件化Surprise应用时间序列平滑(ts_mean)，通过5日移动平均减少单期数据错误或非经常性项目导致的异常Surprise，捕捉持续性的盈利预期修正趋势，降低换手率。",
+    "expression_list": [
+        "ts_mean(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 5)",
+        "ts_mean(trade_when(greater(abs(vec_avg(ern6_estimated_eps)), 0.01), divide(subtract(vec_avg(ern6_actual_eps_274), vec_avg(ern6_estimated_eps)), abs(vec_avg(ern6_estimated_eps))), 0), 5)"
+    ]
+}

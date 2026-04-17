@@ -1,0 +1,10 @@
+{
+    "template": "signed_power(zscore(divide(ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 63), add(ts_mean(ts_backfill(winsorize(vec_avg({x_dividend}), std=4), 5), 252), 0.001))), 2)",
+    "idea": "构建股息动量加速度指标：对比短期（63天）与长期（252天）平均股息的变化比率，再通过signed_power(y=2)非线性放大极端值（无论极高或极低）。该模板强调股息趋势的加速或减速（二阶导），而非绝对水平，适用于捕捉股息政策拐点——如连续改善的股息能力（正值放大）或持续恶化（负值放大）。",
+    "expression_list": [
+        "signed_power(zscore(divide(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend), std=4), 5), 252), 0.001))), 2)",
+        "signed_power(zscore(divide(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_233), std=4), 5), 252), 0.001))), 2)",
+        "signed_power(zscore(divide(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc), std=4), 5), 252), 0.001))), 2)",
+        "signed_power(zscore(divide(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 63), add(ts_mean(ts_backfill(winsorize(vec_avg(ern6_x_dividend_oc_235), std=4), 5), 252), 0.001))), 2)"
+    ]
+}

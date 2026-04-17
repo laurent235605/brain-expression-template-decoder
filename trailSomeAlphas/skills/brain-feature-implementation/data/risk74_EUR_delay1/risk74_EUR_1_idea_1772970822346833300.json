@@ -1,0 +1,8 @@
+{
+    "template": "ts_zscore(subtract(ts_decay_linear(ts_delta({shortint}, 1), 5), ts_decay_linear(ts_delta({shortint}, 1), 20)), 60)",
+    "idea": "**概念**: 做空加速度与趋势背离（Front-loading Detection）\n- **逻辑**: 对比短期（5日线性衰减）与中期（20日线性衰减）的做空强度变化速度，识别做空压力的加速（正值，看空）或减速/反转（负值，看多）拐点\n- **时序处理**: 使用ts_decay_linear而非简单平均以赋予近期更高权重，更快捕捉变化；最终进行60日zscore标准化以得到相对历史的变化速度分位\n- **方向性**: 显著正值表示近期做空强度远超中期趋势（加速看空）；显著负值表示近期快速回补（看多）",
+    "expression_list": [
+        "ts_zscore(subtract(ts_decay_linear(ts_delta(rsk74_shortint, 1), 5), ts_decay_linear(ts_delta(rsk74_shortint, 1), 20)), 60)",
+        "ts_zscore(subtract(ts_decay_linear(ts_delta(rsk74_shortint_ts, 1), 5), ts_decay_linear(ts_delta(rsk74_shortint_ts, 1), 20)), 60)"
+    ]
+}
