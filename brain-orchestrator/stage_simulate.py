@@ -58,8 +58,10 @@ def _load_latest_sim_rows(csv_path: Path) -> pd.DataFrame:
         work_df["__sort_ts__"] = pd.Series(range(len(work_df)), index=work_df.index, dtype=float)
     work_df["__sort_ts__"] = work_df["__sort_ts__"].fillna(-1)
     work_df["__sort_idx__"] = range(len(work_df))
-    work_df = work_df.sort_values(["__sort_ts__", "__sort_idx__"], kind="stable")
-    work_df = work_df.drop_duplicates(subset=["fingerprint"], keep="last")
+    # Use groupby+idxmax instead of full sort to get latest row per fingerprint
+    combined = work_df["__sort_ts__"] * 1e18 + work_df["__sort_idx__"]
+    keep_idx = combined.groupby(work_df["fingerprint"]).idxmax()
+    work_df = work_df.loc[keep_idx]
     work_df = work_df.drop(columns=["__sort_ts__", "__sort_idx__"], errors="ignore")
     return work_df.reset_index(drop=True)
 
@@ -157,8 +159,8 @@ def simulate_idea(
                 summary = _summarize_csv(output_csv)
                 summary["count"] = len(alpha_list)  # total from input, not CSV row count
                 progress_callback(summary)
-            except Exception:
-                pass
+            except Exception as exc:
+                logger.warning(f"Progress callback failed: {exc}")
 
     simulator = BatchSimulator(
         session,

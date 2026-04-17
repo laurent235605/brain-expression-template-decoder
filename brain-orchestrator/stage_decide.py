@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from pathlib import Path
 from typing import Any
 
@@ -98,8 +99,14 @@ def _call_llm(api_key: str, base_url: str, model: str,
         "temperature": 1,
     }
     record_llm_request(counter_path, stage=stage, model=model)
-    resp = requests.post(url, headers=headers, json=payload, timeout=180)
-    resp.raise_for_status()
+    for attempt in range(5):
+        resp = requests.post(url, headers=headers, json=payload, timeout=180)
+        if resp.status_code == 429:
+            wait = int(resp.headers.get("Retry-After", 2 ** attempt))
+            time.sleep(wait)
+            continue
+        resp.raise_for_status()
+        break
     return resp.json()["choices"][0]["message"]["content"]
 
 

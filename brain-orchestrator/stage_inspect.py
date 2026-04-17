@@ -75,10 +75,16 @@ def _call_llm(api_key: str, base_url: str, model: str,
         "temperature": 1,
     }
     record_llm_request(counter_path, stage=stage, model=model)
-    resp = requests.post(url, headers=headers, json=payload, timeout=(15, 600))
-    if resp.status_code != 200:
-        body = resp.text[:500]
-        raise RuntimeError(f"LLM API error {resp.status_code} (model={model}): {body}")
+    for attempt in range(5):
+        resp = requests.post(url, headers=headers, json=payload, timeout=(15, 600))
+        if resp.status_code == 429:
+            wait = int(resp.headers.get("Retry-After", 2 ** attempt))
+            time.sleep(wait)
+            continue
+        if resp.status_code != 200:
+            body = resp.text[:500]
+            raise RuntimeError(f"LLM API error {resp.status_code} (model={model}): {body}")
+        break
     return resp.json()["choices"][0]["message"]["content"]
 
 
