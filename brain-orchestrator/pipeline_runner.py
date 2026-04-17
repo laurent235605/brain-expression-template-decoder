@@ -268,6 +268,8 @@ def phase_generate(
                     if log_cb:
                         log_cb(stripped)
         finally:
+            if proc.stdout:
+                proc.stdout.close()
             if proc_cb:
                 proc_cb(None)
 
@@ -579,8 +581,8 @@ def phase_simulate(pipeline_dir: Path, session, pool: PoolManager,
                     if on_sim_done:
                         try:
                             on_sim_done()
-                        except Exception:
-                            pass
+                        except Exception as exc:
+                            logger.warning(f"on_sim_done callback failed: {exc}")
                 if stop_check and stop_check():
                     return
             except Exception as exc:
@@ -823,8 +825,8 @@ class PipelineRunner:
                 try:
                     alpha_list = json.loads(alpha_list_path.read_text(encoding="utf-8"))
                     update_fields["sim_summary"] = {"count": len(alpha_list)}
-                except Exception:
-                    pass
+                except Exception as exc:
+                    logger.warning(f"Failed to read alpha_list for summary: {exc}")
 
                 self.pool.update_by_idea(idea_file, **update_fields)
                 self.log_activity(f"手动INSPECT完成: {stem}", phase="inspect")
@@ -1230,8 +1232,8 @@ class PipelineRunner:
                                 compare_series = sharpe_series.abs() if sharpe_use_abs else sharpe_series
                                 qualified_for_sharpe = int((compare_series >= float(sharpe_threshold)).sum())
                             qualified_for_diminishing = int((sharpe_series >= float(dr_threshold)).sum())
-                    except Exception:
-                        pass
+                    except Exception as exc:
+                        logger.warning(f"Failed to read sim CSV for metrics: {exc}")
 
             if not entry_submitted:
                 status_breakdown = summary.get("status_breakdown") or {}
@@ -1568,8 +1570,8 @@ class PipelineRunner:
                         try:
                             _al = json.loads(alpha_list_path.read_text(encoding="utf-8"))
                             self.pool.update_by_idea(entry["idea_file"], sim_summary={"count": len(_al)})
-                        except Exception:
-                            pass
+                        except Exception as exc:
+                            logger.warning(f"Failed to read alpha_list count: {exc}")
                         self.log_activity(f"INSPECT [{idx_i}/{total_inspect}]: {stem} → 完成", phase="inspect")
                     except Exception as exc:
                         self.log_activity(f"INSPECT [{idx_i}/{total_inspect}] 失败: {stem}: {exc}", level="error", phase="inspect")
@@ -1927,8 +1929,8 @@ def _load_archive_index() -> dict:
     if _ARCHIVE_FILE.exists():
         try:
             return json.loads(_ARCHIVE_FILE.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning(f"Failed to load archive index: {exc}")
     return {}
 
 
