@@ -153,10 +153,22 @@ class PoolManager:
         return [e for e in self.get_by_status("sim_status", "done") if self._has_sim_success(e)]
 
     def candidates_for_enhance(self) -> list[dict]:
-        """Return simulated entries that haven't been selected for enhancement yet."""
+        """Return simulated entries eligible for enhancement.
+
+        Eligible = simulation succeeded AND either:
+          - never been selected for enhancement, OR
+          - previously selected but enhancement ERRORED (allow retry).
+        """
         with self._lock:
-            return [e for e in self._entries
-                    if e.get("sim_status") == "done" and self._has_sim_success(e) and not e.get("enhance_selected")]
+            return [
+                e for e in self._entries
+                if e.get("sim_status") == "done"
+                and self._has_sim_success(e)
+                and (
+                    not e.get("enhance_selected")
+                    or e.get("enhance_status") == "error"
+                )
+            ]
 
     def stats(self) -> dict:
         with self._lock:
