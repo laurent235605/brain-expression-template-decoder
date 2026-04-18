@@ -372,8 +372,8 @@ def inspect_idea(
         )
         repaired_idea = _llm_repair_invalid_idea(
             api_key=llm_config["api_key"],
-            base_url=llm_config.get("base_url", "https://api.moonshot.cn/v1"),
-            model=llm_config.get("model", "kimi-k2.5"),
+            base_url=llm_config.get("base_url", "https://api.deepseek.com/v1"),
+            model=llm_config.get("model", "deepseek-reasoner"),
             raw_idea=raw_idea,
             validation_failures=ctx.validation_failures,
             operators=operators,
@@ -412,8 +412,8 @@ def inspect_idea(
     # Step 3: LLM chooses settings
     chosen = _llm_choose_settings(
         api_key=llm_config["api_key"],
-        base_url=llm_config.get("base_url", "https://api.moonshot.cn/v1"),
-        model=llm_config.get("model", "kimi-k2.5"),
+        base_url=llm_config.get("base_url", "https://api.deepseek.com/v1"),
+        model=llm_config.get("model", "deepseek-reasoner"),
         idea_ctx=ctx_dict,
         candidates=candidates,
         fixed_universe=fixed_universe,

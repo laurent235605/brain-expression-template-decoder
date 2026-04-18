@@ -432,8 +432,8 @@ def llm_decide(
 
     raw = _call_llm(
         api_key=llm_config["api_key"],
-        base_url=llm_config.get("base_url", "https://api.moonshot.cn/v1"),
-        model=llm_config.get("model", "kimi-k2.5"),
+        base_url=llm_config.get("base_url", "https://api.deepseek.com/v1"),
+        model=llm_config.get("model", "deepseek-reasoner"),
         system_prompt=system,
         user_prompt=user,
         counter_path=llm_config.get("counter_path"),

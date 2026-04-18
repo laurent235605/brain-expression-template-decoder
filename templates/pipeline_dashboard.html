@@ -332,12 +332,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <input type="password" id="cfgApiKey" class="secret-toggle-target" placeholder="sk-...">
       </div>
       <div class="form-group">
-        <label>LLM Base URL <i class="tip" data-tip="大模型API的基础URL地址, 如 https://api.moonshot.cn/v1">i</i></label>
-        <input type="text" id="cfgBaseUrl" value="https://api.moonshot.cn/v1">
+        <label>LLM Base URL <i class="tip" data-tip="大模型API的基础URL地址, 如 https://api.deepseek.com/v1">i</i></label>
+        <input type="text" id="cfgBaseUrl" value="https://api.deepseek.com/v1">
       </div>
       <div class="form-group">
-        <label>LLM Model <i class="tip" data-tip="使用的大模型名称, 如 kimi-k2.5">i</i></label>
-        <input type="text" id="cfgModel" value="kimi-k2.5">
+        <label>LLM Model <i class="tip" data-tip="使用的大模型名称, 如 deepseek-reasoner">i</i></label>
+        <input type="text" id="cfgModel" value="deepseek-reasoner">
       </div>
     </div>
     <div class="form-actions">
@@ -590,8 +590,8 @@ function initSecretToggles() {
 async function openSubmitter() {
   try {
     const apiKey = document.getElementById('cfgApiKey').value.trim() || localStorage.getItem('deepseekApiKey') || '';
-    const baseUrl = document.getElementById('cfgBaseUrl').value.trim() || localStorage.getItem('inspire_llm_url') || 'https://api.moonshot.cn/v1';
-    const model = document.getElementById('cfgModel').value.trim() || localStorage.getItem('featureEngModelName') || 'kimi-k2.5';
+    const baseUrl = document.getElementById('cfgBaseUrl').value.trim() || localStorage.getItem('inspire_llm_url') || 'https://api.deepseek.com/v1';
+    const model = document.getElementById('cfgModel').value.trim() || localStorage.getItem('featureEngModelName') || 'deepseek-reasoner';
     const response = await fetch('/api/open-submitter', {
       method: 'POST',
       headers: getHeaders(),

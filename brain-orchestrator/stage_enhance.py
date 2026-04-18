@@ -65,8 +65,8 @@ def enhance(
     # Build environment for enhance_template.py
     env = os.environ.copy()
     env["MOONSHOT_API_KEY"] = llm_config["api_key"]
-    env["MOONSHOT_BASE_URL"] = llm_config.get("base_url", "https://api.moonshot.cn/v1")
-    env["MOONSHOT_MODEL"] = llm_config.get("model", "kimi-k2.5")
+    env["MOONSHOT_BASE_URL"] = llm_config.get("base_url", "https://api.deepseek.com/v1")
+    env["MOONSHOT_MODEL"] = llm_config.get("model", "deepseek-reasoner")
     env["PIPELINE_LLM_COUNTER_PATH"] = str((pipeline_dir / "llm_requests.jsonl"))
     env["PIPELINE_LLM_COUNTER_STAGE"] = "enhance"
     env["CROSS_PROMPT_STYLE"] = style

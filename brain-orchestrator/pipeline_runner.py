@@ -1142,8 +1142,8 @@ class PipelineRunner:
     def llm_config(self) -> dict:
         return {
             "api_key": self.config.get("moonshot_api_key", ""),
-            "base_url": self.config.get("moonshot_base_url", "https://api.moonshot.cn/v1"),
-            "model": self.config.get("moonshot_model", "kimi-k2.5"),
+            "base_url": self.config.get("moonshot_base_url", "https://api.deepseek.com/v1"),
+            "model": self.config.get("moonshot_model", "deepseek-reasoner"),
             "counter_path": str(self._llm_counter_path),
             "prompt_overrides": self.config.get("prompt_overrides") or {},
         }
