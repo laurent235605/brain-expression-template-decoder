@@ -938,6 +938,34 @@ def main():
             data_type=args.data_type,
         )
 
+        # --- Field blacklist injection --------------------------------
+        # If pipeline_runner or an external caller sets
+        # PIPELINE_FIELD_BLACKLIST_JSON to a JSON file produced by
+        # brain-orchestrator/scripts/build_field_blacklist.py, drop every
+        # blacklisted field from fields_df before we build the prompt.
+        # This prevents the LLM from ever seeing zombie fields.
+        _bl_path = os.environ.get("PIPELINE_FIELD_BLACKLIST_JSON", "").strip()
+        if _bl_path:
+            try:
+                with open(_bl_path, "r", encoding="utf-8") as _fh:
+                    _bl_payload = json.load(_fh)
+                _bl_ids = {
+                    str(b.get("id"))
+                    for b in (_bl_payload.get("blacklist") or [])
+                    if b.get("id")
+                }
+                if _bl_ids and "id" in fields_df.columns:
+                    _before = len(fields_df)
+                    fields_df = fields_df[~fields_df["id"].astype(str).isin(_bl_ids)].reset_index(drop=True)
+                    print(
+                        f"[field-blacklist] applied {_bl_path}: "
+                        f"dropped {_before - len(fields_df)} fields "
+                        f"(kept {len(fields_df)})",
+                        file=sys.stderr,
+                    )
+            except Exception as _exc:
+                print(f"[field-blacklist] skipped — load failed: {_exc}", file=sys.stderr)
+
         feature_engineering_skill_md = read_text_optional(FEATURE_ENGINEERING_DIR / "SKILL.md")
         feature_implementation_skill_md = read_text_optional(FEATURE_IMPLEMENTATION_DIR / "SKILL.md")
         allowed_metric_suffixes = build_allowed_metric_suffixes(fields_df, max_suffixes=300)

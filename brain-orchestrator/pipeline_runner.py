@@ -39,6 +39,7 @@ from stage_simulate import simulate_idea, _summarize_csv, _load_latest_sim_rows,
 from stage_decide import decide
 from stage_enhance import enhance
 from stage_implement import implement_enhanced
+from alpha_sanity import fetch_and_validate as _alpha_fetch_and_validate
 
 logger = logging.getLogger("pipeline_runner")
 
@@ -230,6 +231,16 @@ def phase_generate(
         env["BRAIN_PASSWORD"] = config["brain_password"]
     if prompt_overrides.get("generate_system_prompt"):
         env["PIPELINE_GENERATE_SYSTEM_PROMPT"] = str(prompt_overrides["generate_system_prompt"])
+
+    # If a matching field blacklist JSON exists, tell run_pipeline.py to
+    # drop those fields from fields_df before building the prompt. Keeps
+    # zombie fields out of the generation stage entirely.
+    _bl_file = Path(__file__).resolve().parent / "resources" / "field_blacklists" / (
+        f"{config.get('dataset_id')}_{config.get('region')}_"
+        f"d{config.get('delay')}_{config.get('universe', 'TOP3000')}.json"
+    )
+    if _bl_file.exists():
+        env["PIPELINE_FIELD_BLACKLIST_JSON"] = str(_bl_file)
 
     def _run_generate_once(current_data_type: str) -> None:
         cmd = [
@@ -749,6 +760,79 @@ class PipelineRunner:
         self._main_deciding = False
         self._active_proc: Optional[subprocess.Popen] = None
         self._active_proc_lock = threading.Lock()
+        # Alpha sanity validation cache (prevents zombie alphas from counting
+        # toward the sharpe_target_count stop condition). Key: alpha_id.
+        # Value: {"passed": bool, "reasons": list[str], "ts": float}.
+        self._alpha_validation_cache: dict[str, dict] = {}
+        self._alpha_validation_path = pipeline_dir / "alpha_validations.json"
+        self._alpha_validation_lock = threading.Lock()
+        self._load_alpha_validation_cache()
+        self._validation_session = None  # lazy-initialised wqb/ace_lib session
+
+    def _load_alpha_validation_cache(self) -> None:
+        try:
+            if self._alpha_validation_path.exists():
+                data = json.loads(self._alpha_validation_path.read_text(encoding="utf-8"))
+                if isinstance(data, dict):
+                    self._alpha_validation_cache = {
+                        str(k): v for k, v in data.items() if isinstance(v, dict)
+                    }
+        except Exception as exc:
+            logger.warning(f"alpha_validations.json load failed: {exc}")
+
+    def _save_alpha_validation_cache(self) -> None:
+        try:
+            tmp = self._alpha_validation_path.with_suffix(".json.tmp")
+            tmp.write_text(
+                json.dumps(self._alpha_validation_cache, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+            tmp.replace(self._alpha_validation_path)
+        except Exception as exc:
+            logger.warning(f"alpha_validations.json save failed: {exc}")
+
+    def _get_validation_session(self):
+        """Lazily create an authenticated BRAIN session for sanity-gate use."""
+        if self._validation_session is not None:
+            return self._validation_session
+        try:
+            self._validation_session = ace_lib.start_session()
+        except Exception as exc:
+            logger.warning(f"alpha-sanity session init failed: {exc}")
+            self._validation_session = None
+        return self._validation_session
+
+    def _validate_alpha_sanity(self, alpha_id: str) -> bool:
+        """Return True iff the given alpha passes the zombie-rejection checks.
+
+        Results are cached in-memory + on disk so repeated stop-condition
+        evaluations don't hammer /alphas/<id>.
+        """
+        if not alpha_id:
+            return False
+        with self._alpha_validation_lock:
+            cached = self._alpha_validation_cache.get(alpha_id)
+        if cached is not None and isinstance(cached.get("passed"), bool):
+            return bool(cached["passed"])
+
+        session = self._get_validation_session()
+        if session is None:
+            # Fail-closed: without a session we cannot confirm the alpha is
+            # real, so do not count it toward the stop condition.
+            return False
+        try:
+            passed, reasons, _details = _alpha_fetch_and_validate(session, alpha_id)
+        except Exception as exc:
+            logger.warning(f"alpha-sanity fetch failed for {alpha_id}: {exc}")
+            return False
+
+        entry = {"passed": bool(passed), "reasons": list(reasons), "ts": time.time()}
+        with self._alpha_validation_lock:
+            self._alpha_validation_cache[alpha_id] = entry
+            self._save_alpha_validation_cache()
+        if not passed:
+            logger.info(f"alpha-sanity REJECT {alpha_id}: {reasons}")
+        return bool(passed)
 
     def _set_active_proc(self, proc: Optional[subprocess.Popen]):
         with self._active_proc_lock:
@@ -1230,7 +1314,24 @@ class PipelineRunner:
                             sharpe_series = completed_df["sharpe"].astype(float)
                             if sharpe_threshold is not None:
                                 compare_series = sharpe_series.abs() if sharpe_use_abs else sharpe_series
-                                qualified_for_sharpe = int((compare_series >= float(sharpe_threshold)).sum())
+                                sharpe_mask = compare_series >= float(sharpe_threshold)
+                                qualifying_rows = completed_df[sharpe_mask]
+                                # Raw-Sharpe-only count is kept for reporting,
+                                # but the real qualification requires the
+                                # post-sim sanity gate (zombie rejection).
+                                raw_qualified = int(sharpe_mask.sum())
+                                sane_qualified = 0
+                                if "alpha_id" in qualifying_rows.columns:
+                                    for aid in qualifying_rows["alpha_id"].dropna().astype(str):
+                                        if aid and self._validate_alpha_sanity(aid):
+                                            sane_qualified += 1
+                                qualified_for_sharpe = sane_qualified
+                                if raw_qualified and raw_qualified != sane_qualified:
+                                    logger.info(
+                                        f"sanity-gate filtered qualified alphas: "
+                                        f"raw={raw_qualified} sane={sane_qualified} "
+                                        f"(csv={sim_csv_rel})"
+                                    )
                             qualified_for_diminishing = int((sharpe_series >= float(dr_threshold)).sum())
                     except Exception as exc:
                         logger.warning(f"Failed to read sim CSV for metrics: {exc}")

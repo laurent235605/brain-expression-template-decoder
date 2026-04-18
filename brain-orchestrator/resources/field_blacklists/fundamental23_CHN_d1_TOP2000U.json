@@ -1,0 +1,1889 @@
+{
+  "dataset_id": "fundamental23",
+  "region": "CHN",
+  "delay": 1,
+  "universe": "TOP2000U",
+  "instrument_type": "EQUITY",
+  "data_type": "MATRIX",
+  "generated_at": "2026-04-18T21:30:43.031560+00:00",
+  "thresholds": {
+    "COVERAGE_MIN": 0.6,
+    "DATE_COVERAGE_MIN": 0.6
+  },
+  "total_fields": 313,
+  "blacklisted": 129,
+  "whitelisted": 184,
+  "blacklist": [
+    {
+      "id": "accounts_receivable_miscellaneous",
+      "coverage": 0.8857,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Other receivables not classified elsewhere on the balance sheet.",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "advances_to_vendors",
+      "coverage": 0.7659,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Advertising Expense",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "annual_fiscal_month_number",
+      "coverage": 0.9663,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "The fiscal month number corresponding to the end of the annual period.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "annual_fiscal_year_number",
+      "coverage": 0.9663,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "The fiscal year associated with the annual reporting period.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "annual_reporting_currency_code",
+      "coverage": 0.9663,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "The currency code in which annual financial values are presented after conversion.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "cash_and_marketable_equivalents_assets",
+      "coverage": 0.581,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total cash and marketable securities classified as assets.",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "current_equity_investments_assets",
+      "coverage": 0.5271,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Value of current equity investments classified as assets.",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "current_provisions_deferred",
+      "coverage": 0.529,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Value of current provisions and deferred items.",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "current_tax_assets",
+      "coverage": 0.4149,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Tax assets expected to be realized within one year.",
+      "reason": "low_coverage_0.41"
+    },
+    {
+      "id": "dividends_payable_long_term",
+      "coverage": 0.5542,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Dividends per Share - Com Stock Issue 2",
+      "reason": "low_coverage_0.55"
+    },
+    {
+      "id": "dividends_payable_short_term",
+      "coverage": 0.9928,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] DPS - Common Stock Primary Issue",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "dividends_per_share_secondary",
+      "coverage": 0.5538,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Dividends paid per share for a secondary share class.",
+      "reason": "low_coverage_0.55"
+    },
+    {
+      "id": "employee_retirement_drawdown",
+      "coverage": 0.5156,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Withdrawals or payments from employee retirement plans.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "equity_in_affiliates_subsidiaries",
+      "coverage": 0.5721,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Equity held in affiliated subsidiaries.",
+      "reason": "low_coverage_0.57"
+    },
+    {
+      "id": "equity_investments_affiliates",
+      "coverage": 0.5273,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Equity In Affiliates",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "equity_liabilities_total",
+      "coverage": 0.5374,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total equity and liabilities reported on the balance sheet.",
+      "reason": "low_coverage_0.54"
+    },
+    {
+      "id": "equity_reserves",
+      "coverage": 0.5185,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total amount of equity reserves held by the company.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "equity_valuation_excess",
+      "coverage": 0.5238,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Excess value attributed to equity valuation adjustments.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "extraordinary_income_disposal_operations",
+      "coverage": 0.5261,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Discontinued Operations",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "extraordinary_items_4",
+      "coverage": 0.5243,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Non-recurring gains or losses classified as extraordinary on the income statement.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "extraordinary_items_disposal_operations",
+      "coverage": 0.526,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Extraordinary items related to disposal of operations.",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "extraordinary_items_total_5",
+      "coverage": 0.5169,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Excise Tax Payments",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "extraordinary_items_total_6",
+      "coverage": 0.5245,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Extraordinary Item",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_1nstq",
+      "coverage": 0.9921,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Treasury Shares - Common Stock Primary Issue",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_1spdd",
+      "coverage": 0.9929,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "common dividends per share for common stock primary issues.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_2spdd",
+      "coverage": 0.5544,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "common dividends per share for common stock issue 2.",
+      "reason": "low_coverage_0.55"
+    },
+    {
+      "id": "fnd23_intfvm_aemc",
+      "coverage": 0.5815,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "miscellaneous earnings adjustment.",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "fnd23_intfvm_aiec",
+      "coverage": 0.5275,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "This item represents the share of earnings/losses that the company is entitled to from unconsolidated affiliated companies, but that has not been distributed as",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "fnd23_intfvm_artx",
+      "coverage": 0.5247,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Extraordinary Item.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_bfpv",
+      "coverage": 0.5242,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Basic EPS After Stock-Based Compensation Expense represents Net Income After Stock-Based\r\nCompensation Expense divided by Basic/Primary Weighted Average Shares.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_cstq",
+      "coverage": 0.3843,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "represents the value of common stock owned by the issuing company or its consolidated subsidiaries. Treasury stock is recorded at purchase cost, which is inclus",
+      "reason": "low_coverage_0.38"
+    },
+    {
+      "id": "fnd23_intfvm_ctcv",
+      "coverage": 0.9528,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Current Tax – Total reflects the sum of Current Tax – Domestic, Current Tax – Foreign, Current Tax – Local, Current Tax – Other and Current Tax – Total.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_dfpv",
+      "coverage": 0.5242,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Diluted EPS After Stock-Based Compensation Expense represents Net Income After Stock-Based\r\nCompensation Expense plus the Dilution Adjustment divided by Diluted",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_dgcd",
+      "coverage": 0.9906,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "gross dividends on common stock.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_drpc",
+      "coverage": 0.5294,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "represents the total amount of the current dividend requirement on issued preferred stock of a company (including its subsidiaries).",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "fnd23_intfvm_eiue",
+      "coverage": 0.6832,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Acquisition costs/expenses.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_eooe",
+      "coverage": 0.9319,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Depreciation of investment properties disclosed outside of the cost of goods sold, for companies reporting in the IFRS or in other standards that treat these as",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_eror",
+      "coverage": 0.5389,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "other revenue.",
+      "reason": "low_coverage_0.54"
+    },
+    {
+      "id": "fnd23_intfvm_eros",
+      "coverage": 0.556,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Other Revenue, Total.",
+      "reason": "low_coverage_0.56"
+    },
+    {
+      "id": "fnd23_intfvm_ifpv",
+      "coverage": 0.5242,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net Income After Stock-Based Compensation Expense",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_imae",
+      "coverage": 0.7429,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "amortization of intangible assets reported outside the cost of goods and services sold",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_imav",
+      "coverage": 0.9655,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Amortization.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_inas",
+      "coverage": 0.583,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "total adjustments to net income represents sum of preferred dividend, general partners distributions, misc. earnings adjustments, pro forma adjustment and inter",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "fnd23_intfvm_ixts",
+      "coverage": 0.527,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total Extraordinary Items",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "fnd23_intfvm_jads",
+      "coverage": 0.9132,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Dilution Adjustment represents the adding back to reported net income the interest expense of debentures when assumed converted, and the adding back to the repo",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_nein",
+      "coverage": 0.5187,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "represents interest expense on debt of non-financial service companies, including insurance companies.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_neis",
+      "coverage": 0.5187,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest Expense, Net Non-Operating represents Interest Expense, Non-Operating, reduced by Interest Capitalized, Non-Operating, and is usually a negative value.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_nicn",
+      "coverage": 0.5167,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "non operating interest capitalized.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_niin",
+      "coverage": 0.5176,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "represents non-operating interest income, which is generated from non-operating investment securities such as certificates of deposit or bonds for non-financial",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_niis",
+      "coverage": 0.5815,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest/Investment Income, Non-Operating",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "fnd23_intfvm_nins",
+      "coverage": 0.5819,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest Expense (Income), Net- Non-Operating, Total",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "fnd23_intfvm_nnin",
+      "coverage": 0.5176,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest expense that is reduced by interest income.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_odix",
+      "coverage": 0.5264,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Discontinued Operations.",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "fnd23_intfvm_pacv",
+      "coverage": 0.6459,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest Capitalized,\r\nSupplemental",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_pede",
+      "coverage": 0.9264,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Depreciation of fixed assets reported outside of the cost of goods and services sold.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_pedv",
+      "coverage": 0.9737,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Deprecation",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_pxrv",
+      "coverage": 0.7773,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Rental Expense, Supplemental represents the total value of rental expenses paid for offices, factories, machinery and equipment.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_rale",
+      "coverage": 0.935,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Labor costs reported outside of the cost of goods sold, or not clearly labeled as part of the cost of goods sold, for businesses other than manufacturing and mi",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_rpds",
+      "coverage": 0.9297,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Depreciation/amortization represents sum of depreciation, amortization of intangibles and amortization of acquisition costs.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_rtcv",
+      "coverage": 0.9498,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Current Tax – Total",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_saie",
+      "coverage": 0.5726,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Impairment/write-down/write-off/revaluation of investment securities arising from an unusual event.",
+      "reason": "low_coverage_0.57"
+    },
+    {
+      "id": "fnd23_intfvm_sere",
+      "coverage": 0.5189,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Restructuring Charge is an unusual or non-recurring item related to a significant rearrangement of a company’s assets and/or liabilities.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_tile",
+      "coverage": 0.5378,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "litigation costs. These are non-recurring/unusual items reported within the cost of goods and services sold.",
+      "reason": "low_coverage_0.54"
+    },
+    {
+      "id": "fnd23_intfvm_tnir",
+      "coverage": 0.5178,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "interest income.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_trsr",
+      "coverage": 0.5044,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "sales returns and allowances.",
+      "reason": "low_coverage_0.50"
+    },
+    {
+      "id": "fnd23_intfvm_txer",
+      "coverage": 0.5171,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "represents government-levied taxes on the manufacture, sale, or consumption of goods and services, which are included in the sale price, collected by the seller",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_vdae",
+      "coverage": 0.7661,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "advertising expense reported outside the cost of goods and services sold",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_vdav",
+      "coverage": 0.7758,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Advertising Expense - Supplemental represents the total cost of advertising incurred by the\r\ncompany.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "fnd23_intfvm_veev",
+      "coverage": 0.5242,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Pro Forma Stock Compensation Expense represents employee compensation paid in the form of\r\nstock options that have not yet been exercised and are not disclosed ",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_intfvm_verr",
+      "coverage": 0.5079,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "gross revenue.",
+      "reason": "low_coverage_0.51"
+    },
+    {
+      "id": "fnd23_intfvm_vnin",
+      "coverage": 0.5814,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "represents income or losses, other than interest, from investment securities. Such income may include dividend income, gain/loss on sale of investment securitie",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "fnd23_intfvm_wdre",
+      "coverage": 0.516,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "The portion of acquired in-process research and development costs (IPR&D) that was directly expensed in the income statement, or written off as a result of impa",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "fnd23_repnotickermap",
+      "coverage": 1.0,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "maps each rep to a ticker on a given day.",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "income_after_tax_2",
+      "coverage": 0.5724,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Impairment-Assets Held for Sale",
+      "reason": "low_coverage_0.57"
+    },
+    {
+      "id": "insurance_income_value",
+      "coverage": 0.5813,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest/Invest Income - Non-Operating",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "intangible_investments",
+      "coverage": 0.5015,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Investments classified as intangible assets.",
+      "reason": "low_coverage_0.50"
+    },
+    {
+      "id": "interest_expense_net_3",
+      "coverage": 0.5184,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest Expense - Non-Operating",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "interest_expense_net_4",
+      "coverage": 0.5183,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net interest expense after offsetting interest income.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "interest_expense_value",
+      "coverage": 0.5184,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest Expense, Net Non-Operating",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "interest_income_net_2",
+      "coverage": 0.5174,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest/Investment Income",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "interest_income_total_3",
+      "coverage": 0.5176,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest Income, Non-Bank",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "interest_payable_current",
+      "coverage": 0.5816,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest Income (Exp), Net- Non-Operating, Total",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "interest_receivable_2",
+      "coverage": 0.5174,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest income earned but not yet received.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "interim_fiscal_month",
+      "coverage": 0.9931,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "The fiscal month corresponding to the interim reporting period.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "interim_fiscal_year",
+      "coverage": 0.9931,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "The fiscal year corresponding to the interim reporting period.",
+      "reason": "metadata_field"
+    },
+    {
+      "id": "legal_and_regulatory_expenses",
+      "coverage": 0.9348,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Labor & Related Expense",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "litigation_expenses",
+      "coverage": 0.5375,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Litigation",
+      "reason": "low_coverage_0.54"
+    },
+    {
+      "id": "loans_to_directors",
+      "coverage": 0.2848,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Loans made to company directors.",
+      "reason": "low_coverage_0.28"
+    },
+    {
+      "id": "long_term_receivables_2",
+      "coverage": 0.4621,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Receivables due in more than one year.",
+      "reason": "low_coverage_0.46"
+    },
+    {
+      "id": "marketable_equity_assets",
+      "coverage": 0.5812,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Miscellaneous Earnings Adjustment",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "net_income_equity_noncontrolling",
+      "coverage": 0.5183,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net income attributable to noncontrolling interests in equity.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "net_interest_income_2",
+      "coverage": 0.5175,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total interest income minus interest expense.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "net_interest_income_3",
+      "coverage": 0.5172,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net interest income earned during the period.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "net_investment_income_2",
+      "coverage": 0.5811,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Investment Income - Non-Operating",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "net_investments_2",
+      "coverage": 0.581,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total investments after accounting for disposals and impairments.",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "notes_current_investments",
+      "coverage": 0.5165,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Notes classified as current investments.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "other_receivables_3",
+      "coverage": 0.5558,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Receivables not classified elsewhere.",
+      "reason": "low_coverage_0.56"
+    },
+    {
+      "id": "other_revenue_total",
+      "coverage": 0.5386,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Other Revenue",
+      "reason": "low_coverage_0.54"
+    },
+    {
+      "id": "preferred_dividends_payable",
+      "coverage": 0.5238,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Dividends payable on preferred shares.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "preferred_investments_value",
+      "coverage": 0.5238,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Value of investments classified as preferred.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "preferred_shares_value",
+      "coverage": 0.5238,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total value of preferred shares issued by the company.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "preferred_stock",
+      "coverage": 0.5291,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Preferred Dividends",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "pretax_profit_value",
+      "coverage": 0.9296,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] epreciation/Amortization",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "restructuring_charges",
+      "coverage": 0.504,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total restructuring charges incurred during the period.",
+      "reason": "low_coverage_0.50"
+    },
+    {
+      "id": "restructuring_expense",
+      "coverage": 0.5186,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Restructuring Charge",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "restructuring_expenses",
+      "coverage": 0.5167,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Expenses related to company restructuring activities.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "return_on_revenue",
+      "coverage": 0.5385,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Ratio of net income to total revenue, indicating profitability.",
+      "reason": "low_coverage_0.54"
+    },
+    {
+      "id": "revenue_total_2",
+      "coverage": 0.5077,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Gross Revenue",
+      "reason": "low_coverage_0.51"
+    },
+    {
+      "id": "rewards_expense",
+      "coverage": 0.5158,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Purchased R&D Written-Off",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "royalty_revenue",
+      "coverage": 0.5075,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Revenue generated from royalties.",
+      "reason": "low_coverage_0.51"
+    },
+    {
+      "id": "short_term_accrued_noninterest",
+      "coverage": 0.5828,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term accrued non-interest liabilities.",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "short_term_interest_income_net",
+      "coverage": 0.5811,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net interest income from short-term investments or loans.",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "short_term_notes_interest_net",
+      "coverage": 0.5815,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net interest on short-term notes payable or receivable.",
+      "reason": "low_coverage_0.58"
+    },
+    {
+      "id": "short_term_receivables_total",
+      "coverage": 0.5041,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Sales Returns and Allowances",
+      "reason": "low_coverage_0.50"
+    },
+    {
+      "id": "short_term_tax_incentives_2",
+      "coverage": 0.5267,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Total Extraordinary Items",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "tax_expense_statement_item",
+      "coverage": 0.5265,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Tax expense as reported in the financial statement.",
+      "reason": "low_coverage_0.53"
+    },
+    {
+      "id": "total_liabilities_value_3",
+      "coverage": 0.9129,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Dilution Adjustment",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "total_share_capital_3",
+      "coverage": 0.384,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Treasury Stock - Common",
+      "reason": "low_coverage_0.38"
+    },
+    {
+      "id": "treasury_stock_closing_balance",
+      "coverage": 0.3838,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Closing balance of treasury stock for the period.",
+      "reason": "low_coverage_0.38"
+    },
+    {
+      "id": "unrealized_investment_equity",
+      "coverage": 0.683,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Unusual Income/Expense",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "valuation_allowance_deferred_value",
+      "coverage": 0.7756,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Advertising Expense, Supplemental",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "valuation_allowance_misc_items",
+      "coverage": 0.9653,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Amortization of Intangibles, Supplemental",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "valuation_capital_assets",
+      "coverage": 0.6456,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Interest Capitalized, Supplemental",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "valuation_equity_earnings_value",
+      "coverage": 0.5239,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Pro Forma Stock Compensation Expense",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "valuation_pension_fund_balance",
+      "coverage": 0.5239,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Basic EPS after Stock Based Comp. Exp.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "valuation_pension_fund_deficit",
+      "coverage": 0.5239,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Diluted EPS after Stock Based Comp. Exp.",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "valuation_pension_fund_investments",
+      "coverage": 0.5239,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Net Income After Stock-Based Compensation Expense",
+      "reason": "low_coverage_0.52"
+    },
+    {
+      "id": "valuation_reinsurance_expense",
+      "coverage": 0.7771,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Rental Expense, Supplemental",
+      "reason": "description_id_mismatch"
+    },
+    {
+      "id": "valuation_total_liabilities_2",
+      "coverage": 0.2849,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total value of all liabilities recognized by the company.",
+      "reason": "low_coverage_0.28"
+    }
+  ],
+  "whitelist_top": [
+    {
+      "id": "earnings_before_tax_4",
+      "coverage": 0.9924,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Earnings before tax for the reporting period."
+    },
+    {
+      "id": "property_plant_equipment_total",
+      "coverage": 0.9924,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Total value of property, plant, and equipment."
+    },
+    {
+      "id": "extraordinary_net_income_component_3",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Component of net income classified as extraordinary."
+    },
+    {
+      "id": "other_operating_cashflows",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Other cash flows from operating activities not classified elsewhere."
+    },
+    {
+      "id": "short_term_debt_instruments",
+      "coverage": 0.9921,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Total value of short-term debt instruments held by the company."
+    },
+    {
+      "id": "net_income_total_5",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Total net income reported for the period."
+    },
+    {
+      "id": "short_term_borrowings_3",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Total short-term borrowings outstanding."
+    },
+    {
+      "id": "total_income_after_taxes_2",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Net income after all taxes have been deducted."
+    },
+    {
+      "id": "total_revenue_4",
+      "coverage": 0.9778,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Total revenue generated from business activities."
+    },
+    {
+      "id": "short_term_bank_investments_2",
+      "coverage": 0.9921,
+      "dateCoverage": 1.0,
+      "userCount": 2,
+      "alphaCount": 2,
+      "description": "Short-term investments held in banks."
+    },
+    {
+      "id": "short_term_gross_profit",
+      "coverage": 0.9622,
+      "dateCoverage": 1.0,
+      "userCount": 1,
+      "alphaCount": 1,
+      "description": "Gross profit for the short-term period."
+    },
+    {
+      "id": "accounts_payable_current_3",
+      "coverage": 0.9431,
+      "dateCoverage": 1.0,
+      "userCount": 2,
+      "alphaCount": 3,
+      "description": "Current accounts payable balance."
+    },
+    {
+      "id": "currency_of_converted_financials",
+      "coverage": 0.9931,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Currency in which the financial values have been converted for reporting.",
+      "low_priority": true
+    },
+    {
+      "id": "interim_period_sequence_number_2",
+      "coverage": 0.9931,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Sequence number of the interim period within the fiscal year.",
+      "low_priority": true
+    },
+    {
+      "id": "intangible_liabilities_2",
+      "coverage": 0.9924,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Liabilities classified as intangible on the balance sheet.",
+      "low_priority": true
+    },
+    {
+      "id": "other_long_term_obligations_8",
+      "coverage": 0.9924,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Other long-term obligations not classified elsewhere.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_noncurrent_creditors",
+      "coverage": 0.9924,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Noncurrent creditors classified as short-term liabilities.",
+      "low_priority": true
+    },
+    {
+      "id": "accounts_payable_noncurrent_2",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Noncurrent portion of accounts payable.",
+      "low_priority": true
+    },
+    {
+      "id": "finance_lease_liabilities_2",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Outstanding liabilities from finance lease agreements.",
+      "low_priority": true
+    },
+    {
+      "id": "investment_contracts_exercised",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Contracts for investment that have been exercised.",
+      "low_priority": true
+    },
+    {
+      "id": "long_term_liabilities_4",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total liabilities due in more than one year.",
+      "low_priority": true
+    },
+    {
+      "id": "long_term_tax_payable_5",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Taxes payable that are due beyond one year.",
+      "low_priority": true
+    },
+    {
+      "id": "net_cash_from_operations_3",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net cash generated from operating activities.",
+      "low_priority": true
+    },
+    {
+      "id": "other_current_liabilities_5",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Current liabilities not classified elsewhere on the balance sheet.",
+      "low_priority": true
+    },
+    {
+      "id": "qualified_telecom_expense_liability",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Qualified telecom expense recognized as a liability.",
+      "low_priority": true
+    },
+    {
+      "id": "quarterly_total_long_term_liabilities",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total long-term liabilities for the quarter.",
+      "low_priority": true
+    },
+    {
+      "id": "quasi_treasury_liabilities_equity",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Value of quasi-treasury liabilities and equity.",
+      "low_priority": true
+    },
+    {
+      "id": "redeemable_equity_instruments",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Equity instruments that are redeemable at the holder's option.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_contract_expenses_2",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Expenses related to short-term contracts.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_notes_current_expense",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Current period expense for short-term notes.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_notes_payable_3",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term notes payable or promissory notes due within one year.",
+      "low_priority": true
+    },
+    {
+      "id": "total_assets_8",
+      "coverage": 0.9923,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Sum of all assets owned by the company.",
+      "low_priority": true
+    },
+    {
+      "id": "dividends_declared_per_share",
+      "coverage": 0.9922,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Dividends declared per share for the period.",
+      "low_priority": true
+    },
+    {
+      "id": "minority_interest_4",
+      "coverage": 0.9922,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Portion of net assets attributable to minority shareholders.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_commercial_securities",
+      "coverage": 0.9922,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term commercial securities held by the company.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_loans_drawn_3",
+      "coverage": 0.9922,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term loans drawn by the company.",
+      "low_priority": true
+    },
+    {
+      "id": "long_term_assets_excluding_intangibles_2",
+      "coverage": 0.9921,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Long-term assets excluding intangible assets.",
+      "low_priority": true
+    },
+    {
+      "id": "net_interest_income_banks",
+      "coverage": 0.9921,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net interest income for banking institutions, representing interest earned minus interest paid.",
+      "low_priority": true
+    },
+    {
+      "id": "total_tax_expense_4",
+      "coverage": 0.9921,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total tax expense recognized during the period.",
+      "low_priority": true
+    },
+    {
+      "id": "free_cash_flow_firm_2",
+      "coverage": 0.992,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Free cash flow available to all capital providers.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_borrowings_amount",
+      "coverage": 0.992,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Amount of short-term borrowings outstanding.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_financial_contracts",
+      "coverage": 0.992,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term financial contracts or derivatives held by the company.",
+      "low_priority": true
+    },
+    {
+      "id": "total_shares_number_primary",
+      "coverage": 0.992,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "[Quarterly] Treasury Shares - Common Stock Primary Issue",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_debt_within_one_year",
+      "coverage": 0.9919,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Debt obligations due within one year.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_other_liabilities_assets",
+      "coverage": 0.9919,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Other liabilities or assets classified as short-term.",
+      "low_priority": true
+    },
+    {
+      "id": "qualified_plan_investment_contracts",
+      "coverage": 0.9917,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Investment contracts held within qualified employee benefit plans.",
+      "low_priority": true
+    },
+    {
+      "id": "beneficiary_equity_shares",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Equity shares held by beneficiaries or trusts.",
+      "low_priority": true
+    },
+    {
+      "id": "cash_in_acquisition_2",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Cash received or paid as part of an acquisition.",
+      "low_priority": true
+    },
+    {
+      "id": "deferred_income_noncurrent_2",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Noncurrent deferred income recognized on the balance sheet.",
+      "low_priority": true
+    },
+    {
+      "id": "employee_stock_trusts",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Assets held in employee stock ownership trusts.",
+      "low_priority": true
+    },
+    {
+      "id": "intangible_assets_total_4",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total value of intangible assets held by the company.",
+      "low_priority": true
+    },
+    {
+      "id": "investment_in_associates_companies",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Investments in associated companies or joint ventures.",
+      "low_priority": true
+    },
+    {
+      "id": "net_premiums_written_2",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Net value of insurance premiums written during the period.",
+      "low_priority": true
+    },
+    {
+      "id": "preferred_trust_investments",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Investments in preferred trust securities.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_bank_borrowings_3",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term borrowings from banks or financial institutions.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_debt_final_balance",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Final balance of short-term debt at the end of the period.",
+      "low_priority": true
+    },
+    {
+      "id": "tangible_book_value",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Book value of a company excluding intangible assets.",
+      "low_priority": true
+    },
+    {
+      "id": "term_debt_long_term",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Long-term term debt outstanding.",
+      "low_priority": true
+    },
+    {
+      "id": "total_current_obligations_3",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total current obligations due within one year.",
+      "low_priority": true
+    },
+    {
+      "id": "valuation_intangible_assets",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Valuation of intangible assets held by the company.",
+      "low_priority": true
+    },
+    {
+      "id": "vested_shares",
+      "coverage": 0.9916,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Number of shares that have vested and are available to the holder.",
+      "low_priority": true
+    },
+    {
+      "id": "quarterly_common_stock_outstanding_1",
+      "coverage": 0.9915,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Common stock outstanding for the first quarter.",
+      "low_priority": true
+    },
+    {
+      "id": "quarterly_treasury_stock_number_1",
+      "coverage": 0.9914,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Number of treasury shares for the first quarter.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_capital_payable",
+      "coverage": 0.9914,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Short-term capital amounts payable within one year.",
+      "low_priority": true
+    },
+    {
+      "id": "income_from_cash_flow",
+      "coverage": 0.9912,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Income recognized in the cash flow statement.",
+      "low_priority": true
+    },
+    {
+      "id": "long_term_accounts_payable",
+      "coverage": 0.991,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Accounts payable obligations due beyond one year.",
+      "low_priority": true
+    },
+    {
+      "id": "accrued_interest_payable_3",
+      "coverage": 0.9903,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Interest expense that has been incurred but not yet paid.",
+      "low_priority": true
+    },
+    {
+      "id": "deferred_compensation_granted_2",
+      "coverage": 0.99,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Compensation granted to employees but deferred for future payment.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_securities_investments_5",
+      "coverage": 0.9892,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Investments in securities with maturities less than one year.",
+      "low_priority": true
+    },
+    {
+      "id": "special_items_tax_effect_2",
+      "coverage": 0.9892,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Tax impact of special or extraordinary items.",
+      "low_priority": true
+    },
+    {
+      "id": "allowance_doubtful_trade_accounts",
+      "coverage": 0.9836,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Allowance for doubtful trade accounts receivable.",
+      "low_priority": true
+    },
+    {
+      "id": "environmental_social_governance_assets_2",
+      "coverage": 0.9801,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Assets related to environmental, social, and governance initiatives.",
+      "low_priority": true
+    },
+    {
+      "id": "retail_loans_receivable",
+      "coverage": 0.9801,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Loans receivable from retail customers.",
+      "low_priority": true
+    },
+    {
+      "id": "selling_general_admin_expense_5",
+      "coverage": 0.9801,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total selling, general, and administrative expenses incurred.",
+      "low_priority": true
+    },
+    {
+      "id": "accounts_receivable_trade_current",
+      "coverage": 0.98,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Current trade accounts receivable balance.",
+      "low_priority": true
+    },
+    {
+      "id": "non_operating_net_total",
+      "coverage": 0.98,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Total net value of non-operating items.",
+      "low_priority": true
+    },
+    {
+      "id": "short_term_notes_payable_4",
+      "coverage": 0.98,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Amount of notes payable due within one year.",
+      "low_priority": true
+    },
+    {
+      "id": "long_term_debt_3",
+      "coverage": 0.9798,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Debt obligations with maturities longer than one year.",
+      "low_priority": true
+    },
+    {
+      "id": "other_receivables_current_2",
+      "coverage": 0.9797,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Other receivables classified as current assets.",
+      "low_priority": true
+    },
+    {
+      "id": "equity_to_equity_transfers_3",
+      "coverage": 0.9793,
+      "dateCoverage": 1.0,
+      "userCount": 0,
+      "alphaCount": 0,
+      "description": "Transfers between equity accounts during the period.",
+      "low_priority": true
+    }
+  ]
+}
