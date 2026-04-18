@@ -619,13 +619,15 @@ const KEY_MAP = {
 };
 document.addEventListener('DOMContentLoaded', () => {
   initSecretToggles();
-  // One-time migration: purge legacy Moonshot/Kimi values so new DeepSeek defaults take effect.
-  const LEGACY_URL_RE = /moonshot/i;
-  const LEGACY_MODEL_RE = /^(kimi|moonshot)/i;
-  const legacyUrl = localStorage.getItem('inspire_llm_url');
-  if (legacyUrl && LEGACY_URL_RE.test(legacyUrl)) localStorage.removeItem('inspire_llm_url');
-  const legacyModel = localStorage.getItem('featureEngModelName');
-  if (legacyModel && LEGACY_MODEL_RE.test(legacyModel)) localStorage.removeItem('featureEngModelName');
+  // One-time migration v2: force DeepSeek Reasoner defaults for everyone whose
+  // localStorage predates this migration. After running once, the marker stops
+  // re-purging so the user's future manual choices persist normally.
+  const LLM_DEFAULTS_VERSION = 'v2-deepseek-reasoner';
+  if (localStorage.getItem('dashboardLlmDefaultsVersion') !== LLM_DEFAULTS_VERSION) {
+    localStorage.removeItem('inspire_llm_url');
+    localStorage.removeItem('featureEngModelName');
+    localStorage.setItem('dashboardLlmDefaultsVersion', LLM_DEFAULTS_VERSION);
+  }
 
   for (const [inputId, storageKey] of Object.entries(KEY_MAP)) {
     const saved = localStorage.getItem(storageKey);
