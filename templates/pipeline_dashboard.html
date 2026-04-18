@@ -619,6 +619,14 @@ const KEY_MAP = {
 };
 document.addEventListener('DOMContentLoaded', () => {
   initSecretToggles();
+  // One-time migration: purge legacy Moonshot/Kimi values so new DeepSeek defaults take effect.
+  const LEGACY_URL_RE = /moonshot/i;
+  const LEGACY_MODEL_RE = /^(kimi|moonshot)/i;
+  const legacyUrl = localStorage.getItem('inspire_llm_url');
+  if (legacyUrl && LEGACY_URL_RE.test(legacyUrl)) localStorage.removeItem('inspire_llm_url');
+  const legacyModel = localStorage.getItem('featureEngModelName');
+  if (legacyModel && LEGACY_MODEL_RE.test(legacyModel)) localStorage.removeItem('featureEngModelName');
+
   for (const [inputId, storageKey] of Object.entries(KEY_MAP)) {
     const saved = localStorage.getItem(storageKey);
     if (saved) document.getElementById(inputId).value = saved;
