@@ -30,4 +30,22 @@ Thumbs.db
 
 # Temporary files
 *.tmp
-*.temp 
+*.temp
+
+# Runtime-generated pipeline state (per-pipeline pool.json, sim CSVs,
+# activity logs, alpha_validations cache). NEVER commit — can be hundreds
+# of MB per pipeline and may leak credentials via pool entries.
+brain-orchestrator/pipelines/
+
+# Claude Code internal workspace (worktrees, per-agent state)
+.claude/
+
+# Generated idea markdown reports from skills
+trailSomeAlphas/skills/brain-data-feature-engineering/output_report/
+
+# Dataset caches fetched by brain-feature-implementation
+trailSomeAlphas/skills/brain-feature-implementation/data/
+
+# Local secrets (platform-brain.json, etc. live in ~/secrets/)
+secrets/
+*.secret.json 

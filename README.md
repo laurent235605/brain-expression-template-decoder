@@ -55,7 +55,7 @@ A comprehensive Flask web application for decoding string templates with grammar
    
    **Or run directly with Python:**
    ```bash
-   python app.py
+   python3 "运行打开我.py"
    ```
 
 3. **Automatic dependency installation**:
@@ -110,7 +110,7 @@ pip install -r requirements.txt
 pip install flask==2.3.3 flask-cors==4.0.0 requests==2.31.0 pandas==2.0.3
 
 # Start the application
-python app.py
+python3 "运行打开我.py"
 ```
 
 **Note**: The application includes automatic dependency checking and will attempt to install missing packages when you run it.

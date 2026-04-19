@@ -1,45 +1,9 @@
 [
   {
-    "name": "abs",
-    "category": "Arithmetic",
-    "description": "Returns the absolute value of a number, removing any negative sign.",
-    "definition": "abs(x)"
-  },
-  {
     "name": "add",
     "category": "Arithmetic",
     "description": "Adds two or more inputs element wise. Set filter=true to treat NaNs as 0 before summing.",
     "definition": "add(x, y, filter = false), x + y"
-  },
-  {
-    "name": "densify",
-    "category": "Arithmetic",
-    "description": "Converts a grouping field of many buckets into lesser number of only available buckets so as to make working with grouping fields computationally efficient",
-    "definition": "densify(x)"
-  },
-  {
-    "name": "divide",
-    "category": "Arithmetic",
-    "description": "x / y",
-    "definition": "divide(x, y), x / y"
-  },
-  {
-    "name": "inverse",
-    "category": "Arithmetic",
-    "description": "1 / x",
-    "definition": "inverse(x)"
-  },
-  {
-    "name": "max",
-    "category": "Arithmetic",
-    "description": "Maximum value of all inputs. At least 2 inputs are required",
-    "definition": "max(x, y, ..)"
-  },
-  {
-    "name": "min",
-    "category": "Arithmetic",
-    "description": "Minimum value of all inputs. At least 2 inputs are required",
-    "definition": "min(x, y ..)"
   },
   {
     "name": "multiply",
@@ -48,28 +12,10 @@
     "definition": "multiply(x ,y, ... , filter=false), x * y"
   },
   {
-    "name": "power",
-    "category": "Arithmetic",
-    "description": "x ^ y",
-    "definition": "power(x, y)"
-  },
-  {
-    "name": "reverse",
-    "category": "Arithmetic",
-    "description": " - x",
-    "definition": "reverse(x)"
-  },
-  {
     "name": "sign",
     "category": "Arithmetic",
     "description": "Returns the sign of a number: +1 for positive, -1 for negative, and 0 for zero. If the input is NaN, returns NaN.\r\n\r\nInput: Value of 7 instruments at day t: (2, -3, 5, 6, 3, NaN, -10)\r\nOutput: (1, -1, 1, 1, 1, NaN, -1)",
     "definition": "sign(x)"
-  },
-  {
-    "name": "signed_power",
-    "category": "Arithmetic",
-    "description": "x raised to the power of y such that final result preserves sign of x",
-    "definition": "signed_power(x, y)"
   },
   {
     "name": "subtract",
@@ -84,118 +30,10 @@
     "definition": "log(x)"
   },
   {
-    "name": "sqrt",
+    "name": "max",
     "category": "Arithmetic",
-    "description": "Returns the non negative square root of x. Equivalent to power(x, 0.5); for signed roots use signed_power(x, 0.5).",
-    "definition": "sqrt(x)"
-  },
-  {
-    "name": "arc_cos",
-    "category": "Arithmetic",
-    "description": "If -1 <= x <= 1: arccos(x); else NaN",
-    "definition": "arc_cos(x)"
-  },
-  {
-    "name": "arc_sin",
-    "category": "Arithmetic",
-    "description": "If -1 <= x <= 1: arcsin(x); else NaN",
-    "definition": "arc_sin(x)"
-  },
-  {
-    "name": "arc_tan",
-    "category": "Arithmetic",
-    "description": "This operator does inverse tangent of input",
-    "definition": "arc_tan(x)"
-  },
-  {
-    "name": "ceiling",
-    "category": "Arithmetic",
-    "description": "Nearest larger integer",
-    "definition": "ceiling(x)"
-  },
-  {
-    "name": "exp",
-    "category": "Arithmetic",
-    "description": "Natural exponential function: e^x",
-    "definition": "exp(x)"
-  },
-  {
-    "name": "floor",
-    "category": "Arithmetic",
-    "description": "Nearest smaller integer",
-    "definition": "floor(x)"
-  },
-  {
-    "name": "fraction",
-    "category": "Arithmetic",
-    "description": "This operator removes the whole number part and returns the remaining fraction part with sign",
-    "definition": "fraction(x)"
-  },
-  {
-    "name": "log_diff",
-    "category": "Arithmetic",
-    "description": "Returns log(current value of input or x[t] ) - log(previous value of input or x[t-1])",
-    "definition": "log_diff(x)"
-  },
-  {
-    "name": "nan_mask",
-    "category": "Arithmetic",
-    "description": "replace input with NAN if input's corresponding mask value or the second input here, is negative",
-    "definition": "nan_mask(x, y)"
-  },
-  {
-    "name": "nan_out",
-    "category": "Arithmetic",
-    "description": "If x < lower or x > upper return NaN, else return x. At least one of \"lower\", \"upper\" is required",
-    "definition": "nan_out(x, lower=0, upper=0)"
-  },
-  {
-    "name": "pasteurize",
-    "category": "Arithmetic",
-    "description": "Set to NaN if x is INF or if the underlying instrument is not in the Alpha universe. This operator may help reduce outliers.\r\n\r\nInput: Value of 7 instruments at day t: (2, 3, 5, INF, 3, 8, 10), where value 10 does not belong in Alpha universe\r\nOutput: (2, 3, 5, NaN, 3, 8, NaN)",
-    "definition": "pasteurize(x)"
-  },
-  {
-    "name": "purify",
-    "category": "Arithmetic",
-    "description": "Clear infinities (+inf, -inf) by replacing with NaN",
-    "definition": "purify(x)"
-  },
-  {
-    "name": "replace",
-    "category": "Arithmetic",
-    "description": "Replace target values in input with destination values",
-    "definition": "replace(x, target=\"v1 v2 ..vn\", dest=\"d1,d2,..dn\")"
-  },
-  {
-    "name": "round",
-    "category": "Arithmetic",
-    "description": "Round input to closest integer.",
-    "definition": "round(x)"
-  },
-  {
-    "name": "round_down",
-    "category": "Arithmetic",
-    "description": "Round input to greatest multiple of f less than input;\r\n\r\nInput: Value of 3 instruments at day t: (2.5, 3.2, 5.4), f: 1\r\nOutput: (2, 3, 5)",
-    "definition": "round_down(x, f=1)"
-  },
-  {
-    "name": "sigmoid",
-    "category": "Arithmetic",
-    "description": "Returns 1 / (1 + exp(-x))",
-    "definition": "sigmoid(x)"
-  },
-  {
-    "name": "s_log_1p",
-    "category": "Arithmetic",
-    "description": "Confine function to a shorter range using logarithm such that higher input remains higher and negative input remains negative as an output of resulting function and -1 or 1 is an asymptotic value",
-    "definition": "s_log_1p(x)"
-  },
-  {
-    "name": "tanh",
-    "category": "Arithmetic",
-    "description": "Hyperbolic tangent of x",
-    "definition": "tanh(x)"
+    "description": "Maximum value of all inputs. At least 2 inputs are required",
+    "definition": "max(x, y, ..)"
   },
   {
     "name": "to_nan",
@@ -204,10 +42,88 @@
     "definition": "to_nan(x, value=0, reverse=false)"
   },
   {
+    "name": "abs",
+    "category": "Arithmetic",
+    "description": "Returns the absolute value of a number, removing any negative sign.",
+    "definition": "abs(x)"
+  },
+  {
+    "name": "divide",
+    "category": "Arithmetic",
+    "description": "x / y",
+    "definition": "divide(x, y), x / y"
+  },
+  {
+    "name": "min",
+    "category": "Arithmetic",
+    "description": "Minimum value of all inputs. At least 2 inputs are required",
+    "definition": "min(x, y ..)"
+  },
+  {
+    "name": "signed_power",
+    "category": "Arithmetic",
+    "description": "x raised to the power of y such that final result preserves sign of x",
+    "definition": "signed_power(x, y)"
+  },
+  {
+    "name": "inverse",
+    "category": "Arithmetic",
+    "description": "1 / x",
+    "definition": "inverse(x)"
+  },
+  {
+    "name": "sqrt",
+    "category": "Arithmetic",
+    "description": "Returns the non negative square root of x. Equivalent to power(x, 0.5); for signed roots use signed_power(x, 0.5).",
+    "definition": "sqrt(x)"
+  },
+  {
+    "name": "reverse",
+    "category": "Arithmetic",
+    "description": " - x",
+    "definition": "reverse(x)"
+  },
+  {
+    "name": "power",
+    "category": "Arithmetic",
+    "description": "x ^ y",
+    "definition": "power(x, y)"
+  },
+  {
+    "name": "densify",
+    "category": "Arithmetic",
+    "description": "Converts a grouping field of many buckets into lesser number of only available buckets so as to make working with grouping fields computationally efficient",
+    "definition": "densify(x)"
+  },
+  {
+    "name": "or",
+    "category": "Logical",
+    "description": "Returns 1 if either input is true (either input1 or input2 has a value of 1), otherwise it returns 0.",
+    "definition": "or(input1, input2)"
+  },
+  {
     "name": "and",
     "category": "Logical",
     "description": "Returns 1 ('true') if both inputs are 1 ('true'). Otherwise, returns 0 ('false').",
     "definition": "and(input1, input2)"
+  },
+  {
+    "name": "not",
+    "category": "Logical",
+    "description": "Returns the logical negation of x. Returns 0 when x is 1 (‘true’) and 1 when x is 0 (‘false’).",
+    "definition": "not(x)"
+  },
+  {
+    "name": "is_nan",
+    "category": "Logical",
+    "description": "If (input == NaN) return 1 else return 0",
+    "definition": "is_nan(input)"
+  },
+  {
+    "name": "less",
+    "category": "Logical",
+    "description": "Returns 1 ('true') if input1 is a smaller than input2. Otherwise, returns 0 ('false').",
+    "definition": "input1 < input2"
   },
   {
     "name": "equal",
@@ -222,34 +138,10 @@
     "definition": "input1 > input2"
   },
   {
-    "name": "greater_equal",
-    "category": "Logical",
-    "description": "Returns 1 ('true') if input1 is a larger or the same as input2. Otherwise, returns 0 ('false').",
-    "definition": "input1 >= input2"
-  },
-  {
     "name": "if_else",
     "category": "Logical",
     "description": "The if_else operator returns one of two values based on a condition. If the condition is true, it returns the first value; if false, it returns the second value.",
     "definition": "if_else(input1, input2, input 3)"
-  },
-  {
-    "name": "is_nan",
-    "category": "Logical",
-    "description": "If (input == NaN) return 1 else return 0",
-    "definition": "is_nan(input)"
-  },
-  {
-    "name": "less_equal",
-    "category": "Logical",
-    "description": "Returns 1 ('true') if input1 is a smaller or the same as input2. Otherwise, returns 0 ('false').",
-    "definition": "input1 <= input2"
-  },
-  {
-    "name": "not",
-    "category": "Logical",
-    "description": "Returns the logical negation of x. Returns 0 when x is 1 (‘true’) and 1 when x is 0 (‘false’).",
-    "definition": "not(x)"
   },
   {
     "name": "not_equal",
@@ -258,130 +150,22 @@
     "definition": "input1!= input2"
   },
   {
-    "name": "or",
+    "name": "less_equal",
     "category": "Logical",
-    "description": "Returns 1 if either input is true (either input1 or input2 has a value of 1), otherwise it returns 0.",
-    "definition": "or(input1, input2)"
+    "description": "Returns 1 ('true') if input1 is a smaller or the same as input2. Otherwise, returns 0 ('false').",
+    "definition": "input1 <= input2"
   },
   {
-    "name": "less",
+    "name": "greater_equal",
     "category": "Logical",
-    "description": "Returns 1 ('true') if input1 is a smaller than input2. Otherwise, returns 0 ('false').",
-    "definition": "input1 < input2"
+    "description": "Returns 1 ('true') if input1 is a larger or the same as input2. Otherwise, returns 0 ('false').",
+    "definition": "input1 >= input2"
   },
   {
-    "name": "is_finite",
-    "category": "Logical",
-    "description": "If (input NaN or input == INF) return 0, else return 1",
-    "definition": "is_finite(input)"
-  },
-  {
-    "name": "is_not_finite",
-    "category": "Logical",
-    "description": "If (input NAN or input == INF) return 1 else return 0",
-    "definition": "is_not_finite(input)"
-  },
-  {
-    "name": "is_not_nan",
-    "category": "Logical",
-    "description": "If (input != NaN) return 1 else return 0",
-    "definition": "is_not_nan(input)"
-  },
-  {
-    "name": "negate",
-    "category": "Logical",
-    "description": "The result is true if the converted operand is false; the result is false if the converted operand is true",
-    "definition": "negate(input)"
-  },
-  {
-    "name": "days_from_last_change",
+    "name": "ts_corr",
     "category": "Time Series",
-    "description": "Calculates the number of days since the last change in the value of a given variable.",
-    "definition": "days_from_last_change(x)"
-  },
-  {
-    "name": "hump",
-    "category": "Time Series",
-    "description": "Limits amount and magnitude of changes in input (thus reducing turnover)",
-    "definition": "hump(x, hump = 0.01)"
-  },
-  {
-    "name": "last_diff_value",
-    "category": "Time Series",
-    "description": "Returns the most recent value of x from the past d days that is different from the current value of x.",
-    "definition": "last_diff_value(x, d)"
-  },
-  {
-    "name": "ts_arg_max",
-    "category": "Time Series",
-    "description": "Returns the number of days since the maximum value occurred in the last d days of a time series. If today's value is the maximum, returns 0; if it was yesterday, returns 1, and so on.",
-    "definition": "ts_arg_max(x, d)"
-  },
-  {
-    "name": "ts_arg_min",
-    "category": "Time Series",
-    "description": "Returns the number of days since the minimum value occurred in a time series over the past d days. If today's value is the minimum, returns 0; if it was yesterday, returns 1, and so on.",
-    "definition": "ts_arg_min(x, d)"
-  },
-  {
-    "name": "ts_av_diff",
-    "category": "Time Series",
-    "description": "Calculates the difference between a value and its mean over a specified period, ignoring NaN values in the mean calculation. In short, it returns x – ts_mean(x, d) with NaNs ignored.",
-    "definition": "ts_av_diff(x, d)"
-  },
-  {
-    "name": "ts_backfill",
-    "category": "Time Series",
-    "description": "Replaces missing (NaN) values in a time series with the most recent valid value from a specified lookback window, improving data coverage and reducing risk from missing data.",
-    "definition": "ts_backfill(x,lookback = d, k=1)"
-  },
-  {
-    "name": "ts_delay",
-    "category": "Time Series",
-    "description": "Returns the value of a variable x from d days ago. Use this operator to access historical data points by specifying the desired time lag in days.",
-    "definition": "ts_delay(x, d)"
-  },
-  {
-    "name": "ts_delta",
-    "category": "Time Series",
-    "description": "Calculates the difference between a value and its delayed version over a specified period. Useful for measuring changes or momentum in time-series data.",
-    "definition": "ts_delta(x, d)"
-  },
-  {
-    "name": "ts_mean",
-    "category": "Time Series",
-    "description": "Calculates the simple average (mean) value of a variable x over the past d days.",
-    "definition": "ts_mean(x, d)"
-  },
-  {
-    "name": "ts_quantile",
-    "category": "Time Series",
-    "description": "Calculates the ts_rank of the input and transforms it using the inverse cumulative distribution function (quantile function) of a specified probability distribution (default: Gaussian/normal). This helps to normalize or reshape the distribution of your data over a rolling window.",
-    "definition": "ts_quantile(x,d, driver=\"gaussian\" )"
-  },
-  {
-    "name": "ts_rank",
-    "category": "Time Series",
-    "description": "Ranks the value of a variable for each instrument over a specified number of past days, returning the rank of the current value (optionally adjusted by a constant). Useful for normalizing time-series data and highlighting relative performance over time.",
-    "definition": "ts_rank(x, d, constant = 0)"
-  },
-  {
-    "name": "ts_scale",
-    "category": "Time Series",
-    "description": "Scales a time series to a 0–1 range based on its minimum and maximum values over a specified period, with an optional constant shift.",
-    "definition": "ts_scale(x, d, constant = 0)"
-  },
-  {
-    "name": "ts_std_dev",
-    "category": "Time Series",
-    "description": "Calculates the standard deviation of a data series x over the past d days, measuring how much the values deviate from their mean during that period.",
-    "definition": "ts_std_dev(x, d)"
-  },
-  {
-    "name": "ts_sum",
-    "category": "Time Series",
-    "description": "Sum values of x for the past d days.",
-    "definition": "ts_sum(x, d)"
+    "description": "Calculates the Pearson correlation between two variables, x and y, over the past d days, showing how closely they move together.",
+    "definition": "ts_corr(x, y, d)"
   },
   {
     "name": "ts_zscore",
@@ -390,16 +174,100 @@
     "definition": "ts_zscore(x, d)"
   },
   {
-    "name": "kth_element",
+    "name": "ts_product",
     "category": "Time Series",
-    "description": "Returns the K-th value from a time series by looking back over a specified number of (‘d’) days, with the option to ignore certain values. Commonly used for backfilling missing data.",
-    "definition": "kth_element(x, d, k, ignore=“NaN”)"
+    "description": "Returns the product of the values of x over the past d days. Useful for calculating geometric means and compounding returns or growth rates.",
+    "definition": "ts_product(x, d)"
   },
   {
-    "name": "ts_corr",
+    "name": "ts_std_dev",
     "category": "Time Series",
-    "description": "Calculates the Pearson correlation between two variables, x and y, over the past d days, showing how closely they move together.",
-    "definition": "ts_corr(x, y, d)"
+    "description": "Calculates the standard deviation of a data series x over the past d days, measuring how much the values deviate from their mean during that period.",
+    "definition": "ts_std_dev(x, d)"
+  },
+  {
+    "name": "ts_backfill",
+    "category": "Time Series",
+    "description": "Replaces missing (NaN) values in a time series with the most recent valid value from a specified lookback window, improving data coverage and reducing risk from missing data.",
+    "definition": "ts_backfill(x,lookback = d, k=1)"
+  },
+  {
+    "name": "days_from_last_change",
+    "category": "Time Series",
+    "description": "Calculates the number of days since the last change in the value of a given variable.",
+    "definition": "days_from_last_change(x)"
+  },
+  {
+    "name": "last_diff_value",
+    "category": "Time Series",
+    "description": "Returns the most recent value of x from the past d days that is different from the current value of x.",
+    "definition": "last_diff_value(x, d)"
+  },
+  {
+    "name": "ts_scale",
+    "category": "Time Series",
+    "description": "Scales a time series to a 0–1 range based on its minimum and maximum values over a specified period, with an optional constant shift.",
+    "definition": "ts_scale(x, d, constant = 0)"
+  },
+  {
+    "name": "ts_step",
+    "category": "Time Series",
+    "description": "Returns a counter of days, incrementing by one each day.",
+    "definition": "ts_step(1)"
+  },
+  {
+    "name": "ts_sum",
+    "category": "Time Series",
+    "description": "Sum values of x for the past d days.",
+    "definition": "ts_sum(x, d)"
+  },
+  {
+    "name": "ts_av_diff",
+    "category": "Time Series",
+    "description": "Calculates the difference between a value and its mean over a specified period, ignoring NaN values in the mean calculation. In short, it returns x – ts_mean(x, d) with NaNs ignored.",
+    "definition": "ts_av_diff(x, d)"
+  },
+  {
+    "name": "ts_mean",
+    "category": "Time Series",
+    "description": "Calculates the simple average (mean) value of a variable x over the past d days.",
+    "definition": "ts_mean(x, d)"
+  },
+  {
+    "name": "ts_arg_max",
+    "category": "Time Series",
+    "description": "Returns the number of days since the maximum value occurred in the last d days of a time series. If today's value is the maximum, returns 0; if it was yesterday, returns 1, and so on.",
+    "definition": "ts_arg_max(x, d)"
+  },
+  {
+    "name": "ts_max",
+    "category": "Time Series",
+    "description": "Returns max value of x for the past d days",
+    "definition": "ts_max(x, d)"
+  },
+  {
+    "name": "ts_rank",
+    "category": "Time Series",
+    "description": "Ranks the value of a variable for each instrument over a specified number of past days, returning the rank of the current value (optionally adjusted by a constant). Useful for normalizing time-series data and highlighting relative performance over time.",
+    "definition": "ts_rank(x, d, constant = 0)"
+  },
+  {
+    "name": "ts_delay",
+    "category": "Time Series",
+    "description": "Returns the value of a variable x from d days ago. Use this operator to access historical data points by specifying the desired time lag in days.",
+    "definition": "ts_delay(x, d)"
+  },
+  {
+    "name": "ts_quantile",
+    "category": "Time Series",
+    "description": "Calculates the ts_rank of the input and transforms it using the inverse cumulative distribution function (quantile function) of a specified probability distribution (default: Gaussian/normal). This helps to normalize or reshape the distribution of your data over a rolling window.",
+    "definition": "ts_quantile(x,d, driver=\"gaussian\" )"
+  },
+  {
+    "name": "ts_min",
+    "category": "Time Series",
+    "description": "Returns min value of x for the past d days",
+    "definition": "ts_min(x, d)"
   },
   {
     "name": "ts_count_nans",
@@ -420,10 +288,16 @@
     "definition": "ts_decay_linear(x, d, dense = false)"
   },
   {
-    "name": "ts_product",
+    "name": "jump_decay",
     "category": "Time Series",
-    "description": "Returns the product of the values of x over the past d days. Useful for calculating geometric means and compounding returns or growth rates.",
-    "definition": "ts_product(x, d)"
+    "description": "If there is a huge jump in current data compare to previous one",
+    "definition": "jump_decay(x, d, sensitivity=0.5, force=0.1)"
+  },
+  {
+    "name": "ts_arg_min",
+    "category": "Time Series",
+    "description": "Returns the number of days since the minimum value occurred in a time series over the past d days. If today's value is the minimum, returns 0; if it was yesterday, returns 1, and so on.",
+    "definition": "ts_arg_min(x, d)"
   },
   {
     "name": "ts_regression",
@@ -432,196 +306,22 @@
     "definition": "ts_regression(y, x, d, lag = 0, rettype = 0)"
   },
   {
-    "name": "ts_step",
+    "name": "kth_element",
     "category": "Time Series",
-    "description": "Returns a counter of days, incrementing by one each day.",
-    "definition": "ts_step(1)"
+    "description": "Returns the K-th value from a time series by looking back over a specified number of (‘d’) days, with the option to ignore certain values. Commonly used for backfilling missing data.",
+    "definition": "kth_element(x, d, k, ignore=“NaN”)"
   },
   {
-    "name": "hump_decay",
+    "name": "hump",
     "category": "Time Series",
-    "description": "This operator helps to ignore the values that changed too little corresponding to previous ones",
-    "definition": "hump_decay(x, p=0)"
+    "description": "Limits amount and magnitude of changes in input (thus reducing turnover)",
+    "definition": "hump(x, hump = 0.01)"
   },
   {
-    "name": "inst_tvr",
+    "name": "ts_delta",
     "category": "Time Series",
-    "description": "Total trading value / Total holding value in the past d days\r\n\r\nInput: Value of 1 instrument in past 5 days where first element is the latest: (105, 102, 99, 101,100)\r\nOutput: 0.022 from (1+2+3+3)/(105+102+99+101)",
-    "definition": "inst_tvr(x, d)"
-  },
-  {
-    "name": "jump_decay",
-    "category": "Time Series",
-    "description": "If there is a huge jump in current data compare to previous one",
-    "definition": "jump_decay(x, d, sensitivity=0.5, force=0.1)"
-  },
-  {
-    "name": "ts_co_kurtosis",
-    "category": "Time Series",
-    "description": "Returns cokurtosis of y and x for the past d days",
-    "definition": "ts_co_kurtosis(y, x, d)"
-  },
-  {
-    "name": "ts_co_skewness",
-    "category": "Time Series",
-    "description": "Returns coskewness of y and x for the past d days",
-    "definition": "ts_co_skewness(y, x, d)"
-  },
-  {
-    "name": "ts_decay_exp_window",
-    "category": "Time Series",
-    "description": "Returns exponential decay of x with smoothing factor for the past d days",
-    "definition": "ts_decay_exp_window(x, d, factor = f)"
-  },
-  {
-    "name": "ts_delta_limit",
-    "category": "Time Series",
-    "description": "Limit the change in the Alpha position x between dates to a specified fraction of y. The \"limit_volume\" can be in the range of 0 to 1. Also, please be aware of the scaling for x and y. Besides setting y as adv20 or volume related data, you can also set y as a constant.",
-    "definition": "ts_delta_limit(x, y, limit_volume=0.1)"
-  },
-  {
-    "name": "ts_entropy",
-    "category": "Time Series",
-    "description": "For each instrument, we collect values of input in the past d days and calculate the probability distribution then the information entropy via a histogram as a result",
-    "definition": "ts_entropy(x,d)"
-  },
-  {
-    "name": "ts_ir",
-    "category": "Time Series",
-    "description": "Return information ratio ts_mean(x, d) / ts_std_dev(x, d)",
-    "definition": "ts_ir(x, d)"
-  },
-  {
-    "name": "ts_kurtosis",
-    "category": "Time Series",
-    "description": "Returns kurtosis of x for the last d days",
-    "definition": "ts_kurtosis(x, d)"
-  },
-  {
-    "name": "ts_max",
-    "category": "Time Series",
-    "description": "Returns max value of x for the past d days",
-    "definition": "ts_max(x, d)"
-  },
-  {
-    "name": "ts_max_diff",
-    "category": "Time Series",
-    "description": "Returns x - ts_max(x, d)",
-    "definition": "ts_max_diff(x, d)"
-  },
-  {
-    "name": "ts_median",
-    "category": "Time Series",
-    "description": "Returns median value of x for the past d days",
-    "definition": "ts_median(x, d)"
-  },
-  {
-    "name": "ts_min",
-    "category": "Time Series",
-    "description": "Returns min value of x for the past d days",
-    "definition": "ts_min(x, d)"
-  },
-  {
-    "name": "ts_min_diff",
-    "category": "Time Series",
-    "description": "Returns x - ts_min(x, d)",
-    "definition": "ts_min_diff(x, d)"
-  },
-  {
-    "name": "ts_min_max_cps",
-    "category": "Time Series",
-    "description": "Returns (ts_min(x, d) + ts_max(x, d)) - f * x. If not specified, by default f = 2",
-    "definition": "ts_min_max_cps(x, d, f = 2)"
-  },
-  {
-    "name": "ts_min_max_diff",
-    "category": "Time Series",
-    "description": "Returns x - f * (ts_min(x, d) + ts_max(x, d)). If not specified, by default f = 0.5",
-    "definition": "ts_min_max_diff(x, d, f = 0.5)"
-  },
-  {
-    "name": "ts_moment",
-    "category": "Time Series",
-    "description": "Returns K-th central moment of x for the past d days",
-    "definition": "ts_moment(x, d, k=0)"
-  },
-  {
-    "name": "ts_partial_corr",
-    "category": "Time Series",
-    "description": "Returns partial correlation of x, y, z for the past d days",
-    "definition": "ts_partial_corr(x, y, z, d)"
-  },
-  {
-    "name": "ts_percentage",
-    "category": "Time Series",
-    "description": "Returns percentile value of x for the past d days",
-    "definition": "ts_percentage(x, d, percentage=0.5)"
-  },
-  {
-    "name": "ts_poly_regression",
-    "category": "Time Series",
-    "description": "Returns y - Ey, where Ey = x + x^2 + ... + x^k over d days; k must be specified as a keyword argument",
-    "definition": "ts_poly_regression(y, x, d, k = 1)"
-  },
-  {
-    "name": "ts_rank_gmean_amean_diff",
-    "category": "Time Series",
-    "description": "Returns Geometric Mean of ts_rank(input,d) of all input - Arithmetic Mean of ts_rank(input,d) of all input. This is similar to rank_gmean_amean_diff operator but in time-series space",
-    "definition": "ts_rank_gmean_amean_diff(input1, input2, input3,...,d)"
-  },
-  {
-    "name": "ts_returns",
-    "category": "Time Series",
-    "description": "Returns the relative change in the x value",
-    "definition": "ts_returns (x, d, mode = 1)"
-  },
-  {
-    "name": "ts_skewness",
-    "category": "Time Series",
-    "description": "Return skewness of x for the past d days",
-    "definition": "ts_skewness(x, d)"
-  },
-  {
-    "name": "ts_target_tvr_delta_limit",
-    "category": "Time Series",
-    "description": "Tune \"ts_delta_limit\" to have a turnover equal to a certain target with optimization weight range between lambda_min, lambda_max. Also, please be aware of the scaling for x and y. Besides setting y as adv20 or volume related data, you can also set y as a constant.",
-    "definition": "ts_target_tvr_delta_limit(x, y, lambda_min=0, lambda_max=1, target_tvr=0.1)"
-  },
-  {
-    "name": "ts_target_tvr_hump",
-    "category": "Time Series",
-    "description": "Tune \"hump\" to have a turnover equal to a certain target with optimization weight range between lambda_min, lambda_max.",
-    "definition": "ts_target_tvr_hump(x, lambda_min=0, lambda_max=1, target_tvr=0.1)"
-  },
-  {
-    "name": "ts_theilsen",
-    "category": "Time Series",
-    "description": "Theil Sen slope estimator of inputs for the past n days.",
-    "definition": "ts_theilsen(x, y, d)"
-  },
-  {
-    "name": "ts_triple_corr",
-    "category": "Time Series",
-    "description": "Returns triple correlation of x, y, z for the past d days",
-    "definition": "ts_triple_corr(x, y, z, d)"
-  },
-  {
-    "name": "ts_vector_neut",
-    "category": "Time Series",
-    "description": "Returns x- ts_vector_proj(x,y,d)",
-    "definition": "ts_vector_neut(x,y,d)"
-  },
-  {
-    "name": "ts_vector_proj",
-    "category": "Time Series",
-    "description": "Returns vector projection of x onto y in time-series space.",
-    "definition": "ts_vector_proj(x,y,d)"
-  },
-  {
-    "name": "ts_weighted_decay",
-    "category": "Time Series",
-    "description": "Instead of replacing today's value with yesterday's as in ts_decay(x, 1), it assigns weighted average of today's and yesterday's values with weight on today's value being k and yesterday's being (1-k)",
-    "definition": "ts_weighted_decay(x, k=0.5)"
+    "description": "Calculates the difference between a value and its delayed version over a specified period. Useful for measuring changes or momentum in time-series data.",
+    "definition": "ts_delta(x, d)"
   },
   {
     "name": "ts_target_tvr_decay",
@@ -630,94 +330,22 @@
     "definition": "ts_target_tvr_decay(x, lambda_min=0, lambda_max=1, target_tvr=0.1)"
   },
   {
-    "name": "normalize",
-    "category": "Cross Sectional",
-    "description": "Calculates the mean value of all valid alpha values for a certain date, then subtracts that mean from each element",
-    "definition": "normalize(x, useStd = false, limit = 0.0)"
-  },
-  {
-    "name": "quantile",
-    "category": "Cross Sectional",
-    "description": "Rank the raw vector, shift the ranked Alpha vector, apply distribution (gaussian, cauchy, uniform). If driver is uniform, it simply subtract each Alpha value with the mean of all Alpha values in the Alpha vector",
-    "definition": "quantile(x, driver = gaussian, sigma = 1.0)"
-  },
-  {
-    "name": "rank",
-    "category": "Cross Sectional",
-    "description": "Ranks the input among all the instruments and returns an equally distributed number between 0.0 and 1.0. For precise sort, use the rate as 0",
-    "definition": "rank(x, rate=2)"
-  },
-  {
-    "name": "scale",
-    "category": "Cross Sectional",
-    "description": "Scales input to booksize. We can also scale the long positions and short positions to separate scales by mentioning additional parameters to the operator",
-    "definition": "scale(x, scale=1, longscale=1, shortscale=1)"
+    "name": "ts_target_tvr_delta_limit",
+    "category": "Time Series",
+    "description": "Tune \"ts_delta_limit\" to have a turnover equal to a certain target with optimization weight range between lambda_min, lambda_max. Also, please be aware of the scaling for x and y. Besides setting y as adv20 or volume related data, you can also set y as a constant.",
+    "definition": "ts_target_tvr_delta_limit(x, y, lambda_min=0, lambda_max=1, target_tvr=0.1)"
   },
   {
     "name": "winsorize",
     "category": "Cross Sectional",
-    "description": "Winsorizes x to make sure that all values in x are between the lower and upper limits, which are specified as multiple of std.\r\n\r\nInput: Value of 7 instruments at day t: (2, 4, 5, 6, 3, 8, 10), std: 1\r\nOutput: (2.81, 4, 5, 6, 3, 8, 8.03) from SD. = 2.61, mean = 5.42",
+    "description": "Winsorize limits values in a data to within a specified number of standard deviations from the mean, reducing the impact of extreme outliers.",
     "definition": "winsorize(x, std=4)"
   },
   {
-    "name": "zscore",
+    "name": "rank",
     "category": "Cross Sectional",
-    "description": "Z-score is a numerical measurement that describes a value's relationship to the mean of a group of values. Z-score is measured in terms of standard deviations from the mean",
-    "definition": "zscore(x)"
-  },
-  {
-    "name": "multi_regression",
-    "category": "Cross Sectional",
-    "description": "Perform multivariable regression of multiple independent variables (x1,x2,...) on a dependent variable (y) across number of days.\r\n\r\nIf days = n (n >= 0), will include past n days in the regression. Setting days = 0 indicates that we're only using today (x1, x2, ...) to predict y.\r\n\r\nIf lag = m (m >= 0), will lag (x1, x2, ...) for m days for prediction.\r\n\r\nOptions for solver: \"SVD\"(default), \"QR\", \"NORMAL\"",
-    "definition": "multi_regression(y, x1, x2,..., days=0, lag=0, solver=\"SVD\")"
-  },
-  {
-    "name": "generalized_rank",
-    "category": "Cross Sectional",
-    "description": "The idea is that difference between instrument values raised to the power of m is added to the rank of instrument with bigger value and subtracted from the rank of instrument with lesser value. More details in the notes at the end of page",
-    "definition": "generalized_rank(open, m=1)"
-  },
-  {
-    "name": "one_side",
-    "category": "Cross Sectional",
-    "description": "Shifts all instruments up or down so that the Alpha becomes long-only or short-only (if side = short), respectively.",
-    "definition": "one_side(x , side = long )"
-  },
-  {
-    "name": "rank_by_side",
-    "category": "Cross Sectional",
-    "description": "Ranks positive and negative input separately and scale to book. For precise sorting use rate=0",
-    "definition": "rank_by_side(x, rate=2,scale=1)"
-  },
-  {
-    "name": "rank_gmean_amean_diff",
-    "category": "Cross Sectional",
-    "description": "Operator returns difference of geometric mean and arithmetic mean of cross sectional rank of inputs",
-    "definition": "rank_gmean_amean_diff(input1, input2, input3,...)"
-  },
-  {
-    "name": "regression_neut",
-    "category": "Cross Sectional",
-    "description": "Conducts the cross-sectional regression on the stocks with Y as target and X as the independent variable",
-    "definition": "regression_neut(y, x)"
-  },
-  {
-    "name": "regression_proj",
-    "category": "Cross Sectional",
-    "description": "Conducts the cross-sectional regression on the stocks with Y as target and X as the independent variable",
-    "definition": "regression_proj(y, x)"
-  },
-  {
-    "name": "scale_down",
-    "category": "Cross Sectional",
-    "description": "Scales all values in each day proportionately between 0 and 1 such that minimum value maps to 0 and maximum value maps to 1. Constant is the offset by which final result is subtracted",
-    "definition": "scale_down(x,constant=0)"
-  },
-  {
-    "name": "truncate",
-    "category": "Cross Sectional",
-    "description": "Operator truncates all values of x to maxPercent. Here, maxPercent is in decimal notation",
-    "definition": "truncate(x,maxPercent=0.01)"
+    "description": "Ranks the values of the input x among all instruments, returning numbers evenly spaced between 0.0 and 1.0. Useful for normalizing data and reducing the impact of outliers.",
+    "definition": "rank(x, rate=2)"
   },
   {
     "name": "vector_neut",
@@ -726,58 +354,34 @@
     "definition": "vector_neut(x, y)"
   },
   {
-    "name": "vector_proj",
+    "name": "zscore",
     "category": "Cross Sectional",
-    "description": "Returns vector projection of x onto y.",
-    "definition": "vector_proj(x, y)"
+    "description": "Z-score is a numerical measurement that describes a value's relationship to the mean of a group of values. Z-score is measured in terms of standard deviations from the mean",
+    "definition": "zscore(x)"
   },
   {
-    "name": "vec_avg",
-    "category": "Vector",
-    "description": "Taking mean of the vector field x\r\n\r\nInput: Vector of value of 1 instrument in a day: (2, 3, 5, 6, 3, 8, 10)\r\nOutput: 37 / 7 = 5.29",
-    "definition": "vec_avg(x)"
+    "name": "scale_down",
+    "category": "Cross Sectional",
+    "description": "Scales all values in each day proportionately between 0 and 1 such that minimum value maps to 0 and maximum value maps to 1. Constant is the offset by which final result is subtracted",
+    "definition": "scale_down(x,constant=0)"
   },
   {
-    "name": "vec_sum",
-    "category": "Vector",
-    "description": "Sum of vector field x\r\n\r\nInput: Vector of value of 1 instrument in a day: (2, 3, 5, 6, 3, 8, 10)\r\nOutput: 2 + 3 + 5 + 6 + 3 + 8 + 10 = 37",
-    "definition": "vec_sum(x)"
+    "name": "scale",
+    "category": "Cross Sectional",
+    "description": "Scales the input so that the sum of absolute values across all instruments equals a specified book size. Allows separate scaling for long and short positions using optional parameters.",
+    "definition": "scale(x, scale=1, longscale=1, shortscale=1)"
   },
   {
-    "name": "vec_choose",
-    "category": "Vector",
-    "description": "Choosing k-th item(indexed at 0) from each vector field x",
-    "definition": "vec_choose(x,nth=k)"
+    "name": "normalize",
+    "category": "Cross Sectional",
+    "description": "Centers a daily cross section by subtracting the market mean; optionally divide by the cross sectional standard deviation and clamp the result to [?limit, +limit]. NaNs are ignored in mean/std.",
+    "definition": "normalize(x, useStd = false, limit = 0.0)"
   },
   {
-    "name": "vec_count",
-    "category": "Vector",
-    "description": "Number of elements in vector field x",
-    "definition": "vec_count(x)"
-  },
-  {
-    "name": "vec_filter",
-    "category": "Vector",
-    "description": "Filter vector by values, such as nan. Can filter many values at once, for example: vec_filter(vec, value=\"nan 0 10\"). Please note the output of this VECTOR will still be vector data.",
-    "definition": "vec_filter(vec, value=nan)"
-  },
-  {
-    "name": "vec_ir",
-    "category": "Vector",
-    "description": "Information Ratio (Mean / Standard Deviation) of vector field x",
-    "definition": "vec_ir(x)"
-  },
-  {
-    "name": "vec_kurtosis",
-    "category": "Vector",
-    "description": "Kurtosis of vector field x",
-    "definition": "vec_kurtosis(x)"
-  },
-  {
-    "name": "vec_max",
-    "category": "Vector",
-    "description": "Maximum value form vector field x",
-    "definition": "vec_max(x)"
+    "name": "quantile",
+    "category": "Cross Sectional",
+    "description": "Ranks and shifts a vector of Alpha values, then applies a chosen statistical distribution (gaussian, cauchy, or uniform) to reduce outliers. The sigma parameter controls the scale of the output.",
+    "definition": "quantile(x, driver = gaussian, sigma = 1.0)"
   },
   {
     "name": "vec_min",
@@ -786,34 +390,28 @@
     "definition": "vec_min(x)"
   },
   {
-    "name": "vec_norm",
+    "name": "vec_count",
     "category": "Vector",
-    "description": "Sum of all absolute values of vector field x",
-    "definition": "vec_norm(x)"
+    "description": "Number of elements in vector field x",
+    "definition": "vec_count(x)"
   },
   {
-    "name": "vec_percentage",
+    "name": "vec_sum",
     "category": "Vector",
-    "description": "Percentile of vector field x",
-    "definition": "vec_percentage(x,percentage=0.5)"
+    "description": "Calculates the sum of all values in a vector field.",
+    "definition": "vec_sum(x)"
   },
   {
-    "name": "vec_powersum",
+    "name": "vec_max",
     "category": "Vector",
-    "description": "Sum of power of vector field x",
-    "definition": "vec_powersum(x,constant=2)"
+    "description": "Maximum value form vector field x",
+    "definition": "vec_max(x)"
   },
   {
-    "name": "vec_range",
+    "name": "vec_avg",
     "category": "Vector",
-    "description": "Difference between maximum and minimum element in vector field x",
-    "definition": "vec_range(x)"
-  },
-  {
-    "name": "vec_skewness",
-    "category": "Vector",
-    "description": "Skewness of vector field x",
-    "definition": "vec_skewness(x)"
+    "description": "Calculates the mean (average) of all elements in a vector field for each instrument and date, converting vector data to a single matrix value.",
+    "definition": "vec_avg(x)"
   },
   {
     "name": "vec_stddev",
@@ -822,10 +420,22 @@
     "definition": "vec_stddev(x)"
   },
   {
+    "name": "vec_range",
+    "category": "Vector",
+    "description": "Difference between maximum and minimum element in vector field x",
+    "definition": "vec_range(x)"
+  },
+  {
     "name": "bucket",
     "category": "Transformational",
-    "description": "Convert float values into indexes for user-specified buckets. Bucket is useful for creating group values, which can be passed to GROUP as input",
-    "definition": "bucket(rank(x), range=\"0, 1, 0.1\" or buckets = \"2,5,6,7,10\")"
+    "description": "The bucket operator creates custom groups by dividing data into buckets (ranges) based on ranked values of any data field. These buckets can then be used with group operators like group_neutralize, group_rank, group_zscore etc.",
+    "definition": "bucket(rank(x), range=“0, 1, 0.1”, skipBoth=False, NaNGroup=False)\r\nor\r\nbucket(rank(x), buckets = “2,5,6,7,10”, skipBoth=False, NaNGroup=False)"
+  },
+  {
+    "name": "trade_when",
+    "category": "Transformational",
+    "description": "The trade_when operator changes Alpha values only when a specific condition is met, keeps previous values otherwise, and can close positions by assigning NaN under an exit condition. It is useful for reducing turnover and controlling when trades are executed.",
+    "definition": "trade_when(x, y, z)"
   },
   {
     "name": "generate_stats",
@@ -834,112 +444,16 @@
     "definition": "generate_stats(alpha)"
   },
   {
-    "name": "trade_when",
-    "category": "Transformational",
-    "description": "Used in order to change Alpha values only under a specified condition and to hold Alpha values in other cases. It also allows to close Alpha positions (assign NaN values) under a specified condition",
-    "definition": "trade_when(x, y, z)"
-  },
-  {
-    "name": "clamp",
-    "category": "Transformational",
-    "description": "Limits input value between lower and upper bound in inverse = false mode (which is default). Alternatively, when inverse = true, values between bounds are replaced with mask, while values outside bounds are left as is",
-    "definition": "clamp(x, lower = 0, upper = 0, inverse = False, mask = )"
-  },
-  {
-    "name": "filter",
-    "category": "Transformational",
-    "description": "Used to filter the value and allows to create filters like linear or exponential decay",
-    "definition": "filter(x, h = \"1, 2, 3, 4\", t=\"0.5\")"
-  },
-  {
-    "name": "keep",
-    "category": "Transformational",
-    "description": "This operator outputs value x when f changes and continues to do that for \"period\" days after f stopped changing. After \"period\" days since last change of f, NaN is output",
-    "definition": "keep(x, f, period = 5)"
-  },
-  {
-    "name": "left_tail",
-    "category": "Transformational",
-    "description": "NaN everything greater than maximum, maximum should be constant",
-    "definition": "left_tail(x, maximum = 0)"
-  },
-  {
-    "name": "right_tail",
-    "category": "Transformational",
-    "description": "NaN everything less than minimum, minimum should be constant",
-    "definition": "right_tail(x, minimum = 0)"
-  },
-  {
-    "name": "tail",
-    "category": "Transformational",
-    "description": "If (x > lower AND x < upper) return newval, else return x. Lower, upper, newval should be constants",
-    "definition": "tail(x, lower = 0, upper = 0, newval = 0)"
-  },
-  {
-    "name": "group_backfill",
+    "name": "group_min",
     "category": "Group",
-    "description": "If a certain value for a certain date and instrument is NaN, from the set of same group instruments, calculate winsorized mean of all non-NaN values over last d days",
-    "definition": "group_backfill(x, group, d, std = 4.0)"
+    "description": "All elements in group equals to the min value of the group.",
+    "definition": "group_min(x, group)"
   },
   {
     "name": "group_mean",
     "category": "Group",
-    "description": "All elements in group equals to the mean",
+    "description": "Calculates the harmonic mean of a data field within each specified group.",
     "definition": "group_mean(x, weight, group)"
-  },
-  {
-    "name": "group_neutralize",
-    "category": "Group",
-    "description": "Neutralizes Alpha against groups. These groups can be subindustry, industry, sector, country or a constant",
-    "definition": "group_neutralize(x, group)"
-  },
-  {
-    "name": "group_rank",
-    "category": "Group",
-    "description": "Each elements in a group is assigned the corresponding rank in this group",
-    "definition": "group_rank(x, group)"
-  },
-  {
-    "name": "group_zscore",
-    "category": "Group",
-    "description": "Calculates group Z-score - numerical measurement that describes a value's relationship to the mean of a group of values. Z-score is measured in terms of standard deviations from the mean. zscore = (data - mean) / stddev of x for each instrument within its group.\r\n\r\nInput: Value of 5 instruments of Group A: (100, 0, 50, 60, 25)\r\nOutput: (1.57, -1.39, 0.09, 0.39, -0.65)",
-    "definition": "group_zscore(x, group)"
-  },
-  {
-    "name": "combo_a",
-    "category": "Group",
-    "description": "Combines multiple alpha signals into a single weighted output by balancing each alpha's historical return with its variability over the most recent nlength days.\r\n\r\nThe parameter mode selects one of the several weighted approaches (algo1, algo2, algo3), each of which handles the tradeoff between performance and stability differently.",
-    "definition": "combo_a(alpha, nlength = 250, mode = 'algo1')"
-  },
-  {
-    "name": "group_scale",
-    "category": "Group",
-    "description": "Normalizes the values in a group to be between 0 and 1. (x - groupmin) / (groupmax - groupmin)",
-    "definition": "group_scale(x, group)"
-  },
-  {
-    "name": "group_cartesian_product",
-    "category": "Group",
-    "description": "Merge two groups into one group. If originally there are len_1 and len_2 group indices in g1 and g2, there will be len_1 * len_2 indices in the new group.",
-    "definition": "group_cartesian_product(g1, g2)"
-  },
-  {
-    "name": "group_coalesce",
-    "category": "Group",
-    "description": "Regroup remaining stocks based on group2 and so on if original_group does not cover all stocks in target universe",
-    "definition": "group_coalesce(original_group, group2, group3, …)"
-  },
-  {
-    "name": "group_count",
-    "category": "Group",
-    "description": "Gives the number of instruments in the same group (e.g. sector) which have valid values of x. For example, x=1 gives the number of instruments in each group (without regard for whether any particular field has valid data). This operator improves weight coverage and may help to reduce drawdown risk.",
-    "definition": "group_count(x, group)"
-  },
-  {
-    "name": "group_extra",
-    "category": "Group",
-    "description": "Replaces NaN values by their corresponding group means.",
-    "definition": "group_extra(x, weight, group)"
   },
   {
     "name": "group_max",
@@ -948,58 +462,46 @@
     "definition": "group_max(x, group)"
   },
   {
-    "name": "group_median",
+    "name": "group_rank",
     "category": "Group",
-    "description": "All elements in group equals to the median value of the group.",
-    "definition": "group_median(x, group)"
+    "description": "Ranks each element within its group based on the input field, assigning a value between 0.0 and 1.0. This helps compare items within the same group, such as stocks in the same industry.",
+    "definition": "group_rank(x, group)"
   },
   {
-    "name": "group_min",
+    "name": "group_backfill",
     "category": "Group",
-    "description": "All elements in group equals to the min value of the group.",
-    "definition": "group_min(x, group)"
+    "description": "Fills missing (NaN) values for instruments within the same group by calculating a winsorized mean of all non-NaN values over the past d days. The winsorized mean is computed by trimming extreme values based on a specified standard deviation multiplier (std, default 4.0).",
+    "definition": "group_backfill(x, group, d, std = 4.0)"
   },
   {
-    "name": "group_normalize",
+    "name": "group_scale",
     "category": "Group",
-    "description": "Normalizes input such that each group's absolute sum is 1",
-    "definition": "group_normalize(x, group, constantCheck=False, tolerance=0.01, scale=1)"
+    "description": "Normalizes values within each group to a range between 0 and 1, making data comparable across different groups.",
+    "definition": "group_scale(x, group)"
   },
   {
-    "name": "group_percentage",
+    "name": "group_zscore",
     "category": "Group",
-    "description": "All elements in group equals to the value over the percentage of the group. Percentage = 0.5 means value is equal to group_median(x, group)",
-    "definition": "group_percentage(x, group, percentage=0.5)"
+    "description": "Calculates the Z-score of each value within its group, showing how far each value is from the group mean in terms of standard deviations. Useful for comparing values relative to their group.",
+    "definition": "group_zscore(x, group)"
   },
   {
-    "name": "group_std_dev",
+    "name": "group_neutralize",
     "category": "Group",
-    "description": "All elements in group equals to the standard deviation of the group.",
-    "definition": "group_std_dev(x, group)"
+    "description": "Neutralizes Alpha values within each specified group by subtracting the group mean from each value. Groups can be industry, sector, country, or any custom grouping.",
+    "definition": "group_neutralize(x, group)"
   },
   {
-    "name": "group_sum",
+    "name": "group_cartesian_product",
     "category": "Group",
-    "description": "Sum of x for all instruments in the same group.",
-    "definition": "group_sum(x, group)"
+    "description": "Merge two groups into one group. If originally there are len_1 and len_2 group indices in g1 and g2, there will be len_1 * len_2 indices in the new group.",
+    "definition": "group_cartesian_product(g1, g2)"
   },
   {
-    "name": "group_vector_neut",
+    "name": "combo_a",
     "category": "Group",
-    "description": "Similar to vector_neut(x, y) but x neutralize to y for each group g which can be any classifier such as subindustry, industry, sector, etc.",
-    "definition": "group_vector_neut(x,y,g)"
-  },
-  {
-    "name": "group_vector_proj",
-    "category": "Group",
-    "description": "Similar to vector_proj(x, y) but x projection to y for each group which can be any classifier such as subindustry, industry, sector, etc.",
-    "definition": "group_vector_proj(x,y,g)"
-  },
-  {
-    "name": "group_multi_regression",
-    "category": "Group",
-    "description": "Perform multivariable regression for each data points in a group. For more information, please refer to multi_regression.\r\n\r\nOptions for solver: \"SVD\"(default), \"QR\", \"NORMAL\"",
-    "definition": "group_multi_regression(y, x1, x2, ..., group, days=0, lag=0, solver=\"SVD\")"
+    "description": "Combines multiple alpha signals into a single weighted output by balancing each alpha's historical return with its variability over the most recent nlength days.\r\n\r\nThe parameter mode selects one of the several weighted approaches (algo1, algo2, algo3), each of which handles the tradeoff between performance and stability differently.",
+    "definition": "combo_a(alpha, nlength = 250, mode = 'algo1')"
   },
   {
     "name": "self_corr",
@@ -1020,16 +522,10 @@
     "definition": "universe_size"
   },
   {
-    "name": "convert",
-    "category": "Special",
-    "description": "Convert dollars to share or share to dollar when mode = \"share2dollar\". Please note that the use of the convert() operator in an Alpha Expression is considered as utilizing the pv1 dataset (Price Volume Data for Equity) since it relies on pv1 data for calculations",
-    "definition": "convert(x, mode = \"dollar2share\")"
-  },
-  {
-    "name": "inst_pnl",
-    "category": "Special",
-    "description": "Generate pnl per instruments. Please note that the use of the inst_pnl() operator in an Alpha Expression is considered as utilizing the pv1 dataset (Price Volume Data for Equity) since it relies on pv1 data for calculations.",
-    "definition": "inst_pnl(x)"
+    "name": "reduce_ir",
+    "category": "Reduce",
+    "description": "IR of values in the array *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_ir(input)"
   },
   {
     "name": "reduce_avg",
@@ -1038,28 +534,10 @@
     "definition": "reduce_avg(input, threshold=0)"
   },
   {
-    "name": "reduce_choose",
+    "name": "reduce_powersum",
     "category": "Reduce",
-    "description": "Choose the 'nth' element in the array, return NAN if not found. Threshold: nth=\"<the Nth element>\" (Required) ignoreNan=\"true|false\" (Default: true) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_choose(input, nth, ignoreNan=true)"
-  },
-  {
-    "name": "reduce_count",
-    "category": "Reduce",
-    "description": "Count the number of element of d(..., :) > threshold. threshold=<float> *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_count(input, threshold)"
-  },
-  {
-    "name": "reduce_ir",
-    "category": "Reduce",
-    "description": "IR of values in the array *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_ir(input)"
-  },
-  {
-    "name": "reduce_kurtosis",
-    "category": "Reduce",
-    "description": "Kurtosis of values in the array ***Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. \r\nIf input matrix is (D x N), output matrix (D x 1) \r\nIf input matrix is (D x N X N), output matrix (D x N X 1) \r\nThe defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_kurtosis(input)"
+    "description": "Sum of power, sum(power(x, constant)). Threshold: precise, whether calculate power precise if constant greater than 4, default false constant=<integer value>, default:2 *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_powersum(input, constant=2, precise=false)"
   },
   {
     "name": "reduce_max",
@@ -1080,16 +558,10 @@
     "definition": "reduce_norm(input)"
   },
   {
-    "name": "reduce_percentage",
+    "name": "reduce_sum",
     "category": "Reduce",
-    "description": "Return the value of percentage in the sorted array: e.g., median value when percentage=0.5. Threshold: percentage=\"<value between 0 and 1>\" (Default: 0.5) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_percentage(input, percentage=0.5)"
-  },
-  {
-    "name": "reduce_powersum",
-    "category": "Reduce",
-    "description": "Sum of power, sum(power(x, constant)). Threshold: precise, whether calculate power precise if constant greater than 4, default false constant=<integer value>, default:2 *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_powersum(input, constant=2, precise=false)"
+    "description": "Sum the number of element of d(..., :) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_sum(input)"
   },
   {
     "name": "reduce_range",
@@ -1098,21 +570,39 @@
     "definition": "reduce_range(input)"
   },
   {
+    "name": "reduce_percentage",
+    "category": "Reduce",
+    "description": "Return the value of percentage in the sorted array: e.g., median value when percentage=0.5. Threshold: percentage=\"<value between 0 and 1>\" (Default: 0.5) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_percentage(input, percentage=0.5)"
+  },
+  {
     "name": "reduce_skewness",
     "category": "Reduce",
     "description": "Skewness of values in the array *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
     "definition": "reduce_skewness(input)"
   },
   {
+    "name": "reduce_count",
+    "category": "Reduce",
+    "description": "Count the number of element of d(..., :) > threshold. threshold=<float> *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_count(input, threshold)"
+  },
+  {
+    "name": "reduce_kurtosis",
+    "category": "Reduce",
+    "description": "Kurtosis of values in the array ***Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. \r\nIf input matrix is (D x N), output matrix (D x 1) \r\nIf input matrix is (D x N X N), output matrix (D x N X 1) \r\nThe defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_kurtosis(input)"
+  },
+  {
+    "name": "reduce_choose",
+    "category": "Reduce",
+    "description": "Choose the 'nth' element in the array, return NAN if not found. Threshold: nth=\"<the Nth element>\" (Required) ignoreNan=\"true|false\" (Default: true) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
+    "definition": "reduce_choose(input, nth, ignoreNan=true)"
+  },
+  {
     "name": "reduce_stddev",
     "category": "Reduce",
     "description": "Standard deviation of values in the array. Threshold: Minimum required percentage of valid (non-nan) values. If there is not enough valid values, then the output is NAN. 0 means no limit.threshold (Default: 0) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
     "definition": "reduce_stddev(input, threshold=0)"
-  },
-  {
-    "name": "reduce_sum",
-    "category": "Reduce",
-    "description": "Sum the number of element of d(..., :) *** Takes an input 2-D or 3-D matrix with user-defined reducer, producing an output matrix. *If input matrix is (D x N), output matrix (D x 1) *If input matrix is (D x N X N), output matrix (D x N X 1) *The defined function is applied on the last dimension : output(I) = reduce(input(I, 0:N)).",
-    "definition": "reduce_sum(input)"
   }
 ]

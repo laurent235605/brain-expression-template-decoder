@@ -5340,6 +5340,7 @@ if __name__ == '__main__':
         print("To override (not recommended), set environment variable BRAIN_BIND_HOST")
         sys.exit(1)
 
-    print(f"Application will run on http://{bind_host}:5000")
+    bind_port = int(os.environ.get('BRAIN_BIND_PORT', '5000'))
+    print(f"Application will run on http://{bind_host}:{bind_port}")
     print("BRAIN API integration included - no separate proxy needed!")
-    app.run(debug=False, host=bind_host, port=5000)
+    app.run(debug=False, host=bind_host, port=bind_port)
