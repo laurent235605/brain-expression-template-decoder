@@ -4180,7 +4180,11 @@ def _read_text_optional(path: Path) -> str:
         return ''
 
 
-GENERATE_SYSTEM_PROMPT_TEMPLATE = """You are executing two skills in sequence:
+GENERATE_SYSTEM_PROMPT_TEMPLATE = """# Placeholder Legend
+# {{...}} tokens were substituted by the system before reaching you.
+# {...} variables are Python format-string placeholders your output MUST contain.
+
+You are executing two skills in sequence:
 1) brain-data-feature-engineering
 2) brain-feature-implementation
 The following SKILL.md documents are authoritative; follow them exactly.
@@ -4190,6 +4194,13 @@ The following SKILL.md documents are authoritative; follow them exactly.
 
 --- SKILL.md (brain-feature-implementation) ---
 {{FEATURE_IMPLEMENTATION_SKILL_MD}}
+
+## Handoff Contract
+Skill 1 (brain-data-feature-engineering) MUST output a section titled "## Feature Ideas"
+with each idea as a numbered list containing: field description, expected direction, and economic rationale.
+Skill 2 (brain-feature-implementation) reads "## Feature Ideas" and converts each item
+into an Implementation Example using {variable} format from allowed_placeholders.
+
 ------
 "allowed_operators": {{ALLOWED_OPERATORS_JSON}}
 -------
@@ -4198,15 +4209,21 @@ The following SKILL.md documents are authoritative; follow them exactly.
 {{VECTOR_DATA_HINT}}
 {{VECTOR_OPERATORS_LINE}}
 CRITICAL OUTPUT RULES (to ensure implement_idea.py can generate expressions):
-- Every Implementation Example MUST be a Python format template using {variable}.
-- Every {variable} MUST come from the allowed_placeholders list provided in user content.
-- When you implement ideas, ONLY use operators from allowed_operators provided.
-- Do NOT include dataset codes/prefixes/horizons in {variable} (suffix-only).
-- If you show raw field ids in tables, use backticks `like_this`, NOT {braces}.
-- Include these metadata lines verbatim somewhere near the top:
+- Output the metadata block as the VERY FIRST lines of your response, before any analysis:
   **Dataset**: <dataset_id>
   **Region**: <region>
-  **Delay**: <delay>""".strip()
+  **Delay**: <delay>
+- Every Implementation Example MUST be a Python format template using {variable}.
+  WRONG: ts_rank(adv20, 5)
+  RIGHT: ts_rank({adv}, {lookback})
+- Every {variable} MUST come from the allowed_placeholders list provided in user content.
+  WRONG: {fundamental_eps_growth}
+  RIGHT: {eps_growth}
+- When you implement ideas, ONLY use operators from allowed_operators provided.
+  WRONG: np.corrcoef(x, y)
+  RIGHT: ts_corr({x}, {y}, {window})
+- Do NOT include dataset codes/prefixes/horizons in {variable} (suffix-only).
+- If you show raw field ids in tables, use backticks `like_this`, NOT {braces}.""".strip()
 
 INSPECT_SETTINGS_SYSTEM_PROMPT_TEMPLATE = (
     'You are a WorldQuant BRAIN expert. Given an alpha idea context and valid simulation '

@@ -334,6 +334,21 @@ def normalize_template_placeholders(
     ok = all(placeholder_is_reasonably_matchable(v, dataset_ids) for v in vars_after)
     return normalized, ok
 
+def _get_vector_ops(allowed_operators) -> list[str]:
+    ops: list[str] = []
+    if isinstance(allowed_operators, list):
+        for op in allowed_operators:
+            if not isinstance(op, dict):
+                continue
+            if str(op.get("category") or "").strip().lower() == "vector":
+                name = str(op.get("name") or "").strip()
+                if name:
+                    ops.append(name)
+    if ops:
+        return sorted(set(ops), key=lambda x: x.lower())
+    return ["vec_avg", "vec_sum", "vec_max", "vec_min", "vec_std", "vec_count"]
+
+
 def build_prompt(
     dataset_id: str,
     dataset_name: str | None,
@@ -360,82 +375,84 @@ def build_prompt(
     # NOTE: The user requested that we DO NOT invent our own system prompt.
     # Instead, we embed the two skill specs as the authoritative instructions.
     prompt_lines = [
-            "You are executing two skills in sequence:",
-            "1) brain-data-feature-engineering",
-            "2) brain-feature-implementation",
-            "The following SKILL.md documents are authoritative; follow them exactly.",
-            "",
-            "--- SKILL.md (brain-data-feature-engineering) ---",
-            feature_engineering_skill_md.strip(),
-            "",
-            "--- SKILL.md (brain-feature-implementation) ---",
-            feature_implementation_skill_md.strip(),
-            "------"
-            f'"allowed_operators": {allowed_operators}',
-            "-------",
-            f'"allowed_placeholders": {allowed_metric_suffixes}',
-            "",
-        ]
+        "# Placeholder Legend",
+        "# {{...}} tokens were substituted by the system before reaching you.",
+        "# {...} variables are Python format-string placeholders your output MUST contain.",
+        "",
+        "You are executing two skills in sequence:",
+        "1) brain-data-feature-engineering",
+        "2) brain-feature-implementation",
+        "The following SKILL.md documents are authoritative; follow them exactly.",
+        "",
+        "--- SKILL.md (brain-data-feature-engineering) ---",
+        feature_engineering_skill_md.strip(),
+        "",
+        "--- SKILL.md (brain-feature-implementation) ---",
+        feature_implementation_skill_md.strip(),
+        "",
+        "## Handoff Contract",
+        'Skill 1 (brain-data-feature-engineering) MUST output a section titled "## Feature Ideas"',
+        "with each idea as a numbered list containing: field description, expected direction, and economic rationale.",
+        'Skill 2 (brain-feature-implementation) reads "## Feature Ideas" and converts each item',
+        "into an Implementation Example using {variable} format from allowed_placeholders.",
+        "",
+        "------",
+        f'"allowed_operators": {allowed_operators}',
+        "-------",
+        f'"allowed_placeholders": {allowed_metric_suffixes}',
+        "",
+    ]
 
     if str(data_type).upper() == "VECTOR":
-        prompt_lines.append(
-            "since all the following the data is vector type data, before you do any process, you should choose a vector operator to generate its statistical feature to use, the data cannot be directly use. for example, if datafieldA and datafieldB are vector type data, you can use vec_avg(datafieldA) -  vec_avg(datafieldB), where vec_avg() operator is used to generate the average of the data on a certain date. similarly, vector type operator can only be used on the vector type operator directly and cannot be nested, for example vec_avg(vec_sum(datafield)) is a false use."
-        )
-        vector_ops: list[str] = []
-        if isinstance(allowed_operators, list):
-            for op in allowed_operators:
-                if not isinstance(op, dict):
-                    continue
-                category = str(op.get("category") or "").strip().lower()
-                name = str(op.get("name") or "").strip()
-                if category == "vector" and name:
-                    vector_ops.append(name)
-
-        if vector_ops:
-            vector_ops = sorted(set(vector_ops), key=lambda x: x.lower())
-        else:
-            vector_ops = ["vec_avg", "vec_sum", "vec_max", "vec_min", "vec_std", "vec_count"]
-
-        prompt_lines.append("the available vector operators are: " + ", ".join(vector_ops))
+        prompt_lines.extend([
+            "Since all fields in this dataset are VECTOR type, you MUST apply a vector operator "
+            "to extract a scalar before composing any alpha expression. "
+            "Vector operators convert a vector field into a single number per stock per day. "
+            "Example: vec_avg(fieldA) - vec_avg(fieldB). "
+            "Vector operators CANNOT be nested: vec_avg(vec_sum(fieldA)) is INVALID.",
+            "Available vector operators: " + ", ".join(_get_vector_ops(allowed_operators)),
+        ])
+    else:
+        prompt_lines.append("(No vector dataset in this task — skip all vector-related operators.)")
 
     prompt_lines.extend(
         [
+            "",
             "CRITICAL OUTPUT RULES (to ensure implement_idea.py can generate expressions):",
-            "- Every Implementation Example MUST be a Python format template using {variable}.",
-            "- Every {variable} MUST come from the allowed_placeholders list provided in user content.",
-            "- When you implement ideas, ONLY use operators from allowed_operators provided.",
-            "- Do NOT include dataset codes/prefixes/horizons in {variable} (suffix-only).",
-            "- If you show raw field ids in tables, use backticks `like_this`, NOT {braces}.",
-            "- Include these metadata lines verbatim somewhere near the top:",
+            "- Output the metadata block as the VERY FIRST lines of your response, before any analysis:",
             "  **Dataset**: <dataset_id>",
             "  **Region**: <region>",
             "  **Delay**: <delay>",
+            "- Every Implementation Example MUST be a Python format template using {variable}.",
+            "  WRONG: ts_rank(adv20, 5)",
+            "  RIGHT: ts_rank({adv}, {lookback})",
+            "- Every {variable} MUST come from the allowed_placeholders list provided in user content.",
+            "  WRONG: {fundamental_eps_growth}",
+            "  RIGHT: {eps_growth}",
+            "- When you implement ideas, ONLY use operators from allowed_operators provided.",
+            "  WRONG: np.corrcoef(x, y)",
+            "  RIGHT: ts_corr({x}, {y}, {window})",
+            "- Do NOT include dataset codes/prefixes/horizons in {variable} (suffix-only).",
+            "- If you show raw field ids in tables, use backticks `like_this`, NOT {braces}.",
         ]
     )
 
     system_prompt = "\n".join(prompt_lines)
 
     if system_prompt_override:
-        vector_hint = ""
-        vector_ops_line = ""
         if str(data_type).upper() == "VECTOR":
+            vector_ops = _get_vector_ops(allowed_operators)
             vector_hint = (
-                "since all the following the data is vector type data, before you do any process, you should choose a vector operator to generate its statistical feature to use, the data cannot be directly use. for example, if datafieldA and datafieldB are vector type data, you can use vec_avg(datafieldA) -  vec_avg(datafieldB), where vec_avg() operator is used to generate the average of the data on a certain date. similarly, vector type operator can only be used on the vector type operator directly and cannot be nested, for example vec_avg(vec_sum(datafield)) is a false use."
+                "Since all fields in this dataset are VECTOR type, you MUST apply a vector operator "
+                "to extract a scalar before composing any alpha expression. "
+                "Vector operators convert a vector field into a single number per stock per day. "
+                "Example: vec_avg(fieldA) - vec_avg(fieldB). "
+                "Vector operators CANNOT be nested: vec_avg(vec_sum(fieldA)) is INVALID."
             )
-            vector_ops = []
-            if isinstance(allowed_operators, list):
-                for op in allowed_operators:
-                    if not isinstance(op, dict):
-                        continue
-                    category = str(op.get("category") or "").strip().lower()
-                    name = str(op.get("name") or "").strip()
-                    if category == "vector" and name:
-                        vector_ops.append(name)
-            if vector_ops:
-                vector_ops = sorted(set(vector_ops), key=lambda x: x.lower())
-            else:
-                vector_ops = ["vec_avg", "vec_sum", "vec_max", "vec_min", "vec_std", "vec_count"]
-            vector_ops_line = "the available vector operators are: " + ", ".join(vector_ops)
+            vector_ops_line = "Available vector operators: " + ", ".join(vector_ops)
+        else:
+            vector_hint = "(No vector dataset in this task — skip all vector-related operators.)"
+            vector_ops_line = ""
 
         system_prompt = _render_prompt_template(
             system_prompt_override,
